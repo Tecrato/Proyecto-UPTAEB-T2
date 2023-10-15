@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/LogReg.css">
+    <link rel="stylesheet" href="static/css/uikit.css">
+    <link rel="stylesheet" href="static/css/aos.css">
+    <link rel="shortcut icon" href="static/images/logo_m.png" type="image/x-icon">
+    <title>Iniciar Sesion</title>
+</head>
+<body>
+    <section class="uk-light uk-flex uk-flex-center uk-flex-middle sectionP">
+
+
+        <article class="Item uk-flex uk-flex-middle" data-aos="zoom-in-up">
+            <div class="Register">
+                <div class="uk-text-center">
+                    <img src="static/images/logo_m.png" alt="" width="150px">
+                    <h3>Iniciar Sesión</h3>
+                </div>
+                <form class="uk-flex uk-flex-column uk-flex-middle" action="Controller/funcs/login.php" autocomplete="off" method="POST">
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <span class="uk-form-icon" uk-icon="icon: user"></span>
+                            <input class="uk-input" placeholder="Correo Electronico" type="email" aria-label="Not clickable icon" name="correo">
+                        </div>
+                    </div>
+
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <span class="uk-form-icon" uk-icon="icon: lock"></span>
+                            <input class="uk-input" placeholder="Contraseña" type="password" aria-label="Not clickable icon" name="contraseña">
+                        </div>
+                    </div>
+                    <a class="uk-margin-small-bottom">¿Olvido su contraseña?</a>
+                    <button class="uk-button uk-button-default uk-margin-small-top" type="submit">Ingresar</button>
+                </form>
+            </div>
+        </article>
+
+    </section>
+
+    <script src="static/javascript/uikit.js"></script>
+    <script src="static/javascript/uikit-icons.js"></script>
+    <script src="static/javascript/aos.js"></script>
+    
+    <script>
+        AOS.init({
+          easing: 'ease-in-out-sine',
+          delay: 300
+        });
+      </script>
+
+</body>
+</html>

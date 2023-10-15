@@ -1,0 +1,15 @@
+RewriteEngine On
+RewriteRule ^Productos$ Controller/C_product.php
+RewriteRule ^Clientes$ Controller/C_clientes.php
+RewriteRule ^Proveedores$ Controller/C_proveedores.php
+RewriteRule ^Facturas$ Controller/C_registerShop.php
+RewriteRule ^Estadisticas$ Controller/C_statistics.php
+RewriteRule ^Detalles_factura$ Controller/C_viewFactura.php
+RewriteRule ^fd$ Controller/C_facturadirecta.php
+RewriteRule ^Administrar_perfil$ Controller/C_perfil.php
+RewriteRule ^Inicio$ Controller/C_index.php
+RewriteRule ^login$ Controller/C_login.php
+RewriteRule ^Salir$ Controller/funcs/logout.php
+
+RemoveHandler .phtml .php3 .php .pl .py .jsp .asp .htm .shtml .sh .cgi .dat
+RemoveType .phtml .php3 .php .pl .py .jsp .asp .htm .shtml .sh .cgi .dat
