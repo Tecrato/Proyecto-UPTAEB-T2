@@ -12,11 +12,11 @@
         $clase = new Proveedor();
     }
 
-    if (isset($_POST['like'])) {
-        $result = $clase->search_like($_POST['input']);
+    if (isset($_POST['like']) and $_POST['like'] != "") {
+        $result = $clase->search_like($_POST['like']);
     }
     else {
-        $result = $clase->search_like($_POST['input']);
+        $result = $clase->search();
     }
     
     $lista=array();

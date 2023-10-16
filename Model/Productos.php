@@ -15,9 +15,14 @@
             
             $this->conn->query($query);
         }
-        function borrar_lotes($id_proveedor) {
+        function borrar_lotes($id_proveedor=False,$id_producto=False) {
 
-            $query = "DELETE FROM lotes WHERE id_proveedor=$id_proveedor";
+            if ($id_proveedor){
+                $query = "DELETE FROM lotes WHERE id_proveedor=$id_proveedor";
+            }
+            if ($id_producto){
+                $query = "DELETE FROM lotes WHERE id_producto=$id_producto";
+            }
             
             $this->conn->query($query);
         }
