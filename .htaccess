@@ -11,5 +11,10 @@ RewriteRule ^Inicio$ Controller/C_index.php
 RewriteRule ^login$ Controller/C_login.php
 RewriteRule ^Salir$ Controller/funcs/logout.php
 
+
+RewriteRule ^pruebita$ Controller/funcs/prueba.php
+
+
+
 RemoveHandler .phtml .php3 .php .pl .py .jsp .asp .htm .shtml .sh .cgi .dat
 RemoveType .phtml .php3 .php .pl .py .jsp .asp .htm .shtml .sh .cgi .dat

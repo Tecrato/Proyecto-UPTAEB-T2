@@ -9,9 +9,9 @@
             $this->conn->query($query);
         }
 
-        function agregar_lote($id_producto,$id_proveedor,$cantidad,$fecha_c,$fecha_v,$precio_compra){
+        function agregar_lote($id_producto,$id_proveedor,$cantidad,$fecha_c,$fecha_v,$precio_compra,$precio_venta){
             
-            $query = "INSERT INTO lotes VALUES(null, $id_producto, $id_proveedor, $cantidad,'$fecha_c', '$fecha_v',$precio_compra)";
+            $query = "INSERT INTO lotes VALUES(null, $id_producto, $id_proveedor, $cantidad,'$fecha_c', '$fecha_v',$precio_compra,$precio_venta, $cantidad)";
             
             $this->conn->query($query);
         }
@@ -49,81 +49,30 @@
         }
 
         // Con esta otra funcion se busca entre los productos en la base de datos
-        function search($id=null,$nombre=null,$descripcion=null,$precio_compra=null,$precio_venta=null,$stock=null,$fecha=null,$categoria=null,$distribuidor=null,$n=0,$limite=true){
+        function search($id=null,$n=0,$limite=true){
             // Al igual que la clase anterior, puede buscar segun muchos valores o solo algunos
             $querys = [];
-            $query = "SELECT * FROM productos WHERE";
+            $query = "SELECT * FROM productos";
+
             if ($id != null){
-                array_push($querys," id=$id");
-            }
-            if ($nombre != null) {
-                if (count($querys) > 0){
-                    array_push($querys," AND");
-                }
-                array_push($querys," Nombre='$nombre'");
-            }
-            if ($descripcion != null) {
-                if (count($querys) > 0){
-                    $querys->array_push(" AND");
-                }
-                array_push($querys," Descripcion='$descripcion'");
-            }
-            if ($precio_compra != null) {
-                if (count($querys) > 0){
-                    array_push($querys," AND");
-                }
-                array_push($querys," Precio='$precio_compra'");
-            }
-            if ($precio_venta != null) {
-                if (count($querys) > 0){
-                    $querys->array_push(" AND");
-                }
-                $querys->array_push(" precio_venta='$precio_venta'");
-            }
-            if ($stock != null) {
-                if (count($querys) > 0){
-                    $querys->array_push(" AND");
-                }
-                $querys->array_push(" stock='$stock'");
-            }
-            if ($fecha != null) {
-                if (count($querys) > 0){
-                    $querys->array_push(" AND");
-                }
-                $querys->array_push(" Fecha_compra='$fecha'");
-            }
-            if ($categoria != null) {
-                if (count($querys) > 0){
-                    $querys->array_push(" AND");
-                }
-                $querys->array_push(" categoria='$categoria'");
-            }
-            if ($distribuidor != null) {
-                if (count($querys) > 0){
-                    $querys->array_push(" AND");
-                }
-                $querys->array_push(" distribuidor='$distribuidor'");
+                $query = $query." WHERE id=$id";
             }
 
-            if (count($querys) < 1) { // Si no hay condiciones se obtienen 9 resultados dependiento de en que pagina esta el usuario
-                $s = $n*9;
-                $query = "SELECT * FROM productos";
-                if ($limite) {
-                    $query = $query . " LIMIT 9 OFFSET ".$s;
-                }
-            } else { // Sino
-                foreach ($querys as $q) { // Se pasa con los filtros
-                    $query = $query . $q;;
-                    $query = $query ." LIMIT 9 OFFSET ".$n*9;
-                }
+            if ($limite) {
+                $n = $n*9;
+                $query = $query . " LIMIT 9 OFFSET ".$n;
             }
             
             return $this->conn->query($query);
         }
+        function search_stock($id){
+            $query = "SELECT SUM(restante) as stock FROM lotes WHERE id_producto=$id";
+
+            return $this->conn->query($query)->fetch_assoc();
+        }
         function search_like($nombre){
             $query = "SELECT * FROM productos WHERE nombre LIKE '%$nombre%'";
 
-            
             return $this->conn->query($query);
         }
         function COUNT(){

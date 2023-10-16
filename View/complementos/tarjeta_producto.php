@@ -255,6 +255,9 @@ echo '
                 <div class="uk-width-1-2@s">
                     <input class="uk-input" type="number" step="0.1" placeholder="precio_compra" aria-label="25" name="precio_compra" required>
                 </div>
+                <div class="uk-width-1-2@s">
+                    <input class="uk-input" type="number" step="0.1" placeholder="precio_venta" aria-label="25" name="precio_venta" required>
+                </div>
                 <div class="uk-width-1-1@s uk-flex uk-flex-middle">
                     <label for="" style="width: 265px;">Fecha adquisicion</label>
                     <input class="uk-input" type="date" step="0.01" aria-label="25" name="fecha_c" required>
@@ -263,11 +266,12 @@ echo '
                     <label for="" style="width: 265px;">Fecha de vencimiento</label>
                     <input class="uk-input" type="date" step="0.01" aria-label="25" name="fecha_v" required>
                 </div>
-                <div class="uk-modal-footer uk-text-right">
-                    <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
-                    <input class="uk-button uk-button-secondary" type="submit"></input>
-                </div>
+                <input type="submit" id="subir'.$row['id'].'" style="display:none">
             </form>
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+            <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
+            <label class="uk-button uk-button-secondary" type="submit" for="subir'.$row['id'].'">Guardar</label>
         </div>
     </div>
 </div>

@@ -34,8 +34,8 @@
     elseif ($tipo === 'producto_lote'){
         require('../../Model/Productos.php');
         $clase = new Producto(); // Llama al modelo y le manda la instruccion
-        $clase->agregar_lote($_POST["ID"],$_POST["proveedor"],$_POST["cantidad"],$_POST["fecha_c"],$_POST["fecha_v"],$_POST["precio_compra"]);
-        header('Location:../../productos'); // Y vuelve a la pagina donde estaba antes
+        $clase->agregar_lote($_POST["ID"],$_POST["proveedor"],$_POST["cantidad"],$_POST["fecha_c"],$_POST["fecha_v"],$_POST["precio_compra"],$_POST["precio_venta"]);
+        header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }
 
     elseif ($tipo === 'proveedor'){

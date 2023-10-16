@@ -1,4 +1,6 @@
 <?php
-	print_r($_POST);
-	print_r($_FILES);
+	require('../../Model/Conexion.php');
+	require('../../Model/Productos.php');
+	$clase = new Producto();
+	print_r ($clase->search_stock(4)['stock']);
 ?>

@@ -3,11 +3,11 @@
     
     require('../../Model/Conexion.php');
 
-    if ($_POST['tabla'] == "productos") {
+    if ($_POST['randomnautica'] == "productos") {
         require('../../Model/Productos.php');
         $clase = new Producto();
     }
-    elseif ($_POST['tabla'] == "proveedores") {
+    elseif ($_POST['randomnautica'] == "proveedores") {
         require('../../Model/Proveedores.php');
         $clase = new Proveedor();
     }
@@ -32,5 +32,4 @@
     ];
     $json = json_encode($json);
     echo($json);
-    
 ?>
