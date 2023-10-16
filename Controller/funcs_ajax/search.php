@@ -15,6 +15,9 @@
     if (isset($_POST['like']) and $_POST['like'] != "") {
         $result = $clase->search_like($_POST['like']);
     }
+    elseif ((isset($_POST['ID']) and $_POST['ID'] != "")){
+        $result = $clase->search($_POST['ID']);
+    }
     else {
         $result = $clase->search();
     }
