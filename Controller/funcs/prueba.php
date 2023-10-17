@@ -2,5 +2,9 @@
 	require('../../Model/Conexion.php');
 	require('../../Model/Productos.php');
 	$clase = new Producto();
-	print_r ($clase->search_stock(4)['stock']);
+	$resultado = $clase->search_luis();
+	while ($row = $resultado->fetch_assoc()) {
+        print_r($row);
+        echo "<br>";
+    };
 ?>

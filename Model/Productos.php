@@ -75,6 +75,12 @@
 
             return $this->conn->query($query);
         }
+        function search_luis(){
+            $query = "SELECT id, nombre,(SELECT SUM(restante) FROM lotes Where id_producto = p.id) as stock FROM `productos` as p ORDER BY id";
+
+            return $this->conn->query($query);
+        }
+        #######  SELECT id,(SELECT SUM(restante) FROM lotes Where id_producto = p.id) FROM `productos` as p
         function COUNT(){
             
             return $this->conn->query("SELECT COUNT(*) as 'total' FROM productos")->fetch_assoc()['total'];
