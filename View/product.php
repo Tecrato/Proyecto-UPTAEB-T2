@@ -82,7 +82,7 @@
 
 
                 <div class="uk-flex uk-flex-center uk-flex-middle uk-margin-small-left uk-margin-small-right uk-light cont_imprimir">
-                    <a href="#" class="uk-icon-link" uk-tooltip="title:IMPRIMIR INVENTARIO; delay: 500">
+                    <a href="InventarioPDF" class="uk-icon-link" uk-tooltip="title:IMPRIMIR INVENTARIO; delay: 500">
                         <span uk-icon="icon: print; ratio: 1.7" ></span>
                     </a>
                 </div>
@@ -114,11 +114,13 @@
                             </div>
                             <div class="uk-width-1-2@s">
                                 <select class="uk-select" id="form-stacked-select" name="categoria" required>
+                                    <option value="" disabled selected>Categoria</option>
                                     <?php echo $list_categorias; ?>
                                 </select>
                             </div>
                             <div class="uk-width-1-2@s">
                                 <select class="uk-select" id="form-stacked-select" name="unidad" required>
+                                    <option value="" disabled selected>Unidad</option>
                                     <?php echo $list_unidades; ?>
                                 </select>
                             </div>

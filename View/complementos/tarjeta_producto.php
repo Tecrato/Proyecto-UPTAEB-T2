@@ -36,118 +36,146 @@ echo '
     <!-- ************************************ Modal de Detalles de producto ************************************ -->
 
     <div id="modal-details-product'.$row['id'].'" class="uk-flex-top" uk-modal>
-        <div
-            class="uk-modal-dialog uk-modal-body uk-border-rounded uk-margin-auto-vertical container-modal-detailProduct">
-            <button class="uk-modal-close-default" type="button" uk-close></button>
-            <div>
-
-                <div class="uk-flex uk-flex-center uk-flex-wrap  container-detailProduct">
-                    <div class="uk-margin-small-right margin-img-detailPoduct">
-                        <img src="Media/imagenes/'.$row['imagen'].'" alt="" width="155px" style="height: 195px; object-fit: cover;">
-                    </div>
-                    <div class="container-stats-productDetail">
-                        <div class="uk-flex uk-flex-middle" style="height: 45px;">
-                            <div class="uk-flex uk-flex-middle uk-margin-small-right">
-                                <span class="uk-margin-small-right Color-icon-detailProduct"
-                                    uk-icon="icon: tag; ratio: 1.2"></span>
-                                <h5 class="uk-margin-remove uk-text-bolder">NOMBRE</h5>
-                            </div>
-                            <div>
-                                <h5 class="uk-margin-remove uk-text-emphasis Color-icon-detailProduct uk-text-bold uk-text-uppercase">
-                                    '.$row['nombre'].'</h5>
-                            </div>
-                        </div>
-                        <div class="uk-flex">
-                            <div>
-                                <span class="uk-margin-small-right Color-icon-detailProduct" uk-icon="icon: tag; ratio: 1.2"
-                                    style="float: left;"></span>
-                                <h5 class="uk-margin-small-right uk-margin-remove-top uk-margin-remove-left uk-margin-remove-bottom uk-text-bolder"
-                                    style="float: left;">DESCRIPCIÓN</h5>
-                                <h5 class="Description-item-productDetail uk-margin-remove Color-icon-detailProduct uk-text-bold uk-text-uppercase"
-                                    style="width: 360px; line-height: 23px;">
-                                    '.$row['descripcion'].'
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="uk-flex uk-flex-middle" style="height: 45px;">
-                            <div class="uk-flex uk-flex-middle uk-margin-small-right">
-                                <span class="uk-margin-small-right Color-icon-detailProduct"
-                                    uk-icon="icon: tag; ratio: 1.2"></span>
-                                <h5 class="uk-margin-remove uk-text-bolder">CATEGORIA</h5>
-                            </div>
-                            <div>
-                                <h5 class="uk-margin-remove uk-text-emphasis Color-icon-detailProduct uk-text-bold uk-text-uppercase">
-                                    '.$row['id_categoria'].'</h5>
-                            </div>
-                        </div>
-                        <div class="uk-flex uk-flex-middle" style="height: 45px;">
-                            <div class="uk-flex uk-flex-middle uk-margin-small-right">
-                                <span class="uk-margin-small-right Color-icon-detailProduct"
-                                    uk-icon="icon: tag; ratio: 1.2"></span>
-                                <h5 class="uk-margin-remove uk-text-bolder">EXISTENCIA</h5>
-                            </div>
-                            <div>
-                                <h5 class="uk-margin-remove uk-text-emphasis Color-icon-detailProduct uk-text-bold uk-text-uppercase">30
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="uk-flex uk-flex-middle" style="height: 45px;">
-                            <div class="uk-flex uk-flex-middle uk-margin-small-right">
-                                <span class="uk-margin-small-right Color-icon-detailProduct"
-                                    uk-icon="icon: tag; ratio: 1.2"></span>
-                                <h5 class="uk-margin-remove uk-text-bolder">PRECIO UNITARIO</h5>
-                            </div>
-                            <div>
-                                <h5 class="uk-margin-remove uk-text-emphasis Color-icon-detailProduct uk-text-bold uk-text-uppercase">'.$row['precio_venta'].'BS</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <hr class="uk-divider-icon Color-icon-detailProduct">
-
+            <div
+                class="uk-modal-dialog uk-modal-body uk-border-rounded uk-margin-auto-vertical container-modal-detailProduct">
+                <button class="uk-modal-close-default" type="button" uk-close></button>
                 <div>
-                    <div>
-                        <h5 class=" uk-text-bold uk-text-center">PROVEEDOR</h5>
-                    </div>
-                    <?php for ($i=0; $i < 3; $i++) { ?>
-                    <section class="uk-flex uk-flex-center uk-flex-middle uk-margin-small-bottom">
-                        <article class="tag_modal-detailProduct uk-margin-small-right">
-                            <div class="uk-flex uk-flex-middle uk-margin-small-right">
-                                <span class="uk-margin-small-right" style="color: #fff;"
-                                    uk-icon="icon: bookmark; ratio: 1.2"></span>
-                                <h6 class="uk-margin-remove uk-text-bolder textTag_detail-Product uk-text-uppercase" style="color: #fff;">
-                                    MONTECARMELO</h6>
-                            </div>
-                        </article>
-                        <article class="tag_modal-detailProduct-2">
-                            <div class="uk-flex uk-flex-middle uk-margin-small-right">
-                                <span class="uk-margin-small-right" style="color: #fff;"
-                                    uk-icon="icon: star; ratio: 1.2"></span>
-                                <h6 class="uk-margin-remove uk-text-bolder textTag_detail-Product" style="color: #fff;">
-                                    CANTIDAD</h6>
-                                <h6 class="uk-margin-small-left uk-margin-remove-right uk-margin-remove-top uk-margin-remove-bottom uk-text-bolder textTag_detail-Product uk-text-uppercase"
-                                    style="color: #fff;">10</h6>
-                            </div>
-                        </article>
-                        <article class="tag_modal-detailProduct uk-margin-small-left">
-                            <div class="uk-flex uk-flex-middle uk-margin-small-right">
-                                <span class="uk-margin-small-right" style="color: #fff;"
-                                    uk-icon="icon: calendar; ratio: 1.2"></span>
-                                <h6 class="uk-margin-remove uk-text-bolder textTag_detail-Product" style="color: #fff;">
-                                    EXP</h6>
-                                <h6 class="uk-margin-small-left uk-margin-remove-right uk-margin-remove-top uk-margin-remove-bottom uk-text-bolder textTag_detail-Product uk-text-uppercase"
-                                    style="color: #fff;">10/11/2023</h6>
-                            </div>
-                        </article>
-                    </section>
-                    <?php } ?>
-                </div>
 
+                    <div class="uk-flex uk-flex-center uk-flex-wrap  container-detailProduct">
+                        <div class="uk-margin-small-right margin-img-detailPoduct">
+                            <img src="Media/imagenes/'.$row['imagen'].'" alt="" width="155px"
+                                style="height: 195px; object-fit: cover;">
+                        </div>
+                        <div class="container-stats-productDetail">
+                            <div class="uk-flex uk-flex-middle" style="height: 45px;">
+                                <div class="uk-flex uk-flex-middle uk-margin-small-right">
+                                    <span class="uk-margin-small-right Color-icon-detailProduct"
+                                        uk-icon="icon: tag; ratio: 1.2"></span>
+                                    <h5 class="uk-margin-remove uk-text-bolder">NOMBRE</h5>
+                                </div>
+                                <div>
+                                    <h5
+                                        class="uk-margin-remove uk-text-emphasis Color-icon-detailProduct uk-text-bold uk-text-uppercase">
+                                        '.$row['nombre'].'</h5>
+                                </div>
+                            </div>
+                            <div class="uk-flex">
+                                <div>
+                                    <span class="uk-margin-small-right Color-icon-detailProduct"
+                                        uk-icon="icon: tag; ratio: 1.2" style="float: left;"></span>
+                                    <h5 class="uk-margin-small-right uk-margin-remove-top uk-margin-remove-left uk-margin-remove-bottom uk-text-bolder"
+                                        style="float: left;">DESCRIPCIÓN</h5>
+                                    <h5 class="Description-item-productDetail uk-margin-remove Color-icon-detailProduct uk-text-bold uk-text-uppercase"
+                                        style="width: 360px; line-height: 23px;">
+                                        '.$row['descripcion'].'
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="uk-flex uk-flex-middle" style="height: 45px;">
+                                <div class="uk-flex uk-flex-middle uk-margin-small-right">
+                                    <span class="uk-margin-small-right Color-icon-detailProduct"
+                                        uk-icon="icon: tag; ratio: 1.2"></span>
+                                    <h5 class="uk-margin-remove uk-text-bolder">CATEGORIA</h5>
+                                </div>
+                                <div>
+                                    <h5
+                                        class="uk-margin-remove uk-text-emphasis Color-icon-detailProduct uk-text-bold uk-text-uppercase">
+                                        '.$row['id_categoria'].'</h5>
+                                </div>
+                            </div>
+                            <div class="uk-flex uk-flex-middle" style="height: 45px;">
+                                <div class="uk-flex uk-flex-middle uk-margin-small-right">
+                                    <span class="uk-margin-small-right Color-icon-detailProduct"
+                                        uk-icon="icon: tag; ratio: 1.2"></span>
+                                    <h5 class="uk-margin-remove uk-text-bolder">EXISTENCIA</h5>
+                                </div>
+                                <div>
+                                    <h5
+                                        class="uk-margin-remove uk-text-emphasis Color-icon-detailProduct uk-text-bold uk-text-uppercase">
+                                        30
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="uk-flex uk-flex-middle" style="height: 45px;">
+                                <div class="uk-flex uk-flex-middle uk-margin-small-right">
+                                    <span class="uk-margin-small-right Color-icon-detailProduct"
+                                        uk-icon="icon: tag; ratio: 1.2"></span>
+                                    <h5 class="uk-margin-remove uk-text-bolder">PRECIO UNITARIO</h5>
+                                </div>
+                                <div>
+                                    <h5
+                                        class="uk-margin-remove uk-text-emphasis Color-icon-detailProduct uk-text-bold uk-text-uppercase">
+                                        35
+                                        BS</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="uk-divider-icon Color-icon-detailProduct">
+
+                    <div>
+                        <div class="uk-flex uk-flex-center uk-flex-middle uk-margin-bottom">
+                            <span class="uk-margin-small-right Color-icon-detailProduct"
+                                uk-icon="icon: tag; ratio: 1.2"></span>
+                            <h5 class=" uk-text-bold uk-text-center uk-margin-remove">PROVEEDOR</h5>
+                        </div>
+
+                        <section class="uk-margin-small-bottom" style="height: 150px; overflow: auto;">
+                            <ul uk-accordion>
+
+                                <li class="uk-text-uppercase">
+                                    <a class="uk-accordion-title uk-text-bold uk-text-default" href="#"
+                                        style="color: #106733;">
+                                        <span uk-icon="icon:bookmark; ratio: 1.5"></span>
+                                        Montecarmelo
+                                    </a>
+                                    <div class="uk-accordion-content">
+                                        <?php for ($i=0; $i < 3; $i++) { ?>
+                                        <div class="uk-flex uk-flex-center uk-flex-middle">
+                                            <article class="tag_modal-detailProduct uk-margin-small-right">
+                                                <div class="uk-flex uk-flex-middle uk-margin-small-right">
+                                                    <h6 class="uk-margin-remove uk-text-bolder textTag_detail-Product uk-text-uppercase"
+                                                        style="color: #fff; padding: 2px;">
+                                                        LOTE Nro 01</h6>
+                                                </div>
+                                            </article>
+                                            <article class="tag_modal-detailProduct-2">
+                                                <div class="uk-flex uk-flex-middle uk-margin-small-right">
+                                                    <span class="uk-margin-small-right icon" style="color: #fff;"
+                                                        uk-icon="icon: star; ratio: 1.2"></span>
+                                                    <h6 class="uk-margin-remove uk-text-bolder textTag_detail-Product"
+                                                        style="color: #fff;">
+                                                        CANTIDAD</h6>
+                                                    <h6 class="uk-margin-small-left uk-margin-remove-right uk-margin-remove-top uk-margin-remove-bottom uk-text-bolder textTag_detail-Product uk-text-uppercase"
+                                                        style="color: #fff;">10</h6>
+                                                </div>
+                                            </article>
+                                            <article class="tag_modal-detailProduct uk-margin-small-left">
+                                                <div class="uk-flex uk-flex-middle uk-margin-small-right">
+                                                    <span class="uk-margin-small-right icon" style="color: #fff;"
+                                                        uk-icon="icon: calendar; ratio: 1.2"></span>
+                                                    <h6 class="uk-margin-remove uk-text-bolder textTag_detail-Product"
+                                                        style="color: #fff;">
+                                                        EXP</h6>
+                                                    <h6 class="uk-margin-small-left uk-margin-remove-right uk-margin-remove-top uk-margin-remove-bottom uk-text-bolder textTag_detail-Product uk-text-uppercase"
+                                                        style="color: #fff;">10/11/2023</h6>
+                                                </div>
+                                            </article>
+                                        </div>
+                                        <hr>
+                                        <?php }?>
+                                    </div>
+                                </li>
+                                <hr>
+                            </ul>
+                        </section>
+
+                    </div>
+
+                </div>
             </div>
         </div>
-    </div>
-
 
 
 <!-- **************************Modal de confirmacion de eliminacion************************** -->

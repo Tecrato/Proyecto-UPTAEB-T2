@@ -17,6 +17,7 @@
 }
 .marca_agua{
     width: 240px;
+    margin-top: auto;
     opacity: 0.1;
 }
                                 
@@ -143,7 +144,7 @@
     min-width: 400px;
 }
 
-     /*-----------------------    Estilos del Main de product y Estilos del main registro de ventas -------------------------------*/
+     /*-----------------------    Estilos del Main de product -------------------------------*/
 .img_product{
     width: 255px;
     height: 345px;
@@ -212,7 +213,7 @@
     border-radius: 5px;
 }   
 .tag_modal-detailProduct-2{
-    background-color: #106733;
+    background-color: rgb(16, 103, 51);
     padding: 4px;
     border-radius: 5px;
 }  
@@ -320,6 +321,12 @@
         gap: 25px !important;
     }
 }
+@media (max-width: 475px){
+    .icon{
+        display: none;
+    }
+}
+
                 /*-----------------------    Estilos del main registro de ventas -------------------------------*/
 
 .Client_register:hover{
