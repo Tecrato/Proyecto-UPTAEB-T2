@@ -12,8 +12,14 @@
     <link rel="shortcut icon" href="static/images/logo_m.png" type="image/x-icon">
     <title>Inventario-Inicio</title>
 </head>
-<body class="Bg-Main-home">
+<?php 
+echo "
+<script>var sesion_user = '".$_SESSION['usuario']."'</script>
+<script>var sesionID = ".$_SESSION['id']."</script>
 
+";
+ ?>
+<body class="Bg-Main-home">;
 
            <!-- **********************************  Menu de PC (1024 en adelante)  ********************************** -->
 
