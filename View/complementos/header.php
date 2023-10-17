@@ -123,7 +123,7 @@
                     </a>
                 </li>
                 <li class="uk-margin-small-right Link" href="/Proyecto-UPTAEB-T2/Proveedores">
-                    <a class="uk-button uk-button-text enlace_nav" href="Controller/funcs_ajax/search por nombre.php">
+                    <a class="uk-button uk-button-text enlace_nav" href="Proveedores">
                         <span uk-icon="bookmark" class="uk-icon uk-margin-small-right uk-icon-button"></span>
                         <p>Proveedores</p>
                     </a>
