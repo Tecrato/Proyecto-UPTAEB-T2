@@ -76,7 +76,7 @@
             return $this->conn->query($query);
         }
         function search_luis(){
-            $query = "SELECT id, nombre,(SELECT SUM(restante) FROM lotes Where id_producto = p.id) as stock FROM `productos` as p ORDER BY id";
+            $query = "SELECT id, nombre,(SELECT SUM(restante) FROM lotes Where id_producto = p.id) as stock,IVA FROM `productos` as p ORDER BY id";
 
             return $this->conn->query($query);
         }
