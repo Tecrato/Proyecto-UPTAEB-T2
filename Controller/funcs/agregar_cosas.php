@@ -6,15 +6,20 @@
     require('../../Model/Conexion.php');
     if ($tipo === 'producto'){
         
-        $imagen = $_FILES['imagen1'];
-        $nick = "producto_".$_POST['nombre'] . "_" . $imagen['name'];
-        $img_err = subir_imagen($imagen,$nick);
-        if ($img_err != false){
-            header('Location:../../Productos?error='.$img_err);
-            if ($img_err != 3){
-                unlink('../../Media/imagenes/'.$nick);
+        if ($_FILES['imagen1']['name'] != "") {
+            $imagen = $_FILES['imagen1'];
+            $nick = "producto_".$_POST['nombre'] . "_" . $imagen['name'];
+            $img_err = subir_imagen($imagen,$nick);
+            if ($img_err != false){
+                header('Location:../../Productos?error='.$img_err);
+                if ($img_err != 3){
+                    unlink('../../Media/imagenes/'.$nick);
+                }
+                die();
             }
-            die();
+        }
+        else {
+            $nick = "banner_productos.png";
         }
         
         require('../../Model/Productos.php');
