@@ -98,8 +98,7 @@ echo '
                                 <h5 class="uk-margin-remove uk-text-bolder">PRECIO UNITARIO</h5>
                             </div>
                             <div>
-                                <h5 class="uk-margin-remove uk-text-emphasis Color-icon-detailProduct uk-text-bold uk-text-uppercase">35
-                                    BS</h5>
+                                <h5 class="uk-margin-remove uk-text-emphasis Color-icon-detailProduct uk-text-bold uk-text-uppercase">'.$row['precio_venta'].'BS</h5>
                             </div>
                         </div>
                     </div>
@@ -205,6 +204,9 @@ echo '
                         '.$list_unidades.'
                     </select>
                 </div>
+                <div class="uk-width-1-2@s">
+                    <input class="uk-input" type="number" step="0.1" placeholder="precio_venta" aria-label="25" name="precio_venta" required>
+                </div>
                 <div class="uk-width-1-3@s">
                     <input class="uk-input" type="number" placeholder="Stock mínimo" aria-label="25" name="stock_min" value="'.$row['stock_min'].'" required>
                 </div>
@@ -254,9 +256,6 @@ echo '
                 </div>
                 <div class="uk-width-1-2@s">
                     <input class="uk-input" type="number" step="0.1" placeholder="precio_compra" aria-label="25" name="precio_compra" required>
-                </div>
-                <div class="uk-width-1-2@s">
-                    <input class="uk-input" type="number" step="0.1" placeholder="precio_venta" aria-label="25" name="precio_venta" required>
                 </div>
                 <div class="uk-width-1-1@s uk-flex uk-flex-middle">
                     <label for="" style="width: 265px;">Fecha adquisicion</label>

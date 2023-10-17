@@ -20,7 +20,7 @@
         require('../../Model/Productos.php');
         $clase = new Producto(); // Llama al modelo y le manda la instruccion
         try {
-            $clase->agregar($_POST["categoria"],$_POST["unidad"],$_POST["nombre"],$_POST["descripcion"],$nick,$_POST["stock_min"],$_POST["stock_max"],$_POST["IVA"]);
+            $clase->agregar($_POST["categoria"],$_POST["unidad"],$_POST["nombre"],$_POST["descripcion"],$nick,$_POST["stock_min"],$_POST["stock_max"],$_POST["precio_venta"],$_POST["IVA"]);
         } catch (Exception $e) {
             unlink('../../Media/imagenes/'."producto_".$_POST['nombre']);
             header('Location:../../Productos?error=en+la+base+de+datos');

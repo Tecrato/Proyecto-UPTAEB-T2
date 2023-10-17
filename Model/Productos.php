@@ -2,9 +2,9 @@
     class Producto extends DB{
 
         // esta funcion agrega a la tabla productos un objeto con los valores que se le estan pasando
-        function agregar($categoria,$unidades,$nombre,$descripcion,$imagen,$stock_min,$stock_max,$IVA){
+        function agregar($categoria,$unidades,$nombre,$descripcion,$imagen,$stock_min,$stock_max,$precio_venta,$IVA){
             
-            $query = "INSERT INTO productos VALUES(null, $categoria, $unidades,'$nombre', '$descripcion','$imagen',$stock_min,$stock_max,$IVA)";
+            $query = "INSERT INTO productos VALUES(null, $categoria, $unidades,'$nombre', '$descripcion','$imagen',$stock_min,$stock_max,$precio_venta,$IVA)";
             
             $this->conn->query($query);
         }
@@ -36,10 +36,10 @@
         }
 
         // Con esta funcion podremos cambiar un producto segun su ID con los valores que le pasemos
-        function UPDATE($id,$categoria,$unidades,$nombre,$descripcion,$imagen,$stock_min,$stock_max,$IVA){
+        function UPDATE($id,$categoria,$unidades,$nombre,$descripcion,$imagen,$stock_min,$stock_max,$precio_venta,$IVA){
             
             
-            $query = "UPDATE productos SET id_categoria=".$categoria.", id_unidad=".$unidades.", nombre='".$nombre."', descripcion='".$descripcion."', stock_min=".$stock_min.", stock_max=".$stock_max.", IVA=".$IVA;
+            $query = "UPDATE productos SET id_categoria=".$categoria.", id_unidad=".$unidades.", nombre='".$nombre."', descripcion='".$descripcion."', stock_min=".$stock_min.", stock_max=".$stock_max.", precio_venta=".$precio_venta.", IVA=".$IVA;
             if ($imagen != null) {
                 $query = $query . ", imagen='".$imagen."' ";
             }
@@ -76,7 +76,7 @@
             return $this->conn->query($query);
         }
         function search_luis(){
-            $query = "SELECT id, nombre,(SELECT SUM(restante) FROM lotes Where id_producto = p.id) as stock,IVA FROM `productos` as p ORDER BY id";
+            $query = "SELECT id, nombre,(SELECT SUM(restante) FROM lotes Where id_producto = p.id) as stock,precio_venta,IVA FROM `productos` as p ORDER BY id";
 
             return $this->conn->query($query);
         }

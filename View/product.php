@@ -123,6 +123,9 @@
                                 </select>
                             </div>
                             <div class="uk-width-1-2@s">
+                                <input class="uk-input" type="number" step="0.1" placeholder="precio_venta" aria-label="25" name="precio_venta" required>
+                            </div>
+                            <div class="uk-width-1-2@s">
                                 <input class="uk-input" type="number" placeholder="Stock mínimo" aria-label="25" name="stock_min" required>
                             </div>
                             <div class="uk-width-1-2@s">
