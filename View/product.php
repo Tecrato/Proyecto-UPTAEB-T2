@@ -164,7 +164,7 @@
         <div class="[email protected] uk-grid-large uk-flex-center height_controller" uk-grid uk-height-match="target: > div > .uk-card">
             <?php
                 while ($row = $result->fetch_assoc()) {
-                    require 'complementos/tarjeta_producto.php';
+                    include 'complementos/tarjeta_producto.php';
                 };
             ?> 
         </div>

@@ -28,6 +28,13 @@
             return $this->conn->query($query); //$conn->fetch_assoc() // Y devuelve el resultado al controlador
         }
 
+        function search_detalles_producto($id){
+            
+            $query = "SELECT nombre,(SELECT SUM(restante) FROM lotes Where id_proveedor = p.id) as stock,(SELECT MIN(fecha_vencimiento) FROM lotes Where id_proveedor = p.id) as fecha_vencimiento FROM `proveedores` as p WHERE p.id=$id ORDER BY nombre";
+        
+            return $this->conn->query($query); //$conn->fetch_assoc() // Y devuelve el resultado al controlador
+        }
+
         // Con esta otra funcion se busca entre los productos en la base de datos
         function search($id=null,$nombre=null,$rif=null,$telefono=null,$correo=null,$direccion=null,$n=0){
             // Al igual que la clase anterior, puede buscar segun muchos valores o solo algunos
