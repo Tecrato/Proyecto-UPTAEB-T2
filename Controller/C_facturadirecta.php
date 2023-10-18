@@ -1,3 +1,3 @@
 <?php 
-	include '../View/FacturaPDF.php';
- ?>
+	include('../View/FacturaPDF.php');
+?>

@@ -13,6 +13,26 @@
 			$query = "SELECT * FROM lotes WHERE id_producto=$id_producto AND id_proveedor=$id_proveedor";
 			return $this->conn->query($query);
 		}
+		public function agregar($id_producto,$id_proveedor,$cantidad,$fecha_c,$fecha_v,$precio_compra){
+            $query = "INSERT INTO lotes VALUES(null, $id_producto, $id_proveedor, $cantidad,'$fecha_c', '$fecha_v', $precio_compra, $cantidad)";
+            
+            $this->conn->query($query);
+		}
+        function borrar($id_proveedor=False,$id_producto=False) {
+
+            if ($id_proveedor){
+                $query = "DELETE FROM lotes WHERE id_proveedor=$id_proveedor";
+            }
+            if ($id_producto){
+                $query = "DELETE FROM lotes WHERE id_producto=$id_producto";
+            }
+            else {
+            	throw new Exception("Error, debe pasar el id de un proveedor o de un producto", 1);
+            	
+            }
+            
+            $this->conn->query($query);
+        }
 	}
 
 ?>

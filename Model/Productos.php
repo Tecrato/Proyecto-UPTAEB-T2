@@ -9,23 +9,6 @@
             $this->conn->query($query);
         }
 
-        function agregar_lote($id_producto,$id_proveedor,$cantidad,$fecha_c,$fecha_v,$precio_compra){
-            
-            $query = "INSERT INTO lotes VALUES(null, $id_producto, $id_proveedor, $cantidad,'$fecha_c', '$fecha_v', $precio_compra, $cantidad)";
-            
-            $this->conn->query($query);
-        }
-        function borrar_lotes($id_proveedor=False,$id_producto=False) {
-
-            if ($id_proveedor){
-                $query = "DELETE FROM lotes WHERE id_proveedor=$id_proveedor";
-            }
-            if ($id_producto){
-                $query = "DELETE FROM lotes WHERE id_producto=$id_producto";
-            }
-            
-            $this->conn->query($query);
-        }
 
         // con esta funcion se elimina un elemento dependiendo de su id
         function DELETE($id) {

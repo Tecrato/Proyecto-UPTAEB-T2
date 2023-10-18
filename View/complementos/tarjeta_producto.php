@@ -291,7 +291,7 @@ echo '
         </div>
         <div class="uk-modal-body">
             <form class="uk-grid-small" uk-grid method="POST" action="Controller/funcs/agregar_cosas.php">
-                <input type="text" name="tipo" value="producto_lote" style="display:none">
+                <input type="text" name="tipo" value="lote" style="display:none">
                 <input type="text" name="ID" value="'.$row['id'].'" style="display:none">
                 <div class="uk-width-1-2@s">
                     <select class="uk-select" id="form-stacked-select" name="proveedor" required>

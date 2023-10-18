@@ -11,9 +11,9 @@
     $result = $clase->search_luis();
     
     $lista=array();
-
-    while ($row = $result->fetch_assoc()) {
-        array_push($lista_productos, $row);
+    for ($i=0; $i < $result->num_rows; $i++) {
+        $row = $result->fetch_assoc()
+        array_push($lista, $row);
     };
     $json = [
         'lista'=> $lista

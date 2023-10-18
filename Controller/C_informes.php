@@ -1,3 +1,3 @@
 <?php 
-	include '../View/registerShop.php';
- ?>
+	include('../View/registerShop.php');
+?>

@@ -1,3 +1,3 @@
 <?php 
-	include '../View/client.php';
- ?>
+	include('../View/client.php');
+?>

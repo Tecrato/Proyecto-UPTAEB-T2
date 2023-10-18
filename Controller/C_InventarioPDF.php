@@ -1,3 +1,3 @@
 <?php
-    include '../View/InventarioPDF.php';
+    include('../View/InventarioPDF.php');
 ?>
