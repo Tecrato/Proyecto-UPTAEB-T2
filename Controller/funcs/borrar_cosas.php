@@ -18,7 +18,7 @@
     }
     if ($tipo == 'proveedor'){
         $clase2 = new Lote(); // Llama al modelo y le manda la instruccion
-        $clase2->borrar¿($_POST['ID']);
+        $clase2->borrar($_POST['ID']);
         
         $clase = new Proveedor(); // Llama al modelo y le manda la instruccion
         $clase->DELETE($_POST['ID']);

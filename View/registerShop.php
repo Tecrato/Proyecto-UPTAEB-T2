@@ -149,24 +149,24 @@
                                 <div>
                                     <div>
                                         <p class="uk-text-meta uk-margin-remove">N∘_OPERACIÓN: <b
-                                                class="uk-text-warning">001</b>
+                                                class="uk-text-success">001</b>
                                         </p>
                                         <hr class="uk-margin-remove divider-2">
                                         <p class="uk-text-meta uk-margin-remove">FECHA: <b
-                                                class="uk-text-warning">10/7/2023</b></p>
+                                                class="uk-text-success">10/7/2023</b></p>
                                         <hr class="uk-margin-remove divider-2">
                                         <p class="uk-text-meta uk-margin-remove">CLIENTE: <b
-                                                class="uk-text-warning">Carlos
+                                                class="uk-text-success">Carlos
                                                 Merlo</b></p>
                                         <hr class="uk-margin-remove divider-2">
                                         <p class="uk-text-meta uk-margin-remove">VENDEDOR: <b
-                                                class="uk-text-warning">JUAN</b></p>
+                                                class="uk-text-success">JUAN</b></p>
                                         <hr class="uk-margin-remove divider-2">
                                         <p class="uk-text-meta uk-margin-remove">ESTADO FACTURA: <b
                                                 class="state-fact uk-text-emphasis">PAGADO</b></p>
                                         <hr class="uk-margin-remove divider-2">
                                         <p class="uk-text-meta uk-margin-remove">TOTAL FACTURA: <b
-                                                class="uk-text-warning">100
+                                                class="uk-text-success">100
                                                 BS</b></p>
                                     </div>
                                 </div>

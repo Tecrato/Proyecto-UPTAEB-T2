@@ -1,6 +1,6 @@
 <?php
 	class Lote extends DB {
-		
+
 		function search($id=null,$id_producto=null,$order='id DESC'){
 			$query = "SELECT * FROM lotes";
 			if ($id) {
@@ -46,7 +46,7 @@
             if ($id_proveedor){
                 $query = "DELETE FROM lotes WHERE id_proveedor=$id_proveedor";
             }
-            if ($id_producto){
+            elseif ($id_producto){
                 $query = "DELETE FROM lotes WHERE id_producto=$id_producto";
             }
             else {

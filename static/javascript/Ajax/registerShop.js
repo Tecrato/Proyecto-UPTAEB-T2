@@ -1,6 +1,3 @@
-const screen = window.screen.availWidth;
-let modal = "";
-
 //aqui creamos los modales donde se hara la factura, cada modal dependiendo de la resolucion
 //este es el de version de ordenador
 
@@ -57,7 +54,7 @@ if (screen > 1290) {
                                               for="form-horizontal-select">VENDEDOR</label>
                                           <div class="uk-form-controls" style="margin-left: 130px; !important;">
                                               <input class="uk-input Casher uk-form-width-medium" type="text"
-                                                  value="Administrador" id="2" disabled>
+                                                  value="${sesion_user}" id="${sesionID}" disabled>
                                           </div>
                                       </div>
 
@@ -68,6 +65,7 @@ if (screen > 1290) {
                                               <select class="uk-select selectTypeCash" id="form-horizontal-select">
                                                   <option disabled selected></option>
                                                   <option>Pago Movil</option>
+                                                  <option>Punto de Venta</option>
                                                   <option>Transferencia</option>
                                                   <option>Efectivo</option>
                                                   <option>Divisas</option>
@@ -443,217 +441,228 @@ document.addEventListener("keyup", (e) => {
 });
 
 //Aqui haremos que funcione los detalles de los productos
-const productos = [
-  {
-    id: "1",
-    nombre: "harina pan",
-    disponible: "10",
-    precio: "10.00",
-    iva: false,
-  },
-  {
-    id: "2",
-    nombre: "queso",
-    disponible: "15",
-    precio: "5.00",
-    iva: false,
-  },
-  {
-    id: "3",
-    nombre: "arroz",
-    disponible: "5",
-    precio: "20.00",
-    iva: false,
-  },
-  {
-    id: "4",
-    nombre: "azucar",
-    disponible: "5",
-    precio: "20.00",
-    iva: false,
-  },
-  {
-    id: "5",
-    nombre: "leche",
-    disponible: "5",
-    precio: "20.00",
-    iva: false,
-  },
-  {
-    id: "6",
-    nombre: "pasta",
-    disponible: "5",
-    precio: "20.00",
-    iva: false,
-  },
-  {
-    id: "7",
-    nombre: "jabon harmony",
-    disponible: "25",
-    precio: "7.00",
-    iva: true,
-  },
-  {
-    id: "8",
-    nombre: "Jabon en polvo",
-    disponible: "60",
-    precio: "30.00",
-    iva: true,
-  },
-];
+// const productos = [
+//   {
+//     id: "1",
+//     nombre: "harina pan",
+//     disponible: "10",
+//     precio: "10.00",
+//     iva: false,
+//   },
+//   {
+//     id: "2",
+//     nombre: "queso",
+//     disponible: "15",
+//     precio: "5.00",
+//     iva: false,
+//   },
+//   {
+//     id: "3",
+//     nombre: "arroz",
+//     disponible: "5",
+//     precio: "20.00",
+//     iva: false,
+//   },
+//   {
+//     id: "4",
+//     nombre: "azucar",
+//     disponible: "5",
+//     precio: "20.00",
+//     iva: false,
+//   },
+//   {
+//     id: "5",
+//     nombre: "leche",
+//     disponible: "5",
+//     precio: "20.00",
+//     iva: false,
+//   },
+//   {
+//     id: "6",
+//     nombre: "pasta",
+//     disponible: "5",
+//     precio: "20.00",
+//     iva: false,
+//   },
+//   {
+//     id: "7",
+//     nombre: "jabon harmony",
+//     disponible: "25",
+//     precio: "7.00",
+//     iva: true,
+//   },
+//   {
+//     id: "8",
+//     nombre: "Jabon en polvo",
+//     disponible: "60",
+//     precio: "30.00",
+//     iva: true,
+//   },
+// ];
 
-//aqui seleccionamos el contenedor de la tabla de la izquierda, es decir el tbody donde luego insertaremos los tr
-const ContainerTr = document.getElementById("Product-detail-1");
+//ajax
+$.ajax({
+  url: "Controller/funcs_ajax/search_factura.php",
+  type: "POST",
+  processData: true,
+  contentType: true,
+  success: function (response) {
+    let producto = JSON.parse(response);
+    let productos = producto.lista;
 
-//creamos el template donde estara el tr
-let tr = "";
-//recorremos los productos y creamos los tr
-//el tr tendra el value del id, para luego verificar si es igual al de la base de datos
-const InsertarProductos = () => {
-  productos.forEach((producto) => {
-    //esta condicion es para que agg el tr, pero modificando el tamaño del input de cantidad, para que se vea bien en versiones mobiles
-    if (screen >= 1024) {
-      tr += `
+    // aqui seleccionamos el contenedor de la tabla de la izquierda, es decir el tbody donde luego insertaremos los tr
+    const ContainerTr = document.getElementById("Product-detail-1");
+
+    //creamos el template donde estara el tr
+    let tr = "";
+    //recorremos los productos y creamos los tr
+    //el tr tendra el value del id, para luego verificar si es igual al de la base de datos
+    const InsertarProductos = () => {
+      productos.forEach((producto) => {
+        //esta condicion es para que agg el tr, pero modificando el tamaño del input de cantidad, para que se vea bien en versiones mobiles
+        if (screen >= 1024) {
+          tr += `
           <tr value="${producto.id}" class="TR-Product uk-dark">
               <td>
                   <input type="hidden" value="${producto.nombre}">
                   <p class="uk-margin-remove">${producto.nombre}</p>
               </td>
               <td>
-                  <input class="uk-input uk-form-width-xsmall disponible" type="text" aria-label="disabled" value="${producto.disponible}" disabled>
+                  <input class="uk-input uk-form-width-xsmall disponible" type="text" aria-label="disabled" value="${producto.stock}" disabled>
               </td>
               <td>
-                  <input class="uk-input uk-form-width-xsmall" type="text" aria-label="disabled" value="${producto.precio}" disabled>
+                  <input class="uk-input uk-form-width-xsmall" type="text" aria-label="disabled" value="${producto.precio_venta}" disabled>
               </td>
               <td>
                   <input class="uk-input uk-form-width-small State-input-stock" type="text" placeholder="Cantidad" aria-label="Input">
               </td>
               <td class="uk-flex uk-flex-center">
-                  <input type="hidden" value="${producto.iva}">
+                  <input type="hidden" value="${producto.IVA}">
                   <button class="uk-icon-button ButtonPlus" uk-icon="plus"></button>
               </td>
           </tr>
       `;
-    } else {
-      tr += `
+        } else {
+          tr += `
           <tr value="${producto.id}" class="TR-Product uk-dark">
               <td>
                   <input type="hidden" value="${producto.nombre}">
                   <p class="uk-margin-remove">${producto.nombre}</p>
               </td>
               <td>
-                  <input class="uk-input uk-form-width-xsmall" type="text" aria-label="disabled" value="${producto.disponible}" disabled>
+                  <input class="uk-input uk-form-width-xsmall" type="text" aria-label="disabled" value="${producto.stock}" disabled>
               </td>
               <td>
-                  <input class="uk-input uk-form-width-xsmall" type="text" aria-label="disabled" value="${producto.precio}" disabled>
+                  <input class="uk-input uk-form-width-xsmall" type="text" aria-label="disabled" value="${producto.precio_venta}" disabled>
               </td>
               <td>
                   <input class="uk-input uk-form-width-xsmall State-input-stock" type="text" placeholder="Cantidad" aria-label="Input">
               </td>
               <td class="uk-flex uk-flex-center">
-                  <input type="hidden" value="${producto.iva}">
+                  <input type="hidden" value="${producto.IVA}">
                   <button class="uk-icon-button ButtonPlus" uk-icon="plus"></button>
               </td>
           </tr>
       `;
-    }
-  });
-};
+        }
+      });
+    };
 
-InsertarProductos();
+    InsertarProductos();
 
-//aqui insertamos los tr
-ContainerTr.innerHTML += tr;
+    //aqui insertamos los tr
+    ContainerTr.innerHTML += tr;
 
-//seleccionamos el input donde el usuario ingresa la cantidad de productos que desea comprar
-let inputState = document.querySelectorAll(".State-input-stock");
-inputState.forEach((input) => {
-  //capturamos el evento de pulsar una tecla
-  input.addEventListener("keyup", (e) => {
-    //esta variable guarda la cantidad de stock del producto en esa fila
-    let cantidad = parseInt(
-      input.parentElement.previousElementSibling.previousElementSibling
-        .firstElementChild.value
-    );
-    //esta variable guarda el valor de lo que el usuario teclea
-    let cantidadCliente = parseInt(e.target.value);
-    if (cantidadCliente <= cantidad && cantidadCliente > 0) {
-      input.classList.add("succesc");
-    } else {
-      input.classList.remove("succesc");
-    }
-    if (cantidadCliente > cantidad || cantidadCliente == 0) {
-      input.classList.add("danger");
-    } else {
-      input.classList.remove("danger");
-    }
-  });
-});
+    //seleccionamos el input donde el usuario ingresa la cantidad de productos que desea comprar
+    let inputState = document.querySelectorAll(".State-input-stock");
+    inputState.forEach((input) => {
+      //capturamos el evento de pulsar una tecla
+      input.addEventListener("keyup", (e) => {
+        //esta variable guarda la cantidad de stock del producto en esa fila
+        let cantidad = parseInt(
+          input.parentElement.previousElementSibling.previousElementSibling
+            .firstElementChild.value
+        );
+        //esta variable guarda el valor de lo que el usuario teclea
+        let cantidadCliente = parseInt(e.target.value);
+        if (cantidadCliente <= cantidad && cantidadCliente > 0) {
+          input.classList.add("succesc");
+        } else {
+          input.classList.remove("succesc");
+        }
+        if (cantidadCliente > cantidad || cantidadCliente == 0) {
+          input.classList.add("danger");
+        } else {
+          input.classList.remove("danger");
+        }
+      });
+    });
 
-//creamos esta funcion que calculara los montos de la factura
-let ActualizarTotal = () => {
-  //obtenemos los valores del iva, ya sean true o false
-  let IvaController = document.querySelectorAll(".controller-iva");
-  let PriceExentIva = 0;
-  let PriceNoExentIva = 0;
-  for (const algo of IvaController) {
-    let IvaStatus = algo.getAttribute("iva");
-    if (IvaStatus == "false") {
-      let precioUndTotal = parseFloat(
-        algo.parentElement.previousElementSibling.textContent
-      );
-      PriceExentIva += precioUndTotal;
-    } else {
-      let precioUndTotal = parseFloat(
-        algo.parentElement.previousElementSibling.textContent
-      );
-      PriceNoExentIva += precioUndTotal;
-    }
-  }
-  // esta varible tendra la suma del total parcial
-  let totalAPagarParcial = PriceExentIva + PriceNoExentIva;
-  //obtenemos el contenedor del subtotal
-  let subtotal = document.getElementById("subtotalFact");
-  //luego su texto sera igual a la variable totalAPagarParcial, mas el tipo de moneda
-  subtotal.textContent = totalAPagarParcial.toFixed(2) + " BS";
-  // //creamos la variable que tendra el iva
-  let iva = PriceNoExentIva * 0.16;
-  let TextIva = (document.getElementById("iva").textContent =
-    iva.toFixed(2) + " BS");
-  //con esta varible obtenemos el total a pagar
-  let totalAPagar = totalAPagarParcial + iva;
-  //obtenemos el contenedor del total
-  let total = (document.getElementById("totalFact").textContent =
-    totalAPagar.toFixed(2) + " BS");
-};
+    //creamos esta funcion que calculara los montos de la factura
+    let ActualizarTotal = () => {
+      //obtenemos los valores del iva, ya sean true o false
+      let IvaController = document.querySelectorAll(".controller-iva");
+      let PriceExentIva = 0;
+      let PriceNoExentIva = 0;
+      for (const algo of IvaController) {
+        let IvaStatus = algo.getAttribute("iva");
+        if (IvaStatus == 0) {
+          let precioUndTotal = parseFloat(
+            algo.parentElement.previousElementSibling.textContent
+          );
+          PriceExentIva += precioUndTotal;
+        } else {
+          let precioUndTotal = parseFloat(
+            algo.parentElement.previousElementSibling.textContent
+          );
+          PriceNoExentIva += precioUndTotal;
+        }
+      }
+      // esta varible tendra la suma del total parcial
+      let totalAPagarParcial = PriceExentIva + PriceNoExentIva;
+      //obtenemos el contenedor del subtotal
+      let subtotal = document.getElementById("subtotalFact");
+      //luego su texto sera igual a la variable totalAPagarParcial, mas el tipo de moneda
+      subtotal.textContent = totalAPagarParcial.toFixed(2) + " BS";
+      // //creamos la variable que tendra el iva
+      let iva = PriceNoExentIva * 0.16;
+      let TextIva = (document.getElementById("iva").textContent =
+        iva.toFixed(2) + " BS");
+      //con esta varible obtenemos el total a pagar
+      let totalAPagar = totalAPagarParcial + iva;
+      //obtenemos el contenedor del total
+      let total = (document.getElementById("totalFact").textContent =
+        totalAPagar.toFixed(2) + " BS");
+    };
 
-//seleccionamos todos los botones de +, ya que necesitamos agg los valores del tr en la tabla de la derecha
-let botonAgg = document.querySelectorAll(".ButtonPlus");
-//este sera el template de los tr de la tabla de la derecha
-let trDetail = "";
-//recorremos los botones para ver las etiquetas html
-botonAgg.forEach((boton) => {
-  //con esto sabremos que boton pertenece a cada tr
-  boton.addEventListener("click", () => {
-    //esta varible accedemos al padre del boton, osea el tr
-    //ademas de una lista de todos los child, esto es para poder obtener los valores que el usuario escoja
-    let valor = boton.parentElement.parentElement.children;
-    //esta variable contiene el nombre del producto, para luego hacer una comprobaciob
-    let valor2 = boton.parentElement.parentElement.attributes.value.textContent;
-    // este array guardara los datos del producto que puso el cliente
-    let array = [];
+    //seleccionamos todos los botones de +, ya que necesitamos agg los valores del tr en la tabla de la derecha
+    let botonAgg = document.querySelectorAll(".ButtonPlus");
+    //este sera el template de los tr de la tabla de la derecha
+    let trDetail = "";
+    //recorremos los botones para ver las etiquetas html
+    botonAgg.forEach((boton) => {
+      //con esto sabremos que boton pertenece a cada tr
+      boton.addEventListener("click", () => {
+        //esta varible accedemos al padre del boton, osea el tr
+        //ademas de una lista de todos los child, esto es para poder obtener los valores que el usuario escoja
+        let valor = boton.parentElement.parentElement.children;
+        //esta variable contiene el nombre del producto, para luego hacer una comprobaciob
+        let valor2 =
+          boton.parentElement.parentElement.attributes.value.textContent;
+        // este array guardara los datos del producto que puso el cliente
+        let array = [];
 
-    //con este bucle, recorremos todos los hijos del tr
-    for (const child of valor) {
-      //por cada vuelta, inserta en el array el valor de los inputs, dentro de cada TD
-      array.push(child.firstElementChild.value);
-    }
+        //con este bucle, recorremos todos los hijos del tr
+        for (const child of valor) {
+          //por cada vuelta, inserta en el array el valor de los inputs, dentro de cada TD
+          array.push(child.firstElementChild.value);
+        }
 
-    let ivaIdentifier = boton.previousElementSibling.value;
+        let ivaIdentifier = boton.previousElementSibling.value;
 
-    //Creamos los tr de la tabla de la derecha
-    if (ivaIdentifier == "false") {
-      trDetail = `
+        //Creamos los tr de la tabla de la derecha
+        if (ivaIdentifier == 0) {
+          trDetail = `
                     <tr>
                         <td>${valor2}</td>
                         <td>${array[3]}</td>
@@ -670,8 +679,8 @@ botonAgg.forEach((boton) => {
                         </td>
                     </tr>
                 `;
-    } else {
-      trDetail = `
+        } else {
+          trDetail = `
                     <tr>
                         <td>${valor2}</td>
                         <td>${array[3]}</td>
@@ -688,228 +697,249 @@ botonAgg.forEach((boton) => {
                         </td>
                     </tr>
                 `;
-    }
+        }
 
-    if (
-      parseInt(array[3]) <= parseInt(array[1]) &&
-      parseInt(array[3]) != 0 &&
-      array[3] != ""
-    ) {
-      //seleccionamos el tbody de la tabla de la derecha, y le insertamos los tr con los detalles de los productos solo si se
-      //cumplen todas las condiciones
-      document.getElementById("Detail-product-fact").innerHTML += trDetail;
+        if (
+          parseInt(array[3]) <= parseInt(array[1]) &&
+          parseInt(array[3]) != 0 &&
+          array[3] != ""
+        ) {
+          //seleccionamos el tbody de la tabla de la derecha, y le insertamos los tr con los detalles de los productos solo si se
+          //cumplen todas las condiciones
+          document.getElementById("Detail-product-fact").innerHTML += trDetail;
 
-      //a la vez que insertamos datos en la tabla de detalles, tambien restamos la cantidad que el usuario coloco
-      parseInt(
-        (boton.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.firstElementChild.value -=
-          array[3])
-      );
+          //a la vez que insertamos datos en la tabla de detalles, tambien restamos la cantidad que el usuario coloco
+          parseInt(
+            (boton.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.firstElementChild.value -=
+              array[3])
+          );
 
-      //tambien quitamos el estilo del input
-      boton.parentElement.previousElementSibling.firstElementChild.classList.remove(
-        "succesc"
-      );
-      //ademas resetemos el input una vez pulsado el boton de plus
-      boton.parentElement.previousElementSibling.firstElementChild.value = "";
-    }
+          //tambien quitamos el estilo del input
+          boton.parentElement.previousElementSibling.firstElementChild.classList.remove(
+            "succesc"
+          );
+          //ademas resetemos el input una vez pulsado el boton de plus
+          boton.parentElement.previousElementSibling.firstElementChild.value =
+            "";
+        }
 
-    //en esta condicion mostraremos un mensaje si el campo de cantidad esta vacio
-    if (array[3] == "") {
-      boton.parentElement.previousElementSibling.firstElementChild.setAttribute(
-        "uk-tooltip",
-        "title: Debe ingresar una cantidad"
-      );
-      boton.parentElement.previousElementSibling.firstElementChild.classList.add(
-        "tooltip-efect"
-      );
-      UIkit.tooltip(".tooltip-efect").show();
+        //en esta condicion mostraremos un mensaje si el campo de cantidad esta vacio
+        if (array[3] == "") {
+          boton.parentElement.previousElementSibling.firstElementChild.setAttribute(
+            "uk-tooltip",
+            "title: Debe ingresar una cantidad"
+          );
+          boton.parentElement.previousElementSibling.firstElementChild.classList.add(
+            "tooltip-efect"
+          );
+          UIkit.tooltip(".tooltip-efect").show();
 
-      setTimeout(() => {
-        boton.parentElement.previousElementSibling.firstElementChild.removeAttribute(
-          "uk-tooltip"
-        );
-        boton.parentElement.previousElementSibling.firstElementChild.classList.remove(
-          "tooltip-efect"
-        );
-      }, 800);
-    } else if (
-      parseInt(array[3]) > parseInt(array[1]) ||
-      parseInt(array[3]) == 0
-    ) {
-      //esta condicion es en caso que la cantidad que ingrese el usuario supere la cantidad en existencia
-      boton.parentElement.previousElementSibling.firstElementChild.setAttribute(
-        "uk-tooltip",
-        "title: La cantidad ingresada no es valida"
-      );
-      boton.parentElement.previousElementSibling.firstElementChild.classList.add(
-        "tooltip-efect"
-      );
-      UIkit.tooltip(".tooltip-efect").show();
-
-      setTimeout(() => {
-        boton.parentElement.previousElementSibling.firstElementChild.removeAttribute(
-          "uk-tooltip"
-        );
-        boton.parentElement.previousElementSibling.firstElementChild.classList.remove(
-          "tooltip-efect"
-        );
-      }, 800);
-    }
-
-    let stockHeight =
-      boton.parentElement.parentElement.classList.add("stockHeight");
-    let StockDisponible = document.querySelectorAll(".stockHeight");
-
-    //con esta variable guardamos los botones de eliminar de cada tr, de la tabla de la derecha
-    let BtnDelete = document.querySelectorAll(".Btn-delete");
-    let btnStock = parseInt(
-      boton.parentElement.parentElement.getAttribute("value")
-    );
-
-    //recorremos los botones para obtener la etiqueta html
-    for (const btn of BtnDelete) {
-      btn.addEventListener("click", () => {
-        //aqui obtenemos el tr del boton que estamos pulsando
-        let trash = btn.parentElement.parentElement;
-        //seleccionamos el tbody de la tabla de la derecha y removemos al hijo
-        // que en este caso, es la variable anterior
-        document.getElementById("Detail-product-fact").removeChild(trash);
-        // y luego actualizamos el total a pagar
-        ActualizarTotal();
-        let idTableDetail = parseInt(
-          btn.parentElement.parentElement.firstElementChild.textContent
-        );
-
-        StockDisponible.forEach((da) => {
-          if (idTableDetail == parseInt(da.getAttribute("value"))) {
-            let cantidadUsuario = parseInt(
-              btn.parentElement.parentElement.firstElementChild
-                .nextElementSibling.textContent
+          setTimeout(() => {
+            boton.parentElement.previousElementSibling.firstElementChild.removeAttribute(
+              "uk-tooltip"
             );
-            let cantidadStock = parseInt(
-              da.firstElementChild.nextElementSibling.firstElementChild.value
+            boton.parentElement.previousElementSibling.firstElementChild.classList.remove(
+              "tooltip-efect"
+            );
+          }, 800);
+        } else if (
+          parseInt(array[3]) > parseInt(array[1]) ||
+          parseInt(array[3]) == 0
+        ) {
+          //esta condicion es en caso que la cantidad que ingrese el usuario supere la cantidad en existencia
+          boton.parentElement.previousElementSibling.firstElementChild.setAttribute(
+            "uk-tooltip",
+            "title: La cantidad ingresada no es valida"
+          );
+          boton.parentElement.previousElementSibling.firstElementChild.classList.add(
+            "tooltip-efect"
+          );
+          UIkit.tooltip(".tooltip-efect").show();
+
+          setTimeout(() => {
+            boton.parentElement.previousElementSibling.firstElementChild.removeAttribute(
+              "uk-tooltip"
+            );
+            boton.parentElement.previousElementSibling.firstElementChild.classList.remove(
+              "tooltip-efect"
+            );
+          }, 800);
+        }
+
+        let stockHeight =
+          boton.parentElement.parentElement.classList.add("stockHeight");
+        let StockDisponible = document.querySelectorAll(".stockHeight");
+
+        //con esta variable guardamos los botones de eliminar de cada tr, de la tabla de la derecha
+        let BtnDelete = document.querySelectorAll(".Btn-delete");
+        let btnStock = parseInt(
+          boton.parentElement.parentElement.getAttribute("value")
+        );
+
+        //recorremos los botones para obtener la etiqueta html
+        for (const btn of BtnDelete) {
+          btn.addEventListener("click", () => {
+            //aqui obtenemos el tr del boton que estamos pulsando
+            let trash = btn.parentElement.parentElement;
+            //seleccionamos el tbody de la tabla de la derecha y removemos al hijo
+            // que en este caso, es la variable anterior
+            document.getElementById("Detail-product-fact").removeChild(trash);
+            // y luego actualizamos el total a pagar
+            ActualizarTotal();
+            let idTableDetail = parseInt(
+              btn.parentElement.parentElement.firstElementChild.textContent
             );
 
-            da.firstElementChild.nextElementSibling.firstElementChild.value =
-              cantidadUsuario + cantidadStock;
-          }
-        });
+            StockDisponible.forEach((da) => {
+              if (idTableDetail == parseInt(da.getAttribute("value"))) {
+                let cantidadUsuario = parseInt(
+                  btn.parentElement.parentElement.firstElementChild
+                    .nextElementSibling.textContent
+                );
+                let cantidadStock = parseInt(
+                  da.firstElementChild.nextElementSibling.firstElementChild
+                    .value
+                );
+
+                da.firstElementChild.nextElementSibling.firstElementChild.value =
+                  cantidadUsuario + cantidadStock;
+              }
+            });
+          });
+        }
+
+        //esto actualiza el total a pagar
+        //se actualiza dos veces, ya que esta actualiza al agg contenido de la tabla de la izquierda en la de la derecha
+        // y tambien se llama cuando eliminamos un registro en la tabla de la derecha, ya que toma los tr, los vuelve
+        // a recorrer y vuelve a sumar los montos
+
+        //esta condicion actualiza el total solo si se cumple todas las condiciones
+        if (
+          parseInt(array[3]) <= parseInt(array[1]) &&
+          parseInt(array[3]) != 0 &&
+          array[3] != ""
+        ) {
+          ActualizarTotal();
+        }
       });
-    }
-
-    //esto actualiza el total a pagar
-    //se actualiza dos veces, ya que esta actualiza al agg contenido de la tabla de la izquierda en la de la derecha
-    // y tambien se llama cuando eliminamos un registro en la tabla de la derecha, ya que toma los tr, los vuelve
-    // a recorrer y vuelve a sumar los montos
-
-    //esta condicion actualiza el total solo si se cumple todas las condiciones
-    if (
-      parseInt(array[3]) <= parseInt(array[1]) &&
-      parseInt(array[3]) != 0 &&
-      array[3] != ""
-    ) {
-      ActualizarTotal();
-    }
-  });
-});
-
-//funcion para verificar si ya se puede enviar los datos para hacer la factura
-let btnCreateFact = document.querySelector(".btnCreateFact");
-
-btnCreateFact.addEventListener("click", () => {
-  let tipoPago = document.querySelector(".selectTypeCash").value;
-  let idCasher = document.querySelector(".Casher").getAttribute("id");
-  let idClient = document
-    .getElementById("Client-datails")
-    .firstElementChild.getAttribute("value");
-  let tableDetailProduct = document.getElementById(
-    "Detail-product-fact"
-  ).childElementCount;
-  let json = [];
-
-  if (tipoPago == "") {
-    btnCreateFact.setAttribute(
-      "uk-tooltip",
-      "title:Debe ingresar forma de pago; pos: right;"
-    );
-    UIkit.tooltip(".btnCreateFact").show();
-
-    setTimeout(() => {
-      btnCreateFact.removeAttribute("uk-tooltip");
-    }, 1000);
-  } else if (tableDetailProduct == 0) {
-    btnCreateFact.setAttribute(
-      "uk-tooltip",
-      "title:Debe ingresar producto; pos: right"
-    );
-    UIkit.tooltip(".btnCreateFact").show();
-
-    setTimeout(() => {
-      btnCreateFact.removeAttribute("uk-tooltip");
-    }, 1000);
-  } else {
-    let blo = document.getElementById("Detail-product-fact").children;
-
-    for (const iterator of blo) {
-      let algo = iterator.firstElementChild.textContent;
-      let algo2 = iterator.firstElementChild.nextElementSibling.textContent;
-      let algo3 =
-        iterator.firstElementChild.nextElementSibling.nextElementSibling
-          .textContent;
-      let algo4 =
-        iterator.lastElementChild.previousElementSibling.previousElementSibling
-          .textContent;
-      let algo5 = iterator.lastElementChild.previousElementSibling.textContent;
-
-      json.push({
-        idCasher: idCasher,
-        idClient: idClient,
-        TPago: tipoPago,
-
-        idProduct: algo,
-        nombre: algo3,
-        cantidad: algo2,
-        precioT: algo5,
-
-        pTotal: document.getElementById("totalFact").textContent,
-      });
-    }
-    console.log(json);
-
-    UIkit.notification({
-      message:
-        "<span uk-icon='icon: check'></span> Factura generada correctamente ",
-      status: "success",
     });
-    document.querySelector(".selectTypeCash").value = "";
-    document.getElementById(
-      "Client-datails"
-    ).innerHTML = `<div class="uk-flex uk-flex-column uk-flex-middle" value="default">
+
+    //funcion para verificar si ya se puede enviar los datos para hacer la factura
+    let btnCreateFact = document.querySelector(".btnCreateFact");
+
+    btnCreateFact.addEventListener("click", () => {
+      let tipoPago = document.querySelector(".selectTypeCash").value;
+      let idCasher = document.querySelector(".Casher").getAttribute("id");
+      let idClient = document
+        .getElementById("Client-datails")
+        .firstElementChild.getAttribute("value");
+      let tableDetailProduct = document.getElementById(
+        "Detail-product-fact"
+      ).childElementCount;
+
+      //este json sera el que se envie al server para insertar los datos de la factura
+      let json = {
+        idCasher: parseInt(idCasher),
+        idClient: parseInt(idClient),
+        TPago: tipoPago,
+        tIva: parseFloat(document.getElementById("iva").textContent),
+        pTotal: parseFloat(document.getElementById("totalFact").textContent),
+        details: [],
+      };
+
+      if (tipoPago == "") {
+        btnCreateFact.setAttribute(
+          "uk-tooltip",
+          "title:Debe ingresar forma de pago; pos: right;"
+        );
+        UIkit.tooltip(".btnCreateFact").show();
+
+        setTimeout(() => {
+          btnCreateFact.removeAttribute("uk-tooltip");
+        }, 1000);
+      } else if (tableDetailProduct == 0) {
+        btnCreateFact.setAttribute(
+          "uk-tooltip",
+          "title:Debe ingresar producto; pos: right"
+        );
+        UIkit.tooltip(".btnCreateFact").show();
+
+        setTimeout(() => {
+          btnCreateFact.removeAttribute("uk-tooltip");
+        }, 1000);
+      } else {
+        let blo = document.getElementById("Detail-product-fact").children;
+
+        for (const iterator of blo) {
+          let algo = parseInt(iterator.firstElementChild.textContent);
+          let algo2 = parseInt(iterator.firstElementChild.nextElementSibling.textContent);
+          let algo5 =
+            parseFloat(iterator.lastElementChild.previousElementSibling.textContent);
+
+          //insertamos los datos de los productos por cada tr que haya en detalles de factura
+          json.details.push({
+            idProduct: algo,
+            cantidad: algo2,
+            precioT: algo5,
+          });
+        }
+
+        //luego de enviar los datos reseteamos el modal
+        UIkit.notification({
+          message:
+            "<span uk-icon='icon: check'></span> Factura generada correctamente ",
+          status: "success",
+          pos: 'bottom-right',
+        });
+        document.querySelector(".selectTypeCash").value = "";
+        document.getElementById(
+          "Client-datails"
+        ).innerHTML = `<div class="uk-flex uk-flex-column uk-flex-middle" value="default">
                                                               <h5 class="uk-text-bold">AÑADIR CLIENTE</h5>
                                                               <a href="#" uk-icon="icon: plus-circle; ratio: 2.5"></a>
                                                           </div>`;
-    document.getElementById("Detail-product-fact").innerHTML = "";
-    ActualizarTotal();
+        document.getElementById("Detail-product-fact").innerHTML = "";
+        ActualizarTotal();
 
-    setTimeout(() => {
-      UIkit.modal("#modal-full").hide();
-    }, 800);
-  }
-});
+        setTimeout(() => {
+          UIkit.modal("#modal-full").hide();
+        }, 800);
 
-//con esto hacemos la busqueda de los productos
-document.getElementById("SearchProduct-Fact").addEventListener("keyup", (e) => {
-  if (e.target.matches("#SearchProduct-Fact")) {
-    document.querySelectorAll(".TR-Product").forEach((r) => {
-      if (
-        r.firstElementChild.lastElementChild.textContent
-          .toLowerCase()
-          .includes(e.target.value)
-      ) {
-        r.classList.remove("invisible");
-      } else {
-        r.classList.add("invisible");
+        console.log(json)
+        //envio de datos con ajax
+        //preparamos el json
+        let jsonString = JSON.stringify(json);
+        let nosse = JSON.stringify(datos)
+        // console.log(jsonString);
+
+        $.ajax({
+          url: "Controller/funcs_ajax/prueba.php",
+          type: "POST",
+          data: {jsonString},
+          success: function(response){
+            console.log(response)
+          }
+        });
       }
     });
-  }
+
+    //con esto hacemos la busqueda de los productos
+    document
+      .getElementById("SearchProduct-Fact")
+      .addEventListener("keyup", (e) => {
+        if (e.target.matches("#SearchProduct-Fact")) {
+          document.querySelectorAll(".TR-Product").forEach((r) => {
+            if (
+              r.firstElementChild.lastElementChild.textContent
+                .toLowerCase()
+                .includes(e.target.value)
+            ) {
+              r.classList.remove("invisible");
+            } else {
+              r.classList.add("invisible");
+            }
+          });
+        }
+      });
+  },
 });

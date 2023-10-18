@@ -3,6 +3,14 @@
     
     require('../../Model/Conexion.php');
 
+    if (isset($_POST['limite']) and $_POST['like'] != "") {
+        $limite = $_POST['limite'];
+    }
+    else {
+        $limite = 9;
+    }
+     
+
     if ($_POST['randomnautica'] == "productos") {
         require('../../Model/Productos.php');
         $clase = new Producto();
@@ -19,7 +27,7 @@
         $result = $clase->search($_POST['ID']);
     }
     else {
-        $result = $clase->search();
+        $result = $clase->search(limite:$limite);
     }
     
     $lista=array();

@@ -1,4 +1,4 @@
-// Esta funcion cambia la pagina
+// Esta funcion cambia la pagina de productos
 function cambiar_pagina_php(dir) {
   window.location.href = `Controller/funcs/cambiar_pagina.php?dir=` + dir + "&p="+num_page+"&type="+ type_page;
 }
@@ -14,7 +14,7 @@ $(function () {
     let pagination = document.querySelector(".uk-pagination");
   
     if (containerHeight == 0) {
-      containerBody.style.height = `110vh`;
+      containerBody.style.height = `115vh`;
       containerMarca_agua.classList.remove("invisible");
       pagination.classList.add("invisible");
     } else {

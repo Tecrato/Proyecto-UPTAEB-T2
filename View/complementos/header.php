@@ -19,7 +19,7 @@ echo "
 
 ";
  ?>
-<body class="Bg-Main-home">;
+<body class="Bg-Main-home">
 
            <!-- **********************************  Menu de PC (1024 en adelante)  ********************************** -->
 

@@ -9,6 +9,7 @@
 <script src="static/javaScript/hammer.min.js"></script>
 <script src="static/javaScript/jquery.js"></script>
 <script src="static/javascript/FuncionesGenerales.js"></script>
+<script src="static/javascript/Ajax/registerShop.js"></script>
 
 </body>
 </html>
