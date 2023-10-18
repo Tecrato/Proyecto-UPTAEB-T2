@@ -19,12 +19,12 @@
 			"detalles" => [
 				[ 
 					"id" => 1,
-					"cantidad" =>  1,
+					"cantidad" =>  3,
 					"precio" =>  20,
 				],
 				[
 					"id" => 4,
-					"cantidad" =>  10,
+					"cantidad" =>  4,
 					"precio" =>  19,
 				]
 			]

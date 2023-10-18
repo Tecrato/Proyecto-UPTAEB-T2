@@ -19,6 +19,7 @@
 			$clase_l = new Lote();
 			for ($i=0; $i < count($datos['detalles']); $i++) { 
 				$lista = $datos['detalles'][$i];
+				$clase_l->descontar($lista['id'],$lista['cantidad']);
 				$clase_f->agregar($registro['id'],$lista['id'],$lista['cantidad'],$lista['precio']);
 			}
 		}
