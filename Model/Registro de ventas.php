@@ -5,7 +5,7 @@
 			if ($id) {
 				$query = $query . " WHERE id=$id";
 			}
-			$query = $query . " ORDER BY '$order'";
+			$query = $query . " ORDER BY $order";
 			return $this->conn->query($query);
 		}
 		function agregar($datos){

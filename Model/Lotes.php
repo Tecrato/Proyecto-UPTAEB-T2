@@ -1,9 +1,6 @@
 <?php
 	class Lote extends DB {
-		// public function search_for_producto($id_producto){
-		// 	$query = "SELECT * FROM lotes WHERE id_producto="$id_producto;
-		// 	return $this->conn->query($query);
-		// }
+		
 		function search($id=null,$id_producto=null,$order='id DESC'){
 			$query = "SELECT * FROM lotes";
 			if ($id) {
@@ -36,7 +33,6 @@
 					$query = "UPDATE lotes SET restante=".$lote['restante']-$cantidad." WHERE id=".$lote['id'];
 					$this->conn->query($query);
 					$cantidad = 0;
-					echo $cantidad;
 				}
 				else {
 					$query = "UPDATE lotes SET restante=0 WHERE id=".$lote['id'];
@@ -44,10 +40,6 @@
 					$cantidad -= $lote['restante'];
 				}
 			}
-			// $cantidad = $this->search();
-            // $query = "UPDATE FROM lotes SET VALUES(null, $id_producto, $id_proveedor, $cantidad,'$fecha_c', '$fecha_v', $precio_compra, $cantidad)";
-            
-            // $this->conn->query($query);
 		}
         function borrar($id_proveedor=False,$id_producto=False) {
 
