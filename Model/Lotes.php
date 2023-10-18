@@ -39,8 +39,8 @@
 					echo $cantidad;
 				}
 				else {
-					$query2 = "UPDATE lotes SET restante=0 WHERE id=".$lote['id'];
-					$this->conn->query($query2);
+					$query = "UPDATE lotes SET restante=0 WHERE id=".$lote['id'];
+					$this->conn->query($query);
 					$cantidad -= $lote['restante'];
 				}
 			}

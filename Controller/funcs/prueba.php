@@ -1,33 +1,38 @@
 <?php
 	require('../../Model/Conexion.php');
 	require('../../Model/Lotes.php');
+	require('../../Model/Registro de ventas.php');
+	require('../../Model/Facturas.php');
 	$clase = new Lote();
+	$clase2 = new Registro_ventas();
 	// $resultado = $clase->search_luis();
 	// while ($row = $resultado->fetch_assoc()) {
     //     print_r($row);
     //     echo "<br>";
     // };
     $nose = [
-			"cliente" => "id_cliente",
-			"fecha" => "fecha",
-			"vendedor" => "eso",
-			"total" => "dinero",
-			"detalles de la factra" => [
+			"cliente" => 1,
+			"fecha" => null,
+			"vendedor" => 1,
+			"total" => 20,
+			"metodo" => "tarjeta",
+			"detalles" => [
 				[ 
-					"id_producto" => 1,
+					"id" => 1,
 					"cantidad" =>  1,
-					"precio total" =>  20,
+					"precio" =>  20,
 				],
 				[
-					"id_producto" => 4,
+					"id" => 4,
 					"cantidad" =>  10,
-					"precio total" =>  19,
+					"precio" =>  19,
 				]
 			]
 		];
 	$json = json_encode($nose);
 	$json = json_decode($json);
 
-	$clase->descontar(1,20)
+	// $clase->descontar(1,20)
+	$clase2->agregar($nose);
 
 ?>
