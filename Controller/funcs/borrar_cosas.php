@@ -11,8 +11,8 @@
         if ($imagen != "banner_productos.png"){
             unlink("../../Media/imagenes/".$imagen);
         }
-        $clase->DELETE($_POST['ID']);
         $clase->borrar_lotes(False,$_POST['ID']);
+        $clase->DELETE($_POST['ID']);
         header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }
     if ($tipo == 'proveedor'){

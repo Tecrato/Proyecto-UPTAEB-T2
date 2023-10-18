@@ -9,9 +9,9 @@
             $this->conn->query($query);
         }
 
-        function agregar_lote($id_producto,$id_proveedor,$cantidad,$fecha_c,$fecha_v,$precio_compra,$precio_venta){
+        function agregar_lote($id_producto,$id_proveedor,$cantidad,$fecha_c,$fecha_v,$precio_compra){
             
-            $query = "INSERT INTO lotes VALUES(null, $id_producto, $id_proveedor, $cantidad,'$fecha_c', '$fecha_v',$precio_compra,$precio_venta, $cantidad)";
+            $query = "INSERT INTO lotes VALUES(null, $id_producto, $id_proveedor, $cantidad,'$fecha_c', '$fecha_v', $precio_compra, $cantidad)";
             
             $this->conn->query($query);
         }
