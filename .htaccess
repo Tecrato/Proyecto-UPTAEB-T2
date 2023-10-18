@@ -13,7 +13,7 @@ RewriteRule ^Productos$ Controller/C_product.php
 RewriteRule ^Salir$ Controller/funcs/logout.php
 
 
-RewriteRule ^pruebita$ Controller/funcs/prueba.php
+RewriteRule ^Pruebita$ Controller/funcs/prueba.php
 
 
 

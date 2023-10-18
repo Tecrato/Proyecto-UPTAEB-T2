@@ -4,5 +4,9 @@
 			$query = "SELECT * FROM ";
 			return $this->conn->query($query);
 		}
+		public function search(){
+			$query = "SELECT * FROM ";
+			return $this->conn->query($query);
+		}
 	}
 ?>

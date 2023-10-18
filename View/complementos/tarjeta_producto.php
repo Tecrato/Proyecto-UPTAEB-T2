@@ -126,7 +126,7 @@ echo '
                         $clase_detalles = new Proveedor();
                         $resultado3 = $clase_detalles->search();
 
-                        for ($u=0; $u < $resultado3->num_rows and $u < 20 and $resultado3->num_rows != 0; $u++) { 
+                        for ($u=0; $u < $resultado3->num_rows and $resultado3->num_rows > 0; $u++) { 
                             $row2 = $resultado3->fetch_assoc();
                             echo '
                             <section class="uk-margin-small-bottom" style="height: 150px; overflow: auto;">
@@ -143,7 +143,7 @@ echo '
                                         $clase_nose = new Lote();
                                         $resultado4 = $clase_nose->search_with_producto_and_proveedor($row['id'],$row2['id']);
 
-                                        for ($o=0; $o < $resultado4->num_rows and $o < 20; $o++) { 
+                                        for ($o=0; $o < $resultado4->num_rows; $o++) { 
                                             $row3 = $resultado4->fetch_assoc();
 
                                             echo ' 
@@ -163,7 +163,7 @@ echo '
                                                             style="color: #fff;">
                                                             CANTIDAD</h6>
                                                         <h6 class="uk-margin-small-left uk-margin-remove-right uk-margin-remove-top uk-margin-remove-bottom uk-text-bolder textTag_detail-Product uk-text-uppercase"
-                                                            style="color: #fff;">'.$row3["restante"].'</h6>
+                                                            style="color: #fff;">'.$row3["cantidad"].'</h6>
                                                     </div>
                                                 </article>
                                                 <article class="tag_modal-detailProduct uk-margin-small-left">

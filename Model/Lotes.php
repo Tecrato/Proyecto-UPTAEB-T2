@@ -4,19 +4,50 @@
 		// 	$query = "SELECT * FROM lotes WHERE id_producto="$id_producto;
 		// 	return $this->conn->query($query);
 		// }
-		// public function search_for_proveedor($id_proveedor){
-		// 	$query = "SELECT * FROM lotes WHERE id_proveedor="$id_proveedor;
-		// 	return $this->conn->query($query);
-		// };;;;;
+		function search($id=null,$id_producto=null,$order='id DESC'){
+			$query = "SELECT * FROM lotes";
+			if ($id) {
+				$query = $query . " WHERE id=$id";
+			}
+			if ($id_producto) {
+				$query = $query . " WHERE id_producto=$id_producto";
+			}
+			$query = $query . " ORDER BY '$order'";
 
-		public function search_with_producto_and_proveedor($id_producto,$id_proveedor){
+			return $this->conn->query($query);
+		}
+
+		function search_with_producto_and_proveedor($id_producto,$id_proveedor){
 			$query = "SELECT * FROM lotes WHERE id_producto=$id_producto AND id_proveedor=$id_proveedor";
 			return $this->conn->query($query);
 		}
-		public function agregar($id_producto,$id_proveedor,$cantidad,$fecha_c,$fecha_v,$precio_compra){
+		function agregar($id_producto,$id_proveedor,$cantidad,$fecha_c,$fecha_v,$precio_compra){
             $query = "INSERT INTO lotes VALUES(null, $id_producto, $id_proveedor, $cantidad,'$fecha_c', '$fecha_v', $precio_compra, $cantidad)";
             
             $this->conn->query($query);
+		}
+		function descontar($id_producto,$cantidad){
+
+			$lotes = $this->search(id_producto:$id_producto,order:'fecha_vencimiento');
+
+			for ($i=0; $cantidad > 0; $i++) { 
+				$lote = $lotes->fetch_assoc();
+				if ($lote['restante'] > $cantidad) {
+					$query = "UPDATE lotes SET restante=".$lote['restante']-$cantidad." WHERE id=".$lote['id'];
+					$this->conn->query($query);
+					$cantidad = 0;
+					echo $cantidad;
+				}
+				else {
+					$query2 = "UPDATE lotes SET restante=0 WHERE id=".$lote['id'];
+					$this->conn->query($query2);
+					$cantidad -= $lote['restante'];
+				}
+			}
+			// $cantidad = $this->search();
+            // $query = "UPDATE FROM lotes SET VALUES(null, $id_producto, $id_proveedor, $cantidad,'$fecha_c', '$fecha_v', $precio_compra, $cantidad)";
+            
+            // $this->conn->query($query);
 		}
         function borrar($id_proveedor=False,$id_producto=False) {
 
