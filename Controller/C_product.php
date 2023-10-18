@@ -1,16 +1,35 @@
 <?php
-    require('../Model/Conexion.php');
-    require('../Model/Productos.php');
-    require('../Model/Proveedores.php');
-    require('../Model/Categorias.php');
-    require('../Model/Unidades.php');
-
 
     if (isset($_GET['p'])){
         $num = $_GET['p'];
     }else {
         $num = 0;
     }
+
+    require('../Model/Conexion.php');
+    require('../Model/Productos.php');
+    require('../Model/Proveedores.php');
+    require('../Model/Categorias.php');
+    require('../Model/Unidades.php');
+    require('../Model/Lotes.php');
+
+
+    $clase_Producto = new Producto();
+    $result = $clase_Producto->search(n:$num);
+
+
+    $clase_Proveedor = new Proveedor();
+    $result2 = $clase_Proveedor->search();
+    $list_proveedores = pasar_a_option($result2);
+
+    $clase_Categoria = new Categoria();
+    $result2 = $clase_Categoria->search();
+    $list_categorias = pasar_a_option($result2);
+
+    $clase_Unidad = new Unidad();
+    $result2 = $clase_Unidad->search();
+    $list_unidades = pasar_a_option($result2);
+
 
     function pasar_a_option($busqueda){
         $var = "";
@@ -20,84 +39,7 @@
         }
         return $var;
     }
-    function buscar_proveedores_cantidad($id){
-        $clase_detalles = new Proveedor();
-        $resultado = $clase_detalles->search_detalles_producto($id);
-
-        $texto = "";
-        while ($row = $resultado->fetch_assoc()) {
-            echo '<section class="uk-margin-small-bottom" style="height: 150px; overflow: auto;">
-                    <ul uk-accordion>
-
-                        
-                        <li class="uk-text-uppercase">
-                            <a class="uk-accordion-title uk-text-bold uk-text-default" href="#"
-                                style="color: #106733;">
-                                <span uk-icon="icon:bookmark; ratio: 1.5"></span>
-                                Montecarmelo
-                            </a>
-                            <div class="uk-accordion-content">
-
-                                <div class="uk-flex uk-flex-center uk-flex-middle">
-                                    <article class="tag_modal-detailProduct uk-margin-small-right">
-                                        <div class="uk-flex uk-flex-middle uk-margin-small-right">
-                                            <h6 class="uk-margin-remove uk-text-bolder textTag_detail-Product uk-text-uppercase"
-                                                style="color: #fff; padding: 2px;">
-                                                LOTE Nro </h6>
-                                        </div>
-                                    </article>
-                                    <article class="tag_modal-detailProduct-2">
-                                        <div class="uk-flex uk-flex-middle uk-margin-small-right">
-                                            <span class="uk-margin-small-right icon" style="color: #fff;"
-                                                uk-icon="icon: star; ratio: 1.2"></span>
-                                            <h6 class="uk-margin-remove uk-text-bolder textTag_detail-Product"
-                                                style="color: #fff;">
-                                                '.$row["stock"].'</h6>
-                                            <h6 class="uk-margin-small-left uk-margin-remove-right uk-margin-remove-top uk-margin-remove-bottom uk-text-bolder textTag_detail-Product uk-text-uppercase"
-                                                style="color: #fff;">10</h6>
-                                        </div>
-                                    </article>
-                                    <article class="tag_modal-detailProduct uk-margin-small-left">
-                                        <div class="uk-flex uk-flex-middle uk-margin-small-right">
-                                            <span class="uk-margin-small-right icon" style="color: #fff;"
-                                                uk-icon="icon: calendar; ratio: 1.2"></span>
-                                            <h6 class="uk-margin-remove uk-text-bolder textTag_detail-Product"
-                                                style="color: #fff;">
-                                                EXP</h6>
-                                            <h6 class="uk-margin-small-left uk-margin-remove-right uk-margin-remove-top uk-margin-remove-bottom uk-text-bolder textTag_detail-Product uk-text-uppercase"
-                                                style="color: #fff;">'.$row["fecha_vencimiento"].'</h6>
-                                        </div>
-                                    </article>
-                                </div>
-                                <hr>
-                            
-
-                            </div>
-                        </li>
-                        <hr>
-                    </ul>
-                </section>';
-        }
-        return $texto;
-    }
-
-    $clase = new Producto();
-    $result = $clase->search(n:$num);
-
-    $clase = new Proveedor();
-    $result2 = $clase->search();
-    $list_proveedores = pasar_a_option($result2);
-
-    $clase = new Categoria();
-    $result2 = $clase->search();
-    $list_categorias = pasar_a_option($result2);
-
-    $clase = new Unidad();
-    $result2 = $clase->search();
-    $list_unidades = pasar_a_option($result2);
-
-
-    $var_proveedores = pasar_a_option($result2);
+    
 
     
 

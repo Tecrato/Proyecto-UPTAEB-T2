@@ -9,7 +9,7 @@
                     <div class="uk-light">
                         <form class="uk-search uk-search-default">
                             <span uk-search-icon></span>
-                            <input class="uk-search-input form-search uk-border-rounded" type="search" placeholder="Search" aria-label="Search">
+                            <input class="uk-search-input form-search uk-border-rounded" type="search" placeholder="Buscar" aria-label="Search">
                         </form>
                     </div>
                 </div>
