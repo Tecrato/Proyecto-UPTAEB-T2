@@ -105,7 +105,7 @@ echo '
                                 <div>
                                     <h5
                                         class="uk-margin-remove uk-text-emphasis Color-icon-detailProduct uk-text-bold uk-text-uppercase">
-                                        35
+                                        '.$row['precio_venta'].'
                                         BS</h5>
                                 </div>
                             </div>
