@@ -51,7 +51,8 @@
         function search_stock($id){
             $query = "SELECT SUM(restante) as stock FROM lotes WHERE id_producto=$id";
 
-            return $this->conn->query($query)->fetch_assoc();
+            $r = $this->conn->query($query)->fetch_assoc()['stock'];
+            return $r ?: 0;
         }
         function search_like($nombre){
             $query = "SELECT * FROM productos WHERE nombre LIKE '%$nombre%'";

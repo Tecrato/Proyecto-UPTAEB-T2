@@ -110,7 +110,7 @@
                                 </h3>
                             </div>
                             <div class="">
-                                <a class="ImprBtn" href="./viewFactura.php"
+                                <a class="ImprBtn" href="Detalles_factura"
                                     uk-tooltip="title:Imprimir; delay: 500"><span
                                         class="uk-margin-small-right uk-icon-button" uk-icon="icon: print"></span></a>
                                 <a href="#modal-center" uk-toggle uk-tooltip="title:Eliminar; delay: 500"

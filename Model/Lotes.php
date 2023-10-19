@@ -9,7 +9,7 @@
 			if ($id_producto) {
 				$query = $query . " WHERE id_producto=$id_producto";
 			}
-			$query = $query . " ORDER BY '$order'";
+			$query = $query . " ORDER BY $order";
 
 			return $this->conn->query($query);
 		}
@@ -25,7 +25,7 @@
 		}
 		function descontar($id_producto,$cantidad){
 
-			$lotes = $this->search(id_producto:$id_producto,order:'fecha_vencimiento');
+			$lotes = $this->search(null,$id_producto,'fecha_vencimiento ASC');
 
 			for ($i=0; $cantidad > 0; $i++) { 
 				$lote = $lotes->fetch_assoc();

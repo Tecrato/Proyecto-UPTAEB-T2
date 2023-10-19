@@ -33,7 +33,7 @@
                 header('Location:../../Productos?error='.$img_err);
             }
         }
-        header('Location:../../productos');
+        header('Location:../../Productos');
     }
     if ($tipo === 'proveedor'){
         require('../../Model/Proveedores.php');

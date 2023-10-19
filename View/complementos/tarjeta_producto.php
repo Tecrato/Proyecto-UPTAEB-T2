@@ -18,7 +18,7 @@ echo '
         <div class="uk-flex uk-flex-between">
             <div>
                 <h4 class="uk-margin-remove uk-text-bolder uk-text-truncate" style="width: 115px;">'.$row['nombre'].'</h4>
-                <p class="uk-margin-remove uk-text-meta">Existencia: <b class="uk-text-success">10</b></p>
+                <p class="uk-margin-remove uk-text-meta">Existencia: <b class="uk-text-success">'.$clase_Producto->search_stock($row['id']).'</b></p>
             </div>
             <div class="uk-flex uk-flex-middle uk-margin-small-left">
                 <a href="#Producto-modificar'.$row['id'].'" uk-toggle><span class="uk-margin-small-right uk-icon-button" uk-icon="icon: file-edit"></span></a>
@@ -92,7 +92,7 @@ echo '
                                 <div>
                                     <h5
                                         class="uk-margin-remove uk-text-emphasis Color-icon-detailProduct uk-text-bold uk-text-uppercase">
-                                        30
+                                        '.$clase_Producto->search_stock($row['id']).'
                                     </h5>
                                 </div>
                             </div>

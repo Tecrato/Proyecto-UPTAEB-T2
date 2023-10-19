@@ -15,6 +15,12 @@
         require('../../Model/Productos.php');
         $clase = new Producto();
     }
+    elseif ($_POST['randomnautica'] == "stock_producto") {
+        require('../../Model/Productos.php');
+        $clase = new Producto();
+        echo $clase->search_stock($_POST['ID']);
+        die();
+    }
     elseif ($_POST['randomnautica'] == "proveedores") {
         require('../../Model/Proveedores.php');
         $clase = new Proveedor();
