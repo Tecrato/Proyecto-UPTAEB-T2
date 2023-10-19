@@ -11,12 +11,13 @@
         if ($_FILES['imagen1']['name'] != "") {
             $imagen = $_FILES['imagen1'];
             $nick = "producto_".$_POST['nombre'] . "_" . $imagen['name'];
+        }
         else {
             $imagen = null;
             $nick = null;
         }
         try {
-            $clase->UPDATE($_POST['ID'],$_POST["categoria"],$_POST["unidad"],$_POST["nombre"],$_POST["descripcion"],$nick,$_POST["stock_min"],$_POST["stock_max"],$_POST["IVA"]);
+            $clase->UPDATE($_POST['ID'],$_POST["categoria"],$_POST["unidad"],$_POST["nombre"],$_POST["descripcion"],$nick,$_POST["stock_min"],$_POST["stock_max"],$_POST["precio_venta"],$_POST["IVA"]);
         } catch (Exception $e) {
             echo $e;
             die();
