@@ -913,7 +913,7 @@ $.ajax({
         // console.log(jsonString);
 
         $.ajax({
-          url: "Controller/funcs_ajax/prueba.php",
+          url: "Controller/funcs_ajax/hacer_factura.php",
           type: "POST",
           data: {jsonString},
           success: function(response){

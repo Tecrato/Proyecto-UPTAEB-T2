@@ -3,10 +3,15 @@
 	require('../../Model/Lotes.php');
 	require('../../Model/Registro de ventas.php');
 	require('../../Model/Facturas.php');
+	$clase = new Lote();
+	$clase2 = new Registro_ventas();
 
-	$json = json_encode($nose);
-	$json = json_decode($json);
+	$var = json_decode($_POST['jsonString']);
 
-	// $clase->descontar(1,20)
-	$clase2->agregar($nose);
+	echo "Aparentemente";
+
+	print_r($var);
+
+	$clase2->agregar($var);
+
 ?>
