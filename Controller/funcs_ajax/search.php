@@ -25,6 +25,10 @@
         require('../../Model/Proveedores.php');
         $clase = new Proveedor();
     }
+    elseif ($_POST['randomnautica'] == "stock_producto") {
+        require('../../Model/Clientes.php');
+        $clase = new Cliente();
+    }
 
     if (isset($_POST['like']) and $_POST['like'] != "") {
         $result = $clase->search_like($_POST['like']);
