@@ -25,7 +25,7 @@
         require('../../Model/Proveedores.php');
         $clase = new Proveedor();
     }
-    elseif ($_POST['randomnautica'] == "stock_producto") {
+    elseif ($_POST['randomnautica'] == "clientes") {
         require('../../Model/Clientes.php');
         $clase = new Cliente();
     }

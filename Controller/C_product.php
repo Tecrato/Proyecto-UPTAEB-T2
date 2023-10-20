@@ -14,6 +14,15 @@
     require('../Model/Lotes.php');
 
 
+    function pasar_a_option($busqueda){
+        $var = "";
+
+        while ($row = $busqueda->fetch_assoc()) {
+            $var = $var.'<option value="'.$row["id"].'">'.$row["nombre"].'</option>';
+        }
+        return $var;
+    }
+
     $clase_Producto = new Producto();
     $result = $clase_Producto->search(n:$num);
 
@@ -31,14 +40,6 @@
     $list_unidades = pasar_a_option($result2);
 
 
-    function pasar_a_option($busqueda){
-        $var = "";
-
-        while ($row = $busqueda->fetch_assoc()) {
-            $var = $var.'<option value="'.$row["id"].'">'.$row["nombre"].'</option>';
-        }
-        return $var;
-    }
     
 
     

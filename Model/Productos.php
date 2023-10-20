@@ -32,7 +32,7 @@
         }
 
         // Con esta otra funcion se busca entre los productos en la base de datos
-        function search($id=null,$n=0,$limite=true){
+        function search($id=null,$n=0,$limite=9){
             // Al igual que la clase anterior, puede buscar segun muchos valores o solo algunos
             $querys = [];
             $query = "SELECT * FROM productos";
@@ -41,10 +41,8 @@
                 $query = $query." WHERE id=$id";
             }
 
-            if ($limite) {
-                $n = $n*9;
-                $query = $query . " LIMIT 9 OFFSET ".$n;
-            }
+            $n = $n*$limite;
+            $query = $query . " LIMIT $limite OFFSET ".$n;
             
             return $this->conn->query($query);
         }
