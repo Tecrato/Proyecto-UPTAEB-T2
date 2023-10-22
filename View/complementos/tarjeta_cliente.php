@@ -37,13 +37,13 @@
              <div class="uk-flex">
                  <h6 class="uk-margin-small">Documento</h6>
                  <p class="uk-margin-small uk-margin-small-left uk-margin-remove-top uk-text-meta">
-                     500000000
+                    '.$row['Documento'].'
                  </p>
              </div>
              <div class="uk-flex">
                  <h6 class="uk-margin-small">Telefono</h6>
                  <p class="uk-margin-small uk-margin-small-left uk-margin-remove-top uk-text-meta">
-                     0000000000000
+                    '.$row['Telefono'].'
                  </p>
              </div>
              <div class="">
@@ -51,13 +51,11 @@
                  </h6>
                  <p class="uk-margin-small uk-margin-small-left uk-margin-remove-top uk-margin-remove-left uk-text-meta"
                      style="width: 185px; line-height: 23px;">
-                     carrera 10, entre 15 y 17, sector matica de rosa
+                    '.$row['Direccion'].'
                  </p>
              </div>
          </div>
      </div>
  </div>
 </div>';
-
-
 ?>
