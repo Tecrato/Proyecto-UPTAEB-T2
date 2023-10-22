@@ -35,15 +35,16 @@
                             <h3 class="uk-modal-title">REGISTRO CLIENTES</h3>
                         </div>
                         <div class="uk-modal-body">
-                            <form class="uk-grid-small" uk-grid>
-                                <div class="uk-width-1-2@s">
+                            <form class="uk-grid-small" uk-grid method="POST" action="Controller/funcs/agregar_cosas.php" enctype="multipart/form-data">
+                            <input type="text" name="tipo" value='Cliente' id="" style="display:none">
+                            <div class="uk-width-1-2@s">
                                     <input class="uk-input" type="text" placeholder="Nombre" aria-label="100">
                                 </div>
                                 <div class="uk-width-1-2@s">
                                     <input class="uk-input" type="text" placeholder="Apellido" aria-label="50">
                                 </div>
                                 <div class="uk-width-1-2@s">
-                                    <select class="uk-select" id="form-stacked-select" name="categoria" required>
+                                    <select class="uk-select" id="form-stacked-select" name="Documento" required>
                                         <option selected disabled>Documento</option>
                                         <option>V</option>
                                         <option>J</option>
@@ -51,7 +52,7 @@
                                     </select>
                                 </div>
                                 <div class="uk-width-1-2@s">
-                                    <input class="uk-input" type="text" placeholder="Numero de documento"
+                                    <input class="uk-input" type="text" placeholder="cedula"
                                         aria-label="50">
                                 </div>
                                 <div class="uk-width-1-2@s">
@@ -62,12 +63,14 @@
                                     <input class="uk-input" type="text" placeholder="Dirección"
                                         aria-label="50">
                                 </div>
+                                <input type="submit" id="subirC" style="display:none">
                             </form>
+                            <div class="uk-modal-footer uk-text-right">
+                                <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
+                                <label class="uk-button uk-button-secondary" type="button" for="subirC">Guardar</label>
+                            </div>
                         </div>
-                        <div class="uk-modal-footer uk-text-right">
-                            <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
-                            <button class="uk-button uk-button-secondary" type="button">Guardar</button>
-                        </div>
+                        
                     </div>
                 </div>
 

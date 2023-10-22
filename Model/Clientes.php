@@ -1,10 +1,10 @@
 <?php
     class Cliente extends DB{
 
-        // esta funcion agrega a la tabla productos un objeto con los valores que se le estan pasando
-        function agregar($nombre,$cedula,$apellido){
-            
-            $query = "INSERT INTO clientes VALUES(null, '$nombre', $cedula,'$apellido')";
+        function agregar($nombre,$cedula,$apellido,$Telefono,$Direccion){
+            $cedulaD=$cedula.$Documento;
+            return ($cedulaD);
+            $query = "INSERT INTO clientes VALUES(null, '$nombre', $cedulaD,'$apellido','$Telefono','$Direccion')";
             
             $this->conn->query($query);
         }
@@ -18,17 +18,17 @@
             $this->conn->query($query);
         }
 
-        // Con esta funcion podremos cambiar un producto segun su ID con los valores que le pasemos
-        function UPDATE($id,$nombre,$cedula,$apellido){
+        // Con esta funcion podremos cambiar un cliente segun su ID con los valores que le pasemos
+        function UPDATE($id,$nombre,$cedulaD,$apellido,$Telefono,$Direccion){
             
             
-            $query = "UPDATE clientes SET nombre=".$nombre.", cedula=".$cedula.", apellido='".$apellido." WHERE id=$id";
+            $query = "UPDATE clientes SET nombre=".$nombre.", cedula=".$cedulaD.", apellido=".$apellido."Telefono=."$Telefono".Direccion=.""$Direccion"." WHERE id=$id";
             
             
             return $this->conn->query($query); //$conn->fetch_assoc() // Y devuelve el resultado al controlador
         }
 
-        // Con esta otra funcion se busca entre los productos en la base de datos
+        // Con esta otra funcion se busca entre los clientes en la base de datos
         function search($id=null,$n=0,$limite=9){
             // Al igual que la clase anterior, puede buscar segun muchos valores o solo algunos
             $querys = [];
@@ -38,7 +38,7 @@
                 $query = $query." WHERE id=$id";
             }
 
-            if ($limite) {
+            else($limite) {
                 $n = $n*$limite;
                 $query = $query . " LIMIT 9 OFFSET ".$n;
             }

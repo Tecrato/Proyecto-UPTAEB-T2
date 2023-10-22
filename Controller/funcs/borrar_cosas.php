@@ -25,4 +25,10 @@
 
         header('Location:../../Proveedores'); // Y vuelve a la pagina donde estaba antes
     }
+    if ($tipo == 'Cliente'){
+        $clase = new Cliente(); // Llama al modelo y le manda la instruccion
+        $clase->DELETE($_POST['ID']);
+
+        header('Location:../../Cliente'); // Y vuelve a la pagina donde estaba antes
+    }
 ?>
