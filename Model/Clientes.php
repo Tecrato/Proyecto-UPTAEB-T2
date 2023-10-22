@@ -11,7 +11,6 @@
 
         // con esta funcion se elimina un elemento dependiendo de su id
         function DELETE($id) {
-
             $query = "DELETE FROM clientes WHERE ID=$id";
             
             $this->conn->query($query);
@@ -20,8 +19,7 @@
         // Con esta funcion podremos cambiar un cliente segun su ID con los valores que le pasemos
         function UPDATE($id,$nombre,$cedula,$apellido,$Telefono,$Direccion){
             
-            
-            $query = "UPDATE clientes SET nombre=".$nombre.", cedula=".$cedula.", apellido=".$apellido."Telefono=."$Telefono".Direccion=.""$Direccion"." WHERE id=$id";
+            $query = "UPDATE clientes SET nombre='".$nombre."', cedula=".$cedula.", apellido='".$apellido."', Telefono=".$Telefono.", Direccion='".$Direccion."' WHERE id=$id";
             
             
             return $this->conn->query($query); //$conn->fetch_assoc() // Y devuelve el resultado al controlador
@@ -37,7 +35,7 @@
                 $query = $query." WHERE id=$id";
             }
 
-            else($limite) {
+            if($limite) {
                 $n = $n*$limite;
                 $query = $query . " LIMIT 9 OFFSET ".$n;
             }

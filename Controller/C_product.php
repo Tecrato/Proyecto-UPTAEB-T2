@@ -24,7 +24,7 @@
     }
 
     $clase_Producto = new Producto();
-    $result = $clase_Producto->search($num);
+    $result = $clase_Producto->search(n:$num);
 
 
     $clase_Proveedor = new Proveedor();

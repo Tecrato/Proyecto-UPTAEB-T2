@@ -7,7 +7,7 @@
     }
     require('../Model/Proveedores.php');
     $result = new Proveedor;
-    $result = $result->search($num);
+    $result = $result->search(n:$num);
     include('../View/proveedores.php');
     echo '<script>var num_page = '.$_GET['p'].';</script>';
     echo '<script>var type_page = "proveedores";</script>';
