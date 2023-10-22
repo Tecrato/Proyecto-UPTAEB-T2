@@ -89,9 +89,17 @@
         </div>
         <div class="[email protected] uk-grid-large uk-flex-center height_controller" uk-grid
             uk-height-match="target: > div > .uk-card">
+          <?php
+                   for ($i=0; $i <  $result->num_rows; $i++) {
+                    $row = $result->fetch_assoc();
+                    include 'complementos/tarjeta_producto.php';
+                
+                };
           
+          
+          ?>
       
-            <div>
+            <!-- <div>
                 <div class="target_supplier uk-card uk-card-default uk-flex uk-padding-small uk-background-secondary uk-light uk-border-rounded"
                     style="width: 370px;">
                     <div>
@@ -149,7 +157,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         
         </div>
     </section>
