@@ -52,8 +52,8 @@
     elseif ($tipo === 'proveedor'){
         require('../../Model/Clientes.php');
         $clase = new Cliente(); // Llama al modelo y le manda la instruccion
-        $clase->agregar($_POST["nombre"],$_POST["cedula"],$_POST["telefono"],$_POST["Documento"],$_POST["direccion"]);
-        header('Location:../../Client'); // Y vuelve a la pagina donde estaba antes
+        $clase->agregar($_POST["nombre"],$_POST["cedula"],$_POST["telefono"],$_POST["direccion"]);
+        header('Location:../../Clientes'); // Y vuelve a la pagina donde estaba antes
     }
     
 ?>

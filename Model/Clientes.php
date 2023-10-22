@@ -1,10 +1,9 @@
 <?php
+
     class Cliente extends DB{
 
         function agregar($nombre,$cedula,$apellido,$Telefono,$Direccion){
-            $cedulaD=$cedula.$Documento;
-            return ($cedulaD);
-            $query = "INSERT INTO clientes VALUES(null, '$nombre', $cedulaD,'$apellido','$Telefono','$Direccion')";
+            $query = "INSERT INTO clientes VALUES(null, '$nombre', $cedula,'$apellido','$Telefono','$Direccion')";
             
             $this->conn->query($query);
         }
@@ -19,10 +18,10 @@
         }
 
         // Con esta funcion podremos cambiar un cliente segun su ID con los valores que le pasemos
-        function UPDATE($id,$nombre,$cedulaD,$apellido,$Telefono,$Direccion){
+        function UPDATE($id,$nombre,$cedula,$apellido,$Telefono,$Direccion){
             
             
-            $query = "UPDATE clientes SET nombre=".$nombre.", cedula=".$cedulaD.", apellido=".$apellido."Telefono=."$Telefono".Direccion=.""$Direccion"." WHERE id=$id";
+            $query = "UPDATE clientes SET nombre=".$nombre.", cedula=".$cedula.", apellido=".$apellido."Telefono=."$Telefono".Direccion=.""$Direccion"." WHERE id=$id";
             
             
             return $this->conn->query($query); //$conn->fetch_assoc() // Y devuelve el resultado al controlador
