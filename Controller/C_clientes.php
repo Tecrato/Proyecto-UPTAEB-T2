@@ -1,18 +1,13 @@
 <?php 
-	include('../View/client.php');
-	
-?>
-<?php
     require('../Model/Conexion.php');
+    require('../Model/Clientes.php');
     if (isset($_GET['p'])){
         $num = $_GET['p'];
     }
-    // else {
-    //     header('Location:clientes');
-    // }
-    require('../Model/Clientes.php');
+
     $result = new Cliente;
-    $result = $result->search();
+    $result = $result->search(n:$num);
+
     include('../View/client.php');
     echo '<script>var type_page = "cliente";</script>';
 ?>
