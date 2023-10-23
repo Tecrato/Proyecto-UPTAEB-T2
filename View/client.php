@@ -90,7 +90,7 @@
         <div class="[email protected] uk-grid-large uk-flex-center height_controller" uk-grid
             uk-height-match="target: > div > .uk-card">
           <?php
-                   for ($i=0; $i <  $result->num_rows; $i++) {
+                   for ($i=0; $i < $result->num_rows; $i++) {
                     $row = $result->fetch_assoc();
                     include 'complementos/tarjeta_producto.php';
                 
