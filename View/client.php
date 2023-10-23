@@ -80,148 +80,22 @@
 
     </section>
 
-
-
-
     <section class="uk-light uk-padding uk-padding-remove-left uk-padding-remove-right uk-grid-small uk-flex-center" uk-grid>
         <div class="container_marca_agua invisible">
             <img class="marca_agua" src="static/images/logo_letras-minimarket.png" alt="">
         </div>
         <div class="[email protected] uk-grid-large uk-flex-center height_controller" uk-grid
             uk-height-match="target: > div > .uk-card">
-          <?php
-                   for ($i=0; $i <  $result->num_rows; $i++) {
+            <?php
+                for ($i=0; $i <  $result->num_rows; $i++){
                     $row = $result->fetch_assoc();
-                    include 'complementos/tarjeta_producto.php';
-                
-                };
-          
-          
-          ?>
-      
-            <!-- <div>
-                <div class="target_supplier uk-card uk-card-default uk-flex uk-padding-small uk-background-secondary uk-light uk-border-rounded"
-                    style="width: 370px;">
-                    <div>
-                        <div class="img_proveedor_container uk-border-rounded">
-                            <img src="static/images/undraw_profile_2.svg" alt="" width="120px" />
-                            <h5
-                                class="uk-margin-remove-left uk-margin-remove-right uk-margin-small-top uk-margin-small-bottom uk-text-center">
-                                Jose Nose
-                            </h5>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="uk-flex uk-flex-middle uk-flex-between uk-margin-small-bottom">
-                            <h4 class="uk-margin-remove-bottom uk-margin-right uk-text-center">
-                                DATOS
-                            </h4>
-                            <div>
-                                <a href="#modificar_client" uk-toggle uk-tooltip="title:Editar; delay: 500"
-                                    class="uk-icon-button uk-margin-small-right" type="button"
-                                    style="border: none; cursor: pointer">
-                                    <span uk-icon="icon: file-edit"></span>
-                                </a>
-                                <a href="#eliminar_supplier" uk-toggle uk-tooltip="title:Eliminar; delay: 500"
-                                    class="uk-icon-button uk-margin-small-right" uk-tooltip="title:Eliminar; delay: 500"
-                                    type="button" style="border: none; cursor: pointer" type="button">
-                                    <span uk-icon="icon: trash"></span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <hr class="uk-margin-bottom uk-margin-remove-top hr_supplier" />
-
-                        <div class="Container-details-suppliers" style="width: 200px;">
-                            <div class="uk-flex">
-                                <h6 class="uk-margin-small">Documento</h6>
-                                <p class="uk-margin-small uk-margin-small-left uk-margin-remove-top uk-text-meta">
-                                    500000000
-                                </p>
-                            </div>
-                            <div class="uk-flex">
-                                <h6 class="uk-margin-small">Telefono</h6>
-                                <p class="uk-margin-small uk-margin-small-left uk-margin-remove-top uk-text-meta">
-                                    0000000000000
-                                </p>
-                            </div>
-                            <div class="">
-                                <h6 class="uk-margin-small-right uk-margin-remove-bottom" style="float: left;">Direccion
-                                </h6>
-                                <p class="uk-margin-small uk-margin-small-left uk-margin-remove-top uk-margin-remove-left uk-text-meta"
-                                    style="width: 185px; line-height: 23px;">
-                                    carrera 10, entre 15 y 17, sector matica de rosa
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-        
+                    require 'complementos/tarjeta_cliente.php';
+                }
+            ?>
+       
         </div>
     </section>
 
-    <!-- ****************** Modal de modificacion ****************** -->
-
-    <div id="modificar_client" uk-modal>
-        <div class="uk-modal-dialog">
-            <button class="uk-modal-close-default" type="button" uk-close></button>
-            <div class="uk-modal-header">
-                <h3 class="uk-modal-title">EDITAR CLIENTES</h3>
-            </div>
-            <div class="uk-modal-body">
-                <form class="uk-grid-small" uk-grid>
-                    <div class="uk-width-1-2@s">
-                        <input class="uk-input" type="text" placeholder="Nombre" aria-label="100">
-                    </div>
-                    <div class="uk-width-1-2@s">
-                        <input class="uk-input" type="text" placeholder="Apellido" aria-label="50">
-                    </div>
-                    <div class="uk-width-1-2@s">
-                        <select class="uk-select" id="form-stacked-select" name="categoria" required>
-                            <option selected disabled>Documento</option>
-                            <option>V</option>
-                            <option>J</option>
-                            <option>E</option>
-                        </select>
-                    </div>
-                    <div class="uk-width-1-2@s">
-                        <input class="uk-input" type="text" placeholder="Numero de documento" aria-label="50">
-                    </div>
-                </form>
-            </div>
-            <div class="uk-modal-footer uk-text-right">
-                <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
-                <button class="uk-button uk-button-secondary" type="button">Guardar</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- **************************Modal de confirmacion de eliminacion************************** -->
-
-    <div id="eliminar_supplier" class="uk-flex-top" uk-modal>
-        <div class="uk-modal-dialog uk-margin-auto-vertical">
-            <div class="uk-modal-header uk-flex uk-flex-middle">
-                <span class="uk-margin-small-right" uk-icon="icon: warning ; ratio: 2"></span>
-                <h2 class="uk-modal-title uk-margin-remove-top">ELIMINAR</h2>
-            </div>
-            <div class="uk-modal-body">
-                <p>
-                    Deseas eliminar este registro para siempre? No podras recuperlo mas
-                    adelante
-                </p>
-            </div>
-            <div class="uk-modal-footer uk-text-right">
-                <button class="uk-button uk-button-default uk-modal-close" type="button">
-                    Cancelar
-                </button>
-                <button class="uk-button uk-button-secondary" type="button">
-                    Aceptar
-                </button>
-            </div>
-        </div>
-    </div>
 
     <!-- ****************************************************************************** -->
 

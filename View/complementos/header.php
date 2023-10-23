@@ -17,7 +17,7 @@ echo "
 <script>var sesion_user = '".$_SESSION['usuario']."'</script>
 <script>var sesionID = ".$_SESSION['id']."</script>
 
-";
+"
  ?>
 <body class="Bg-Main-home">
 
