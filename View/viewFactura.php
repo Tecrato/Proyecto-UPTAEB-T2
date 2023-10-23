@@ -10,7 +10,7 @@
         <div class="uk-width-1-4@s uk-light container_fact">
             <div class="uk-flex uk-flex-center container_fact_filter">
                 <div class="uk-margin">
-                    <form class="uk-search uk-search-default">
+                    <form class="uk-search uk-search-default filterSearch">
                         <span class="uk-search-icon-flip" uk-search-icon></span>
                         <input class="uk-search-input" type="search" placeholder="Buscar" aria-label="Search">
                     </form>
@@ -27,7 +27,7 @@
             <div class="Contanier_fact_item">
                <?php for ($i=0; $i < 3; $i++) { ?> 
                 <article>
-                    <div class="uk-flex uk-flex-between uk-flex-middle uk-background-secondary Target_factura">
+                    <div class="uk-flex uk-flex-between uk-flex-middle uk-background-secondary Target_factura" id=<?php echo $i ?>>
                         <div class="uk-flex uk-flex-middle uk-margin-medium-right">
                             <div class="uk-margin-small-right">
                                 <img src="static/images/logo_m.png" alt="" width="60px">
