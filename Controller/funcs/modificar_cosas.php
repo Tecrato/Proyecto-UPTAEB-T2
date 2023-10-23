@@ -35,10 +35,16 @@
         }
         header('Location:../../Productos');
     }
-    if ($tipo === 'proveedor'){
+    elseif ($tipo === 'proveedor'){
         require('../../Model/Proveedores.php');
         $clase = new Proveedor(); // Llama al modelo y le manda la instruccion
         $clase->UPDATE($_POST["ID"],$_POST["nombre"],$_POST["razon_social"],$_POST["rif"],$_POST["telefono"],$_POST["correo"],$_POST["direccion"]);
         header('Location:../../Proveedores');
+    }
+    elseif ($tipo === 'cliente'){
+        require('../../Model/Clientes.php');
+        $clase = new Cliente(); // Llama al modelo y le manda la instruccion
+        $clase->UPDATE($_POST["ID"],$_POST["nombre"],$_POST["cedula"],$_POST["Documento"],$_POST["telefono"],$_POST["direccion"]);
+        header('Location:../../Clientes');
     }
 ?>
