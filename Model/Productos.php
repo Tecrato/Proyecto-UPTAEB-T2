@@ -62,6 +62,25 @@
 
             return $this->conn->query($query);
         }
+
+        function search_target(){
+            $query = "SELECT id, imagen, nombre,(SELECT SUM(restante) FROM lotes WHERE productos.id = id_producto) AS existencia FROM productos";
+
+            return $this->conn->query($query);
+        }
+
+        function search_inventario(){
+            $query = "SELECT id,descripcion,(SELECT SUM(cantidad) FROM lotes WHERE productos.id = id_producto) AS entradas,(SELECT SUM(cantidad) - (SELECT SUM(restante) FROM lotes WHERE productos.id = id_producto) FROM lotes WHERE productos.id = id_producto) AS salidas, (SELECT SUM(restante) FROM lotes WHERE productos.id = id_producto) AS existencia, precio_venta,(SELECT SUM(restante) FROM lotes WHERE productos.id = id_producto) * precio_venta AS Total FROM productos";
+
+            return $this->conn->query($query);
+        }
+
+        function search_ValorInventario(){
+            $query = "SELECT SUM((SELECT SUM(restante) FROM lotes WHERE productos.id = id_producto) * precio_venta) AS Total FROM productos";
+
+            return $this->conn->query($query);
+        }
+
         #######  SELECT id,(SELECT SUM(restante) FROM lotes Where id_producto = p.id) FROM `productos` as p
         function COUNT(){
             
