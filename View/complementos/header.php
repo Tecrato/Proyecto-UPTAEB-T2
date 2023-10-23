@@ -18,7 +18,7 @@ echo "
 <script>var sesionID = ".$_SESSION['id']."</script>
 
 "
- ?>
+?>
 <body class="Bg-Main-home">
 
            <!-- **********************************  Menu de PC (1024 en adelante)  ********************************** -->
