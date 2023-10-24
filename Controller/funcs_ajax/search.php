@@ -28,6 +28,13 @@
     elseif ($_POST['randomnautica'] == "clientes") {
         require('../../Model/Clientes.php');
         $clase = new Cliente();
+    }elseif ($_POST['randomnautica'] == "categoria") {
+        require('../../Model/Categorias.php');
+        $clase = new Categoria();
+    }
+    elseif ($_POST['randomnautica'] == "unidad") {
+        require('../../Model/Unidades.php');
+        $clase = new Unidad();
     }
 
     if (isset($_POST['like']) and $_POST['like'] != "") {
@@ -37,13 +44,13 @@
         $result = $clase->search($_POST['ID']);
     }
     else {
-        $result = $clase->search(limite:$limite);
+        $result = $clase->search();
     }
-    
+    // limite:$limite
     $lista=array();
 
     while ($row = $result->fetch_assoc()) {
-        array_push($lista_productos, $row);
+        array_push($lista, $row);
     };
     $json = [
         'lista'=> $lista

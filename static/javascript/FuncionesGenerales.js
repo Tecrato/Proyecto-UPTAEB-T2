@@ -5,7 +5,7 @@ function cambiar_pagina_php(dir) {
 
 
 //funcion para colocar la marca de agua en el fondo de los modulos
-$(function () {
+const marcaAgua = ()=>{
     //esto hace que el fondo de pantalla y altura se modifiquen si hay tarjetas en los modulos
     let containerMarca_agua = document.querySelector(".container_marca_agua");
     let containerBody = document.querySelector(".Bg-Main-home");
@@ -20,7 +20,8 @@ $(function () {
     } else {
       pagination.classList.remove("invisible");
     }
-  });
+}
+
 
 //funcion para asignar clase de boton activo dependiendo de la pantall en donde este
 $(function () {

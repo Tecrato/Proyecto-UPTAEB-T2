@@ -15,7 +15,7 @@
 
         public $conn;
         function __construct() {
-            $this->conn = new mysqli('localhost' ,'root', '', 'proyecto');
+            $this->conn = new mysqli('localhost' ,'root', '12345', 'proyecto_2');
             if ($this->conn->connect_error) {
                 die("Error en la conexión: " . $conn->connect_error);
             }

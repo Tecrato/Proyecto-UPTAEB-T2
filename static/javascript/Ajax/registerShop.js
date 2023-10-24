@@ -626,10 +626,12 @@ $.ajax({
       subtotal.textContent = totalAPagarParcial.toFixed(2) + " BS";
       // //creamos la variable que tendra el iva
       let iva = PriceNoExentIva * 0.16;
+
       let TextIva = (document.getElementById("iva").textContent =
         iva.toFixed(2) + " BS");
       //con esta varible obtenemos el total a pagar
       let totalAPagar = totalAPagarParcial + iva;
+
       //obtenemos el contenedor del total
       let total = (document.getElementById("totalFact").textContent =
         totalAPagar.toFixed(2) + " BS");
@@ -842,8 +844,10 @@ $.ajax({
         idCasher: parseInt(idCasher),
         idClient: parseInt(idClient),
         TPago: tipoPago,
-        tIva: parseFloat(document.getElementById("iva").textContent),
-        pTotal: parseFloat(document.getElementById("totalFact").textContent),
+        tIva: parseFloat(document.getElementById("iva").textContent).toFixed(2),
+        pTotal: parseFloat(
+          document.getElementById("totalFact").textContent
+        ).toFixed(2),
         details: [],
       };
 
@@ -872,9 +876,12 @@ $.ajax({
 
         for (const iterator of blo) {
           let algo = parseInt(iterator.firstElementChild.textContent);
-          let algo2 = parseInt(iterator.firstElementChild.nextElementSibling.textContent);
-          let algo5 =
-            parseFloat(iterator.lastElementChild.previousElementSibling.textContent);
+          let algo2 = parseInt(
+            iterator.firstElementChild.nextElementSibling.textContent
+          );
+          let algo5 = parseFloat(
+            iterator.lastElementChild.previousElementSibling.textContent
+          );
 
           //insertamos los datos de los productos por cada tr que haya en detalles de factura
           json.details.push({
@@ -889,7 +896,7 @@ $.ajax({
           message:
             "<span uk-icon='icon: check'></span> Factura generada correctamente ",
           status: "success",
-          pos: 'bottom-right',
+          pos: "bottom-right",
         });
         document.querySelector(".selectTypeCash").value = "";
         document.getElementById(
@@ -905,20 +912,17 @@ $.ajax({
           UIkit.modal("#modal-full").hide();
         }, 800);
 
-        console.log(json)
         //envio de datos con ajax
         //preparamos el json
         let jsonString = JSON.stringify(json);
-        let nosse = JSON.stringify(datos)
-        // console.log(jsonString);
 
         $.ajax({
-          url: "Controller/funcs_ajax/hacer_factura.php",
+          url: "Controller/funcs_ajax/prueba.php",
           type: "POST",
-          data: {jsonString},
-          success: function(response){
-            console.log(response)
-          }
+          data: { jsonString },
+          success: function (response) {
+            console.log(response);
+          },
         });
       }
     });

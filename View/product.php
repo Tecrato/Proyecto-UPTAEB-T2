@@ -1,7 +1,7 @@
 <?php require("../View/complementos/header.php"); ?>
 
 <main class="Bg-Main-home2 uk-padding uk-padding-remove-bottom">
-    
+
     <section class="uk-flex uk-flex-center">
         <article class="uk-flex uk-flex-around cont-search uk-flex-middle uk-background-secondary Section-search">
             <div class="Section-search">
@@ -82,29 +82,28 @@
 
 
                 <div class="uk-flex uk-flex-center uk-flex-middle uk-margin-small-left uk-margin-small-right uk-light cont_imprimir">
-                    <a href="InventarioPDF" class="uk-icon-link" uk-tooltip="title:IMPRIMIR INVENTARIO; delay: 500">
-                        <span uk-icon="icon: print; ratio: 1.7" ></span>
+                    <a href="InventarioPDF" target="_blank" class="uk-icon-link" uk-tooltip="title:Imprimir Inventario; delay: 500">
+                        <span uk-icon="icon: print; ratio: 1.7"></span>
                     </a>
                 </div>
 
                 <div class="uk-flex uk-flex-center uk-flex-middle uk-margin-small-right">
-                    <a href="#modal-sections" uk-toggle uk-tooltip="title:Añadir; delay: 500">
+                    <a class="btn-modal-register" href="#modal-register-product" uk-tooltip="title:Añadir; delay: 500">
                         <img class="btn_agg" src="static/images/btn_agg.png" alt="" width="38px">
                     </a>
                 </div>
             </div>
 
 
-                           <!-- ****************** Modal de registro ****************** -->
-
-            <div  id="modal-sections" uk-modal>
+            <!-- ****************** Modal de registro ****************** -->
+            <!-- <div id="modal-register-product" uk-modal>
                 <div class="uk-modal-dialog">
-                    <button class="uk-modal-close-default" type="button" uk-close></button>
+                    <button class="uk-modal-close-default close" type="button" uk-close></button>
                     <div class="uk-modal-header">
                         <h2 class="uk-modal-title">Registro de productos</h2>
                     </div>
                     <div class="uk-modal-body ">
-                        <form class="uk-grid-small" uk-grid method="POST" action="Controller/funcs/agregar_cosas.php" enctype="multipart/form-data">
+                        <form id="formAggProduct" class="uk-grid-small" uk-grid method="POST" action="" enctype="multipart/form-data">
                             <input type="text" name="tipo" value='producto' id="" style="display:none">
                             <div class="uk-width-1-2">
                                 <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" required>
@@ -113,15 +112,14 @@
                                 <input class="uk-input" type="text" placeholder="Descripción" aria-label="50" name="descripcion">
                             </div>
                             <div class="uk-width-1-2@s">
-                                <select class="uk-select" id="form-stacked-select" name="categoria" required>
+                                <select id="selectCat" class="uk-select" id="form-stacked-select" name="categoria" required>
                                     <option value="" disabled selected>Categoria</option>
-                                    <?php echo $list_categorias; ?>
                                 </select>
                             </div>
                             <div class="uk-width-1-2@s">
-                                <select class="uk-select" id="form-stacked-select" name="unidad" required>
+                                <select id="selectUni" class="uk-select" id="form-stacked-select" name="unidad" required>
                                     <option value="" disabled selected>Unidad</option>
-                                    <?php echo $list_unidades; ?>
+
                                 </select>
                             </div>
                             <div class="uk-width-1-2@s">
@@ -148,35 +146,44 @@
                         </form>
                     </div>
                     <div class="uk-modal-footer uk-text-right">
-                        <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
-                        <label class="uk-button uk-button-secondary" type="submit" for="subirxd">Guardar</label>
+                        <button class="uk-button uk-button-default uk-modal-close cancelar" type="button">Cancelar</button>
+                        <label class="uk-button uk-button-secondary subir" type="submit" for="subirxd">Guardar</label>
                     </div>
                 </div>
-            </div>
+            </div> -->
+
         </article>
     </section>
+
+    <!-- ****************** producto ****************** -->
     
-                                        <!-- ****************** producto ****************** -->
     <section class="uk-light uk-padding uk-padding-remove-left uk-padding-remove-right uk-grid-small uk-flex-center" uk-grid>
         <div class="container_marca_agua invisible">
             <img class="marca_agua" src="static/images/logo_letras-minimarket.png" alt="">
         </div>
-        <div class="[email protected] uk-grid-large uk-flex-center height_controller" uk-grid uk-height-match="target: > div > .uk-card">
-            <?php
-            for ($i=0; $i <  $result->num_rows; $i++) {
-                    $row = $result->fetch_assoc();
-                    include 'complementos/tarjeta_producto.php';
-                
-                };
-            ?> 
+        <div class="[email protected] uk-grid-large uk-flex-center height_controller container-target-product" uk-grid uk-height-match="target: > div > .uk-card">
+            <!-- aqui se cargan las tarjetas de productos con js -->
         </div>
     </section>
 
 
+    <div id="container-modals">
+        <!-- aqui se cargan los modales dinamicamente con js -->
+    </div>
+
+
     <!-- ****************** Botones de paginacion ****************** -->
-    
-    <?php include ("../View/complementos/btn_pag.html"); ?>
+
+    <?php include("../View/complementos/btn_pag.html"); ?>
 
 </main>
 
-<?php require("../View/complementos/footer.php"); ?>
+<?php require("../View/complementos/footer.php"); 
+
+//con este for, se cargan los productos pero con php
+// for ($i=0; $i <  $result->num_rows; $i++) {
+//         $row = $result->fetch_assoc();
+//         include 'complementos/tarjeta_producto.php';
+
+//     };
+?>
