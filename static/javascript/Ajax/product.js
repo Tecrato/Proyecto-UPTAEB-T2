@@ -127,6 +127,7 @@ const cargarTargetProduct = () => {
               processData: false,
               contentType: false,
               success: function (response) {
+                console.log(response)
                 //ocultamos el modal
                 UIkit.modal("#eliminar_product").hide();
                 //mostramos el mensaje de eliminacion exitosa
@@ -231,7 +232,7 @@ const cargarTargetProduct = () => {
                 let options = ``;
                 let json = JSON.parse(response);
                 json.lista.forEach((date) => {
-                  options += `<option value="${date.id}">${date.nombre}</option>`;
+                  options += `<option value="${date.id}">${date.razon_social}</option>`;
                 });
                 document.querySelector(".selectSupplier").innerHTML += options;
               },
