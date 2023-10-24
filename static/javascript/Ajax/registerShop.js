@@ -396,7 +396,6 @@ Clientes.forEach((date) => {
                               <a class="Bg-user uk-margin-small-bottom" uk-icon="icon: user; ratio: 1.5"></a>
                               <p class="uk-margin-remove uk-margin-small-bottom uk-text-meta">Cliente: <b>${dat.nombre}</b></p>
                               <p class="uk-margin-remove uk-text-meta">Cedula: <b>${dat.cedula}</b></p>
-                              
                             </div>
                           `;
       }
@@ -439,66 +438,6 @@ document.addEventListener("keyup", (e) => {
     });
   }
 });
-
-//Aqui haremos que funcione los detalles de los productos
-// const productos = [
-//   {
-//     id: "1",
-//     nombre: "harina pan",
-//     disponible: "10",
-//     precio: "10.00",
-//     iva: false,
-//   },
-//   {
-//     id: "2",
-//     nombre: "queso",
-//     disponible: "15",
-//     precio: "5.00",
-//     iva: false,
-//   },
-//   {
-//     id: "3",
-//     nombre: "arroz",
-//     disponible: "5",
-//     precio: "20.00",
-//     iva: false,
-//   },
-//   {
-//     id: "4",
-//     nombre: "azucar",
-//     disponible: "5",
-//     precio: "20.00",
-//     iva: false,
-//   },
-//   {
-//     id: "5",
-//     nombre: "leche",
-//     disponible: "5",
-//     precio: "20.00",
-//     iva: false,
-//   },
-//   {
-//     id: "6",
-//     nombre: "pasta",
-//     disponible: "5",
-//     precio: "20.00",
-//     iva: false,
-//   },
-//   {
-//     id: "7",
-//     nombre: "jabon harmony",
-//     disponible: "25",
-//     precio: "7.00",
-//     iva: true,
-//   },
-//   {
-//     id: "8",
-//     nombre: "Jabon en polvo",
-//     disponible: "60",
-//     precio: "30.00",
-//     iva: true,
-//   },
-// ];
 
 //ajax
 $.ajax({
@@ -917,7 +856,7 @@ $.ajax({
         let jsonString = JSON.stringify(json);
 
         $.ajax({
-          url: "Controller/funcs_ajax/prueba.php",
+          url: "Controller/funcs_ajax/hacer_factura.php",
           type: "POST",
           data: { jsonString },
           success: function (response) {
