@@ -65,10 +65,10 @@
                                 </div>
                                 <input type="submit" id="subirC" style="display:none">
                             </form>
-                            <div class="uk-modal-footer uk-text-right">
-                                <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
-                                <label class="uk-button uk-button-secondary" type="button" for="subirC">Guardar</label>
-                            </div>
+                        </div>
+                        <div class="uk-modal-footer uk-text-right">
+                            <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
+                            <label class="uk-button uk-button-secondary" type="button" for="subirC">Guardar</label>
                         </div>
                         
                     </div>

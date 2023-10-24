@@ -6,7 +6,9 @@
     }
 
     $result = new Cliente;
-    $result = $result->search(n:$num);
+    $result = $result->search();
+
+    // n:$num
 
     include('../View/client.php');
     echo '<script>var type_page = "cliente";</script>';

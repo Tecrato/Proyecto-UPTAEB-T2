@@ -8,13 +8,14 @@
     
     if ($tipo == 'producto'){
         $clase = new Producto(); // Llama al modelo y le manda la instruccion
+        $clase_l = new Lote(); // Llama al modelo y le manda la instruccion
         $imagen = array_slice($clase->search($_POST['ID'])->fetch_assoc(), 0)['imagen'];
         if ($imagen != "banner_productos.png"){
             unlink("../../Media/imagenes/".$imagen);
         }
-        $clase->borrar(False,$_POST['ID']);
+        $clase_l->borrar(False,$_POST['ID']);
         $clase->DELETE($_POST['ID']);
-        header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
+        // header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }
     if ($tipo == 'proveedor'){
         $clase2 = new Lote(); // Llama al modelo y le manda la instruccion
