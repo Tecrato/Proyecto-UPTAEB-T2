@@ -55,8 +55,10 @@ const cargarTargetProduct = () => {
       });
 
       if (json.lista.length === 0) {
+        document.querySelector(".container_marca_agua").classList.remove("invisible");
         $(".container-target-product").html("");
       }
+
 
       // en esta parte se cargan los modales segun el que quiera ver
 
@@ -686,3 +688,4 @@ btnAgg.addEventListener("click", () => {
     }, 300);
   });
 });
+

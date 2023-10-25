@@ -158,7 +158,7 @@
     <!-- ****************** producto ****************** -->
     
     <section class="uk-light uk-padding uk-padding-remove-left uk-padding-remove-right uk-grid-small uk-flex-center" uk-grid>
-        <div class="container_marca_agua invisible">
+        <div class="container_marca_agua">
             <img class="marca_agua" src="static/images/logo_letras-minimarket.png" alt="">
         </div>
         <div class="[email protected] uk-grid-large uk-flex-center height_controller container-target-product" uk-grid uk-height-match="target: > div > .uk-card">

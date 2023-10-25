@@ -15,10 +15,10 @@ const marcaAgua = ()=>{
   
     if (containerHeight == 0) {
       containerBody.style.height = `115vh`;
-      containerMarca_agua.classList.remove("invisible");
       pagination.classList.add("invisible");
     } else {
       pagination.classList.remove("invisible");
+      containerMarca_agua.classList.add("invisible");
     }
 }
 
