@@ -36,15 +36,15 @@
                         </div>
                         <div class="uk-modal-body">
                             <form class="uk-grid-small" uk-grid method="POST" action="Controller/funcs/agregar_cosas.php" enctype="multipart/form-data">
-                            <input type="text" name="tipo" value='Cliente' id="" style="display:none">
+                            <input type="text" name="tipo" value='cliente' id="" style="display:none">
                             <div class="uk-width-1-2@s">
-                                    <input class="uk-input" type="text" placeholder="Nombre" aria-label="100">
+                                    <input class="uk-input" type="text" placeholder="Nombre"  name="nombre" aria-label="100">
                                 </div>
                                 <div class="uk-width-1-2@s">
-                                    <input class="uk-input" type="text" placeholder="Apellido" aria-label="50">
+                                    <input class="uk-input" type="text" placeholder="Apellido"  name="apellido" aria-label="50">
                                 </div>
                                 <div class="uk-width-1-2@s">
-                                    <select class="uk-select" id="form-stacked-select" name="Documento" required>
+                                    <select class="uk-select" id="form-stacked-select" name="documento" required>
                                         <option selected disabled>Documento</option>
                                         <option>V</option>
                                         <option>J</option>
@@ -52,15 +52,15 @@
                                     </select>
                                 </div>
                                 <div class="uk-width-1-2@s">
-                                    <input class="uk-input" type="text" placeholder="cedula"
+                                    <input class="uk-input" type="text" placeholder="cedula"  name="cedula"
                                         aria-label="50">
                                 </div>
                                 <div class="uk-width-1-2@s">
-                                    <input class="uk-input" type="text" placeholder="Telefono"
+                                    <input class="uk-input" type="text" placeholder="Telefono"  name="telefono"
                                         aria-label="50">
                                 </div>
                                 <div class="uk-width-1-2@s">
-                                    <input class="uk-input" type="text" placeholder="Dirección"
+                                    <input class="uk-input" type="text" placeholder="Dirección"  name="direccion"
                                         aria-label="50">
                                 </div>
                                 <input type="submit" id="subirC" style="display:none">

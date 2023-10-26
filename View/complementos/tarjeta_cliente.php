@@ -23,7 +23,7 @@
                      style="border: none; cursor: pointer">
                      <span uk-icon="icon: file-edit"></span>
                  </a>
-                 <a href="#eliminar_supplier" uk-toggle uk-tooltip="title:Eliminar; delay: 500"
+                 <a href="#eliminar_supplier'.$row["id"].'"  uk-toggle uk-tooltip="title:Eliminar; delay: 500"
                      class="uk-icon-button uk-margin-small-right" uk-tooltip="title:Eliminar; delay: 500"
                      type="button" style="border: none; cursor: pointer" type="button">
                      <span uk-icon="icon: trash"></span>
@@ -96,7 +96,7 @@
 
 <!-- **************************Modal de confirmacion de eliminacion************************** -->
 
-<div id="eliminar_supplier" class="uk-flex-top" uk-modal>
+<div id="eliminar_supplier'.$row["id"].'" class="uk-flex-top" uk-modal>
     <div class="uk-modal-dialog uk-margin-auto-vertical">
         <div class="uk-modal-header uk-flex uk-flex-middle">
             <span class="uk-margin-small-right" uk-icon="icon: warning ; ratio: 2"></span>
@@ -112,9 +112,11 @@
             <button class="uk-button uk-button-default uk-modal-close" type="button">
                 Cancelar
             </button>
-            <button class="uk-button uk-button-secondary" type="button">
-                Aceptar
-            </button>
+            <form method="POST" action="Controller/funcs/borrar_cosas.php">
+                <input type="number" name="ID" value='.$row["id"].' style="display:none">
+                <input type="text" name="tipo" value="cliente" style="display:none">
+                <input type="submit" class="uk-button uk-button-secondary"  >
+            </form>
         </div>
     </div>
 </div>';

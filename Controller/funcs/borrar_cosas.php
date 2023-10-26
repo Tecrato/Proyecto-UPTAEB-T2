@@ -3,6 +3,7 @@
     require('../../Model/Productos.php');
     require('../../Model/Proveedores.php');
     require('../../Model/Lotes.php');
+    require('../../Model/Clientes.php');
     $tipo = $_POST['tipo']; // Depende de que es lo que queramos borrar
 
     
@@ -30,6 +31,6 @@
         $clase = new Cliente(); // Llama al modelo y le manda la instruccion
         $clase->DELETE($_POST['ID']);
 
-        header('Location:../../Cliente'); // Y vuelve a la pagina donde estaba antes
+        header('Location:../../Clientes'); // Y vuelve a la pagina donde estaba antes
     }
 ?>
