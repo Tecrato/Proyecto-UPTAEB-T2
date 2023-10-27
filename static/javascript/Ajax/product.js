@@ -36,7 +36,7 @@ const cargarTargetProduct = () => {
                                               <p class="uk-margin-remove uk-text-meta">Existencia: <b class="uk-text-success">${item.existencia}</b></p>
                                           </div>
                                           <div class="uk-flex uk-flex-middle uk-margin-small-left">
-                                              <a href="#Producto-modificar"><span class="uk-margin-small-right uk-icon-button"
+                                              <a href="#Producto-modificar" uk-tooltip="title:Modificar; delay: 500"><span class="uk-margin-small-right uk-icon-button"
                                                       uk-icon="icon: file-edit"></span></a>
                                               <a href="#eliminar_product" class="deleteID" uk-tooltip="title:Eliminar; delay: 500"><span class="uk-icon-button"
                                                       uk-icon="icon: trash"></span></a>
