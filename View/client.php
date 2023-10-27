@@ -46,13 +46,13 @@
                                 <div class="uk-width-1-2@s">
                                     <select class="uk-select" id="form-stacked-select" name="documento" required>
                                         <option selected disabled>Documento</option>
-                                        <option>V</option>
-                                        <option>J</option>
-                                        <option>E</option>
+                                        <option value="V">V</option>
+                                        <option value="J">J</option>
+                                        <option value="E">E</option>
                                     </select>
                                 </div>
                                 <div class="uk-width-1-2@s">
-                                    <input class="uk-input" type="text" placeholder="cedula"  name="cedula"
+                                    <input class="uk-input" type="number" placeholder="cedula"  name="cedula"
                                         aria-label="50">
                                 </div>
                                 <div class="uk-width-1-2@s">
@@ -81,7 +81,7 @@
     </section>
 
     <section class="uk-light uk-padding uk-padding-remove-left uk-padding-remove-right uk-grid-small uk-flex-center" uk-grid>
-        <div class="container_marca_agua invisible">
+        <div class="container_marca_agua">
             <img class="marca_agua" src="static/images/logo_letras-minimarket.png" alt="">
         </div>
         <div class="[email protected] uk-grid-large uk-flex-center height_controller" uk-grid uk-height-match="target: > div > .uk-card">

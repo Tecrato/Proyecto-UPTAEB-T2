@@ -3,7 +3,7 @@
     class Cliente extends DB{
 
         function agregar($nombre,$cedula,$Documento,$apellido,$Telefono,$Direccion){
-            $query = "INSERT INTO clientes VALUES(null, '$nombre', $cedula,'$Documento','$apellido','$Telefono','$Direccion')";
+            $query = "INSERT INTO clientes (Nombre, Cedula, Apellido, Documento, Direccion, Telefono) VALUES('$nombre', '$cedula','$apellido','$Documento','$Telefono','$Direccion')";
             
             $this->conn->query($query);
         }

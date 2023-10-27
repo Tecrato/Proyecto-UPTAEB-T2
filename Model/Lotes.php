@@ -24,7 +24,7 @@ class Lote extends DB
 
 	function search_proveedor_from_product($id_producto)
 	{
-		$query = "SELECT id_proveedor, (SELECT nombre FROM proveedores WHERE lotes.id_proveedor = id) AS proveedor FROM lotes WHERE id_producto = $id_producto GROUP BY id_proveedor";
+		$query = "SELECT id_proveedor, (SELECT razon_social FROM proveedores WHERE lotes.id_proveedor = id) AS proveedor FROM lotes WHERE id_producto = $id_producto GROUP BY id_proveedor";
 		return $this->conn->query($query);
 	}
 

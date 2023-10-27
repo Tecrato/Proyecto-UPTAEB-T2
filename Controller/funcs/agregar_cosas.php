@@ -54,7 +54,7 @@
         echo "paso1";
         $clase = new Cliente(); // Llama al modelo y le manda la instruccion
         echo "paso2";
-        $clase->agregar($_POST["nombre"],$_POST["apellido"],$_POST["Documento"],$_POST["cedula"],$_POST["telefono"],$_POST["direccion"]);
+        $clase->agregar($_POST["nombre"],$_POST["apellido"],$_POST["documento"],$_POST["cedula"],$_POST["telefono"],$_POST["direccion"]);
         echo "paso3";
         header('Location:../../Clientes'); // Y vuelve a la pagina donde estaba antes
     };
