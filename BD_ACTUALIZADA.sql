@@ -31,16 +31,6 @@ CREATE TABLE `categoria` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `categoria`
---
-
-LOCK TABLES `categoria` WRITE;
-/*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
-INSERT INTO `categoria` VALUES (1,'comida','Cosas que se comen :V'),(2,'limpieza','sin comentarios'),(3,'charcuteria','los restos de los animales D:'),(100,'otros','Cosas variadas');
-/*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `clientes`
 --
 
@@ -58,16 +48,6 @@ CREATE TABLE `clientes` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `clientes`
---
-
-LOCK TABLES `clientes` WRITE;
-/*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-INSERT INTO `clientes` VALUES (1,'Jose','Perez','2323232323','V','04126742231','Direccion tal');
-/*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `factura`
@@ -88,16 +68,6 @@ CREATE TABLE `factura` (
   CONSTRAINT `fk_productos_has_registro_ventas_registro_ventas1` FOREIGN KEY (`id_registro_ventas`) REFERENCES `registro_ventas` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `factura`
---
-
-LOCK TABLES `factura` WRITE;
-/*!40000 ALTER TABLE `factura` DISABLE KEYS */;
-INSERT INTO `factura` VALUES (4,66,5,125),(5,66,40,1000);
-/*!40000 ALTER TABLE `factura` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `lotes`
@@ -122,16 +92,6 @@ CREATE TABLE `lotes` (
   CONSTRAINT `lotes_ibfk_2` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedores` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `lotes`
---
-
-LOCK TABLES `lotes` WRITE;
-/*!40000 ALTER TABLE `lotes` DISABLE KEYS */;
-INSERT INTO `lotes` VALUES (6,66,5,10,'2023-10-27','2024-09-18',15,0),(7,66,5,10,'2023-10-27','2023-10-28',80,0),(8,66,5,50,'2023-10-27','2025-04-22',15,25),(9,67,5,15,'2023-10-27','2023-11-07',25,15);
-/*!40000 ALTER TABLE `lotes` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `productos`
@@ -161,16 +121,6 @@ CREATE TABLE `productos` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `productos`
---
-
-LOCK TABLES `productos` WRITE;
-/*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES (66,1,1,'Azúcar','Azucar refinada blanca 500g','producto_Azúcar_5e5294ee-d7d2-424d-ac2e-5802bbad41ab.jpeg',5,14,25,0),(67,1,1,'Pan','pan frances de 1 oz','producto_Pan_Fondos de Pantalla.jpeg',5,15,7.6,0),(68,1,1,'Harina','aaa','banner_productos.png',5,50,25,1);
-/*!40000 ALTER TABLE `productos` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `proveedores`
 --
 
@@ -188,16 +138,6 @@ CREATE TABLE `proveedores` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `proveedores`
---
-
-LOCK TABLES `proveedores` WRITE;
-/*!40000 ALTER TABLE `proveedores` DISABLE KEYS */;
-INSERT INTO `proveedores` VALUES (4,'PolarC.A','nn','j-00000000',1231231231,'nose@gmail.com','Ahora si tiene'),(5,'Jose Paez','EL TUNAL','j-00000000',0,'garnicaluis391@gmail.com','scacac');
-/*!40000 ALTER TABLE `proveedores` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `registro_ventas`
@@ -223,16 +163,6 @@ CREATE TABLE `registro_ventas` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `registro_ventas`
---
-
-LOCK TABLES `registro_ventas` WRITE;
-/*!40000 ALTER TABLE `registro_ventas` DISABLE KEYS */;
-INSERT INTO `registro_ventas` VALUES (4,125,'Pago Movil','2023-10-27 09:56:02',1,1,0),(5,1000,'Pago Movil','2023-10-27 09:56:38',1,1,0);
-/*!40000 ALTER TABLE `registro_ventas` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `unidades`
 --
 
@@ -245,16 +175,6 @@ CREATE TABLE `unidades` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `unidades`
---
-
-LOCK TABLES `unidades` WRITE;
-/*!40000 ALTER TABLE `unidades` DISABLE KEYS */;
-INSERT INTO `unidades` VALUES (1,'kilogramos'),(2,'Litros'),(3,'unidades');
-/*!40000 ALTER TABLE `unidades` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `usuarios`
@@ -272,16 +192,6 @@ CREATE TABLE `usuarios` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `usuarios`
---
-
-LOCK TABLES `usuarios` WRITE;
-/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'Edouard','nose@gmail.com','123',1);
-/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -292,4 +202,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-30 18:14:33
+-- Dump completed on 2023-10-30 18:16:20
