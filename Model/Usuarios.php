@@ -1,6 +1,5 @@
 <?php
 
-    require('Conexion.php');
     class Usuarios extends DB {
         // Que de momento solo busca, ya que solo se podra loguear al sistema
         function search($id=null, $lvl=null,$nombre=null,$correo=null,$password=null){
@@ -41,7 +40,9 @@
                     $query = $query . $q;
                 }
             }
-            return $this->conn->query($query);
+            $nose = $this->conn->prepare($query);      
+            $resultado=$nose->execute();
+            return $nose;
         }
         function COUNT(){
             return $this->conn->query("SELECT COUNT(*) 'total' FROM usuarios")->fetch_assoc()['total'];
