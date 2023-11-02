@@ -85,16 +85,15 @@
         <div class="[email protected] uk-grid-medium uk-flex-center height_controller" uk-grid uk-height-match="target: > div > .uk-card">
            
             <?php
-            while ($row = $result->fetch_assoc()) {
+            for ($i=0; $i < count($result); $i++) { 
+                $row = $result[$i];
                 require 'complementos/tarjeta_proveedor.php';
-                
-            };
+            }
         ?>
         </div>
     </section>
 </main>
 
 <?php include ("../View/complementos/btn_pag.html"); ?>
-<script src="static/javascript/cosas.js" type="text/javascript"></script>
 
 <?php require("../View/complementos/footer.php"); ?>

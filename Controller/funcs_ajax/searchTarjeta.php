@@ -1,17 +1,18 @@
 <?php
 
-require('../../Model/Conexion.php');
-require('../../Model/Productos.php');
+    require('../../Model/Conexion.php');
+    require('../../Model/Productos.php');
 
-$clase = new Producto();
-$result = $clase->search_target();
+    $clase = new Producto();
+    $result = $clase->search_targeta();
 
 
     $lista=array();
 
-    while ($row = $result->fetch_assoc()) {
+    for ($i=0; $i < count($result); $i++) { 
+        $row = $result[$i];
         array_push($lista, $row);
-    };
+    }
     $json = [
         'lista'=> $lista
     ];

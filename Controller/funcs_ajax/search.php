@@ -49,9 +49,10 @@
     // limite:$limite
     $lista=array();
 
-    while ($row = $result->fetch_assoc()) {
+    for ($i=0; $i < count($result); $i++) { 
+        $row = $result[$i];
         array_push($lista, $row);
-    };
+    }
     $json = [
         'lista'=> $lista
     ];

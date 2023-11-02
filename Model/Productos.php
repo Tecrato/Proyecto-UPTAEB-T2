@@ -63,10 +63,10 @@
             return $this->conn->query($query);
         }
 
-        function search_target(){
-            $query = "SELECT id, imagen, nombre,(SELECT SUM(restante) FROM lotes WHERE productos.id = id_producto) AS existencia FROM productos";
+        function search_targeta(){
+            $query = "SELECT id, imagen, nombre,(SELECT SUM(existencia) FROM lotes WHERE productos.id = id_producto) AS existencia FROM productos";
 
-            return $this->conn->query($query);
+            return $this->conn->query($query)->fetchAll();
         }
 
         function search_inventario(){

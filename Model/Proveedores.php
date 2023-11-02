@@ -6,9 +6,15 @@
         // esta funcion agrega a la tabla productos un objeto con los valores que se le estan pasando
         function agregar($nombre,$razon_social,$rif,$telefono,$correo,$direccion) {
             
-            $query = "INSERT INTO proveedores VALUES(null,'$nombre', '$razon_social', '$rif', $telefono, '$correo', '$direccion')";
-            
-            $this->conn->query($query);
+            $query = $this->conn->prepare("INSERT INTO proveedores VALUES(null,?, ?, ?, ?, ?, ?)");
+
+            $query->bindParam(1,$nombre);
+            $query->bindParam(2,$razon_social);
+            $query->bindParam(3,$rif);
+            $query->bindParam(4,$telefono);
+            $query->bindParam(5,$correo);
+            $query->bindParam(6,$direccion);
+            $query->execute();
         }
 
         // con esta funcion se elimina un elemento dependiendo de su id
@@ -83,7 +89,8 @@
                 }
             }
             
-            return $this->conn->query($query);
+            $consulta = $this->conn->query($query);
+            return $consulta->fetchAll();
         }
         function search_like($nombre){
             $query = "SELECT * FROM proveedores WHERE nombre LIKE '%$nombre%'";

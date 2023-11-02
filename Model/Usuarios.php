@@ -40,9 +40,8 @@
                     $query = $query . $q;
                 }
             }
-            $nose = $this->conn->prepare($query);      
-            $resultado=$nose->execute();
-            return $nose;
+            $consulta = $this->conn->prepare($query);
+            return $consulta->fetchAll();
         }
         function COUNT(){
             return $this->conn->query("SELECT COUNT(*) 'total' FROM usuarios")->fetch_assoc()['total'];
