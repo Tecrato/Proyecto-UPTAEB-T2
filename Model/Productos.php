@@ -1,12 +1,25 @@
 <?php
     class Producto extends DB{
 
+        // private function __construct(){
+
+        // }
         // esta funcion agrega a la tabla productos un objeto con los valores que se le estan pasando
-        function agregar($categoria,$unidades,$nombre,$descripcion,$imagen,$stock_min,$stock_max,$precio_venta,$IVA){
+        function agregar($categoria,$unidades,$nombre,$marca,$imagen,$stock_min,$stock_max,$precio_venta,$IVA){
             
-            $query = "INSERT INTO productos VALUES(null, $categoria, $unidades,'$nombre', '$descripcion','$imagen',$stock_min,$stock_max,$precio_venta,$IVA)";
-            
-            $this->conn->query($query);
+            $query = $this->conn->prepare("INSERT INTO productos VALUES(null,?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+            $query->bindParam(1,$categoria);
+            $query->bindParam(2,$unidades);
+            $query->bindParam(3,$nombre);
+            $query->bindParam(4,$marca);
+            $query->bindParam(5,$imagen);
+            $query->bindParam(6,$stock_min);
+            $query->bindParam(7,$stock_max);
+            $query->bindParam(8,$precio_venta);
+            $query->bindParam(9,$IVA);
+
+            echo $query->execute();
         }
 
 
