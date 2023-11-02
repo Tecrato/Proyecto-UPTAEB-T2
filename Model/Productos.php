@@ -26,28 +26,43 @@
         // con esta funcion se elimina un elemento dependiendo de su id
         function DELETE($id) {
 
-            $query = "DELETE FROM productos WHERE ID=$id";
-            
-            $this->conn->query($query);
+            $query = $this->conn->prepare("DELETE FROM productos WHERE ID=:id");
+                
+            $query->bindParam(':id',$id);
+
+            $query->execute();
         }
 
         // Con esta funcion podremos cambiar un producto segun su ID con los valores que le pasemos
         function UPDATE($id,$categoria,$unidades,$nombre,$descripcion,$imagen,$stock_min,$stock_max,$precio_venta,$IVA){
             
             
-            $query = "UPDATE productos SET id_categoria=".$categoria.", id_unidad=".$unidades.", nombre='".$nombre."', descripcion='".$descripcion."', stock_min=".$stock_min.", stock_max=".$stock_max.", precio_venta=".$precio_venta.", IVA=".$IVA;
+            $query = "UPDATE productos SET id_categoria=:categoria, id_unidad=:unidades, nombre=:nombre, marca=:descripcion, stock_min=:stock_min, stock_max=:stock_max, precio_venta=:precio_venta, IVA=:IVA";
             if ($imagen != null) {
-                $query = $query . ", imagen='".$imagen."' ";
+                $query = $query . ", imagen=:imagen ";
             }
-            $query = $query . " WHERE id=$id";
+            $query = $query . " WHERE id=:id";
             
-            return $this->conn->query($query); //$conn->fetch_assoc() // Y devuelve el resultado al controlador
+            $query = $this->conn->prepare($query);
+
+            $query->bindParam(':categoria',$categoria);
+            $query->bindParam(':unidades',$unidades);
+            $query->bindParam(':nombre',$nombre);
+            $query->bindParam(':marca',$marca);
+            $query->bindParam(':stock_min',$stock_min);
+            $query->bindParam(':stock_max',$stock_max);
+            $query->bindParam(':precio_venta',$precio_venta);
+            $query->bindParam(':IVA',$IVA);
+            if ($imagen != null) {
+                $query->bindParam(':imagen',$imagen);
+            }
+
+            return $this->conn->execute($query);
         }
 
         // Con esta otra funcion se busca entre los productos en la base de datos
         function search($id=null,$n=0,$limite=9){
             // Al igual que la clase anterior, puede buscar segun muchos valores o solo algunos
-            $querys = [];
             $query = "SELECT * FROM productos";
 
             if ($id != null){
@@ -62,7 +77,7 @@
         function search_stock($id){
             $query = "SELECT SUM(restante) as stock FROM lotes WHERE id_producto=$id";
 
-            $r = $this->conn->query($query)->fetch_assoc()['stock'];
+            $r = $this->conn->query($query)->fetch()['stock'];
             return $r ?: 0;
         }
         function search_like($nombre){
@@ -71,33 +86,32 @@
             return $this->conn->query($query);
         }
         function search_luis(){
-            $query = "SELECT id, nombre,(SELECT SUM(restante) FROM lotes Where id_producto = p.id) as stock,precio_venta,IVA FROM `productos` as p ORDER BY id";
+            $query = "SELECT id, nombre,(SELECT SUM(existencia) FROM lotes Where id_producto = p.id) as stock,precio_venta,IVA FROM `productos` as p ORDER BY id";
 
-            return $this->conn->query($query);
+            return $this->conn->query($query)->fetchAll();
         }
 
-        function search_targeta(){
-            $query = "SELECT id, imagen, nombre,(SELECT SUM(existencia) FROM lotes WHERE productos.id = id_producto) AS existencia FROM productos";
+        function search_targeta($n, $limite){
+            $query = "SELECT id, imagen, nombre,(SELECT SUM(existencia) FROM lotes WHERE productos.id = id_producto) AS existencia FROM productos LIMIT $limite OFFSET $n";
 
             return $this->conn->query($query)->fetchAll();
         }
 
         function search_inventario(){
-            $query = "SELECT id,descripcion,(SELECT SUM(cantidad) FROM lotes WHERE productos.id = id_producto) AS entradas,(SELECT SUM(cantidad) - (SELECT SUM(restante) FROM lotes WHERE productos.id = id_producto) FROM lotes WHERE productos.id = id_producto) AS salidas, (SELECT SUM(restante) FROM lotes WHERE productos.id = id_producto) AS existencia, precio_venta,(SELECT SUM(restante) FROM lotes WHERE productos.id = id_producto) * precio_venta AS Total FROM productos";
+            $query = "SELECT id,marca,(SELECT SUM(cantidad) FROM lotes WHERE productos.id = id_producto) AS entradas,(SELECT SUM(cantidad) - (SELECT SUM(existencia) FROM lotes WHERE productos.id = id_producto) FROM lotes WHERE productos.id = id_producto) AS salidas, (SELECT SUM(existencia) FROM lotes WHERE productos.id = id_producto) AS existencia, precio_venta,(SELECT SUM(existencia) FROM lotes WHERE productos.id = id_producto) * precio_venta AS Total FROM productos";
 
-            return $this->conn->query($query);
+            return $this->conn->query($query)->fetchAll();
         }
 
         function search_ValorInventario(){
-            $query = "SELECT SUM((SELECT SUM(restante) FROM lotes WHERE productos.id = id_producto) * precio_venta) AS Total FROM productos";
+            $query = "SELECT SUM((SELECT SUM(existencia) FROM lotes WHERE productos.id = id_producto) * precio_venta) AS Total FROM productos";
 
-            return $this->conn->query($query);
+            return $this->conn->query($query)->fetchAll();
         }
 
-        #######  SELECT id,(SELECT SUM(restante) FROM lotes Where id_producto = p.id) FROM `productos` as p
         function COUNT(){
             
-            return $this->conn->query("SELECT COUNT(*) as 'total' FROM productos")->fetch_assoc()['total'];
+            return $this->conn->query("SELECT COUNT(*) as 'total' FROM productos")->fetch()['total'];
         }
     }
 ?>

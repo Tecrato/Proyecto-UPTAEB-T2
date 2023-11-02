@@ -44,7 +44,7 @@
             return $consulta->fetchAll();
         }
         function COUNT(){
-            return $this->conn->query("SELECT COUNT(*) 'total' FROM usuarios")->fetch_assoc()['total'];
+            return $this->conn->query("SELECT COUNT(*) 'total' FROM usuarios")->fetchAll()['total'];
         }
     }
 

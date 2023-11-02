@@ -20,18 +20,24 @@
         // con esta funcion se elimina un elemento dependiendo de su id
         function DELETE($id) {
 
-            $query = "DELETE FROM proveedores WHERE ID=$id";
+            $query = $this->conn->prepare("DELETE FROM proveedores WHERE ID=:id");
             
-            $this->conn->query($query);
+            $query->execute([':id'=>$id]);
         }
 
         // Con esta funcion podremos cambiar un producto segun su ID con los valores que le pasemos
         function UPDATE($id,$nombre,$razon_social,$rif,$telefono,$correo,$direccion){
             
-            $query = "UPDATE proveedores SET nombre='$nombre', razon_social='$razon_social', rif='$rif', telefono=$telefono, correo='$correo', direccion='$direccion'";
-            $query = $query . " WHERE ID=$id";
+            $query = $this->conn->prepare("UPDATE proveedores SET nombre=?, razon_social=?, rif=?, telefono=?, correo=?, direccion=? WHERE ID=?");
         
-            return $this->conn->query($query); //$conn->fetch_assoc() // Y devuelve el resultado al controlador
+            $query->bindParam(1,$nombre);
+            $query->bindParam(2,$razon_social);
+            $query->bindParam(3,$rif);
+            $query->bindParam(4,$telefono);
+            $query->bindParam(5,$correo);
+            $query->bindParam(6,$direccion);
+            $query->bindParam(7,$id);
+            $query->execute();
         }
 
         function search_detalles_producto($id){

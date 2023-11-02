@@ -10,7 +10,7 @@
     if ($tipo == 'producto'){
         $clase = new Producto(); // Llama al modelo y le manda la instruccion
         $clase_l = new Lote(); // Llama al modelo y le manda la instruccion
-        $imagen = array_slice($clase->search($_POST['ID'])->fetch_assoc(), 0)['imagen'];
+        $imagen = $clase->search($_POST['ID'])->fetchAll()[0]['imagen'];
         if ($imagen != "banner_productos.png"){
             unlink("../../Media/imagenes/".$imagen);
         }

@@ -2,10 +2,17 @@
 
     class Cliente extends DB{
 
-        function agregar($nombre,$cedula,$Documento,$apellido,$Telefono,$Direccion){
-            $query = "INSERT INTO clientes (Nombre, Cedula, Apellido, Documento, Direccion, Telefono) VALUES('$nombre', '$cedula','$apellido','$Documento','$Telefono','$Direccion')";
+        function agregar($nombre,$cedula,$documento,$apellido,$telefono,$direccion){
+            $query = $this->conn->prepare("INSERT INTO clientes (nombre, cedula, apellido, documento, direccion, telefono) VALUES(?, ?,?,?,?,?)");
             
-            $this->conn->query($query);
+            $query->bindParam(1,$nombre);
+            $query->bindParam(2,$cedula);
+            $query->bindParam(3,$documento);
+            $query->bindParam(4,$apellido);
+            $query->bindParam(5,$telefono);
+            $query->bindParam(6,$direccion);
+
+            $query->execute();
         }
 
 
@@ -19,8 +26,15 @@
         // Con esta funcion podremos cambiar un cliente segun su ID con los valores que le pasemos
         function UPDATE($id,$nombre,$cedula,$apellido,$Telefono,$Direccion){
             
-            $query = "UPDATE clientes SET nombre='".$nombre."', cedula=".$cedula.", apellido='".$apellido."', Telefono=".$Telefono.", Direccion='".$Direccion."' WHERE id=$id";
+            $query = $this->conn->prepare("UPDATE clientes SET nombre=?, cedula=?, apellido=?, Telefono=?, Direccion=? WHERE id=?");
             
+            $query->bindParam(1,$nombre);
+            $query->bindParam(2,$cedula);
+            $query->bindParam(3,$documento);
+            $query->bindParam(4,$apellido);
+            $query->bindParam(5,$telefono);
+            $query->bindParam(6,$direccion);
+            $query->bindParam(7,$id);
             
             return $this->conn->query($query); //$conn->fetch_assoc() // Y devuelve el resultado al controlador
         }
@@ -40,7 +54,7 @@
                 $query = $query . " LIMIT 9 OFFSET ".$n;
             }
             
-            return $this->conn->query($query);
+            return $this->conn->query($query)->fetchAll();
         }
         function search_like($nombre){
             $query = "SELECT * FROM clientes WHERE nombre LIKE '%$nombre%'";

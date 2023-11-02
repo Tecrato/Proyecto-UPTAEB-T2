@@ -1,10 +1,29 @@
 //creamos una funcion que nos cargue todas las tarjetas y sus modales, dependiendo de que modal desea abrir
+var page = 0
+
+function cambiar_pagina_php(dir) {
+  // window.location.href = `Controller/funcs_ajax/cambiar_pagina.php?dir=` + dir + "&p="+num_page+"&type="+ type_page;
+  $.ajax({
+    url:`Controller/funcs_ajax/cambiar_pagina.php?dir=` + dir + "&p="+num_page+"&type="+ type_page+"&n_p="+ 9, // en n_p colocas el numero de tarjetas que se van a visualizar, en las tarjetas viejas era 9
+    type:"GET",
+    success: response => {
+      page=parseInt(response)
+      cargarTargetProduct()
+    }
+  }
+  )
+}
+
 const cargarTargetProduct = () => {
   //hacemos la petion ajax
   $.ajax({
-    url: "Controller/funcs_ajax/searchTarjeta.php",
+    url: "Controller/funcs_ajax/search.php",
     type: "POST",
-    // data: { randomnautica: "tarjeta" },
+    data: {
+      randomnautica: "tarjeta_productos",
+      n:page,
+      limite:9 // Aca tambien va ese numero => el numero de tarjetas que se van a imprimir
+    },
     success: function (response) {
       //convertimos la respuesta en un objeto
       let json = JSON.parse(response);

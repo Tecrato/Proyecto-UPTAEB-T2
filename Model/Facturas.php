@@ -14,9 +14,14 @@
 		}
 
 		function agregar($registro,$id_producto,$cantidad, $vendedor){
-            $query = "INSERT INTO factura VALUES($registro, $id_producto, $cantidad, $vendedor)";
+            $query = $this->conn->prepare("INSERT INTO factura VALUES(null, ?, ?, ?, ?)");
+
+            $query->bindParam(1,$registro);
+            $query->bindParam(2,$id_producto);
+            $query->bindParam(3,$cantidad);
+            $query->bindParam(4,$vendedor);
             
-            $this->conn->query($query);
+            $query->execute();
 		}
         function borrar($id_registro=False) {
 

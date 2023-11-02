@@ -340,22 +340,22 @@ contenedor.innerHTML += modal;
 
 const datos = [
   {
-    id: "1",
+    id: 1,
     nombre: "Alejo",
     cedula: "000000000",
   },
   {
-    id: "2",
+    id: 2,
     nombre: "Luis",
     cedula: "30087582",
   },
   {
-    id: "3",
+    id: 3,
     nombre: "DALTO",
     cedula: "251616816",
   },
   {
-    id: "4",
+    id: 4,
     nombre: "Bryan",
     cedula: "25555555",
   },

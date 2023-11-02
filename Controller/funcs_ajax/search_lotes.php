@@ -16,7 +16,7 @@
     }
     $lista=array();
 
-    for ($i=0; $i < $count($result); $i++) { 
+    for ($i=0; $i < count($result); $i++) { 
         $row = $result[$i];
         array_push($lista, $row);
     }
