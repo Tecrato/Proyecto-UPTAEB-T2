@@ -43,8 +43,8 @@
     }
     elseif ($tipo === 'cliente'){
         require('../../Model/Clientes.php');
-        $clase = new Cliente(); // Llama al modelo y le manda la instruccion
-        $clase->UPDATE($_POST["ID"],$_POST["nombre"],$_POST["cedula"],$_POST["Documento"],$_POST["telefono"],$_POST["direccion"]);
+        $clase = new Cliente($_POST["ID"],$_POST["nombre"],$_POST["cedula"],$_POST["Documento"],$_POST["telefono"],$_POST["direccion"]);
+        $clase->UPDATE();
         header('Location:../../Clientes');
     }
 ?>

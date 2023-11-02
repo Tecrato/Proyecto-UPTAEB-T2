@@ -51,7 +51,7 @@
     }
     elseif ($tipo === 'cliente'){
         require('../../Model/Clientes.php');
-        $clase = new Cliente($_POST["nombre"],$_POST["apellido"],$_POST["documento"],$_POST["cedula"],$_POST["direccion"],$_POST["telefono"]); 
+        $clase = new Cliente(null,$_POST["nombre"],$_POST["apellido"],$_POST["documento"],$_POST["cedula"],$_POST["direccion"],$_POST["telefono"]); 
         $clase->agregar();
         header('Location:../../Clientes'); // Y vuelve a la pagina donde estaba antes
     };

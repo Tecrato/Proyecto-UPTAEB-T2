@@ -24,12 +24,12 @@
         function agregar(){
             $query = $this->conn->prepare("INSERT INTO clientes (nombre, cedula, apellido, documento, direccion, telefono) VALUES(?, ?,?,?,?,?)");
             
-            $query->bindParam(1,$this->nombre);
-            $query->bindParam(2,$this->cedula);
-            $query->bindParam(3,$this->documento);
-            $query->bindParam(4,$this->apellido);
-            $query->bindParam(6,$this->direccion);
-            $query->bindParam(5,$this->telefono);
+            $query->bindParam(1,$this->nombre, PDO::PARAM_STR);
+            $query->bindParam(2,$this->cedula, PDO::PARAM_STR);
+            $query->bindParam(3,$this->documento, PDO::PARAM_STR);
+            $query->bindParam(4,$this->apellido, PDO::PARAM_STR);
+            $query->bindParam(5,$this->direccion, PDO::PARAM_STR);
+            $query->bindParam(6,$this->telefono, PDO::PARAM_STR);
 
             $query->execute();
         }
@@ -37,11 +37,11 @@
 
         // con esta funcion se elimina un elemento dependiendo de su id
         function DELETE() {
-            $query = "DELETE FROM clientes WHERE ID=?";
+            $query = $this->conn->prepare("DELETE FROM clientes WHERE ID=?");
 
             $query->bindParam(1,$this->id);
             
-            $this->conn->query($query);
+            $query->execute();
         }
 
         // Con esta funcion podremos cambiar un cliente segun su ID con los valores que le pasemos
@@ -49,15 +49,15 @@
             
             $query = $this->conn->prepare("UPDATE clientes SET nombre=?, cedula=?, apellido=?, Telefono=?, Direccion=? WHERE id=?");
             
-            $query->bindParam(1,$nombre);
-            $query->bindParam(2,$cedula);
-            $query->bindParam(3,$documento);
-            $query->bindParam(4,$apellido);
-            $query->bindParam(5,$telefono);
-            $query->bindParam(6,$direccion);
-            $query->bindParam(7,$id);
+            $query->bindParam(1,$this->nombre);
+            $query->bindParam(2,$this->cedula);
+            $query->bindParam(3,$this->documento);
+            $query->bindParam(4,$this->apellido);
+            $query->bindParam(5,$this->telefono);
+            $query->bindParam(6,$this->direccion);
+            $query->bindParam(7,$this->id);
             
-            return $this->conn->query($query); //$conn->fetch_assoc() // Y devuelve el resultado al controlador
+            return $query->execute(); //$conn->fetch_assoc() // Y devuelve el resultado al controlador
         }
 
         // Con esta otra funcion se busca entre los clientes en la base de datos
@@ -68,9 +68,8 @@
             if ($this->id != null){
                 $query = $query." WHERE id=:id";
             }
-            if($n != 0) {
-                $n = $n*$limite;
-            }
+            $n = $n*$limite;
+            
 
             $query = $query . " LIMIT :l OFFSET :n";
             $consulta = $this->conn->prepare($query);
