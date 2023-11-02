@@ -1,30 +1,51 @@
 <?php
 
     class Cliente extends DB{
+        private $id;
+        private $nombre;
+        private $cedula;
+        private $documento;
+        private $apellido;
+        private $telefono;
+        private $direccion;
 
-        function agregar($nombre,$cedula,$documento,$apellido,$telefono,$direccion){
+        function __construct($id=null, $nombre=null,$cedula=null,$documento=null,$apellido=null,$direccion=null,$telefono=null){
+            $this->id = $id;
+            $this->nombre = $nombre;
+            $this->cedula = $cedula;
+            $this->documento = $documento;
+            $this->apellido = $apellido;
+            $this->telefono = $telefono;
+            $this->direccion = $direccion;
+            DB::__construct();
+
+        }
+
+        function agregar(){
             $query = $this->conn->prepare("INSERT INTO clientes (nombre, cedula, apellido, documento, direccion, telefono) VALUES(?, ?,?,?,?,?)");
             
-            $query->bindParam(1,$nombre);
-            $query->bindParam(2,$cedula);
-            $query->bindParam(3,$documento);
-            $query->bindParam(4,$apellido);
-            $query->bindParam(5,$telefono);
-            $query->bindParam(6,$direccion);
+            $query->bindParam(1,$this->nombre);
+            $query->bindParam(2,$this->cedula);
+            $query->bindParam(3,$this->documento);
+            $query->bindParam(4,$this->apellido);
+            $query->bindParam(6,$this->direccion);
+            $query->bindParam(5,$this->telefono);
 
             $query->execute();
         }
 
 
         // con esta funcion se elimina un elemento dependiendo de su id
-        function DELETE($id) {
-            $query = "DELETE FROM clientes WHERE ID=$id";
+        function DELETE() {
+            $query = "DELETE FROM clientes WHERE ID=?";
+
+            $query->bindParam(1,$this->id);
             
             $this->conn->query($query);
         }
 
         // Con esta funcion podremos cambiar un cliente segun su ID con los valores que le pasemos
-        function UPDATE($id,$nombre,$cedula,$apellido,$Telefono,$Direccion){
+        function UPDATE(){
             
             $query = $this->conn->prepare("UPDATE clientes SET nombre=?, cedula=?, apellido=?, Telefono=?, Direccion=? WHERE id=?");
             
@@ -40,21 +61,29 @@
         }
 
         // Con esta otra funcion se busca entre los clientes en la base de datos
-        function search($id=null,$n=0,$limite=9){
+        function search($n=0,$limite=9){
             // Al igual que la clase anterior, puede buscar segun muchos valores o solo algunos
-            $querys = [];
             $query = "SELECT * FROM clientes";
 
-            if ($id != null){
-                $query = $query." WHERE id=$id";
+            if ($this->id != null){
+                $query = $query." WHERE id=:id";
+            }
+            if($n != 0) {
+                $n = $n*$limite;
             }
 
-            if($limite) {
-                $n = $n*$limite;
-                $query = $query . " LIMIT 9 OFFSET ".$n;
-            }
+            $query = $query . " LIMIT :l OFFSET :n";
+            $consulta = $this->conn->prepare($query);
+
+
+            $consulta->bindParam(':l',$limite, PDO::PARAM_INT);
+            $consulta->bindParam(':n',$n, PDO::PARAM_INT);
             
-            return $this->conn->query($query)->fetchAll();
+            if ($this->id != null){
+                $consulta->bindParam(':id',$this->id, PDO::PARAM_INT);
+            }
+            $consulta->execute();
+            return $consulta->fetchAll();
         }
         function search_like($nombre){
             $query = "SELECT * FROM clientes WHERE nombre LIKE '%$nombre%'";

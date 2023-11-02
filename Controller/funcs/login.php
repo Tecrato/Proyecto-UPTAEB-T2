@@ -7,10 +7,10 @@
     $correo = $_POST["correo"];
     $password = $_POST["contraseña"];
     
-    $c = new Usuarios(); // Llamamos al modelos y se busca el usuario
-    $result = $c->search(null,null,null ,$correo,$password)->fetchAll();
+    $c = new Usuarios(null,null,$correo,$password); // Llamamos al modelos y se busca el usuario
+    $result = $c->login();
 
-    // print_r($result[0]);
+    print_r($result);
     if (count($result) > 0 and $_POST["correo"] and $_POST["contraseña"]) { // si hay un resultado entonces lo deja pasar
         $row = $result[0];
         $_SESSION['usuario'] = $row['nombre']; // Y tambien guarda el nombre para despues
@@ -27,8 +27,7 @@
         }
         header('Location: ../../Inicio'); // y pa' la pagina que se va
     } else {
-        // print_r($result);
-        header('Location: ../../login'); // Sino, lo devuelve al login
+        header('Location: ../../login?err=1'); // Sino, lo devuelve al login
     }
 
 ?>

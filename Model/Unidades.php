@@ -1,6 +1,11 @@
 <?php
 	class Unidad extends DB {
-		public function search($n=0){
+		function __construct($id=null, $nombre=null){
+			DB::__construct();
+			$this->id = $id;
+			$this->nombre = $nombre;
+		}
+		function search($n=0){
 			$query = "SELECT * FROM unidades";
 			return $this->conn->query($query)->fetchAll();
 		}

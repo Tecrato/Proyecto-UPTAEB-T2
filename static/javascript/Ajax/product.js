@@ -623,6 +623,7 @@ btnAgg.addEventListener("click", () => {
       type: "POST",
       data: { randomnautica: "categoria" },
       success: function (response) {
+        console.log(response)
         let options = ``;
         let json = JSON.parse(response);
         json.lista.forEach((date) => {
