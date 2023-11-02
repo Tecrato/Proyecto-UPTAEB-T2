@@ -94,64 +94,6 @@
                 </div>
             </div>
 
-
-            <!-- ****************** Modal de registro ****************** -->
-            <!-- <div id="modal-register-product" uk-modal>
-                <div class="uk-modal-dialog">
-                    <button class="uk-modal-close-default close" type="button" uk-close></button>
-                    <div class="uk-modal-header">
-                        <h2 class="uk-modal-title">Registro de productos</h2>
-                    </div>
-                    <div class="uk-modal-body ">
-                        <form id="formAggProduct" class="uk-grid-small" uk-grid method="POST" action="" enctype="multipart/form-data">
-                            <input type="text" name="tipo" value='producto' id="" style="display:none">
-                            <div class="uk-width-1-2">
-                                <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" required>
-                            </div>
-                            <div class="uk-width-1-2@s">
-                                <input class="uk-input" type="text" placeholder="Descripción" aria-label="50" name="descripcion">
-                            </div>
-                            <div class="uk-width-1-2@s">
-                                <select id="selectCat" class="uk-select" id="form-stacked-select" name="categoria" required>
-                                    <option value="" disabled selected>Categoria</option>
-                                </select>
-                            </div>
-                            <div class="uk-width-1-2@s">
-                                <select id="selectUni" class="uk-select" id="form-stacked-select" name="unidad" required>
-                                    <option value="" disabled selected>Unidad</option>
-
-                                </select>
-                            </div>
-                            <div class="uk-width-1-2@s">
-                                <input class="uk-input" type="number" step="0.1" placeholder="precio_venta" aria-label="25" name="precio_venta" required>
-                            </div>
-                            <div class="uk-width-1-2@s">
-                                <input class="uk-input" type="number" placeholder="Stock mínimo" aria-label="25" name="stock_min" required>
-                            </div>
-                            <div class="uk-width-1-2@s">
-                                <input class="uk-input" type="number" placeholder="Stock maximo" aria-label="25" name="stock_max" required>
-                            </div>
-                            <div class="uk-width-1-2@s">
-                                <label class="uk-margin-medium-right" for="">IVA</label>
-                                <label><input class="uk-radio" type="radio" name="IVA" value=0 checked> Exento</label>
-                                <label><input class="uk-radio" type="radio" name="IVA" value=1> No Exento</label>
-                            </div>
-                            <div class="uk-width-1-2@s">
-                                <div uk-form-custom>
-                                    <input type="file" accept="image/*" aria-label="Custom controls" name="imagen1">
-                                    <button class="uk-button uk-button-default" type="button" tabindex="-1">Selecciona Imagen</button>
-                                </div>
-                            </div>
-                            <input type="submit" id="subirxd" style="display:none">
-                        </form>
-                    </div>
-                    <div class="uk-modal-footer uk-text-right">
-                        <button class="uk-button uk-button-default uk-modal-close cancelar" type="button">Cancelar</button>
-                        <label class="uk-button uk-button-secondary subir" type="submit" for="subirxd">Guardar</label>
-                    </div>
-                </div>
-            </div> -->
-
         </article>
     </section>
 
@@ -178,12 +120,4 @@
 
 </main>
 
-<?php require("../View/complementos/footer.php"); 
-
-//con este for, se cargan los productos pero con php
-// for ($i=0; $i <  $result->num_rows; $i++) {
-//         $row = $result->fetch_assoc();
-//         include 'complementos/tarjeta_producto.php';
-
-//     };
-?>
+<?php require("../View/complementos/footer.php");?>
