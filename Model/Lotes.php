@@ -59,20 +59,20 @@
 			$query = $this->conn->query("SELECT imagen,nombre,marca,(SELECT nombre FROM categoria WHERE productos.id_categoria = id) AS categoria,(SELECT SUM(existencia) FROM lotes WHERE productos.id = id_producto GROUP BY id_producto) AS existencia,precio_venta FROM productos WHERE id = $id_producto");
 			return $query->fetchAll();
 		}
-		function descontar($id_producto, $cantidad){
+		function descontar(){
 
-			$lotes = $this->search(null, $id_producto, 'fecha_vencimiento ASC');
+			$lotes = $this->search(null, $this->id_producto, 'fecha_vencimiento ASC');
 
-			for ($i = 0; $cantidad > 0; $i++) {
+			for ($i = 0; $this->cantidad > 0; $i++) {
 				$lote = $lotes[$i];
-				if ($lote['existencia'] > $cantidad) {
-					$query = "UPDATE lotes SET existencia=" . $lote['existencia'] - $cantidad . " WHERE id=" . $lote['id'];
+				if ($lote['existencia'] > $this->cantidad) {
+					$query = "UPDATE lotes SET existencia=" . $lote['existencia'] - $this->cantidad . " WHERE id=" . $lote['id'];
 					$this->conn->query($query);
-					$cantidad = 0;
+					$this->cantidad = 0;
 				} else {
 					$query = "UPDATE lotes SET existencia=0 WHERE id=" . $lote['id'];
 					$this->conn->query($query);
-					$cantidad -= $lote['existencia'];
+					$this->cantidad -= $lote['existencia'];
 				}
 			}
 		}

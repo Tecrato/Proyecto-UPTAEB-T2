@@ -780,14 +780,14 @@ $.ajax({
 
       //este json sera el que se envie al server para insertar los datos de la factura
       let json = {
-        idCasher: parseInt(idCasher),
-        idClient: parseInt(idClient),
-        TPago: tipoPago,
-        tIva: parseFloat(document.getElementById("iva").textContent).toFixed(2),
-        pTotal: parseFloat(
+        id_usuario: parseInt(idCasher),
+        id_cliente: parseInt(idClient),
+        metodo_pago: tipoPago,
+        IVA: parseFloat(document.getElementById("iva").textContent).toFixed(2),
+        monto_final: parseFloat(
           document.getElementById("totalFact").textContent
         ).toFixed(2),
-        details: [],
+        detalles: [],
       };
 
       if (tipoPago == "") {
@@ -823,10 +823,10 @@ $.ajax({
           );
 
           //insertamos los datos de los productos por cada tr que haya en detalles de factura
-          json.details.push({
-            idProduct: algo,
+          json.detalles.push({
+            id_product: algo,
             cantidad: algo2,
-            precioT: algo5,
+            precio: algo5,
           });
         }
 
