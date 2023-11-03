@@ -37,11 +37,11 @@
         }
 
         // con esta funcion se elimina un elemento dependiendo de su id
-        function DELETE($id) {
+        function DELETE() {
 
             $query = $this->conn->prepare("DELETE FROM proveedores WHERE ID=:id");
             
-            $query->execute([':id'=>$id]);
+            $query->execute([':id'=>$this->id]);
         }
 
         // Con esta funcion podremos cambiar un producto segun su ID con los valores que le pasemos

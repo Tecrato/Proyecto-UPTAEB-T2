@@ -57,7 +57,7 @@
             $query->bindParam(6,$this->direccion);
             $query->bindParam(7,$this->id);
             
-            return $query->execute(); //$conn->fetch_assoc() // Y devuelve el resultado al controlador
+            return $query->execute(); 
         }
 
         // Con esta otra funcion se busca entre los clientes en la base de datos

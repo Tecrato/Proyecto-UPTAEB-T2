@@ -20,11 +20,11 @@
         // header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }
     if ($tipo == 'proveedor'){
-        $clase2 = new Lote(); // Llama al modelo y le manda la instruccion
-        $clase2->borrar($_POST['ID']);
+        $clase2 = new Lote(id_proveedor:$_POST['ID']); // Llama al modelo y le manda la instruccion
+        $clase2->borrar();
         
-        $clase = new Proveedor(); // Llama al modelo y le manda la instruccion
-        $clase->DELETE($_POST['ID']);
+        $clase = new Proveedor($_POST['ID']); // Llama al modelo y le manda la instruccion
+        $clase->DELETE();
 
         header('Location:../../Proveedores'); // Y vuelve a la pagina donde estaba antes
     }
