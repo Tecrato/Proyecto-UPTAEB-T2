@@ -2,18 +2,37 @@
 
     // require('Conexion.php');
     class Proveedor extends DB{
+        private $id;
+        private $nombre;
+        private $razon_social;
+        private $rif;
+        private $telefono;
+        private $correo;
+        private $direccion;
+
+        function __construct($id=null, $nombre=null,$razon_social=null,$rif=null,$telefono=null,$correo=null,$direccion=null){
+            $this->id = $id;
+            $this->nombre = $nombre;
+            $this->razon_social = $razon_social;
+            $this->rif = $rif;
+            $this->telefono = $telefono;
+            $this->correo = $correo;
+            $this->direccion = $direccion;
+            DB::__construct();
+
+        }
 
         // esta funcion agrega a la tabla productos un objeto con los valores que se le estan pasando
-        function agregar($nombre,$razon_social,$rif,$telefono,$correo,$direccion) {
+        function agregar() {
             
             $query = $this->conn->prepare("INSERT INTO proveedores VALUES(null,?, ?, ?, ?, ?, ?)");
 
-            $query->bindParam(1,$nombre);
-            $query->bindParam(2,$razon_social);
-            $query->bindParam(3,$rif);
-            $query->bindParam(4,$telefono);
-            $query->bindParam(5,$correo);
-            $query->bindParam(6,$direccion);
+            $query->bindParam(1,$this->nombre);
+            $query->bindParam(2,$this->razon_social);
+            $query->bindParam(3,$this->rif);
+            $query->bindParam(4,$this->telefono);
+            $query->bindParam(5,$this->correo);
+            $query->bindParam(6,$this->direccion);
             $query->execute();
         }
 
@@ -26,17 +45,17 @@
         }
 
         // Con esta funcion podremos cambiar un producto segun su ID con los valores que le pasemos
-        function UPDATE($id,$nombre,$razon_social,$rif,$telefono,$correo,$direccion){
+        function UPDATE(){
             
             $query = $this->conn->prepare("UPDATE proveedores SET nombre=?, razon_social=?, rif=?, telefono=?, correo=?, direccion=? WHERE ID=?");
         
-            $query->bindParam(1,$nombre);
-            $query->bindParam(2,$razon_social);
-            $query->bindParam(3,$rif);
-            $query->bindParam(4,$telefono);
-            $query->bindParam(5,$correo);
-            $query->bindParam(6,$direccion);
-            $query->bindParam(7,$id);
+            $query->bindParam(1,$this->nombre);
+            $query->bindParam(2,$this->razon_social);
+            $query->bindParam(3,$this->rif);
+            $query->bindParam(4,$this->telefono);
+            $query->bindParam(5,$this->correo);
+            $query->bindParam(6,$this->direccion);
+            $query->bindParam(7,$this->id);
             $query->execute();
         }
 

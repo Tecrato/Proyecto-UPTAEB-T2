@@ -1,15 +1,33 @@
 <?php
 	class Lote extends DB{
+        private $id;
+        private $id_producto;
+        private $id_proveedor;
+        private $cantidad;
+        private $fecha_c;
+        private $fecha_v;
+        private $precio_compra;
 
-		function agregar($id_producto, $id_proveedor, $cantidad, $fecha_c, $fecha_v, $precio_compra){
-			$query = $this->conn->prepare("INSERT INTO lotes VALUES(null, :id_producto, :id_proveedor, :cantidad,:fecha_c, :fecha_v, :precio_compra, :cantidad)");
-			$query->bindParam(':id_producto',$id_producto);
-			$query->bindParam(':id_proveedor',$id_proveedor);
-			$query->bindParam(':cantidad',$cantidad);
-			$query->bindParam(':fecha_c',$fecha_c);
-			$query->bindParam(':fecha_v',$fecha_v);
-			$query->bindParam(':precio_compra',$precio_compra);
-			$query->bindParam(':cantidad',$cantidad);
+        function __construct($id=null, $id_producto=null,$id_proveedor=null,$cantidad=null,$fecha_c=null,$fecha_v=null,$precio_compra=null){
+            $this->id = $id;
+            $this->id_producto = $id_producto;
+            $this->id_proveedor = $id_proveedor;
+            $this->cantidad = $cantidad;
+            $this->fecha_c = $fecha_c;
+            $this->fecha_v = $fecha_v;
+            $this->precio_compra = $precio_compra;
+            DB::__construct();
+        }
+
+		function agregar(){
+			$query = $this->conn->prepare("INSERT INTO lotes VALUES(null, ?, ?, ?,?, ?, ?, ?)");
+			$query->bindParam(1,$this->id_producto);
+			$query->bindParam(2,$this->id_proveedor);
+			$query->bindParam(3,$this->cantidad);
+			$query->bindParam(4,$this->fecha_c);
+			$query->bindParam(5,$this->fecha_v);
+			$query->bindParam(6,$this->precio_compra);
+			$query->bindParam(7,$this->cantidad);
 
 			$query->execute();
 		}
@@ -58,14 +76,14 @@
 				}
 			}
 		}
-		function borrar($id_proveedor = False, $id_producto = False){
+		function borrar(){
 
-			if ($id_proveedor) {
+			if ($this->id_proveedor != null) {
 				$query = $this->conn->prepare("DELETE FROM lotes WHERE id_proveedor=:id_proveedor");
-				$query->bindParam(':id_proveedor',$id_proveedor);
-			} elseif ($id_producto) {
+				$query->bindParam(':id_proveedor',$this->id_proveedor, PDO::PARAM_INT);
+			} elseif ($this->id_producto != null) {
 				$query = $this->conn->prepare("DELETE FROM lotes WHERE id_producto=:id_producto");
-				$query->bindParam(':id_producto',$id_producto);
+				$query->bindParam(':id_producto',$this->id_producto, PDO::PARAM_INT);
 			} else {
 				throw new Exception("Error, debe pasar el id de un proveedor o de un producto", 1);
 			}

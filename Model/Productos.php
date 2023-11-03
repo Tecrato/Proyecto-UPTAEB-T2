@@ -93,17 +93,22 @@
 
             $query = $query . " LIMIT :l OFFSET :n";
 
+            $consulta = $this->conn->prepare($query);
+
             $consulta->bindParam(':l',$limite, PDO::PARAM_INT);
             $consulta->bindParam(':n',$n, PDO::PARAM_INT);
-            
-            return $query->execute();
+            if ($this->id != null){
+                $consulta->bindParam(':id',$this->id, PDO::PARAM_INT);
+            }
+            $consulta->execute();
+            return $consulta->fetchAll();
         }
         function search_stock(){
             $query = $this->conn->prepare("SELECT SUM(restante) as stock FROM lotes WHERE id_producto=:id");
 
             $query->bindParam(':id',$this->id, PDO::PARAM_INT);
 
-            $query->execute()
+            $query->execute();
             $r = $query->fetch()['stock'];
             return $r ?: 0;
         }

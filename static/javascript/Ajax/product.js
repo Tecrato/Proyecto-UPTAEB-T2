@@ -275,6 +275,7 @@ const cargarTargetProduct = () => {
               contentType: false,
               success: function (response) {
                 //en la respuesta le mostramos un mensaje de producto creado correctamente
+                console.log(response)
                 UIkit.notification({
                   message:
                     "<span uk-icon='icon: check'></span> Lote agregado correctamente ",
