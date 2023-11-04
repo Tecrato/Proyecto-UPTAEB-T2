@@ -17,7 +17,7 @@
             $nick = null;
         }
         try {
-            $clase->UPDATE($_POST['ID'],$_POST["categoria"],$_POST["unidad"],$_POST["nombre"],$_POST["descripcion"],$nick,$_POST["stock_min"],$_POST["stock_max"],$_POST["precio_venta"],$_POST["IVA"]);
+            $clase->actualizar($_POST['ID'],$_POST["categoria"],$_POST["unidad"],$_POST["nombre"],$_POST["descripcion"],$nick,$_POST["stock_min"],$_POST["stock_max"],$_POST["precio_venta"],$_POST["IVA"]);
         } catch (Exception $e) {
             echo $e;
             die();
@@ -38,13 +38,13 @@
     elseif ($tipo === 'proveedor'){
         require('../../Model/Proveedores.php');
         $clase = new Proveedor(); // Llama al modelo y le manda la instruccion
-        $clase->UPDATE($_POST["ID"],$_POST["nombre"],$_POST["razon_social"],$_POST["rif"],$_POST["telefono"],$_POST["correo"],$_POST["direccion"]);
+        $clase->actualizar($_POST["ID"],$_POST["nombre"],$_POST["razon_social"],$_POST["rif"],$_POST["telefono"],$_POST["correo"],$_POST["direccion"]);
         header('Location:../../Proveedores');
     }
     elseif ($tipo === 'cliente'){
         require('../../Model/Clientes.php');
         $clase = new Cliente($_POST["ID"],$_POST["nombre"],$_POST["cedula"],$_POST["Documento"],$_POST["telefono"],$_POST["direccion"]);
-        $clase->UPDATE();
+        $clase->actualizar();
         header('Location:../../Clientes');
     }
 ?>

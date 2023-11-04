@@ -17,7 +17,7 @@
             DB::__construct();
 
         }
-		function search($id=null,$n=0,$limite=9,$order='id ASC'){
+		function search($n=0,$limite=9,$order='id ASC'){
 			$query = "SELECT * FROM registro_ventas";
 
             if ($this->id != null){

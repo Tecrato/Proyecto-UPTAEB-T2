@@ -16,21 +16,21 @@
             unlink("../../Media/imagenes/".$imagen);
         }
         $clase_l->borrar();
-        $clase->DELETE();
-        // header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
+        $clase->borrar();
+        header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }
     if ($tipo == 'proveedor'){
         $clase2 = new Lote(id_proveedor:$_POST['ID']); // Llama al modelo y le manda la instruccion
         $clase2->borrar();
         
         $clase = new Proveedor($_POST['ID']); // Llama al modelo y le manda la instruccion
-        $clase->DELETE();
+        $clase->borrar();
 
         header('Location:../../Proveedores'); // Y vuelve a la pagina donde estaba antes
     }
     if ($tipo == 'cliente'){
         $clase = new Cliente($_POST['ID']); // Llama al modelo y le manda la instruccion
-        $clase->DELETE();
+        $clase->borrar();
 
         header('Location:../../Clientes'); // Y vuelve a la pagina donde estaba antes
     }

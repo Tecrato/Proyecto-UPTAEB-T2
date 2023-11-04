@@ -1,5 +1,7 @@
 <?php
 	class Unidad extends DB {
+		private $id;
+		private $nombre;
 		function __construct($id=null, $nombre=null){
 			DB::__construct();
 			$this->id = $id;

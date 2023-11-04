@@ -36,7 +36,7 @@
 
 
         // con esta funcion se elimina un elemento dependiendo de su id
-        function DELETE() {
+        function borrar() {
             $query = $this->conn->prepare("DELETE FROM clientes WHERE ID=?");
 
             $query->bindParam(1,$this->id);
@@ -45,7 +45,7 @@
         }
 
         // Con esta funcion podremos cambiar un cliente segun su ID con los valores que le pasemos
-        function UPDATE(){
+        function actualizar(){
             
             $query = $this->conn->prepare("UPDATE clientes SET nombre=?, cedula=?, apellido=?, Telefono=?, Direccion=? WHERE id=?");
             
@@ -84,10 +84,11 @@
             $consulta->execute();
             return $consulta->fetchAll();
         }
-        function search_like($nombre){
-            $query = "SELECT * FROM clientes WHERE nombre LIKE '%$nombre%'";
-
-            return $this->conn->query($query);
+        function search_like(){
+            $query = $this->conn->prepare("SELECT * FROM clientes WHERE nombre LIKE %?%");
+            $query->bindParam(1,$this->nombre);
+            $query->execute();
+            return $query->fetchAll();
         }
         function COUNT(){
             return $this->conn->query("SELECT COUNT(*) as 'total' FROM clientes")->fetch_assoc()['total'];

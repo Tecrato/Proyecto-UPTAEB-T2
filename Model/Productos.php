@@ -45,7 +45,7 @@
 
 
         // con esta funcion se elimina un elemento dependiendo de su id
-        function DELETE() {
+        function borrar() {
 
             $query = $this->conn->prepare("DELETE FROM productos WHERE ID=:id");
                 
@@ -55,7 +55,7 @@
         }
 
         // Con esta funcion podremos cambiar un producto segun su ID con los valores que le pasemos
-        function UPDATE(){
+        function actualizar(){
             
             
             $query = "UPDATE productos SET id_categoria=:categoria, id_unidad=:unidades, nombre=:nombre, marca=:descripcion, stock_min=:stock_min, stock_max=:stock_max, precio_venta=:precio_venta, IVA=:IVA";

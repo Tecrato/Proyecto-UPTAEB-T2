@@ -37,7 +37,7 @@
         }
 
         // con esta funcion se elimina un elemento dependiendo de su id
-        function DELETE() {
+        function borrar() {
 
             $query = $this->conn->prepare("DELETE FROM proveedores WHERE ID=:id");
             
@@ -45,7 +45,7 @@
         }
 
         // Con esta funcion podremos cambiar un producto segun su ID con los valores que le pasemos
-        function UPDATE(){
+        function actualizar(){
             
             $query = $this->conn->prepare("UPDATE proveedores SET nombre=?, razon_social=?, rif=?, telefono=?, correo=?, direccion=? WHERE ID=?");
         
@@ -57,13 +57,6 @@
             $query->bindParam(6,$this->direccion);
             $query->bindParam(7,$this->id);
             $query->execute();
-        }
-
-        function search_detalles_producto($id){
-            
-            $query = "SELECT nombre,(SELECT SUM(restante) FROM lotes Where id_proveedor = p.id) as stock,(SELECT MIN(fecha_vencimiento) FROM lotes Where id_proveedor = p.id) as fecha_vencimiento FROM `proveedores` as p WHERE p.id=$id ORDER BY nombre";
-        
-            return $this->conn->query($query); //$conn->fetch_assoc() // Y devuelve el resultado al controlador
         }
 
         // Con esta otra funcion se busca entre los productos en la base de datos
@@ -117,6 +110,14 @@
             $consulta = $this->conn->query($query);
             return $consulta->fetchAll();
         }
+        
+        function search_detalles_producto($id){
+            
+            $query = "SELECT nombre,(SELECT SUM(restante) FROM lotes Where id_proveedor = p.id) as stock,(SELECT MIN(fecha_vencimiento) FROM lotes Where id_proveedor = p.id) as fecha_vencimiento FROM `proveedores` as p WHERE p.id=$id ORDER BY nombre";
+        
+            return $this->conn->query($query); //$conn->fetch_assoc() // Y devuelve el resultado al controlador
+        }
+
         function search_like($nombre){
             $query = "SELECT * FROM proveedores WHERE nombre LIKE '%$nombre%'";
 
