@@ -65,13 +65,13 @@
 		function search($n=0,$limite=9, $order = 'id DESC'){
 			$query = "SELECT * FROM lotes";
 
-            $n = $n*$limite;
             if ($this->id != null){
                 $query = $query." WHERE id=:id";
             }
 			elseif ($this->id_producto != null) {
 				$query = $query . " WHERE id_producto=:id_producto";
 			}
+            $n = $n*$limite;
 			$query = $query . " ORDER BY $order";
             $query = $query . " LIMIT :l OFFSET :n";
 
