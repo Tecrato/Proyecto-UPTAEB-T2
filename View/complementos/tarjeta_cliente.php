@@ -7,7 +7,7 @@
              <img src="static/images/undraw_profile_2.svg" alt="" width="120px" />
                 <h5
                     class="uk-margin-remove-left uk-margin-remove-right uk-margin-small-top uk-margin-small-bottom uk-text-center">
-                    '.$row['Nombre'].'
+                    '.$row['nombre'].'
                 </h5>
          </div>
      </div>
@@ -37,13 +37,13 @@
              <div class="uk-flex">
                  <h6 class="uk-margin-small">Documento</h6>
                  <p class="uk-margin-small uk-margin-small-left uk-margin-remove-top uk-text-meta">
-                    '.$row['Documento'].'-'.$row['Cedula'].'
+                    '.$row['documento'].'-'.$row['cedula'].'
                  </p>
              </div>
              <div class="uk-flex">
                  <h6 class="uk-margin-small">Telefono</h6>
                  <p class="uk-margin-small uk-margin-small-left uk-margin-remove-top uk-text-meta">
-                    '.$row['Telefono'].'
+                    '.$row['telefono'].'
                  </p>
              </div>
              <div class="">
@@ -51,7 +51,7 @@
                  </h6>
                  <p class="uk-margin-small uk-margin-small-left uk-margin-remove-top uk-margin-remove-left uk-text-meta"
                      style="width: 185px; line-height: 23px;">
-                    '.$row['Direccion'].'
+                    '.$row['direccion'].'
                  </p>
              </div>
          </div>

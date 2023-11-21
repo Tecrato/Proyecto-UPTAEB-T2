@@ -3,15 +3,21 @@
     
     require('../../Model/Conexion.php');
 
-    if (isset($_POST['limite']) and $_POST['like'] != "") {
+    if (isset($_POST['limite']) and !empty($_POST['limite'])) {
         $limite = $_POST['limite'];
     }
     else {
         $limite = 9;
     }
+    if (isset($_POST['n']) and $_POST['n'] != "") {
+        $n = $_POST['n'];
+    }
+    else {
+        $n = 0;
+    }
      
 
-    if ($_POST['randomnautica'] == "productos") {
+    if ($_POST['randomnautica'] == "productos" or $_POST['randomnautica'] == "tarjeta_productos" or $_POST['randomnautica'] == "productos_factura") {
         require('../../Model/Productos.php');
         $clase = new Producto();
     }
@@ -43,15 +49,22 @@
     elseif ((isset($_POST['ID']) and $_POST['ID'] != "")){
         $result = $clase->search($_POST['ID']);
     }
+    elseif ($_POST['randomnautica'] == "tarjeta_productos") {
+        $result = $clase->search_targeta($n,$limite);
+    }
+    elseif ($_POST['randomnautica'] == "productos_factura") {
+        $result = $clase->search_luis();
+    }
     else {
-        $result = $clase->search();
+        $result = $clase->search(n:$n);
     }
     // limite:$limite
     $lista=array();
 
-    while ($row = $result->fetch_assoc()) {
+    for ($i=0; $i < count($result); $i++) { 
+        $row = $result[$i];
         array_push($lista, $row);
-    };
+    }
     $json = [
         'lista'=> $lista
     ];

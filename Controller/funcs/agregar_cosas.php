@@ -23,9 +23,9 @@
         }
         
         require('../../Model/Productos.php');
-        $clase = new Producto(); // Llama al modelo y le manda la instruccion
+        $clase = new Producto($_POST["categoria"],$_POST["unidad"],$_POST["nombre"],$_POST["descripcion"],$nick,$_POST["stock_min"],$_POST["stock_max"],$_POST["precio_venta"],$_POST["IVA"]); // Llama al modelo y le manda la instruccion
         try {
-            $clase->agregar($_POST["categoria"],$_POST["unidad"],$_POST["nombre"],$_POST["descripcion"],$nick,$_POST["stock_min"],$_POST["stock_max"],$_POST["precio_venta"],$_POST["IVA"]);
+            $clase->agregar();
         } catch (Exception $e) {
             unlink('../../Media/imagenes/'."producto_".$_POST['nombre']);
             header('Location:../../Productos?error=en+la+base+de+datos');
@@ -38,24 +38,21 @@
 
     elseif ($tipo === 'lote'){
         require('../../Model/Lotes.php');
-        $clase = new Lote(); // Llama al modelo y le manda la instruccion
-        $clase->agregar($_POST["ID"],$_POST["proveedor"],$_POST["cantidad"],$_POST["fecha_c"],$_POST["fecha_v"],$_POST["precio_compra"]);
+        $clase = new Lote(null,$_POST["ID"],$_POST["proveedor"],$_POST["cantidad"],$_POST["fecha_c"],$_POST["fecha_v"],$_POST["precio_compra"]); // Llama al modelo y le manda la instruccion
+        $clase->agregar();
         header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }
 
     elseif ($tipo === 'proveedor'){
         require('../../Model/Proveedores.php');
-        $clase = new Proveedor(); // Llama al modelo y le manda la instruccion
-        $clase->agregar($_POST["nombre"],$_POST["razon_social"],$_POST["rif"],$_POST["telefono"],$_POST["correo"],$_POST["direccion"]);
+        $clase = new Proveedor(null,$_POST["nombre"],$_POST["razon_social"],$_POST["rif"],$_POST["telefono"],$_POST["correo"],$_POST["direccion"]); // Llama al modelo y le manda la instruccion
+        $clase->agregar();
         header('Location:../../Proveedores'); // Y vuelve a la pagina donde estaba antes
     }
     elseif ($tipo === 'cliente'){
         require('../../Model/Clientes.php');
-        echo "paso1";
-        $clase = new Cliente(); // Llama al modelo y le manda la instruccion
-        echo "paso2";
-        $clase->agregar($_POST["nombre"],$_POST["apellido"],$_POST["documento"],$_POST["cedula"],$_POST["telefono"],$_POST["direccion"]);
-        echo "paso3";
+        $clase = new Cliente(null,$_POST["nombre"],$_POST["apellido"],$_POST["documento"],$_POST["cedula"],$_POST["direccion"],$_POST["telefono"]); 
+        $clase->agregar();
         header('Location:../../Clientes'); // Y vuelve a la pagina donde estaba antes
     };
     

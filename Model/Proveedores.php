@@ -2,37 +2,61 @@
 
     // require('Conexion.php');
     class Proveedor extends DB{
+        private $id;
+        private $nombre;
+        private $razon_social;
+        private $rif;
+        private $telefono;
+        private $correo;
+        private $direccion;
+
+        function __construct($id=null, $nombre=null,$razon_social=null,$rif=null,$telefono=null,$correo=null,$direccion=null){
+            $this->id = $id;
+            $this->nombre = $nombre;
+            $this->razon_social = $razon_social;
+            $this->rif = $rif;
+            $this->telefono = $telefono;
+            $this->correo = $correo;
+            $this->direccion = $direccion;
+            DB::__construct();
+
+        }
 
         // esta funcion agrega a la tabla productos un objeto con los valores que se le estan pasando
-        function agregar($nombre,$razon_social,$rif,$telefono,$correo,$direccion) {
+        function agregar() {
             
-            $query = "INSERT INTO proveedores VALUES(null,'$nombre', '$razon_social', '$rif', $telefono, '$correo', '$direccion')";
-            
-            $this->conn->query($query);
+            $query = $this->conn->prepare("INSERT INTO proveedores VALUES(null,?, ?, ?, ?, ?, ?)");
+
+            $query->bindParam(1,$this->nombre);
+            $query->bindParam(2,$this->razon_social);
+            $query->bindParam(3,$this->rif);
+            $query->bindParam(4,$this->telefono);
+            $query->bindParam(5,$this->correo);
+            $query->bindParam(6,$this->direccion);
+            $query->execute();
         }
 
         // con esta funcion se elimina un elemento dependiendo de su id
-        function DELETE($id) {
+        function borrar() {
 
-            $query = "DELETE FROM proveedores WHERE ID=$id";
+            $query = $this->conn->prepare("DELETE FROM proveedores WHERE ID=:id");
             
-            $this->conn->query($query);
+            $query->execute([':id'=>$this->id]);
         }
 
         // Con esta funcion podremos cambiar un producto segun su ID con los valores que le pasemos
-        function UPDATE($id,$nombre,$razon_social,$rif,$telefono,$correo,$direccion){
+        function actualizar(){
             
-            $query = "UPDATE proveedores SET nombre='$nombre', razon_social='$razon_social', rif='$rif', telefono=$telefono, correo='$correo', direccion='$direccion'";
-            $query = $query . " WHERE ID=$id";
+            $query = $this->conn->prepare("UPDATE proveedores SET nombre=?, razon_social=?, rif=?, telefono=?, correo=?, direccion=? WHERE ID=?");
         
-            return $this->conn->query($query); //$conn->fetch_assoc() // Y devuelve el resultado al controlador
-        }
-
-        function search_detalles_producto($id){
-            
-            $query = "SELECT nombre,(SELECT SUM(restante) FROM lotes Where id_proveedor = p.id) as stock,(SELECT MIN(fecha_vencimiento) FROM lotes Where id_proveedor = p.id) as fecha_vencimiento FROM `proveedores` as p WHERE p.id=$id ORDER BY nombre";
-        
-            return $this->conn->query($query); //$conn->fetch_assoc() // Y devuelve el resultado al controlador
+            $query->bindParam(1,$this->nombre);
+            $query->bindParam(2,$this->razon_social);
+            $query->bindParam(3,$this->rif);
+            $query->bindParam(4,$this->telefono);
+            $query->bindParam(5,$this->correo);
+            $query->bindParam(6,$this->direccion);
+            $query->bindParam(7,$this->id);
+            $query->execute();
         }
 
         // Con esta otra funcion se busca entre los productos en la base de datos
@@ -83,8 +107,17 @@
                 }
             }
             
-            return $this->conn->query($query);
+            $consulta = $this->conn->query($query);
+            return $consulta->fetchAll();
         }
+        
+        function search_detalles_producto($id){
+            
+            $query = "SELECT nombre,(SELECT SUM(restante) FROM lotes Where id_proveedor = p.id) as stock,(SELECT MIN(fecha_vencimiento) FROM lotes Where id_proveedor = p.id) as fecha_vencimiento FROM `proveedores` as p WHERE p.id=$id ORDER BY nombre";
+        
+            return $this->conn->query($query); //$conn->fetch_assoc() // Y devuelve el resultado al controlador
+        }
+
         function search_like($nombre){
             $query = "SELECT * FROM proveedores WHERE nombre LIKE '%$nombre%'";
 

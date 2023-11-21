@@ -9,8 +9,8 @@
     $result = $clase->search_luis();
     
     $lista=array();
-    for ($i=0; $i < $result->num_rows; $i++) {
-        $row = $result->fetch_assoc();
+    for ($i=0; $i < count($result); $i++) {
+        $row = $result[$i];
         array_push($lista, $row);
     };
     $json = [

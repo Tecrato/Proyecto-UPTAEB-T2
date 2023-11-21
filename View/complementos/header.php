@@ -140,12 +140,12 @@ echo "
                         <p>Clientes</p>
                     </a>
                 </li>
-                <li class="uk-margin-small-right Link" href="/Proyecto-UPTAEB-T2/Estadisticas">
+                <!-- <li class="uk-margin-small-right Link" href="/Proyecto-UPTAEB-T2/Estadisticas">
                     <a class="uk-button uk-button-text enlace_nav" href="Estadisticas">
                         <span uk-icon="statitics" class="uk-icon uk-margin-small-right uk-icon-button"></span>
                         <p>Estadisticas</p>
                     </a>
-                </li>
+                </li> -->
                 <li class="uk-margin-small-right Link" href="/Proyecto-UPTAEB-T2/Facturas">
                     <a class="uk-button uk-button-text enlace_nav" href="Facturas">
                         <span uk-icon="factura" class="uk-icon uk-margin-small-right uk-icon-button"></span>
@@ -206,12 +206,12 @@ echo "
                             <span uk-icon="users" class="uk-icon uk-icon-button"></span>
                         </a>
                     </li>
-                    <li class="Link">
+                    <!-- <li class="Link">
                         <a class="uk-button uk-button-text" href="Estadisticas">
                             <span uk-icon="bell" class="uk-icon uk-icon-button"></span>
                         </a>
                         
-                    </li>
+                    </li> -->
                     <li class="Link">
                         <a class="uk-button uk-button-text" href="Facturas">
                             <span uk-icon="factura" class="uk-icon uk-icon-button"></span>

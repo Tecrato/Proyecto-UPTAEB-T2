@@ -1,51 +1,94 @@
 <?php
 
     class Cliente extends DB{
+        private $id;
+        private $nombre;
+        private $cedula;
+        private $documento;
+        private $apellido;
+        private $telefono;
+        private $direccion;
 
-        function agregar($nombre,$cedula,$Documento,$apellido,$Telefono,$Direccion){
-            $query = "INSERT INTO clientes (Nombre, Cedula, Apellido, Documento, Direccion, Telefono) VALUES('$nombre', '$cedula','$apellido','$Documento','$Telefono','$Direccion')";
+        function __construct($id=null, $nombre=null,$cedula=null,$documento=null,$apellido=null,$direccion=null,$telefono=null){
+            $this->id = $id;
+            $this->nombre = $nombre;
+            $this->cedula = $cedula;
+            $this->documento = $documento;
+            $this->apellido = $apellido;
+            $this->telefono = $telefono;
+            $this->direccion = $direccion;
+            DB::__construct();
+
+        }
+
+        function agregar(){
+            $query = $this->conn->prepare("INSERT INTO clientes (nombre, cedula, apellido, documento, direccion, telefono) VALUES(?, ?,?,?,?,?)");
             
-            $this->conn->query($query);
+            $query->bindParam(1,$this->nombre, PDO::PARAM_STR);
+            $query->bindParam(2,$this->cedula, PDO::PARAM_STR);
+            $query->bindParam(3,$this->documento, PDO::PARAM_STR);
+            $query->bindParam(4,$this->apellido, PDO::PARAM_STR);
+            $query->bindParam(5,$this->direccion, PDO::PARAM_STR);
+            $query->bindParam(6,$this->telefono, PDO::PARAM_STR);
+
+            $query->execute();
         }
 
 
         // con esta funcion se elimina un elemento dependiendo de su id
-        function DELETE($id) {
-            $query = "DELETE FROM clientes WHERE ID=$id";
+        function borrar() {
+            $query = $this->conn->prepare("DELETE FROM clientes WHERE ID=?");
+
+            $query->bindParam(1,$this->id);
             
-            $this->conn->query($query);
+            $query->execute();
         }
 
         // Con esta funcion podremos cambiar un cliente segun su ID con los valores que le pasemos
-        function UPDATE($id,$nombre,$cedula,$apellido,$Telefono,$Direccion){
+        function actualizar(){
             
-            $query = "UPDATE clientes SET nombre='".$nombre."', cedula=".$cedula.", apellido='".$apellido."', Telefono=".$Telefono.", Direccion='".$Direccion."' WHERE id=$id";
+            $query = $this->conn->prepare("UPDATE clientes SET nombre=?, cedula=?, apellido=?, Telefono=?, Direccion=? WHERE id=?");
             
+            $query->bindParam(1,$this->nombre);
+            $query->bindParam(2,$this->cedula);
+            $query->bindParam(3,$this->documento);
+            $query->bindParam(4,$this->apellido);
+            $query->bindParam(5,$this->telefono);
+            $query->bindParam(6,$this->direccion);
+            $query->bindParam(7,$this->id);
             
-            return $this->conn->query($query); //$conn->fetch_assoc() // Y devuelve el resultado al controlador
+            return $query->execute(); 
         }
 
         // Con esta otra funcion se busca entre los clientes en la base de datos
-        function search($id=null,$n=0,$limite=9){
+        function search($n=0,$limite=9){
             // Al igual que la clase anterior, puede buscar segun muchos valores o solo algunos
-            $querys = [];
             $query = "SELECT * FROM clientes";
 
-            if ($id != null){
-                $query = $query." WHERE id=$id";
+            if ($this->id != null){
+                $query = $query." WHERE id=:id";
             }
-
-            if($limite) {
-                $n = $n*$limite;
-                $query = $query . " LIMIT 9 OFFSET ".$n;
-            }
+            $n = $n*$limite;
             
-            return $this->conn->query($query);
-        }
-        function search_like($nombre){
-            $query = "SELECT * FROM clientes WHERE nombre LIKE '%$nombre%'";
 
-            return $this->conn->query($query);
+            $query = $query . " LIMIT :l OFFSET :n";
+            $consulta = $this->conn->prepare($query);
+
+
+            $consulta->bindParam(':l',$limite, PDO::PARAM_INT);
+            $consulta->bindParam(':n',$n, PDO::PARAM_INT);
+            
+            if ($this->id != null){
+                $consulta->bindParam(':id',$this->id, PDO::PARAM_INT);
+            }
+            $consulta->execute();
+            return $consulta->fetchAll();
+        }
+        function search_like(){
+            $query = $this->conn->prepare("SELECT * FROM clientes WHERE nombre LIKE %?%");
+            $query->bindParam(1,$this->nombre);
+            $query->execute();
+            return $query->fetchAll();
         }
         function COUNT(){
             return $this->conn->query("SELECT COUNT(*) as 'total' FROM clientes")->fetch_assoc()['total'];

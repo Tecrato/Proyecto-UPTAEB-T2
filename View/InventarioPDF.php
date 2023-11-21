@@ -51,7 +51,7 @@ $pdf->SetY(35);
 $pdf->SetX(112);
 $pdf->SetFillColor(16, 103, 51);
 $pdf->SetFont('Arial','B',10);
-$pdf->Cell(84,10,$result2->fetch_assoc()['Total'].' Bs',1,0,'C',1);
+$pdf->Cell(84,10,$result2[0]['Total'].' Bs',1,0,'C',1);
 
 //CABECERA DE LOS NOMBRES DE LAS COLUMNAS__________________________________________________________________________________
 
@@ -73,18 +73,18 @@ $pdf->Ln(3);
 //FILAS DEL INVENTARIO__________________________________________________________________________________
 $pdf->SetTextColor(0, 0, 0);
 
-for ($i=1; $i <= $result->num_rows; $i++) { 
+for ($i=0; $i <= count($result); $i++) { 
 
     // if ($i % 2 == 0) {
     //     $pdf->SetFillColor(230,230,230);
     // } else {
     //     $pdf->SetFillColor(255,255,255);
     // }
-    $row = $result->fetch_assoc();
+    $row = $result[$i];
 
     $pdf->SetX(17);
     $pdf->Cell(10,10,$row['id'],0,0,'C',0);
-    $pdf->Cell(45,10,$row['descripcion'],0,0,'C',0);
+    $pdf->Cell(45,10,$row['marca'],0,0,'C',0);
     $pdf->Cell(20,10,$row['entradas'],0,0,'C',0);
     $pdf->Cell(20,10,$row['salidas'],0,0,'C',0);
     $pdf->Cell(30,10,$row['existencia'],0,0,'C',0);
