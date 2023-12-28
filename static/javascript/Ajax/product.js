@@ -681,6 +681,7 @@ btnAgg.addEventListener("click", () => {
             .parentElement;
         controllerModal.removeChild(subir);
         btnAgg.removeAttribute("uk-toggle");
+        console.log(response)
         //y llamamos a la funcion de cargar contenido
         cargarTargetProduct();
       },

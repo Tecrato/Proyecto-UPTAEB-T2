@@ -22,14 +22,14 @@
         }
 
         function agregar(){
-            $query = $this->conn->prepare("INSERT INTO clientes (nombre, cedula, apellido, documento, direccion, telefono) VALUES(?, ?,?,?,?,?)");
+            $query = $this->conn->prepare("INSERT INTO clientes (nombre, cedula, apellido, documento, direccion, telefono) VALUES(:nombre, :cedula, :documento, :apellido, :direccion, :telefono)");
             
-            $query->bindParam(1,$this->nombre, PDO::PARAM_STR);
-            $query->bindParam(2,$this->cedula, PDO::PARAM_STR);
-            $query->bindParam(3,$this->documento, PDO::PARAM_STR);
-            $query->bindParam(4,$this->apellido, PDO::PARAM_STR);
-            $query->bindParam(5,$this->direccion, PDO::PARAM_STR);
-            $query->bindParam(6,$this->telefono, PDO::PARAM_STR);
+            $query->bindParam(':nombre',$this->nombre, PDO::PARAM_STR);
+            $query->bindParam(':cedula',$this->cedula, PDO::PARAM_STR);
+            $query->bindParam(':documento',$this->documento, PDO::PARAM_STR);
+            $query->bindParam(':apellido',$this->apellido, PDO::PARAM_STR);
+            $query->bindParam(':direccion',$this->direccion, PDO::PARAM_STR);
+            $query->bindParam(':telefono',$this->telefono, PDO::PARAM_STR);
 
             $query->execute();
         }
@@ -47,15 +47,15 @@
         // Con esta funcion podremos cambiar un cliente segun su ID con los valores que le pasemos
         function actualizar(){
             
-            $query = $this->conn->prepare("UPDATE clientes SET nombre=?, cedula=?, apellido=?, Telefono=?, Direccion=? WHERE id=?");
+            $query = $this->conn->prepare("UPDATE clientes SET nombre=:nombre, cedula=:cedula, documento=:documento, apellido=:apellido, Telefono=:telefono, direccion=:direccion WHERE id=:id");
             
-            $query->bindParam(1,$this->nombre);
-            $query->bindParam(2,$this->cedula);
-            $query->bindParam(3,$this->documento);
-            $query->bindParam(4,$this->apellido);
-            $query->bindParam(5,$this->telefono);
-            $query->bindParam(6,$this->direccion);
-            $query->bindParam(7,$this->id);
+            $query->bindParam(':nombre',$this->nombre);
+            $query->bindParam(':cedula',$this->cedula);
+            $query->bindParam(':documento',$this->documento);
+            $query->bindParam(':apellido',$this->apellido);
+            $query->bindParam(':telefono',$this->telefono);
+            $query->bindParam(':direccion',$this->direccion);
+            $query->bindParam(':id',$this->id);
             
             return $query->execute(); 
         }
@@ -85,8 +85,8 @@
             return $consulta->fetchAll();
         }
         function search_like(){
-            $query = $this->conn->prepare("SELECT * FROM clientes WHERE nombre LIKE %?%");
-            $query->bindParam(1,$this->nombre);
+            $query = $this->conn->prepare("SELECT * FROM clientes WHERE nombre LIKE %:li%");
+            $query->bindParam(':li',$this->nombre);
             $query->execute();
             return $query->fetchAll();
         }

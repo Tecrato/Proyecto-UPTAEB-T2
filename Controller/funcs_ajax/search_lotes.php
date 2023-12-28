@@ -1,18 +1,18 @@
 <?php
     require('../../Model/Conexion.php');
-    require('../../Model/Lotes.php');
+    require('../../Model/Entradas.php');
 
     if ($_POST['TB'] == 'NP' && $_POST['ID']) {
-        $clase = new Lote();
-        $result = $clase->search_proveedor_from_product($_POST['ID']);
+        $clase = new Entrada(null,$_POST['ID']);
+        $result = $clase->search_proveedor_from_product();
     }
     elseif ($_POST['TB'] == 'LP'){
-        $clase = new Lote();
-        $result = $clase->search_with_producto_and_proveedor($_POST['ID'], $_POST['SUPPLIER']);
+        $clase = new Entrada(null,$_POST['ID'], $_POST['SUPPLIER']);
+        $result = $clase->search_with_producto_and_proveedor();
     }
     elseif ($_POST['TB'] == 'MODAL') {
-        $clase = new Lote();
-        $result = $clase->search_modal_details($_POST['ID']);
+        $clase = new Entrada(null,$_POST['ID']);
+        $result = $clase->search_modal_details();
     }
     $lista=array();
 

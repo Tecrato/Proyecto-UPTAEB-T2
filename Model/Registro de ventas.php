@@ -44,14 +44,14 @@
 		}
 		function agregar($datos){
 			
-			$query = $this->conn->prepare("INSERT INTO registro_ventas (monto_final,metodo_pago, id_cliente, id_usuario, IVA) VALUES(?,?,?,?,?)");
+			$query = $this->conn->prepare("INSERT INTO registro_ventas (monto_final,metodo_pago, id_cliente, id_usuario, IVA) VALUES(:monto, :metodo, :id1, :id2, :iva)");
 
 
-			$query->bindParam(1,$this->monto_final);
-			$query->bindParam(2,$this->metodo_pago, PDO::PARAM_STR);
-			$query->bindParam(3,$this->id_cliente, PDO::PARAM_INT);
-			$query->bindParam(4,$this->id_usuario, PDO::PARAM_INT);
-			$query->bindParam(5,$this->IVA, PDO::PARAM_STR);
+			$query->bindParam(':monto',$this->monto_final);
+			$query->bindParam(':metodo',$this->metodo_pago, PDO::PARAM_STR);
+			$query->bindParam(':id1',$this->id_cliente, PDO::PARAM_INT);
+			$query->bindParam(':id2',$this->id_usuario, PDO::PARAM_INT);
+			$query->bindParam(':iva',$this->IVA, PDO::PARAM_STR);
 
 			echo $this->IVA;
 
@@ -63,7 +63,7 @@
 				$lista = $datos[$i];
 				$clase_f = new Factura(null,$registro['id'],$lista->id_product,$lista->cantidad,$lista->precio);
 				$clase_f->agregar();
-				$clase_l = new Lote(null,$lista->id_product,cantidad:$lista->cantidad);
+				$clase_l = new Entrada(null,$lista->id_product,cantidad:$lista->cantidad);
 				$clase_l->descontar();
 			}
 		}

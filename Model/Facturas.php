@@ -33,18 +33,18 @@
 		}
 
 		function agregar(){
-            $query = $this->conn->prepare("INSERT INTO factura VALUES(null, ?, ?, ?, ?)");
+            $query = $this->conn->prepare("INSERT INTO factura VALUES(null, :id1, :id2, :cantidad, :coste)");
 
-            $query->bindParam(1,$this->id_registro_ventas);
-            $query->bindParam(2,$this->id_productos);
-            $query->bindParam(3,$this->cantidad);
-            $query->bindParam(4,$this->coste_producto_total);
+            $query->bindParam(':id1',$this->id_registro_ventas);
+            $query->bindParam(':id2',$this->id_productos);
+            $query->bindParam(':cantidad',$this->cantidad);
+            $query->bindParam(':coste',$this->coste_producto_total);
             
             $query->execute();
 		}
         function borrar() {
             if ($this->id_registro){
-                $query = $this->conn->prepare("DELETE FROM lotes WHERE id_registro_ventas=:id_registro");
+                $query = $this->conn->prepare("DELETE FROM entradas WHERE id_registro_ventas=:id_registro");
                 $query->bindParam(':id_registro',$this->id_registro_ventas);
             }
             else {

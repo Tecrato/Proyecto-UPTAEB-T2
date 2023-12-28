@@ -1,5 +1,5 @@
 <?php
-	class Lote extends DB{
+	class Entrada extends DB{
         private $id;
         private $id_producto;
         private $id_proveedor;
@@ -20,14 +20,15 @@
         }
 
 		function agregar(){
-			$query = $this->conn->prepare("INSERT INTO lotes VALUES(null, ?, ?, ?,?, ?, ?, ?)");
-			$query->bindParam(1,$this->id_producto);
-			$query->bindParam(2,$this->id_proveedor);
-			$query->bindParam(3,$this->cantidad);
-			$query->bindParam(4,$this->fecha_c);
-			$query->bindParam(5,$this->fecha_v);
-			$query->bindParam(6,$this->precio_compra);
-			$query->bindParam(7,$this->cantidad);
+			$query = $this->conn->prepare("INSERT INTO entradas VALUES(null, :id1, :id2, :cantidad, :fecha_c, :fecha_v, :precio_compra, :cantidad)");
+
+			$query->bindParam(':id1',$this->id_producto);
+			$query->bindParam(':id2',$this->id_proveedor);
+			$query->bindParam(':cantidad',$this->cantidad);
+			$query->bindParam(':fecha_c',$this->fecha_c);
+			$query->bindParam(':fecha_v',$this->fecha_v);
+			$query->bindParam(':precio_compra',$this->precio_compra);
+			$query->bindParam(':cantidad',$this->cantidad);
 
 			$query->execute();
 		}
@@ -38,11 +39,11 @@
 			for ($i = 0; $this->cantidad > 0; $i++) {
 				$lote = $lotes[$i];
 				if ($lote['existencia'] > $this->cantidad) {
-					$query = "UPDATE lotes SET existencia=" . $lote['existencia'] - $this->cantidad . " WHERE id=" . $lote['id'];
+					$query = "UPDATE entradas SET existencia=" . $lote['existencia'] - $this->cantidad . " WHERE id=" . $lote['id'];
 					$this->conn->query($query);
 					$this->cantidad = 0;
 				} else {
-					$query = "UPDATE lotes SET existencia=0 WHERE id=" . $lote['id'];
+					$query = "UPDATE entradas SET existencia=0 WHERE id=" . $lote['id'];
 					$this->conn->query($query);
 					$this->cantidad -= $lote['existencia'];
 				}
@@ -51,10 +52,10 @@
 		function borrar(){
 
 			if ($this->id_proveedor != null) {
-				$query = $this->conn->prepare("DELETE FROM lotes WHERE id_proveedor=:id_proveedor");
+				$query = $this->conn->prepare("DELETE FROM entradas WHERE id_proveedor=:id_proveedor");
 				$query->bindParam(':id_proveedor',$this->id_proveedor, PDO::PARAM_INT);
 			} elseif ($this->id_producto != null) {
-				$query = $this->conn->prepare("DELETE FROM lotes WHERE id_producto=:id_producto");
+				$query = $this->conn->prepare("DELETE FROM entradas WHERE id_producto=:id_producto");
 				$query->bindParam(':id_producto',$this->id_producto, PDO::PARAM_INT);
 			} else {
 				throw new Exception("Error, debe pasar el id de un proveedor o de un producto", 1);
@@ -63,7 +64,7 @@
 			$query->execute();
 		}
 		function search($n=0,$limite=9, $order = 'id DESC'){
-			$query = "SELECT * FROM lotes";
+			$query = "SELECT * FROM entradas";
 
             if ($this->id != null){
                 $query = $query." WHERE id=:id";
@@ -92,10 +93,11 @@
 		}
 
 		function search_with_producto_and_proveedor(){
-			$query = "SELECT * FROM lotes WHERE id_producto=? AND id_proveedor=?";
+			$query = $this->conn->prepare("SELECT * FROM entradas WHERE id_producto=:id1 AND id_proveedor=:id2");
 
-			$query->bindParam(1,$this->id_producto);
-			$query->bindParam(2,$this->id_proveedor);
+			$query->bindParam(':id1',$this->id_producto);
+			$query->bindParam(':id2',$this->id_proveedor);
+
 			$query->execute();
 			
 			return $query->fetchAll();
@@ -103,18 +105,18 @@
 
 		function search_proveedor_from_product()
 		{
-			$query = $this->conn->prepare("SELECT id_proveedor, (SELECT razon_social FROM proveedores WHERE lotes.id_proveedor=id) AS proveedor FROM lotes WHERE id_producto=? GROUP BY id_proveedor");
+			$query = $this->conn->prepare("SELECT id_proveedor, (SELECT razon_social FROM proveedores WHERE entradas.id_proveedor=:id) AS proveedor FROM entradas WHERE id_producto=:id GROUP BY id_proveedor");
 
-			$query->bindParam(1,$this->id_producto);
+			$query->bindParam(':id',$this->id_producto);
 			$query->execute();
 			
 			return $query->fetchAll();
 		}
 
 		function search_modal_details(){
-			$query = $this->conn->prepare("SELECT imagen,nombre,marca,(SELECT nombre FROM categoria WHERE productos.id_categoria = id) AS categoria,(SELECT SUM(existencia) FROM lotes WHERE productos.id = id_producto GROUP BY id_producto) AS existencia,precio_venta FROM productos WHERE id = ?");
+			$query = $this->conn->prepare("SELECT imagen,nombre,marca,(SELECT nombre FROM categoria WHERE productos.id_categoria = id) AS categoria,(SELECT SUM(existencia) FROM entradas WHERE productos.id = :id GROUP BY :id) AS existencia,precio_venta FROM productos WHERE id = :id");
 
-			$query->bindParam(1,$this->id_producto);
+			$query->bindParam(':id',$this->id_producto);
 			$query->execute();
 
 			return $query->fetchAll();

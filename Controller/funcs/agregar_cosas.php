@@ -11,7 +11,7 @@
             $nick = "producto_".$_POST['nombre'] . "_" . $imagen['name'];
             $img_err = subir_imagen($imagen,$nick);
             if ($img_err != false){
-                header('Location:../../Productos?error='.$img_err);
+                // header('Location:../../Productos?error='.$img_err);
                 if ($img_err != 3){
                     unlink('../../Media/imagenes/'.$nick);
                 }
@@ -23,22 +23,23 @@
         }
         
         require('../../Model/Productos.php');
-        $clase = new Producto($_POST["categoria"],$_POST["unidad"],$_POST["nombre"],$_POST["descripcion"],$nick,$_POST["stock_min"],$_POST["stock_max"],$_POST["precio_venta"],$_POST["IVA"]); // Llama al modelo y le manda la instruccion
+        $clase = new Producto(null,$_POST["categoria"],$_POST["unidad"],$_POST["nombre"],$_POST["descripcion"],$nick,$_POST["stock_min"],$_POST["stock_max"],$_POST["precio_venta"],$_POST["IVA"]); // Llama al modelo y le manda la instruccion
         try {
             $clase->agregar();
         } catch (Exception $e) {
+            print_r($e);
             unlink('../../Media/imagenes/'."producto_".$_POST['nombre']);
-            header('Location:../../Productos?error=en+la+base+de+datos');
-            die();
+            // header('Location:../../Productos?error=en+la+base+de+datos');
+            // die();
         }
 
 
-        header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
+        // header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }
 
     elseif ($tipo === 'lote'){
-        require('../../Model/Lotes.php');
-        $clase = new Lote(null,$_POST["ID"],$_POST["proveedor"],$_POST["cantidad"],$_POST["fecha_c"],$_POST["fecha_v"],$_POST["precio_compra"]); // Llama al modelo y le manda la instruccion
+        require('../../Model/Entradas.php');
+        $clase = new Entrada(null,$_POST["ID"],$_POST["proveedor"],$_POST["cantidad"],$_POST["fecha_c"],$_POST["fecha_v"],$_POST["precio_compra"]); // Llama al modelo y le manda la instruccion
         $clase->agregar();
         header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }

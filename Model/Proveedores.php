@@ -25,14 +25,14 @@
         // esta funcion agrega a la tabla productos un objeto con los valores que se le estan pasando
         function agregar() {
             
-            $query = $this->conn->prepare("INSERT INTO proveedores VALUES(null,?, ?, ?, ?, ?, ?)");
+            $query = $this->conn->prepare("INSERT INTO proveedores VALUES(null, :nombre, :razon, :rif, :tel, :correo, :dir)");
 
-            $query->bindParam(1,$this->nombre);
-            $query->bindParam(2,$this->razon_social);
-            $query->bindParam(3,$this->rif);
-            $query->bindParam(4,$this->telefono);
-            $query->bindParam(5,$this->correo);
-            $query->bindParam(6,$this->direccion);
+            $query->bindParam(':nombre',$this->nombre);
+            $query->bindParam(':razon',$this->razon_social);
+            $query->bindParam(':rif',$this->rif);
+            $query->bindParam(':tel',$this->telefono);
+            $query->bindParam(':correo',$this->correo);
+            $query->bindParam(':dir',$this->direccion);
             $query->execute();
         }
 
@@ -47,15 +47,15 @@
         // Con esta funcion podremos cambiar un producto segun su ID con los valores que le pasemos
         function actualizar(){
             
-            $query = $this->conn->prepare("UPDATE proveedores SET nombre=?, razon_social=?, rif=?, telefono=?, correo=?, direccion=? WHERE ID=?");
+            $query = $this->conn->prepare("UPDATE proveedores SET nombre=:nombre, razon_social=:razon, rif=:rif, telefono=:tel, correo=:correo, direccion=:dir WHERE ID=:id");
         
-            $query->bindParam(1,$this->nombre);
-            $query->bindParam(2,$this->razon_social);
-            $query->bindParam(3,$this->rif);
-            $query->bindParam(4,$this->telefono);
-            $query->bindParam(5,$this->correo);
-            $query->bindParam(6,$this->direccion);
-            $query->bindParam(7,$this->id);
+            $query->bindParam(':nombre',$this->nombre);
+            $query->bindParam(':razon',$this->razon_social);
+            $query->bindParam(':rif',$this->rif);
+            $query->bindParam(':tel',$this->telefono);
+            $query->bindParam(':correo',$this->correo);
+            $query->bindParam(':dir',$this->direccion);
+            $query->bindParam(':id',$this->id);
             $query->execute();
         }
 
@@ -117,12 +117,12 @@
         
             return $this->conn->query($query); //$conn->fetch_assoc() // Y devuelve el resultado al controlador
         }
+        function search_like(){
+            $query = $this->conn->prepare("SELECT * FROM productos WHERE nombre LIKE '%:nombre%'");
+            $query->bindParam(':nombre',$this->nombre);
 
-        function search_like($nombre){
-            $query = "SELECT * FROM proveedores WHERE nombre LIKE '%$nombre%'";
-
-            
-            return $this->conn->query($query);
+            $query->execute();
+            return $query->fetchAll();
         }
         function COUNT(){
             return $this->conn->query("SELECT COUNT(*) 'total' FROM proveedores")->fetch_assoc()['total'];

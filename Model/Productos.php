@@ -28,19 +28,20 @@
         // esta funcion agrega a la tabla productos un objeto con los valores que se le estan pasando
         function agregar(){
             
-            $query = $this->conn->prepare("INSERT INTO productos VALUES(null,?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $query = $this->conn->prepare("INSERT INTO productos VALUES(null, :categoria, :unidades, :nombre, :marca, :imagen, :stock_min, :stock_max, :precio_venta, :IVA)");
 
-            $query->bindParam(1,$this->categoria);
-            $query->bindParam(2,$this->unidades);
-            $query->bindParam(3,$this->nombre);
-            $query->bindParam(4,$this->marca);
-            $query->bindParam(5,$this->imagen);
-            $query->bindParam(6,$this->stock_min);
-            $query->bindParam(7,$this->stock_max);
-            $query->bindParam(8,$this->precio_venta);
-            $query->bindParam(9,$this->IVA);
+            $query->bindParam(':categoria',$this->categoria);
+            $query->bindParam(':unidades',$this->unidades);
+            $query->bindParam(':nombre',$this->nombre);
+            $query->bindParam(':marca',$this->marca);
+            $query->bindParam(':imagen',$this->imagen);
+            $query->bindParam(':stock_min',$this->stock_min);
+            $query->bindParam(':stock_max',$this->stock_max);
+            $query->bindParam(':precio_venta',$this->precio_venta);
+            $query->bindParam(':IVA',$this->IVA);
 
-            echo $query->execute();
+
+            $query->execute();
         }
 
 
@@ -104,7 +105,7 @@
             return $consulta->fetchAll();
         }
         function search_stock(){
-            $query = $this->conn->prepare("SELECT SUM(restante) as stock FROM lotes WHERE id_producto=:id");
+            $query = $this->conn->prepare("SELECT SUM(restante) as stock FROM entradas WHERE id_producto=:id");
 
             $query->bindParam(':id',$this->id, PDO::PARAM_INT);
 
@@ -115,16 +116,19 @@
         function search_like(){
             $query = $this->conn->prepare("SELECT * FROM productos WHERE nombre LIKE '%:nombre%'");
 
-            return $query->execute();
+            $query->bindParam(':nombre',$this->nombre);
+
+            $query->execute();
+            return $query->fetchAll();
         }
         function search_luis(){
-            $query = "SELECT id, nombre,(SELECT SUM(existencia) FROM lotes Where id_producto = p.id) as stock,precio_venta,IVA FROM `productos` as p ORDER BY id";
+            $query = "SELECT id, nombre,(SELECT SUM(existencia) FROM entradas Where id_producto = p.id) as stock,precio_venta,IVA FROM `productos` as p ORDER BY id";
 
             return $this->conn->query($query)->fetchAll();
         }
 
         function search_targeta($n, $limite){
-            $query = $this->conn->prepare("SELECT id, imagen, nombre,(SELECT SUM(existencia) FROM lotes WHERE productos.id = id_producto) AS existencia FROM productos LIMIT :l OFFSET :n");
+            $query = $this->conn->prepare("SELECT id, imagen, nombre,(SELECT SUM(existencia) FROM entradas WHERE productos.id = id_producto) AS existencia FROM productos LIMIT :l OFFSET :n");
 
             $query->bindParam(':l',$limite, PDO::PARAM_INT);
             $query->bindParam(':n',$n, PDO::PARAM_INT);
@@ -133,13 +137,13 @@
         }
 
         function search_inventario(){
-            $query = "SELECT id,marca,(SELECT SUM(cantidad) FROM lotes WHERE productos.id = id_producto) AS entradas,(SELECT SUM(cantidad) - (SELECT SUM(existencia) FROM lotes WHERE productos.id = id_producto) FROM lotes WHERE productos.id = id_producto) AS salidas, (SELECT SUM(existencia) FROM lotes WHERE productos.id = id_producto) AS existencia, precio_venta,(SELECT SUM(existencia) FROM lotes WHERE productos.id = id_producto) * precio_venta AS Total FROM productos";
+            $query = "SELECT id,marca,(SELECT SUM(cantidad) FROM entradas WHERE productos.id = id_producto) AS entradas,(SELECT SUM(cantidad) - (SELECT SUM(existencia) FROM entradas WHERE productos.id = id_producto) FROM entradas WHERE productos.id = id_producto) AS salidas, (SELECT SUM(existencia) FROM entradas WHERE productos.id = id_producto) AS existencia, precio_venta,(SELECT SUM(existencia) FROM entradas WHERE productos.id = id_producto) * precio_venta AS Total FROM productos";
 
             return $this->conn->query($query)->fetchAll();
         }
 
         function search_ValorInventario(){
-            $query = "SELECT SUM((SELECT SUM(existencia) FROM lotes WHERE productos.id = id_producto) * precio_venta) AS Total FROM productos";
+            $query = "SELECT SUM((SELECT SUM(existencia) FROM entradas WHERE productos.id = id_producto) * precio_venta) AS Total FROM productos";
 
             return $this->conn->query($query)->fetchAll();
         }
