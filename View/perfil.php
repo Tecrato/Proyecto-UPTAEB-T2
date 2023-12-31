@@ -34,7 +34,7 @@
                 <img width="160px" src="static/images/undraw_profile.svg" alt="">
             </div>
             <div>
-                <h3 class="uk-text-center ">Nombre del usuario</h3>
+                <h3 class="uk-text-center ">Nombre</h3>
                 <p class="uk-text-center uk-margin-remove-bottom">Administrador</p>
             </div>
         </div>
@@ -53,20 +53,26 @@
 
                     <div>
                         <h3>Detalles del perfil</h3>
-                        <div class="uk-flex">
-                            <p class="item-profile">Nombre </p><span class="uk-article-meta">Nombre del usuario</span>
+
+                        <!-- PEQUEÑO PROBLEMA -->
+                        <?php for ($i=0; $i < 1; $i++) { 
+                    $row = $result[$i];
+
+                    echo ' <div class="uk-flex">
+                            <p class="item-profile">Nombre </p><span class="uk-article-meta">'.$row['nombre'].'</span>
                         </div>
                         <div class="uk-flex">
-                            <p class="item-profile">Correo</p><span class="uk-article-meta">correo@gmail.com</span>
+                            <p class="item-profile">Correo</p><span class="uk-article-meta">'.$row['correo'].'</span>
                         </div>
                         <div class="uk-flex">
                             <p class="item-profile">Fecha de Registro</p><span class="uk-article-meta">20/11/2002</span>
                         </div>
                         <div class="uk-flex">
                             <p class="item-profile uk-margin-remove-bottom">Tipo de usuario</p><span
-                                class="uk-article-meta">Usuario tal</span>
+                                class="uk-article-meta">'.$row['rol'].'</span>
                         </div>
-                    </div>
+                    </div>';
+                    }?>
                 </li>
                 <li>
                     <form class="uk-form-horizontal uk-margin-large">
@@ -74,7 +80,7 @@
                         <div class="uk-margin">
                             <label class="uk-form-label" for="form-horizontal-text">Nombre</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input" id="form-horizontal-text" type="text" placeholder="Nombre">
+                                <input class="uk-input" id="form-horizontal-text" type="text" placeholder="Nombre" name="Nombre">
                             </div>
                         </div>
                         <div class="uk-margin">
@@ -154,28 +160,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php for ($i=1; $i <= 5; $i++) { ?>
-                    <tr>
-                        <td>
-                            <?php echo $i ?>
-                        </td>
-                        <td>Usuario</td>
-                        <td>usuario@gmail.com</td>
-                        <td>Administrador</td>
-                        <td class="uk-flex">
-                            <a href="#Update_user" uk-toggle uk-tooltip="title:Editar; delay: 500"
-                                class="uk-icon-button uk-margin-small-right" type="button"
-                                style=" border: none; cursor: pointer;">
-                                <span uk-icon="icon: file-edit"></span>
-                            </a>
-                            <a href="#eliminar_user" uk-toggle class="uk-icon-button uk-margin-small-right"
-                                uk-tooltip="title:Eliminar; delay: 500" type="button"
-                                style=" border: none; cursor: pointer;" type="button">
-                                <span uk-icon="icon: trash"></span>
-                            </a>
-                        </td>
-                    </tr>
-                    <?php } ?>
+                <?php
+
+                for ($i=0; $i < count($result); $i++) { 
+                    $row = $result[$i];
+                require ('complementos/tabla_usuario.php');
+                }
+
+            
+        ?>
                 </tbody>
             </table>
         </div>
@@ -190,35 +183,36 @@
                 <h2 class="uk-modal-title">REGISTRO USUARIO</h2>
             </div>
             <div class="uk-modal-body ">
-                <form class="uk-grid-small" uk-grid method="POST" action="../Controller/agregar_cosas.php">
+                <form class="uk-grid-small" uk-grid method="POST" action="../Controller/funcs/agregar_cosas.php">
                     <div class="uk-width-1-2">
-                        <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="Nombre"
+                        <input type="text" name="tipo" value="Usuarios" id="" style="display:none">
+                        <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre"
                             required>
                     </div>
                     <div class="uk-width-1-2@s">
-                        <input class="uk-input" type="text" placeholder="Apellido" aria-label="50" name="Apellido">
+                        <input class="uk-input" type="text" placeholder="Apellido" aria-label="50" name="apellido">
                     </div>
                     <div class="uk-width-1-2@s">
                         <input class="uk-input" type="text" placeholder="Correo Electronico" aria-label="100"
-                            name="nombre" required>
+                            name="correo" required>
                     </div>
                     <div class="uk-width-1-2@s">
-                        <select class="uk-select" id="form-stacked-select" name="categoria" required>
+                        <select class="uk-select" id="form-stacked-select" name="rol" required>
                             <option selected disabled>Tipo de usuario</option>
-                            <option>Dueño</option>
-                            <option>Administrador</option>
-                            <option>Cajero</option>
+                            <option value="Administrador">Administrador</option>
+                            <option value="Cajero">Cajero</option>
                         </select>
                     </div>
                     <div class="uk-width-1-1@s">
-                        <input class="uk-input" type="password" placeholder="Contraseña" aria-label="100" name="nombre"
+                        <input class="uk-input" type="password" placeholder="Contraseña" aria-label="100" name="password"
                             required>
                     </div>
+                    <input type="submit" id="subirxd" style="display:none">
                 </form>
             </div>
             <div class="uk-modal-footer uk-text-right">
                 <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
-                <button class="uk-button uk-button-secondary" type="submit">Guardar</button>
+                <label class="uk-button uk-button-secondary" type="submit" for="subirxd">Guardar</label>
             </div>
         </div>
     </div>
