@@ -3,7 +3,7 @@
     
     require('../../Model/Conexion.php');
 
-    if (isset($_POST['limite']) {
+    if (isset($_POST['limite'])) {
         $limite = $_POST['limite'];
     }
     else {
