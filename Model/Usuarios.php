@@ -17,6 +17,23 @@
             DB::__construct();
 
         }
+        function agregar() {
+            
+            $query = $this->conn->prepare("INSERT INTO usuarios VALUES(null,?, ?, ?, ?, ?, ?)");
+
+            $query->bindParam(1,$this->nombre);
+            $query->bindParam(2,$this->correo);
+            $query->bindParam(3,$this->password);
+            $query->bindParam(4,$this->rol);
+            $query->bindParam(5,$this->id);
+            $query->execute();
+        }
+        function borrar() {
+
+            $query = $this->conn->prepare("DELETE FROM usuarios WHERE ID=:id");
+            
+            $query->execute([':id'=>$this->id]);
+        }
         function search($n=0,$limite=9){
             // Al igual que la clase anterior, puede buscar segun muchos valores o solo algunos
             $query = "SELECT * FROM usuarios";
@@ -39,6 +56,18 @@
             }
             $consulta->execute();
             return $consulta->fetchAll();
+        }
+        function actualizar(){
+            
+            $query = $this->conn->prepare("UPDATE usuarios SET nombre=?, correo=?, password=?, rol=? WHERE id=?");
+            
+            $query->bindParam(1,$this->nombre);
+            $query->bindParam(2,$this->correo);
+            $query->bindParam(3,$this->password);
+            $query->bindParam(4,$this->rol);
+            $query->bindParam(5,$this->id);
+            
+            return $query->execute(); 
         }
         // public function search(){
         //     // $query = "SELECT * FROM usuarios WHERE";

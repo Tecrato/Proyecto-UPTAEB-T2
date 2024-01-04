@@ -34,7 +34,7 @@
                 <img width="160px" src="static/images/undraw_profile.svg" alt="">
             </div>
             <div>
-                <h3 class="uk-text-center ">Nombre</h3>
+                <h3 class="uk-text-center "><?php echo $_SESSION['usuario']; ?></h3>
                 <p class="uk-text-center uk-margin-remove-bottom">Administrador</p>
             </div>
         </div>
@@ -222,16 +222,16 @@
 
     <!-- ************************************ Modal de modificar ************************************ -->
 
-    <div id="Update_user" uk-modal>
+    <!-- <div id="Update_user" uk-modal>
         <div class="uk-modal-dialog">
             <button class="uk-modal-close-default" type="button" uk-close></button>
             <div class="uk-modal-header">
                 <h2 class="uk-modal-title">EDITAR USUARIO</h2>
             </div>
-            <div class="uk-modal-body ">
-                <form class="uk-grid-small" uk-grid method="POST" action="../Controller/agregar_cosas.php">
+            <div class="uk-modal-body">
+                <form class="uk-grid-small" uk-grid method="POST" action="../Controller/funcs/modificar_cosas.php">
                     <div class="uk-width-1-2">
-                        <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="Nombre"
+                        <input class="uk-input" type="text" placeholder="Nombre" value="" aria-label="100" name="Nombre"
                             required>
                     </div>
                     <div class="uk-width-1-2@s">
@@ -276,17 +276,24 @@
             <div class="uk-modal-body">
                 <p>Deseas eliminar este registro para siempre? No podras recuperlo mas adelante</p>
             </div>
-            <div class="uk-modal-footer uk-text-right">
-                <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
-                <button class="uk-button uk-button-secondary" type="button">Aceptar</button>
-            </div>
+            <form action="Controller/funcs/borrar_cosas.php" method="POST">
+            <input type=number value="<?php echo  $row['id']?>" name="ID" style="display:none">
+            <input type=text value="Usuarios" name="tipo" style="display:none">
+            <button class="uk-button uk-button-default uk-modal-close" type="button">
+                Cancelar
+            </button>
+            <button class="uk-button uk-button-secondary" type="submit">
+                Aceptar
+            </button>
+            <input type="submit" id="subirxd" style="display:none">
+        </form>
         </div>
-    </div>
+    </div> 
 
 
-    <!-- ****************************************************************************** -->
+    <!-- ******************************************************************************
 
 
-</main>
+</main> -->
 
 <?php require("../View/complementos/footer.php"); ?>

@@ -4,6 +4,7 @@
     require('../../Model/Proveedores.php');
     require('../../Model/Lotes.php');
     require('../../Model/Clientes.php');
+    require('../../Model/Usuarios.php');
     $tipo = $_POST['tipo']; // Depende de que es lo que queramos borrar
 
     
@@ -30,6 +31,12 @@
     }
     if ($tipo == 'cliente'){
         $clase = new Cliente($_POST['ID']); // Llama al modelo y le manda la instruccion
+        $clase->borrar();
+
+        header('Location:../../Clientes'); // Y vuelve a la pagina donde estaba antes
+    }
+    if ($tipo == 'Usuarios'){
+        $clase = new Usuarios($_POST['ID']); // Llama al modelo y le manda la instruccion
         $clase->borrar();
 
         header('Location:../../Clientes'); // Y vuelve a la pagina donde estaba antes
