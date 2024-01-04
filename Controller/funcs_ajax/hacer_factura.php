@@ -8,7 +8,6 @@
 	$var = json_decode($_POST['jsonString']);
 	print_r($var->IVA);
 
-	$clase = new Entrada();
 	$clase2 = new Registro_ventas(null,$var->monto_final,$var->metodo_pago,$var->id_cliente,$var->id_usuario,$var->IVA);
 	$clase2->agregar($var->detalles);
 

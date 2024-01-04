@@ -24,7 +24,7 @@
                     <div class="uk-margin">
                         <div class="uk-inline">
                             <span class="uk-form-icon" uk-icon="icon: user"></span>
-                            <input class="uk-input" placeholder="Correo Electronico" type="email" aria-label="Not clickable icon" name="correo" required>
+                            <input class="uk-input" placeholder="Correo Electronico" type="email" id="email" aria-label="Not clickable icon" name="correo" required>
                         </div>
                     </div>
 
@@ -34,7 +34,7 @@
                             <input class="uk-input" placeholder="Contraseña" type="password" aria-label="Not clickable icon" name="contraseña" required>
                         </div>
                     </div>
-                    <a class="uk-margin-small-bottom">¿Olvido su contraseña?</a>
+                    <a class="uk-margin-small-bottom" id="forget-pass">¿Olvido su contraseña?</a>
                     <button class="uk-button uk-button-default uk-margin-small-top" type="submit">Ingresar</button>
                 </form>
             </div>
@@ -45,6 +45,8 @@
     <script src="static/javascript/uikit.js"></script>
     <script src="static/javascript/uikit-icons.js"></script>
     <script src="static/javascript/aos.js"></script>
+    <script src="static/javascript/jquery.js"></script>
+    <script src="static/javascript/Ajax/recuperaPass.js"></script>
     
     <script>
         AOS.init({

@@ -13,8 +13,8 @@
                 <article class="uk-flex uk-flex-center Container-stats">
                     <span class="uk-margin-medium-right" uk-icon="icon: check; ratio: 3.5"></span>
                     <div>
-                        <h3>150</h3>
-                        <p>Cesta basica</p>
+                        <h3 id="nose">0.0</h3>
+                        <p>Precio Dolar Paralelo</p>
                     </div>
                 </article>
                 <article class="uk-flex uk-flex-center Container-stats">
@@ -58,3 +58,16 @@
 
 
 <?php require("../View/complementos/footer.php"); ?>
+<script>
+var respuesta
+$.ajax({
+    url:"https://exchangemonitor.net/ajax/widget-unique",
+    data: {"country":"ve","type":"enparalelovzla"},
+    success: response => {
+        console.log(response.price)
+        respuesta = response
+        document.getElementById('nose').innerHTML = JSON.parse(response).price
+    }
+})
+
+</script>

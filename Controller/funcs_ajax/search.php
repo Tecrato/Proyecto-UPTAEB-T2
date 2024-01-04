@@ -1,9 +1,9 @@
 <?php
-    // Con este archivo se insertan objotes en tablas del SQL   mysqli_fetch_array()
+    // Con este archivo se buscan datos de ciertas maneras, dependiendo de lo que pase como "randomnautica"
     
     require('../../Model/Conexion.php');
 
-    if (isset($_POST['limite']) and !empty($_POST['limite'])) {
+    if (isset($_POST['limite']) {
         $limite = $_POST['limite'];
     }
     else {

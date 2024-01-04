@@ -3,6 +3,8 @@
     require('../Model/Clientes.php');
     if (isset($_GET['p'])){
         $num = $_GET['p'];
+    }else {
+        $num = 0;
     }
 
     $result = new Cliente;
