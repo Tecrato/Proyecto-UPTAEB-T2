@@ -3,7 +3,7 @@
     if (isset($_GET['p'])){
         $num = $_GET['p'];
     }else {
-        header('Location:Proveedores?p=0');
+        $num = 0;
     }
     require('../Model/Proveedores.php');
     $result = new Proveedor;

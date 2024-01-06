@@ -35,7 +35,7 @@
 
         header('Location:../../Clientes'); // Y vuelve a la pagina donde estaba antes
     }
-    if ($tipo == 'Usuarios'){
+    if ($tipo == 'usuarios'){
         $clase = new Usuarios($_POST['ID']); // Llama al modelo y le manda la instruccion
         $clase->borrar();
 

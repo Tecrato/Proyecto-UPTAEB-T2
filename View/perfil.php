@@ -164,7 +164,7 @@
 
                 for ($i=0; $i < count($result); $i++) { 
                     $row = $result[$i];
-                require ('complementos/tabla_usuario.php');
+                    require ('complementos/tabla_usuario.php');
                 }
 
             

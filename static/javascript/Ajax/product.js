@@ -359,8 +359,7 @@ const cargarTargetProduct = () => {
                                     <h5 class="uk-margin-remove uk-text-bolder">NOMBRE</h5>
                                 </div>
                                 <div>
-                                    <h5
-                                        class="uk-margin-remove uk-text-emphasis Color-icon-detailProduct uk-text-bold uk-text-uppercase">
+                                    <h5 class="uk-margin-remove uk-text-emphasis Color-icon-detailProduct uk-text-bold uk-text-uppercase">
                                         ${item.nombre}</h5>
                                 </div>
                             </div>
@@ -383,8 +382,7 @@ const cargarTargetProduct = () => {
                                     <h5 class="uk-margin-remove uk-text-bolder">CATEGORIA</h5>
                                 </div>
                                 <div>
-                                    <h5
-                                        class="uk-margin-remove uk-text-emphasis Color-icon-detailProduct uk-text-bold uk-text-uppercase">
+                                    <h5 class="uk-margin-remove uk-text-emphasis Color-icon-detailProduct uk-text-bold uk-text-uppercase">
                                         ${item.categoria}</h5>
                                 </div>
                             </div>
@@ -395,8 +393,7 @@ const cargarTargetProduct = () => {
                                     <h5 class="uk-margin-remove uk-text-bolder">EXISTENCIA</h5>
                                 </div>
                                 <div>
-                                    <h5
-                                        class="uk-margin-remove uk-text-emphasis Color-icon-detailProduct uk-text-bold uk-text-uppercase">
+                                    <h5 class="uk-margin-remove uk-text-emphasis Color-icon-detailProduct uk-text-bold uk-text-uppercase">
                                         ${item.existencia}
                                     </h5>
                                 </div>
@@ -408,8 +405,7 @@ const cargarTargetProduct = () => {
                                     <h5 class="uk-margin-remove uk-text-bolder">PRECIO UNITARIO</h5>
                                 </div>
                                 <div>
-                                    <h5
-                                        class="uk-margin-remove uk-text-emphasis Color-icon-detailProduct uk-text-bold uk-text-uppercase">
+                                    <h5 class="uk-margin-remove uk-text-emphasis Color-icon-detailProduct uk-text-bold uk-text-uppercase">
                                         ${item.precio_venta}
                                         BS</h5>
                                 </div>
