@@ -1,6 +1,6 @@
 <?php
 
-    class Usuarios extends DB {
+    class Usuarios extends DB{
         private $id;
         private $nombre;
         private $correo;
@@ -8,7 +8,8 @@
         private $rol;
 
 
-        function __construct($id=null, $nombre=null,$correo=null,$password=null,$rol=null){            $this->id = $id;
+        function __construct($id=null, $nombre=null,$correo=null,$password=null,$rol=null){           
+            $this->id = $id;
             $this->nombre = $nombre;
             $this->correo = $correo;
             $this->password = $password;
@@ -16,47 +17,99 @@
             DB::__construct();
 
         }
-        public function search(){
-            // $query = "SELECT * FROM usuarios WHERE";
-            // if ($this->id != null){
-            //     $query->array_push(" ID=:id");
-            // }
-            // if ($this->nombre != null) {
-            //     if (count($querys) > 0){
-            //         $querys->array_push(" AND");
-            //     }
-            //     $querys->array_push(" Nombre=:nombre");
-            // }
-            // if ($this->correo != null) {
-            //     if (count($querys) > 0){
-            //         $querys->array_push(" AND");
-            //     }
-            //     array_push($querys," correo=:correo");
-            // }
-            // if ($this->password != null) {
-            //     if (count($querys) > 0){
-            //         array_push($querys," AND");
-            //     }
-            //     array_push($querys," contraseña=:passsword");
-            // }
-            // if ($this->rol != null) {
-            //     if (count($querys) > 0){
-            //         $querys->array_push(" AND");
-            //     }
-            //     $querys->array_push(" rol=:rol");
-            // }
+        function agregar() {
+            
+            $query = $this->conn->prepare("INSERT INTO usuarios VALUES(null,?, ?, ?, ?, ?, ?)");
 
-            // if (count($querys) < 1) {
-            //     $query = "SELECT * FROM usuarios";
-            // } else {
-            //     foreach ($querys as $q) {
-            //         $query = $query . $q;
-            //     }
-            // }
-            $consulta = $this->conn->prepare('SELECT * FROM usuarios');
+            $query->bindParam(1,$this->nombre);
+            $query->bindParam(2,$this->correo);
+            $query->bindParam(3,$this->password);
+            $query->bindParam(4,$this->rol);
+            $query->bindParam(5,$this->id);
+            $query->execute();
+        }
+        function borrar() {
+
+            $query = $this->conn->prepare("DELETE FROM usuarios WHERE ID=:id");
+            
+            $query->execute([':id'=>$this->id]);
+        }
+        function search($n=0,$limite=9){
+            // Al igual que la clase anterior, puede buscar segun muchos valores o solo algunos
+            $query = "SELECT * FROM usuarios";
+
+            if ($this->id != null){
+                $query = $query." WHERE id=:id";
+            }
+            $n = $n*$limite;
+            
+
+            $query = $query . " LIMIT :l OFFSET :n";
+            $consulta = $this->conn->prepare($query);
+
+
+            $consulta->bindParam(':l',$limite, PDO::PARAM_INT);
+            $consulta->bindParam(':n',$n, PDO::PARAM_INT);
+            
+            if ($this->id != null){
+                $consulta->bindParam(':id',$this->id, PDO::PARAM_INT);
+            }
             $consulta->execute();
             return $consulta->fetchAll();
         }
+        function actualizar(){
+            
+            $query = $this->conn->prepare("UPDATE usuarios SET nombre=?, correo=?, password=?, rol=? WHERE id=?");
+            
+            $query->bindParam(1,$this->nombre);
+            $query->bindParam(2,$this->correo);
+            $query->bindParam(3,$this->password);
+            $query->bindParam(4,$this->rol);
+            $query->bindParam(5,$this->id);
+            
+            return $query->execute(); 
+        }
+        // public function search(){
+        //     // $query = "SELECT * FROM usuarios WHERE";
+        //     // if ($this->id != null){
+        //     //     $query->array_push(" ID=:id");
+        //     // }
+        //     // if ($this->nombre != null) {
+        //     //     if (count($querys) > 0){
+        //     //         $querys->array_push(" AND");
+        //     //     }
+        //     //     $querys->array_push(" Nombre=:nombre");
+        //     // }
+        //     // if ($this->correo != null) {
+        //     //     if (count($querys) > 0){
+        //     //         $querys->array_push(" AND");
+        //     //     }
+        //     //     array_push($querys," correo=:correo");
+        //     // }
+        //     // if ($this->password != null) {
+        //     //     if (count($querys) > 0){
+        //     //         array_push($querys," AND");
+        //     //     }
+        //     //     array_push($querys," contraseña=:passsword");
+        //     // }
+        //     // if ($this->rol != null) {
+        //     //     if (count($querys) > 0){
+        //     //         $querys->array_push(" AND");
+        //     //     }
+        //     //     $querys->array_push(" rol=:rol");
+        //     // }
+
+        //     // if (count($querys) < 1) {
+        //     //     $query = "SELECT * FROM usuarios";
+        //     // } else {
+        //     //     foreach ($querys as $q) {
+        //     //         $query = $query . $q;
+        //     //     }
+        //     // }
+        //     $consulta = $this->conn->prepare('SELECT * FROM usuarios');
+        //     $consulta->execute();
+        //     return $consulta->fetchAll();
+        // }
         // Que de momento solo busca, ya que solo se podra loguear al sistema
         public function login(){
 
