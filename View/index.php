@@ -64,8 +64,6 @@ $.ajax({
     url:"https://exchangemonitor.net/ajax/widget-unique",
     data: {"country":"ve","type":"enparalelovzla"},
     success: response => {
-        console.log(response.price)
-        respuesta = response
         document.getElementById('nose').innerHTML = JSON.parse(response).price
     }
 })
