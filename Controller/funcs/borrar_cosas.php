@@ -1,14 +1,12 @@
 <?php
     require('../../Model/Conexion.php');
-    require('../../Model/Productos.php');
-    require('../../Model/Proveedores.php');
-    require('../../Model/Lotes.php');
-    require('../../Model/Clientes.php');
-    require('../../Model/Usuarios.php');
     $tipo = $_POST['tipo']; // Depende de que es lo que queramos borrar
 
     
     if ($tipo == 'producto'){
+        require('../../Model/Productos.php');
+        require('../../Model/Entradas.php');
+        require('../../Model/Proveedores.php');
         $clase = new Producto($_POST['ID']); // Llama al modelo y le manda la instruccion
         $clase_l = new Lote(id_producto:$_POST['ID']); // Llama al modelo y le manda la instruccion
         $imagen = $clase->search($_POST['ID'])[0]['imagen'];
@@ -21,6 +19,9 @@
         header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }
     if ($tipo == 'proveedor'){
+        require('../../Model/Proveedores.php');
+        require('../../Model/Entradas.php');
+        require('../../Model/Productos.php');
         $clase2 = new Lote(id_proveedor:$_POST['ID']); // Llama al modelo y le manda la instruccion
         $clase2->borrar();
         
@@ -30,15 +31,17 @@
         header('Location:../../Proveedores'); // Y vuelve a la pagina donde estaba antes
     }
     if ($tipo == 'cliente'){
+        require('../../Model/Clientes.php');
         $clase = new Cliente($_POST['ID']); // Llama al modelo y le manda la instruccion
         $clase->borrar();
 
         header('Location:../../Clientes'); // Y vuelve a la pagina donde estaba antes
     }
     if ($tipo == 'usuarios'){
-        $clase = new Usuarios($_POST['ID']); // Llama al modelo y le manda la instruccion
+        require('../../Model/Usuarios.php');
+        $clase = new Usuario($_POST['ID']); // Llama al modelo y le manda la instruccion
         $clase->borrar();
 
-        header('Location:../../Clientes'); // Y vuelve a la pagina donde estaba antes
+        header('Location:../../Administrar_perfil'); // Y vuelve a la pagina donde estaba antes
     }
 ?>

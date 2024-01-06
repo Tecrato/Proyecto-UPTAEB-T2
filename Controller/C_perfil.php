@@ -9,10 +9,10 @@
         $num = 0;
     }
 
-    $result = new Usuarios;
+    $result = new Usuario();
     $result = $result->search();
 
     include('../View/perfil.php');
-    
+
     echo '<script>var type_page = "usuario";</script>';
 ?>

@@ -7,7 +7,7 @@
     $correo = $_POST["correo"];
     $password = $_POST["contraseña"];
     
-    $c = new Usuarios(null,null,$correo,$password); // Llamamos al modelos y se busca el usuario
+    $c = new Usuario(null,null,$correo,$password); // Llamamos al modelos y se busca el usuario
     $result = $c->login();
 
     // print_r($result);

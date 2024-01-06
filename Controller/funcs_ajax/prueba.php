@@ -11,7 +11,7 @@
 
 	// ";
 	
-	$c = new Usuarios();
+	$c = new Usuario();
 	$resultado = $c->search();
 	print_r($resultado);
 ?>

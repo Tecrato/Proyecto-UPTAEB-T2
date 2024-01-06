@@ -10,7 +10,7 @@ echo '
         <a href="#Update_user'.$row['id'].'" uk-toggle uk-tooltip="title:Editar; delay: 500" class="uk-icon-button uk-margin-small-right" type="button" style=" border: none; cursor: pointer;">
             <span uk-icon="icon: file-edit"></span>
         </a>
-        <a href="#eliminar_user" uk-toggle class="uk-icon-button uk-margin-small-right" uk-tooltip="title:Eliminar; delay: 500" type="button" style=" border: none; cursor: pointer;" type="button">
+        <a href="#eliminar_user'.$row['id'].'" uk-toggle class="uk-icon-button uk-margin-small-right" uk-tooltip="title:Eliminar; delay: 500" type="button" style=" border: none; cursor: pointer;" type="button">
             <span uk-icon="icon: trash"></span>
         </a>
     </td>
@@ -27,30 +27,31 @@ echo '
         </div>
         <div class="uk-modal-body">
             <form class="uk-grid-small" method="POST" action="Controller/funcs/modificar_cosas.php" uk-grid>
+                <input type=number value="'.$row['id'].'" name="ID" style="display:none">
+                <input type=text value="usuarios" name="tipo" style="display:none">
                 <div class="uk-width-1-3@s">
-                    <input type="text" name="tipo" value="usuarios" id="" style="display:none">
-                    <input class="uk-input" type="text" placeholder="Nombre" value="'.$row['nombre'].'" aria-label="100" name="Nombre" required>
+                    <input class="uk-input" type="text" placeholder="Nombre" value="'.$row['nombre'].'" aria-label="100" name="nombre" required>
                 </div>
                 <div class="uk-width-1-3@s">
-                    <input class="uk-input" type="text" placeholder="Correo Electronico" value="'.$row['correo'].'"  aria-label="100"yname="nombre" required>
+                    <input class="uk-input" type="text" placeholder="Correo Electronico" value="'.$row['correo'].'"  aria-label="100" name="correo" required>
                 </div>
                 <div class="uk-width-1-2@s">
-                    <select class="uk-select" id="form-stacked-select" name="categoria" required>
-                        <option selected disabled>Seleccione un rol</option>
+                    <select class="uk-select" id="form-stacked-select" name="rol" required>
+                        <option value="'.$row['rol'].'" selected>Rol Actual</option>
                         <option value="1">Dueño</option>
                         <option value="2">Administrador</option>
                         <option value="3">Cajero</option>
                     </select>
                 </div>
                 <div class="uk-width-1-2@s">
-                    <input class="uk-input" type="text" placeholder="Contraseña" value="'.$row['password'].'" aria-label="100" name="nombre" required>
+                    <input class="uk-input" type="text" placeholder="Contraseña" value="'.$row['password'].'" aria-label="100" name="password" required>
                 </div>
                 <input type="submit" id="modificar'.$row['id'].'" style="display:none">
             </form>
         </div>
         <div class="uk-modal-footer uk-text-right">
             <button class="uk-button uk-button-default uk-modal-close" type="button" >Cancelar</button>
-            <label class="uk-button uk-button-secondary" for="modificar'.$row['id'].'" >Guardar</label>
+            <label class="uk-button uk-button-secondary" for="modificar'.$row['id'].'" >Aceptar</label>
         </div>
     </div>
 </div>
@@ -61,25 +62,25 @@ echo '
 
 <div id="eliminar_user'.$row['id'].'" uk-modal>
     <div class="uk-modal-dialog uk-margin-auto-vertical">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
         <div class="uk-modal-header uk-flex uk-flex-middle">
             <span class="uk-margin-small-right" uk-icon="icon: warning ; ratio: 2"></span>
             <h2 class="uk-modal-title uk-margin-remove-top">ELIMINAR</h2>
         </div>
+
         <div class="uk-modal-body">
             <p>Deseas eliminar este registro para siempre? No podras recuperlo mas adelante</p>
+            <form action="Controller/funcs/borrar_cosas.php" method="POST">
+                <input type=number value="'.$row['id'].'" name="ID" style="display:none">
+                <input type=text value="usuarios" name="tipo" style="display:none">
+                <input type="submit" id="eliminar'.$row['id'].'" style="display:none">
+            </form>
         </div>
+
         <div class="uk-modal-footer uk-text-right">
-        <form action="Controller/funcs/borrar_cosas.php" method="POST">
-            <input type=number value="'.$row['id'].'" name="ID" style="display:none">
-            <input type=text value="usuarios" name="tipo" style="display:none">
             <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
-            <button class="uk-button uk-button-secondary" type="submit">Aceptar</button>
-            <input type="submit" id="eliminar'.$row['id'].'" style="display:none">
-        </form>
-    </div>
-    <div class="uk-modal-footer uk-text-right">
-        <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
-        <label class="uk-button uk-button-secondary" type="submit" for="eliminar'.$row['id'].'">Aceptar</label>
+            <label class="uk-button uk-button-secondary" type="submit" for="eliminar'.$row['id'].'">Aceptar</label>
+        </div>
     </div>
 </div>
 ';

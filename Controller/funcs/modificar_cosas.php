@@ -51,6 +51,6 @@
         require('../../Model/Usuarios.php');
         $clase = new Usuario($_POST["ID"],$_POST["nombre"],$_POST["correo"],$_POST["password"],$_POST["rol"]); 
         $clase->actualizar();
-       Location('Location:../../Administrar_perfil'); // Y vuelve a la pagina donde estaba antes
+       header('Location:../../Administrar_perfil'); // Y vuelve a la pagina donde estaba antes
     };
 ?>

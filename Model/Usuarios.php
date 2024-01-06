@@ -1,6 +1,6 @@
 <?php
 
-    class Usuarios extends DB{
+    class Usuario extends DB{
         private $id;
         private $nombre;
         private $correo;
