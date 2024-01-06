@@ -26,27 +26,24 @@ echo '
             <h2 class="uk-modal-title">EDITAR USUARIO</h2>
         </div>
         <div class="uk-modal-body">
-            <form class="uk-grid-small" uk-grid method="POST" action="../Controller/funcs/modificar_cosas.php">
-                <div class="uk-width-1-2">
-                    <input type="text" name="tipo" value="Usuarios" id="" style="display:none">
+            <form class="uk-grid-small" method="POST" action="../Controller/funcs/modificar_cosas.php" uk-grid>
+                <div class="uk-width-1-3@s">
+                    <input type="text" name="tipo" value="usuarios" id="" style="display:none">
                     <input class="uk-input" type="text" placeholder="Nombre" value="'.$row['nombre'].'" aria-label="100" name="Nombre" required>
                 </div>
-                <div class="uk-width-1-2@s">
-                    <input class="uk-input" type="text" placeholder="Apellido" value="'.$row['nombre'].'" aria-label="50" name="Apellido">
-                </div>
-                <div class="uk-width-1-2@s">
+                <div class="uk-width-1-3@s">
                     <input class="uk-input" type="text" placeholder="Correo Electronico" value="'.$row['correo'].'"  aria-label="100"yname="nombre" required>
                 </div>
                 <div class="uk-width-1-2@s">
                     <select class="uk-select" id="form-stacked-select" name="categoria" required>
                         <option selected disabled>Seleccione un rol</option>
-                        <option >Dueño</option>
-                        <option>Administrador</option>
-                        <option>Cajero</option>
+                        <option value="1">Dueño</option>
+                        <option value="2">Administrador</option>
+                        <option value="3">Cajero</option>
                     </select>
                 </div>
-                <div class="uk-width-1-1@s">
-                    <input class="uk-input" type="password" placeholder="Contraseña" value="'.$row['password'].'" aria-label="100" name="nombre" required>
+                <div class="uk-width-1-2@s">
+                    <input class="uk-input" type="text" placeholder="Contraseña" value="'.$row['password'].'" aria-label="100" name="nombre" required>
                 </div>
                 <input type="submit" id="modificar'.$row['id'].'" style="display:none">
             </form>
@@ -62,7 +59,7 @@ echo '
 
 <!-- **************************Modal de confirmacion de eliminacion************************** -->
 
-<div id="eliminar_user'.$row['id'].'" class="uk-flex-top" uk-modal>
+<div id="eliminar_user'.$row['id'].'" uk-modal>
     <div class="uk-modal-dialog uk-margin-auto-vertical">
         <div class="uk-modal-header uk-flex uk-flex-middle">
             <span class="uk-margin-small-right" uk-icon="icon: warning ; ratio: 2"></span>

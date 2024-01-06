@@ -14,8 +14,8 @@
 </head>
 <?php 
 echo "
-<script>var sesion_user = '".$_SESSION['usuario']."'</script>
-<script>var sesionID = ".$_SESSION['id']."</script>
+<script>var session_user_name = '".$_SESSION['user_name']."'</script>
+<script>const session_user_id = ".$_SESSION['user_id']."</script>
 
 "
 ?>
@@ -81,11 +81,11 @@ echo "
                                 <a href="#">
                                     <!-- <span class="uk-icon uk-margin-small-right Bg-user" uk-icon="icon: user; ratio: 1.5"></span> -->
                                     <img class="uk-preserve-width uk-border-circle uk-margin-small-right" src="static/images/undraw_profile.svg" width="40" height="40" alt="">
-                                    <p class="Link-nav"><?php echo $_SESSION['usuario']; ?></p>
+                                    <p class="Link-nav"><?php echo $_SESSION['user_name']; ?></p>
                                 </a>
                                 <div class="uk-dropdown uk-border-rounded">
                                     <ul class="uk-nav uk-dropdown-nav ">
-                                        <li class="uk-active"><a href="#"><?php echo $_SESSION['usuario']; ?></a></li>
+                                        <li class="uk-active"><a href="#"><?php echo $_SESSION['user_name']; ?></a></li>
                                         <li>
                                             <a class="uk-padding-remove-vertical" href="Administrar_perfil">
                                                 <span class="uk-margin-small-right" uk-icon="cog"></span>
@@ -228,7 +228,7 @@ echo "
                 <li class="uk-active">
                     <a href="#">
                         <img class="uk-preserve-width uk-border-circle uk-margin-small-right" src="static/images/undraw_profile.svg" width="40" height="40" alt="">
-                        <p><?php echo $_SESSION['usuario']; ?></p>
+                        <p><?php echo $_SESSION['user_name']; ?></p>
                     </a>
                 </li>
                 <li class="uk-parent">

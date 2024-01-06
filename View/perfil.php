@@ -34,7 +34,7 @@
                 <img width="160px" src="static/images/undraw_profile.svg" alt="">
             </div>
             <div>
-                <h3 class="uk-text-center "><?php echo $_SESSION['usuario']; ?></h3>
+                <h3 class="uk-text-center "><?php echo $_SESSION['user_name']; ?></h3>
                 <p class="uk-text-center uk-margin-remove-bottom">Administrador</p>
             </div>
         </div>
@@ -56,23 +56,21 @@
 
                         <!-- PEQUEÑO PROBLEMA -->
                         <?php for ($i=0; $i < 1; $i++) { 
-                    $row = $result[$i];
+                            $row = $result[$_SESSION['user_id']];
 
-                    echo ' <div class="uk-flex">
-                            <p class="item-profile">Nombre </p><span class="uk-article-meta">'.$row['nombre'].'</span>
-                        </div>
-                        <div class="uk-flex">
-                            <p class="item-profile">Correo</p><span class="uk-article-meta">'.$row['correo'].'</span>
-                        </div>
-                        <div class="uk-flex">
-                            <p class="item-profile">Fecha de Registro</p><span class="uk-article-meta">20/11/2002</span>
-                        </div>
-                        <div class="uk-flex">
-                            <p class="item-profile uk-margin-remove-bottom">Tipo de usuario</p><span
-                                class="uk-article-meta">'.$row['rol'].'</span>
-                        </div>
-                    </div>';
-                    }?>
+                            echo '
+                                <div class="uk-flex">
+                                    <p class="item-profile">Nombre </p><span class="uk-article-meta">'.$row['nombre'].'</span>
+                                </div>
+                                <div class="uk-flex">
+                                    <p class="item-profile">Correo</p><span class="uk-article-meta">'.$row['correo'].'</span>
+                                </div>
+                                <div class="uk-flex">
+                                    <p class="item-profile uk-margin-remove-bottom">Tipo de usuario</p>
+                                    <span class="uk-article-meta">'.$row['rol'].'</span>
+                                </div>';
+                        }?>
+                    </div>
                 </li>
                 <li>
                     <form class="uk-form-horizontal uk-margin-large">
@@ -83,13 +81,6 @@
                                 <input class="uk-input" id="form-horizontal-text" type="text" placeholder="Nombre" name="Nombre">
                             </div>
                         </div>
-                        <div class="uk-margin">
-                            <label class="uk-form-label" for="form-horizontal-text">Apellido</label>
-                            <div class="uk-form-controls">
-                                <input class="uk-input" id="form-horizontal-text" type="text" placeholder="Apellido">
-                            </div>
-                        </div>
-
                         <div class="uk-margin">
                             <label class="uk-form-label" for="form-horizontal-text">Correo</label>
                             <div class="uk-form-controls">
