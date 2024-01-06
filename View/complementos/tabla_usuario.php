@@ -26,7 +26,7 @@ echo '
             <h2 class="uk-modal-title">EDITAR USUARIO</h2>
         </div>
         <div class="uk-modal-body">
-            <form class="uk-grid-small" method="POST" action="../Controller/funcs/modificar_cosas.php" uk-grid>
+            <form class="uk-grid-small" method="POST" action="Controller/funcs/modificar_cosas.php" uk-grid>
                 <div class="uk-width-1-3@s">
                     <input type="text" name="tipo" value="usuarios" id="" style="display:none">
                     <input class="uk-input" type="text" placeholder="Nombre" value="'.$row['nombre'].'" aria-label="100" name="Nombre" required>
