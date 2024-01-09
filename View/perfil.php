@@ -35,7 +35,7 @@
             </div>
             <div>
                 <h3 class="uk-text-center "><?php echo $_SESSION['user_name']; ?></h3>
-                <p class="uk-text-center uk-margin-remove-bottom">Administrador</p>
+                <p class="uk-text-center uk-margin-remove-bottom"><?php echo $ROLES[$tu['rol']]; ?></p>
             </div>
         </div>
 
@@ -55,21 +55,20 @@
                         <h3>Detalles del perfil</h3>
 
                         <!-- PEQUEÑO PROBLEMA -->
-                        <?php for ($i=0; $i < 1; $i++) { 
-                            $row = $result[$_SESSION['user_id']];
-
-                            echo '
-                                <div class="uk-flex">
-                                    <p class="item-profile">Nombre </p><span class="uk-article-meta">'.$row['nombre'].'</span>
-                                </div>
-                                <div class="uk-flex">
-                                    <p class="item-profile">Correo</p><span class="uk-article-meta">'.$row['correo'].'</span>
-                                </div>
-                                <div class="uk-flex">
-                                    <p class="item-profile uk-margin-remove-bottom">Tipo de usuario</p>
-                                    <span class="uk-article-meta">'.$row['rol'].'</span>
-                                </div>';
-                        }?>
+                        <?php 
+                        
+                        echo '
+                            <div class="uk-flex">
+                                <p class="item-profile">Nombre </p><span class="uk-article-meta">'.$tu['nombre'].'</span>
+                            </div>
+                            <div class="uk-flex">
+                                <p class="item-profile">Correo</p><span class="uk-article-meta">'.$tu['correo'].'</span>
+                            </div>
+                            <div class="uk-flex">
+                                <p class="item-profile uk-margin-remove-bottom">Tipo de usuario</p>
+                                <span class="uk-article-meta">'.$ROLES[$tu['rol']].'</span>
+                            </div>';
+                        ?>
                     </div>
                 </li>
                 <li>
@@ -282,9 +281,6 @@
     </div> 
 
 
-    <!-- ******************************************************************************
-
-
-</main> -->
+</main>
 
 <?php require("../View/complementos/footer.php"); ?>

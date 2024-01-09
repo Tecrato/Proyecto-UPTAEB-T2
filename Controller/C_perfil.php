@@ -1,7 +1,12 @@
 <?php
+    include("./funcs/verificar.php");
     require('../Model/Conexion.php');
     require("../Model/Usuarios.php");
 
+    $ROLES = [
+        '1' => 'Dueño',
+        '2' => 'Cajero'
+    ];
 
     if (isset($_GET['p'])){
         $num = $_GET['p'];
@@ -9,8 +14,11 @@
         $num = 0;
     }
 
+
     $result = new Usuario();
     $result = $result->search();
+    $tu = new Usuario(id:$_SESSION['user_id']);
+    $tu = $tu->search()[0];
 
     include('../View/perfil.php');
 

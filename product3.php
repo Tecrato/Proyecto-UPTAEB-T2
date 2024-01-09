@@ -1,14 +1,10 @@
-<?php require("../View/complementos/header.php"); ?>
-
-
-
-
+<?php require('./layout/header.php'); ?>
 
 <main class="Bg-Main-home2 uk-padding uk-padding-remove-bottom main-Product uk-light">
     <section class="">
         <ul uk-tab>
-            <li><a href="#"><img class="uk-preserve-width uk-margin-small-right" src="./static/images/cajas (2).png" width="30" height="30" alt="">PRODUCTOS</a></li>
-            <li><a href="#"><img class="uk-preserve-width uk-margin-small-right" src="./static/images/suministros.png" width="32" height="32" alt="">ENTRADAS</a></li>
+            <li><a href="#"><img class="uk-preserve-width uk-margin-small-right" src="./Image/cajas (2).png" width="30" height="30" alt="">PRODUCTOS</a></li>
+            <li><a href="#"><img class="uk-preserve-width uk-margin-small-right" src="./Image/suministros.png" width="32" height="32" alt="">ENTRADAS</a></li>
         </ul>
 
         <ul class="uk-switcher uk-margin">
@@ -28,7 +24,7 @@
                                         <div class="uk-margin-left">
                                             <a href="#" uk-icon="icon: print; ratio: 1.5"></a>
                                             <a href="#" class="uk-margin-small-left">
-                                                <img class="btn_agg" src="./static/images/btn_agg.png" alt="" width="35px">
+                                                <img class="btn_agg" src="./Image/btn_agg.png" alt="" width="35px">
                                             </a>
                                         </div>
                                     </div>
@@ -101,7 +97,7 @@
                                             <div class="uk-card uk-card-default uk-background-secondary uk-light uk-border-rounded">
                                                 <div class="uk-visible-toggle" tabindex="-1">
                                                     <article class="uk-transition-toggle">
-                                                        <img src="./static/images/banner_productos.png" alt="" class="img_product" width="150px">
+                                                        <img src="./Image/banner_productos.png" alt="" class="img_product" width="150px">
                                                         <div class="uk-position-top-right uk-transition-fade uk-position-small">
                                                             <a href="#modal-details-product" uk-toggle>
                                                                 <span class="Bg-info" uk-icon="icon: info; ratio: 1.5"></span>
@@ -112,7 +108,7 @@
                                                                 <li><a href="#" class="uk-icon-button" uk-icon="icon: trash"></a></li>
                                                                 <li><a href="#" class="uk-icon-button" uk-icon="icon: file-edit"></a></li>
                                                                 <li><a href="#">
-                                                                        <img src="./static/images/btn_lote2.png" alt="" width="35px">
+                                                                        <img src="./Image/btn_lote2.png" alt="" width="35px">
                                                                     </a></li>
                                                             </ul>
                                                         </div>
@@ -145,7 +141,7 @@
                                 <div class="uk-accordion-content">
                                     <?php for ($i = 0; $i < 4; $i++) { ?>
                                         <h4 class="uk-margin-medium-left uk-margin-small-top uk-margin-small-bottom">
-                                            <img src="./static/images/cajas (2).png" width="30" alt="">
+                                            <img src="./Image/cajas (2).png" width="30" alt="">
                                             <span class="uk-margin-small-left uk-text-bold">harina</span>
                                         </h4>
                                         <hr class="uk-margin-remove">
@@ -164,7 +160,7 @@
                                             <div class="target_supplier uk-card uk-card-default uk-flex uk-padding-small uk-background-secondary uk-light uk-border-rounded">
                                                 <div>
                                                     <div class="img_proveedor_container uk-border-rounded">
-                                                        <img src="./static/images/btn_lote2.png" alt="" width="90px" />
+                                                        <img src="./Image//btn_lote2.png" alt="" width="90px" />
                                                         <h5 class="uk-margin-remove-left uk-margin-remove-right uk-margin-small-top uk-margin-small-bottom uk-text-center uk-text-bold">
                                                             ENTRADA NRO 1
                                                         </h5>
@@ -220,7 +216,7 @@
                                 </div>
                             </section>
                             <div>
-                                <?php include("../View/complementos/btn_pag.html"); ?>
+                                aqui va la numeracion de pagina
                             </div>
                         </div>
                     </article>
@@ -228,8 +224,11 @@
             </li>
         </ul>
     </section>
-        
+
 
 </main>
 
-<?php require("../View/complementos/footer.php");?>
+
+
+
+<?php require('./layout/footer.php'); ?>
