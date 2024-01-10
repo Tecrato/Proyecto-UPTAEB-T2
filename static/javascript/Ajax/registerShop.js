@@ -54,7 +54,7 @@ if (screen > 1290) {
                                               for="form-horizontal-select">VENDEDOR</label>
                                           <div class="uk-form-controls" style="margin-left: 130px; !important;">
                                               <input class="uk-input Casher uk-form-width-medium" type="text"
-                                                  value="${sesion_user}" id="${sesionID}" disabled>
+                                                  value="${sesion_user_name}" id="${sesion_user_id}" disabled>
                                           </div>
                                       </div>
 

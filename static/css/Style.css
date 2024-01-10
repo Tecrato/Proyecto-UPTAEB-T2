@@ -1,6 +1,6 @@
-                            /*-----------------------clases para trabajar en JS-------------------------------*/
+
 .invisible{
-    display: none !important;
+    display: none;
 }
 .succesc{
     color: #15ff00 !important;
@@ -9,16 +9,6 @@
 .danger{
     color: #ff0000 !important;
     border-color: #ff0000 !important;
-}
-.container_marca_agua{
-    display: flex;
-    align-items: center;
-    height: 365px;
-}
-.marca_agua{
-    width: 240px;
-    /* margin-top: ; */
-    opacity: 0.1;
 }
                                 
                                 /*-----------------------Estilos del Header-------------------------------*/
@@ -57,7 +47,7 @@
     align-items: center;
 }
 .Bg-info{
-    background-color: #009640 !important;
+    background-color: rgb(0, 150, 64) !important;
     width: 35px;
     height: 35px;
     border-radius: 50%;
@@ -129,10 +119,11 @@
 
 .Bg-Main-home{
     /* background-color: #111; */
-    background-image: url(../images/fondo5.jpg);
+    background-image: url('../images/fondo5.jpg');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    padding-bottom: 20px;
 }
 .Container-stats{
     width: 300px;
@@ -143,13 +134,17 @@
 .Card-items{
     min-width: 400px;
 }
-
-     /*-----------------------    Estilos del Main de product -------------------------------*/
-.img_product{
-    width: 255px;
-    height: 345px;
-    object-fit: cover;
+.main-index{
+    background-image: url(../images/fondo5.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
+
+
+
+     /*-----------------------    Estilos del Main de product y Estilos del main registro de ventas -------------------------------*/
+
 .Section-search{
     padding: 5px;
     border-radius: 5px;
@@ -213,7 +208,7 @@
     border-radius: 5px;
 }   
 .tag_modal-detailProduct-2{
-    background-color: rgb(16, 103, 51);
+    background-color: #106733;
     padding: 4px;
     border-radius: 5px;
 }  
@@ -264,14 +259,27 @@
     .margin-img-detailPoduct{
         margin-bottom: 12px;
     }
+    .target-detail-fact{
+        width: 250px !important;
+    }
+    .container-entradas{
+        flex-wrap: wrap;
+    }
+    .state-entrys{
+        width: 125px !important;
+    }
+    .search-responsive-product{
+        width: 130px !important;
+    }
+    .container-view-order{
+        width: 300px;
+    }
 }
 @media (min-width: 376px) and (max-width: 767px){
     .form-search{
         max-width: 200px !important;
     }
-    .target-detail-fact{
-        width: 380px !important;
-    }
+    
    .Options-nav{
     width: 135px !important;
     /* margin-left: 5px; */
@@ -300,6 +308,20 @@
     .textTag_detail-Product{
         font-size: 12px;
     }
+    .container-entradas{
+        flex-wrap: wrap;
+    }
+    .state-entrys{
+        width: 135px !important;
+    }
+    .container-view-order{
+        width: 300px;
+    }
+    .filter_product{
+        display: block !important;
+        margin-left: 10px;
+        margin-top: 15px;
+    }
 }
 @media (min-width: 768px) and (max-width: 939px){
     .img_product{
@@ -312,6 +334,9 @@
     .gap_nav{
         gap: 40px !important;
     }
+    .container-entradas{
+        flex-wrap: wrap;
+    }
 }
 @media (min-width: 375px) and (max-width: 423px){
     .Nav-img-2{
@@ -320,13 +345,13 @@
     .gap_nav{
         gap: 25px !important;
     }
-}
-@media (max-width: 475px){
-    .icon{
-        display: none;
+    .search-responsive-product{
+        width: 130px !important;
+    }
+    .container-view-order{
+        width: 300px;
     }
 }
-
                 /*-----------------------    Estilos del main registro de ventas -------------------------------*/
 
 .Client_register:hover{
@@ -335,47 +360,22 @@
     transition: background 300ms all;
     color: rgb(140, 140, 140) !important;
 }
-.pointer{
-    cursor: pointer;
+.main-statistics{
+    background-image: url('../images/fondo5.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
-.btn-close{
-    position: absolute;
-    top: 75px;
-    left: 270px;
-    z-index: 1;
-    cursor: pointer;
-}
-
 
 @media (min-width: 325px) and (max-width: 640px){
     .container_table_fact-responsive{
         height: 300px !important;
     }    
-    /* .btn-close{
-        position: absolute;
-        top: 75px;
-        left: 270px;
-        z-index: 1;
-    } */
 }
 @media (min-width: 1024px) and (max-width: 1290px){
     .container_table_fact-responsive{
         height: 575px !important;
     }  
-    .btn-close{
-        position: absolute;
-        top: 75px;
-        left: 345px;
-        z-index: 1;
-    }
-}
-@media (min-width: 1400px) and (max-width: 1500px){
-    .btn-close{
-        position: absolute;
-        top: 75px;
-        left: 235px;
-        z-index: 1;
-    }
 }
 @media (min-width: 325px) and (max-width: 1290px){
     .Plus-client{
@@ -413,21 +413,22 @@
     border-right: 1px solid rgba(170, 170, 170, 0.244);
     padding: 10px 0px 10px 30px;
 }
+.main-viewfactura{
+    background-image: url('../images/fondo5.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
 .Nav-size{
     width: 209px;
 }
 .Target_factura{
     padding: 15px 15px 15px 10px;
     transition: border 100ms ease;
-    cursor: pointer;
 }
 .Target_factura:hover{
     border-left: 8px solid #007D35;
 }
-.Target_factura:focus{
-    border-left: 8px solid #007D35;
-}
-
 .text_fact_info{
     font-size: 10px;
     text-transform: uppercase;
@@ -457,13 +458,11 @@
 .container_fact{
     border-right: 1px solid rgba(170, 170, 170, 0.112);
     height: 700px;
-    width: 350px;
 }
 .iframe{
     width: 100%;
     height: 600px;
 }
-
 
                          /*-----------------------    Estilos del main informes -------------------------------*/
 .Gap{
@@ -543,6 +542,12 @@
                                  
 .item-profile{
     width: 200px;
+}
+.main-perfil{
+    background-image: url('../images/fondo5.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 .item_profile-target{
     width: 20%;
@@ -642,9 +647,6 @@
 @media (min-width: 350px) and (max-width: 425px){
     .img_proveedor_container > img{
       width: 80px;
-    }
-    .target_supplier{
-        width: 328px !important;
     }
     .Container-details-suppliers{
         width: 180px !important;

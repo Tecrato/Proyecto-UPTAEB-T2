@@ -1,4 +1,5 @@
 <?php
+    include("./funcs/verificar.php");
 
     if (isset($_GET['p'])){
         $num = $_GET['p'];

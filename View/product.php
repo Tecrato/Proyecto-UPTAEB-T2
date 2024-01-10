@@ -1,122 +1,234 @@
 <?php require("../View/complementos/header.php"); ?>
 
-<main class="Bg-Main-home2 uk-padding uk-padding-remove-bottom">
 
-    <section class="uk-flex uk-flex-center">
-        <article class="uk-flex uk-flex-around cont-search uk-flex-middle uk-background-secondary Section-search">
-            <div class="Section-search">
-                <div class="uk-flex uk-flex-center uk-flex-middle">
-                    <div class="uk-light">
-                        <form class="uk-search uk-search-default">
-                            <span uk-search-icon></span>
-                            <input class="uk-search-input form-search uk-border-rounded" type="search" placeholder="Buscar" aria-label="Search">
-                        </form>
-                    </div>
-                </div>
-            </div>
 
-            <div class="uk-flex uk-flex-middle Options-nav">
-                <nav uk-dropnav="mode: click">
-                    <ul class="uk-subnav uk-margin-remove">
-                        <li>
-                            <div class="uk-light">
-                                <a href="" class="uk-icon-link icon-filter" uk-icon="icon: filter; ratio: 1.5"></a>
-                            </div>
-                            <div class="uk-dropdown uk-border-rounded">
-                                <ul class="uk-nav uk-dropdown-nav uk-border-rounded">
-                                    <li class="uk-margin-small-bottom"><strong>FILTRAR</strong></li>
-                                    <li>
-                                        <div class="uk-dark">
-                                            <form>
-                                                <div class="">
-                                                    <div class="uk-flex uk-flex-middle">
-                                                        <span class="uk-margin-small-right uk-text-bold">De</span>
-                                                        <input class="uk-input" type="date" placeholder="100" aria-label="100">
-                                                    </div>
-                                                    <div class="uk-flex uk-flex-middle uk-margin-top">
-                                                        <span class="uk-margin-small-right uk-text-bold">Hasta</span>
-                                                        <input class="uk-input" type="date" placeholder="100" aria-label="100">
-                                                    </div>
-                                                </div>
-                                                <div class="uk-margin-top">
-                                                    <div class="uk-flex uk-flex-middle">
-                                                        <span class="uk-margin-small-right uk-text-bold">Proveedor</span>
-                                                        <select class="uk-select" id="form-stacked-select" name="distribuidor" required>
-                                                            <option selected disabled>Proveedor</option>
-                                                            <option>Option 01</option>
-                                                            <option>Option 02</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="uk-margin-top">
-                                                    <div>
-                                                        <p class="uk-text-bold">Categoria</p>
-                                                    </div>
-                                                    <div class="">
-                                                        <label for="name">Categoria 1</label>
-                                                        <input type="radio" name="name" id="">
-                                                        <br>
-                                                        <label for="name">Categoria 2</label>
-                                                        <input type="radio" name="name" id="">
-                                                        <br>
-                                                        <label for="name">Categoria 3</label>
-                                                        <input type="radio" name="name" id="">
-                                                        <br>
-                                                        <label for="name">Categoria 4</label>
-                                                        <input type="radio" name="name" id="">
-                                                    </div>
-                                                </div>
-                                                <div class="uk-margin-top">
-                                                    <div class="uk-flex uk-flex-center">
-                                                        <input class="uk-button uk-button-secondary" type="submit" value="APLICAR">
-                                                    </div>
-                                                </div>
+
+
+<main class="Bg-Main-home2 uk-padding uk-padding-remove-bottom main-Product uk-light">
+    <section class="">
+        <ul uk-tab>
+            <li><a href="#"><img class="uk-preserve-width uk-margin-small-right" src="./static/images/cajas (2).png" width="30" height="30" alt="">PRODUCTOS</a></li>
+            <li><a href="#"><img class="uk-preserve-width uk-margin-small-right" src="./static/images/suministros.png" width="32" height="32" alt="">ENTRADAS</a></li>
+        </ul>
+
+        <ul class="uk-switcher uk-margin">
+            <li>
+                <section class="uk-background-secondary uk-padding uk-border-rounded" uk-filter="target: .js-filter">
+                    <div>
+                        <div class="uk-flex uk-flex-between" style="align-items: baseline;" >
+                            <div class="uk-flex uk-flex-wrap" style="align-items: baseline;">
+                                <div class="uk-margin-right">
+                                    <div class="uk-flex uk-flex-wrap">
+                                        <div class="uk-margin formDelete">
+                                            <form class="uk-search uk-search-default search-responsive-product">
+                                                <span class="uk-search-icon-flip" uk-search-icon></span>
+                                                <input class="uk-search-input" type="search" placeholder="Buscar" aria-label="Search">
                                             </form>
                                         </div>
-                                    </li>
-                                </ul>
+                                        <div class="uk-margin-left">
+                                            <a href="#" uk-icon="icon: print; ratio: 1.5"></a>
+                                            <a href="#" class="uk-margin-small-left">
+                                                <img class="btn_agg" src="./static/images/btn_agg.png" alt="" width="35px">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <nav uk-dropnav="mode: click">
+                                    <ul class="uk-subnav filter_product" uk-margin>
+                                        <li class="uk-active" uk-filter-control><a href="#">TODO</a></li>
+                                        <li>
+                                            <a href="#">CATEGORIA <span uk-drop-parent-icon></span></a>
+                                            <div class="uk-dropdown">
+                                                <ul class="uk-nav uk-dropdown-nav">
+                                                    <li uk-filter-control="filter: [data-color='white']; group: data-color"><a href="#">White</a></li>
+                                                    <li uk-filter-control="filter: [data-color='blue']; group: data-color"><a href="#">Blue</a></li>
+                                                    <li uk-filter-control="filter: [data-color='black']; group: data-color"><a href="#">Black</a></li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <a href="#">PROVEEDOR <span uk-drop-parent-icon></span></a>
+                                            <div class="uk-dropdown">
+                                                <ul class="uk-nav uk-dropdown-nav">
+                                                    <li uk-filter-control="filter: [data-size='small']; group: size"><a href="#">Small</a></li>
+                                                    <li uk-filter-control="filter: [data-size='medium']; group: size"><a href="#">Medium</a></li>
+                                                    <li uk-filter-control="filter: [data-size='large']; group: size"><a href="#">Large</a></li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <a href="#">MARCA <span uk-drop-parent-icon></span></a>
+                                            <div class="uk-dropdown">
+                                                <ul class="uk-nav uk-dropdown-nav">
+                                                    <li uk-filter-control="filter: [data-size='small']; group: size"><a href="#">Small</a></li>
+                                                    <li uk-filter-control="filter: [data-size='medium']; group: size"><a href="#">Medium</a></li>
+                                                    <li uk-filter-control="filter: [data-size='large']; group: size"><a href="#">Large</a></li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <a href="#">PRESENTACION <span uk-drop-parent-icon></span></a>
+                                            <div class="uk-dropdown">
+                                                <ul class="uk-nav uk-dropdown-nav">
+                                                    <li uk-filter-control="filter: [data-size='small']; group: size"><a href="#">Small</a></li>
+                                                    <li uk-filter-control="filter: [data-size='medium']; group: size"><a href="#">Medium</a></li>
+                                                    <li uk-filter-control="filter: [data-size='large']; group: size"><a href="#">Large</a></li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </nav>
                             </div>
-                        </li>
-                    </ul>
-                </nav>
+
+                            <div class="uk-flex uk-margin-left container-view-order">
+                                <div class="uk-margin-right">
+                                    <span class="uk-icon-link" id="list" uk-icon="icon: list; ratio: 1.3" style="cursor: pointer;"></span>
+                                </div>
+                                <div class="uk-width-auto uk-text-nowrap flechas">
+                                    <span class="uk-active" uk-filter-control="sort: data-name"><a class="uk-icon-link" href="#" uk-icon="icon: arrow-down" aria-label="Sort ascending"></a></span>
+                                    <span uk-filter-control="sort: data-name; order: desc"><a class="uk-icon-link" href="#" uk-icon="icon: arrow-up" aria-label="Sort descending"></a></span>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="uk-margin-remove">
 
 
-                <div class="uk-flex uk-flex-center uk-flex-middle uk-margin-small-left uk-margin-small-right uk-light cont_imprimir">
-                    <a href="InventarioPDF" target="_blank" class="uk-icon-link" uk-tooltip="title:Imprimir Inventario; delay: 500">
-                        <span uk-icon="icon: print; ratio: 1.7"></span>
-                    </a>
-                </div>
+                        <div>
+                            <section class="uk-light uk-padding uk-padding-remove-left uk-padding-remove-right uk-grid-small dataTable" uk-grid>
+                                <div class="[email protected] uk-grid-large uk-flex-center dataTable2" uk-grid uk-height-match="target: > div > .uk-card">
+                                    <?php for ($i = 0; $i < 10; $i++) { ?>
+                                        <div>
+                                            <div class="uk-card uk-card-default uk-background-secondary uk-light uk-border-rounded">
+                                                <div class="uk-visible-toggle" tabindex="-1">
+                                                    <article class="uk-transition-toggle">
+                                                        <img src="./static/images/banner_productos.png" alt="" class="img_product" width="150px">
+                                                        <div class="uk-position-top-right uk-transition-fade uk-position-small">
+                                                            <a href="#modal-details-product" uk-toggle>
+                                                                <span class="Bg-info" uk-icon="icon: info; ratio: 1.5"></span>
+                                                            </a>
+                                                        </div>
+                                                        <div class="uk-position-bottom-center ">
+                                                            <ul class=" uk-iconnav uk-background-secondary uk-transition-slide-bottom-small" style="width: 116%; padding: 5px;">
+                                                                <li><a href="#" class="uk-icon-button" uk-icon="icon: trash"></a></li>
+                                                                <li><a href="#" class="uk-icon-button" uk-icon="icon: file-edit"></a></li>
+                                                                <li><a href="#">
+                                                                        <img src="./static/images/btn_lote2.png" alt="" width="35px">
+                                                                    </a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </article>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </section>
+                        </div>
 
-                <div class="uk-flex uk-flex-center uk-flex-middle uk-margin-small-right">
-                    <a class="btn-modal-register" href="#modal-register-product" uk-tooltip="title:Añadir; delay: 500">
-                        <img class="btn_agg" src="static/images/btn_agg.png" alt="" width="38px">
-                    </a>
-                </div>
-            </div>
+                    </div>
+                </section>
+            </li>
+            <li>
+                <section class="uk-flex container-entradas">
+                    <article style="width: 840px;" class="uk-background-secondary uk-padding uk-border-rounded uk-margin-medium-bottom">
+                        <form class="uk-search uk-search-default uk-margin-bottom" style="width: 100% !important;">
+                            <input class="uk-search-input" type="search" placeholder="Buscar" aria-label="Search">
+                        </form>
+                        <ul uk-accordion>
+                            <li class="uk-open">
+                                <a class="uk-accordion-title" href="#">
+                                    <div class="uk-flex">
+                                        <span class="uk-margin-small-right" uk-icon="icon: bookmark; ratio: 1.5"></span>
+                                        <p class="uk-margin-remove uk-text-bold">MONTECARMELO</p>
+                                    </div>
+                                </a>
+                                <div class="uk-accordion-content">
+                                    <?php for ($i = 0; $i < 4; $i++) { ?>
+                                        <h4 class="uk-margin-medium-left uk-margin-small-top uk-margin-small-bottom">
+                                            <img src="./static/images/cajas (2).png" width="30" alt="">
+                                            <span class="uk-margin-small-left uk-text-bold">harina</span>
+                                        </h4>
+                                        <hr class="uk-margin-remove">
 
-        </article>
+                                    <?php } ?>
+                                </div>
+                            </li>
+                        </ul>
+                    </article>
+                    <article>
+                        <div>
+                            <section class="uk-light uk-grid-small uk-flex-center" uk-grid>
+                                <div class="[email protected] uk-grid-medium uk-flex-center height_controller" uk-grid uk-height-match="target: > div > .uk-card">
+                                    <?php for ($i = 0; $i < 6; $i++) { ?>
+                                        <div>
+                                            <div class="target_supplier uk-card uk-card-default uk-flex uk-padding-small uk-background-secondary uk-light uk-border-rounded">
+                                                <div>
+                                                    <div class="img_proveedor_container uk-border-rounded">
+                                                        <img src="./static/images/btn_lote2.png" alt="" width="90px" />
+                                                        <h5 class="uk-margin-remove-left uk-margin-remove-right uk-margin-small-top uk-margin-small-bottom uk-text-center uk-text-bold">
+                                                            ENTRADA NRO 1
+                                                        </h5>
+                                                    </div>
+                                                </div>
+
+                                                <div>
+                                                    <div class="uk-flex uk-flex-middle uk-flex-between uk-margin-small-bottom">
+                                                        <h4 class="uk-margin-remove-bottom uk-margin-right uk-text-center">
+                                                            Nombre del producto
+                                                        </h4>
+                                                        <div>
+                                                            <a href="#eliminar_supplier" uk-toggle uk-tooltip="title:Eliminar; delay: 500" class="uk-icon-button uk-margin-small-right" uk-tooltip="title:Eliminar; delay: 500" type="button" style="border: none; cursor: pointer" type="button">
+                                                                <span uk-icon="icon: trash"></span>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                    <hr class="uk-margin-bottom uk-margin-remove-top hr_supplier" />
+
+                                                    <div class="Container-details-suppliers" style="width: 200px;">
+                                                        <div class="uk-flex">
+                                                            <h6 class="uk-margin-small">CANTIDAD</h6>
+                                                            <p class="uk-margin-small uk-margin-small-left uk-margin-remove-top uk-text-meta">
+                                                                Luis Garnica
+                                                            </p>
+                                                        </div>
+                                                        <div class="uk-flex">
+                                                            <h6 class="uk-margin-small">EXP</h6>
+                                                            <p class="uk-margin-small uk-margin-small-left uk-margin-remove-top uk-text-meta">
+                                                                J-5000000
+                                                            </p>
+                                                        </div>
+                                                        <div class="uk-flex">
+                                                            <h6 class="uk-margin-small">PRECIO COMPRA</h6>
+                                                            <p class="uk-margin-small uk-margin-small-left uk-margin-remove-top uk-text-meta">
+                                                                0000
+                                                            </p>
+                                                        </div>
+                                                        <div class="uk-flex">
+                                                            <div class="uk-margin-small-right">
+                                                                <h6>ESTADO</h6>
+                                                            </div>
+                                                            <div>
+                                                                <h6 class="uk-background-primary uk-margin-remove uk-text-center uk-border-rounded uk-text-bold state-entrys" style="width: 195px; padding: 2px 0px;">ACTIVO</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </section>
+                            <div>
+                                <?php include("../View/complementos/btn_pag.html"); ?>
+                            </div>
+                        </div>
+                    </article>
+                </section>
+            </li>
+        </ul>
     </section>
-
-    <!-- ****************** producto ****************** -->
-    
-    <section class="uk-light uk-padding uk-padding-remove-left uk-padding-remove-right uk-grid-small uk-flex-center" uk-grid>
-        <div class="container_marca_agua">
-            <img class="marca_agua" src="static/images/logo_letras-minimarket.png" alt="">
-        </div>
-        <div class="[email protected] uk-grid-large uk-flex-center height_controller container-target-product" uk-grid uk-height-match="target: > div > .uk-card">
-            <!-- aqui se cargan las tarjetas de productos con js -->
-        </div>
-    </section>
-
-
-    <div id="container-modals">
-        <!-- aqui se cargan los modales dinamicamente con js -->
-    </div>
-
-
-    <!-- ****************** Botones de paginacion ****************** -->
-
-    <?php include("../View/complementos/btn_pag.html"); ?>
+        
 
 </main>
 
