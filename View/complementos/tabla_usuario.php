@@ -28,7 +28,7 @@ echo '
         <div class="uk-modal-body">
             <form class="uk-grid-small" method="POST" action="Controller/funcs/modificar_cosas.php" uk-grid>
                 <input type=number value="'.$row['id'].'" name="ID" style="display:none">
-                <input type=text value="usuarios" name="tipo" style="display:none">
+                <input type=text value="usuario" name="tipo" style="display:none">
                 <div class="uk-width-1-3@s">
                     <input class="uk-input" type="text" placeholder="Nombre" value="'.$row['nombre'].'" aria-label="100" name="nombre" required>
                 </div>
@@ -38,9 +38,8 @@ echo '
                 <div class="uk-width-1-2@s">
                     <select class="uk-select" id="form-stacked-select" name="rol" required>
                         <option value="'.$row['rol'].'" selected>Rol Actual</option>
-                        <option value="1">Dueño</option>
-                        <option value="2">Administrador</option>
-                        <option value="3">Cajero</option>
+                        <option value="1">Administrador</option>
+                        <option value="2">Cajero</option>
                     </select>
                 </div>
                 <div class="uk-width-1-2@s">

@@ -56,9 +56,9 @@
         $clase->agregar();
         header('Location:../../Clientes'); // Y vuelve a la pagina donde estaba antes
     }
-    elseif ($tipo === 'Usuarios'){
+    elseif ($tipo === 'Usuario'){
         require('../../Model/Usuarios.php');
-        $clase = new Usuario(null,$_POST["nombre"],$_POST["apellido"],$_POST["correo"],$_POST["password"],$_POST["rol"]); 
+        $clase = new Usuario(null,$_POST["nombre"],$_POST["correo"],$_POST["password"],$_POST["rol"]); 
         $clase->agregar();
         header('Location:../../Administrar_perfil'); // Y vuelve a la pagina donde estaba antes
     };

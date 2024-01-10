@@ -17,17 +17,30 @@
             DB::__construct();
 
         }
-        function agregar() {
-            
-            $query = $this->conn->prepare("INSERT INTO usuarios VALUES(null,?, ?, ?, ?, ?, ?)");
 
-            $query->bindParam(1,$this->nombre);
-            $query->bindParam(2,$this->correo);
-            $query->bindParam(3,$this->password);
-            $query->bindParam(4,$this->rol);
-            $query->bindParam(5,$this->id);
+        function agregar(){
+            $query = $this->conn->prepare("INSERT INTO usuarios (nombre, correo, password, rol) VALUES(:nombre, :correo, :password, :rol)");
+            
+            $query->bindParam(':nombre',$this->nombre, PDO::PARAM_STR);
+            $query->bindParam(':correo',$this->correo, PDO::PARAM_STR);
+            $query->bindParam(':password',$this->password, PDO::PARAM_STR);
+            $query->bindParam(':rol',$this->rol, PDO::PARAM_STR);
             $query->execute();
         }
+
+
+
+        // function agregar() {
+            
+        //     $query = $this->conn->prepare("INSERT INTO usuarios VALUES(null,?, ?, ?, ?,?)");
+            
+        //     $query->bindParam(1,$this->id);
+        //     $query->bindParam(2,$this->nombre);
+        //     $query->bindParam(3,$this->correo);
+        //     $query->bindParam(4,$this->password);
+        //     $query->bindParam(5,$this->rol);
+        //     $query->execute();
+        // }
         function borrar() {
 
             $query = $this->conn->prepare("DELETE FROM usuarios WHERE ID=:id");
@@ -66,8 +79,7 @@
             $query->bindParam(3,$this->password);
             $query->bindParam(4,$this->rol);
             $query->bindParam(5,$this->id);
-            
-            return $query->execute(); 
+            $query->execute(); 
         }
         // public function search(){
         //     // $query = "SELECT * FROM usuarios WHERE";
