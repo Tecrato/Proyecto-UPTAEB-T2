@@ -47,7 +47,7 @@
         $clase->actualizar();
         header('Location:../../Clientes');
     }
-    elseif ($tipo === 'usuarios'){
+    elseif ($tipo === 'usuario'){
         require('../../Model/Usuarios.php');
         $clase = new Usuario($_POST["ID"],$_POST["nombre"],$_POST["correo"],$_POST["password"],$_POST["rol"]); 
         $clase->actualizar();

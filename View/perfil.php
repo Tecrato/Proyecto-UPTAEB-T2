@@ -72,25 +72,26 @@
                     </div>
                 </li>
                 <li>
-                    <form class="uk-form-horizontal uk-margin-large">
-
+                    <form class="uk-form-horizontal uk-margin-large" method="POST" action="Controller/funcs/modificar_cosas.php">
+                        <input type=number value=<?php echo $row['id']?> name="ID" style="display:none">
+                        <input type=text value="usuario" name="tipo" style="display:none">
                         <div class="uk-margin">
                             <label class="uk-form-label" for="form-horizontal-text">Nombre</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input" id="form-horizontal-text" type="text" placeholder="Nombre" name="Nombre">
+                                <input class="uk-input" id="form-horizontal-text" value="<?php echo $row['nombre']?>"  type="text" placeholder="Nombre" name="Nombre">
                             </div>
                         </div>
                         <div class="uk-margin">
                             <label class="uk-form-label" for="form-horizontal-text">Correo</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input" id="form-horizontal-text" type="email" placeholder="Correo">
+                                <input class="uk-input" id="form-horizontal-text" value="<?php echo $row['correo']?>"type="email" placeholder="Correo">
                             </div>
                         </div>
 
                         <div class="uk-margin">
                             <label class="uk-form-label" for="form-horizontal-text">Contraseña</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input" id="form-horizontal-text" type="password"
+                                <input class="uk-input" id="form-horizontal-text" value="<?php echo $row['password']?>" type="text"
                                     placeholder="Contraseña">
                             </div>
                         </div>
@@ -100,7 +101,6 @@
                                 <input class="uk-button uk-button-default" type="submit" value="Guardar">
                             </div>
                         </div>
-
                     </form>
                 </li>
                 <li>
@@ -173,15 +173,15 @@
                 <h2 class="uk-modal-title">REGISTRO USUARIO</h2>
             </div>
             <div class="uk-modal-body ">
-                <form class="uk-grid-small" uk-grid method="POST" action="../Controller/funcs/agregar_cosas.php">
+                <form class="uk-grid-small" uk-grid method="POST" action="Controller/funcs/agregar_cosas.php">
                     <div class="uk-width-1-2">
-                        <input type="text" name="tipo" value="Usuarios" id="" style="display:none">
+                        <input type="text" name="tipo" value="Usuario" id="" style="display:none">
                         <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre"
                             required>
                     </div>
-                    <div class="uk-width-1-2@s">
+                    <!-- <div class="uk-width-1-2@s">
                         <input class="uk-input" type="text" placeholder="Apellido" aria-label="50" name="apellido">
-                    </div>
+                    </div> -->
                     <div class="uk-width-1-2@s">
                         <input class="uk-input" type="text" placeholder="Correo Electronico" aria-label="100"
                             name="correo" required>
@@ -189,20 +189,20 @@
                     <div class="uk-width-1-2@s">
                         <select class="uk-select" id="form-stacked-select" name="rol" required>
                             <option selected disabled>Tipo de usuario</option>
-                            <option value="Administrador">Administrador</option>
-                            <option value="Cajero">Cajero</option>
+                            <option value="1">Administrador</option>
+                            <option value="2">Cajero</option>
                         </select>
                     </div>
                     <div class="uk-width-1-1@s">
                         <input class="uk-input" type="password" placeholder="Contraseña" aria-label="100" name="password"
                             required>
                     </div>
-                    <input type="submit" id="subirxd" style="display:none">
+                    <input type="submit" id="Agregar" style="display:none">
                 </form>
             </div>
             <div class="uk-modal-footer uk-text-right">
                 <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
-                <label class="uk-button uk-button-secondary" type="submit" for="subirxd">Guardar</label>
+                <label class="uk-button uk-button-secondary" for="Agregar" >Aceptar</label>
             </div>
         </div>
     </div>
