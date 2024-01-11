@@ -1,17 +1,24 @@
 //creamos una funcion que nos cargue todas las tarjetas y sus modales, dependiendo de que modal desea abrir
-var page = 0
+var page = 0;
 
 function cambiar_pagina_php(dir) {
   // window.location.href = `Controller/funcs_ajax/cambiar_pagina.php?dir=` + dir + "&p="+num_page+"&type="+ type_page;
   $.ajax({
-    url:`Controller/funcs_ajax/cambiar_pagina.php?dir=` + dir + "&p="+num_page+"&type="+ type_page+"&n_p="+ 9, // en n_p colocas el numero de tarjetas que se van a visualizar, en las tarjetas viejas era 9
-    type:"GET",
-    success: response => {
-      page=parseInt(response)
-      cargarTargetProduct()
-    }
-  }
-  )
+    url:
+      `Controller/funcs_ajax/cambiar_pagina.php?dir=` +
+      dir +
+      "&p=" +
+      num_page +
+      "&type=" +
+      type_page +
+      "&n_p=" +
+      9, // en n_p colocas el numero de tarjetas que se van a visualizar, en las tarjetas viejas era 9
+    type: "GET",
+    success: (response) => {
+      page = parseInt(response);
+      cargarTargetProduct();
+    },
+  });
 }
 
 const cargarTargetProduct = () => {
@@ -21,8 +28,8 @@ const cargarTargetProduct = () => {
     type: "POST",
     data: {
       randomnautica: "tarjeta_productos",
-      n:page,
-      limite:9 // Aca tambien va ese numero => el numero de tarjetas que se van a imprimir
+      n: page,
+      limite: 9, // Aca tambien va ese numero => el numero de tarjetas que se van a imprimir
     },
     success: function (response) {
       //convertimos la respuesta en un objeto
@@ -33,53 +40,50 @@ const cargarTargetProduct = () => {
       //recorremos el json para crear las tarjetas
       json.lista.forEach((item) => {
         tarjeta += `
-                              <div id="${item.id}">
-                                  <div class="uk-card uk-card-default uk-padding-small uk-background-secondary uk-light uk-border-rounded">
-                                      <article class="uk-margin-small-bottom uk-inline">
-                                          <div uk-lightbox>
-                                              <a href="Media/imagenes/${item.imagen}" data-caption="${item.nombre}">
-                                                  <img src="Media/imagenes/${item.imagen}" alt="" class="img_product">
-                                              </a>
-                                          </div>
-          
-                                          <div class="uk-position-top-right uk-position-small">
-                                              <a class="btnDetails" href="#modal-details-product" uk-tooltip="title:Ver Detalles; delay: 500">
-                                                  <span class="Bg-info" uk-icon="icon: info; ratio: 1.5"></span>
-                                              </a>
-                                          </div>
-                                      </article>
-                                      <div class="uk-flex uk-flex-between">
-                                          <div>
-                                              <h4 class="uk-margin-remove uk-text-bolder uk-text-truncate" style="width: 115px;">${item.nombre}
-                                              </h4>
-                                              <p class="uk-margin-remove uk-text-meta">Existencia: <b class="uk-text-success">${item.existencia}</b></p>
-                                          </div>
-                                          <div class="uk-flex uk-flex-middle uk-margin-small-left">
-                                              <a href="#Producto-modificar" uk-tooltip="title:Modificar; delay: 500"><span class="uk-margin-small-right uk-icon-button"
-                                                      uk-icon="icon: file-edit"></span></a>
-                                              <a href="#eliminar_product" class="deleteID" uk-tooltip="title:Eliminar; delay: 500"><span class="uk-icon-button"
-                                                      uk-icon="icon: trash"></span></a>
-                                              <div class="uk-margin-small-left">
-                                                  <a href="#product-date" class="Lote" uk-tooltip="title:Añadir Lote; delay: 500">
-                                                      <img class="btn_agg" src="static/images/boton.png" alt="" width="38px">
-                                                  </a>
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-              `;
+                  
+      <div id="${item.id}">
+        <div class="uk-card uk-card-default uk-background-secondary uk-light uk-border-rounded">
+            <div class="uk-visible-toggle" tabindex="-1">
+                <article class="uk-transition-toggle">
+                    <img src="Media/imagenes/${item.imagen}"" alt="" class="img_product" width="150px" style="object-fit: cover; height: 215px;">
+                    <div class="uk-position-top-right uk-transition-fade uk-position-small">
+                        <a href="#modal-details-product" class="btnDetails">
+                            <span class="Bg-info" uk-icon="icon: info; ratio: 1.5"></span>
+                        </a>
+                    </div>
+                    <div class="uk-position-bottom-center ">
+                        <ul class=" uk-iconnav uk-background-secondary uk-transition-slide-bottom-small" style="width: 116%; padding: 5px;">
+                            <li><a href="#eliminar_product" uk-tooltip="title:Eliminar; delay: 500" class="uk-icon-button deleteID" uk-icon="icon: trash"></a></li>
+                            <li><a href="#Producto-modificar" uk-tooltip="title:Modificar; delay: 500" class="uk-icon-button" uk-icon="icon: file-edit"></a></li>
+                            <li>
+                                <a href="#product-date" class="Lote" uk-tooltip="title:Añadir Entrada; delay: 500">
+                                    <img src="./static/images/btn_lote2.png" alt="" width="35px">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+              `;   
         //seleccionamos el contenedor de las tarjetas, y las insertamos
         $(".container-target-product").html(tarjeta);
       });
 
+
+      
+
       if (json.lista.length === 0) {
-        document.querySelector(".container_marca_agua").classList.remove("invisible");
+        document
+          .querySelector(".container_marca_agua")
+          .classList.remove("invisible");
         $(".container-target-product").html("");
       }
 
-
       // en esta parte se cargan los modales segun el que quiera ver
+
+
 
       //***************************************************  Modal de Eliminar  ******************************************************
 
@@ -89,11 +93,9 @@ const cargarTargetProduct = () => {
         //usamos el evento click para saber en que tarjeta pulso, para luego capturar el id del producto
         btn.addEventListener("click", () => {
           //obtenemos el id del producto pulsado
-          let idDelete = parseInt(
-            btn.parentElement.parentElement.parentElement.parentElement.getAttribute(
-              "id"
-            )
-          );
+          let idDelete = 
+            parseInt(btn.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.getAttribute('id'))
+            console.log(idDelete);
           //creamos el template del modal de eliminar
           let ModalDeleteProduct = `<div id="eliminar_product" class="uk-flex-top" uk-modal>
                                           <div class="uk-modal-dialog uk-margin-auto-vertical">
@@ -121,7 +123,7 @@ const cargarTargetProduct = () => {
           let controllerModal = document.querySelector(".controller-modal");
 
           //si exede el n 10(que es el numero fijo de elementos en el body, sin ningun modal) no le permite crear mas modales de delete
-          if (controllerModal.childElementCount == 11) {
+          if (controllerModal.childElementCount == 9 || 10) {
             //agg el atributo uk-toggle que tiene uikit para poder abrir los modales
             btn.setAttribute("uk-toggle", "");
             //insertamos el template del modal en el contenedor
@@ -148,7 +150,6 @@ const cargarTargetProduct = () => {
               processData: false,
               contentType: false,
               success: function (response) {
-                console.log(response)
                 //ocultamos el modal
                 UIkit.modal("#eliminar_product").hide();
                 //mostramos el mensaje de eliminacion exitosa
@@ -186,7 +187,7 @@ const cargarTargetProduct = () => {
         });
       });
 
-      //***************************************************  Modal de Agg Lote  ******************************************************
+      //***************************************************  Modal de Agg entrada  ******************************************************
 
       let controllerModal = document.querySelector(".controller-modal");
 
@@ -195,9 +196,7 @@ const cargarTargetProduct = () => {
       document.querySelectorAll(".Lote").forEach((L) => {
         L.addEventListener("click", () => {
           let idProduct =
-            L.parentElement.parentElement.parentElement.parentElement.parentElement.getAttribute(
-              "id"
-            );
+            L.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.getAttribute("id");
           let templateAggLote = `
             <div id="product-lote" uk-modal>
                   <div class="uk-modal-dialog">
@@ -240,7 +239,7 @@ const cargarTargetProduct = () => {
                   </div>
               </div>
                       `;
-          if (controllerModal.childElementCount == 11) {
+          if (controllerModal.childElementCount == 9 || 10) {
             L.setAttribute("uk-toggle", "");
             $("#container-modals").html(templateAggLote);
             UIkit.modal("#product-lote").show();
@@ -275,7 +274,7 @@ const cargarTargetProduct = () => {
               contentType: false,
               success: function (response) {
                 //en la respuesta le mostramos un mensaje de producto creado correctamente
-                console.log(response)
+                console.log(response);
                 UIkit.notification({
                   message:
                     "<span uk-icon='icon: check'></span> Lote agregado correctamente ",
@@ -330,9 +329,7 @@ const cargarTargetProduct = () => {
           let templateDetails = "";
           //obtenemos el id del producto para hacer la consulta
           let idProduct =
-            info.parentElement.parentElement.parentElement.parentElement.getAttribute(
-              "id"
-            );
+            info.parentElement.parentElement.parentElement.parentElement.parentElement.getAttribute("id");
           //hacemos la peticion ajax para crear el esqueleto del modal
           $.ajax({
             url: "Controller/funcs_ajax/search_lotes.php",
@@ -458,7 +455,7 @@ const cargarTargetProduct = () => {
                   });
                   $("#containerSupplierName").html(supplierName);
 
-                  //esta consulta es para insertar los lotes en los a que generamos anteriormente
+                  //esta consulta es para insertar las entradas en los a que generamos anteriormente
 
                   let SupplierID = document.querySelectorAll(".SupplierID");
                   SupplierID.forEach((sup) => {
@@ -607,20 +604,21 @@ let templateRegisterProduct = `
 let controllerModal = document.querySelector(".controller-modal");
 //seleccionamos el btn que abre el modal
 let btnAgg = document.querySelector(".btn-modal-register");
+console.log(controllerModal.childElementCount);
 
 btnAgg.addEventListener("click", () => {
   //esto es para que se cree solo una vez, ya que el body tiene 10 elementos por defecto
-  if (controllerModal.childElementCount == 11) {
+  if (controllerModal.childElementCount == 9 || 10) {
     btnAgg.setAttribute("uk-toggle", "");
     $("#container-modals").html(templateRegisterProduct);
     UIkit.modal("#modal-register-product").show();
-    //ejecutamos esta peticion para traer las categorias de los productos a los select
+    //   //ejecutamos esta peticion para traer las categorias de los productos a los select
     $.ajax({
       url: "Controller/funcs_ajax/search.php",
       type: "POST",
       data: { randomnautica: "categoria" },
       success: function (response) {
-        console.log(response)
+        console.log(response);
         let options = ``;
         let json = JSON.parse(response);
         json.lista.forEach((date) => {
@@ -629,7 +627,7 @@ btnAgg.addEventListener("click", () => {
         document.getElementById("selectCat").innerHTML += options;
       },
     });
-    //ejecutamos esta peticion para traer las unidades de los productos a los select
+    //   //ejecutamos esta peticion para traer las unidades de los productos a los select
     $.ajax({
       url: "Controller/funcs_ajax/search.php",
       type: "POST",
@@ -645,7 +643,7 @@ btnAgg.addEventListener("click", () => {
     });
   }
 
-  //primero seleccionamos el form que tiene los datos para crear los productos
+  // //primero seleccionamos el form que tiene los datos para crear los productos
   let formAggProduct = document.getElementById("formAggProduct");
   //captamos su evento submit, primero para evitar que la pagina se refresque, y segundo para insertar esos datos en un objeto FormData
   formAggProduct.addEventListener("submit", (e) => {
@@ -677,7 +675,7 @@ btnAgg.addEventListener("click", () => {
             .parentElement;
         controllerModal.removeChild(subir);
         btnAgg.removeAttribute("uk-toggle");
-        console.log(response)
+        console.log(response);
         //y llamamos a la funcion de cargar contenido
         cargarTargetProduct();
       },
@@ -706,4 +704,3 @@ btnAgg.addEventListener("click", () => {
     }, 300);
   });
 });
-

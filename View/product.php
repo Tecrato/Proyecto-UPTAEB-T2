@@ -15,7 +15,7 @@
             <li>
                 <section class="uk-background-secondary uk-padding uk-border-rounded" uk-filter="target: .js-filter">
                     <div>
-                        <div class="uk-flex uk-flex-between" style="align-items: baseline;" >
+                        <div class="uk-flex uk-flex-between" style="align-items: baseline;">
                             <div class="uk-flex uk-flex-wrap" style="align-items: baseline;">
                                 <div class="uk-margin-right">
                                     <div class="uk-flex uk-flex-wrap">
@@ -26,8 +26,8 @@
                                             </form>
                                         </div>
                                         <div class="uk-margin-left">
-                                            <a href="#" uk-icon="icon: print; ratio: 1.5"></a>
-                                            <a href="#" class="uk-margin-small-left">
+                                            <a href="InventarioPDF" target="_blank" class="uk-icon-link" uk-tooltip="title:Imprimir Inventario; delay: 500" uk-icon="icon: print; ratio: 1.5"></a>
+                                            <a href="#modal-register-product" uk-tooltip="title:Añadir; delay: 500" class="uk-margin-small-left btn-modal-register">
                                                 <img class="btn_agg" src="./static/images/btn_agg.png" alt="" width="35px">
                                             </a>
                                         </div>
@@ -95,38 +95,16 @@
 
                         <div>
                             <section class="uk-light uk-padding uk-padding-remove-left uk-padding-remove-right uk-grid-small dataTable" uk-grid>
-                                <div class="[email protected] uk-grid-large uk-flex-center dataTable2" uk-grid uk-height-match="target: > div > .uk-card">
-                                    <?php for ($i = 0; $i < 10; $i++) { ?>
-                                        <div>
-                                            <div class="uk-card uk-card-default uk-background-secondary uk-light uk-border-rounded">
-                                                <div class="uk-visible-toggle" tabindex="-1">
-                                                    <article class="uk-transition-toggle">
-                                                        <img src="./static/images/banner_productos.png" alt="" class="img_product" width="150px">
-                                                        <div class="uk-position-top-right uk-transition-fade uk-position-small">
-                                                            <a href="#modal-details-product" uk-toggle>
-                                                                <span class="Bg-info" uk-icon="icon: info; ratio: 1.5"></span>
-                                                            </a>
-                                                        </div>
-                                                        <div class="uk-position-bottom-center ">
-                                                            <ul class=" uk-iconnav uk-background-secondary uk-transition-slide-bottom-small" style="width: 116%; padding: 5px;">
-                                                                <li><a href="#" class="uk-icon-button" uk-icon="icon: trash"></a></li>
-                                                                <li><a href="#" class="uk-icon-button" uk-icon="icon: file-edit"></a></li>
-                                                                <li><a href="#">
-                                                                        <img src="./static/images/btn_lote2.png" alt="" width="35px">
-                                                                    </a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </article>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    <?php } ?>
+                                <div class="[email protected] uk-grid-large uk-flex-center dataTable2 container-target-product" uk-grid uk-height-match="target: > div > .uk-card">
+                                     <!-- aqui se cargan las tarjetas de productos con js -->
                                 </div>
                             </section>
                         </div>
-
                     </div>
                 </section>
+                <div id="container-modals">
+                    <!-- aqui se cargan los modales dinamicamente con js -->
+                </div>
             </li>
             <li>
                 <section class="uk-flex container-entradas">
@@ -228,8 +206,8 @@
             </li>
         </ul>
     </section>
-        
+
 
 </main>
 
-<?php require("../View/complementos/footer.php");?>
+<?php require("../View/complementos/footer.php"); ?>

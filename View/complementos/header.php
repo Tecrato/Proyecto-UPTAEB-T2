@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="static/css/uikit.css">
     <link rel="stylesheet" href="static/css/Style.css">
+    <link rel="stylesheet" href="static/css/dataTables.css">
     <script src="static/javaScript/uikit.js"></script>
     <script src="static/javaScript/uikit-icons.js"></script>
     <link rel="shortcut icon" href="static/images/logo_m.png" type="image/x-icon">

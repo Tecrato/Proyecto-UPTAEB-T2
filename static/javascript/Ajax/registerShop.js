@@ -127,7 +127,7 @@ if (screen > 1290) {
                   <h4 class="uk-text-bolder uk-padding-medium">DETALLES FACTURA</h4>
                   <div class="container-result-fact">
                       <div style="height: 300px; overflow: auto;">
-                          <table class="uk-table uk-table-hover uk-table-divider uk-table-middle">
+                          <table class="uk-table uk-table-hover uk-table-divider uk-table-middle uk-light">
                               <thead>
                                   <tr>
                                       <th>ID</th>
@@ -461,7 +461,7 @@ $.ajax({
         //esta condicion es para que agg el tr, pero modificando el tamaño del input de cantidad, para que se vea bien en versiones mobiles
         if (screen >= 1024) {
           tr += `
-          <tr value="${producto.id}" class="TR-Product uk-dark">
+          <tr value="${producto.id}" class="TR-Product uk-light">
               <td>
                   <input type="hidden" value="${producto.nombre}">
                   <p class="uk-margin-remove">${producto.nombre}</p>
@@ -483,7 +483,7 @@ $.ajax({
       `;
         } else {
           tr += `
-          <tr value="${producto.id}" class="TR-Product uk-dark">
+          <tr value="${producto.id}" class="TR-Product uk-light">
               <td>
                   <input type="hidden" value="${producto.nombre}">
                   <p class="uk-margin-remove">${producto.nombre}</p>
@@ -529,7 +529,11 @@ $.ajax({
         } else {
           input.classList.remove("succesc");
         }
-        if (cantidadCliente > cantidad || cantidadCliente == 0) {
+        if (
+          cantidadCliente > cantidad ||
+          cantidadCliente == 0 ||
+          /^([a-zA-Z]+)$/.test(e.target.value)
+        ) {
           input.classList.add("danger");
         } else {
           input.classList.remove("danger");
@@ -604,7 +608,7 @@ $.ajax({
         //Creamos los tr de la tabla de la derecha
         if (ivaIdentifier == 0) {
           trDetail = `
-                    <tr>
+                    <tr class="uk-light">
                         <td>${valor2}</td>
                         <td>${array[3]}</td>
                         <td>${array[0]} (E)</td>
@@ -691,6 +695,24 @@ $.ajax({
           boton.parentElement.previousElementSibling.firstElementChild.setAttribute(
             "uk-tooltip",
             "title: La cantidad ingresada no es valida"
+          );
+          boton.parentElement.previousElementSibling.firstElementChild.classList.add(
+            "tooltip-efect"
+          );
+          UIkit.tooltip(".tooltip-efect").show();
+
+          setTimeout(() => {
+            boton.parentElement.previousElementSibling.firstElementChild.removeAttribute(
+              "uk-tooltip"
+            );
+            boton.parentElement.previousElementSibling.firstElementChild.classList.remove(
+              "tooltip-efect"
+            );
+          }, 800);
+        } else if (/^([a-zA-Z]+)$/.test(array[3])) {
+          boton.parentElement.previousElementSibling.firstElementChild.setAttribute(
+            "uk-tooltip",
+            "title: Debe Ingresar solo numeros"
           );
           boton.parentElement.previousElementSibling.firstElementChild.classList.add(
             "tooltip-efect"
@@ -829,6 +851,7 @@ $.ajax({
             precio: algo5,
           });
         }
+        console.log(json);
 
         //luego de enviar los datos reseteamos el modal
         UIkit.notification({

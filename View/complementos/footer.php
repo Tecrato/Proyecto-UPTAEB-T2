@@ -6,14 +6,14 @@
     </div>
 </footer> -->
 
-<script src="static/javascript/Ajax/datatables.js"></script>
 <script src="static/javaScript/hammer.min.js"></script>
 <script src="static/javaScript/jquery.js"></script>
 <script src="static/javascript/FuncionesGenerales.js"></script>
 <script src="static/javascript/Ajax/registerShop.js"></script>
 <script src="static/javascript/Ajax/product.js"></script>
 <script src="static/javascript/Ajax/viewFactura.js"></script>
-<script src="static/javascript/Ajax/funcionDataTable.js"></script>
+<script src="static/javascript/datatables.js"></script>
+<script src="static/javascript/funcionDataTable.js"></script>
 
 
 </body>
