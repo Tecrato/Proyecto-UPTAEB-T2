@@ -80,7 +80,7 @@
                         <tbody>
                             <?php for ($i = 0; $i < 5; $i++) {  ?>
                                 <tr>
-                                    <td><img class="uk-preserve-width uk-border-circle" src="./image/logo_m.png" width="48" height="48" alt=""></td>
+                                    <td><img class="uk-preserve-width uk-border-circle" src="./static/images/logo_m.png" width="48" height="48" alt=""></td>
                                     <td>Table Data</td>
                                     <td>Table Data</td>
                                     <td>Table Data</td>
@@ -105,7 +105,7 @@
                             <h3 class="uk-text-bolder" style="font-size: 33px;">1.</h3>
                         </article>
                         <article>
-                            <img class="uk-preserve-width uk-border-circle" src="./Image/logo_m.png" width="60" height="60" alt="">
+                            <img class="uk-preserve-width uk-border-circle" src="./static/images/logo_m.png" width="60" height="60" alt="">
                             <span class="uk-text-lead uk-text-bold uk-margin-left">HARINA PAN</span>
                         </article>
                     </section>
@@ -125,7 +125,7 @@
                             <h3 class="uk-text-bolder" style="font-size: 33px;">1.</h3>
                         </article>
                         <article>
-                            <img class="uk-preserve-width uk-border-circle" src="./Image/logo_m.png" width="60" height="60" alt="">
+                            <img class="uk-preserve-width uk-border-circle" src="./static/images/logo_m.png" width="60" height="60" alt="">
                             <span class="uk-text-lead uk-text-bold uk-margin-left">HARINA PAN</span>
                         </article>
                     </section>

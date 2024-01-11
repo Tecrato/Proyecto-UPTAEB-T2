@@ -8,7 +8,7 @@
         require('../../Model/Entradas.php');
         require('../../Model/Proveedores.php');
         $clase = new Producto($_POST['ID']); // Llama al modelo y le manda la instruccion
-        $clase_l = new Lote(id_producto:$_POST['ID']); // Llama al modelo y le manda la instruccion
+        $clase_l = new Entrada(id_producto:$_POST['ID']); // Llama al modelo y le manda la instruccion
         $imagen = $clase->search($_POST['ID'])[0]['imagen'];
         print_r($imagen);
         if ($imagen != "banner_productos.png"){
@@ -22,7 +22,7 @@
         require('../../Model/Proveedores.php');
         require('../../Model/Entradas.php');
         require('../../Model/Productos.php');
-        $clase2 = new Lote(id_proveedor:$_POST['ID']); // Llama al modelo y le manda la instruccion
+        $clase2 = new Entrada(id_proveedor:$_POST['ID']); // Llama al modelo y le manda la instruccion
         $clase2->borrar();
         
         $clase = new Proveedor($_POST['ID']); // Llama al modelo y le manda la instruccion

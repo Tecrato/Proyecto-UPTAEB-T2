@@ -3,6 +3,54 @@ document.addEventListener("DOMContentLoaded", () => {
   let data1 = document.querySelector(".dataTable");
   let data2 = document.querySelector(".dataTable2");
 
+  const cargarTrProduct = ()=>{
+        $.ajax({
+                url: "Controller/funcs_ajax/search.php",
+                type: "POST",
+                data: {
+                  randomnautica: "tarjeta_productos",
+                  n: page,
+                  limite: 9, // Aca tambien va ese numero => el numero de tarjetas que se van a imprimir
+                },
+                success: function (response) {
+                  let json = JSON.parse(response);
+                  let json2 = json.lista;
+        
+                  $(document).ready(function () {
+                    $("#tabla").DataTable({
+                      data: json2,
+                      columns: [
+                        { data: "id" },
+                        {
+                          data: "imagen",
+                          render: function (data, type, row) {
+                            return `<img class="uk-preserve-width uk-border-circle" src="Media/imagenes/${data}" " style="height: 50px; width: 50px; object-fit: cover;">`;
+                          },
+                        },
+        
+                        { data: "nombre" },
+                        { data: "id" },
+                        { data: "id" },
+                        { data: "id" },
+                        {
+                          data: "id",
+                          render: function (data, type, row) {
+                            return `<div class="uk-flex uk-flex-middle">
+                                <a href="#Producto-modificar" uk-toggle uk-tooltip="title:Editar; delay: 500"><span
+                                        class="uk-margin-small-right uk-icon-button" uk-icon="icon: file-edit"></span></a>
+                                <a href="#eliminar_product" uk-toggle uk-tooltip="title:Eliminar; delay: 500"><span
+                                        class="uk-icon-button" uk-icon="icon: trash"></span></a>
+                            </div>`;
+                          },
+                        },
+                      ],
+                      responsive: true,
+                    });
+                  });
+                },
+              });
+      }
+
   const view = () => {
     if (localStorage.getItem("view") == "false") {
       data1.removeChild(data2);
@@ -19,169 +67,23 @@ document.addEventListener("DOMContentLoaded", () => {
                               <th>Precio Unit</th>
                               <th>Acciones</th>
                           </thead>
-                          <tbody class="js-filter">
-                              <tr data-color="white">
-                                  <td>1</td>
-                                  <td><img class="uk-preserve-width uk-border-circle" src="./Image/logo_m.png" width="40" height="40" alt=""></td>
-                                  <td>Luis</td>
-                                  <td>Garnica</td>
-                                  <td>30.087.582</td>
-                                  <td>alguna direccion</td>
-                                  <td>
-                                          <div class="uk-flex uk-flex-middle">
-                                              <a href="#Producto-modificar" uk-toggle uk-tooltip="title:Editar; delay: 500"><span
-                                                      class="uk-margin-small-right uk-icon-button" uk-icon="icon: file-edit"></span></a>
-                                              <a href="#eliminar_product" uk-toggle uk-tooltip="title:Eliminar; delay: 500"><span
-                                                      class="uk-icon-button" uk-icon="icon: trash"></span></a>
-                                          </div>
-                                  </td>
-                              </tr>
-                              <tr data-color="blue">
-                                  <td>1</td>
-                                  <td><img class="uk-preserve-width uk-border-circle" src="./Image/logo_m.png" width="40" height="40" alt=""></td>
-                                  <td>ALEJO</td>
-                                  <td>VARGAS</td>
-                                  <td>21.145.268</td>
-                                  <td>MI CASA</td>
-                                  <td>
-                                      <div class="uk-flex uk-flex-middle">
-                                              <a href="#Producto-modificar" uk-toggle uk-tooltip="title:Editar; delay: 500"><span
-                                                      class="uk-margin-small-right uk-icon-button" uk-icon="icon: file-edit"></span></a>
-                                              <a href="#eliminar_product" uk-toggle uk-tooltip="title:Eliminar; delay: 500"><span
-                                                      class="uk-icon-button" uk-icon="icon: trash"></span></a>
-                                          </div>                
-                                  </td>
-                              </tr>
-                              <tr data-color="blue">
-                                  <td>2</td>
-                                  <td><img class="uk-preserve-width uk-border-circle" src="./Image/logo_m.png" width="40" height="40" alt=""></td>
-                                  <td>Luis</td>
-                                  <td>Garnica</td>
-                                  <td>30.087.582</td>
-                                  <td>alguna direccion</td>
-                                  <td>
-                                      <div class="uk-flex uk-flex-middle">
-                                              <a href="#Producto-modificar" uk-toggle uk-tooltip="title:Editar; delay: 500"><span
-                                                      class="uk-margin-small-right uk-icon-button" uk-icon="icon: file-edit"></span></a>
-                                              <a href="#eliminar_product" uk-toggle uk-tooltip="title:Eliminar; delay: 500"><span
-                                                      class="uk-icon-button" uk-icon="icon: trash"></span></a>
-                                          </div>                
-                                  </td>
-                              </tr>
-                              <tr data-color="white">
-                                  <td>3</td>
-                                  <td><img class="uk-preserve-width uk-border-circle" src="./Image/logo_m.png" width="40" height="40" alt=""></td>
-                                  <td>Luis</td>
-                                  <td>Garnica</td>
-                                  <td>30.087.582</td>
-                                  <td>alguna direccion</td>
-                                  <td>
-                                      <div class="uk-flex uk-flex-middle">
-                                              <a href="#Producto-modificar" uk-toggle uk-tooltip="title:Editar; delay: 500"><span
-                                                      class="uk-margin-small-right uk-icon-button" uk-icon="icon: file-edit"></span></a>
-                                              <a href="#eliminar_product" uk-toggle uk-tooltip="title:Eliminar; delay: 500"><span
-                                                      class="uk-icon-button" uk-icon="icon: trash"></span></a>
-                                          </div>                
-                                  </td>
-                              </tr>
-                              <tr data-color="white">
-                                  <td>3</td>
-                                  <td><img class="uk-preserve-width uk-border-circle" src="./Image/logo_m.png" width="40" height="40" alt=""></td>
-                                  <td>Luis</td>
-                                  <td>Garnica</td>
-                                  <td>30.087.582</td>
-                                  <td>alguna direccion</td>
-                                  <td>
-                                      <div class="uk-flex uk-flex-middle">
-                                              <a href="#Producto-modificar" uk-toggle uk-tooltip="title:Editar; delay: 500"><span
-                                                      class="uk-margin-small-right uk-icon-button" uk-icon="icon: file-edit"></span></a>
-                                              <a href="#eliminar_product" uk-toggle uk-tooltip="title:Eliminar; delay: 500"><span
-                                                      class="uk-icon-button" uk-icon="icon: trash"></span></a>
-                                          </div>                
-                                  </td>
-                              </tr>
-                              <tr data-color="blue">
-                                  <td>3</td>
-                                  <td><img class="uk-preserve-width uk-border-circle" src="./Image/logo_m.png" width="40" height="40" alt=""></td>
-                                  <td>Luis</td>
-                                  <td>Garnica</td>
-                                  <td>30.087.582</td>
-                                  <td>alguna direccion</td>
-                                  <td>
-                                      <div class="uk-flex uk-flex-middle">
-                                              <a href="#Producto-modificar" uk-toggle uk-tooltip="title:Editar; delay: 500"><span
-                                                      class="uk-margin-small-right uk-icon-button" uk-icon="icon: file-edit"></span></a>
-                                              <a href="#eliminar_product" uk-toggle uk-tooltip="title:Eliminar; delay: 500"><span
-                                                      class="uk-icon-button" uk-icon="icon: trash"></span></a>
-                                          </div>                
-                                  </td>
-                              </tr>
-                              <tr data-color="white">
-                                  <td>3</td>
-                                  <td><img class="uk-preserve-width uk-border-circle" src="./Image/logo_m.png" width="40" height="40" alt=""></td>
-                                  <td>Luis</td>
-                                  <td>Garnica</td>
-                                  <td>30.087.582</td>
-                                  <td>alguna direccion</td>
-                                  <td>
-                                      <div class="uk-flex uk-flex-middle">
-                                              <a href="#Producto-modificar" uk-toggle uk-tooltip="title:Editar; delay: 500"><span
-                                                      class="uk-margin-small-right uk-icon-button" uk-icon="icon: file-edit"></span></a>
-                                              <a href="#eliminar_product" uk-toggle uk-tooltip="title:Eliminar; delay: 500"><span
-                                                      class="uk-icon-button" uk-icon="icon: trash"></span></a>
-                                          </div>                
-                                  </td>
-                              </tr>
-                              <tr data-color="white">
-                                  <td>3</td>
-                                  <td><img class="uk-preserve-width uk-border-circle" src="./Image/logo_m.png" width="40" height="40" alt=""></td>
-                                  <td>Luis</td>
-                                  <td>Garnica</td>
-                                  <td>30.087.582</td>
-                                  <td>alguna direccion</td>
-                                  <td>
-                                      <div class="uk-flex uk-flex-middle">
-                                              <a href="#Producto-modificar" uk-toggle uk-tooltip="title:Editar; delay: 500"><span
-                                                      class="uk-margin-small-right uk-icon-button" uk-icon="icon: file-edit"></span></a>
-                                              <a href="#eliminar_product" uk-toggle uk-tooltip="title:Eliminar; delay: 500"><span
-                                                      class="uk-icon-button" uk-icon="icon: trash"></span></a>
-                                          </div>                
-                                  </td>
-                              </tr>
-                              <tr data-color="blue">
-                                  <td>3</td>
-                                  <td><img class="uk-preserve-width uk-border-circle" src="./Image/logo_m.png" width="40" height="40" alt=""></td>
-                                  <td>Luis</td>
-                                  <td>Garnica</td>
-                                  <td>30.087.582</td>
-                                  <td>alguna direccion</td>
-                                  <td>
-                                      <div class="uk-flex uk-flex-middle">
-                                              <a href="#Producto-modificar" uk-toggle uk-tooltip="title:Editar; delay: 500"><span
-                                                      class="uk-margin-small-right uk-icon-button" uk-icon="icon: file-edit"></span></a>
-                                              <a href="#eliminar_product" uk-toggle uk-tooltip="title:Eliminar; delay: 500"><span
-                                                      class="uk-icon-button" uk-icon="icon: trash"></span></a>
-                                          </div>                
-                                  </td>
-                              </tr>
+                          <tbody class="js-filter" id="tbodyDataTable">
+                              
                           </tbody>
                       </table>
                       `;
 
       data1.innerHTML = template;
+     
 
+
+      cargarTrProduct()
       data1.removeAttribute("uk-grid");
       data1.classList.remove("uk-grid-small");
       data1.classList.remove("uk-grid");
       //       data1.classList.remove("uk-grid-stack");
       document.querySelector(".formDelete").style.display = "none";
       document.querySelector(".flechas").style.display = "none";
-
-      $(document).ready(function () {
-        $("#tabla").DataTable({
-          responsive: true,
-        });
-      });
     } else {
       lista.style.transition = "5s all ease";
       lista.setAttribute("uk-icon", "icon: list; ratio: 1.3");
@@ -203,13 +105,13 @@ document.addEventListener("DOMContentLoaded", () => {
     view();
   });
 
-//   document.querySelectorAll('.uk-background-secondary').forEach(element => {
-//       element.classList.remove('uk-background-secondary')
-//       element.classList.add('uk-background-default')
-//       document.querySelectorAll('.uk-light').forEach(element2 => {
-//           element2.classList.remove('uk-light')
-//           element2.classList.add('uk-dark')
-//           document.querySelector('.Bg-Main-home').style.backgroundColor = '#f7f7f7'
-//       });
-//   });
+  //   document.querySelectorAll('.uk-background-secondary').forEach(element => {
+  //       element.classList.remove('uk-background-secondary')
+  //       element.classList.add('uk-background-default')
+  //       document.querySelectorAll('.uk-light').forEach(element2 => {
+  //           element2.classList.remove('uk-light')
+  //           element2.classList.add('uk-dark')
+  //           document.querySelector('.Bg-Main-home').style.backgroundColor = '#f7f7f7'
+  //       });
+  //   });
 });
