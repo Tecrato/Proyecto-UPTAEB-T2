@@ -34,20 +34,21 @@
 		}
 		function descontar(){
 
-			$lotes = $this->search(null, $this->id_producto, 'fecha_vencimiento ASC');
+			$entradas = $this->search(null, null, 'fecha_vencimiento ASC');
 
-			for ($i = 0; $this->cantidad > 0; $i++) {
-				$lote = $lotes[$i];
-				print_r($this->cantidad);
-				print_r($lote.'\n');
-				if ($lote['existencia'] > $this->cantidad) {
-					$query = "UPDATE entradas SET existencia=" . $lote['existencia'] - $this->cantidad . " WHERE id=" . $lote['id'];
+			for ($i = 0; $this->cantidad >= 1; $i++) {
+				$entrada = $entradas[$i];
+				print_r($entrada);
+				if ($entrada['existencia'] > $this->cantidad) {
+					$query = "UPDATE entradas SET existencia=" . $entrada['existencia'] - $this->cantidad . " WHERE id=" . $entrada['id'];
 					$this->conn->query($query);
 					$this->cantidad = 0;
+					echo "Pasa por aqui";
 				} else {
-					$query = "UPDATE entradas SET existencia=0 WHERE id=" . $lote['id'];
+					$query = "UPDATE entradas SET existencia=0 WHERE id=" . $entrada['id'];
 					$this->conn->query($query);
-					$this->cantidad -= $lote['existencia'];
+					$this->cantidad -= $entrada['existencia'];
+					echo "Pasa por este otro lado";
 				}
 			}
 		}
