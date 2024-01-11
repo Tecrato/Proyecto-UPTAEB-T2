@@ -35,7 +35,7 @@ echo "
                 <div class="uk-navbar-left">
                     <ul class="uk-navbar-nav ">
                         <li class="uk-flex uk-flex-middle">
-                            <a href="inicio"><img src="static/images/Logo Minimarket 2.png" alt="" class="Nav-img uk-margin-medium-right"></a>
+                            <a href="Inicio"><img src="static/images/Logo Minimarket 2.png" alt="" class="Nav-img uk-margin-medium-right"></a>
                             
                             <form action="" class="uk-flex uk-flex-middle ">
                                 <input class="uk-input uk-margin-small-right uk-border-pill" type="text" placeholder="Buscar">
@@ -165,7 +165,7 @@ echo "
 <section class="Header-responsive">
     <nav class="Nav-bg-2 uk-light Header-2" uk-navbar>
         <div class="nav-overlay uk-navbar-left">
-            <a href="incio">
+            <a href="Inicio">
                 <img src="static/images/logo Minimarket 2.png" alt="" class="Nav-img-2 uk-margin-medium-right">
             </a>
         </div>
