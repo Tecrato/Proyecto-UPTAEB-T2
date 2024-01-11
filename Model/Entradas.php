@@ -38,6 +38,8 @@
 
 			for ($i = 0; $this->cantidad > 0; $i++) {
 				$lote = $lotes[$i];
+				print_r($this->cantidad);
+				print_r($lote.'\n');
 				if ($lote['existencia'] > $this->cantidad) {
 					$query = "UPDATE entradas SET existencia=" . $lote['existencia'] - $this->cantidad . " WHERE id=" . $lote['id'];
 					$this->conn->query($query);
