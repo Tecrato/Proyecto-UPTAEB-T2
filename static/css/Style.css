@@ -9,7 +9,31 @@
 .danger{
     color: #ff0000 !important;
     border-color: #ff0000 !important;
+} 
+/* html{
+    background-color: #111;
+} */
+/* este es el boton para el modo oscuro/claro */
+.btn-ModeColorView, .btn-ModeColorView2{
+    width: 25px;
+    height: 25px;
+    background-color: #bdbdbd;
+    border-radius: 50%;
+    padding: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }
+.btn-ModeColorView:hover{
+    background-color: #8a8a8a;
+    transition: 300ms background ease;
+}
+.iconMoon, .iconSun{
+    filter: invert(1);
+}
+
+
                                 
                                 /*-----------------------Estilos del Header-------------------------------*/
 
@@ -118,8 +142,8 @@
                      /*-----------------------    Estilos del Main-Home -------------------------------*/
 
 .Bg-Main-home{
-    /* background-color: #111; */
-    background-image: url('../images/fondo5.jpg');
+    background-color: #111;
+    /* background-image: url('../images/fondo5.jpg'); */
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -133,12 +157,6 @@
 }
 .Card-items{
     min-width: 400px;
-}
-.main-index{
-    background-image: url(../images/fondo5.jpg);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
 }
 
 

@@ -7,8 +7,8 @@
 <main class="Bg-Main-home2 uk-padding uk-padding-remove-bottom main-Product uk-light">
     <section class="">
         <ul uk-tab>
-            <li><a href="#"><img class="uk-preserve-width uk-margin-small-right" src="./static/images/cajas (2).png" width="30" height="30" alt="">PRODUCTOS</a></li>
-            <li><a href="#"><img class="uk-preserve-width uk-margin-small-right" src="./static/images/suministros.png" width="32" height="32" alt="">ENTRADAS</a></li>
+            <li><a href="#"><img class="uk-preserve-width uk-margin-small-right img1ProductSwitcher" src="./static/images/cajas (2).png" width="30" height="30" alt="">PRODUCTOS</a></li>
+            <li><a href="#"><img class="uk-preserve-width uk-margin-small-right img2ProductSwitcher" src="./static/images/suministros.png" width="32" height="32" alt="">ENTRADAS</a></li>
         </ul>
 
         <ul class="uk-switcher uk-margin">
@@ -123,7 +123,7 @@
                                 <div class="uk-accordion-content">
                                     <?php for ($i = 0; $i < 4; $i++) { ?>
                                         <h4 class="uk-margin-medium-left uk-margin-small-top uk-margin-small-bottom">
-                                            <img src="./static/images/cajas (2).png" width="30" alt="">
+                                            <img class="img3ProductSwitcher" src="./static/images/cajas (2).png" width="30" alt="">
                                             <span class="uk-margin-small-left uk-text-bold">harina</span>
                                         </h4>
                                         <hr class="uk-margin-remove">

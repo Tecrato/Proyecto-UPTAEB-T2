@@ -1,6 +1,6 @@
 <?php require("../View/complementos/header.php"); ?>
 
-<main class="Bg-Main-home2 main-index">
+<main class="Bg-Main-home2">
 <!-- <h2 class="uk-text-bolder uk-light uk-margin-remove-bottom uk-padding uk-padding-remove-bottom">BIENVENIDO USUARIO</h2> -->
 <div class="uk-margin uk-heading-line uk-text-left uk-margin-remove-bottom uk-padding uk-padding-remove-bottom">
     <h2 class="uk-text-bolder uk-text-uppercase uk-light">BIENVENIDO USUARIO</h2>

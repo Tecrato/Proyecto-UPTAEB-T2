@@ -97,7 +97,7 @@
         <div class="[email protected] uk-grid-medium uk-flex-center height_controller" uk-grid uk-height-match="target: > div > .uk-card">
 
             <!-- ****************** Ficha de la factura ****************** -->
-            <?php for ($i=0; $i < 8; $i++) { ?>
+            <?php for ($i=0; $i < 1; $i++) { ?>
             <div>
                 <div class="target-detail-fact uk-card uk-card-default uk-padding-small uk-background-secondary uk-light uk-border-rounded"
                     style="width: 300px;">

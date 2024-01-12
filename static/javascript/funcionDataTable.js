@@ -105,13 +105,4 @@ document.addEventListener("DOMContentLoaded", () => {
     view();
   });
 
-  //   document.querySelectorAll('.uk-background-secondary').forEach(element => {
-  //       element.classList.remove('uk-background-secondary')
-  //       element.classList.add('uk-background-default')
-  //       document.querySelectorAll('.uk-light').forEach(element2 => {
-  //           element2.classList.remove('uk-light')
-  //           element2.classList.add('uk-dark')
-  //           document.querySelector('.Bg-Main-home').style.backgroundColor = '#f7f7f7'
-  //       });
-  //   });
 });

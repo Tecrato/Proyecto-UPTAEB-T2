@@ -52,7 +52,7 @@ const cargarTargetProduct = () => {
                         </a>
                     </div>
                     <div class="uk-position-bottom-center ">
-                        <ul class=" uk-iconnav uk-background-secondary uk-transition-slide-bottom-small" style="width: 116%; padding: 5px;">
+                        <ul class="uk-iconnav uk-background-secondary uk-transition-slide-bottom-small" style="width: 105%; padding: 5px;">
                             <li><a href="#eliminar_product" uk-tooltip="title:Eliminar; delay: 500" class="uk-icon-button deleteID" uk-icon="icon: trash"></a></li>
                             <li><a href="#Producto-modificar" uk-tooltip="title:Modificar; delay: 500" class="uk-icon-button" uk-icon="icon: file-edit"></a></li>
                             <li>
