@@ -121,11 +121,6 @@
             $query->execute();
             return $query->fetchAll();
         }
-        function search_luis(){
-            $query = "SELECT id, nombre,(SELECT SUM(existencia) FROM entradas Where id_producto = p.id) as stock,precio_venta,IVA FROM `productos` as p ORDER BY id";
-
-            return $this->conn->query($query)->fetchAll();
-        }
 
         function search_targeta($n, $limite){
             $query = $this->conn->prepare("SELECT id, imagen, nombre,(SELECT SUM(existencia) FROM entradas WHERE productos.id = id_producto) AS existencia FROM productos LIMIT :l OFFSET :n");
@@ -138,7 +133,6 @@
 
         function search_inventario(){
             $query = "SELECT id,marca,(SELECT SUM(cantidad) FROM entradas WHERE productos.id = id_producto) AS entradas,(SELECT SUM(cantidad) - (SELECT SUM(existencia) FROM entradas WHERE productos.id = id_producto) FROM entradas WHERE productos.id = id_producto) AS salidas, (SELECT SUM(existencia) FROM entradas WHERE productos.id = id_producto) AS existencia, precio_venta,(SELECT SUM(existencia) FROM entradas WHERE productos.id = id_producto) * precio_venta AS Total FROM productos";
-
             return $this->conn->query($query)->fetchAll();
         }
 

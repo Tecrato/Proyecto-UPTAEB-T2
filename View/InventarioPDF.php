@@ -1,5 +1,6 @@
 <?php
 
+
 require('../Plugins/fpdf.php');
 require('../Controller/funcs/searchInventario.php');
 
@@ -73,24 +74,24 @@ $pdf->Ln(3);
 //FILAS DEL INVENTARIO__________________________________________________________________________________
 $pdf->SetTextColor(0, 0, 0);
 
-for ($i=0; $i <= count($result); $i++) { 
-
-    // if ($i % 2 == 0) {
-    //     $pdf->SetFillColor(230,230,230);
-    // } else {
-    //     $pdf->SetFillColor(255,255,255);
-    // }
-    $row = $result[$i];
-
+$co = 0;
+foreach ($result as $variable) {
+    $co++;
+    if ($co % 2 == 0) {
+        $pdf->SetFillColor(230,230,230);
+    } else {
+        $pdf->SetFillColor(255,255,255);
+    }
     $pdf->SetX(17);
-    $pdf->Cell(10,10,$row['id'],0,0,'C',0);
-    $pdf->Cell(45,10,$row['marca'],0,0,'C',0);
-    $pdf->Cell(20,10,$row['entradas'],0,0,'C',0);
-    $pdf->Cell(20,10,$row['salidas'],0,0,'C',0);
-    $pdf->Cell(30,10,$row['existencia'],0,0,'C',0);
-    $pdf->Cell(30,10,$row['precio_venta'].' Bs',0,0,'C',0);
-    $pdf->Cell(24,10,$row['Total'].' Bs',0,1,'C',0);
+    $pdf->Cell(10,10,$variable['id'],0,0,'C',0);
+    $pdf->Cell(45,10,$variable['marca'],0,0,'C',0);
+    $pdf->Cell(20,10,$variable['entradas'],0,0,'C',0);
+    $pdf->Cell(20,10,$variable['salidas'],0,0,'C',0);
+    $pdf->Cell(30,10,$variable['existencia'],0,0,'C',0);
+    $pdf->Cell(30,10,$variable['precio_venta'].' Bs',0,0,'C',0);
+    $pdf->Cell(24,10,$variable['Total'].' Bs',0,1,'C',0);
 }
+
 $pdf->Output();
 ?>
 
