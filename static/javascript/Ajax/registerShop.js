@@ -443,8 +443,7 @@ document.addEventListener("keyup", (e) => {
 $.ajax({
   url: "Controller/funcs_ajax/search_factura.php",
   type: "POST",
-  processData: true,
-  contentType: true,
+  data: {TYPE: "PRODUCT_FACT_TABLE"},
   success: function (response) {
     let producto = JSON.parse(response);
     let productos = producto.lista;

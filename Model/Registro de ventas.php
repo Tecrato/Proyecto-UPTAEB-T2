@@ -67,5 +67,10 @@
 				$clase_l->descontar();
 			}
 		}
+
+        function search_target_fact(){
+            $query = "SELECT id, (SELECT nombre FROM clientes WHERE id = registro_ventas.id_cliente) AS cliente, monto_final, fecha FROM registro_ventas";
+            return $this->conn->query($query)->fetchAll();
+        }
 	}
 ?>

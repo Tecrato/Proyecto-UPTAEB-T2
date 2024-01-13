@@ -13,6 +13,12 @@
 /* html{
     background-color: #111;
 } */
+.dolar{
+    position: absolute;
+    width: 100%;
+    right: 0px;
+    top: 129px;
+}
 /* este es el boton para el modo oscuro/claro */
 .btn-ModeColorView, .btn-ModeColorView2{
     width: 25px;
@@ -443,6 +449,7 @@
 .Target_factura{
     padding: 15px 15px 15px 10px;
     transition: border 100ms ease;
+    cursor: pointer;
 }
 .Target_factura:hover{
     border-left: 8px solid #007D35;

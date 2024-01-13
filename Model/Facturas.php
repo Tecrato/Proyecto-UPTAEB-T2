@@ -54,6 +54,13 @@
             
             $query->execute($query);
         }
+
+        function search_detailsFact($id){
+            $query = "
+            SELECT id,fecha,(SELECT Nombre FROM clientes WHERE registro_ventas.id_cliente = id) AS nombre, (SELECT Apellido FROM clientes WHERE registro_ventas.id_cliente = id) AS apellido, (SELECT Cedula FROM clientes WHERE registro_ventas.id_cliente = id) AS cedula, metodo_pago,(SELECT nombre FROM usuarios WHERE registro_ventas.id_usuario = id) AS vendedor FROM registro_ventas WHERE id = $id";
+
+            return $this->conn->query($query)->fetchAll();
+        }
 	}
 
 ?>

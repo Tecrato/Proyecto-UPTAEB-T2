@@ -1,6 +1,36 @@
 <?php
-
 require('../Plugins/fpdf.php');
+// require('../Controller/funcs_ajax/search_factura.php');
+
+// if ($_POST['TYPE'] == 'DETAIL-USER-FACT') {
+    $user = array();
+    foreach ($_POST as $key) {
+        foreach ($key as $key2) {
+            // print_r($key2['nombre']);
+            $user = array(
+                'vendedor' => $key2['vendedor'],
+                'nombre' => $key2['nombre'],
+                'metodo_pago' => $key2['metodo_pago'],
+                'id' => $key2['id'],
+                'fecha' => $key2['fecha'],
+                'cedula' => $key2['cedula'],
+                'apellido' => $key2['apellido'],
+            );
+        }
+    }
+
+    print_r($user["vendedor"]);
+// }
+
+// var_dump($json);
+
+// foreach ($algo as $key) {
+//     foreach ($key as $key2) {
+//         print_r($key2['nombre']);
+//     }
+// }
+
+
 
 class PDF extends FPDF
 {
