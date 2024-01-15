@@ -17,6 +17,7 @@
     }
      
 
+
     if ($_POST['randomnautica'] == "productos" or $_POST['randomnautica'] == "tarjeta_productos" or $_POST['randomnautica'] == "productos_factura") {
         require('../../Model/Productos.php');
         $clase = new Producto();
@@ -58,6 +59,7 @@
     else {
         $result = $clase->search(n:$n);
     }
+
     // limite:$limite
     $lista=array();
 

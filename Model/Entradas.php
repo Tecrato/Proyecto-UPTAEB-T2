@@ -34,11 +34,10 @@
 		}
 		function descontar(){
 
-			$entradas = $this->search(null, null, 'fecha_vencimiento ASC');
+			$entradas = $this->search(order:'fecha_vencimiento ASC');
 
 			for ($i = 0; $this->cantidad >= 1; $i++) {
 				$entrada = $entradas[$i];
-				print_r($entrada);
 				if ($entrada['existencia'] > $this->cantidad) {
 					$query = "UPDATE entradas SET existencia=" . $entrada['existencia'] - $this->cantidad . " WHERE id=" . $entrada['id'];
 					$this->conn->query($query);

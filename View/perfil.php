@@ -73,25 +73,25 @@
                 </li>
                 <li>
                     <form class="uk-form-horizontal uk-margin-large" method="POST" action="Controller/funcs/modificar_cosas.php">
-                        <input type=number value=<?php echo $row['id']?> name="ID" style="display:none">
+                        <input type=number value=<?php echo $tu['id']?> name="ID" style="display:none">
                         <input type=text value="usuario" name="tipo" style="display:none">
                         <div class="uk-margin">
                             <label class="uk-form-label" for="form-horizontal-text">Nombre</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input" id="form-horizontal-text" value="<?php echo $row['nombre']?>"  type="text" placeholder="Nombre" name="Nombre">
+                                <input class="uk-input" id="form-horizontal-text" value="<?php echo $tu['nombre']?>"  type="text" placeholder="Nombre" name="Nombre">
                             </div>
                         </div>
                         <div class="uk-margin">
                             <label class="uk-form-label" for="form-horizontal-text">Correo</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input" id="form-horizontal-text" value="<?php echo $row['correo']?>"type="email" placeholder="Correo">
+                                <input class="uk-input" id="form-horizontal-text" value="<?php echo $tu['correo']?>"type="email" placeholder="Correo">
                             </div>
                         </div>
 
                         <div class="uk-margin">
                             <label class="uk-form-label" for="form-horizontal-text">Contraseña</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input" id="form-horizontal-text" value="<?php echo $row['password']?>" type="text"
+                                <input class="uk-input" id="form-horizontal-text" value="<?php echo $tu['password']?>" type="text"
                                     placeholder="Contraseña">
                             </div>
                         </div>

@@ -197,9 +197,7 @@
                                     <?php } ?>
                                 </div>
                             </section>
-                            <div>
-                                <?php include("../View/complementos/btn_pag.html"); ?>
-                            </div>
+                            <?php include("../View/complementos/btn_pag.html"); ?>
                         </div>
                     </article>
                 </section>

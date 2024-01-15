@@ -3,46 +3,72 @@ require('../Plugins/fpdf.php');
 // require('../Controller/funcs_ajax/search_factura.php');
 
 // if ($_POST['TYPE'] == 'DETAIL-USER-FACT') {
-    $user = array();
-    foreach ($_POST as $key) {
-        foreach ($key as $key2) {
-            // print_r($key2['nombre']);
-            $user = array(
-                'vendedor' => $key2['vendedor'],
-                'nombre' => $key2['nombre'],
-                'metodo_pago' => $key2['metodo_pago'],
-                'id' => $key2['id'],
-                'fecha' => $key2['fecha'],
-                'cedula' => $key2['cedula'],
-                'apellido' => $key2['apellido'],
-            );
-        }
-    }
+    // $user = array();
+    // foreach ($_POST as $key) {
+    //     foreach ($key as $key2) {
+    //         // print_r($key2['nombre']);
+    //         $user = array(
+    //             'vendedor' => $key2['vendedor'],
+    //             'nombre' => $key2['nombre'],
+    //             'metodo_pago' => $key2['metodo_pago'],
+    //             'id' => $key2['id'],
+    //             'fecha' => $key2['fecha'],
+    //             'cedula' => $key2['cedula'],                        // se esta declarando el array por cada ciclo .-.
+    //             'apellido' => $key2['apellido'],
+    //         );
+    //     }
+    // }
 
-    print_r($user["vendedor"]);
+
+    // print_r($user["vendedor"]);
+    // $user.
 // }
 
-// var_dump($json);
+$json = [
+    'vendedor' => 'erfulano',
+    'nombre' => 'Harina',
+    'metodo_pago' => 'Efectivo',
+    'id' => 20,
+    'fecha' => 'yoquese',
+    'cedula' => 'ppppppp',
+    'apellido' => 'kratos'
+];
 
-// foreach ($algo as $key) {
-//     foreach ($key as $key2) {
-//         print_r($key2['nombre']);
-//     }
-// }
+
+print_r($json);
+print_r('<br>');
+print_r($json['vendedor']);
+print_r('<br>');
+print_r($json['nombre']);
+print_r('<br>');
+print_r(array_values($json));
+print_r('<br>');
 
 
 
-class PDF extends FPDF
-{
-// Cabecera de página
-function Header()
-{
-// bordes de página_____________________________________________________________________________________________
-$this->SetFillColor(0, 130, 38);
-$this->Rect(0, 0, 3, 300, 'F');
-$this->Rect(206.9, 0, 3, 300, 'F');
+// ahi con mas cosas
+$new_arr = array();
+
+for ($x = 0; $x < 20; $x++){
+    array_push($new_arr,$json);
 }
 
+print_r('<br>');
+print_r($new_arr);
+
+
+
+
+// El resto ya nose
+
+class PDF extends FPDF {
+    // Cabecera de página
+    function Header(){
+        // bordes de página
+        $this->SetFillColor(0, 130, 38);
+        $this->Rect(0, 0, 3, 300, 'F');
+        $this->Rect(206.9, 0, 3, 300, 'F');
+    }
 }
 
 // Creación del objeto de la clase heredada

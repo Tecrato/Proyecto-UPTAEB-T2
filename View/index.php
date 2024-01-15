@@ -135,15 +135,4 @@
     </div>
 </main>
 
-<script>
-$.ajax({
-    url:"https://exchangemonitor.net/ajax/widget-unique",
-    data: {"country":"ve","type":"enparalelovzla"},
-    success: response => {
-        document.getElementById('nose').innerHTML = JSON.parse(response).price
-    }
-})
-
-</script>
-
 <?php require("../View/complementos/footer.php"); ?>
