@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="static/css/uikit.css">
     <link rel="stylesheet" href="static/css/Style.css">
     <link rel="stylesheet" href="static/css/dataTables.css">
-    <script src="static/javaScript/uikit.js"></script>
-    <script src="static/javaScript/uikit-icons.js"></script>
+    <script src="static/javaScript/librerias/uikit.js"></script>
+    <script src="static/javaScript/librerias/uikit-icons.js"></script>
     <link rel="shortcut icon" href="static/images/logo_m.png" type="image/x-icon">
     <title>Inventario-Inicio</title>
 </head>

@@ -9,6 +9,16 @@ require('../../Model/Registro de ventas.php');
 if ($_POST['TYPE'] == 'TRG_FACT') {
     $clase = new Registro_ventas();
     $result = $clase->search_targeta_fact();
+    $lista = array();
+    for ($i = 0; $i < count($result); $i++) {
+        $row = $result[$i];
+        array_push($lista, $row);
+    };
+    $json = [
+        'lista' => $lista
+    ];
+    $json = json_encode($json);
+    echo ($json);
 
 }
 elseif ($_POST['TYPE'] == 'PRODUCT_FACT_TABLE') {
