@@ -118,15 +118,15 @@ echo "
 
 
         <div class="dolar">
-            <marquee behavior="alternative" direction="right" scrollamount="12" style="width: 99%;">
+            <marquee behavior="alternative" direction="right" scrollamount="12" style="padding-top: 8px;width: 99%;">
                 <div class="uk-flex uk-flex-middle">
                     <div class="uk-margin-medium-right uk-flex uk-flex-middle">
                         <img class="uk-margin-small-right" src="static/images/bcv.png" alt="" width="28px" height="25px">
-                        <h5 class="uk-text-bolder uk-margin-remove" style="color: #fff;">BCV: 35.85 BS</h5>
+                        <h5 class="uk-text-bolder uk-margin-remove" style="color: #fff;">BCV: <span id="BCV">35.85</span> BS</h5>
                     </div>
                     <div class="uk-flex uk-flex-middle">
                         <img class="uk-margin-small-right" src="static/images/paralelo2.png" alt="" width="25px" height="25px">
-                        <h5 class="uk-text-bolder uk-margin-remove" style="color: #fff;">PARALELO: 39.85 BS</h5>
+                        <h5 class="uk-text-bolder uk-margin-remove" style="color: #fff;">PARALELO: <span id="PARALELO">39.85</span> BS</h5>
                     </div>
                 </div>
             </marquee>

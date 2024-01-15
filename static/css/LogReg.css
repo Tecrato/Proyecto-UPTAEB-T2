@@ -4,10 +4,14 @@
 }
 
 .Login{
-    margin-right: -200%;
+    display:flex;
 }
 .SetPassword {
-    margin-right: 100%;
+    display:flex;
+}
+
+.display-none {
+    display:none;
 }
 
 .Register {

@@ -20,11 +20,11 @@
         $row = $result[$i];
         array_push($lista, $row);
     }
-$json = [
-    'lista'=> $lista
-];
-$json = json_encode($json);
-echo($json);
+    $json = [
+        'lista'=> $lista
+    ];
+    $json = json_encode($json);
+    echo($json);
 
 ?>
 

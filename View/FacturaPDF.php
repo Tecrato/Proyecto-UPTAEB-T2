@@ -1,17 +1,19 @@
 <?php
 require('../Plugins/fpdf.php');
+
 require('../Controller/funcs_ajax/print_factura.php');
+
 
 $fecha = strtotime($lista['fecha']);
 $hora = strtoupper(date('h:i a', $fecha));
 $dia =  date('d/m/Y', $fecha);
 
-class PDF extends FPDF
-{
+
+
+class PDF extends FPDF {
     // Cabecera de página
-    function Header()
-    {
-        // bordes de página_____________________________________________________________________________________________
+    function Header(){
+        // bordes de página
         $this->SetFillColor(0, 130, 38);
         $this->Rect(0, 0, 3, 300, 'F');
         $this->Rect(206.9, 0, 3, 300, 'F');

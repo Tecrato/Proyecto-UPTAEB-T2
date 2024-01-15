@@ -9,8 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 type: "POST",
                 data: {
                   randomnautica: "tarjeta_productos",
-                  n: page,
-                  limite: 9, // Aca tambien va ese numero => el numero de tarjetas que se van a imprimir
+                  n: page,  // Aca va el numero de la pagina actual
+                  limite: 9, // Aca va el numero maximo de tarjetas que se pueden imprimir
                 },
                 success: function (response) {
                   let json = JSON.parse(response);
