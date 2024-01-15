@@ -10,15 +10,14 @@
     color: #ff0000 !important;
     border-color: #ff0000 !important;
 } 
-/* html{
-    background-color: #111;
-} */
+
 .dolar{
     position: absolute;
     width: 100%;
     right: 0px;
     top: 129px;
 }
+
 /* este es el boton para el modo oscuro/claro */
 .btn-ModeColorView, .btn-ModeColorView2{
     width: 25px;
@@ -33,7 +32,7 @@
 }
 .btn-ModeColorView:hover{
     background-color: #8a8a8a;
-    transition: 300ms background ease;
+    transition: 300ms ease;
 }
 .iconMoon, .iconSun{
     filter: invert(1);
@@ -52,10 +51,10 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position-x: right;
-    height: 160px;
+    height: 170px;
 }
 .Nav-img{
-    width: 300px;
+    width: 260px;
 }
 .Nav-links{
     height: 170px;
@@ -381,7 +380,7 @@
 .Client_register:hover{
     cursor: pointer;
     background-color: rgb(32, 32, 32);
-    transition: background 300ms all;
+    transition: 300ms all;
     color: rgb(140, 140, 140) !important;
 }
 .main-statistics{
@@ -477,28 +476,28 @@
     flex-direction: column;
     gap: 20px;
 }
-.container_fact_filter{
+.container_fact_filter {
     padding: 15px 15px 10px 15px;
 }
-.container_fact{
+.container_fact {
     border-right: 1px solid rgba(170, 170, 170, 0.112);
     height: 700px;
 }
-.iframe{
+.iframe {
     width: 100%;
     height: 600px;
 }
 
                          /*-----------------------    Estilos del main informes -------------------------------*/
-.Gap{
+.Gap {
     gap: 50px;
 }
-.Bg-Grafic-title{
+.Bg-Grafic-title {
     font-weight: bolder;
     margin-bottom: 0 !important;
     font-size: 25px;
 }
-.titleReport{
+.titleReport {
     background-color: rgb(30, 30, 30);
     padding: 10px 25px;
     border-radius: 20px;
@@ -507,23 +506,23 @@
     align-items: center;
     justify-content: space-between;
 }
-.Item_generate-report{
+.Item_generate-report {
     height: 25px;
 }
-.Card-grafic{
+.Card-grafic {
     padding: 25px;
 } 
 @media (min-width: 350px) and (max-width: 767px){
-    .Wraper{
+    .Wraper {
         flex-wrap: wrap;
     }
-    .Grafic-2{
+    .Grafic-2 {
         height: 150px;
     }
-    .Bg-Grafic-title{
+    .Bg-Grafic-title {
         font-size: 17px;
     }
-    .Card-grafic, .card-graphics2{
+    .Card-grafic {
         padding: 10px;
     } 
     .titleReport{
