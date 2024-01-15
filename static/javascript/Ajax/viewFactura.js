@@ -1,12 +1,13 @@
+//se hace una consulta ajax para traer los datos de la factura
 $.ajax({
   url: "Controller/funcs_ajax/search_factura.php",
   type: "POST",
   data: { TYPE: "TRG_FACT" },
   success: function (response) {
-    let json = JSON.parse(response)
-    let ContainerTarget = document.querySelector(".Contanier_fact_item")
-    let template = ""
-    json.lista.forEach((t) =>{
+    let json = JSON.parse(response);
+    let ContainerTarget = document.querySelector(".Contanier_fact_item");
+    let template = "";
+    json.lista.forEach((t) => {
       template += ` <article id=${t.id}>
                       <div class="uk-flex uk-flex-between uk-flex-middle uk-background-secondary Target_factura" id=${t.id}>
                           <div class="uk-flex uk-flex-middle uk-margin-medium-right">
@@ -22,47 +23,41 @@ $.ajax({
                           <div>
                               <div>  
                                   <h4 class="uk-margin-remove uk-text-right uk-text-bold">BS  ${t.monto_final}</h4>
-                                  <p class="uk-margin-remove uk-text-meta text_fact_date">${(t.fecha)}</p>
+                                  <p class="uk-margin-remove uk-text-meta text_fact_date">${t.fecha}</p>
                               </div>
                           </div>
                       </div>
-                    </article> `
-    })
-    ContainerTarget.innerHTML = template
+                    </article> `;
+    });
+    //se inserta las tarjetas de las facturas
+    ContainerTarget.innerHTML = template;
     let date = document.querySelectorAll(".text_fact_date");
-    date.forEach((d) =>{
-      d.textContent = d.textContent.slice(0,10)
-    })
-    
+    date.forEach((d) => {
+      //con esto se resetea la fecha
+      d.textContent = d.textContent.slice(0, 10);
+    });
 
+    //cuando pulsemos sobre las fichas de la factura, obtenemos el id para luego enviarlo al controlador y buscar la factura segun el id
     let tarjetaFactura = document.querySelectorAll(".Target_factura");
     tarjetaFactura.forEach((tj) => {
       tj.addEventListener("click", () => {
         tj.tabIndex = tj.getAttribute("id");
-    
+
+        //cada vez que pulsemos sobre una ficha, el iframe se recarga con la misma ruta, solo que se le ira cambiando el id de la factura
         let iframe = document.querySelector(".iframe");
-        iframe.src = `./View/FacturaPDF.php?c="${tj.getAttribute("id")}"`;
+        iframe.src = `FacturaPDF?d=${tj.getAttribute("id")}`;
 
-        // let id = tj.getAttribute('id')
-        // $.ajax({
-        //   url: "Controller/funcs_ajax/search_factura.php",
-        //   type: "POST",
-        //   data: { TYPE: "DETAIL-USER-FACT", ID: id },
-        //   success: function (response) {
-        //     let json = JSON.parse(response)
-        //     console.log(json);
-        //     $.ajax({
-        //       url: "View/FacturaPDF.php",
-        //       type: "POST",
-        //       data: json,
-        //       success: function (response) {
-        //         console.log(response);
-        //       }
-        //     })
-
-        //   }
-        // })
-
+        let id = tj.getAttribute("id");
+        document.querySelector(".n_factura").textContent = "N_FACTURA " + id;
+        //hacemos la peticion,mandando el id al controlador como una variable por url
+        $.ajax({
+          url: `Controller/funcs_ajax/print_factura.php?d=${id}`,
+          type: "GET",
+          success: function (response) {
+            let json = JSON.parse(response);
+            console.log(response);
+          },
+        });
       });
     });
   },

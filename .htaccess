@@ -6,6 +6,7 @@ RewriteRule ^Inicio$ Controller/C_index.php
 RewriteRule ^Facturas$ Controller/C_registerShop.php
 RewriteRule ^login$ Controller/C_login.php
 RewriteRule ^InventarioPDF$ Controller/C_InventarioPDF.php
+RewriteRule ^FacturaPDF$ Controller/C_FacturaPDF.php
 RewriteRule ^fd$ Controller/C_facturadirecta.php
 RewriteRule ^Administrar_perfil$ Controller/C_perfil.php
 RewriteRule ^Proveedores$ Controller/C_proveedores.php

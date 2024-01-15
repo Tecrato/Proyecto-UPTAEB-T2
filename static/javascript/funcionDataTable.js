@@ -36,11 +36,12 @@ document.addEventListener("DOMContentLoaded", () => {
                           data: "id",
                           render: function (data, type, row) {
                             return `<div class="uk-flex uk-flex-middle">
-                                <a href="#Producto-modificar" uk-toggle uk-tooltip="title:Editar; delay: 500"><span
-                                        class="uk-margin-small-right uk-icon-button" uk-icon="icon: file-edit"></span></a>
-                                <a href="#eliminar_product" uk-toggle uk-tooltip="title:Eliminar; delay: 500"><span
-                                        class="uk-icon-button" uk-icon="icon: trash"></span></a>
-                            </div>`;
+                                      <a href="#Producto-modificar" uk-toggle uk-tooltip="title:Editar; delay: 500"><span class="uk-margin-small-right uk-icon-button" uk-icon="icon: file-edit"></span></a> 
+                                      <a href="#eliminar_product" uk-toggle uk-tooltip="title:Eliminar; delay: 500"><span class="uk-icon-button" uk-icon="icon: trash"></span></a>
+                                      <a href="#product-date" class="Lote uk-margin-small-left" uk-tooltip="title:Añadir Entrada; delay: 500">
+                                          <img src="./static/images/btn_lote2.png" alt="" width="35px">
+                                      </a> 
+                                    </div>`;
                           },
                         },
                       ],

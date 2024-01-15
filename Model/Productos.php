@@ -129,7 +129,7 @@
         }
 
         function search_targeta($n, $limite){
-            $query = $this->conn->prepare("SELECT id, imagen, nombre,(SELECT SUM(existencia) FROM entradas WHERE productos.id = id_producto) AS existencia FROM productos LIMIT :l OFFSET :n");
+            $query = $this->conn->prepare("SELECT id,nombre,marca,imagen,(SELECT nombre FROM categoria WHERE productos.id_categoria = id) AS categoria, (SELECT MAX((SELECT razon_social FROM proveedores WHERE entradas.id_proveedor = id)) FROM entradas WHERE id_producto = productos.id) AS proveedor FROM productos LIMIT :l OFFSET :n");
 
             $query->bindParam(':l',$limite, PDO::PARAM_INT);
             $query->bindParam(':n',$n, PDO::PARAM_INT);

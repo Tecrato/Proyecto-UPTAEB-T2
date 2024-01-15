@@ -34,19 +34,4 @@ if ($_POST['TYPE'] == 'TRG_FACT') {
     ];
     $json = json_encode($json);
     echo ($json);
-// } elseif ($_POST['TYPE'] == 'DETAIL-USER-FACT') {
-//     $clase = new Factura();
-//     $result = $clase->search_detailsFact($_POST['ID']);
-
-//     $lista = array();
-//     for ($i = 0; $i < count($result); $i++) {
-//         $row = $result[$i];
-//         array_push($lista, $row);
-//     };
-//     $json = [
-//         'lista' => $lista
-//     ];
-//     $json = json_encode($json);
-//     echo ($json);
-
 }

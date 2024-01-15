@@ -53,7 +53,7 @@
         $result = $clase->search_targeta($n,$limite);
     }
     elseif ($_POST['randomnautica'] == "productos_factura") {
-        $result = $clase->search_luis();
+        $result = $clase->search_Product_RegistroVentas();
     }
     else {
         $result = $clase->search(n:$n);

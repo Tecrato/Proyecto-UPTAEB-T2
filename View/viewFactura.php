@@ -33,13 +33,11 @@
 
         <div class="uk-width-1-1@s uk-light  uk-padding-small">
             <div class="uk-flex uk-flex-between">
-                <h3 class="uk-text-bold">N_FACTURA</h3>
-                    <nav class="Nav1" uk-dropnav="mode: click">
+                <h3 class="uk-text-bold n_factura">N_FACTURA </h3>
+                    <!-- <nav class="Nav1" uk-dropnav="mode: click">
                         <ul class="uk-subnav uk-margin-remove uk-padding-remove">
                             <li>
-                                <!-- <a href="#">
-                                    <span class="uk-icon uk-margin-small-right" uk-icon="icon: more; ratio: 1.5"></span>
-                                </a> -->
+                                
                                 <a href="" class="uk-icon-button" uk-icon="more"></a>
                                 <div class="uk-dropdown uk-border-rounded">
                                     <ul class="uk-nav uk-dropdown-nav">
@@ -59,11 +57,11 @@
                                 </div>
                             </li>
                         </ul>
-                    </nav>           
+                    </nav>            -->
             </div>
 
             <div class="uk-background-secondary uk-padding-small uk-border-rounded">
-                <iframe class="iframe" src="./View/FacturaPDF.php" frameborder="0"></iframe>
+                <iframe class="iframe" src="FacturaPDF" frameborder="0"></iframe>
             </div>
         </div>
         

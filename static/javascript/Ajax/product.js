@@ -41,7 +41,7 @@ const cargarTargetProduct = () => {
       json.lista.forEach((item) => {
         tarjeta += `
                   
-      <div id="${item.id}">
+      <div id="${item.id}" data-supplier="${item.proveedor}" data-category="${item.categoria}">
         <div class="uk-card uk-card-default uk-background-secondary uk-light uk-border-rounded">
             <div class="uk-visible-toggle" tabindex="-1">
                 <article class="uk-transition-toggle">
@@ -66,13 +66,10 @@ const cargarTargetProduct = () => {
             </div>
         </div>
     </div>
-              `;   
+              `;
         //seleccionamos el contenedor de las tarjetas, y las insertamos
         $(".container-target-product").html(tarjeta);
       });
-
-
-      
 
       if (json.lista.length === 0) {
         document
@@ -83,8 +80,6 @@ const cargarTargetProduct = () => {
 
       // en esta parte se cargan los modales segun el que quiera ver
 
-
-
       //***************************************************  Modal de Eliminar  ******************************************************
 
       //seleccionamos todos los btn con la clase deleteID y lo recorremos
@@ -93,11 +88,14 @@ const cargarTargetProduct = () => {
         //usamos el evento click para saber en que tarjeta pulso, para luego capturar el id del producto
         btn.addEventListener("click", () => {
           //obtenemos el id del producto pulsado
-          let idDelete = 
-            parseInt(btn.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.getAttribute('id'))
-            console.log(idDelete);
+          let idDelete = parseInt(
+            btn.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.getAttribute(
+              "id"
+            )
+          );
+          console.log(idDelete);
           //creamos el template del modal de eliminar
-          let ModalDeleteProduct = `<div id="eliminar_product" class="uk-flex-top" uk-modal>
+          let ModalDeleteProduct = `<div id="eliminar_product" class="uk-flex-top uk-modal" uk-modal bg-close='false'>
                                           <div class="uk-modal-dialog uk-margin-auto-vertical">
                                               <div class="uk-modal-header uk-flex uk-flex-middle">
                                                   <span class="uk-margin-small-right" uk-icon="icon: warning ; ratio: 2"></span>
@@ -123,7 +121,7 @@ const cargarTargetProduct = () => {
           let controllerModal = document.querySelector(".controller-modal");
 
           //si exede el n 10(que es el numero fijo de elementos en el body, sin ningun modal) no le permite crear mas modales de delete
-          if (controllerModal.childElementCount == 9 || 10) {
+          if (controllerModal.childElementCount == 13) {
             //agg el atributo uk-toggle que tiene uikit para poder abrir los modales
             btn.setAttribute("uk-toggle", "");
             //insertamos el template del modal en el contenedor
@@ -196,9 +194,11 @@ const cargarTargetProduct = () => {
       document.querySelectorAll(".Lote").forEach((L) => {
         L.addEventListener("click", () => {
           let idProduct =
-            L.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.getAttribute("id");
+            L.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.getAttribute(
+              "id"
+            );
           let templateAggLote = `
-            <div id="product-lote" uk-modal>
+            <div id="product-lote" uk-modal bg-close='false'>
                   <div class="uk-modal-dialog">
                       <button class="uk-modal-close-default close" type="button" uk-close></button>
                       <div class="uk-modal-header">
@@ -239,7 +239,7 @@ const cargarTargetProduct = () => {
                   </div>
               </div>
                       `;
-          if (controllerModal.childElementCount == 9 || 10) {
+          if (controllerModal.childElementCount == 13) {
             L.setAttribute("uk-toggle", "");
             $("#container-modals").html(templateAggLote);
             UIkit.modal("#product-lote").show();
@@ -329,7 +329,9 @@ const cargarTargetProduct = () => {
           let templateDetails = "";
           //obtenemos el id del producto para hacer la consulta
           let idProduct =
-            info.parentElement.parentElement.parentElement.parentElement.parentElement.getAttribute("id");
+            info.parentElement.parentElement.parentElement.parentElement.parentElement.getAttribute(
+              "id"
+            );
           //hacemos la peticion ajax para crear el esqueleto del modal
           $.ajax({
             url: "Controller/funcs_ajax/search_lotes.php",
@@ -338,7 +340,7 @@ const cargarTargetProduct = () => {
             success: function (response) {
               let json = JSON.parse(response);
               json.lista.forEach((item) => {
-                templateDetails = `<div id="modal-details-product" class="uk-flex-top" uk-modal>
+                templateDetails = `<div id="modal-details-product" class="uk-flex-top" uk-modal bg-close='false'>
             <div class="uk-modal-dialog uk-modal-body uk-border-rounded uk-margin-auto-vertical container-modal-detailProduct">
                 <button class="uk-modal-close-default close" type="button" uk-close></button>
                 <div>
@@ -545,7 +547,7 @@ cargarTargetProduct();
 
 //creamos el template del modal de registro de productos
 let templateRegisterProduct = `
-                                    <div id="modal-register-product" uk-modal>
+                                    <div id="modal-register-product" uk-modal bg-close='false'>
                                         <div class="uk-modal-dialog">
                                             <button class="uk-modal-close-default close" type="button" uk-close></button>
                                             <div class="uk-modal-header">
@@ -604,11 +606,12 @@ let templateRegisterProduct = `
 let controllerModal = document.querySelector(".controller-modal");
 //seleccionamos el btn que abre el modal
 let btnAgg = document.querySelector(".btn-modal-register");
-console.log(controllerModal.childElementCount);
 
 btnAgg.addEventListener("click", () => {
   //esto es para que se cree solo una vez, ya que el body tiene 10 elementos por defecto
-  if (controllerModal.childElementCount == 9 || 10) {
+  console.log(controllerModal.childElementCount);
+
+  if (controllerModal.childElementCount == 13) {
     btnAgg.setAttribute("uk-toggle", "");
     $("#container-modals").html(templateRegisterProduct);
     UIkit.modal("#modal-register-product").show();
@@ -703,4 +706,43 @@ btnAgg.addEventListener("click", () => {
       btnAgg.removeAttribute("uk-toggle");
     }, 300);
   });
+});
+
+// aqui insertaremos los proveedores, categoria y marcas para los filtros de los productos
+
+//esta consulta sirve para cargar los datos de los proveedores en el filtro
+$.ajax({
+  url: "Controller/funcs_ajax/search.php",
+  type: "POST",
+  data: { randomnautica: "proveedores" },
+  success: function (response) {
+    let options = ``;
+    let json = JSON.parse(response);
+    json.lista.forEach((date) => {
+      options += `<li  uk-filter-control="filter: [data-supplier='${date.razon_social}']; group: supplier"><a class='filterS' href="#">${date.razon_social}</a></li>`;
+    });
+    document.querySelector(".filter_supplier").innerHTML += options;
+  },
+});
+//esta consulta sirve para cargar los datos de las categorias en el filtro
+$.ajax({
+  url: "Controller/funcs_ajax/search.php",
+  type: "POST",
+  data: { randomnautica: "categoria" },
+  success: function (response) {
+    let options = ``;
+    let json = JSON.parse(response);
+    json.lista.forEach((date) => {
+      options += `<li  uk-filter-control="filter: [data-category='${date.nombre}']; group: category"><a class='filterS' href="#">${date.nombre}</a></li>`;
+    });
+    document.querySelector(".filter_category").innerHTML += options;
+
+    let filtera = document.querySelectorAll(".filterS");
+
+    filtera.forEach((e) => {
+      e.addEventListener("click", () => {
+        console.log(document.querySelector(".height_controller").childElementCount)
+      });
+    });
+  },
 });

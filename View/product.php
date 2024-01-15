@@ -39,35 +39,21 @@
                                         <li>
                                             <a href="#">CATEGORIA <span uk-drop-parent-icon></span></a>
                                             <div class="uk-dropdown">
-                                                <ul class="uk-nav uk-dropdown-nav">
-                                                    <li uk-filter-control="filter: [data-color='white']; group: data-color"><a href="#">White</a></li>
-                                                    <li uk-filter-control="filter: [data-color='blue']; group: data-color"><a href="#">Blue</a></li>
-                                                    <li uk-filter-control="filter: [data-color='black']; group: data-color"><a href="#">Black</a></li>
+                                                <ul class="uk-nav uk-dropdown-nav filter_category">
+                                                    <!-- aqui se cargan las categorias con js -->
                                                 </ul>
                                             </div>
                                         </li>
                                         <li>
                                             <a href="#">PROVEEDOR <span uk-drop-parent-icon></span></a>
                                             <div class="uk-dropdown">
-                                                <ul class="uk-nav uk-dropdown-nav">
-                                                    <li uk-filter-control="filter: [data-size='small']; group: size"><a href="#">Small</a></li>
-                                                    <li uk-filter-control="filter: [data-size='medium']; group: size"><a href="#">Medium</a></li>
-                                                    <li uk-filter-control="filter: [data-size='large']; group: size"><a href="#">Large</a></li>
+                                                <ul class="uk-nav uk-dropdown-nav filter_supplier">
+                                                    <!-- aqui se cargan los proveedores con js -->
                                                 </ul>
                                             </div>
                                         </li>
                                         <li>
                                             <a href="#">MARCA <span uk-drop-parent-icon></span></a>
-                                            <div class="uk-dropdown">
-                                                <ul class="uk-nav uk-dropdown-nav">
-                                                    <li uk-filter-control="filter: [data-size='small']; group: size"><a href="#">Small</a></li>
-                                                    <li uk-filter-control="filter: [data-size='medium']; group: size"><a href="#">Medium</a></li>
-                                                    <li uk-filter-control="filter: [data-size='large']; group: size"><a href="#">Large</a></li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <a href="#">PRESENTACION <span uk-drop-parent-icon></span></a>
                                             <div class="uk-dropdown">
                                                 <ul class="uk-nav uk-dropdown-nav">
                                                     <li uk-filter-control="filter: [data-size='small']; group: size"><a href="#">Small</a></li>
@@ -94,9 +80,12 @@
 
 
                         <div>
-                            <section class="uk-light uk-padding uk-padding-remove-left uk-padding-remove-right uk-grid-small dataTable" uk-grid>
-                                <div class="[email protected] uk-grid-large uk-flex-center dataTable2 container-target-product" uk-grid uk-height-match="target: > div > .uk-card">
-                                     <!-- aqui se cargan las tarjetas de productos con js -->
+                            <section class="uk-light uk-padding uk-padding-remove-left uk-padding-remove-right uk-grid-small dataTable viewP" uk-grid>
+                                <div class="container_marca_agua">
+                                    <img class="marca_agua" src="static/images/logo_letras-minimarket.png" alt="">
+                                </div>
+                                <div class="[email protected] uk-grid-large uk-flex-center dataTable2 container-target-product height_controller js-filter" uk-grid uk-height-match="target: > div > .uk-card">
+                                    <!-- aqui se cargan las tarjetas de productos con js -->
                                 </div>
                             </section>
                         </div>
