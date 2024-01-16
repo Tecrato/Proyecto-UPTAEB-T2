@@ -1,66 +1,46 @@
 <?php
-
-
 require("./../Model/Conexion.php");
 require('./../Model/Facturas.php');
 
-if (isset($_GET['d'])) {
-    $clase = new Factura();
-    $result = $clase->search_detailsFact($_GET['d']);
+// WTF amigo
 
-    $lista = array();
-    foreach ($result as $i) {
-        $lista = array(
-            'vendedor' => $i['vendedor'],
-            'nombre' => $i['nombre'],
-            'metodo_pago' => $i['metodo_pago'],
-            'id' => $i['id'],
-            'fecha' => $i['fecha'],
-            'cedula' => $i['cedula'],
-            'apellido' => $i['apellido'],
-        );
-    }
+$clase = new Factura(isset($_GET['d']) ? $_GET['d'] : 8);
 
-    $amount = $clase->search_mountFact($_GET['d']);
-    $resultAmount = array();
-    foreach ($amount as $i) {
-        $resultAmount = array(
-            'subtotal' => $i['subtotal'],
-            'monto_final' => $i['monto_final'],
-            'IVA' => $i['IVA'],
-        );
-    }
+$result = $clase->search_detailsFact();
 
-    $product = $clase->search_ProductFact($_GET['d']);
-    
+$lista = array();
 
-} else {
-    $clase = new Factura();
-    $result = $clase->search_detailsFact(8);
+$lista = [
+    'vendedor' => $result['vendedor'],
+    'nombre' => $result['nombre'],
+    'metodo_pago' => $result['metodo_pago'],
+    'id' => $result['id'],
+    'fecha' => $result['fecha'],
+    'cedula' => $result['cedula'],
+    'apellido' => $result['apellido'],
+];
+// foreach ($result as $i) {
+//     $lista = [
+//         'vendedor' => $i['vendedor'],
+//         'nombre' => $i['nombre'],
+//         'metodo_pago' => $i['metodo_pago'],
+//         'id' => $i['id'],
+//         'fecha' => $i['fecha'],
+//         'cedula' => $i['cedula'],
+//         'apellido' => $i['apellido'],
+//     ];
+//     // array_push($arr);
+// }
 
-    $lista = array();
-    foreach ($result as $i) {
-        $lista = array(
-            'vendedor' => $i['vendedor'],
-            'nombre' => $i['nombre'],
-            'metodo_pago' => $i['metodo_pago'],
-            'id' => $i['id'],
-            'fecha' => $i['fecha'],
-            'cedula' => $i['cedula'],
-            'apellido' => $i['apellido'],
-        );
-    }
-
-    $amount = $clase->search_mountFact(8);
-    $resultAmount = array();
-    foreach ($amount as $i) {
-        $resultAmount = array(
-            'subtotal' => $i['subtotal'],
-            'monto_final' => $i['monto_final'],
-            'IVA' => $i['IVA'],
-        );
-    }
-
-    $product = $clase->search_ProductFact(8);
-
+$amount = $clase->search_mountFact();
+$resultAmount = array();
+foreach ($amount as $i) {
+    $resultAmount = array(
+        'subtotal' => $i['subtotal'],
+        'monto_final' => $i['monto_final'],
+        'IVA' => $i['IVA'],
+    );
 }
+
+$product = $clase->search_ProductFact();
+    
