@@ -83,7 +83,7 @@
         }
 
         // Con esta otra funcion se busca entre los productos en la base de datos
-        function search($id=null,$n=0,$limite=9){
+        function search($n=0,$limite=9){
             // Al igual que la clase anterior, puede buscar segun muchos valores o solo algunos
             $query = "SELECT * FROM productos";
 
@@ -130,7 +130,8 @@
 
         function search_targeta($n, $limite){
             $query = $this->conn->prepare("SELECT id,nombre,marca,imagen,(SELECT nombre FROM categoria WHERE productos.id_categoria = id) AS categoria, (SELECT MAX((SELECT razon_social FROM proveedores WHERE entradas.id_proveedor = id)) FROM entradas WHERE id_producto = productos.id) AS proveedor FROM productos LIMIT :l OFFSET :n");
-
+            
+            $n = $n*$limite;
             $query->bindParam(':l',$limite, PDO::PARAM_INT);
             $query->bindParam(':n',$n, PDO::PARAM_INT);
             $query->execute();

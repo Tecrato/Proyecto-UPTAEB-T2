@@ -14,7 +14,7 @@ RewriteRule ^Productos$ Controller/C_product.php
 RewriteRule ^Salir$ Controller/funcs/logout.php
 
 
-RewriteRule ^Pruebita$ Controller/funcs_ajax/prueba.php
+RewriteRule ^test$ Controller/funcs_ajax/prueba.php
 
 
 

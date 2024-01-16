@@ -30,5 +30,6 @@
     } elseif ($dir === 'end') {
         $page = ceil($todos/$pagination)-1;
     }
+    // echo $_GET['p'];
     echo $page;
 ?>

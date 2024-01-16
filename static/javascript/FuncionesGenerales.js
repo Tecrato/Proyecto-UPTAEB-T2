@@ -1,14 +1,23 @@
-// Esta funcion cambia la pagina de productos
-function cambiar_pagina_php(dir) {
-  window.location.href =
-    `Controller/funcs/cambiar_pagina.php?dir=` +
-    dir +
-    "&p=" +
-    num_page +
-    "&type=" +
-    type_page;
+var page = 0;
+
+function cambiar_pagina_ajax(dir,type,func,limit=9) {
+  limit = limit ? limit : 9
+  $.ajax({
+    url:
+      `Controller/funcs_ajax/cambiar_pagina.php?dir=` + dir + "&p=" +  page + "&type=" + type + "&n_p=" + limit,
+    type: "GET",
+    success: (response) => {
+      page = parseInt(response);
+      console.log(response)
+      func();
+    },
+  });
 }
 
+function cambiar_pagina_php(dir,type,limit=9) {
+  limit = limit ? limit : 9
+  window.location.href = 'Controller/funcs/cambiar_pagina.php?dir='+dir + '&p='+page + '&type='+type + '&n_p='+limit
+}
 //funcion para colocar la marca de agua en el fondo de los modulos
 const marcaAgua = () => {
   //esto hace que el fondo de pantalla y altura se modifiquen si hay tarjetas en los modulos
@@ -176,17 +185,21 @@ if (screen < 768) {
   // let btnImpr = (document.querySelector(".ImprBtn").href = "fd");
 }
 
-$.ajax({
-  url:"https://exchangemonitor.net/ajax/widget-unique",
-  data: {"country":"ve","type":"enparalelovzla"},
-  success: response => {
-      document.getElementById('PARALELO').textContent = JSON.parse(response).price
-  }
-})
-$.ajax({
-  url:"https://exchangemonitor.net/ajax/widget-unique",
-  data: {"country":"ve","type":"promedio"},
-  success: response => {
-      document.getElementById('BCV').textContent = JSON.parse(response).price
-  }
-})
+async function asyncfunc(){
+  $.ajax({
+    url:"https://exchangemonitor.net/ajax/widget-unique",
+    data: {"country":"ve","type":"enparalelovzla"},
+    success: response => {
+        document.getElementById('PARALELO').textContent = JSON.parse(response).price
+    }
+  })
+  $.ajax({
+    url:"https://exchangemonitor.net/ajax/widget-unique",
+    data: {"country":"ve","type":"promedio"},
+    success: response => {
+        document.getElementById('BCV').textContent = JSON.parse(response).price
+    }
+  })
+}
+
+asyncfunc()

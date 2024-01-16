@@ -60,7 +60,6 @@
         $result = $clase->search(n:$n);
     }
 
-    // limite:$limite
     $lista=array();
 
     for ($i=0; $i < count($result); $i++) { 

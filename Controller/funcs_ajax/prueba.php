@@ -1,6 +1,6 @@
 <?php
-    require '../../Model/Conexion.php';
-    require '../../Model/Usuarios.php';
+    // require '../../Model/Conexion.php';
+    // require '../../Model/Usuarios.php';
 
 	// echo "
 	// <form method='POST' action='Controller/funcs_ajax/search.php'>
@@ -11,7 +11,11 @@
 
 	// ";
 	
-	$c = new Usuario();
-	$resultado = $c->search();
-	print_r($resultado);
+	
+	// $c = new Usuario();
+	// $resultado = $c->search();
+	// print_r($resultado);
+
+	echo(False ? '10': '20');
+	echo '10';
 ?>

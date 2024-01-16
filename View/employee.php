@@ -144,4 +144,8 @@
 
 
 
-<?php require("../View/complementos/footer.php"); ?>
+    <script src="static/javaScript/librerias/jquery.js"></script>
+    <script src="static/javascript/FuncionesGenerales.js"></script>
+
+</body>
+</html>

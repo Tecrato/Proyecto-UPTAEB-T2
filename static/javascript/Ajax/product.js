@@ -1,19 +1,21 @@
 //creamos una funcion que nos cargue todas las tarjetas y sus modales, dependiendo de que modal desea abrir
 var page = 0;
 
-function cambiar_pagina_php(dir) {
-  // window.location.href = `Controller/funcs_ajax/cambiar_pagina.php?dir=` + dir + "&p="+num_page+"&type="+ type_page;
-  $.ajax({
-    url:
-    // en n_p colocas el numero de tarjetas que se van a visualizar, en las tarjetas viejas era 9
-      `Controller/funcs_ajax/cambiar_pagina.php?dir=` + dir + "&p=" +  num_page + "&type=" + type_page + "&n_p=" + 9,
-    type: "GET",
-    success: (response) => {
-      page = parseInt(response);
-      cargarTargetProduct();
-    },
-  });
-}
+const CATEGORIAS = {}
+
+// function cargar_categorias() {
+//   $.ajax({
+//     url: 'Controller/funcs_ajax/search.php',    // Esto es para quitar funciones en php
+//     type: 'GET',                                // hay un monton de codigo repetido WTF
+//     success: response => {
+//     //   for (JSON.parse(response))
+//     }
+//   })
+// }
+
+$('.pag-btn-productos').click(ele => {
+  cambiar_pagina_ajax(ele.target.dataset['direccion'],'productos',cargarTargetProduct,9)
+})
 
 const cargarTargetProduct = () => {
   //hacemos la petion ajax
@@ -41,16 +43,16 @@ const cargarTargetProduct = () => {
                 <article class="uk-transition-toggle">
                     <img src="Media/imagenes/${item.imagen}"" alt="" class="img_product" width="150px" style="object-fit: cover; height: 215px;">
                     <div class="uk-position-top-right uk-transition-fade uk-position-small">
-                        <a href="#modal-details-product" class="btnDetails">
+                        <a href="#modal-details-product" class="btnDetails" data-id="${item.id}">
                             <span class="Bg-info" uk-icon="icon: info; ratio: 1.5"></span>
                         </a>
                     </div>
                     <div class="uk-position-bottom-center ">
                         <ul class="uk-iconnav uk-background-secondary uk-transition-slide-bottom-small" style="width: 105%; padding: 5px;">
-                            <li><a href="#eliminar_product" uk-tooltip="title:Eliminar; delay: 500" class="uk-icon-button deleteID" uk-icon="icon: trash"></a></li>
-                            <li><a href="#Producto-modificar" uk-tooltip="title:Modificar; delay: 500" class="uk-icon-button" uk-icon="icon: file-edit"></a></li>
+                            <li><a href="#eliminar_product" uk-tooltip="title:Eliminar; delay: 500" class="uk-icon-button deleteID" uk-icon="icon: trash" data-id="${item.id}"></a></li>
+                            <li><a href="#Producto-modificar" uk-tooltip="title:Modificar; delay: 500" class="uk-icon-button" uk-icon="icon: file-edit" data-id="${item.id}"></a></li>
                             <li>
-                                <a href="#product-date" class="Lote" uk-tooltip="title:Añadir Entrada; delay: 500">
+                                <a href="#product-date" class="Lote" uk-tooltip="title:Añadir Entrada; delay: 500" data-id="${item.id}">
                                     <img src="./static/images/btn_lote2.png" alt="" width="35px">
                                 </a>
                             </li>
@@ -83,9 +85,7 @@ const cargarTargetProduct = () => {
         btn.addEventListener("click", () => {
           //obtenemos el id del producto pulsado
           let idDelete = parseInt(
-            btn.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.getAttribute(
-              "id"
-            )
+            btn.dataset['id']
           );
           console.log(idDelete);
           //creamos el template del modal de eliminar
@@ -187,10 +187,7 @@ const cargarTargetProduct = () => {
 
       document.querySelectorAll(".Lote").forEach((L) => {
         L.addEventListener("click", () => {
-          let idProduct =
-            L.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.getAttribute(
-              "id"
-            );
+          let idProduct =  L.dataset['id'];
           let templateAggLote = `
             <div id="product-lote" uk-modal bg-close='false'>
                   <div class="uk-modal-dialog">
@@ -323,9 +320,7 @@ const cargarTargetProduct = () => {
           let templateDetails = "";
           //obtenemos el id del producto para hacer la consulta
           let idProduct =
-            info.parentElement.parentElement.parentElement.parentElement.parentElement.getAttribute(
-              "id"
-            );
+            info.dataset['id'];
           //hacemos la peticion ajax para crear el esqueleto del modal
           $.ajax({
             url: "Controller/funcs_ajax/search_lotes.php",

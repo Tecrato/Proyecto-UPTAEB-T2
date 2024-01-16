@@ -94,6 +94,23 @@
     </section>
 </main>
 
-<?php include ("../View/complementos/btn_pag.html"); ?>
+<div class="uk-flex uk-flex-center">
+    <ul class="uk-pagination uk-margin-large-top">
+        <li><a class="pag-btn-proveedores" data-direccion="start"><span class="uk-margin-small-right" uk-pagination-previous></span><span class="uk-margin-small-right" uk-pagination-previous></span></a></li>
+        <li><a class="pag-btn-proveedores" data-direccion="back">Previous</a></li>
+        <li><a class="pag-btn-proveedores" data-direccion="next">Next</a></li>
+        <li><a class="pag-btn-proveedores" data-direccion="end"><span class="uk-margin-small-left" uk-pagination-next></span><span class="uk-margin-small-left" uk-pagination-next></span></a></li>
+    </ul>
+</div>
 
-<?php require("../View/complementos/footer.php"); ?>
+<script src="static/javaScript/librerias/jquery.js"></script>
+<script src="static/javascript/FuncionesGenerales.js"></script>
+
+<script>
+    $('.pag-btn-proveedores').click(ele => {
+        cambiar_pagina_php(ele.target.dataset['direccion'],'proveedores',9)
+    })
+</script>
+
+</body>
+</html>

@@ -22,14 +22,16 @@
 			}
 			$query = $query . " ORDER BY $order";
 
-            $consulta->bindParam(':l',$limite, PDO::PARAM_INT);
-            $consulta->bindParam(':n',$n, PDO::PARAM_INT);
+			$query = $this->conn->prepare("SELECT * FROM factura");
+
+            $query->bindParam(':l',$limite, PDO::PARAM_INT);
+            $query->bindParam(':n',$n, PDO::PARAM_INT);
             if ($this->id != null){
-                $consulta->bindParam(':id',$this->id, PDO::PARAM_INT);
+                $query->bindParam(':id',$this->id, PDO::PARAM_INT);
             }
 
-            $consulta->execute();
-            return $consulta->fetchAll();
+            $query->execute();
+            return $query->fetchAll();
 		}
 
 		function agregar(){
@@ -55,19 +57,27 @@
             $query->execute($query);
         }
 
-        function search_detailsFact($id){
-            $query = " SELECT id,fecha,(SELECT Nombre FROM clientes WHERE registro_ventas.id_cliente = id) AS nombre, (SELECT Apellido FROM clientes WHERE registro_ventas.id_cliente = id) AS apellido, (SELECT Cedula FROM clientes WHERE registro_ventas.id_cliente = id) AS cedula, metodo_pago,(SELECT nombre FROM usuarios WHERE registro_ventas.id_usuario = id) AS vendedor FROM registro_ventas WHERE id = $id";
-            return $this->conn->query($query)->fetchAll();
-        }
+        function search_detailsFact(){
+            $query = $this->conn->prepare("SELECT id,fecha,(SELECT nombre FROM clientes WHERE registro_ventas.id_cliente = id) AS nombre, (SELECT Apellido FROM clientes WHERE registro_ventas.id_cliente = id) AS apellido, (SELECT Cedula FROM clientes WHERE registro_ventas.id_cliente = id) AS cedula, metodo_pago,(SELECT nombre FROM usuarios WHERE registro_ventas.id_usuario = id) AS vendedor FROM registro_ventas WHERE id = :id");
+            
+            $query->bindParam(':id',$this->id);
+            $query->execute();
+            return $query->fetchAll()[0];
 
-        function search_mountFact($id){
-            $query = " SELECT ROUND(monto_final - IVA) AS subtotal,IVA,monto_final FROM registro_ventas WHERE id = $id";
-            return $this->conn->query($query)->fetchAll();
         }
-
-        function search_ProductFact($id){
-            $query = "SELECT cantidad,(SELECT nombre FROM productos WHERE factura.id_productos = id) AS descripcion, (SELECT precio_venta FROM productos WHERE factura.id_productos = id) AS valor_unit, cantidad * (SELECT precio_venta FROM productos WHERE factura.id_productos = id) AS Total FROM factura WHERE id_registro_ventas = $id";
-            return $this->conn->query($query)->fetchAll();
+        
+        function search_mountFact(){
+            $query = $this->conn->prepare("SELECT ROUND(monto_final - IVA) AS subtotal,IVA,monto_final FROM registro_ventas WHERE id = :id");
+            $query->bindParam(':id',$this->id);
+            $query->execute();
+            return $query->fetchAll();
+        }
+        
+        function search_ProductFact(){
+            $query = $this->conn->prepare("SELECT cantidad,(SELECT nombre FROM productos WHERE factura.id_productos = id) AS descripcion, (SELECT precio_venta FROM productos WHERE factura.id_productos = id) AS valor_unit, cantidad * (SELECT precio_venta FROM productos WHERE factura.id_productos = id) AS Total FROM factura WHERE id_registro_ventas = :id");
+            $query->bindParam(':id',$this->id);
+            $query->execute();
+            return $query->fetchAll();
         }
 	}
 

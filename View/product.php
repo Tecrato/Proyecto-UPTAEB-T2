@@ -88,6 +88,14 @@
                                     <!-- aqui se cargan las tarjetas de productos con js -->
                                 </div>
                             </section>
+                            <div class="uk-flex uk-flex-center">
+                                <ul class="uk-pagination uk-margin-large-top">
+                                    <li><a class="pag-btn-productos" data-direccion="start"><span class="uk-margin-small-right" uk-pagination-previous></span><span class="uk-margin-small-right" uk-pagination-previous></span></a></li>
+                                    <li><a class="pag-btn-productos" data-direccion="back">Previous</a></li>
+                                    <li><a class="pag-btn-productos" data-direccion="next">Next</a></li>
+                                    <li><a class="pag-btn-productos" data-direccion="end"><span class="uk-margin-small-left" uk-pagination-next></span><span class="uk-margin-small-left" uk-pagination-next></span></a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -196,5 +204,12 @@
 
 
 </main>
+<script src="static/javaScript/librerias/jquery.js"></script>
+<script src="static/javascript/FuncionesGenerales.js"></script>
+<script src="static/javascript/librerias/datatables.js"></script>
+<script src="static/javascript/Ajax/product.js"></script>
+<script src="static/javascript/funcionDataTable.js"></script>
 
-<?php require("../View/complementos/footer.php"); ?>
+
+</body>
+</html>

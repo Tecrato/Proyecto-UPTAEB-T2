@@ -272,8 +272,9 @@ echo "
                             </li>
                         </ul>
                     </li>
-
-                    <hr class="uk-divider-icon">
+                    <li>
+                        <hr class="uk-divider-icon">
+                    </li>
 
                     <li class="uk-active Link-subMenu">
                         <a href="#">

@@ -6,7 +6,7 @@
     $page = intval($_GET['p']);
     $type = $_GET['type'];
     if (isset($_GET['n_p'])) {
-        $pagination = $_GET['n_p'];
+        $pagination = intval($_GET['n_p']);
     } else {
         $pagination = 9;
     }
@@ -19,20 +19,25 @@
         require('../../Model/Proveedores.php');
         $vart = new Proveedor;
         $todos = $vart->COUNT();
+    } elseif ($type == 'clientes') {
+        require('../../Model/Clientes.php');
+        $vart = new Cliente;
+        $todos = $vart->COUNT();
     }
-
-    if ($dir === 'next' && $page < ceil($todos / $pagination)-1){
+    if ($dir == 'next' && $page < ceil($todos / $pagination)-1){
         $page = $page + 1;
-    } elseif ($dir === 'back' && $page > 0) {
+    } elseif ($dir == 'back' && $page > 0) {
         $page = $page - 1;
-    } elseif ($dir === 'start') {
+    } elseif ($dir == 'start') {
         $page = 0;
-    } elseif ($dir === 'end') {
+    } elseif ($dir == 'end') {
         $page = ceil($todos/$pagination)-1;
     }
     if ($type == 'productos') {
         header('Location:../../Productos?p='.$page);
     } elseif ($type == 'proveedores') {
         header('Location:../../Proveedores?p='.$page);
+    } elseif ($type == 'clientes') {
+        header('Location:../../Clientes?p='.$page);
     }
 ?>

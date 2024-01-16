@@ -14,6 +14,8 @@
         $clase = new Entrada(null,$_POST['ID']);
         $result = $clase->search_modal_details();
     }
+
+    
     $lista=array();
 
     for ($i=0; $i < count($result); $i++) { 

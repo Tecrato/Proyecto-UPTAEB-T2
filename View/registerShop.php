@@ -181,13 +181,27 @@
 
 
 
-    <div class="Paginacion uk-flex uk-flex-center">
-        <ul class="uk-pagination">
-            <li><a href="#"><span class="uk-margin-small-right" uk-pagination-previous></span> Previous</a></li>
-            <li><a href="#">Next <span class="uk-margin-small-left" uk-pagination-next></span></a></li>
-        </ul>
-    </div>
+
+<div class="uk-flex uk-flex-center">
+    <ul class="uk-pagination uk-margin-large-top">
+        <li><a class="pag-btn-facturas" data-direccion="start"><span class="uk-margin-small-right" uk-pagination-previous></span><span class="uk-margin-small-right" uk-pagination-previous></span></a></li>
+        <li><a class="pag-btn-facturas" data-direccion="back">Previous</a></li>
+        <li><a class="pag-btn-facturas" data-direccion="next">Next</a></li>
+        <li><a class="pag-btn-facturas" data-direccion="end"><span class="uk-margin-small-left" uk-pagination-next></span><span class="uk-margin-small-left" uk-pagination-next></span></a></li>
+    </ul>
+</div>
 </main>
 
+<script src="static/javaScript/librerias/jquery.js"></script>
+<script src="static/javascript/FuncionesGenerales.js"></script>
+<script src="static/javascript/Ajax/registerShop.js"></script>
 
-<?php require("../View/complementos/footer.php"); ?>
+<script>
+    $('.pag-btn-facturas').click(ele => {
+        cambiar_pagina_php(ele.target.dataset['direccion'],'facturas',9)
+    })
+</script>
+
+
+</body>
+</html>

@@ -78,20 +78,20 @@
                         <div class="uk-margin">
                             <label class="uk-form-label" for="form-horizontal-text">Nombre</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input" id="form-horizontal-text" value="<?php echo $tu['nombre']?>"  type="text" placeholder="Nombre" name="Nombre">
+                                <input class="uk-input" value="<?php echo $tu['nombre']?>"  type="text" placeholder="Nombre" name="Nombre">
                             </div>
                         </div>
                         <div class="uk-margin">
                             <label class="uk-form-label" for="form-horizontal-text">Correo</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input" id="form-horizontal-text" value="<?php echo $tu['correo']?>"type="email" placeholder="Correo">
+                                <input class="uk-input" value="<?php echo $tu['correo']?>"type="email" placeholder="Correo">
                             </div>
                         </div>
 
                         <div class="uk-margin">
                             <label class="uk-form-label" for="form-horizontal-text">Contraseña</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input" id="form-horizontal-text" value="<?php echo $tu['password']?>" type="text"
+                                <input class="uk-input" value="<?php echo $tu['password']?>" type="text"
                                     placeholder="Contraseña">
                             </div>
                         </div>
@@ -152,135 +152,21 @@
                 <tbody>
                 <?php
 
-                for ($i=0; $i < count($result); $i++) { 
-                    $row = $result[$i];
-                    require ('complementos/tabla_usuario.php');
-                }
-
-            
-        ?>
+                    for ($i=0; $i < count($result); $i++) { 
+                        $row = $result[$i];
+                        require ('complementos/tabla_usuario.php');
+                    }
+                ?>
                 </tbody>
             </table>
         </div>
     </section>
 
-    <!-- ************************************ Modal de registro ************************************ -->
-
-    <div id="register_user" uk-modal>
-        <div class="uk-modal-dialog">
-            <button class="uk-modal-close-default" type="button" uk-close></button>
-            <div class="uk-modal-header">
-                <h2 class="uk-modal-title">REGISTRO USUARIO</h2>
-            </div>
-            <div class="uk-modal-body ">
-                <form class="uk-grid-small" uk-grid method="POST" action="Controller/funcs/agregar_cosas.php">
-                    <div class="uk-width-1-2">
-                        <input type="text" name="tipo" value="Usuario" id="" style="display:none">
-                        <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre"
-                            required>
-                    </div>
-                    <!-- <div class="uk-width-1-2@s">
-                        <input class="uk-input" type="text" placeholder="Apellido" aria-label="50" name="apellido">
-                    </div> -->
-                    <div class="uk-width-1-2@s">
-                        <input class="uk-input" type="text" placeholder="Correo Electronico" aria-label="100"
-                            name="correo" required>
-                    </div>
-                    <div class="uk-width-1-2@s">
-                        <select class="uk-select" id="form-stacked-select" name="rol" required>
-                            <option selected disabled>Tipo de usuario</option>
-                            <option value="1">Administrador</option>
-                            <option value="2">Cajero</option>
-                        </select>
-                    </div>
-                    <div class="uk-width-1-1@s">
-                        <input class="uk-input" type="password" placeholder="Contraseña" aria-label="100" name="password"
-                            required>
-                    </div>
-                    <input type="submit" id="Agregar" style="display:none">
-                </form>
-            </div>
-            <div class="uk-modal-footer uk-text-right">
-                <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
-                <label class="uk-button uk-button-secondary" for="Agregar" >Aceptar</label>
-            </div>
-        </div>
-    </div>
-
-    <!-- ************************************************************************************************************ -->
-
-
-    <!-- ************************************ Modal de modificar ************************************ -->
-
-    <!-- <div id="Update_user" uk-modal>
-        <div class="uk-modal-dialog">
-            <button class="uk-modal-close-default" type="button" uk-close></button>
-            <div class="uk-modal-header">
-                <h2 class="uk-modal-title">EDITAR USUARIO</h2>
-            </div>
-            <div class="uk-modal-body">
-                <form class="uk-grid-small" uk-grid method="POST" action="../Controller/funcs/modificar_cosas.php">
-                    <div class="uk-width-1-2">
-                        <input class="uk-input" type="text" placeholder="Nombre" value="" aria-label="100" name="Nombre"
-                            required>
-                    </div>
-                    <div class="uk-width-1-2@s">
-                        <input class="uk-input" type="text" placeholder="Apellido" aria-label="50" name="Apellido">
-                    </div>
-                    <div class="uk-width-1-2@s">
-                        <input class="uk-input" type="text" placeholder="Correo Electronico" aria-label="100"
-                            name="nombre" required>
-                    </div>
-                    <div class="uk-width-1-2@s">
-                        <select class="uk-select" id="form-stacked-select" name="categoria" required>
-                            <option selected disabled>Tipo de usuario</option>
-                            <option>Dueño</option>
-                            <option>Administrador</option>
-                            <option>Cajero</option>
-                        </select>
-                    </div>
-                    <div class="uk-width-1-1@s">
-                        <input class="uk-input" type="password" placeholder="Contraseña" aria-label="100" name="nombre"
-                            required>
-                    </div>
-                </form>
-            </div>
-            <div class="uk-modal-footer uk-text-right">
-                <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
-                <button class="uk-button uk-button-secondary" type="submit">Guardar</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- ************************************************************************************************************ -->
-
-    <!-- **************************Modal de confirmacion de eliminacion************************** -->
-
-    <div id="eliminar_user" class="uk-flex-top" uk-modal>
-        <div class="uk-modal-dialog uk-margin-auto-vertical">
-
-            <div class="uk-modal-header uk-flex uk-flex-middle">
-                <span class="uk-margin-small-right" uk-icon="icon: warning ; ratio: 2"></span>
-                <h2 class="uk-modal-title uk-margin-remove-top">ELIMINAR</h2>
-            </div>
-            <div class="uk-modal-body">
-                <p>Deseas eliminar este registro para siempre? No podras recuperlo mas adelante</p>
-            </div>
-            <form action="Controller/funcs/borrar_cosas.php" method="POST">
-            <input type=number value="<?php echo  $row['id']?>" name="ID" style="display:none">
-            <input type=text value="Usuarios" name="tipo" style="display:none">
-            <button class="uk-button uk-button-default uk-modal-close" type="button">
-                Cancelar
-            </button>
-            <button class="uk-button uk-button-secondary" type="submit">
-                Aceptar
-            </button>
-            <input type="submit" id="subirxd" style="display:none">
-        </form>
-        </div>
-    </div> 
-
-
 </main>
 
-<?php require("../View/complementos/footer.php"); ?>
+
+<script src="static/javaScript/librerias/jquery.js"></script>
+<script src="static/javascript/FuncionesGenerales.js"></script>
+
+</body>
+</html>  

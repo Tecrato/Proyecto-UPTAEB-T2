@@ -36,7 +36,7 @@ echo '
                     <input class="uk-input" type="text" placeholder="Correo Electronico" value="'.$row['correo'].'"  aria-label="100" name="correo" required>
                 </div>
                 <div class="uk-width-1-2@s">
-                    <select class="uk-select" id="form-stacked-select" name="rol" required>
+                    <select class="uk-select" name="rol" required>
                         <option value="'.$row['rol'].'" selected>Rol Actual</option>
                         <option value="1">Administrador</option>
                         <option value="2">Cajero</option>

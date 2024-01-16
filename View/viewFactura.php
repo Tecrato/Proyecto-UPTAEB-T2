@@ -67,4 +67,9 @@
         
    </div>
 
-<?php require('complementos/footer.php')?>
+    <script src="static/javaScript/librerias/jquery.js"></script>
+    <script src="static/javascript/FuncionesGenerales.js"></script>
+    <script src="static/javascript/Ajax/viewFactura.js"></script>
+
+</body>
+</html>

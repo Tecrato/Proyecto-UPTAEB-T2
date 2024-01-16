@@ -91,7 +91,7 @@
             return $query->fetchAll();
         }
         function COUNT(){
-            return $this->conn->query("SELECT COUNT(*) as 'total' FROM clientes")->fetch_assoc()['total'];
+            return $this->conn->query("SELECT COUNT(*) as 'total' FROM clientes")->fetch()['total'];
         }
     }
 ?>

@@ -116,4 +116,9 @@
 <script src="static/javaScript/librerias/chart.umd.js"></script>
 <script src="static/javaScript/graphicsController.js"></script>
 </main>
-<?php require("../View/complementos/footer.php"); ?>
+
+    <script src="static/javaScript/librerias/jquery.js"></script>
+    <script src="static/javascript/FuncionesGenerales.js"></script>
+
+   </body>
+</html>

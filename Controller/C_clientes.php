@@ -10,11 +10,9 @@
         $num = 0;
     }
 
-
     $result = new Cliente;
-    $result = $result->search();
+    $result = $result->search(n:$num,limite:9);
 
 
     include('../View/client.php');
-    echo '<script>var type_page = "cliente";</script>';
 ?>
