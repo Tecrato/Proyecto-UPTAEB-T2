@@ -18,7 +18,7 @@
         $clase->borrar();
         header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }
-    if ($tipo == 'proveedor'){
+    elseif ($tipo == 'proveedor'){
         require('../../Model/Proveedores.php');
         require('../../Model/Entradas.php');
         require('../../Model/Productos.php');
@@ -30,18 +30,25 @@
 
         header('Location:../../Proveedores'); // Y vuelve a la pagina donde estaba antes
     }
-    if ($tipo == 'cliente'){
+    elseif ($tipo == 'cliente'){
         require('../../Model/Clientes.php');
         $clase = new Cliente($_POST['ID']); // Llama al modelo y le manda la instruccion
         $clase->borrar();
 
         header('Location:../../Clientes'); // Y vuelve a la pagina donde estaba antes
     }
-    if ($tipo == 'usuarios'){
+    elseif ($tipo == 'usuarios'){
         require('../../Model/Usuarios.php');
         $clase = new Usuario($_POST['ID']); // Llama al modelo y le manda la instruccion
         $clase->borrar();
 
         header('Location:../../Administrar_perfil'); // Y vuelve a la pagina donde estaba antes
+    }
+    elseif ($tipo == 'ventas'){
+        require('../../Model/Registro de ventas.php');
+        $clase = new Registro_ventas($_POST['ID']); // Llama al modelo y le manda la instruccion
+        $clase->borrar_logicamente();
+
+        header('Location:../../Ventas'); // Y vuelve a la pagina donde estaba antes
     }
 ?>

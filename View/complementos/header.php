@@ -167,8 +167,8 @@ echo "
                         <p>Estadisticas</p>
                     </a>
                 </li> -->
-                    <li class="uk-margin-small-right Link" href="/Proyecto-UPTAEB-T2/Facturas">
-                        <a class="uk-button uk-button-text enlace_nav" href="Facturas">
+                    <li class="uk-margin-small-right Link" href="/Proyecto-UPTAEB-T2/Ventas">
+                        <a class="uk-button uk-button-text enlace_nav" href="Ventas">
                             <span uk-icon="factura" class="uk-icon uk-margin-small-right uk-icon-button"></span>
                             <p>Registro de ventas</p>
                         </a>
@@ -234,7 +234,7 @@ echo "
                         
                     </li> -->
                         <li class="Link">
-                            <a class="uk-button uk-button-text" href="Facturas">
+                            <a class="uk-button uk-button-text" href="Ventas">
                                 <span uk-icon="factura" class="uk-icon uk-icon-button"></span>
                             </a>
                         </li>

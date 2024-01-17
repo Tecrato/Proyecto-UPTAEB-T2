@@ -35,13 +35,18 @@
     elseif ($_POST['randomnautica'] == "clientes") {
         require('../../Model/Clientes.php');
         $clase = new Cliente();
-    }elseif ($_POST['randomnautica'] == "categoria") {
+    }
+    elseif ($_POST['randomnautica'] == "categoria") {
         require('../../Model/Categorias.php');
         $clase = new Categoria();
     }
     elseif ($_POST['randomnautica'] == "unidad") {
         require('../../Model/Unidades.php');
         $clase = new Unidad();
+    }
+    elseif ($_POST['randomnautica'] == "ventas") {
+        require('../../Model/Registro de ventas.php');
+        $clase = new Registro_ventas();
     }
 
     if (isset($_POST['like']) and $_POST['like'] != "") {
@@ -57,8 +62,13 @@
         $result = $clase->search_Product_RegistroVentas();
     }
     else {
-        $result = $clase->search(n:$n);
+        $result = $clase->search(n:$n,limite:$limite);
     }
+
+
+
+
+
 
     $lista=array();
 

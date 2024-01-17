@@ -19,6 +19,10 @@
         require('../../Model/Proveedores.php');
         $vart = new Proveedor;
         $todos = $vart->COUNT();
+    } elseif ($type == 'ventas') {
+        require('../../Model/Registro de ventas.php');
+        $vart = new Registro_ventas();
+        $todos = $vart->COUNT();
     }
 
     if ($dir === 'next' && $page < ceil($todos / $pagination)-1){

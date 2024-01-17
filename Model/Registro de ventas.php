@@ -21,20 +21,23 @@
 			$query = "SELECT * FROM registro_ventas";
 
             if ($this->id != null){
-                $query = $query." WHERE id=:id";
+                $query = $query." WHERE a.id=:id";
             }
+
             $n = $n*$limite;
-			if ($this->id) {
-				$query = $query . " WHERE id=:id";
-			}
+
+			$query = $query . " WHERE a.active=:active";
+
 			$query = $query . " ORDER BY $order";
             $query = $query . " LIMIT :l OFFSET :n";
 
 
             $consulta = $this->conn->prepare($query);
 
+            $consulta->bindParam(':active',$active, PDO::PARAM_BOOL);
             $consulta->bindParam(':l',$limite, PDO::PARAM_INT);
             $consulta->bindParam(':n',$n, PDO::PARAM_INT);
+
             if ($this->id != null){
                 $consulta->bindParam(':id',$this->id, PDO::PARAM_INT);
             }
@@ -53,8 +56,6 @@
 			$query->bindParam(':id2',$this->id_usuario, PDO::PARAM_INT);
 			$query->bindParam(':iva',$this->IVA, PDO::PARAM_STR);
 
-			echo $this->IVA;
-
 			$query->execute();
 			
 			$registro = $this->search(order:'id DESC')[0];
@@ -68,9 +69,17 @@
 			}
 		}
 
-        function search_targeta_fact(){
-            $query = "SELECT id, (SELECT nombre FROM clientes WHERE id = registro_ventas.id_cliente) AS cliente, monto_final, fecha FROM registro_ventas";
-            return $this->conn->query($query)->fetchAll();
+        function borrar_logicamente(){
+            $query = $this->conn->prepare("UPDATE registro_ventas SET active=0 WHERE id=:id");
+			$query->bindParam(':id',$this->id, PDO::PARAM_INT);
+
+			$query->execute();
+        }
+
+
+        function COUNT(){
+            
+            return $this->conn->query("SELECT COUNT(*) as 'total' FROM registro_ventas")->fetch()['total'];
         }
 	}
 ?>

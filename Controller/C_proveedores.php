@@ -10,6 +10,5 @@
     $result = new Proveedor;
     $result = $result->search(n:$num);
     include('../View/proveedores.php');
-    echo '<script>var num_page = '.$num.';</script>';
-    echo '<script>var type_page = "proveedores";</script>';
+    echo '<script>var page = '.$num.';</script>';
 ?>

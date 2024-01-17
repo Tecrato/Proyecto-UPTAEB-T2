@@ -97,85 +97,12 @@
         <div class="[email protected] uk-grid-medium uk-flex-center height_controller" uk-grid uk-height-match="target: > div > .uk-card">
 
             <!-- ****************** Ficha de la factura ****************** -->
-            <?php for ($i=0; $i < 1; $i++) { ?>
-            <div>
-                <div class="target-detail-fact uk-card uk-card-default uk-padding-small uk-background-secondary uk-light uk-border-rounded"
-                    style="width: 300px;">
-                    <div class="uk-background-secondary">
-                        <div class="uk-flex uk-flex-middle uk-flex-between">
-                            <div class="uk-flex uk-flex-middle">
-                                <img class="uk-margin-small-right" src="static/images/logo_m.png" alt="" width="50PX">
-                                <h3 class="uk-margin-remove uk-text-bolder">#
-                                    <?php echo "$i"?>
-                                </h3>
-                            </div>
-                            <div class="">
-                                <a class="ImprBtn" href="Detalles_factura"
-                                    uk-tooltip="title:Imprimir; delay: 500"><span
-                                        class="uk-margin-small-right uk-icon-button" uk-icon="icon: print"></span></a>
-                                <a href="#modal-center" uk-toggle uk-tooltip="title:Eliminar; delay: 500"
-                                    class="uk-icon-button uk-margin-small-right" uk-icon="trash"></a>
-                            </div>
-
-
-                            <!-- **************************Modal de confirmacion de eliminacion************************** -->
-
-                            <div id="modal-center" class="uk-flex-top" uk-modal>
-                                <div class="uk-modal-dialog uk-margin-auto-vertical">
-
-                                    <div class="uk-modal-header uk-flex uk-flex-middle">
-                                        <span class="uk-margin-small-right" uk-icon="icon: warning ; ratio: 2"></span>
-                                        <h2 class="uk-modal-title uk-margin-remove-top">ELIMINAR</h2>
-                                    </div>
-                                    <div class="uk-modal-body">
-                                        <p>Deseas eliminar este registro para siempre? No podras recuperlo mas adelante
-                                        </p>
-                                    </div>
-                                    <div class="uk-modal-footer uk-text-right">
-                                        <button class="uk-button uk-button-default uk-modal-close"
-                                            type="button">Cancelar</button>
-                                        <button class="uk-button uk-button-secondary" type="button">Aceptar</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <!-- ****************************************************************************** -->
-
-                        <hr class="uk-margin-remove divider">
-
-                        <section>
-                            <div>
-                                <div>
-                                    <div>
-                                        <p class="uk-text-meta uk-margin-remove">N∘_OPERACIÓN: <b
-                                                class="uk-text-success">001</b>
-                                        </p>
-                                        <hr class="uk-margin-remove divider-2">
-                                        <p class="uk-text-meta uk-margin-remove">FECHA: <b
-                                                class="uk-text-success">10/7/2023</b></p>
-                                        <hr class="uk-margin-remove divider-2">
-                                        <p class="uk-text-meta uk-margin-remove">CLIENTE: <b
-                                                class="uk-text-success">Carlos
-                                                Merlo</b></p>
-                                        <hr class="uk-margin-remove divider-2">
-                                        <p class="uk-text-meta uk-margin-remove">VENDEDOR: <b
-                                                class="uk-text-success">JUAN</b></p>
-                                        <hr class="uk-margin-remove divider-2">
-                                        <p class="uk-text-meta uk-margin-remove">ESTADO FACTURA: <b
-                                                class="state-fact uk-text-emphasis">PAGADO</b></p>
-                                        <hr class="uk-margin-remove divider-2">
-                                        <p class="uk-text-meta uk-margin-remove">TOTAL FACTURA: <b
-                                                class="uk-text-success">100
-                                                BS</b></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-            </div>
-            <?php } ?>
+            <?php
+            for ($i=0; $i < count($result); $i++) { 
+                $row = $result[$i];
+                require 'complementos/tarjeta_venta.php';
+            }
+            ?>
         </div>
     </section>
 
@@ -198,7 +125,7 @@
 
 <script>
     $('.pag-btn-facturas').click(ele => {
-        cambiar_pagina_php(ele.target.dataset['direccion'],'facturas',9)
+        cambiar_pagina_php(ele.target.dataset['direccion'],'ventas',9)
     })
 </script>
 
