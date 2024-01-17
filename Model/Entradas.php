@@ -68,11 +68,29 @@
 		function search($n=0,$limite=9, $order = 'id DESC'){
 			$query = "SELECT * FROM entradas";
 
-            if ($this->id != null){
-                $query = $query." WHERE id=:id";
+			$cuenta = 0;
+
+			if ($this->id || $this->id_producto || $this->id_proveedor) {
+				$query .= " WHERE";
+			}
+
+            if ($this->id){
+                $query = $query." AND id=:id";
+                $cuenta += 1;
             }
-			elseif ($this->id_producto != null) {
-				$query = $query . " WHERE id_producto=:id_producto";
+            if ($cuenta > 0) {
+            	$query .= " AND";
+            }
+			if ($this->id_producto) {
+				$query = $query . " id_producto=:id_producto";
+                $cuenta += 1;
+			}
+            if ($cuenta > 0) {
+            	$query .= " AND";
+            }
+			if ($this->id_proveedor) {
+				$query = $query . " id_proveedor=:id_proveedor";
+                $cuenta += 1;
 			}
             $n = $n*$limite;
 			$query = $query . " ORDER BY $order";
@@ -86,28 +104,20 @@
             if ($this->id != null){
                 $consulta->bindParam(':id',$this->id, PDO::PARAM_INT);
             }
-			elseif ($this->id_producto != null) {
+			if ($this->id_producto != null) {
                 $consulta->bindParam(':id_producto',$this->id_producto, PDO::PARAM_INT);
+			}
+			if ($this->id_proveedor != null) {
+                $consulta->bindParam(':id_proveedor',$this->id_proveedor, PDO::PARAM_INT);
 			}
 
             $consulta->execute();
             return $consulta->fetchAll();
 		}
 
-		function search_with_producto_and_proveedor(){
-			$query = $this->conn->prepare("SELECT * FROM entradas WHERE id_producto=:id1 AND id_proveedor=:id2");
 
-			$query->bindParam(':id1',$this->id_producto);
-			$query->bindParam(':id2',$this->id_proveedor);
-
-			$query->execute();
-			
-			return $query->fetchAll();
-		}
-
-		function search_proveedor_from_product()
-		{
-			$query = $this->conn->prepare("SELECT id_proveedor, (SELECT razon_social FROM proveedores WHERE entradas.id_proveedor=:id) AS proveedor FROM entradas WHERE id_producto=:id GROUP BY id_proveedor");
+		function search_proveedor_from_product(){
+			$query = $this->conn->prepare("SELECT id_proveedor, (SELECT razon_social FROM proveedores p WHERE p.id = entradas.id_proveedor) AS proveedor FROM entradas WHERE id_producto=:id GROUP BY id_proveedor LIMIT 50");
 
 			$query->bindParam(':id',$this->id_producto);
 			$query->execute();
@@ -115,12 +125,4 @@
 			return $query->fetchAll();
 		}
 
-		function search_modal_details(){
-			$query = $this->conn->prepare("SELECT imagen,nombre,marca,(SELECT nombre FROM categoria WHERE productos.id_categoria = id) AS categoria,(SELECT SUM(existencia) FROM entradas WHERE productos.id = :id GROUP BY :id) AS existencia,precio_venta FROM productos WHERE id = :id");
-
-			$query->bindParam(':id',$this->id_producto);
-			$query->execute();
-
-			return $query->fetchAll();
-		}
 }

@@ -60,65 +60,31 @@
         }
 
         // Con esta otra funcion se busca entre los productos en la base de datos
-        function search($id=null,$nombre=null,$rif=null,$telefono=null,$correo=null,$direccion=null,$n=0){
-            // Al igual que la clase anterior, puede buscar segun muchos valores o solo algunos
-            $querys = [];
-            $query = "SELECT * FROM proveedores WHERE";
-            if ($id != null){
-                array_push($querys," ID='$id'");
+        function search($n=0,$limite=9){
+            $query = "SELECT * FROM proveedores";
+
+            if ($this->id != null){
+                $query = $query." WHERE id=:id";
             }
-            if ($nombre != null) {
-                if (count($querys) > 0){
-                    array_push($querys," AND");
-                }
-                array_push($querys," Nombre='$nombre'");
-            }
-            if ($rif != null) {
-                if (count($querys) > 0){
-                    array_push($querys," AND");
-                }
-                array_push($querys," rif='$rif'");
-            }
-            if ($telefono != null) {
-                if (count($querys) > 0){
-                    array_push($querys," AND");
-                }
-                array_push($querys," telefono='$telefono'");
-            }
-            if ($correo != null) {
-                if (count($querys) > 0){
-                    array_push($querys," AND");
-                }
-                array_push($querys," correo='$correo'");
-            }
-            if ($direccion != null) {
-                if (count($querys) > 0){
-                    array_push($querys," AND");
-                }
-                array_push($querys," direccion='$direccion'");
+            $n = $n*$limite;
+
+            $query = $query . " LIMIT :l OFFSET :n";
+
+            $consulta = $this->conn->prepare($query);
+
+            $consulta->bindParam(':l',$limite, PDO::PARAM_INT);
+            $consulta->bindParam(':n',$n, PDO::PARAM_INT);
+            if ($this->id != null){
+                $consulta->bindParam(':id',$this->id, PDO::PARAM_INT);
             }
 
-            if (count($querys) < 1) { // Si no hay condiciones se obtienen 9 resultados dependiento de en que pagina esta el usuario
-                $n = 9*$n;
-                $query = "SELECT * FROM proveedores LIMIT 9 OFFSET $n";
-            } else { // Sino
-                foreach ($querys as $q) { // Se pasa con los filtros
-                    $query = $query . $q;
-                }
-            }
-            
-            $consulta = $this->conn->query($query);
+        
+            $consulta->execute();
             return $consulta->fetchAll();
         }
         
-        function search_detalles_producto($id){
-            
-            $query = "SELECT nombre,(SELECT SUM(restante) FROM lotes Where id_proveedor = p.id) as stock,(SELECT MIN(fecha_vencimiento) FROM lotes Where id_proveedor = p.id) as fecha_vencimiento FROM `proveedores` as p WHERE p.id=$id ORDER BY nombre";
-        
-            return $this->conn->query($query); //$conn->fetch_assoc() // Y devuelve el resultado al controlador
-        }
         function search_like(){
-            $query = $this->conn->prepare("SELECT * FROM productos WHERE nombre LIKE '%:nombre%'");
+            $query = $this->conn->prepare("SELECT * FROM proveedores WHERE nombre LIKE '%:nombre%'");
             $query->bindParam(':nombre',$this->nombre);
 
             $query->execute();

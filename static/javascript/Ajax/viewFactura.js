@@ -1,8 +1,8 @@
 //se hace una consulta ajax para traer los datos de la factura
 $.ajax({
-  url: "Controller/funcs_ajax/search_factura.php",
+  url: "Controller/funcs_ajax/search.php",
   type: "POST",
-  data: { TYPE: "TRG_FACT" },
+  data: { randomnautica: "ventas" },
   success: function (response) {
     let json = JSON.parse(response);
     let ContainerTarget = document.querySelector(".Contanier_fact_item");

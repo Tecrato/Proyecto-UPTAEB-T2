@@ -17,16 +17,15 @@
     }
      
 
-
-    if ($_POST['randomnautica'] == "productos" or $_POST['randomnautica'] == "tarjeta_productos" or $_POST['randomnautica'] == "productos_factura") {
+    if ($_POST['randomnautica'] == "productos") {
         require('../../Model/Productos.php');
-        $clase = new Producto();
+        $clase = new Producto(isset($_POST['ID']) ? $_POST['ID'] : null);
     }
-    elseif ($_POST['randomnautica'] == "stock_producto") {
-        require('../../Model/Productos.php');
-        $clase = new Producto();
-        echo $clase->search_stock($_POST['ID']);
-        die();
+    elseif ($_POST['randomnautica'] == "entradas") {
+        require('../../Model/Entradas.php');
+        $clase = new Entrada(
+            id_producto: isset($_POST['id_producto']) ? $_POST['id_producto']: null,
+            id_proveedor: isset($_POST['id_proveedor']) ? $_POST['id_proveedor']: null);
     }
     elseif ($_POST['randomnautica'] == "proveedores") {
         require('../../Model/Proveedores.php');
@@ -36,11 +35,11 @@
         require('../../Model/Clientes.php');
         $clase = new Cliente();
     }
-    elseif ($_POST['randomnautica'] == "categoria") {
+    elseif ($_POST['randomnautica'] == "categorias") {
         require('../../Model/Categorias.php');
         $clase = new Categoria();
     }
-    elseif ($_POST['randomnautica'] == "unidad") {
+    elseif ($_POST['randomnautica'] == "unidades") {
         require('../../Model/Unidades.php');
         $clase = new Unidad();
     }
@@ -52,20 +51,14 @@
     if (isset($_POST['like']) and $_POST['like'] != "") {
         $result = $clase->search_like($_POST['like']);
     }
-    elseif ((isset($_POST['ID']) and $_POST['ID'] != "")){
-        $result = $clase->search($_POST['ID']);
-    }
-    elseif ($_POST['randomnautica'] == "tarjeta_productos") {
-        $result = $clase->search_targeta($n,$limite);
-    }
-    elseif ($_POST['randomnautica'] == "productos_factura") {
-        $result = $clase->search_Product_RegistroVentas();
+    elseif (isset($_POST['subFunction'])) {
+        if ($_POST['subFunction'] == 'proveedor_de_una_entrada') {
+            $result = $clase->search_proveedor_from_product();
+        }
     }
     else {
         $result = $clase->search(n:$n,limite:$limite);
     }
-
-
 
 
 

@@ -81,48 +81,6 @@
             $query->bindParam(5,$this->id);
             $query->execute(); 
         }
-        // public function search(){
-        //     // $query = "SELECT * FROM usuarios WHERE";
-        //     // if ($this->id != null){
-        //     //     $query->array_push(" ID=:id");
-        //     // }
-        //     // if ($this->nombre != null) {
-        //     //     if (count($querys) > 0){
-        //     //         $querys->array_push(" AND");
-        //     //     }
-        //     //     $querys->array_push(" Nombre=:nombre");
-        //     // }
-        //     // if ($this->correo != null) {
-        //     //     if (count($querys) > 0){
-        //     //         $querys->array_push(" AND");
-        //     //     }
-        //     //     array_push($querys," correo=:correo");
-        //     // }
-        //     // if ($this->password != null) {
-        //     //     if (count($querys) > 0){
-        //     //         array_push($querys," AND");
-        //     //     }
-        //     //     array_push($querys," contraseña=:passsword");
-        //     // }
-        //     // if ($this->rol != null) {
-        //     //     if (count($querys) > 0){
-        //     //         $querys->array_push(" AND");
-        //     //     }
-        //     //     $querys->array_push(" rol=:rol");
-        //     // }
-
-        //     // if (count($querys) < 1) {
-        //     //     $query = "SELECT * FROM usuarios";
-        //     // } else {
-        //     //     foreach ($querys as $q) {
-        //     //         $query = $query . $q;
-        //     //     }
-        //     // }
-        //     $consulta = $this->conn->prepare('SELECT * FROM usuarios');
-        //     $consulta->execute();
-        //     return $consulta->fetchAll();
-        // }
-        // Que de momento solo busca, ya que solo se podra loguear al sistema
         public function login(){
 
             $query = "SELECT * FROM usuarios WHERE correo=:correo AND password=:password";

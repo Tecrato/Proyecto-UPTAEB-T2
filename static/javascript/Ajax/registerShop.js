@@ -441,9 +441,9 @@ document.addEventListener("keyup", (e) => {
 
 //ajax
 $.ajax({
-  url: "Controller/funcs_ajax/search_factura.php",
+  url: "Controller/funcs_ajax/search.php",
   type: "POST",
-  data: {TYPE: "PRODUCT_FACT_TABLE"},
+  data: {randomnautica: "productos"},
   success: function (response) {
     let producto = JSON.parse(response);
     let productos = producto.lista;

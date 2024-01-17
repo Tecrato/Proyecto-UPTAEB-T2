@@ -85,10 +85,24 @@
         // Con esta otra funcion se busca entre los productos en la base de datos
         function search($n=0,$limite=9){
             // Al igual que la clase anterior, puede buscar segun muchos valores o solo algunos
-            $query = "SELECT * FROM productos";
+            $query = "SELECT 
+                    a.id, 
+                    b.nombre categoria,
+                    c.nombre unidad,
+                    a.nombre,
+                    a.marca,
+                    a.imagen,
+                    (SELECT SUM(entradas.existencia) FROM entradas Where id_producto = a.id) as stock,
+                    a.stock_min,
+                    a.stock_max,
+                    a.precio_venta,
+                    a.IVA
+                    FROM productos a 
+                    INNER JOIN categoria b ON b.id = a.id_categoria 
+                    INNER JOIN unidades c ON c.id = a.id_unidad";
 
             if ($this->id != null){
-                $query = $query." WHERE id=:id";
+                $query = $query." WHERE a.id=:id";
             }
             $n = $n*$limite;
 
@@ -104,15 +118,7 @@
             $consulta->execute();
             return $consulta->fetchAll();
         }
-        function search_stock(){
-            $query = $this->conn->prepare("SELECT SUM(restante) as stock FROM entradas WHERE id_producto=:id");
 
-            $query->bindParam(':id',$this->id, PDO::PARAM_INT);
-
-            $query->execute();
-            $r = $query->fetch()['stock'];
-            return $r ?: 0;
-        }
         function search_like(){
             $query = $this->conn->prepare("SELECT * FROM productos WHERE nombre LIKE '%:nombre%'");
 
@@ -122,21 +128,7 @@
             return $query->fetchAll();
         }
 
-        function search_Product_RegistroVentas(){
-            $query = "SELECT id, nombre,(SELECT SUM(existencia) FROM entradas Where id_producto = p.id) as stock,precio_venta,IVA FROM `productos` as p ORDER BY id";
 
-            return $this->conn->query($query)->fetchAll();
-        }
-
-        function search_targeta($n, $limite){
-            $query = $this->conn->prepare("SELECT id,nombre,marca,imagen,(SELECT nombre FROM categoria WHERE productos.id_categoria = id) AS categoria, (SELECT MAX((SELECT razon_social FROM proveedores WHERE entradas.id_proveedor = id)) FROM entradas WHERE id_producto = productos.id) AS proveedor FROM productos LIMIT :l OFFSET :n");
-            
-            $n = $n*$limite;
-            $query->bindParam(':l',$limite, PDO::PARAM_INT);
-            $query->bindParam(':n',$n, PDO::PARAM_INT);
-            $query->execute();
-            return $query->fetchAll();
-        }
 
         function search_inventario(){
             $query = "SELECT id,marca,(SELECT SUM(cantidad) FROM entradas WHERE productos.id = id_producto) AS entradas,(SELECT SUM(cantidad) - (SELECT SUM(existencia) FROM entradas WHERE productos.id = id_producto) FROM entradas WHERE productos.id = id_producto) AS salidas, (SELECT SUM(existencia) FROM entradas WHERE productos.id = id_producto) AS existencia, precio_venta,(SELECT SUM(existencia) FROM entradas WHERE productos.id = id_producto) * precio_venta AS Total FROM productos";

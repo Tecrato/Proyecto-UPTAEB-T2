@@ -1,17 +1,6 @@
 //creamos una funcion que nos cargue todas las tarjetas y sus modales, dependiendo de que modal desea abrir
 var page = 0;
 
-const CATEGORIAS = {}
-
-// function cargar_categorias() {
-//   $.ajax({
-//     url: 'Controller/funcs_ajax/search.php',    // Esto es para quitar funciones en php
-//     type: 'GET',                                // hay un monton de codigo repetido WTF
-//     success: response => {
-//     //   for (JSON.parse(response))
-//     }
-//   })
-// }
 
 $('.pag-btn-productos').click(ele => {
   cambiar_pagina_ajax(ele.target.dataset['direccion'],'productos',cargarTargetProduct,9)
@@ -23,7 +12,7 @@ const cargarTargetProduct = () => {
     url: "Controller/funcs_ajax/search.php",
     type: "POST",
     data: {
-      randomnautica: "tarjeta_productos",
+      randomnautica: "productos",
       n: page, // Aca va el numero de la pagina actual
       limite: 9, // Aca va el numero maximo de tarjetas que se pueden imprimir
     },
@@ -323,9 +312,9 @@ const cargarTargetProduct = () => {
             info.dataset['id'];
           //hacemos la peticion ajax para crear el esqueleto del modal
           $.ajax({
-            url: "Controller/funcs_ajax/search_lotes.php",
+            url: "Controller/funcs_ajax/search.php",
             type: "POST",
-            data: { TB: "MODAL", ID: idProduct },
+            data: { randomnautica: "productos", ID: idProduct},
             success: function (response) {
               let json = JSON.parse(response);
               json.lista.forEach((item) => {
@@ -426,10 +415,11 @@ const cargarTargetProduct = () => {
               //esta consulta es para cargar los lotes segun del id del producto y el proveedor
               let supplierName = "";
               $.ajax({
-                url: "Controller/funcs_ajax/search_lotes.php",
+                url: "Controller/funcs_ajax/search.php",
                 type: "POST",
-                data: { TB: "NP", ID: idProduct },
+                data: { randomnautica: "entradas", subFunction: 'proveedor_de_una_entrada', id_producto: idProduct },
                 success: function (response) {
+                  console.log(response)
                   let json = JSON.parse(response);
                   json.lista.forEach((s) => {
                     supplierName += `<li class="uk-text-uppercase lotes-content" idProveedor="${s.id_proveedor}">
@@ -457,8 +447,8 @@ const cargarTargetProduct = () => {
                       let contenedor = sup.nextElementSibling;
 
                       $.post(
-                        "Controller/funcs_ajax/search_lotes.php",
-                        { TB: "LP", ID: idProduct, SUPPLIER: idProveedor },
+                        "Controller/funcs_ajax/search.php",
+                        { randomnautica: "entradas", id_producto: idProduct, id_proveedor: idProveedor },
                         function (response) {
                           let json = JSON.parse(response);
                           json.lista.forEach((dat) => {
@@ -717,7 +707,7 @@ $.ajax({
 $.ajax({
   url: "Controller/funcs_ajax/search.php",
   type: "POST",
-  data: { randomnautica: "categoria" },
+  data: { randomnautica: "categorias" },
   success: function (response) {
     let options = ``;
     let json = JSON.parse(response);
