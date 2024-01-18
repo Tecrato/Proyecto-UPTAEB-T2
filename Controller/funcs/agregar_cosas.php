@@ -25,7 +25,7 @@
         require('../../Model/Productos.php');
         $clase = new Producto(null,$_POST["categoria"],$_POST["unidad"],$_POST["nombre"],$_POST["descripcion"],$nick,$_POST["stock_min"],$_POST["stock_max"],$_POST["precio_venta"],$_POST["IVA"]); // Llama al modelo y le manda la instruccion
         try {
-            $clase->agregar();
+            print_r($clase->agregar());
         } catch (Exception $e) {
             print_r($e);
             unlink('../../Media/imagenes/'."producto_".$_POST['nombre']);
@@ -52,11 +52,11 @@
     }
     elseif ($tipo === 'cliente'){
         require('../../Model/Clientes.php');
-        $clase = new Cliente(null,$_POST["nombre"],$_POST["apellido"],$_POST["documento"],$_POST["cedula"],$_POST["direccion"],$_POST["telefono"]); 
+        $clase = new Cliente(null,$_POST["nombre"],$_POST["cedula"],$_POST["apellido"],$_POST["documento"],$_POST["direccion"],$_POST["telefono"]); 
         $clase->agregar();
         header('Location:../../Clientes'); // Y vuelve a la pagina donde estaba antes
     }
-    elseif ($tipo === 'Usuario'){
+    elseif ($tipo === 'usuarios'){
         require('../../Model/Usuarios.php');
         $clase = new Usuario(null,$_POST["nombre"],$_POST["correo"],$_POST["password"],$_POST["rol"]); 
         $clase->agregar();

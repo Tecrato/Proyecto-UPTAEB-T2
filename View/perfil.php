@@ -12,18 +12,13 @@
                         <span uk-icon="plus" class="uk-icon uk-margin-small-right"></span>
                         <p class="uk-margin-remove">CREAR USUARIO</p>
                     </a>
+                    
                     <a href="#" class="uk-button uk-button-link uk-flex uk-flex-middle">
                         <span uk-icon="history" class="uk-icon uk-margin-small-right"></span>
                         <p class="uk-margin-remove">ACTIDADAD DEL SISTEMA</p>
                     </a>
                 </div>
             </div>
-            <nav class="Breadcrumb" aria-label="Breadcrumb">
-                <ul class="uk-breadcrumb uk-background-secondary profile-breadcrumb">
-                    <li><a href="#">Inicio</a></li>
-                    <li><span>Perfil</span></li>
-                </ul>
-            </nav>
         </div>
     </div>
 
@@ -53,14 +48,12 @@
 
                     <div>
                         <h3>Detalles del perfil</h3>
-
-                        <!-- PEQUEÑO PROBLEMA -->
+                            <div class="uk-flex">
+                                <p class="item-profile">Nombre </p><span class="uk-article-meta"> <?php echo $tu['nombre']; ?></span>
+                            </div>
                         <?php 
                         
                         echo '
-                            <div class="uk-flex">
-                                <p class="item-profile">Nombre </p><span class="uk-article-meta">'.$tu['nombre'].'</span>
-                            </div>
                             <div class="uk-flex">
                                 <p class="item-profile">Correo</p><span class="uk-article-meta">'.$tu['correo'].'</span>
                             </div>
@@ -75,16 +68,17 @@
                     <form class="uk-form-horizontal uk-margin-large" method="POST" action="Controller/funcs/modificar_cosas.php">
                         <input type=number value=<?php echo $tu['id']?> name="ID" style="display:none">
                         <input type=text value="usuario" name="tipo" style="display:none">
+                        <input type=text value="zi" name="self" style="display:none">
                         <div class="uk-margin">
                             <label class="uk-form-label" for="form-horizontal-text">Nombre</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input" value="<?php echo $tu['nombre']?>"  type="text" placeholder="Nombre" name="Nombre">
+                                <input class="uk-input" value="<?php echo $tu['nombre']?>"  type="text" placeholder="Nombre" name="nombre">
                             </div>
                         </div>
                         <div class="uk-margin">
                             <label class="uk-form-label" for="form-horizontal-text">Correo</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input" value="<?php echo $tu['correo']?>"type="email" placeholder="Correo">
+                                <input class="uk-input" value="<?php echo $tu['correo']?>" name="correo" type="email" placeholder="Correo">
                             </div>
                         </div>
 
@@ -92,7 +86,7 @@
                             <label class="uk-form-label" for="form-horizontal-text">Contraseña</label>
                             <div class="uk-form-controls">
                                 <input class="uk-input" value="<?php echo $tu['password']?>" type="text"
-                                    placeholder="Contraseña">
+                                    placeholder="Contraseña" name="password">
                             </div>
                         </div>
 

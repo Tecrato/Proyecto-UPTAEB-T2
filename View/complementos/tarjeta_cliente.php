@@ -18,12 +18,12 @@
                  DATOS
              </h4>
              <div>
-                 <a href="#modificar_client" uk-toggle uk-tooltip="title:Editar; delay: 500"
+                 <a href="#modificar_cliente'.$row['id'].'" uk-toggle uk-tooltip="title:Editar; delay: 500"
                      class="uk-icon-button uk-margin-small-right" type="button"
                      style="border: none; cursor: pointer">
                      <span uk-icon="icon: file-edit"></span>
                  </a>
-                 <a href="#eliminar_supplier'.$row["id"].'"  uk-toggle uk-tooltip="title:Eliminar; delay: 500"
+                 <a href="#eliminar_cliente'.$row["id"].'"  uk-toggle uk-tooltip="title:Eliminar; delay: 500"
                      class="uk-icon-button uk-margin-small-right" uk-tooltip="title:Eliminar; delay: 500"
                      type="button" style="border: none; cursor: pointer" type="button">
                      <span uk-icon="icon: trash"></span>
@@ -60,43 +60,50 @@
 </div>
 <!-- ****************** Modal de modificacion ****************** -->
 
-<div id="modificar_client" uk-modal>
+<div id="modificar_cliente'.$row['id'].'" uk-modal>
     <div class="uk-modal-dialog">
         <button class="uk-modal-close-default" type="button" uk-close></button>
         <div class="uk-modal-header">
             <h3 class="uk-modal-title">EDITAR CLIENTES</h3>
         </div>
         <div class="uk-modal-body">
-            <form class="uk-grid-small" uk-grid>
+            <form action="Controller/funcs/modificar_cosas.php" method="POST" class="uk-grid-small" uk-grid>
+                <input type="text" name="tipo" value="cliente" id="" style="display:none">
+                <input type=number value="'.$row['id'].'" name="ID" style="display:none">
                 <div class="uk-width-1-2@s">
-                    <input class="uk-input" type="text" placeholder="Nombre" aria-label="100">
+                    <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre">
                 </div>
                 <div class="uk-width-1-2@s">
-                    <input class="uk-input" type="text" placeholder="Apellido" aria-label="50">
+                    <input class="uk-input" type="text" placeholder="Apellido" aria-label="50" name="apellido">
                 </div>
                 <div class="uk-width-1-2@s">
-                    <select class="uk-select" id="form-stacked-select" name="categoria" required>
-                        <option selected disabled>Documento</option>
-                        <option>V</option>
-                        <option>J</option>
-                        <option>E</option>
+                    <select class="uk-select" name="documento" required>
+                        <option value="V" selected>V</option>
+                        <option value="J">J</option>
+                        <option value="E">E</option>
                     </select>
                 </div>
                 <div class="uk-width-1-2@s">
-                    <input class="uk-input" type="text" placeholder="Numero de documento" aria-label="50">
+                    <input class="uk-input" type="number" placeholder="Numero de documento" aria-label="50" name="cedula">
                 </div>
+                <div class="uk-width-1-2@s">
+                    <input class="uk-input" type="text" placeholder="Direccion" name="direccion" aria-label="50">
+                </div>
+                <div class="uk-width-1-2@s">
+                    <input class="uk-input" type="text" placeholder="Telefono" name="telefono" aria-label="50">
+                </div>
+                    <div class="uk-modal-footer uk-text-right">
+                        <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
+                        <button class="uk-button uk-button-secondary" type="submit">Guardar</button>
+                    </div>
             </form>
-        </div>
-        <div class="uk-modal-footer uk-text-right">
-            <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
-            <button class="uk-button uk-button-secondary" type="button">Guardar</button>
         </div>
     </div>
 </div>
 
 <!-- **************************Modal de confirmacion de eliminacion************************** -->
 
-<div id="eliminar_supplier'.$row["id"].'" class="uk-flex-top" uk-modal>
+<div id="eliminar_cliente'.$row["id"].'" method="POST" class="uk-flex-top" uk-modal>
     <div class="uk-modal-dialog uk-margin-auto-vertical">
         <div class="uk-modal-header uk-flex uk-flex-middle">
             <span class="uk-margin-small-right" uk-icon="icon: warning ; ratio: 2"></span>
@@ -109,14 +116,16 @@
             </p>
         </div>
         <div class="uk-modal-footer uk-text-right">
+            <form method="POST" action="Controller/funcs/borrar_cosas.php" style="display:none">
+                <input type="number" name="ID" value='.$row["id"].' style="display:none">
+                <input type="text" name="tipo" value="cliente" style="display:none">
+                <input type="submit" id="eliminar'.$row['id'].'" class="uk-button uk-button-secondary">
+            </form>
             <button class="uk-button uk-button-default uk-modal-close" type="button">
                 Cancelar
             </button>
-            <form method="POST" action="Controller/funcs/borrar_cosas.php">
-                <input type="number" name="ID" value='.$row["id"].' style="display:none">
-                <input type="text" name="tipo" value="cliente" style="display:none">
-                <input type="submit" class="uk-button uk-button-secondary"  >
-            </form>
+            <label class="uk-button uk-button-secondary" for="eliminar'.$row['id'].'">Aceptar</label>
+
         </div>
     </div>
 </div>';

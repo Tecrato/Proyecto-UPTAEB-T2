@@ -9,7 +9,7 @@
         private $telefono;
         private $direccion;
 
-        function __construct($id=null, $nombre=null,$cedula=null,$documento=null,$apellido=null,$direccion=null,$telefono=null){
+        function __construct($id=null, $nombre=null,$cedula=null,$apellido=null,$documento=null,$direccion=null,$telefono=null){
             $this->id = $id;
             $this->nombre = $nombre;
             $this->cedula = $cedula;
@@ -22,7 +22,7 @@
         }
 
         function agregar(){
-            $query = $this->conn->prepare("INSERT INTO clientes (nombre, cedula, apellido, documento, direccion, telefono) VALUES(:nombre, :cedula, :documento, :apellido, :direccion, :telefono)");
+            $query = $this->conn->prepare("INSERT INTO clientes (nombre, cedula, apellido, documento, direccion, telefono) VALUES(:nombre, :cedula, :apellido, :documento, :direccion, :telefono)");
             
             $query->bindParam(':nombre',$this->nombre, PDO::PARAM_STR);
             $query->bindParam(':cedula',$this->cedula, PDO::PARAM_STR);

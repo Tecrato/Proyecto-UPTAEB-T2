@@ -73,10 +73,8 @@ const cargarTargetProduct = () => {
         //usamos el evento click para saber en que tarjeta pulso, para luego capturar el id del producto
         btn.addEventListener("click", () => {
           //obtenemos el id del producto pulsado
-          let idDelete = parseInt(
-            btn.dataset['id']
-          );
-          console.log(idDelete);
+          let idDelete = parseInt(btn.dataset['id']);
+
           //creamos el template del modal de eliminar
           let ModalDeleteProduct = `<div id="eliminar_product" class="uk-flex-top uk-modal" uk-modal bg-close='false'>
                                           <div class="uk-modal-dialog uk-margin-auto-vertical">
@@ -371,7 +369,7 @@ const cargarTargetProduct = () => {
                                 </div>
                                 <div>
                                     <h5 class="uk-margin-remove uk-text-emphasis Color-icon-detailProduct uk-text-bold uk-text-uppercase">
-                                        ${item.existencia}
+                                        ${item.stock}
                                     </h5>
                                 </div>
                             </div>
@@ -419,7 +417,6 @@ const cargarTargetProduct = () => {
                 type: "POST",
                 data: { randomnautica: "entradas", subFunction: 'proveedor_de_una_entrada', id_producto: idProduct },
                 success: function (response) {
-                  console.log(response)
                   let json = JSON.parse(response);
                   json.lista.forEach((s) => {
                     supplierName += `<li class="uk-text-uppercase lotes-content" idProveedor="${s.id_proveedor}">
@@ -588,7 +585,7 @@ let btnAgg = document.querySelector(".btn-modal-register");
 
 btnAgg.addEventListener("click", () => {
   //esto es para que se cree solo una vez, ya que el body tiene 10 elementos por defecto
-  console.log(controllerModal.childElementCount);
+  // console.log(controllerModal.childElementCount);
 
   if (controllerModal.childElementCount == 13) {
     btnAgg.setAttribute("uk-toggle", "");
@@ -598,9 +595,8 @@ btnAgg.addEventListener("click", () => {
     $.ajax({
       url: "Controller/funcs_ajax/search.php",
       type: "POST",
-      data: { randomnautica: "categoria" },
+      data: { randomnautica: "categorias" },
       success: function (response) {
-        console.log(response);
         let options = ``;
         let json = JSON.parse(response);
         json.lista.forEach((date) => {
@@ -613,7 +609,7 @@ btnAgg.addEventListener("click", () => {
     $.ajax({
       url: "Controller/funcs_ajax/search.php",
       type: "POST",
-      data: { randomnautica: "unidad" },
+      data: { randomnautica: "unidades" },
       success: function (response) {
         let options = ``;
         let json = JSON.parse(response);
@@ -657,7 +653,6 @@ btnAgg.addEventListener("click", () => {
             .parentElement;
         controllerModal.removeChild(subir);
         btnAgg.removeAttribute("uk-toggle");
-        console.log(response);
         //y llamamos a la funcion de cargar contenido
         cargarTargetProduct();
       },

@@ -20,9 +20,6 @@
             $_SESSION['rol'] = "Dueño"; // Y tambien guarda el nombre para despues   
         }
         else if ($rol == 2){
-            $_SESSION['rol'] = "Administrador"; // Y tambien guarda el nombre para despues   
-        }
-        else if ($rol == 3){
             $_SESSION['rol'] = "Cajero"; // Y tambien guarda el nombre para despues   
         }
         header('Location: ../../Inicio'); // y pa' la pagina que se va

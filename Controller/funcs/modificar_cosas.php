@@ -43,14 +43,21 @@
     }
     elseif ($tipo === 'cliente'){
         require('../../Model/Clientes.php');
-        $clase = new Cliente($_POST["ID"],$_POST["nombre"],$_POST["cedula"],$_POST["Documento"],$_POST["telefono"],$_POST["direccion"]);
+        $clase = new Cliente($_POST["ID"],$_POST["nombre"],$_POST["cedula"],$_POST["apellido"],$_POST["documento"],$_POST["direccion"],$_POST["telefono"]);
         $clase->actualizar();
         header('Location:../../Clientes');
     }
     elseif ($tipo === 'usuario'){
         require('../../Model/Usuarios.php');
-        $clase = new Usuario($_POST["ID"],$_POST["nombre"],$_POST["correo"],$_POST["password"],$_POST["rol"]); 
+        $clase = new Usuario($_POST["ID"],$_POST["nombre"],$_POST["correo"],$_POST["password"],isset($_POST["rol"]) ? $_POST["rol"] : null); 
         $clase->actualizar();
-       header('Location:../../Administrar_perfil'); // Y vuelve a la pagina donde estaba antes
+
+        if (isset($_POST['self'])) {
+            session_start();
+            $_SESSION['user_name'] = $_POST["nombre"];
+            $_SESSION['user_id'] = $_POST["ID"];
+        }
+
+        header('Location:../../Administrar_perfil'); // Y vuelve a la pagina donde estaba antes
     };
 ?>

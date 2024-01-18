@@ -30,17 +30,6 @@
 
 
 
-        // function agregar() {
-            
-        //     $query = $this->conn->prepare("INSERT INTO usuarios VALUES(null,?, ?, ?, ?,?)");
-            
-        //     $query->bindParam(1,$this->id);
-        //     $query->bindParam(2,$this->nombre);
-        //     $query->bindParam(3,$this->correo);
-        //     $query->bindParam(4,$this->password);
-        //     $query->bindParam(5,$this->rol);
-        //     $query->execute();
-        // }
         function borrar() {
 
             $query = $this->conn->prepare("DELETE FROM usuarios WHERE ID=:id");
@@ -71,14 +60,21 @@
             return $consulta->fetchAll();
         }
         function actualizar(){
+            $query = 'UPDATE usuarios SET nombre=:nombre, correo=:correo, password=:pass';
+            if ($this->rol) {
+                $query .= ', rol=:rol';
+            }
+            $query .= " WHERE id=:id";
+            $query = $this->conn->prepare($query);
             
-            $query = $this->conn->prepare("UPDATE usuarios SET nombre=?, correo=?, password=?, rol=? WHERE id=?");
-            
-            $query->bindParam(1,$this->nombre);
-            $query->bindParam(2,$this->correo);
-            $query->bindParam(3,$this->password);
-            $query->bindParam(4,$this->rol);
-            $query->bindParam(5,$this->id);
+            $query->bindParam(':nombre',$this->nombre);
+            $query->bindParam(':correo',$this->correo);
+            $query->bindParam('pass',$this->password);
+            $query->bindParam(':id',$this->id);
+            if ($this->rol) {
+                $query->bindParam(':rol',$this->rol);
+            }
+
             $query->execute(); 
         }
         public function login(){

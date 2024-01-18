@@ -21,11 +21,22 @@
 	// echo '10';
 
 
-	// $args = [
-	// 	0 => 'tabla2',
-	// 	1 => 'limit',
-	// 	2 => 'offset',
-	// ];
+	$args = [
+		0 => 'tabla2',
+		1 => 'limit',
+		2 => 'offset',
+	];
+
+	array_push($args, ['0' => 'id', '1' => '2']);
+	array_push($args, ['nose' => 'a']);
+	array_push($args, ['a' => 'new']);
+
+
+	foreach ($args as $key) {
+		print_r($key);
+	}
+
+	// print_r(array_keys($args));
 
 	// print_r($args);
 	// $args2 = [
@@ -46,8 +57,8 @@
 	// 	print_r('<br>');
     // 	print_r($result[$i]);
     // }
-    $a = null;
-	print_r($a ? 'true' : 'false');
+    // $a = null;
+	// print_r($a ? 'true' : 'false');
 
 
 ?>

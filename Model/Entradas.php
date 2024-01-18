@@ -32,9 +32,10 @@
 
 			$query->execute();
 		}
+
 		function descontar(){
 
-			$entradas = $this->search(order:'fecha_vencimiento ASC');
+			$entradas = $this->search(0,1000000000,order:' fecha_vencimiento ASC');
 
 			for ($i = 0; $this->cantidad >= 1; $i++) {
 				$entrada = $entradas[$i];
@@ -42,15 +43,14 @@
 					$query = "UPDATE entradas SET existencia=" . $entrada['existencia'] - $this->cantidad . " WHERE id=" . $entrada['id'];
 					$this->conn->query($query);
 					$this->cantidad = 0;
-					echo "Pasa por aqui";
 				} else {
 					$query = "UPDATE entradas SET existencia=0 WHERE id=" . $entrada['id'];
 					$this->conn->query($query);
 					$this->cantidad -= $entrada['existencia'];
-					echo "Pasa por este otro lado";
 				}
 			}
 		}
+
 		function borrar(){
 
 			if ($this->id_proveedor != null) {
@@ -65,56 +65,58 @@
 
 			$query->execute();
 		}
-		function search($n=0,$limite=9, $order = 'id DESC'){
+
+		function search(Int $n=0,Int $limite=9, $order = ' id DESC '){
 			$query = "SELECT * FROM entradas";
 
-			$cuenta = 0;
-
-			if ($this->id || $this->id_producto || $this->id_proveedor) {
-				$query .= " WHERE";
-			}
+			$lista = [];
 
             if ($this->id){
-                $query = $query." AND id=:id";
-                $cuenta += 1;
+            	array_push($lista,'id');
             }
-            if ($cuenta > 0) {
-            	$query .= " AND";
+            if ($this->id_producto){
+                array_push($lista, 'id_producto');
             }
-			if ($this->id_producto) {
-				$query = $query . " id_producto=:id_producto";
-                $cuenta += 1;
-			}
-            if ($cuenta > 0) {
-            	$query .= " AND";
+            if ($this->id_proveedor){
+                array_push($lista, 'id_proveedor');
             }
-			if ($this->id_proveedor) {
-				$query = $query . " id_proveedor=:id_proveedor";
-                $cuenta += 1;
-			}
+            if ($lista) {
+            	$query .= ' WHERE';
+            	$and = false;
+            	foreach ($lista as $e){
+            		if (!$and) {
+            			$and = true;
+            		} else {
+            			$query .= ' AND';
+            		}
+            		$query .= ' '.$e.'=:'.$e;
+            	}
+            }
+
+
             $n = $n*$limite;
 			$query = $query . " ORDER BY $order";
-            $query = $query . " LIMIT :l OFFSET :n";
+			$query = $query . " LIMIT :l OFFSET :n";
 
 
             $consulta = $this->conn->prepare($query);
 
             $consulta->bindParam(':l',$limite, PDO::PARAM_INT);
             $consulta->bindParam(':n',$n, PDO::PARAM_INT);
-            if ($this->id != null){
+
+            if ($this->id){
                 $consulta->bindParam(':id',$this->id, PDO::PARAM_INT);
             }
-			if ($this->id_producto != null) {
+			if ($this->id_producto) {
                 $consulta->bindParam(':id_producto',$this->id_producto, PDO::PARAM_INT);
 			}
-			if ($this->id_proveedor != null) {
+			if ($this->id_proveedor) {
                 $consulta->bindParam(':id_proveedor',$this->id_proveedor, PDO::PARAM_INT);
 			}
 
             $consulta->execute();
             return $consulta->fetchAll();
 		}
-
 
 		function search_proveedor_from_product(){
 			$query = $this->conn->prepare("SELECT id_proveedor, (SELECT razon_social FROM proveedores p WHERE p.id = entradas.id_proveedor) AS proveedor FROM entradas WHERE id_producto=:id GROUP BY id_proveedor LIMIT 50");
@@ -124,5 +126,4 @@
 			
 			return $query->fetchAll();
 		}
-
 }
