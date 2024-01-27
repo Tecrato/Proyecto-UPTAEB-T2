@@ -59,7 +59,7 @@
                             </div>
                             <div class="uk-flex">
                                 <p class="item-profile uk-margin-remove-bottom">Tipo de usuario</p>
-                                <span class="uk-article-meta">'.$ROLES[$tu['rol']].'</span>
+                                <span class="uk-article-meta">'.$_SESSION['rol'].'</span>
                             </div>';
                         ?>
                     </div>

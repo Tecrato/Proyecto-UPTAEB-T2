@@ -67,16 +67,8 @@
     }
 
 
-
-
-    $lista=array();
-
-    for ($i=0; $i < count($result); $i++) { 
-        $row = $result[$i];
-        array_push($lista, $row);
-    }
     $json = [
-        'lista'=> $lista
+        'lista'=> $result
     ];
     $json = json_encode($json);
     echo($json);
