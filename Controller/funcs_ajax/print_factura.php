@@ -4,7 +4,7 @@ require('./../Model/Facturas.php');
 
 // WTF amigo
 
-$clase = new Factura(isset($_GET['d']) ? $_GET['d'] : 8);
+$clase = new Factura(isset($_GET['d']) ? $_GET['d'] : 1);
 
 $result = $clase->search_detailsFact();
 
@@ -19,18 +19,6 @@ $lista = [
     'cedula' => $result['cedula'],
     'apellido' => $result['apellido'],
 ];
-// foreach ($result as $i) {
-//     $lista = [
-//         'vendedor' => $i['vendedor'],
-//         'nombre' => $i['nombre'],
-//         'metodo_pago' => $i['metodo_pago'],
-//         'id' => $i['id'],
-//         'fecha' => $i['fecha'],
-//         'cedula' => $i['cedula'],
-//         'apellido' => $i['apellido'],
-//     ];
-//     // array_push($arr);
-// }
 
 $amount = $clase->search_mountFact();
 $resultAmount = array();

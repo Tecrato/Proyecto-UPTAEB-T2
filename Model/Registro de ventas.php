@@ -60,6 +60,7 @@
 			
 			$registro = $this->search(order:'id DESC')[0];
 
+
 			for ($i=0; $i < count($datos); $i++) { 
 				$lista = $datos[$i];
 				$clase_f = new Factura(null,$registro['id'],$lista->id_product,$lista->cantidad,$lista->precio);

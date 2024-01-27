@@ -31,6 +31,7 @@
         header('Location:../../Proveedores'); // Y vuelve a la pagina donde estaba antes
     }
     elseif ($tipo == 'cliente'){
+        include("../funcs/verificar_admin_funcs.php");
         require('../../Model/Clientes.php');
         $clase = new Cliente($_POST['ID']); // Llama al modelo y le manda la instruccion
         $clase->borrar();

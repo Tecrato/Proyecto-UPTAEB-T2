@@ -1,6 +1,7 @@
 <?php
 
-
+require('../Plugins/fpdf.php');
+require('../Controller/funcs/searchInventario.php');
 
 
 //CABECERA DEL INVENTARIO__________________________________________________________________________________

@@ -120,6 +120,7 @@
 </main>
 
 <script src="static/javaScript/librerias/jquery.js"></script>
+<script src="static/javaScript/librerias/hammer.min.js"></script>
 <script src="static/javascript/FuncionesGenerales.js"></script>
 <script src="static/javascript/Ajax/registerShop.js"></script>
 

@@ -1,5 +1,6 @@
 <?php
     include("./funcs/verificar.php");
+    include("./funcs/verificar_admin.php");
     require('../Model/Conexion.php');
     if (isset($_GET['p'])){
         $num = $_GET['p'];

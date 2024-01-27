@@ -1,11 +1,79 @@
 //creamos una funcion que nos cargue todas las tarjetas y sus modales, dependiendo de que modal desea abrir
 var page = 0;
 
+$(".pag-btn-productos").click((ele) => {
+  cambiar_pagina_ajax(
+    ele.target.dataset["direccion"],
+    "productos",
+    cargarTargetProduct,
+    9
+  );
+});
 
-$('.pag-btn-productos').click(ele => {
-  cambiar_pagina_ajax(ele.target.dataset['direccion'],'productos',cargarTargetProduct,9)
-})
+const tarjetas = (response) => {
+  //convertimos la respuesta en un objeto
+  let json = JSON.parse(response);
+  //tarjeta sera el template de las tarjetas
+  let tarjeta = "";
+  //recorremos el json para crear las tarjetas
+  json.lista.forEach((item) => {
+    tarjeta += `
+              
+  <div id="${item.id}" data-supplier="${item.proveedor}" data-category="${item.categoria}" data-marca="${item.marca}">
+    <div class="uk-card uk-card-default uk-background-secondary uk-light uk-border-rounded">
+        <div class="uk-visible-toggle" tabindex="-1">
+            <article class="uk-transition-toggle">
+                <img src="Media/imagenes/${
+                  item.imagen
+                }"" alt="" class="img_product" width="150px" style="object-fit: cover; height: 215px;">
+                <div class="uk-position-top-right uk-transition-fade uk-position-small">
+                    <a href="#modal-details-product" class="btnDetails" data-id="${
+                      item.id
+                    }">
+                        <span class="Bg-info" uk-icon="icon: info; ratio: 1.5"></span>
+                    </a>
+                </div>
+                <div class="uk-position-bottom-center ">
+                    <ul class="uk-iconnav uk-background-secondary uk-transition-slide-bottom-small" style="width: 105%; padding: 5px;">
+                        <li><a href="#eliminar_product" uk-tooltip="title:Eliminar; delay: 500" class="uk-icon-button deleteID" uk-icon="icon: trash" data-id="${
+                          item.id
+                        }"></a></li>
+                        <li><a href="#Producto-modificar" uk-tooltip="title:Modificar; delay: 500" class="uk-icon-button" uk-icon="icon: file-edit" data-id="${
+                          item.id
+                        }"></a></li>
+                        <li>
+                            <a href="#product-date" class="Lote" uk-tooltip="title:Añadir Entrada; delay: 500" data-id="${
+                              item.id
+                            }">
+                                <img src="./static/images/btn_lote2.png" alt="" width="35px">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div style="padding: 0px 10px;">
+                        <div>${item.nombre}</div>
+                        <div>stock: <b class="uk-text-success">${
+                          item.stock ? item.stock : 0
+                        }</b></div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</div>
+          `;
+    //seleccionamos el contenedor de las tarjetas, y las insertamos
+    $(".container-target-product").html(tarjeta);
+  });
 
+  if (json.lista.length === 0) {
+    document
+      .querySelector(".container_marca_agua")
+      .classList.remove("invisible");
+    $(".container-target-product").html("");
+  }
+};
 const cargarTargetProduct = () => {
   //hacemos la petion ajax
   $.ajax({
@@ -17,51 +85,7 @@ const cargarTargetProduct = () => {
       limite: 9, // Aca va el numero maximo de tarjetas que se pueden imprimir
     },
     success: function (response) {
-      //convertimos la respuesta en un objeto
-      let json = JSON.parse(response);
-      //tarjeta sera el template de las tarjetas
-      let tarjeta = "";
-
-      //recorremos el json para crear las tarjetas
-      json.lista.forEach((item) => {
-        tarjeta += `
-                  
-      <div id="${item.id}" data-supplier="${item.proveedor}" data-category="${item.categoria}">
-        <div class="uk-card uk-card-default uk-background-secondary uk-light uk-border-rounded">
-            <div class="uk-visible-toggle" tabindex="-1">
-                <article class="uk-transition-toggle">
-                    <img src="Media/imagenes/${item.imagen}"" alt="" class="img_product" width="150px" style="object-fit: cover; height: 215px;">
-                    <div class="uk-position-top-right uk-transition-fade uk-position-small">
-                        <a href="#modal-details-product" class="btnDetails" data-id="${item.id}">
-                            <span class="Bg-info" uk-icon="icon: info; ratio: 1.5"></span>
-                        </a>
-                    </div>
-                    <div class="uk-position-bottom-center ">
-                        <ul class="uk-iconnav uk-background-secondary uk-transition-slide-bottom-small" style="width: 105%; padding: 5px;">
-                            <li><a href="#eliminar_product" uk-tooltip="title:Eliminar; delay: 500" class="uk-icon-button deleteID" uk-icon="icon: trash" data-id="${item.id}"></a></li>
-                            <li><a href="#Producto-modificar" uk-tooltip="title:Modificar; delay: 500" class="uk-icon-button" uk-icon="icon: file-edit" data-id="${item.id}"></a></li>
-                            <li>
-                                <a href="#product-date" class="Lote" uk-tooltip="title:Añadir Entrada; delay: 500" data-id="${item.id}">
-                                    <img src="./static/images/btn_lote2.png" alt="" width="35px">
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </div>
-              `;
-        //seleccionamos el contenedor de las tarjetas, y las insertamos
-        $(".container-target-product").html(tarjeta);
-      });
-
-      if (json.lista.length === 0) {
-        document
-          .querySelector(".container_marca_agua")
-          .classList.remove("invisible");
-        $(".container-target-product").html("");
-      }
+      tarjetas(response);
 
       // en esta parte se cargan los modales segun el que quiera ver
 
@@ -73,7 +97,7 @@ const cargarTargetProduct = () => {
         //usamos el evento click para saber en que tarjeta pulso, para luego capturar el id del producto
         btn.addEventListener("click", () => {
           //obtenemos el id del producto pulsado
-          let idDelete = parseInt(btn.dataset['id']);
+          let idDelete = parseInt(btn.dataset["id"]);
 
           //creamos el template del modal de eliminar
           let ModalDeleteProduct = `<div id="eliminar_product" class="uk-flex-top uk-modal" uk-modal bg-close='false'>
@@ -174,7 +198,7 @@ const cargarTargetProduct = () => {
 
       document.querySelectorAll(".Lote").forEach((L) => {
         L.addEventListener("click", () => {
-          let idProduct =  L.dataset['id'];
+          let idProduct = L.dataset["id"];
           let templateAggLote = `
             <div id="product-lote" uk-modal bg-close='false'>
                   <div class="uk-modal-dialog">
@@ -306,13 +330,12 @@ const cargarTargetProduct = () => {
         info.addEventListener("click", () => {
           let templateDetails = "";
           //obtenemos el id del producto para hacer la consulta
-          let idProduct =
-            info.dataset['id'];
+          let idProduct = info.dataset["id"];
           //hacemos la peticion ajax para crear el esqueleto del modal
           $.ajax({
             url: "Controller/funcs_ajax/search.php",
             type: "POST",
-            data: { randomnautica: "productos", ID: idProduct},
+            data: { randomnautica: "productos", ID: idProduct },
             success: function (response) {
               let json = JSON.parse(response);
               json.lista.forEach((item) => {
@@ -415,7 +438,11 @@ const cargarTargetProduct = () => {
               $.ajax({
                 url: "Controller/funcs_ajax/search.php",
                 type: "POST",
-                data: { randomnautica: "entradas", subFunction: 'proveedor_de_una_entrada', id_producto: idProduct },
+                data: {
+                  randomnautica: "entradas",
+                  subFunction: "proveedor_de_una_entrada",
+                  id_producto: idProduct,
+                },
                 success: function (response) {
                   let json = JSON.parse(response);
                   json.lista.forEach((s) => {
@@ -445,7 +472,11 @@ const cargarTargetProduct = () => {
 
                       $.post(
                         "Controller/funcs_ajax/search.php",
-                        { randomnautica: "entradas", id_producto: idProduct, id_proveedor: idProveedor },
+                        {
+                          randomnautica: "entradas",
+                          id_producto: idProduct,
+                          id_proveedor: idProveedor,
+                        },
                         function (response) {
                           let json = JSON.parse(response);
                           json.lista.forEach((dat) => {
@@ -587,39 +618,38 @@ btnAgg.addEventListener("click", () => {
   //esto es para que se cree solo una vez, ya que el body tiene 10 elementos por defecto
   // console.log(controllerModal.childElementCount);
 
-  if (controllerModal.childElementCount == 13) {
-    btnAgg.setAttribute("uk-toggle", "");
-    $("#container-modals").html(templateRegisterProduct);
-    UIkit.modal("#modal-register-product").show();
-    //   //ejecutamos esta peticion para traer las categorias de los productos a los select
-    $.ajax({
-      url: "Controller/funcs_ajax/search.php",
-      type: "POST",
-      data: { randomnautica: "categorias" },
-      success: function (response) {
-        let options = ``;
-        let json = JSON.parse(response);
-        json.lista.forEach((date) => {
-          options += `<option value="${date.id}">${date.nombre}</option>`;
-        });
-        document.getElementById("selectCat").innerHTML += options;
-      },
-    });
-    //   //ejecutamos esta peticion para traer las unidades de los productos a los select
-    $.ajax({
-      url: "Controller/funcs_ajax/search.php",
-      type: "POST",
-      data: { randomnautica: "unidades" },
-      success: function (response) {
-        let options = ``;
-        let json = JSON.parse(response);
-        json.lista.forEach((date) => {
-          options += `<option value="${date.id}">${date.nombre}</option>`;
-        });
-        document.getElementById("selectUni").innerHTML += options;
-      },
-    });
-  }
+  btnAgg.setAttribute("uk-toggle", "");
+  $("#container-modals").html(templateRegisterProduct);
+  UIkit.modal("#modal-register-product").show();
+  //   //ejecutamos esta peticion para traer las categorias de los productos a los select
+  $.ajax({
+    url: "Controller/funcs_ajax/search.php",
+    type: "POST",
+    data: { randomnautica: "categorias" },
+    success: function (response) {
+      let options = ``;
+      let json = JSON.parse(response);
+      json.lista.forEach((date) => {
+        options += `<option value="${date.id}">${date.nombre}</option>`;
+      });
+      document.getElementById("selectCat").innerHTML += options;
+    },
+  });
+  //   //ejecutamos esta peticion para traer las unidades de los productos a los select
+  $.ajax({
+    url: "Controller/funcs_ajax/search.php",
+    type: "POST",
+    data: { randomnautica: "unidades" },
+    success: function (response) {
+      console.log(response);
+      let options = ``;
+      let json = JSON.parse(response);
+      json.lista.forEach((date) => {
+        options += `<option value="${date.id}">${date.nombre}</option>`;
+      });
+      document.getElementById("selectUni").innerHTML += options;
+    },
+  });
 
   // //primero seleccionamos el form que tiene los datos para crear los productos
   let formAggProduct = document.getElementById("formAggProduct");
@@ -710,13 +740,30 @@ $.ajax({
       options += `<li  uk-filter-control="filter: [data-category='${date.nombre}']; group: category"><a class='filterS' href="#">${date.nombre}</a></li>`;
     });
     document.querySelector(".filter_category").innerHTML += options;
-
-    let filtera = document.querySelectorAll(".filterS");
-
-    filtera.forEach((e) => {
-      e.addEventListener("click", () => {
-        console.log(document.querySelector(".height_controller").childElementCount)
-      });
-    });
   },
+});
+$.ajax({
+  url: "Controller/funcs_ajax/search.php",
+  type: "POST",
+  data: { randomnautica: "productos", subFunction: "marca" },
+  success: function (response) {
+    let options = ``;
+    let json = JSON.parse(response);
+    json.lista.forEach((E) => {
+      options += `<li  uk-filter-control="filter: [data-marca='${E.marca}']; group: marca"><a class='filterS' href="#">${E.marca}</a></li>`;
+    });
+    document.querySelector(".filter_marca").innerHTML += options;
+  },
+});
+
+document.querySelector(".searchProduct").addEventListener("keyup", (e) => {
+  let val = e.target.value;
+  $.ajax({
+    url: "Controller/funcs_ajax/search.php",
+    type: "POST",
+    data: { randomnautica: "productos", like: val },
+    success: function (response) {
+      tarjetas(response)
+    },
+  });
 });

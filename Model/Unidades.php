@@ -7,7 +7,7 @@
 			$this->id = $id;
 			$this->nombre = $nombre;
 		}
-		function search($n=0){
+		function search($n=0, $limite=9){
 			$query = "SELECT * FROM unidades";
 			return $this->conn->query($query)->fetchAll();
 		}

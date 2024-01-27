@@ -1,6 +1,5 @@
 <?php
 require('../Plugins/fpdf.php');
-
 require('../Controller/funcs_ajax/print_factura.php');
 
 

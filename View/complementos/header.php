@@ -17,6 +17,7 @@
 echo "
 <script>var session_user_name = '" . $_SESSION['user_name'] . "'</script>
 <script>const session_user_id = " . $_SESSION['user_id'] . "</script>
+<script>const session_user_rol = '" . $_SESSION['rol'] . "'</script>
 
 "
 ?>
@@ -149,6 +150,7 @@ echo "
                             <p>Productos</p>
                         </a>
                     </li>
+
                     <li class="uk-margin-small-right Link" href="/Proyecto-UPTAEB-T2/Proveedores">
                         <a class="uk-button uk-button-text enlace_nav" href="Proveedores">
                             <span uk-icon="bookmark" class="uk-icon uk-margin-small-right uk-icon-button"></span>

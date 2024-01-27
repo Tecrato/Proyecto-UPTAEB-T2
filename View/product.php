@@ -22,7 +22,7 @@
                                         <div class="uk-margin formDelete">
                                             <form class="uk-search uk-search-default search-responsive-product">
                                                 <span class="uk-search-icon-flip" uk-search-icon></span>
-                                                <input class="uk-search-input" type="search" placeholder="Buscar" aria-label="Search">
+                                                <input class="uk-search-input searchProduct" type="search" placeholder="Buscar" aria-label="Search">
                                             </form>
                                         </div>
                                         <div class="uk-margin-left">
@@ -55,10 +55,8 @@
                                         <li>
                                             <a href="#">MARCA <span uk-drop-parent-icon></span></a>
                                             <div class="uk-dropdown">
-                                                <ul class="uk-nav uk-dropdown-nav">
-                                                    <li uk-filter-control="filter: [data-size='small']; group: size"><a href="#">Small</a></li>
-                                                    <li uk-filter-control="filter: [data-size='medium']; group: size"><a href="#">Medium</a></li>
-                                                    <li uk-filter-control="filter: [data-size='large']; group: size"><a href="#">Large</a></li>
+                                                <ul class="uk-nav uk-dropdown-nav filter_marca">
+                                                    
                                                 </ul>
                                             </div>
                                         </li>

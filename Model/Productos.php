@@ -79,7 +79,7 @@
                 $query->bindParam(':imagen',$this->imagen);
             }
 
-            return $this->conn->execute($query);
+            return $query->execute();
         }
 
         // Con esta otra funcion se busca entre los productos en la base de datos
@@ -93,6 +93,7 @@
                     a.marca,
                     a.imagen,
                     (SELECT SUM(entradas.existencia) FROM entradas Where id_producto = a.id) as stock,
+                    (SELECT (SELECT razon_social FROM proveedores WHERE entradas.id_proveedor = id) FROM entradas WHERE id_producto = a.id) as proveedor,
                     a.stock_min,
                     a.stock_max,
                     a.precio_venta,
@@ -101,9 +102,31 @@
                     INNER JOIN categoria b ON b.id = a.id_categoria 
                     INNER JOIN unidades c ON c.id = a.id_unidad";
 
-            if ($this->id != null){
-                $query = $query." WHERE a.id=:id";
+                    
+			$lista = [];
+
+            if ($this->id){
+            	array_push($lista,'id');
             }
+            if ($this->marca){
+                array_push($lista, 'marca');
+            }
+            if ($lista) {
+            	$query .= ' WHERE';
+            	$and = false;
+            	foreach ($lista as $e){
+            		if (!$and) {
+            			$and = true;
+            		} else {
+            			$query .= ' AND';
+            		}
+            		$query .= ' '.$e.'=:'.$e;
+            	}
+            }
+
+            // if ($this->id != null){
+            //     $query = $query." WHERE a.id=:id";
+            // }
             $n = $n*$limite;
 
             $query = $query . " LIMIT :l OFFSET :n";
@@ -112,18 +135,27 @@
 
             $consulta->bindParam(':l',$limite, PDO::PARAM_INT);
             $consulta->bindParam(':n',$n, PDO::PARAM_INT);
-            if ($this->id != null){
+            if ($this->id){
                 $consulta->bindParam(':id',$this->id, PDO::PARAM_INT);
             }
+			else if ($this->marca) {
+                $consulta->bindParam(':marca',$this->marca, PDO::PARAM_INT);
+			}
             $consulta->execute();
             return $consulta->fetchAll();
         }
 
-        function search_like(){
-            $query = $this->conn->prepare("SELECT * FROM productos WHERE nombre LIKE '%:nombre%'");
+        function search_marca() {
+            $query = $this->conn->prepare("SELECT marca FROM productos GROUP BY marca");
+            $query->execute();
+            return $query->fetchAll();
+            
+        }
 
-            $query->bindParam(':nombre',$this->nombre);
-
+        function search_like($nombre){
+            // echo $nombre;
+            $query = $this->conn->prepare("SELECT * FROM productos WHERE nombre LIKE '%$nombre%'");
+            // $query->bindParam(1,$nombre);
             $query->execute();
             return $query->fetchAll();
         }

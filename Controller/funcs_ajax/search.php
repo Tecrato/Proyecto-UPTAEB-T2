@@ -19,7 +19,11 @@
 
     if ($_POST['randomnautica'] == "productos") {
         require('../../Model/Productos.php');
-        $clase = new Producto(isset($_POST['ID']) ? $_POST['ID'] : null);
+        $clase = new Producto(
+            id:(isset($_POST['ID']) ? $_POST['ID'] : null),
+            marca:(isset($_POST['marca']) ? $_POST['marca'] : null),
+            nombre:(isset($_POST['nombre']) ? $_POST['nombre'] : null)
+        );
     }
     elseif ($_POST['randomnautica'] == "entradas") {
         require('../../Model/Entradas.php');
@@ -54,6 +58,8 @@
     elseif (isset($_POST['subFunction'])) {
         if ($_POST['subFunction'] == 'proveedor_de_una_entrada') {
             $result = $clase->search_proveedor_from_product();
+        } else if ($_POST['subFunction'] == 'marca') {
+            $result = $clase->search_marca();
         }
     }
     else {
