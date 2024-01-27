@@ -156,6 +156,50 @@
         </div>
     </section>
 
+     <!-- ************************************ Modal de registro ************************************ -->
+
+     <div id="register_user" uk-modal>
+        <div class="uk-modal-dialog">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <div class="uk-modal-header">
+                <h2 class="uk-modal-title">REGISTRO USUARIO</h2>
+            </div>
+            <div class="uk-modal-body ">
+                <form class="uk-grid-small" uk-grid method="POST" action="../Controller/agregar_cosas.php">
+                    <div class="uk-width-1-2">
+                        <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="Nombre"
+                            required>
+                    </div>
+                    <div class="uk-width-1-2@s">
+                        <input class="uk-input" type="text" placeholder="Apellido" aria-label="50" name="Apellido">
+                    </div>
+                    <div class="uk-width-1-2@s">
+                        <input class="uk-input" type="text" placeholder="Correo Electronico" aria-label="100"
+                            name="nombre" required>
+                    </div>
+                    <div class="uk-width-1-2@s">
+                        <select class="uk-select" id="form-stacked-select" name="categoria" required>
+                            <option selected disabled>Tipo de usuario</option>
+                            <option>Dueño</option>
+                            <option>Administrador</option>
+                            <option>Cajero</option>
+                        </select>
+                    </div>
+                    <div class="uk-width-1-1@s">
+                        <input class="uk-input" type="password" placeholder="Contraseña" aria-label="100" name="nombre"
+                            required>
+                    </div>
+                </form>
+            </div>
+            <div class="uk-modal-footer uk-text-right">
+                <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
+                <button class="uk-button uk-button-secondary" type="submit">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ************************************************************************************************************ -->
+
 </main>
 
 
