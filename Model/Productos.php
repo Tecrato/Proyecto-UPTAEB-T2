@@ -93,7 +93,6 @@
                     a.marca,
                     a.imagen,
                     (SELECT SUM(entradas.existencia) FROM entradas Where id_producto = a.id) as stock,
-                    (SELECT (SELECT razon_social FROM proveedores WHERE entradas.id_proveedor = id) FROM entradas WHERE id_producto = a.id) as proveedor,
                     a.stock_min,
                     a.stock_max,
                     a.precio_venta,
@@ -138,7 +137,7 @@
             if ($this->id){
                 $consulta->bindParam(':id',$this->id, PDO::PARAM_INT);
             }
-			else if ($this->marca) {
+			if ($this->marca) {
                 $consulta->bindParam(':marca',$this->marca, PDO::PARAM_INT);
 			}
             $consulta->execute();
@@ -171,6 +170,22 @@
             $query = "SELECT SUM((SELECT SUM(existencia) FROM entradas WHERE productos.id = id_producto) * precio_venta) AS Total FROM productos";
 
             return $this->conn->query($query)->fetchAll();
+        }
+
+        function stock_segun_categorias()  {
+            // $query = "
+            // SELECT p.id_categoria, SUM(e.existencia) AS 'maximo_stock'
+            // FROM productos p
+            // LEFT JOIN entradas e ON p.id = e.id_producto
+            // GROUP BY p.id_categoria;";
+            $query = "SELECT c.nombre, SUM(e.existencia) AS 'maximo_stock'
+                FROM categoria c
+                JOIN productos p ON c.id = p.id_categoria
+                JOIN entradas e ON p.id = e.id_producto
+                GROUP BY c.id";
+            $query = $this->conn->prepare($query);
+            $query->execute();
+            return $query->fetchAll();
         }
 
         function COUNT(){

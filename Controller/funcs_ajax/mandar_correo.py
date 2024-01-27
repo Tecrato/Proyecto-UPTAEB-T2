@@ -28,7 +28,7 @@ if __name__ == '__main__':
 	'''
 		Para hacer pruebas antes de llamarlo con PHP
 	'''
-	result = main(["jaja",decouple.config('MAIL_TEST'),"testo"])
+	result = main(["jaja",decouple.config('MAIL_TEST'),"testo<br>Musho testo"])
 else:
 	result = main(list(sys.argv))
 

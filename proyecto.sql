@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-12-2023 a las 21:54:29
+-- Tiempo de generación: 27-01-2024 a las 18:17:23
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -33,13 +33,6 @@ CREATE TABLE `categoria` (
   `descripcion` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Volcado de datos para la tabla `categoria`
---
-
-INSERT INTO `categoria` (`id`, `nombre`, `descripcion`) VALUES(1, 'bebida', NULL);
-INSERT INTO `categoria` (`id`, `nombre`, `descripcion`) VALUES(2, 'empaquetados', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -56,13 +49,6 @@ CREATE TABLE `clientes` (
   `telefono` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Volcado de datos para la tabla `clientes`
---
-
-INSERT INTO `clientes` (`id`, `nombre`, `cedula`, `apellido`, `documento`, `direccion`, `telefono`) VALUES(1, 'erfulano', '16498357', 'detal', 'V', 'En su casa, nose', '04122943118');
-INSERT INTO `clientes` (`id`, `nombre`, `cedula`, `apellido`, `documento`, `direccion`, `telefono`) VALUES(4, '111qwe', '123q', 'V', '3', '23423', '1231231231');
-
 -- --------------------------------------------------------
 
 --
@@ -77,17 +63,9 @@ CREATE TABLE `entradas` (
   `fecha_compra` date NOT NULL,
   `fecha_vencimiento` date NOT NULL,
   `precio_compra` float NOT NULL,
-  `existencia` int(11) NOT NULL DEFAULT 0
+  `existencia` int(11) NOT NULL DEFAULT 0,
+  `active` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Volcado de datos para la tabla `entradas`
---
-
-INSERT INTO `entradas` (`id`, `id_producto`, `id_proveedor`, `cantidad`, `fecha_compra`, `fecha_vencimiento`, `precio_compra`, `existencia`) VALUES(1, 1, 1, 1, '2023-11-03', '2023-11-17', 12, 0);
-INSERT INTO `entradas` (`id`, `id_producto`, `id_proveedor`, `cantidad`, `fecha_compra`, `fecha_vencimiento`, `precio_compra`, `existencia`) VALUES(2, 1, 1, 667, '2023-11-22', '2023-11-18', 45, 599);
-INSERT INTO `entradas` (`id`, `id_producto`, `id_proveedor`, `cantidad`, `fecha_compra`, `fecha_vencimiento`, `precio_compra`, `existencia`) VALUES(5, 1, 1, 2, '2023-11-29', '2023-12-16', 12, 2);
-INSERT INTO `entradas` (`id`, `id_producto`, `id_proveedor`, `cantidad`, `fecha_compra`, `fecha_vencimiento`, `precio_compra`, `existencia`) VALUES(6, 5, 1, 232, '2023-12-07', '2023-12-30', 2, 232);
 
 -- --------------------------------------------------------
 
@@ -102,15 +80,6 @@ CREATE TABLE `factura` (
   `cantidad` int(11) NOT NULL,
   `coste_producto_total` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Volcado de datos para la tabla `factura`
---
-
-INSERT INTO `factura` (`id`, `id_registro_ventas`, `id_productos`, `cantidad`, `coste_producto_total`) VALUES(1, 8, 1, 20, 4680);
-INSERT INTO `factura` (`id`, `id_registro_ventas`, `id_productos`, `cantidad`, `coste_producto_total`) VALUES(2, 9, 1, 6, 1404);
-INSERT INTO `factura` (`id`, `id_registro_ventas`, `id_productos`, `cantidad`, `coste_producto_total`) VALUES(3, 16, 1, 1, 234);
-INSERT INTO `factura` (`id`, `id_registro_ventas`, `id_productos`, `cantidad`, `coste_producto_total`) VALUES(4, 17, 1, 1, 234);
 
 -- --------------------------------------------------------
 
@@ -128,15 +97,9 @@ CREATE TABLE `productos` (
   `stock_min` int(11) NOT NULL,
   `stock_max` int(11) NOT NULL,
   `precio_venta` float NOT NULL DEFAULT 0,
-  `IVA` tinyint(4) NOT NULL
+  `IVA` tinyint(4) NOT NULL,
+  `active` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Volcado de datos para la tabla `productos`
---
-
-INSERT INTO `productos` (`id`, `id_categoria`, `id_unidad`, `nombre`, `marca`, `imagen`, `stock_min`, `stock_max`, `precio_venta`, `IVA`) VALUES(1, 1, 1, 'Harina', 'Arepasss', 'banner_productos.png', 1, 12, 234, 1);
-INSERT INTO `productos` (`id`, `id_categoria`, `id_unidad`, `nombre`, `marca`, `imagen`, `stock_min`, `stock_max`, `precio_venta`, `IVA`) VALUES(5, 1, 1, '12', '1', 'banner_productos.png', 1, 12, 5, 0);
 
 -- --------------------------------------------------------
 
@@ -151,14 +114,9 @@ CREATE TABLE `proveedores` (
   `rif` varchar(15) NOT NULL,
   `telefono` varchar(11) NOT NULL,
   `correo` varchar(50) NOT NULL,
-  `direccion` varchar(45) NOT NULL
+  `direccion` varchar(45) NOT NULL,
+  `active` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Volcado de datos para la tabla `proveedores`
---
-
-INSERT INTO `proveedores` (`id`, `nombre`, `razon_social`, `rif`, `telefono`, `correo`, `direccion`) VALUES(1, 'tyrty', 'nn', 'j-00000000', '1231231231', 'nose@gmail.com', '54764576');
 
 -- --------------------------------------------------------
 
@@ -173,28 +131,9 @@ CREATE TABLE `registro_ventas` (
   `fecha` datetime NOT NULL DEFAULT current_timestamp(),
   `id_cliente` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL,
-  `IVA` int(11) NOT NULL DEFAULT 0
+  `IVA` int(11) NOT NULL DEFAULT 0,
+  `active` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Volcado de datos para la tabla `registro_ventas`
---
-
-INSERT INTO `registro_ventas` (`id`, `monto_final`, `metodo_pago`, `fecha`, `id_cliente`, `id_usuario`, `IVA`) VALUES(3, 3257.28, 'Transferencia', '2023-11-02 16:51:59', 1, 1, 449);
-INSERT INTO `registro_ventas` (`id`, `monto_final`, `metodo_pago`, `fecha`, `id_cliente`, `id_usuario`, `IVA`) VALUES(4, 3257.28, 'Pago Movil', '2023-11-02 16:52:45', 1, 1, 449);
-INSERT INTO `registro_ventas` (`id`, `monto_final`, `metodo_pago`, `fecha`, `id_cliente`, `id_usuario`, `IVA`) VALUES(5, 3257.28, 'Punto de Venta', '2023-11-02 16:53:47', 1, 1, 449);
-INSERT INTO `registro_ventas` (`id`, `monto_final`, `metodo_pago`, `fecha`, `id_cliente`, `id_usuario`, `IVA`) VALUES(6, 5428.8, 'Efectivo', '2023-11-02 16:54:36', 1, 1, 749);
-INSERT INTO `registro_ventas` (`id`, `monto_final`, `metodo_pago`, `fecha`, `id_cliente`, `id_usuario`, `IVA`) VALUES(7, 5428.8, 'Pago Movil', '2023-11-02 16:55:31', 1, 1, 749);
-INSERT INTO `registro_ventas` (`id`, `monto_final`, `metodo_pago`, `fecha`, `id_cliente`, `id_usuario`, `IVA`) VALUES(8, 5428.8, 'Transferencia', '2023-11-02 16:57:13', 1, 1, 749);
-INSERT INTO `registro_ventas` (`id`, `monto_final`, `metodo_pago`, `fecha`, `id_cliente`, `id_usuario`, `IVA`) VALUES(9, 1628.64, 'Pago Movil', '2023-11-02 22:20:56', 1, 1, 225);
-INSERT INTO `registro_ventas` (`id`, `monto_final`, `metodo_pago`, `fecha`, `id_cliente`, `id_usuario`, `IVA`) VALUES(10, 271.44, 'Punto de Venta', '2023-11-02 23:59:42', 1, 1, 37);
-INSERT INTO `registro_ventas` (`id`, `monto_final`, `metodo_pago`, `fecha`, `id_cliente`, `id_usuario`, `IVA`) VALUES(11, 271.44, 'Transferencia', '2023-11-03 00:00:35', 1, 1, 37);
-INSERT INTO `registro_ventas` (`id`, `monto_final`, `metodo_pago`, `fecha`, `id_cliente`, `id_usuario`, `IVA`) VALUES(12, 271.44, 'Punto de Venta', '2023-11-03 00:01:41', 1, 1, 37);
-INSERT INTO `registro_ventas` (`id`, `monto_final`, `metodo_pago`, `fecha`, `id_cliente`, `id_usuario`, `IVA`) VALUES(13, 271.44, 'Transferencia', '2023-11-03 00:02:17', 1, 1, 37);
-INSERT INTO `registro_ventas` (`id`, `monto_final`, `metodo_pago`, `fecha`, `id_cliente`, `id_usuario`, `IVA`) VALUES(14, 271.44, 'Punto de Venta', '2023-11-03 00:03:01', 1, 1, 37);
-INSERT INTO `registro_ventas` (`id`, `monto_final`, `metodo_pago`, `fecha`, `id_cliente`, `id_usuario`, `IVA`) VALUES(15, 271.44, 'Transferencia', '2023-11-03 00:03:34', 1, 1, 37);
-INSERT INTO `registro_ventas` (`id`, `monto_final`, `metodo_pago`, `fecha`, `id_cliente`, `id_usuario`, `IVA`) VALUES(16, 271.44, 'Transferencia', '2023-11-03 00:06:15', 1, 1, 37);
-INSERT INTO `registro_ventas` (`id`, `monto_final`, `metodo_pago`, `fecha`, `id_cliente`, `id_usuario`, `IVA`) VALUES(17, 271.44, 'Transferencia', '2023-11-03 00:07:31', 1, 1, 37);
 
 -- --------------------------------------------------------
 
@@ -206,12 +145,6 @@ CREATE TABLE `unidades` (
   `id` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Volcado de datos para la tabla `unidades`
---
-
-INSERT INTO `unidades` (`id`, `nombre`) VALUES(1, 'g');
 
 -- --------------------------------------------------------
 
@@ -226,13 +159,6 @@ CREATE TABLE `usuarios` (
   `password` varchar(45) NOT NULL,
   `rol` int(11) NOT NULL DEFAULT 3
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Volcado de datos para la tabla `usuarios`
---
-
-INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `password`, `rol`) VALUES(1, 'Edouard', 'nose@gmail.com', '12345', 1);
-INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `password`, `rol`) VALUES(2, 'nose', 'pinchos792003@gmail.com', 'asd', 3);
 
 --
 -- Índices para tablas volcadas
@@ -264,7 +190,6 @@ ALTER TABLE `entradas`
 --
 ALTER TABLE `factura`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `registro_ventas_id_UNIQUE` (`id_registro_ventas`),
   ADD KEY `fk_productos_has_registro_ventas_registro_ventas1_idx` (`id_registro_ventas`),
   ADD KEY `fk_productos_has_registro_ventas_productos1_idx` (`id_productos`);
 
@@ -311,55 +236,55 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `entradas`
 --
 ALTER TABLE `entradas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedores`
 --
 ALTER TABLE `proveedores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `registro_ventas`
 --
 ALTER TABLE `registro_ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `unidades`
 --
 ALTER TABLE `unidades`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
@@ -392,73 +317,6 @@ ALTER TABLE `productos`
 ALTER TABLE `registro_ventas`
   ADD CONSTRAINT `id_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id`),
   ADD CONSTRAINT `id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`);
-
-
---
--- Metadatos
---
-USE `phpmyadmin`;
-
---
--- Metadatos para la tabla categoria
---
-
---
--- Metadatos para la tabla clientes
---
-
---
--- Metadatos para la tabla entradas
---
-
---
--- Metadatos para la tabla factura
---
-
---
--- Metadatos para la tabla productos
---
-
---
--- Metadatos para la tabla proveedores
---
-
---
--- Metadatos para la tabla registro_ventas
---
-
---
--- Metadatos para la tabla unidades
---
-
---
--- Metadatos para la tabla usuarios
---
-
---
--- Metadatos para la base de datos proyecto
---
-
---
--- Volcado de datos para la tabla `pma__pdf_pages`
---
-
-INSERT INTO `pma__pdf_pages` (`db_name`, `page_descr`) VALUES('proyecto', 'proyecto');
-
-SET @LAST_PAGE = LAST_INSERT_ID();
-
---
--- Volcado de datos para la tabla `pma__table_coords`
---
-
-INSERT INTO `pma__table_coords` (`db_name`, `table_name`, `pdf_page_number`, `x`, `y`) VALUES('proyecto', 'categoria', @LAST_PAGE, 97, 436);
-INSERT INTO `pma__table_coords` (`db_name`, `table_name`, `pdf_page_number`, `x`, `y`) VALUES('proyecto', 'clientes', @LAST_PAGE, 734, 236);
-INSERT INTO `pma__table_coords` (`db_name`, `table_name`, `pdf_page_number`, `x`, `y`) VALUES('proyecto', 'factura', @LAST_PAGE, 302, 315);
-INSERT INTO `pma__table_coords` (`db_name`, `table_name`, `pdf_page_number`, `x`, `y`) VALUES('proyecto', 'productos', @LAST_PAGE, 98, 173);
-INSERT INTO `pma__table_coords` (`db_name`, `table_name`, `pdf_page_number`, `x`, `y`) VALUES('proyecto', 'proveedores', @LAST_PAGE, 506, 99);
-INSERT INTO `pma__table_coords` (`db_name`, `table_name`, `pdf_page_number`, `x`, `y`) VALUES('proyecto', 'registro_ventas', @LAST_PAGE, 509, 319);
-INSERT INTO `pma__table_coords` (`db_name`, `table_name`, `pdf_page_number`, `x`, `y`) VALUES('proyecto', 'unidades', @LAST_PAGE, 101, 99);
-INSERT INTO `pma__table_coords` (`db_name`, `table_name`, `pdf_page_number`, `x`, `y`) VALUES('proyecto', 'usuarios', @LAST_PAGE, 737, 427);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

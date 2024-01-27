@@ -2,6 +2,10 @@
     require '../../Model/Conexion.php';
     require '../../Model/Productos.php';
 
+
+	$clase = new Producto();
+	$result = $clase->stock_segun_categorias();
+	print_r($result);
 	// echo "
 	// <form method='POST' action='Controller/funcs_ajax/search.php'>
 	// 	<input type='text' name='randomnautica' value='stock_producto' />
@@ -21,20 +25,20 @@
 	// echo '10';
 
 
-	$args = [
-		0 => 'tabla2',
-		1 => 'limit',
-		2 => 'offset',
-	];
+	// $args = [
+	// 	0 => 'tabla2',
+	// 	1 => 'limit',
+	// 	2 => 'offset',
+	// ];
 
-	array_push($args, ['0' => 'id', '1' => '2']);
-	array_push($args, ['nose' => 'a']);
-	array_push($args, ['a' => 'new']);
+	// array_push($args, ['0' => 'id', '1' => '2']);
+	// array_push($args, ['nose' => 'a']);
+	// array_push($args, ['a' => 'new']);
 
 
-	foreach ($args as $key) {
-		print_r($key);
-	}
+	// foreach ($args as $key) {
+	// 	print_r($key);
+	// }
 
 	// print_r(array_keys($args));
 
