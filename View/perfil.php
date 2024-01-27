@@ -30,7 +30,7 @@
             </div>
             <div>
                 <h3 class="uk-text-center "><?php echo $_SESSION['user_name']; ?></h3>
-                <p class="uk-text-center uk-margin-remove-bottom"><?php echo $ROLES[$tu['rol']]; ?></p>
+                <p class="uk-text-center uk-margin-remove-bottom"><?php echo $_SESSION['rol']; ?></p>
             </div>
         </div>
 
@@ -127,7 +127,7 @@
         </div>
 
     </section>
-
+    <?php if ($_SESSION['rol'] == 'Administrador') { ?>
     <section>
         <div class="uk-flex uk-flex-center uk-margin-medium-top">
             <h2>USUARIOS REGISTRADOS</h2>
@@ -155,6 +155,7 @@
             </table>
         </div>
     </section>
+    <?php }; ?>
 
 </main>
 

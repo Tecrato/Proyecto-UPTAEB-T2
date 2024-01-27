@@ -3,10 +3,6 @@
     require('../Model/Conexion.php');
     require("../Model/Usuarios.php");
 
-    $ROLES = [
-        '1' => 'Dueño',
-        '2' => 'Cajero'
-    ];
 
     if (isset($_GET['p'])){
         $num = $_GET['p'];
