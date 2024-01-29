@@ -151,10 +151,9 @@
             
         }
 
-        function search_like($nombre){
-            // echo $nombre;
+        function search_like(String $nombre){
             $query = $this->conn->prepare("SELECT * FROM productos WHERE nombre LIKE '%$nombre%'");
-            // $query->bindParam(1,$nombre);
+            // $query->bindParam(':aaa',$nombre);
             $query->execute();
             return $query->fetchAll();
         }
@@ -173,11 +172,6 @@
         }
 
         function stock_segun_categorias()  {
-            // $query = "
-            // SELECT p.id_categoria, SUM(e.existencia) AS 'maximo_stock'
-            // FROM productos p
-            // LEFT JOIN entradas e ON p.id = e.id_producto
-            // GROUP BY p.id_categoria;";
             $query = "SELECT c.nombre, SUM(e.existencia) AS 'maximo_stock'
                 FROM categoria c
                 JOIN productos p ON c.id = p.id_categoria

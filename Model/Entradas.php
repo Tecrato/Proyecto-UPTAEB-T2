@@ -51,18 +51,10 @@
 			}
 		}
 
-		function borrar(){
+		function borrar_logicamente() {
+			$query = $this->conn->prepare('UPDATE entradas SET active=0 WHERE id=:id');
 
-			if ($this->id_proveedor != null) {
-				$query = $this->conn->prepare("DELETE FROM entradas WHERE id_proveedor=:id_proveedor");
-				$query->bindParam(':id_proveedor',$this->id_proveedor, PDO::PARAM_INT);
-			} elseif ($this->id_producto != null) {
-				$query = $this->conn->prepare("DELETE FROM entradas WHERE id_producto=:id_producto");
-				$query->bindParam(':id_producto',$this->id_producto, PDO::PARAM_INT);
-			} else {
-				throw new Exception("Error, debe pasar el id de un proveedor o de un producto", 1);
-			}
-
+			$query->bindParam(':id',$this->id);
 			$query->execute();
 		}
 
@@ -126,4 +118,8 @@
 			
 			return $query->fetchAll();
 		}
+        function COUNT(){
+            
+            return $this->conn->query("SELECT COUNT(*) as 'total' FROM entradas")->fetch()['total'];
+        }
 }

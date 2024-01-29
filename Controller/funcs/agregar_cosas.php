@@ -1,5 +1,6 @@
 <?php
     // Con este archivo se insertan objetos en tablas del SQL
+    include("./verificar_admin_funcs.php");
     require 'subir_imagen.php';
     $tipo = $_POST['tipo']; // Depende de que es lo que queramos insertar
     

@@ -258,7 +258,7 @@
                                             <div class="target_supplier uk-card uk-card-default uk-flex uk-padding-small uk-background-secondary uk-light uk-border-rounded">
                                                 <div>
                                                     <div class="img_proveedor_container uk-border-rounded">
-                                                        <img src="./static/images/btn_lote2.png" alt="" width="90px" />
+                                                        <img src="static/images/btn_lote2.png" alt="" width="90px" />
                                                         <h5 class="uk-margin-remove-left uk-margin-remove-right uk-margin-small-top uk-margin-small-bottom uk-text-center uk-text-bold">
                                                             ENTRADA NRO 1
                                                         </h5>
@@ -313,7 +313,14 @@
                                     <?php } ?>
                                 </div>
                             </section>
-                            <?php include("../View/complementos/btn_pag.html"); ?>
+                            <div class="uk-flex uk-flex-center">
+                                <ul class="uk-pagination uk-margin-large-top">
+                                    <li><a class="pag-btn-entradas" data-direccion="start"><span class="uk-margin-small-right" uk-pagination-previous></span><span class="uk-margin-small-right" uk-pagination-previous></span></a></li>
+                                    <li><a class="pag-btn-entradas" data-direccion="back">Previous</a></li>
+                                    <li><a class="pag-btn-entradas" data-direccion="next">Next</a></li>
+                                    <li><a class="pag-btn-entradas" data-direccion="end"><span class="uk-margin-small-left" uk-pagination-next></span><span class="uk-margin-small-left" uk-pagination-next></span></a></li>
+                                </ul>
+                            </div>
                         </div>
                     </article>
                 </section>

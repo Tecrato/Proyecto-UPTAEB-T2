@@ -15,15 +15,23 @@
         require('../../Model/Productos.php');
         $vart = new Producto;
         $todos = $vart->COUNT();
-    } elseif ($type == 'proveedores') {
+    }
+    if ($type == 'entradas') {
+        require('../../Model/Entradas.php');
+        $vart = new Entrada;
+        $todos = $vart->COUNT();
+    } 
+    elseif ($type == 'proveedores') {
         require('../../Model/Proveedores.php');
         $vart = new Proveedor;
         $todos = $vart->COUNT();
-    } elseif ($type == 'clientes') {
+    }
+    elseif ($type == 'clientes') {
         require('../../Model/Clientes.php');
         $vart = new Cliente;
         $todos = $vart->COUNT();
-    } elseif ($type == 'ventas') {
+    }
+    elseif ($type == 'ventas') {
         require('../../Model/Registro de ventas.php');
         $vart = new Registro_ventas();
         $todos = $vart->COUNT();
@@ -39,13 +47,16 @@
         $page = ceil($todos/$pagination)-1;
     }
     
-    if ($type == 'productos') {
-        header('Location:../../Productos?p='.$page);
-    } elseif ($type == 'proveedores') {
-        header('Location:../../Proveedores?p='.$page);
-    } elseif ($type == 'clientes') {
-        header('Location:../../Clientes?p='.$page);
-    } elseif ($type == 'ventas') {
-        header('Location:../../Ventas?p='.$page);
-    }
+    header('Location:../../'.ucfirst($type).'?p='.$page);
+    // if ($type == 'productos') {
+    //     header('Location:../../Productos?p='.$page);
+    // } elseif ($type == 'entradas') {
+    //     header('Location:../../Entradas?p='.$page);
+    // } elseif ($type == 'proveedores') {
+    //     header('Location:../../Proveedores?p='.$page);
+    // } elseif ($type == 'clientes') {
+    //     header('Location:../../Clientes?p='.$page);
+    // } elseif ($type == 'ventas') {
+    //     header('Location:../../Ventas?p='.$page);
+    // }
 ?>

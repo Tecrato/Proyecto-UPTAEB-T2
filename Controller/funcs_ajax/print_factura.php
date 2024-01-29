@@ -2,7 +2,6 @@
 require("./../Model/Conexion.php");
 require('./../Model/Facturas.php');
 
-
 $clase = new Factura(isset($_GET['d']) ? $_GET['d'] : 40);
 $result = $clase->search_detailsFact();
 $lista = array();
