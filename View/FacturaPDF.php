@@ -8,7 +8,6 @@ $hora = strtoupper(date('h:i a', $fecha));
 $dia =  date('d/m/Y', $fecha);
 
 
-
 class PDF extends FPDF {
     // Cabecera de página
     function Header(){
@@ -84,11 +83,11 @@ $pdf->Cell(30, 10, utf8_decode('DATOS DEL CONSUMIDOR'), 0, 0, 'C');
 $pdf->Ln(10);
 $pdf->SetTextColor(50, 50, 50);
 $pdf->SetFont('Arial', '', 10);
-$pdf->Cell(20);
-$pdf->Cell(30, 10, utf8_decode('CLIENTE: ' . strtoupper($lista['nombre'] . " " . $lista['apellido'])), 0, 0, 'C');
+$pdf->Cell(7.5);
+$pdf->Cell(80, 10, utf8_decode('CLIENTE: ' . strtoupper($lista['nombre'] . " " . $lista['apellido'])), 0, 0, 'L');
 $pdf->Ln(6);
-$pdf->Cell(7.8);
-$pdf->Cell(30, 10, utf8_decode('RIF: ' . $lista['cedula']), 0, 0, 'C');
+$pdf->Cell(7.5);
+$pdf->Cell(50, 10, utf8_decode('RIF: ' .$lista['documento']. $lista['cedula']), 0, 0, 'L');
 $pdf->Ln(7);
 $pdf->Cell(78);
 $pdf->Cell(30, 10, utf8_decode('----------------------------------------------------------------------------------------------------------------------------------------------------'), 0, 0, 'C');

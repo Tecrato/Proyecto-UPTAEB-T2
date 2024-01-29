@@ -2,14 +2,10 @@
 require("./../Model/Conexion.php");
 require('./../Model/Facturas.php');
 
-// WTF amigo
 
-$clase = new Factura(isset($_GET['d']) ? $_GET['d'] : 1);
-
+$clase = new Factura(isset($_GET['d']) ? $_GET['d'] : 40);
 $result = $clase->search_detailsFact();
-
 $lista = array();
-
 $lista = [
     'vendedor' => $result['vendedor'],
     'nombre' => $result['nombre'],
@@ -18,6 +14,7 @@ $lista = [
     'fecha' => $result['fecha'],
     'cedula' => $result['cedula'],
     'apellido' => $result['apellido'],
+    'documento' => $result['documento'],
 ];
 
 $amount = $clase->search_mountFact();
@@ -29,6 +26,4 @@ foreach ($amount as $i) {
         'IVA' => $i['IVA'],
     );
 }
-
 $product = $clase->search_ProductFact();
-    

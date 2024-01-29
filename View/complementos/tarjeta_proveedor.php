@@ -1,14 +1,14 @@
 <?php
 echo '<div>
-    <div class="target_supplier uk-card uk-card-default uk-flex uk-padding-small uk-background-secondary uk-light uk-border-rounded" style="width: 405px;">
+    <div class="target_supplier uk-card uk-card-default uk-flex uk-padding-small uk-light uk-border-rounded" style=" background-color: #333;">
         <div>
             <div class="img_proveedor_container uk-border-rounded">
-                <img src="static/images/logo_proveedor.png" alt="" width="90px" />
-                <h5 class="uk-margin-remove-left uk-margin-remove-right uk-margin-small-top uk-text-center">Montecarmelo C.A</h5>
+                <img src="static/images/logo_proveedor.png" alt="" width="80px" />
+                <h5 class="uk-margin-remove-left uk-margin-remove-right uk-margin-small-top uk-text-center">'.$row['razon_social'].'</h5>
             </div>
         </div>
 
-        <div>
+        <div style="width: 180px;">
             <div class="uk-flex uk-flex-middle uk-flex-between uk-margin-small-bottom">
                 <h4 class="uk-margin-remove-bottom uk-margin-right uk-text-center">DATOS</h4>
                 <div>
@@ -88,15 +88,12 @@ echo '<div>
                 <div class="uk-width-1-2@s">
                     <input class="uk-input" type="text" placeholder="Dirección" aria-label="25" value="'.$row['direccion'].'" name="direccion">
                 </div>
-                <div class="uk-modal-footer uk-text-right">
-                    <button class="uk-button uk-button-default uk-modal-close" type="button">
-                        Cancelar
-                    </button>
-                    <button class="uk-button uk-button-secondary" type="submit">
-                        Guardar
-                    </button>
-                </div>
+                <input type="submit" id="modificarSup" style="display:none">
             </form>
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+            <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
+            <label class="uk-button uk-button-secondary" type="submit" for="modificarSup">Guardar</label>
         </div>
     </div>
 </div>

@@ -1,7 +1,7 @@
 <?php
  echo '<div>
  <div class="target_supplier uk-card uk-card-default uk-flex uk-padding-small uk-background-secondary uk-light uk-border-rounded"
-     style="width: 370px;">
+     style="width: 370px; background-color: #333;">
      <div>
          <div class="img_proveedor_container uk-border-rounded">
              <img src="static/images/undraw_profile_2.svg" alt="" width="120px" />
@@ -92,11 +92,12 @@
                 <div class="uk-width-1-2@s">
                     <input class="uk-input" type="text" placeholder="Telefono" name="telefono" aria-label="50">
                 </div>
-                    <div class="uk-modal-footer uk-text-right">
-                        <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
-                        <button class="uk-button uk-button-secondary" type="submit">Guardar</button>
-                    </div>
+                <input type="submit" id="modificarCli" style="display:none">
             </form>
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+            <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
+            <label class="uk-button uk-button-secondary" for="modificarCli" type="submit">Guardar</label>
         </div>
     </div>
 </div>

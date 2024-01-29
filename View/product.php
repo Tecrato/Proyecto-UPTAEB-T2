@@ -1,9 +1,5 @@
 <?php require("../View/complementos/header.php"); ?>
 
-
-
-
-
 <main class="Bg-Main-home2 uk-padding uk-padding-remove-bottom main-Product uk-light">
     <section class="">
         <ul uk-tab>
@@ -15,7 +11,7 @@
             <li>
                 <section class="uk-background-secondary uk-padding uk-border-rounded" uk-filter="target: .js-filter">
                     <div>
-                        <div class="uk-flex uk-flex-between" style="align-items: baseline;">
+                        <div class="uk-flex uk-flex-between container-filter" style="align-items: baseline;">
                             <div class="uk-flex uk-flex-wrap" style="align-items: baseline;">
                                 <div class="uk-margin-right">
                                     <div class="uk-flex uk-flex-wrap">
@@ -27,7 +23,7 @@
                                         </div>
                                         <div class="uk-margin-left">
                                             <a href="InventarioPDF" target="_blank" class="uk-icon-link" uk-tooltip="title:Imprimir Inventario; delay: 500" uk-icon="icon: print; ratio: 1.5"></a>
-                                            <a href="#modal-register-product" uk-tooltip="title:Añadir; delay: 500" class="uk-margin-small-left btn-modal-register">
+                                            <a href="#modal-register-product" uk-toggle uk-tooltip="title:Añadir; delay: 500" class="uk-margin-small-left btn-modal-register">
                                                 <img class="btn_agg" src="./static/images/btn_agg.png" alt="" width="35px">
                                             </a>
                                         </div>
@@ -56,7 +52,7 @@
                                             <a href="#">MARCA <span uk-drop-parent-icon></span></a>
                                             <div class="uk-dropdown">
                                                 <ul class="uk-nav uk-dropdown-nav filter_marca">
-                                                    
+
                                                 </ul>
                                             </div>
                                         </li>
@@ -82,7 +78,7 @@
                                 <div class="container_marca_agua">
                                     <img class="marca_agua" src="static/images/logo_letras-minimarket.png" alt="">
                                 </div>
-                                <div class="[email protected] uk-grid-large uk-flex-center dataTable2 container-target-product height_controller js-filter" uk-grid uk-height-match="target: > div > .uk-card">
+                                <div class="[email protected] uk-grid-large uk-flex-center dataTable2 container-target-product js-filter" uk-grid uk-height-match="target: > div > .uk-card">
                                     <!-- aqui se cargan las tarjetas de productos con js -->
                                 </div>
                             </section>
@@ -99,8 +95,133 @@
                 </section>
                 <div id="container-modals">
                     <!-- aqui se cargan los modales dinamicamente con js -->
+
+                    <!-- *********************************modal de registro de productos********************************* -->
+
+                    <div id="modal-register-product" uk-modal bg-close='false'>
+                        <div class="uk-modal-dialog">
+                            <button class="uk-modal-close-default close" type="button" uk-close></button>
+                            <div class="uk-modal-header">
+                                <h2 class="uk-modal-title">REGISTRAR PRODUCTO</h2>
+                            </div>
+                            <div class="uk-modal-body ">
+                                <form id="formAggProduct" class="uk-grid-small" uk-grid method="POST" action="" enctype="multipart/form-data">
+                                    <input type="text" name="tipo" value='producto' id="" style="display:none">
+                                    <div class="uk-width-1-2">
+                                        <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" required>
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <input class="uk-input" type="text" placeholder="Descripción" aria-label="50" name="descripcion">
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <select id="selectCat" class="uk-select" id="form-stacked-select" name="categoria" required>
+                                            <option value="" disabled selected>Categoria</option>
+                                        </select>
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <select id="selectUni" class="uk-select" id="form-stacked-select" name="unidad" required>
+                                            <option value="" disabled selected>Unidad</option>
+
+                                        </select>
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <input class="uk-input" type="number" step="0.1" placeholder="precio_venta" aria-label="25" name="precio_venta" required>
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <input class="uk-input" type="number" placeholder="Stock mínimo" aria-label="25" name="stock_min" required>
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <input class="uk-input" type="number" placeholder="Stock maximo" aria-label="25" name="stock_max" required>
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <label class="uk-margin-medium-right" for="">IVA</label>
+                                        <label><input class="uk-radio" type="radio" name="IVA" value=0 checked> Exento</label>
+                                        <label><input class="uk-radio" type="radio" name="IVA" value=1> No Exento</label>
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <div uk-form-custom>
+                                            <input type="file" accept="image/*" aria-label="Custom controls" name="imagen1">
+                                            <button class="uk-button uk-button-default" type="button" tabindex="-1">Selecciona Imagen</button>
+                                        </div>
+                                    </div>
+                                    <input type="submit" id="subirxd" style="display:none">
+                                </form>
+                            </div>
+                            <div class="uk-modal-footer uk-text-right">
+                                <button class="uk-button uk-button-default uk-modal-close cancelar" type="button">Cancelar</button>
+                                <label class="uk-button uk-button-secondary subir" type="submit" for="subirxd">Guardar</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- *********************************modal de eliminar productos********************************* -->
+
+                    <div id="eliminar_product" class="uk-flex-top uk-modal" uk-modal bg-close='false'>
+                        <div class="uk-modal-dialog uk-margin-auto-vertical">
+                            <div class="uk-modal-header uk-flex uk-flex-middle">
+                                <span class="uk-margin-small-right" uk-icon="icon: warning ; ratio: 2"></span>
+                                <h2 class="uk-modal-title uk-margin-remove-top">ELIMINAR</h2>
+                            </div>
+                            <div class="uk-modal-body">
+                                <p>Deseas eliminar este registro para siempre? No podras recuperlo mas adelante</p>
+                            </div>
+                            <div class="uk-modal-footer uk-text-right">
+                                <button class="uk-button uk-button-default uk-modal-close cancelar" type="button">Cancelar</button>
+                                <label class="uk-button uk-button-secondary subir" type="button" for="btn">Aceptar</label>
+                                <form id="formDelete" action="" method="POST" style="display:none">
+                                    <input type=number id="ValueInputDelete" name="ID">
+                                    <input type=text value="producto" name="tipo">
+                                    <input type=submit id="btn">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- *********************************modal de entradas productos********************************* -->
+                    
+                    <div id="product-entry" uk-modal bg-close='false'>
+                        <div class="uk-modal-dialog">
+                            <button class="uk-modal-close-default close" type="button" uk-close></button>
+                            <div class="uk-modal-header">
+                                <h2 class="uk-modal-title">DETALLES DE ENTRADA</h2>
+                            </div>
+                            <div class="uk-modal-body">
+                                <form id="formLotes" class="uk-grid-small" uk-grid method="POST" action="">
+                                    <input type="text" name="tipo" value="lote" style="display:none">
+                                    <input type="text" name="ID" id="ValueIdEntry" style="display:none">
+                                    <div class="uk-width-1-3@s">
+                                        <select class="uk-select selectSupplier" id="form-stacked-select" name="proveedor" required>
+                                            <!-- aqui cargar las opciones en js -->
+                                        </select>
+                                    </div>
+                                    <div class="uk-width-1-3@s">
+                                        <input class="uk-input" type="number" placeholder="Cantidad" aria-label="100" name="cantidad" required>
+                                    </div>
+                                    <div class="uk-width-1-3@s">
+                                        <input class="uk-input" type="number" step="0.1" placeholder="precio_compra" aria-label="25" name="precio_compra" required>
+                                    </div>
+                                    <div class="uk-width-1-1@s uk-flex uk-flex-middle">
+                                        <label for="" style="width: 265px;">Fecha adquisicion</label>
+                                        <input class="uk-input" type="date" step="0.01" aria-label="25" name="fecha_c" required>
+                                    </div>
+                                    <div class="uk-width-1-1@s uk-flex uk-flex-middle">
+                                        <label for="" style="width: 265px;">Fecha de vencimiento</label>
+                                        <input class="uk-input" type="date" step="0.01" aria-label="25" name="fecha_v" required>
+                                    </div>
+                                    <input type="submit" id="subir" style="display:none">
+                                </form>
+                            </div>
+                            <div class="uk-modal-footer uk-text-right">
+                                <button class="uk-button uk-button-default uk-modal-close cancelar" type="button">Cancelar</button>
+                                <label class="uk-button uk-button-secondary subir" type="submit" for="subir">Guardar</label>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </li>
+
+            
             <li>
                 <section class="uk-flex container-entradas">
                     <article style="width: 840px;" class="uk-background-secondary uk-padding uk-border-rounded uk-margin-medium-bottom">
@@ -210,4 +331,5 @@
 
 
 </body>
+
 </html>

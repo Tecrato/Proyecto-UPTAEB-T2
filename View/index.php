@@ -136,7 +136,8 @@
 </main>
 
 <script src="static/javaScript/librerias/jquery.js"></script>
-<script src="static/javascript/FuncionesGenerales.js"></script>
+<script src="static/javaScript/ChangeColor.js"></script>
+
 
 </body>
 </html>

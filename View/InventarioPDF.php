@@ -76,19 +76,19 @@ $pdf->SetTextColor(0, 0, 0);
 $co = 0;
 foreach ($result as $variable) {
     $co++;
-    if ($co % 2 == 0) {
+    // if ($co % 2 == 0) {
         $pdf->SetFillColor(230,230,230);
-    } else {
-        $pdf->SetFillColor(255,255,255);
-    }
+    // } else {
+    //     $pdf->SetFillColor(255,255,255);
+    // }
     $pdf->SetX(17);
     $pdf->Cell(10,10,$variable['id'],0,0,'C',0);
-    $pdf->Cell(45,10,$variable['marca'],0,0,'C',0);
-    $pdf->Cell(20,10,$variable['entradas'],0,0,'C',0);
-    $pdf->Cell(20,10,$variable['salidas'],0,0,'C',0);
-    $pdf->Cell(30,10,$variable['existencia'],0,0,'C',0);
+    $pdf->Cell(45,10,$variable['nombre'],0,0,'C',0);
+    $pdf->Cell(20,10,$variable['entradas'] ? $variable['entradas'] : 0,0,0,'C',0);
+    $pdf->Cell(20,10,$variable['salidas'] ? $variable['salidas'] : 0,0,0,'C',0);
+    $pdf->Cell(30,10,$variable['existencia'] ? $variable['existencia'] : 0,0,0,'C',0);
     $pdf->Cell(30,10,$variable['precio_venta'].' Bs',0,0,'C',0);
-    $pdf->Cell(24,10,$variable['Total'].' Bs',0,1,'C',0);
+    $pdf->Cell(24,10,$variable['Total'] ? $variable['Total'].' Bs' : 0 .' Bs',0,1,'C',1);
 }
 
 $pdf->Output();

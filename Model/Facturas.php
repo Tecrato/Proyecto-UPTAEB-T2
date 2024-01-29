@@ -61,7 +61,7 @@ class Factura extends DB
 
     function search_detailsFact()
     {
-        $query = $this->conn->prepare("SELECT id,fecha,(SELECT nombre FROM clientes WHERE registro_ventas.id_cliente = id) AS nombre, (SELECT Apellido FROM clientes WHERE registro_ventas.id_cliente = id) AS apellido, (SELECT Cedula FROM clientes WHERE registro_ventas.id_cliente = id) AS cedula, metodo_pago,(SELECT nombre FROM usuarios WHERE registro_ventas.id_usuario = id) AS vendedor FROM registro_ventas WHERE id = :id");
+        $query = $this->conn->prepare("SELECT id,fecha,(SELECT nombre FROM clientes WHERE registro_ventas.id_cliente = id) AS nombre, (SELECT Apellido FROM clientes WHERE registro_ventas.id_cliente = id) AS apellido, (SELECT Cedula FROM clientes WHERE registro_ventas.id_cliente = id) AS cedula,(SELECT documento FROM clientes WHERE registro_ventas.id_cliente = id) AS documento, metodo_pago,(SELECT nombre FROM usuarios WHERE registro_ventas.id_usuario = id) AS vendedor FROM registro_ventas WHERE id = :id");
 
         $query->bindParam(':id', $this->id);
         $query->execute();

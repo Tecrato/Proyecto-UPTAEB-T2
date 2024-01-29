@@ -24,15 +24,16 @@ if (screen > 1290) {
                           
                               <ul class="uk-subnav uk-margin-remove uk-padding-remove">
                                   <li>
-                                      <div
-                                          class="Plus-client uk-flex uk-flex-column uk-flex-center uk-flex-middle uk-margin-medium-right">
-                                          <div id="Client-datails"
-                                              class="uk-flex uk-flex-column uk-flex-center uk-flex-middle">
-
+                                      <div class="Plus-client uk-flex uk-flex-column uk-flex-center uk-flex-middle uk-margin-medium-right">
+                                          <div id="Client-datails" class="uk-flex uk-flex-column uk-flex-center uk-flex-middle">
+                                              <div class="uk-flex uk-flex-column uk-flex-middle uk-flex-center pointer" value="default">
+                                                  <h5 class="uk-text-bold">AÑADIR CLIENTE</h5>
+                                                  <a href="#" uk-icon="icon: plus-circle; ratio: 2.5"></a>
+                                              </div>
                                           </div>
                                       </div>
                                       <div class="uk-dropdown uk-border-rounded uk-background-secondary">
-                                          <ul id="Client" class="uk-nav uk-dropdown-nav">
+                                          <ul class="uk-nav uk-dropdown-nav">
                                               <li class="uk-active uk-margin-small-bottom">
                                                   <form class="uk-search uk-search-default">
                                                       <span class="uk-search-icon-flip" uk-search-icon></span>
@@ -40,6 +41,9 @@ if (screen > 1290) {
                                                           type="search" placeholder="Buscar" aria-label="Buscar">
                                                   </form>
                                               </li>
+                                              <div id="Client">  
+                                              
+                                              </div>
                                           </ul>
                                       </div>
                                   </li>
@@ -195,22 +199,26 @@ if (screen > 1290) {
                           <nav class="Nav1" uk-dropnav="mode: click">
                               <ul class="uk-subnav uk-margin-remove uk-padding-remove">
                                   <li>
-                                      <div id="Plus-client"
-                                          class="Plus-client uk-flex uk-flex-column uk-flex-center uk-flex-middle uk-margin-medium-right">
-                                          <div id="Client-datails"
-                                              class="uk-flex uk-flex-column uk-flex-center uk-flex-middle">
-                                              <!-- aqui cargan los clientes -->
+                                      <div id="Plus-client" class="Plus-client uk-flex uk-flex-column uk-flex-center uk-flex-middle uk-margin-medium-right">
+                                          <div id="Client-datails" class="uk-flex uk-flex-column uk-flex-center uk-flex-middle">
+                                              <div class="uk-flex uk-flex-column uk-flex-middle uk-flex-center pointer" value="default">
+                                                  <h5 class="uk-text-bold">AÑADIR CLIENTE</h5>
+                                                  <a href="#" uk-icon="icon: plus-circle; ratio: 2.5"></a>
+                                              </div>
                                           </div>
                                       </div>
                                       <div class="uk-dropdown uk-border-rounded uk-background-secondary">
-                                          <ul id="Client" class="uk-nav uk-dropdown-nav">
+                                          <ul class="uk-nav uk-dropdown-nav">
                                               <li class="uk-active uk-margin-small-bottom">
                                                   <form class="uk-search uk-search-default">
                                                       <span class="uk-search-icon-flip" uk-search-icon></span>
-                                                      <input id="input-search-fact2" class="uk-search-input"
+                                                      <input id="input-search-fact" class="uk-search-input"
                                                           type="search" placeholder="Buscar" aria-label="Buscar">
                                                   </form>
                                               </li>
+                                              <div id="Client">  
+                                              
+                                              </div>
                                           </ul>
                                       </div>
                                   </li>
@@ -223,8 +231,7 @@ if (screen > 1290) {
                                           <label class="uk-form-label"
                                               for="form-horizontal-select">VENDEDOR</label>
                                           <div class="uk-form-controls">
-                                              <input class="uk-input uk-form-width-large Casher" type="text"
-                                                  value="Administrador" id="2" disabled>
+                                              <input class="uk-input uk-form-width-large Casher" type="text" value="${sesion_user_name}" id="${sesion_user_id}" disabled>
                                           </div>
                                       </div>
 
@@ -338,112 +345,88 @@ if (screen > 1290) {
 let contenedor = document.querySelector("#Container-modal-full");
 contenedor.innerHTML += modal;
 
-const datos = [
-  {
-    id: 1,
-    nombre: "Alejo",
-    cedula: "000000000",
-  },
-  {
-    id: 2,
-    nombre: "Luis",
-    cedula: "30087582",
-  },
-  {
-    id: 3,
-    nombre: "DALTO",
-    cedula: "251616816",
-  },
-  {
-    id: 4,
-    nombre: "Bryan",
-    cedula: "25555555",
-  },
-];
-//Con  esta parte cargamos los datos en la pestana de detalles del cliente que quiere seleccionar
-let LI = "";
-let ClienteDatos = "";
-datos.forEach((dato) => {
-  LI += `   <li class="Client_register">
-                <div class="uk-padding-remove-vertical uk-flex uk-flex-middle">
-                    <span class="uk-margin-small-right" uk-icon="user"></span>
-                    <p class="uk-margin-small">${dato.nombre}</p>
+//aqui empieza la funcion para buscar los clientes
+//captamos el evento keyup del buscador
+document.getElementById("input-search-fact").addEventListener("keyup", (e) => {
+  //obtenemos el valor de lo que el usuario teclea
+  let val = e.target.value;
+  //si no esta vacio, entonces enviamos una solicitud ajax para buscar los clientes
+  if (val != "") {
+    $.ajax({
+      url: "Controller/funcs_ajax/search.php",
+      type: "POST",
+      data: { randomnautica: "clientes", like: val },
+      success: function (response) {
+        let json = JSON.parse(response);
+        let LI = "";
+        //recorremos la respuesta del server y creamos el template de los li
+        json.lista.forEach((dato) => {
+          LI += `   <li class="Client_register" name="${dato.nombre +" "+ dato.apellido}" ci="${dato.cedula}" id="${dato.id}">
+                      <div class="uk-padding-remove-vertical uk-flex uk-flex-middle">
+                          <span class="uk-margin-small-right" uk-icon="user"></span>
+                          <p class="uk-margin-small">${dato.nombre +" "+ dato.apellido}</p>
+                      </div>
+                    </li>`;
+        });
+        document.getElementById("Client").innerHTML = LI;
+
+
+        let ClienteDetails = "";
+        //ahora que los resultados se imprimieron, procedemos a captar el evento click sobre las opciones que se imprimieron
+        const Clientes = document.querySelectorAll(".Client_register");
+
+
+        // Con esto recorremos todos los clientes cargados, y dependiendo de cual pulse, nos trae el nombre del cliente
+        // luego recorremos los datos del los clientes y el nombre lo comparamos con el extraido anteriormente
+        //si es igual, entonces remplaza el contenido de cliente-details por el nombre del usuario y la cedula
+        
+        Clientes.forEach((date) => {
+          date.addEventListener("click", () => {
+            let name = date.getAttribute('name')
+            let CI = date.getAttribute('ci')          
+            let ID = date.getAttribute('id')          
+            
+            ClienteDetails = ` 
+                              <div class="uk-flex uk-flex-column uk-flex-middle pointer" value="${ID}" >
+                                <a class="Bg-user uk-margin-small-bottom" uk-icon="icon: user; ratio: 1.5"></a>
+                                <p class="uk-margin-remove uk-margin-small-bottom uk-text-meta">Cliente: <b>${name}</b></p>
+                                <p class="uk-margin-remove uk-text-meta">Cedula: <b>${CI}</b></p>
+                              </div>
+                            `;
+
+            document.getElementById("Client-datails").innerHTML = ClienteDetails;
+          });
+        });
+
+        //esta validacion sirve para que cuando la respuesta del server sea vacia, cree un template para ese caso
+        if (json.lista.length == 0) {
+          document.getElementById("Client").innerHTML = `
+          <li>
+              <div class="uk-padding-remove-vertical uk-flex uk-flex-middle">
+                  <span class="uk-margin-small-right" uk-icon="history"></span>
+                  <p class="uk-margin-small">no se encontro resultado</p>
+              </div>
+              <div class="uk-padding-remove-vertical uk-flex uk-flex-middle">
+                <div class="uk-flex uk-flex-center uk-margin-small-top" style="width: 100%;">
+                    <a href="Clientes" class="uk-button uk-button-default">Registrar Cliente</a>
                 </div>
-            </li>`;
-});
-document.getElementById("Client").innerHTML += LI;
-const Clientes = document.querySelectorAll(".Client_register");
-//con esta parte cargamos por defecto la opcion de anadir cliente
-document.getElementById(
-  "Client-datails"
-).innerHTML = `<div class="uk-flex uk-flex-column uk-flex-middle uk-flex-center pointer" value="default">
-                  <h5 class="uk-text-bold">AÑADIR CLIENTE</h5>
-                  <a href="#" uk-icon="icon: plus-circle; ratio: 2.5"></a>
-                </div>`;
-let ClienteDetails = "";
-
-// Con esto recorremos todos los clientes cargados, y dependiendo de cual pulse, nos trae el nombre del cliente
-// luego recorremos los datos del los clientes y el nombre lo comparamos con el extraido anteriormente
-//si es igual, entonces remplaza el contenido de cliente-details por el nombre del usuario y la cedula
-
-Clientes.forEach((date) => {
-  date.addEventListener("click", () => {
-    let textoCliente = date.firstElementChild.lastElementChild.textContent;
-    datos.forEach((dat) => {
-      if (dat.nombre == textoCliente) {
-        ClienteDetails = ` 
-                            <div class="uk-flex uk-flex-column uk-flex-middle pointer" value="${dat.id}" >
-                              <a class="Bg-user uk-margin-small-bottom" uk-icon="icon: user; ratio: 1.5"></a>
-                              <p class="uk-margin-remove uk-margin-small-bottom uk-text-meta">Cliente: <b>${dat.nombre}</b></p>
-                              <p class="uk-margin-remove uk-text-meta">Cedula: <b>${dat.cedula}</b></p>
-                            </div>
-                          `;
-      }
+              </div>
+          </li>`;
+        }
+      },
     });
-    document.getElementById("Client-datails").innerHTML = ClienteDetails;
-    document.querySelector(".btn-close").classList.remove("invisible");
-  });
-});
-
-const resetCloseClient = (clase) => {
-  let btnClose = document.querySelector(clase);
-
-  btnClose.addEventListener("click", () => {
-    document.getElementById(
-      "Client-datails"
-    ).innerHTML = `<div class="uk-flex uk-flex-column uk-flex-middle uk-flex-center pointer" value="default">
-                    <h5 class="uk-text-bold">AÑADIR CLIENTE</h5>
-                    <a href="#" uk-icon="icon: plus-circle; ratio: 2.5"></a>
-                  </div>`;
-    btnClose.classList.add("invisible");
-  });
-};
-
-resetCloseClient(".btn-close");
-
-//con esto hacemos la busqueda de los clientes
-let input = document.getElementById("input-search-fact");
-document.addEventListener("keyup", (e) => {
-  if (e.target.matches("input")) {
-    Clientes.forEach((dato) => {
-      if (
-        dato.firstElementChild.lastElementChild.textContent
-          .toLowerCase()
-          .includes(e.target.value)
-      ) {
-        dato.classList.remove("invisible");
-      } else {
-        dato.classList.add("invisible");
-      }
-    });
+  } else {
+    //si el usuario no teclea nada, osea el input se encuentra vacio, el container sera vacio
+    document.getElementById("Client").innerHTML = "";
   }
 });
+
 
 //ajax
 $.ajax({
   url: "Controller/funcs_ajax/search.php",
   type: "POST",
-  data: {randomnautica: "productos"},
+  data: { randomnautica: "productos" },
   success: function (response) {
     let producto = JSON.parse(response);
     let productos = producto.lista;
@@ -466,10 +449,14 @@ $.ajax({
                   <p class="uk-margin-remove">${producto.nombre}</p>
               </td>
               <td>
-                  <input class="uk-input uk-form-width-xsmall disponible" type="text" aria-label="disabled" value="${producto.stock}" disabled>
+                  <input class="uk-input uk-form-width-xsmall disponible" type="text" aria-label="disabled" value="${
+                    producto.stock ? producto.stock : 0
+                  }" disabled>
               </td>
               <td>
-                  <input class="uk-input uk-form-width-xsmall" type="text" aria-label="disabled" value="${producto.precio_venta}" disabled>
+                  <input class="uk-input uk-form-width-xsmall" type="text" aria-label="disabled" value="${
+                    producto.precio_venta
+                  }" disabled>
               </td>
               <td>
                   <input class="uk-input uk-form-width-small State-input-stock" type="text" placeholder="Cantidad" aria-label="Input">
@@ -488,7 +475,7 @@ $.ajax({
                   <p class="uk-margin-remove">${producto.nombre}</p>
               </td>
               <td>
-                  <input class="uk-input uk-form-width-xsmall" type="text" aria-label="disabled" value="${producto.stock}" disabled>
+                  <input class="uk-input uk-form-width-xsmall" type="text" aria-label="disabled" value="${producto.stock ? producto.stock : 0}" disabled>
               </td>
               <td>
                   <input class="uk-input uk-form-width-xsmall" type="text" aria-label="disabled" value="${producto.precio_venta}" disabled>

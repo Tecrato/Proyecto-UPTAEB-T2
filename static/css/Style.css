@@ -1,6 +1,15 @@
-
+.container_marca_agua{
+    width: 100%;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    img{
+        opacity: 0.2;
+    }
+}
 .invisible{
     display: none;
+    transition: all 300ms ease;
 }
 .succesc{
     color: #15ff00 !important;
@@ -659,7 +668,7 @@
 }
                                     /*-----------------------Estilos del supplier-------------------------------*/
 .img_proveedor_container{
-    background-color: rgb(62, 62, 62);
+    background-color: rgb(56, 56, 56);
     padding: 15px;
     margin-right: 20px;
     height: 85%;
@@ -668,17 +677,26 @@
     align-items: center;
     justify-content: center;
 }
-@media (min-width: 350px) and (max-width: 425px){
+@media (min-width: 350px) and (max-width: 498px){
     .img_proveedor_container > img{
       width: 80px;
+    }
+    .img_proveedor_container > h5{
+        margin: 0px;
+      }
+    .target_supplier{
+        width: 250px !important;
+        flex-wrap: wrap;
+        justify-content: center;
     }
     .Container-details-suppliers{
         width: 180px !important;
     }
     .img_proveedor_container{
         padding: 10px;
-        margin-right: 10px;
-        height: 90%;
+        margin: 0px 0px 25px 0px;
+        height: 80%;
+        background-color: transparent;
     }
     .hr_supplier{
         width: 170px;

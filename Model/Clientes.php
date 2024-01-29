@@ -84,9 +84,9 @@
             $consulta->execute();
             return $consulta->fetchAll();
         }
-        function search_like(){
-            $query = $this->conn->prepare("SELECT * FROM clientes WHERE nombre LIKE %:li%");
-            $query->bindParam(':li',$this->nombre);
+        function search_like($val){
+            $query = $this->conn->prepare("SELECT * FROM clientes WHERE cedula LIKE '%$val%'");
+            // $query->bindParam(':li',$this->nombre);
             $query->execute();
             return $query->fetchAll();
         }

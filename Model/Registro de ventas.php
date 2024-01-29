@@ -18,7 +18,7 @@
 
         }
 		function search($n=0,$limite=9,$order='id ASC', $active=true){
-			$query = "SELECT a.id, a.monto_final, a.metodo_pago, a.fecha, b.nombre cliente, a.id_usuario vendedor, a.IVA FROM registro_ventas a INNER JOIN clientes b ON b.id = a.id_cliente";
+			$query = "SELECT a.id, a.monto_final, a.metodo_pago, a.fecha, b.nombre nom_cliente, b.apellido apell_cliente, a.id_usuario vendedor, a.IVA FROM registro_ventas a INNER JOIN clientes b ON b.id = a.id_cliente";
 
             if ($this->id != null){
                 $query = $query." WHERE a.id=:id";

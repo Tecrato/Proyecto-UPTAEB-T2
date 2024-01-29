@@ -1,8 +1,11 @@
 <?php
+
+$fecha = strtotime($row['fecha']);
+$dia =  date('d/m/Y', $fecha);
 echo '
 <div>
-<div class="target-detail-fact uk-card uk-card-default uk-padding-small uk-background-secondary uk-light uk-border-rounded" style="width: 300px;">
-    <div class="uk-background-secondary">
+<div class="target-detail-fact uk-card uk-card-default uk-padding-small uk-background-secondary uk-light uk-border-rounded" style="width: 280px; background-color: #333;">
+    <div class="cont1_tar_fact" style="background-color: #333;">
         <div class="uk-flex uk-flex-middle uk-flex-between">
             <div class="uk-flex uk-flex-middle">
                 <img class="uk-margin-small-right" src="static/images/logo_m.png" alt="" width="50PX">
@@ -56,11 +59,11 @@ echo '
                         <p class="uk-text-meta uk-margin-remove">N∘_OPERACIÓN: <b class="uk-text-success">'.$row['id'].'</b></p>
                         <hr class="uk-margin-remove divider-2">
 
-                        <p class="uk-text-meta uk-margin-remove">FECHA: <b class="uk-text-success">'.$row['fecha'].'</b></p>
+                        <p class="uk-text-meta uk-margin-remove">FECHA: <b class="uk-text-success">'.$dia.'</b></p>
 
                         <hr class="uk-margin-remove divider-2">
 
-                        <p class="uk-text-meta uk-margin-remove">CLIENTE: <b class="uk-text-success">'.$row['cliente'].'</b></p>
+                        <p class="uk-text-meta uk-margin-remove">CLIENTE: <b class="uk-text-success">'.$row['nom_cliente']." ".$row['apell_cliente'].'</b></p>
 
                         <hr class="uk-margin-remove divider-2">
 
@@ -74,7 +77,7 @@ echo '
 
                         <hr class="uk-margin-remove divider-2">
 
-                        <p class="uk-text-meta uk-margin-remove">TOTAL FACTURA: <b class="uk-text-success">100BS</b></p>
+                        <p class="uk-text-meta uk-margin-remove">TOTAL FACTURA: <b class="uk-text-success">'.$row['monto_final'].' BS</b></p>
                     </div>
                 </div>
             </div>

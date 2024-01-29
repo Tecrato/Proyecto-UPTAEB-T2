@@ -19,7 +19,7 @@ const tarjetas = (response) => {
   json.lista.forEach((item) => {
     tarjeta += `
               
-  <div id="${item.id}" data-supplier="${item.proveedor}" data-category="${item.categoria}" data-marca="${item.marca}">
+  <div id="${item.id}" data-supplier="${item.proveedor}" data-category="${item.categoria}" data-marca="${item.marca}" data-name="${item.nombre.slice(0,1).toUpperCase()}">
     <div class="uk-card uk-card-default uk-background-secondary uk-light uk-border-rounded">
         <div class="uk-visible-toggle" tabindex="-1">
             <article class="uk-transition-toggle">
@@ -35,14 +35,14 @@ const tarjetas = (response) => {
                 </div>
                 <div class="uk-position-bottom-center ">
                     <ul class="uk-iconnav uk-background-secondary uk-transition-slide-bottom-small" style="width: 105%; padding: 5px;">
-                        <li><a href="#eliminar_product" uk-tooltip="title:Eliminar; delay: 500" class="uk-icon-button deleteID" uk-icon="icon: trash" data-id="${
+                        <li><a href="#eliminar_product" uk-toggle uk-tooltip="title:Eliminar; delay: 500" class="uk-icon-button deleteID" uk-icon="icon: trash" data-id="${
                           item.id
                         }"></a></li>
                         <li><a href="#Producto-modificar" uk-tooltip="title:Modificar; delay: 500" class="uk-icon-button" uk-icon="icon: file-edit" data-id="${
                           item.id
                         }"></a></li>
                         <li>
-                            <a href="#product-date" class="Lote" uk-tooltip="title:Añadir Entrada; delay: 500" data-id="${
+                            <a href="#product-entry" uk-toggle class="Lote" uk-tooltip="title:Añadir Entrada; delay: 500" data-id="${
                               item.id
                             }">
                                 <img src="./static/images/btn_lote2.png" alt="" width="35px">
@@ -53,9 +53,7 @@ const tarjetas = (response) => {
                 <div>
                     <div style="padding: 0px 10px;">
                         <div>${item.nombre}</div>
-                        <div>stock: <b class="uk-text-success">${
-                          item.stock ? item.stock : 0
-                        }</b></div>
+                        <div>stock: <b class="uk-text-success">${item.stock ? item.stock : 0}</b></div>
                     </div>
                 </div>
             </article>
@@ -67,11 +65,13 @@ const tarjetas = (response) => {
     $(".container-target-product").html(tarjeta);
   });
 
-  if (json.lista.length === 0) {
-    document
-      .querySelector(".container_marca_agua")
-      .classList.remove("invisible");
+  if (json.lista.length == 0) {
+    document.querySelector(".container_marca_agua").classList.remove("invisible");
+    document.querySelector(".uk-pagination").classList.add('invisible');
     $(".container-target-product").html("");
+  } else {
+    document.querySelector(".container_marca_agua").classList.add("invisible");
+    document.querySelector(".uk-pagination").classList.remove('invisible');
   }
 };
 const cargarTargetProduct = () => {
@@ -85,64 +85,26 @@ const cargarTargetProduct = () => {
       limite: 9, // Aca va el numero maximo de tarjetas que se pueden imprimir
     },
     success: function (response) {
-      tarjetas(response);
-
-      // en esta parte se cargan los modales segun el que quiera ver
-
-      //***************************************************  Modal de Eliminar  ******************************************************
+        tarjetas(response);
 
       //seleccionamos todos los btn con la clase deleteID y lo recorremos
-
+      //esta parte tiene el fin de dar el id al input que se enviara para eliminar el producto
       document.querySelectorAll(".deleteID").forEach((btn) => {
         //usamos el evento click para saber en que tarjeta pulso, para luego capturar el id del producto
         btn.addEventListener("click", () => {
           //obtenemos el id del producto pulsado
           let idDelete = parseInt(btn.dataset["id"]);
-
-          //creamos el template del modal de eliminar
-          let ModalDeleteProduct = `<div id="eliminar_product" class="uk-flex-top uk-modal" uk-modal bg-close='false'>
-                                          <div class="uk-modal-dialog uk-margin-auto-vertical">
-                                              <div class="uk-modal-header uk-flex uk-flex-middle">
-                                                  <span class="uk-margin-small-right" uk-icon="icon: warning ; ratio: 2"></span>
-                                                  <h2 class="uk-modal-title uk-margin-remove-top">ELIMINAR</h2>
-                                              </div>
-                                              <div class="uk-modal-body">
-                                                  <p>Deseas eliminar este registro para siempre? No podras recuperlo mas adelante</p>
-                                              </div>
-                                              <div class="uk-modal-footer uk-text-right">
-                                                  <button class="uk-button uk-button-default uk-modal-close cancelar" type="button">Cancelar</button>
-                                                  <label class="uk-button uk-button-secondary subir" type="button" for="btn">Aceptar</label>
-                                                  <form id="formDelete" action="" method="POST" style="display:none">
-                                                      <input type=number value="${idDelete}" name="ID">
-                                                      <input type=text value="producto" name="tipo">
-                                                      <input type=submit id="btn">
-                                                  </form>
-                                              </div>
-                                          </div>
-                                      </div>`;
-
-          //esta variable funciona para que una vez creado el modal, utilizamos childElementCount del body para que no se
-          //creen mas modales cada vez que el usuario de el btn de delete
-          let controllerModal = document.querySelector(".controller-modal");
-
-          //si exede el n 10(que es el numero fijo de elementos en el body, sin ningun modal) no le permite crear mas modales de delete
-          if (controllerModal.childElementCount == 13) {
-            //agg el atributo uk-toggle que tiene uikit para poder abrir los modales
-            btn.setAttribute("uk-toggle", "");
-            //insertamos el template del modal en el contenedor
-            $("#container-modals").html(ModalDeleteProduct);
-            //para luego mostrarlo
-            UIkit.modal("#eliminar_product").show();
-          }
-          //estas dos varibles, sirven para eliminar le modal segun el que pulse
-          let subir = document.querySelector(".subir");
-          let cancelar = document.querySelector(".cancelar");
+          //le damos el atributo de value con el id del producto a eliminar
+          document
+            .getElementById("ValueInputDelete")
+            .setAttribute("value", idDelete);
 
           //seleccionamos el form que esta en el modal de delete
           let formDelete = document.querySelector("#formDelete");
 
           //captamos su evento submit
           formDelete.addEventListener("submit", (e) => {
+            e.preventDefault();
             //creamos y luego pasamos por parametro los datos del form
             let detailDelete = new FormData(formDelete);
             //hacemos la peticion ajax
@@ -153,6 +115,7 @@ const cargarTargetProduct = () => {
               processData: false,
               contentType: false,
               success: function (response) {
+                console.log(response);
                 //ocultamos el modal
                 UIkit.modal("#eliminar_product").hide();
                 //mostramos el mensaje de eliminacion exitosa
@@ -162,104 +125,38 @@ const cargarTargetProduct = () => {
                   status: "success",
                   pos: "bottom-right",
                 });
-                //esta varible sirve para obtener el contenedor principal del modal
-                let modal = subir.parentElement.parentElement.parentElement;
-                //unos milisegundos despues
-                setTimeout(() => {
-                  //removemos el modal
-                  controllerModal.removeChild(modal);
-                  //y removemos el atributo uk-toggle
-                  btn.removeAttribute("uk-toggle");
-                }, 300);
                 //para al final, llamar a la funcion de cargar las tarjetas
                 cargarTargetProduct();
               },
             });
-            e.preventDefault();
-          });
-
-          //si el usuario pulsa sobre cancelar, tambien elimina el modal
-          cancelar.addEventListener("click", () => {
-            UIkit.modal("#eliminar_product").hide();
-            let modal = cancelar.parentElement.parentElement.parentElement;
-            setTimeout(() => {
-              controllerModal.removeChild(modal);
-              btn.removeAttribute("uk-toggle");
-            }, 300);
           });
         });
       });
 
       //***************************************************  Modal de Agg entrada  ******************************************************
 
-      let controllerModal = document.querySelector(".controller-modal");
-
       //seleccionamos todos los btn con la clase Lote y lo recorremos
 
       document.querySelectorAll(".Lote").forEach((L) => {
         L.addEventListener("click", () => {
           let idProduct = L.dataset["id"];
-          let templateAggLote = `
-            <div id="product-lote" uk-modal bg-close='false'>
-                  <div class="uk-modal-dialog">
-                      <button class="uk-modal-close-default close" type="button" uk-close></button>
-                      <div class="uk-modal-header">
-                          <h2 class="uk-modal-title">DETALLES DE LOTE</h2>
-                      </div>
-                      <div class="uk-modal-body">
-                          <form id="formLotes" class="uk-grid-small" uk-grid method="POST" action="">
-                              <input type="text" name="tipo" value="lote" style="display:none">
-                              <input type="text" name="ID" value="${idProduct}" style="display:none">
-                              <div class="uk-width-1-3@s">
-                                  <select class="uk-select selectSupplier" id="form-stacked-select" name="proveedor" required>
-                                      <option selected disabled>Proveedor</option>
-                                  </select>
-                              </div>
-                              <div class="uk-width-1-3@s">
-                                  <input class="uk-input" type="number" placeholder="Cantidad" aria-label="100" name="cantidad"
-                                      required>
-                              </div>
-                              <div class="uk-width-1-3@s">
-                                  <input class="uk-input" type="number" step="0.1" placeholder="precio_compra" aria-label="25"
-                                      name="precio_compra" required>
-                              </div>
-                              <div class="uk-width-1-1@s uk-flex uk-flex-middle">
-                                  <label for="" style="width: 265px;">Fecha adquisicion</label>
-                                  <input class="uk-input" type="date" step="0.01" aria-label="25" name="fecha_c" required>
-                              </div>
-                              <div class="uk-width-1-1@s uk-flex uk-flex-middle">
-                                  <label for="" style="width: 265px;">Fecha de vencimiento</label>
-                                  <input class="uk-input" type="date" step="0.01" aria-label="25" name="fecha_v" required>
-                              </div>
-                              <input type="submit" id="subir" style="display:none">
-                          </form>
-                      </div>
-                      <div class="uk-modal-footer uk-text-right">
-                          <button class="uk-button uk-button-default uk-modal-close cancelar" type="button">Cancelar</button>
-                          <label class="uk-button uk-button-secondary subir" type="submit" for="subir">Guardar</label>
-                      </div>
-                  </div>
-              </div>
-                      `;
-          if (controllerModal.childElementCount == 13) {
-            L.setAttribute("uk-toggle", "");
-            $("#container-modals").html(templateAggLote);
-            UIkit.modal("#product-lote").show();
-            // ejecutamos esta peticion para traer los proveedores de los productos a los select
-            $.ajax({
-              url: "Controller/funcs_ajax/search.php",
-              type: "POST",
-              data: { randomnautica: "proveedores" },
-              success: function (response) {
-                let options = ``;
-                let json = JSON.parse(response);
-                json.lista.forEach((date) => {
-                  options += `<option value="${date.id}">${date.razon_social}</option>`;
-                });
-                document.querySelector(".selectSupplier").innerHTML += options;
-              },
-            });
-          }
+            document.getElementById("ValueIdEntry").setAttribute("value", idProduct);
+          // ejecutamos esta peticion para traer los proveedores de los productos a los select
+          $.ajax({
+            url: "Controller/funcs_ajax/search.php",
+            type: "POST",
+            data: { randomnautica: "proveedores" },
+            success: function (response) {
+              let options = ``;
+              let json = JSON.parse(response);
+              json.lista.forEach((date) => {
+                options += `<option value="${date.id}">${date.razon_social}</option>`;
+              });
+              document.querySelector(".selectSupplier").innerHTML = options;
+              document.querySelector(".selectSupplier").insertAdjacentHTML('afterbegin', `<option selected disabled>Proveedor</option>`)
+              
+            },
+          });
 
           let formAggLote = document.getElementById("formLotes");
           //captamos su evento submit, primero para evitar que la pagina se refresque, y segundo para insertar esos datos en un objeto FormData
@@ -279,45 +176,18 @@ const cargarTargetProduct = () => {
                 console.log(response);
                 UIkit.notification({
                   message:
-                    "<span uk-icon='icon: check'></span> Lote agregado correctamente ",
+                    "<span uk-icon='icon: check'></span> Entrada agregado correctamente ",
                   status: "success",
                   pos: "bottom-right",
                 });
                 // y ocultamos el modal
                 setTimeout(() => {
-                  UIkit.modal("#product-lote").hide();
-                }, 400);
-                //lo eliminamos
-                let subir =
-                  document.querySelector(".subir").parentElement.parentElement
-                    .parentElement;
-                controllerModal.removeChild(subir);
-                //y llamamos a la funcion de cargar contenido
+                  UIkit.modal("#product-entry").hide();
+                }, 300);
                 cargarTargetProduct();
               },
             });
             e.preventDefault();
-          });
-
-          let close = document.querySelector(".close");
-          let cancelar = document.querySelector(".cancelar");
-
-          cancelar.addEventListener("click", () => {
-            UIkit.modal("#product-lote").hide();
-            let modal = cancelar.parentElement.parentElement.parentElement;
-            setTimeout(() => {
-              controllerModal.removeChild(modal);
-              L.removeAttribute("uk-toggle");
-            }, 300);
-          });
-
-          close.addEventListener("click", () => {
-            UIkit.modal("#product-lote").hide();
-            let modal = close.parentElement.parentElement;
-            setTimeout(() => {
-              controllerModal.removeChild(modal);
-              L.removeAttribute("uk-toggle");
-            }, 300);
           });
         });
       });
@@ -337,6 +207,7 @@ const cargarTargetProduct = () => {
             type: "POST",
             data: { randomnautica: "productos", ID: idProduct },
             success: function (response) {
+              console.log(response);
               let json = JSON.parse(response);
               json.lista.forEach((item) => {
                 templateDetails = `<div id="modal-details-product" class="uk-flex-top" uk-modal bg-close='false'>
@@ -431,7 +302,7 @@ const cargarTargetProduct = () => {
               //le damos el atributo para que pueda abrir el modal
               info.getAttribute("uk-toogle", "");
               //insertamos el template en el contenedor
-              $("#container-modals").html(templateDetails);
+              $("#container-modals").append(templateDetails);
 
               //esta consulta es para cargar los lotes segun del id del producto y el proveedor
               let supplierName = "";
@@ -543,8 +414,6 @@ const cargarTargetProduct = () => {
           });
         });
       });
-
-      marcaAgua();
     },
   });
 };
@@ -552,76 +421,6 @@ cargarTargetProduct();
 
 //***************************************************  Modal de Registro de productos  ******************************************************
 
-//creamos el template del modal de registro de productos
-let templateRegisterProduct = `
-                                    <div id="modal-register-product" uk-modal bg-close='false'>
-                                        <div class="uk-modal-dialog">
-                                            <button class="uk-modal-close-default close" type="button" uk-close></button>
-                                            <div class="uk-modal-header">
-                                                <h2 class="uk-modal-title">REGISTRAR PRODUCTO</h2>
-                                            </div>
-                                            <div class="uk-modal-body ">
-                                                <form id="formAggProduct" class="uk-grid-small" uk-grid method="POST" action="" enctype="multipart/form-data">
-                                                    <input type="text" name="tipo" value='producto' id="" style="display:none">
-                                                    <div class="uk-width-1-2">
-                                                        <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" required>
-                                                    </div>
-                                                    <div class="uk-width-1-2@s">
-                                                        <input class="uk-input" type="text" placeholder="Descripción" aria-label="50" name="descripcion">
-                                                    </div>
-                                                    <div class="uk-width-1-2@s">
-                                                        <select id="selectCat" class="uk-select" id="form-stacked-select" name="categoria" required>
-                                                            <option value="" disabled selected>Categoria</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="uk-width-1-2@s">
-                                                        <select id="selectUni" class="uk-select" id="form-stacked-select" name="unidad" required>
-                                                            <option value="" disabled selected>Unidad</option>
-                                                           
-                                                        </select>
-                                                    </div>
-                                                    <div class="uk-width-1-2@s">
-                                                        <input class="uk-input" type="number" step="0.1" placeholder="precio_venta" aria-label="25" name="precio_venta" required>
-                                                    </div>
-                                                    <div class="uk-width-1-2@s">
-                                                        <input class="uk-input" type="number" placeholder="Stock mínimo" aria-label="25" name="stock_min" required>
-                                                    </div>
-                                                    <div class="uk-width-1-2@s">
-                                                        <input class="uk-input" type="number" placeholder="Stock maximo" aria-label="25" name="stock_max" required>
-                                                    </div>
-                                                    <div class="uk-width-1-2@s">
-                                                        <label class="uk-margin-medium-right" for="">IVA</label>
-                                                        <label><input class="uk-radio" type="radio" name="IVA" value=0 checked> Exento</label>
-                                                        <label><input class="uk-radio" type="radio" name="IVA" value=1> No Exento</label>
-                                                    </div>
-                                                    <div class="uk-width-1-2@s">
-                                                        <div uk-form-custom>
-                                                            <input type="file" accept="image/*" aria-label="Custom controls" name="imagen1">
-                                                            <button class="uk-button uk-button-default" type="button" tabindex="-1">Selecciona Imagen</button>
-                                                        </div>
-                                                    </div>
-                                                    <input type="submit" id="subirxd" style="display:none">
-                                                </form>
-                                            </div>
-                                            <div class="uk-modal-footer uk-text-right">
-                                                <button class="uk-button uk-button-default uk-modal-close cancelar" type="button">Cancelar</button>
-                                                <label class="uk-button uk-button-secondary subir" type="submit" for="subirxd">Guardar</label>
-                                            </div>
-                                        </div>
-                                    </div>
-`;
-let controllerModal = document.querySelector(".controller-modal");
-//seleccionamos el btn que abre el modal
-let btnAgg = document.querySelector(".btn-modal-register");
-
-btnAgg.addEventListener("click", () => {
-  //esto es para que se cree solo una vez, ya que el body tiene 10 elementos por defecto
-  // console.log(controllerModal.childElementCount);
-
-  btnAgg.setAttribute("uk-toggle", "");
-  $("#container-modals").html(templateRegisterProduct);
-  UIkit.modal("#modal-register-product").show();
-  //   //ejecutamos esta peticion para traer las categorias de los productos a los select
   $.ajax({
     url: "Controller/funcs_ajax/search.php",
     type: "POST",
@@ -641,7 +440,6 @@ btnAgg.addEventListener("click", () => {
     type: "POST",
     data: { randomnautica: "unidades" },
     success: function (response) {
-      console.log(response);
       let options = ``;
       let json = JSON.parse(response);
       json.lista.forEach((date) => {
@@ -690,27 +488,6 @@ btnAgg.addEventListener("click", () => {
     e.preventDefault();
   });
 
-  let close = document.querySelector(".close");
-  let cancelar = document.querySelector(".cancelar");
-
-  cancelar.addEventListener("click", () => {
-    UIkit.modal("#modal-register-product").hide();
-    let modal = cancelar.parentElement.parentElement.parentElement;
-    setTimeout(() => {
-      controllerModal.removeChild(modal);
-      btnAgg.removeAttribute("uk-toggle");
-    }, 300);
-  });
-
-  close.addEventListener("click", () => {
-    UIkit.modal("#modal-register-product").hide();
-    let modal = close.parentElement.parentElement;
-    setTimeout(() => {
-      controllerModal.removeChild(modal);
-      btnAgg.removeAttribute("uk-toggle");
-    }, 300);
-  });
-});
 
 // aqui insertaremos los proveedores, categoria y marcas para los filtros de los productos
 
@@ -742,6 +519,7 @@ $.ajax({
     document.querySelector(".filter_category").innerHTML += options;
   },
 });
+//esta consulta sirve para cargar los datos de las marcas en el filtro
 $.ajax({
   url: "Controller/funcs_ajax/search.php",
   type: "POST",
@@ -755,15 +533,20 @@ $.ajax({
     document.querySelector(".filter_marca").innerHTML += options;
   },
 });
-
+//esta funcion tiene el objetivo de mostrar los productos por nombre
 document.querySelector(".searchProduct").addEventListener("keyup", (e) => {
   let val = e.target.value;
-  $.ajax({
+  if (val != "") {
+    $.ajax({
     url: "Controller/funcs_ajax/search.php",
     type: "POST",
     data: { randomnautica: "productos", like: val },
     success: function (response) {
-      tarjetas(response)
+      console.log(response);
+      tarjetas(response);
     },
   });
+  } else {
+    cargarTargetProduct()
+  }
 });

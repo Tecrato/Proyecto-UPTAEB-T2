@@ -18,7 +18,7 @@ function cambiar_pagina_php(dir,type,limit=9) {
   limit = limit ? limit : 9
   window.location.href = 'Controller/funcs/cambiar_pagina.php?dir='+dir + '&p='+page + '&type='+type + '&n_p='+limit
 }
-//funcion para colocar la marca de agua en el fondo de los modulos
+// funcion para colocar la marca de agua en el fondo de los modulos
 const marcaAgua = () => {
   //esto hace que el fondo de pantalla y altura se modifiquen si hay tarjetas en los modulos
   let containerMarca_agua = document.querySelector(".container_marca_agua");
@@ -28,13 +28,17 @@ const marcaAgua = () => {
   let pagination = document.querySelector(".uk-pagination");
 
   if (containerHeight == 0) {
-    containerBody.style.height = `115vh`;
+    // containerMarca_agua.parentElement.classList.add('uk-flex-center')
+    // containerBody.style.height = `115vh`;
+    containerMarca_agua.classList.remove('invisible')
     pagination.classList.add("invisible");
   } else {
+    // containerMarca_agua.parentElement.classList.remove('uk-flex-center')
     pagination.classList.remove("invisible");
     containerMarca_agua.classList.add("invisible");
   }
 };
+marcaAgua()
 
 // funcion para cambiar el color de las vistas
 const btnModeColorView = document.querySelector(".btn-ModeColorView");
@@ -62,14 +66,16 @@ const ColorViewLight = () => {
       document.querySelectorAll(".img3ProductSwitcher").forEach((img) => {
         img.src = "./static/images/cajas (2) newColor.png";
       });
-      if (
-        document.querySelector(".item_profile-target") ||
-        document.querySelector(".item_profile-target-2")
-      ) {
-        document.querySelector(".item_profile-target").style.backgroundColor =
-          "#fff";
-        document.querySelector(".item_profile-target-2").style.backgroundColor =
-          "#fff";
+      if (document.querySelector(".target-detail-fact") || document.querySelector(".cont1_tar_fact")) {
+        document.querySelector(".target-detail-fact").style.backgroundColor = "#fff"
+        document.querySelector(".cont1_tar_fact").style.backgroundColor = "#fff"
+      }
+      
+      document.querySelector(".marca_agua").src = "./static/images/logo_letras-minimarket_color2.png"
+      
+      if ( document.querySelector(".item_profile-target") || document.querySelector(".item_profile-target-2")) {
+        document.querySelector(".item_profile-target").style.backgroundColor = "#fff"; 
+        document.querySelector(".item_profile-target-2").style.backgroundColor = "#fff";  
       }
 
       document.querySelector(".formSearchHeader").classList.add("uk-light");
@@ -105,18 +111,17 @@ const ColorViewDark = () => {
       document.querySelectorAll(".img3ProductSwitcher").forEach((img) => {
         img.src = "./static/images/cajas (2).png";
       });
-      if (
-        document.querySelector(".item_profile-target") ||
-        document.querySelector(".item_profile-target-2")
-      ) {
-        document.querySelector(".item_profile-target").style.backgroundColor =
-          "rgb(62, 62, 62)";
-        document.querySelector(".item_profile-target-2").style.backgroundColor =
-          "rgb(62, 62, 62)";
+
+      if (document.querySelector(".target-detail-fact") || document.querySelector(".cont1_tar_fact")) {
+        document.querySelector(".target-detail-fact").style.backgroundColor = "#333"
+        document.querySelector(".cont1_tar_fact").style.backgroundColor = "#333"
       }
 
-      // document.querySelector(".formSearchHeader").classList.add("uk-light")
-      // document.querySelector(".iconNotification").classList.add("uk-light")
+      document.querySelector(".marca_agua").src = "./static/images/logo_letras-minimarket.png"
+      if (document.querySelector(".item_profile-target") || document.querySelector(".item_profile-target-2")){
+        document.querySelector(".item_profile-target").style.backgroundColor = "rgb(62, 62, 62)";
+        document.querySelector(".item_profile-target-2").style.backgroundColor = "rgb(62, 62, 62)";
+      }
     });
   });
   let iconSun = `<img class="iconSun" src="static/images/sun-solid.svg" alt="" width="23px">`;
