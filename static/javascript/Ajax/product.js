@@ -276,7 +276,6 @@ const cargarTargetProduct = () => {
               contentType: false,
               success: function (response) {
                 //en la respuesta le mostramos un mensaje de producto creado correctamente
-                console.log(response);
                 UIkit.notification({
                   message:
                     "<span uk-icon='icon: check'></span> Lote agregado correctamente ",
@@ -625,7 +624,7 @@ btnAgg.addEventListener("click", () => {
   $.ajax({
     url: "Controller/funcs_ajax/search.php",
     type: "POST",
-    data: { randomnautica: "categorias" },
+    data: {randomnautica: "categorias"},
     success: function (response) {
       let options = ``;
       let json = JSON.parse(response);
@@ -639,9 +638,8 @@ btnAgg.addEventListener("click", () => {
   $.ajax({
     url: "Controller/funcs_ajax/search.php",
     type: "POST",
-    data: { randomnautica: "unidades" },
+    data: {randomnautica: "unidades"},
     success: function (response) {
-      console.log(response);
       let options = ``;
       let json = JSON.parse(response);
       json.lista.forEach((date) => {

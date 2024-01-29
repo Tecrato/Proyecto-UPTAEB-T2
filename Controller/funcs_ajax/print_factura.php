@@ -4,7 +4,7 @@ require('./../Model/Facturas.php');
 
 // WTF amigo
 
-$clase = new Factura(isset($_GET['d']) ? $_GET['d'] : 1);
+$clase = new Factura(isset($_GET['d']) ? $_GET['d'] : 8);
 
 $result = $clase->search_detailsFact();
 

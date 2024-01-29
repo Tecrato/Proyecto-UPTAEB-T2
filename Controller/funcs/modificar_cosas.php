@@ -1,5 +1,6 @@
 <?php
     // Con este codigo se realiza el UPDATE en la base de datos
+    include("./verificar_admin_funcs.php");
     require 'subir_imagen.php';
     require('../../Model/Conexion.php');
     $tipo = $_POST['tipo']; // Depende de que es lo que queramos actualizar

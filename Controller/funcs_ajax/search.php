@@ -2,6 +2,7 @@
     // Con este archivo se buscan datos de ciertas maneras, dependiendo de lo que pase como "randomnautica"
     
     require('../../Model/Conexion.php');
+    include("../funcs/verificar.php");
 
     if (isset($_POST['limite'])) {
         $limite = $_POST['limite'];
@@ -32,6 +33,7 @@
             id_proveedor: isset($_POST['id_proveedor']) ? $_POST['id_proveedor']: null);
     }
     elseif ($_POST['randomnautica'] == "proveedores") {
+        include("../funcs/verificar_admin.php");
         require('../../Model/Proveedores.php');
         $clase = new Proveedor();
     }
