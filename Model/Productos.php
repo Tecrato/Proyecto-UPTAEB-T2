@@ -182,6 +182,36 @@
             return $query->fetchAll();
         }
 
+        function search_RecienAgregado() {
+            $query = $this->conn->prepare("SELECT * FROM productos
+            WHERE active = 1
+            ORDER BY id DESC
+            LIMIT 10;");
+            $query->execute();
+            return $query->fetchAll();
+            
+        }
+        function search_MasVendidos() {
+            $query = $this->conn->prepare("SELECT p.nombre, SUM(f.cantidad) as total_vendido
+            FROM factura f
+            JOIN productos p ON f.id_productos = p.id
+            GROUP BY f.id_productos
+            ORDER BY total_vendido DESC;");
+            $query->execute();
+            return $query->fetchAll();
+            
+        }
+        function search_MenosVendidos() {
+            $query = $this->conn->prepare("SELECT p.nombre, SUM(f.cantidad) as total_vendido
+            FROM factura f
+            JOIN productos p ON f.id_productos = p.id
+            GROUP BY f.id_productos
+            ORDER BY total_vendido ASC;");
+            $query->execute();
+            return $query->fetchAll();
+            
+        }
+
         function COUNT(){
             
             return $this->conn->query("SELECT COUNT(*) as 'total' FROM productos")->fetch()['total'];

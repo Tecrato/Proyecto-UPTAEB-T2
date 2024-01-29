@@ -13,7 +13,20 @@
                     <h2>Stats</h2>
                     <p>Bienvenido, estos son los niveles actuales de productos</p>
                 </article>
-                <hr class="uk-divide">
+                    <?php for ($i=0; $i < count($categoria); $i++){ 
+                        $row = $categoria[$i];
+
+                        echo '<hr class="uk-divide">
+                        <section class="uk-flex uk-flex-center uk-flex-wrap section-home uk-margin-medium-top uk-margin-medium-bottom">
+                            <article class="uk-flex uk-flex-center Container-stats">
+                                <span class="uk-margin-medium-right" uk-icon="icon: check; ratio: 3.5"></span>
+                                <div>
+                                    <h3>'.$row['nombre'].'</h3>
+                                    <p>'.$row['maximo_stock'].'</p>
+                                </div>
+                            </article>';
+                    }?>
+                <!-- <hr class="uk-divide">
                 <section class="uk-flex uk-flex-center uk-flex-wrap section-home uk-margin-medium-top uk-margin-medium-bottom">
                     <article class="uk-flex uk-flex-center Container-stats">
                         <span class="uk-margin-medium-right" uk-icon="icon: check; ratio: 3.5"></span>
@@ -42,11 +55,11 @@
                             <h3>150</h3>
                             <p></p>
                         </div>
-                    </article>
+                    </article> -->
                 </section>
                 <hr class="uk-divide">
                 <div class="uk-flex uk-flex-center ">
-                    <a class="uk-button uk-button-default uk-margin-small-top" href="#">Ver más</a>
+                    <a class="uk-button uk-button-default uk-margin-small-top" href="/Proyecto-UPTAEB-T2/Productos">Ver más</a>
                 </div>
             </div>
         </div>
@@ -64,28 +77,28 @@
                         <thead>
                             <tr>
                                 <th>
-                                    <p class="uk-text-bold uk-margin-remove">IMG</p>
+                                    <p class="uk-text-bold uk-margin-remove">Imagen</p>
                                 </th>
                                 <th>
                                     <p class="uk-text-bold uk-margin-remove">NOMBRE</p>
                                 </th>
                                 <th>
-                                    <p class="uk-text-bold uk-margin-remove">PROVEEDOR</p>
+                                    <p class="uk-text-bold uk-margin-remove">Precio</p>
                                 </th>
-                                <th>
-                                    <p class="uk-text-bold uk-margin-remove">FECHA</p>
-                                </th>
+
                             </tr>
                         </thead>
                         <tbody>
-                            <?php for ($i = 0; $i < 5; $i++) {  ?>
+                            <?php for ($i=0; $i < count($result); $i++) { 
+                                    $row = $result[$i]; 
+                                    echo '
                                 <tr>
                                     <td><img class="uk-preserve-width uk-border-circle" src="./static/images/logo_m.png" width="48" height="48" alt=""></td>
-                                    <td>Table Data</td>
-                                    <td>Table Data</td>
-                                    <td>Table Data</td>
-                                </tr>
-                            <?php } ?>
+                                    <td>'.$row['nombre'].'</td>
+                                    <td>'.$row['precio_venta'].'</td>
+
+                                </tr>';
+                             } ?>
                         </tbody>
 
                     </table>
@@ -99,17 +112,20 @@
                     <h3 class="uk-text-center uk-text-bold">PRODUCTOS MAS VENDIDOS</h3>
                     <hr class="uk-margin-remove">
                 </div>
-                <?php for ($i = 0; $i < 3; $i++) {  ?>
+                <?php  for ($i=0; $i < count($MasV); $i++)  {  
+                        $row = $MasV[$i];
+                    echo '
                     <section class="uk-flex uk-flex-around uk-margin-medium-top">
-                        <article>
-                            <h3 class="uk-text-bolder" style="font-size: 33px;">1.</h3>
-                        </article>
+
                         <article>
                             <img class="uk-preserve-width uk-border-circle" src="./static/images/logo_m.png" width="60" height="60" alt="">
-                            <span class="uk-text-lead uk-text-bold uk-margin-left">HARINA PAN</span>
+                            <span class="uk-text-lead uk-text-bold uk-margin-left">'.$row['nombre'].'</span>
                         </article>
-                    </section>
-                <?php } ?>
+                        <article>
+                            <h3 class="uk-text-bolder" style="font-size: 33px;">'.$row['total_vendido'].'</h3>
+                        </article>
+                    </section>';
+                } ?>
             </div>
         </div>
 
@@ -119,25 +135,27 @@
                     <h3 class="uk-text-center uk-text-bold">PRODUCTOS MENOS VENDIDOS</h3>
                     <hr class="uk-margin-remove">
                 </div>
-                <?php for ($i = 0; $i < 3; $i++) {  ?>
+                <?php  for ($i=0; $i < count($MenosV); $i++){ 
+                    $row = $MenosV[$i];
+                    echo'
                     <section class="uk-flex uk-flex-around uk-margin-medium-top">
-                        <article>
-                            <h3 class="uk-text-bolder" style="font-size: 33px;">1.</h3>
-                        </article>
+
                         <article>
                             <img class="uk-preserve-width uk-border-circle" src="./static/images/logo_m.png" width="60" height="60" alt="">
-                            <span class="uk-text-lead uk-text-bold uk-margin-left">HARINA PAN</span>
+                            <span class="uk-text-lead uk-text-bold uk-margin-left">'.$row['nombre'].'</span>
+                        </article>
+                        <article>
+                            <h3 class="uk-text-bolder" style="font-size: 33px;">'.$row['total_vendido'].'</h3>
                         </article>
                     </section>
-                <?php } ?>
+                ';} ?>
             </div>
         </div>
     </div>
 </main>
 
 <script src="static/javaScript/librerias/jquery.js"></script>
-<script src="static/javaScript/ChangeColor.js"></script>
-
+<script src="static/javascript/FuncionesGenerales.js"></script>
 
 </body>
 </html>
