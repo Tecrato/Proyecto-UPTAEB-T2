@@ -6,9 +6,6 @@
     $tipo = $_POST['tipo']; // Depende de que es lo que queramos actualizar
 
     if ($tipo === 'producto'){
-        require('../../Model/Productos.php');
-        $clase = new Producto($_POST['ID'],$_POST["categoria"],$_POST["unidad"],$_POST["nombre"],$_POST["marca"],$nick,$_POST["stock_min"],$_POST["stock_max"],$_POST["precio_venta"],$_POST["IVA"]); // Llama al modelo y le manda la instruccion
-
         if ($_FILES['imagen1']['name'] != "") {
             $imagen = $_FILES['imagen1'];
             $nick = "producto_".$_POST['nombre'] . "_" . $imagen['name'];
@@ -17,6 +14,10 @@
             $imagen = null;
             $nick = null;
         }
+        
+        require('../../Model/Productos.php');
+        $clase = new Producto($_POST['ID'],$_POST["categoria"],$_POST["unidad"],$_POST["nombre"],$_POST["marca"],$nick,$_POST["stock_min"],$_POST["stock_max"],$_POST["precio_venta"],$_POST["IVA"]); // Llama al modelo y le manda la instruccion
+
         try {
             $clase->actualizar();
         } catch (Exception $e) {
