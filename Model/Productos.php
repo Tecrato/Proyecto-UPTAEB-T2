@@ -15,6 +15,39 @@
         function __construct(
             $id=null, $categoria=null,$unidades=null,$nombre=null,$marca=null,$imagen=null,$stock_min=null,
             $stock_max=null,$precio_venta=null,$IVA=null,$like=''){
+            if($this->id and !preg_match("/^[0-9]+$/", $this->id)){
+                throw  'El id esta mal';
+            }
+            if($this->categoria and !preg_match("/^[0-9]+$/", $this->categoria)){
+                throw  'La categoria esta mal';
+            }
+            if($this->unidades and !preg_match("/^[0-9]+$/", $this->unidades)){
+                throw  'La unidad esta mal';
+            }
+            if($this->nombre and !preg_match("/^[a-z][a-z0-9]{2,20}$/", $this->nombre)){
+                throw  'El nombre esta mal';
+            }
+            if($this->marca and !preg_match("/^[0-9]+$/", $this->marca)){
+                throw  'La marca esta mal';
+            }
+            if($this->imagen and !preg_match("/^[0-9a-z]{2,}$/", $this->imagen)){
+                throw  'La imagen esta mal';
+            }
+            if($this->stock_min and !preg_match("/^[0-9]+$/", $this->stock_min)){
+                throw  'El stock_min esta mal';
+            }
+            if($this->stock_max and !preg_match("/^[0-9]+$/", $this->stock_max)){
+                throw  'El stock_max esta mal';
+            }
+            if($this->precio_venta and !preg_match("/^[0-9]+$/", $this->precio_venta)){
+                throw  'El precio_venta esta mal';
+            }
+            if($this->IVA and !preg_match("/^[0-1]$/", $this->IVA)){
+                throw  'El IVA esta mal';
+            }
+            if($this->like and !preg_match("/^[a-z]+[a-z0-9]{2,20}+$/", $this->like)){
+                throw  'El like esta mal';
+            }
             $this->id = $id;
             $this->categoria = $categoria;
             $this->unidades = $unidades;

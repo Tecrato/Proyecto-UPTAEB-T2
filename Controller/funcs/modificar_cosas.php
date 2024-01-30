@@ -14,7 +14,7 @@
             $imagen = null;
             $nick = null;
         }
-        
+
         require('../../Model/Productos.php');
         $clase = new Producto($_POST['ID'],$_POST["categoria"],$_POST["unidad"],$_POST["nombre"],$_POST["marca"],$nick,$_POST["stock_min"],$_POST["stock_max"],$_POST["precio_venta"],$_POST["IVA"]); // Llama al modelo y le manda la instruccion
 
@@ -35,7 +35,7 @@
                 header('Location:../../Productos?error='.$img_err);
             }
         }
-        header('Location:../../Productos');
+        // header('Location:../../Productos');
     }
     elseif ($tipo === 'proveedor'){
         require('../../Model/Proveedores.php');
