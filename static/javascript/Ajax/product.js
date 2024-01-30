@@ -88,7 +88,7 @@ const modalDetalles = () => {
                                                 <div class="uk-flex uk-flex-middle uk-margin-small-right">
                                                     <h6 class="uk-margin-remove uk-text-bolder textTag_detail-Product uk-text-uppercase"
                                                         style="color: #fff; padding: 2px;">
-                                                        LOTE Nro ${dat.id}</h6>
+                                                        ENTRADA Nro ${dat.id}</h6>
                                                 </div>
                                             </article>
                                             <article class="tag_modal-detailProduct-2">
@@ -364,7 +364,7 @@ const cargarTargetProduct = () => {
     data: {
       randomnautica: "productos",
       n: page, // Aca va el numero de la pagina actual
-      limite: 9, // Aca va el numero maximo de tarjetas que se pueden imprimir
+      limite: 18, // Aca va el numero maximo de tarjetas que se pueden imprimir
       like: "",
     },
     success: function (response) {
