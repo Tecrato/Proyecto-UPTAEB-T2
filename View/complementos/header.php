@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="static/css/uikit.css">
+    <link rel="stylesheet" href="static/css/para el ui.css">
     <link rel="stylesheet" href="static/css/Style.css">
     <link rel="stylesheet" href="static/css/dataTables.css">
     <script src="static/javaScript/librerias/uikit.js"></script>
@@ -90,9 +91,15 @@ echo "
                                         <ul class="uk-nav uk-dropdown-nav ">
                                             <li class="uk-active uk-flex uk-flex-middle uk-flex-between">
                                                 <a href="#"><?php echo $_SESSION['user_name']; ?></a>
-                                                <div class="uk-overflow-hidden btn-ModeColorView">
-                                                    <img class="iconMoon" src="static/images/moon-solid.svg" alt="" width="18px">
-                                                </div>
+                                                <label class="switch-button" for="switch">
+                                                    <div class="switch-outer">
+                                                        <input id="switch" type="checkbox">
+                                                        <div class="button">
+                                                        <span class="button-toggle"></span>
+                                                        <span class="button-indicator"></span>
+                                                        </div>
+                                                    </div>
+                                                </label>
                                             </li>
                                             <li>
                                                 <a class="uk-padding-remove-vertical" href="Administrar_perfil">
