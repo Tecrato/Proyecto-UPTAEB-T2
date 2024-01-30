@@ -46,14 +46,14 @@
         }
 
         function borrar() {
-            if ($this->id_registro) {
+            if ($this->id_registro_ventas) {
                 $query = $this->conn->prepare("DELETE FROM entradas WHERE id_registro_ventas=:id_registro");
                 $query->bindParam(':id_registro', $this->id_registro_ventas);
+                $query->execute();
             } else {
                 throw new Exception("Error, debe pasar el id del registro asociado", 1);
             }
 
-            $query->execute($query);
         }
 
         function search_detailsFact()

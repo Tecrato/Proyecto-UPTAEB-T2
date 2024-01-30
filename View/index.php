@@ -155,7 +155,7 @@
 </main>
 
 <script src="static/javaScript/librerias/jquery.js"></script>
-<script src="static/javascript/FuncionesGenerales.js"></script>
+<script src="static/javascript/ChangeColor.js"></script>
 
 </body>
 </html>

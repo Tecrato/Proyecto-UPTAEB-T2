@@ -18,7 +18,7 @@
     $MasV = $MasV->search_MasVendidos();
 
     $MenosV = new Producto;
-    $MenosV = $MenosV->search_MasVendidos();
+    $MenosV = $MenosV->search_MenosVendidos();
     include('../View/index.php');
 
 

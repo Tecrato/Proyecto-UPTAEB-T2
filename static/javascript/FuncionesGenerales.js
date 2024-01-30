@@ -38,7 +38,7 @@ const marcaAgua = () => {
     containerMarca_agua.classList.add("invisible");
   }
 };
-marcaAgua()
+// marcaAgua()
 
 // funcion para cambiar el color de las vistas
 const btnModeColorView = document.querySelector(".btn-ModeColorView");
@@ -207,4 +207,4 @@ async function asyncfunc(){
   })
 }
 
-asyncfunc()
+// asyncfunc()

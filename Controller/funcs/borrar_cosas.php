@@ -1,6 +1,6 @@
 <?php
     require('../../Model/Conexion.php');
-    include("./verificar_admin_funcs.php");
+    // require("./verificar_admin_funcs.php");
     $tipo = $_POST['tipo']; // Depende de que es lo que queramos borrar
 
     
@@ -10,14 +10,16 @@
         require('../../Model/Proveedores.php');
         $clase = new Producto($_POST['ID']); // Llama al modelo y le manda la instruccion
         $clase_l = new Entrada(id_producto:$_POST['ID']); // Llama al modelo y le manda la instruccion
-        $imagen = $clase->search($_POST['ID'])[0]['imagen'];
+        $imagen = $clase->search()[0]['imagen'];
         print_r($imagen);
+        print_r($_POST);
         if ($imagen != "banner_productos.png"){
+            print_r(realpath("../../Media/imagenes/".$imagen));
             unlink("../../Media/imagenes/".$imagen);
         }
         $clase_l->borrar_logicamente();
-        $clase->borrar();
-        header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
+        $clase->borrar_logicamente();
+        // header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }
     elseif ($tipo == 'proveedor'){
         require('../../Model/Proveedores.php');
@@ -27,14 +29,14 @@
         $clase2->borrar_logicamente();
         
         $clase = new Proveedor($_POST['ID']); // Llama al modelo y le manda la instruccion
-        $clase->borrar();
+        $clase->borrar_logicamente();
 
         header('Location:../../Proveedores'); // Y vuelve a la pagina donde estaba antes
     }
     elseif ($tipo == 'cliente'){
         require('../../Model/Clientes.php');
         $clase = new Cliente($_POST['ID']); // Llama al modelo y le manda la instruccion
-        $clase->borrar();
+        $clase->borrar_logicamente();
 
         header('Location:../../Clientes'); // Y vuelve a la pagina donde estaba antes
     }

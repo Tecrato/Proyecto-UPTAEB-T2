@@ -14,6 +14,27 @@
 	// </form>
 
 	// ";
+	$consulta = $this->conn->prepare("SELECT 
+	a.id, 
+	b.nombre categoria,
+	c.nombre unidad,
+	a.nombre,
+	a.marca,
+	a.imagen,
+	(SELECT SUM(entradas.existencia) FROM entradas Where id_producto = a.id) as stock,
+	a.stock_min,
+	a.stock_max,
+	a.precio_venta,
+	a.IVA
+	FROM productos a 
+	INNER JOIN categoria b ON b.id = a.id_categoria 
+	INNER JOIN unidades c ON c.id = a.id_unidad
+	WHERE a.nombre LIKE :como AND
+	active = 1 
+	");
+
+	$this->like = '%'.$this->like.'%';
+    $consulta->bindParam(':como',$this->like, PDO::PARAM_STR);
 	
 	
 	// $c = new Usuario();

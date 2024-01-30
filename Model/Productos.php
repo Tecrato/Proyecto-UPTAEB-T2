@@ -10,8 +10,11 @@
         private $stock_max;
         private $precio_venta;
         private $IVA;
+        private $like;
 
-        function __construct($id=null, $categoria=null,$unidades=null,$nombre=null,$marca=null,$imagen=null,$stock_min=null,$stock_max=null,$precio_venta=null,$IVA=null){
+        function __construct(
+            $id=null, $categoria=null,$unidades=null,$nombre=null,$marca=null,$imagen=null,$stock_min=null,
+            $stock_max=null,$precio_venta=null,$IVA=null,$like=''){
             $this->id = $id;
             $this->categoria = $categoria;
             $this->unidades = $unidades;
@@ -22,13 +25,14 @@
             $this->stock_max = $stock_max;
             $this->precio_venta = $precio_venta;
             $this->IVA = $IVA;
+            $this->like = $like;
             DB::__construct();
 
         }
         // esta funcion agrega a la tabla productos un objeto con los valores que se le estan pasando
         function agregar(){
             
-            $query = $this->conn->prepare("INSERT INTO productos VALUES(null, :categoria, :unidades, :nombre, :marca, :imagen, :stock_min, :stock_max, :precio_venta, :IVA)");
+            $query = $this->conn->prepare("INSERT INTO productos VALUES(null, :categoria, :unidades, :nombre, :marca, :imagen, :stock_min, :stock_max, :precio_venta, :IVA, 1)");
 
             $query->bindParam(':categoria',$this->categoria);
             $query->bindParam(':unidades',$this->unidades);
@@ -46,13 +50,11 @@
 
 
         // con esta funcion se elimina un elemento dependiendo de su id
-        function borrar() {
+        function borrar_logicamente() {
+			$query = $this->conn->prepare('UPDATE productos SET active=0 WHERE id=:id');
 
-            $query = $this->conn->prepare("DELETE FROM productos WHERE ID=:id");
-                
-            $query->bindParam(':id',$this->id);
-
-            $query->execute();
+			$query->bindParam(':id',$this->id);
+			$query->execute();
         }
 
         // Con esta funcion podremos cambiar un producto segun su ID con los valores que le pasemos
@@ -99,7 +101,9 @@
                     a.IVA
                     FROM productos a 
                     INNER JOIN categoria b ON b.id = a.id_categoria 
-                    INNER JOIN unidades c ON c.id = a.id_unidad";
+                    INNER JOIN unidades c ON c.id = a.id_unidad
+                    WHERE a.nombre LIKE :como AND
+                    active=1 ";
 
                     
 			$lista = [];
@@ -111,15 +115,8 @@
                 array_push($lista, 'marca');
             }
             if ($lista) {
-            	$query .= ' WHERE';
-            	$and = false;
             	foreach ($lista as $e){
-            		if (!$and) {
-            			$and = true;
-            		} else {
-            			$query .= ' AND';
-            		}
-            		$query .= ' '.$e.'=:'.$e;
+            		$query .= ' AND a.'.$e.'=:'.$e;
             	}
             }
 
@@ -137,9 +134,12 @@
             if ($this->id){
                 $consulta->bindParam(':id',$this->id, PDO::PARAM_INT);
             }
+            $this->like = '%'.$this->like.'%';
+            $consulta->bindParam(':como',$this->like, PDO::PARAM_STR);
 			if ($this->marca) {
                 $consulta->bindParam(':marca',$this->marca, PDO::PARAM_INT);
 			}
+
             $consulta->execute();
             return $consulta->fetchAll();
         }
@@ -152,7 +152,7 @@
         }
 
         function search_like(String $nombre){
-            $query = $this->conn->prepare("SELECT * FROM productos WHERE nombre LIKE '%$nombre%'");
+            $query = $this->conn->prepare("SELECT * FROM productos WHERE active=1 and nombre LIKE '%$nombre%'");
             // $query->bindParam(':aaa',$nombre);
             $query->execute();
             return $query->fetchAll();

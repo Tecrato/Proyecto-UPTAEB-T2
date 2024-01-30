@@ -25,7 +25,7 @@
         // esta funcion agrega a la tabla productos un objeto con los valores que se le estan pasando
         function agregar() {
             
-            $query = $this->conn->prepare("INSERT INTO proveedores VALUES(null, :nombre, :razon, :rif, :tel, :correo, :dir)");
+            $query = $this->conn->prepare("INSERT INTO proveedores VALUES(null, :nombre, :razon, :rif, :tel, :correo, :dir,1)");
 
             $query->bindParam(':nombre',$this->nombre);
             $query->bindParam(':razon',$this->razon_social);
@@ -37,11 +37,11 @@
         }
 
         // con esta funcion se elimina un elemento dependiendo de su id
-        function borrar() {
+        function borrar_logicamente() {
+			$query = $this->conn->prepare('UPDATE proveedores SET active=0 WHERE id=:id');
 
-            $query = $this->conn->prepare("DELETE FROM proveedores WHERE ID=:id");
-            
-            $query->execute([':id'=>$this->id]);
+			$query->bindParam(':id',$this->id);
+			$query->execute();
         }
 
         // Con esta funcion podremos cambiar un producto segun su ID con los valores que le pasemos
@@ -61,10 +61,10 @@
 
         // Con esta otra funcion se busca entre los productos en la base de datos
         function search($n=0,$limite=9){
-            $query = "SELECT * FROM proveedores";
+            $query = "SELECT * FROM proveedores WHERE active=1";
 
             if ($this->id != null){
-                $query = $query." WHERE id=:id";
+                $query = $query." AND id=:id";
             }
             $n = $n*$limite;
 

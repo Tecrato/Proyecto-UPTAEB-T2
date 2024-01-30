@@ -20,7 +20,7 @@
         }
 
 		function agregar(){
-			$query = $this->conn->prepare("INSERT INTO entradas VALUES(null, :id1, :id2, :cantidad, :fecha_c, :fecha_v, :precio_compra, :cantidad)");
+			$query = $this->conn->prepare("INSERT INTO entradas VALUES(null, :id1, :id2, :cantidad, :fecha_c, :fecha_v, :precio_compra, :cantidad, 1)");
 
 			$query->bindParam(':id1',$this->id_producto);
 			$query->bindParam(':id2',$this->id_proveedor);

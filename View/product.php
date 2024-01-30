@@ -94,7 +94,6 @@
                     </div>
                 </section>
                 <div id="container-modals">
-                    <!-- aqui se cargan los modales dinamicamente con js -->
 
                     <!-- *********************************modal de registro de productos********************************* -->
 
@@ -102,41 +101,41 @@
                         <div class="uk-modal-dialog">
                             <button class="uk-modal-close-default close" type="button" uk-close></button>
                             <div class="uk-modal-header">
-                                <h2 class="uk-modal-title">REGISTRAR PRODUCTO</h2>
+                                <h2 class="uk-modal-title title_modal_reg_upd">REGISTRAR PRODUCTO</h2>
                             </div>
                             <div class="uk-modal-body ">
                                 <form id="formAggProduct" class="uk-grid-small" uk-grid method="POST" action="" enctype="multipart/form-data">
+                                    <input class="ValueInpUpdate" type="number" name="ID" style="display:none">
                                     <input type="text" name="tipo" value='producto' id="" style="display:none">
                                     <div class="uk-width-1-2">
-                                        <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" required>
+                                        <input class="NameUpdateProduct uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" required>
                                     </div>
                                     <div class="uk-width-1-2@s">
-                                        <input class="uk-input" type="text" placeholder="Descripción" aria-label="50" name="descripcion">
+                                        <input class="MarcaUpdateProduct uk-input" type="text" placeholder="Marca" aria-label="50" name="marca">
                                     </div>
                                     <div class="uk-width-1-2@s">
                                         <select id="selectCat" class="uk-select" id="form-stacked-select" name="categoria" required>
-                                            <option value="" disabled selected>Categoria</option>
+                                            
                                         </select>
                                     </div>
                                     <div class="uk-width-1-2@s">
                                         <select id="selectUni" class="uk-select" id="form-stacked-select" name="unidad" required>
-                                            <option value="" disabled selected>Unidad</option>
-
+                                            
                                         </select>
                                     </div>
                                     <div class="uk-width-1-2@s">
-                                        <input class="uk-input" type="number" step="0.1" placeholder="precio_venta" aria-label="25" name="precio_venta" required>
+                                        <input class="PVUpdateProduct uk-input" type="number" step="0.1" placeholder="precio_venta" aria-label="25" name="precio_venta" required>
                                     </div>
                                     <div class="uk-width-1-2@s">
-                                        <input class="uk-input" type="number" placeholder="Stock mínimo" aria-label="25" name="stock_min" required>
+                                        <input class="SMMUpdateProduct uk-input" type="number" placeholder="Stock mínimo" aria-label="25" name="stock_min" required>
                                     </div>
                                     <div class="uk-width-1-2@s">
-                                        <input class="uk-input" type="number" placeholder="Stock maximo" aria-label="25" name="stock_max" required>
+                                        <input class="SMXUpdateProduct uk-input" type="number" placeholder="Stock maximo" aria-label="25" name="stock_max" required>
                                     </div>
                                     <div class="uk-width-1-2@s">
                                         <label class="uk-margin-medium-right" for="">IVA</label>
-                                        <label><input class="uk-radio" type="radio" name="IVA" value=0 checked> Exento</label>
-                                        <label><input class="uk-radio" type="radio" name="IVA" value=1> No Exento</label>
+                                        <label><input class="IVA_EUpdateProduct uk-radio" type="radio" name="IVA" value=0 checked> Exento</label>
+                                        <label><input class="IVA_NEUpdateProduct uk-radio" type="radio" name="IVA" value=1> No Exento</label>
                                     </div>
                                     <div class="uk-width-1-2@s">
                                         <div uk-form-custom>
@@ -178,7 +177,7 @@
                     </div>
 
                     <!-- *********************************modal de entradas productos********************************* -->
-                    
+
                     <div id="product-entry" uk-modal bg-close='false'>
                         <div class="uk-modal-dialog">
                             <button class="uk-modal-close-default close" type="button" uk-close></button>
@@ -218,35 +217,104 @@
                         </div>
                     </div>
 
+
+                    <!-- *********************************modal de detalles productos********************************* -->
+
+
+                    <div id="modal-details-product" class="uk-flex-top" uk-modal  bg-close='false'>
+                        <div class="uk-modal-dialog uk-modal-body uk-border-rounded uk-margin-auto-vertical container-modal-detailProduct">
+                            <button class="uk-modal-close-default close" type="button" uk-close></button>
+                            <div>
+
+                                <div class="uk-flex uk-flex-center uk-flex-wrap  container-detailProduct">
+                                    <div class="uk-margin-small-right margin-img-detailPoduct">
+                                        <img class="productDetailIMG" src="" alt="" width="155px" style="height: 195px; object-fit: cover;">
+                                    </div>
+                                    <div class="container-stats-productDetail">
+                                        <div class="uk-flex uk-flex-middle" style="height: 45px;">
+                                            <div class="uk-flex uk-flex-middle uk-margin-small-right">
+                                                <span class="uk-margin-small-right Color-icon-detailProduct" uk-icon="icon: tag; ratio: 1.2"></span>
+                                                <h5 class="uk-margin-remove uk-text-bolder">NOMBRE</h5>
+                                            </div>
+                                            <div>
+                                                <h5 class="productDetailName uk-margin-remove uk-text-emphasis Color-icon-detailProduct uk-text-bold uk-text-uppercase">
+                                                    ${item.nombre}</h5>
+                                            </div>
+                                        </div>
+                                        <div class="uk-flex">
+                                            <div>
+                                                <span class="uk-margin-small-right Color-icon-detailProduct" uk-icon="icon: tag; ratio: 1.2" style="float: left;"></span>
+                                                <h5 class="uk-margin-small-right uk-margin-remove-top uk-margin-remove-left uk-margin-remove-bottom uk-text-bolder" style="float: left;">MARCA</h5>
+                                                <h5 class="productDetailmarca Description-item-productDetail uk-margin-remove Color-icon-detailProduct uk-text-bold uk-text-uppercase" style="width: 360px; line-height: 23px;">
+                                                    ${item.marca}
+                                                </h5>
+                                            </div>
+                                        </div>
+                                        <div class="uk-flex uk-flex-middle" style="height: 45px;">
+                                            <div class="uk-flex uk-flex-middle uk-margin-small-right">
+                                                <span class="uk-margin-small-right Color-icon-detailProduct" uk-icon="icon: tag; ratio: 1.2"></span>
+                                                <h5 class="uk-margin-remove uk-text-bolder">CATEGORIA</h5>
+                                            </div>
+                                            <div>
+                                                <h5 class="productDetailCategory uk-margin-remove uk-text-emphasis Color-icon-detailProduct uk-text-bold uk-text-uppercase">
+                                                    ${item.categoria}</h5>
+                                            </div>
+                                        </div>
+                                        <div class="uk-flex uk-flex-middle" style="height: 45px;">
+                                            <div class="uk-flex uk-flex-middle uk-margin-small-right">
+                                                <span class="uk-margin-small-right Color-icon-detailProduct" uk-icon="icon: tag; ratio: 1.2"></span>
+                                                <h5 class="uk-margin-remove uk-text-bolder">EXISTENCIA</h5>
+                                            </div>
+                                            <div>
+                                                <h5 class="productDetailStock uk-margin-remove uk-text-emphasis Color-icon-detailProduct uk-text-bold uk-text-uppercase">
+                                                    ${item.stock}
+                                                </h5>
+                                            </div>
+                                        </div>
+                                        <div class="uk-flex uk-flex-middle" style="height: 45px;">
+                                            <div class="uk-flex uk-flex-middle uk-margin-small-right">
+                                                <span class="uk-margin-small-right Color-icon-detailProduct" uk-icon="icon: tag; ratio: 1.2"></span>
+                                                <h5 class="uk-margin-remove uk-text-bolder">PRECIO UNITARIO</h5>
+                                            </div>
+                                            <div>
+                                                <h5 class="productDetailPV uk-margin-remove uk-text-emphasis Color-icon-detailProduct uk-text-bold uk-text-uppercase">
+                                                    ${item.precio_venta}
+                                                    BS</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr class="uk-divider-icon Color-icon-detailProduct">
+
+                                <div>
+                                    <div class="uk-flex uk-flex-center uk-flex-middle uk-margin-bottom">
+                                        <span class="uk-margin-small-right Color-icon-detailProduct" uk-icon="icon: tag; ratio: 1.2"></span>
+                                        <h5 class=" uk-text-bold uk-text-center uk-margin-remove">PROVEEDOR</h5>
+                                    </div>
+                                    <section class="uk-margin-small-bottom" style="height: 150px; overflow: auto;">
+                                        <ul id="containerSupplierName" uk-accordion>
+
+                                        </ul>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </li>
 
-            
+
             <li>
                 <section class="uk-flex container-entradas">
-                    <article style="width: 840px;" class="uk-background-secondary uk-padding uk-border-rounded uk-margin-medium-bottom">
+                    <article style="width: 400px;" class="uk-background-secondary uk-padding uk-border-rounded uk-margin-medium-bottom">
                         <form class="uk-search uk-search-default uk-margin-bottom" style="width: 100% !important;">
                             <input class="uk-search-input" type="search" placeholder="Buscar" aria-label="Search">
                         </form>
-                        <ul uk-accordion>
-                            <li class="uk-open">
-                                <a class="uk-accordion-title" href="#">
-                                    <div class="uk-flex">
-                                        <span class="uk-margin-small-right" uk-icon="icon: bookmark; ratio: 1.5"></span>
-                                        <p class="uk-margin-remove uk-text-bold">MONTECARMELO</p>
-                                    </div>
-                                </a>
-                                <div class="uk-accordion-content">
-                                    <?php for ($i = 0; $i < 4; $i++) { ?>
-                                        <h4 class="uk-margin-medium-left uk-margin-small-top uk-margin-small-bottom">
-                                            <img class="img3ProductSwitcher" src="./static/images/cajas (2).png" width="30" alt="">
-                                            <span class="uk-margin-small-left uk-text-bold">harina</span>
-                                        </h4>
-                                        <hr class="uk-margin-remove">
+                        <ul uk-accordion id="container_prov_entry" >
+                        
 
-                                    <?php } ?>
-                                </div>
-                            </li>
                         </ul>
                     </article>
                     <article>
@@ -255,8 +323,8 @@
                                 <div class="[email protected] uk-grid-medium uk-flex-center height_controller" uk-grid uk-height-match="target: > div > .uk-card">
                                     <?php for ($i = 0; $i < 6; $i++) { ?>
                                         <div>
-                                            <div class="target_supplier uk-card uk-card-default uk-flex uk-padding-small uk-background-secondary uk-light uk-border-rounded">
-                                                <div>
+                                            <div class="uk-card uk-card-default uk-flex uk-padding-small uk-background-secondary uk-light uk-border-rounded">
+                                                <div style="width: 125px;">
                                                     <div class="img_proveedor_container uk-border-rounded">
                                                         <img src="static/images/btn_lote2.png" alt="" width="90px" />
                                                         <h5 class="uk-margin-remove-left uk-margin-remove-right uk-margin-small-top uk-margin-small-bottom uk-text-center uk-text-bold">
@@ -265,7 +333,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div>
+                                                <div style="width: 180px;">
                                                     <div class="uk-flex uk-flex-middle uk-flex-between uk-margin-small-bottom">
                                                         <h4 class="uk-margin-remove-bottom uk-margin-right uk-text-center">
                                                             Nombre del producto
@@ -303,7 +371,7 @@
                                                                 <h6>ESTADO</h6>
                                                             </div>
                                                             <div>
-                                                                <h6 class="uk-background-primary uk-margin-remove uk-text-center uk-border-rounded uk-text-bold state-entrys" style="width: 195px; padding: 2px 0px;">ACTIVO</h6>
+                                                                <h6 class="uk-background-primary uk-margin-remove uk-text-center uk-border-rounded uk-text-bold state-entrys" style="width: 120px; padding: 2px 0px;">ACTIVO</h6>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -334,6 +402,7 @@
 <script src="static/javascript/FuncionesGenerales.js"></script>
 <script src="static/javascript/librerias/datatables.js"></script>
 <script src="static/javascript/Ajax/product.js"></script>
+<script src="static/javascript/Ajax/entry.js"></script>
 <script src="static/javascript/funcionDataTable.js"></script>
 
 

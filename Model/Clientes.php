@@ -22,7 +22,7 @@
         }
 
         function agregar(){
-            $query = $this->conn->prepare("INSERT INTO clientes (nombre, cedula, apellido, documento, direccion, telefono) VALUES(:nombre, :cedula, :apellido, :documento, :direccion, :telefono)");
+            $query = $this->conn->prepare("INSERT INTO clientes (nombre, cedula, apellido, documento, direccion, telefono, active) VALUES(:nombre, :cedula, :apellido, :documento, :direccion, :telefono,1)");
             
             $query->bindParam(':nombre',$this->nombre, PDO::PARAM_STR);
             $query->bindParam(':cedula',$this->cedula, PDO::PARAM_STR);
@@ -36,12 +36,11 @@
 
 
         // con esta funcion se elimina un elemento dependiendo de su id
-        function borrar() {
-            $query = $this->conn->prepare("DELETE FROM clientes WHERE ID=?");
+        function borrar_logicamente() {
+			$query = $this->conn->prepare('UPDATE clientes SET active=0 WHERE id=:id');
 
-            $query->bindParam(1,$this->id);
-            
-            $query->execute();
+			$query->bindParam(':id',$this->id);
+			$query->execute();
         }
 
         // Con esta funcion podremos cambiar un cliente segun su ID con los valores que le pasemos
@@ -63,10 +62,10 @@
         // Con esta otra funcion se busca entre los clientes en la base de datos
         function search($n=0,$limite=9){
             // Al igual que la clase anterior, puede buscar segun muchos valores o solo algunos
-            $query = "SELECT * FROM clientes";
+            $query = "SELECT * FROM clientes WHERE active=1";
 
             if ($this->id != null){
-                $query = $query." WHERE id=:id";
+                $query = $query." AND id=:id";
             }
             $n = $n*$limite;
             

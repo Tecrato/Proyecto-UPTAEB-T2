@@ -1,13 +1,13 @@
 <?php
     // Con este codigo se realiza el UPDATE en la base de datos
-    include("./verificar_admin_funcs.php");
+    // include("./verificar_admin_funcs.php");
     require 'subir_imagen.php';
     require('../../Model/Conexion.php');
     $tipo = $_POST['tipo']; // Depende de que es lo que queramos actualizar
 
     if ($tipo === 'producto'){
         require('../../Model/Productos.php');
-        $clase = new Producto(); // Llama al modelo y le manda la instruccion
+        $clase = new Producto($_POST['ID'],$_POST["categoria"],$_POST["unidad"],$_POST["nombre"],$_POST["marca"],$nick,$_POST["stock_min"],$_POST["stock_max"],$_POST["precio_venta"],$_POST["IVA"]); // Llama al modelo y le manda la instruccion
 
         if ($_FILES['imagen1']['name'] != "") {
             $imagen = $_FILES['imagen1'];
@@ -18,13 +18,13 @@
             $nick = null;
         }
         try {
-            $clase->actualizar($_POST['ID'],$_POST["categoria"],$_POST["unidad"],$_POST["nombre"],$_POST["descripcion"],$nick,$_POST["stock_min"],$_POST["stock_max"],$_POST["precio_venta"],$_POST["IVA"]);
+            $clase->actualizar();
         } catch (Exception $e) {
             echo $e;
             die();
         }
         if ($_FILES['imagen1']['name'] != "") {
-            $imagen = array_slice($clase->search($_POST['ID'])->fetch_assoc(), 0)['imagen'];
+            $imagen = array_slice($clase->search(), 0)['imagen'];
             unlink('../../Media/imagenes/'.$imagen);
 
             $imagen = $_FILES['imagen1'];

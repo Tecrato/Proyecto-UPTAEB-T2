@@ -150,6 +150,7 @@ echo "
                             <p>Productos</p>
                         </a>
                     </li>
+                    <?php if ($_SESSION['rol'] == 'Administrador') { ?>
 
                     <li class="uk-margin-small-right Link" href="/Proyecto-UPTAEB-T2/Proveedores">
                         <a class="uk-button uk-button-text enlace_nav" href="Proveedores">
@@ -157,6 +158,7 @@ echo "
                             <p>Proveedores</p>
                         </a>
                     </li>
+                    <?php }; ?>
                     <li class="uk-margin-small-right Link" href="/Proyecto-UPTAEB-T2/Clientes">
                         <a class="uk-button uk-button-text enlace_nav" href="Clientes">
                             <span uk-icon="users" class="uk-icon uk-margin-small-right uk-icon-button"></span>

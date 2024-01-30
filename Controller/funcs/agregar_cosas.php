@@ -1,18 +1,17 @@
 <?php
     // Con este archivo se insertan objetos en tablas del SQL
-    include("./verificar_admin_funcs.php");
+    // include("./verificar_admin_funcs.php");
     require 'subir_imagen.php';
     $tipo = $_POST['tipo']; // Depende de que es lo que queramos insertar
     
     require('../../Model/Conexion.php');
     if ($tipo === 'producto'){
-        
+        print_r($_POST);
         if ($_FILES['imagen1']['name'] != "") {
             $imagen = $_FILES['imagen1'];
             $nick = "producto_".$_POST['nombre'] . "_" . $imagen['name'];
             $img_err = subir_imagen($imagen,$nick);
             if ($img_err != false){
-                // header('Location:../../Productos?error='.$img_err);
                 if ($img_err != 3){
                     unlink('../../Media/imagenes/'.$nick);
                 }
@@ -24,14 +23,12 @@
         }
         
         require('../../Model/Productos.php');
-        $clase = new Producto(null,$_POST["categoria"],$_POST["unidad"],$_POST["nombre"],$_POST["descripcion"],$nick,$_POST["stock_min"],$_POST["stock_max"],$_POST["precio_venta"],$_POST["IVA"]); // Llama al modelo y le manda la instruccion
+        $clase = new Producto(null,$_POST["categoria"],$_POST["unidad"],$_POST["nombre"],$_POST["marca"],$nick,$_POST["stock_min"],$_POST["stock_max"],$_POST["precio_venta"],$_POST["IVA"]); // Llama al modelo y le manda la instruccion
         try {
             print_r($clase->agregar());
         } catch (Exception $e) {
             print_r($e);
             unlink('../../Media/imagenes/'."producto_".$_POST['nombre']);
-            // header('Location:../../Productos?error=en+la+base+de+datos');
-            // die();
         }
 
 

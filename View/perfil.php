@@ -2,6 +2,7 @@
 
 <main class="Bg-Main-home2 uk-padding uk-light">
 
+            <?php if ($_SESSION['rol'] == 'Administrador') { ?>
     <div>
         <div>
             <div class="uk-flex uk-flex-middle uk-flex-between uk-flex-wrap uk-margin-small-bottom uk-light">
@@ -12,15 +13,11 @@
                         <span uk-icon="plus" class="uk-icon uk-margin-small-right"></span>
                         <p class="uk-margin-remove">CREAR USUARIO</p>
                     </a>
-                    
-                    <a href="#" class="uk-button uk-button-link uk-flex uk-flex-middle">
-                        <span uk-icon="history" class="uk-icon uk-margin-small-right"></span>
-                        <p class="uk-margin-remove">ACTIDADAD DEL SISTEMA</p>
-                    </a>
                 </div>
             </div>
         </div>
     </div>
+            <?php }; ?>
 
     <section class="container-item_profile uk-flex">
 
@@ -166,35 +163,36 @@
                 <h2 class="uk-modal-title">REGISTRO USUARIO</h2>
             </div>
             <div class="uk-modal-body ">
-                <form class="uk-grid-small" uk-grid method="POST" action="../Controller/agregar_cosas.php">
+                <form class="uk-grid-small" uk-grid method="POST" action="./Controller/funcs/agregar_cosas.php">
+                    <input type="text" name="tipo" value='usuarios' id="" style="display:none">
                     <div class="uk-width-1-2">
-                        <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="Nombre"
+                        <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre"
                             required>
                     </div>
                     <div class="uk-width-1-2@s">
-                        <input class="uk-input" type="text" placeholder="Apellido" aria-label="50" name="Apellido">
+                        <input class="uk-input" type="text" placeholder="Apellido" aria-label="50" name="apellido">
                     </div>
                     <div class="uk-width-1-2@s">
                         <input class="uk-input" type="text" placeholder="Correo Electronico" aria-label="100"
-                            name="nombre" required>
+                            name="correo" required>
                     </div>
                     <div class="uk-width-1-2@s">
-                        <select class="uk-select" id="form-stacked-select" name="categoria" required>
+                        <select class="uk-select" id="form-stacked-select" name="rol" required>
                             <option selected disabled>Tipo de usuario</option>
-                            <option>Dueño</option>
-                            <option>Administrador</option>
-                            <option>Cajero</option>
+                            <option value="1">Administrador</option>
+                            <option value="2">Usuario</option>
                         </select>
                     </div>
                     <div class="uk-width-1-1@s">
-                        <input class="uk-input" type="password" placeholder="Contraseña" aria-label="100" name="nombre"
+                        <input class="uk-input" type="password" placeholder="Contraseña" aria-label="100" name="password"
                             required>
                     </div>
+                    <input type="submit" id="subirC" style="display:none">
                 </form>
             </div>
             <div class="uk-modal-footer uk-text-right">
                 <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
-                <button class="uk-button uk-button-secondary" type="submit">Guardar</button>
+                <label class="uk-button uk-button-secondary" type="button" for="subirC">Guardar</label>
             </div>
         </div>
     </div>

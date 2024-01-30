@@ -23,7 +23,8 @@
         $clase = new Producto(
             id:(isset($_POST['ID']) ? $_POST['ID'] : null),
             marca:(isset($_POST['marca']) ? $_POST['marca'] : null),
-            nombre:(isset($_POST['nombre']) ? $_POST['nombre'] : null)
+            nombre:(isset($_POST['nombre']) ? $_POST['nombre'] : null),
+            like:(isset($_POST['like']) ? $_POST['like'] : '')
         );
     }
     elseif ($_POST['randomnautica'] == "entradas") {
@@ -54,10 +55,10 @@
         $clase = new Registro_ventas();
     }
 
-    if (isset($_POST['like']) and $_POST['like'] != "") {
-        $result = $clase->search_like($_POST['like']);
-    }
-    elseif (isset($_POST['subFunction'])) {
+    // if (isset($_POST['like']) and $_POST['like'] != "") {
+    //     $result = $clase->search_like($_POST['like']);
+    // }
+    if (isset($_POST['subFunction'])) {
         if ($_POST['subFunction'] == 'proveedor_de_una_entrada') {
             $result = $clase->search_proveedor_from_product();
         } else if ($_POST['subFunction'] == 'marca') {
