@@ -80,6 +80,7 @@
             if ($this->imagen != null) {
                 $query->bindParam(':imagen',$this->imagen);
             }
+            $query->bindParam(':id',$this->id);
 
             return $query->execute();
         }
