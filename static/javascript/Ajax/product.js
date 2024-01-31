@@ -80,6 +80,7 @@ const modalDetalles = () => {
                       id_proveedor: idProveedor,
                     },
                     function (response) {
+                      console.log(response);
                       let json = JSON.parse(response);
                       json.lista.forEach((dat) => {
                         detailsLote += `

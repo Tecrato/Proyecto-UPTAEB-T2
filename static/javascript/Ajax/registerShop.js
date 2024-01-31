@@ -355,8 +355,9 @@ document.getElementById("input-search-fact").addEventListener("keyup", (e) => {
     $.ajax({
       url: "Controller/funcs_ajax/search.php",
       type: "POST",
-      data: { randomnautica: "clientes", like: val },
+      data: { randomnautica: "clientes", like_cedula: val },
       success: function (response) {
+        console.log(response);
         let json = JSON.parse(response);
         let LI = "";
         //recorremos la respuesta del server y creamos el template de los li
