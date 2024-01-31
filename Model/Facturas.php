@@ -75,9 +75,8 @@
             $query = $this->conn->prepare("
                     SELECT cantidad,
                     (SELECT nombre FROM productos WHERE factura.id_productos = id) AS descripcion, 
-                    (SELECT precio_venta FROM productos WHERE factura.id_productos = id) AS valor_unit, 
+                    (coste_producto_total / cantidad) AS valor_unit, 
                     cantidad * (SELECT precio_venta FROM productos WHERE factura.id_productos = id) AS Total 
-    
                     FROM factura WHERE id_registro_ventas = :id");
             $query->bindParam(':id', $this->id);
             $query->execute();
