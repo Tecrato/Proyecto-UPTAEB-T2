@@ -91,5 +91,10 @@
     // Usar la semilla para generar una cadena alfanumérica aleatoria
     $longitud = 10; // Define la longitud de la cadena
     $cadena_aleatoria = substr(str_shuffle(str_repeat($semilla, $longitud)), 0, $longitud);
-	echo $cadena_aleatoria;
+	echo $cadena_aleatoria.'<br>';
+
+	$var = '8aaa';
+	if ($var and !preg_match("/^[a-z][a-z0-9]{2,20}$/", $var)){
+		throw new Exception('El id esta mal');
+	}
 ?>

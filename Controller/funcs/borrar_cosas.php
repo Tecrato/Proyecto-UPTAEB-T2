@@ -9,24 +9,18 @@
         require('../../Model/Entradas.php');
         require('../../Model/Proveedores.php');
         $clase = new Producto($_POST['ID']); // Llama al modelo y le manda la instruccion
-        $clase_l = new Entrada(id_producto:$_POST['ID']); // Llama al modelo y le manda la instruccion
         $imagen = $clase->search()[0]['imagen'];
-        print_r($imagen);
-        print_r($_POST);
+
         if ($imagen != "banner_productos.png"){
             print_r(realpath("../../Media/imagenes/".$imagen));
             unlink("../../Media/imagenes/".$imagen);
         }
-        $clase_l->borrar_logicamente();
-        $clase->borrar_logicamente();
-        // header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
+        $clase->borrar();
     }
     elseif ($tipo == 'proveedor'){
         require('../../Model/Proveedores.php');
         require('../../Model/Entradas.php');
         require('../../Model/Productos.php');
-        $clase2 = new Entrada(id_proveedor:$_POST['ID']); // Llama al modelo y le manda la instruccion
-        $clase2->borrar_logicamente();
         
         $clase = new Proveedor($_POST['ID']); // Llama al modelo y le manda la instruccion
         $clase->borrar_logicamente();

@@ -16,37 +16,48 @@
             $id=null, $categoria=null,$unidades=null,$nombre=null,$marca=null,$imagen=null,$stock_min=null,
             $stock_max=null,$precio_venta=null,$IVA=null,$like=''){
             if($this->id and !preg_match("/^[0-9]+$/", $this->id)){
-                throw  'El id esta mal';
+                return new Exception('El id esta mal');
+                die;
             }
             if($this->categoria and !preg_match("/^[0-9]+$/", $this->categoria)){
-                throw  'La categoria esta mal';
+                return new Exception('La categoria esta mal');
+                die;
             }
             if($this->unidades and !preg_match("/^[0-9]+$/", $this->unidades)){
-                throw  'La unidad esta mal';
+                return new Exception('La unidad esta mal');
+                die;
             }
             if($this->nombre and !preg_match("/^[a-z][a-z0-9]{2,20}$/", $this->nombre)){
-                throw  'El nombre esta mal';
+                return new Exception('El nombre esta mal');
+                die;
             }
             if($this->marca and !preg_match("/^[0-9]+$/", $this->marca)){
-                throw  'La marca esta mal';
+                return new Exception('La marca esta mal');
+                die;
             }
             if($this->imagen and !preg_match("/^[0-9a-z]{2,}$/", $this->imagen)){
-                throw  'La imagen esta mal';
+                return new Exception('La imagen esta mal');
+                die;
             }
             if($this->stock_min and !preg_match("/^[0-9]+$/", $this->stock_min)){
-                throw  'El stock_min esta mal';
+                return new Exception('El stock_min esta mal');
+                die;
             }
             if($this->stock_max and !preg_match("/^[0-9]+$/", $this->stock_max)){
-                throw  'El stock_max esta mal';
+                return new Exception('El stock_max esta mal');
+                die;
             }
             if($this->precio_venta and !preg_match("/^[0-9]+$/", $this->precio_venta)){
-                throw  'El precio_venta esta mal';
+                return new Exception('El precio_venta esta mal');
+                die;
             }
             if($this->IVA and !preg_match("/^[0-1]$/", $this->IVA)){
-                throw  'El IVA esta mal';
+                return new Exception('El IVA esta mal');
+                die;
             }
             if($this->like and !preg_match("/^[a-z]+[a-z0-9]{2,20}+$/", $this->like)){
-                throw  'El like esta mal';
+                return new Exception('El like esta mal');
+                die;
             }
             $this->id = $id;
             $this->categoria = $categoria;
@@ -83,12 +94,19 @@
 
 
         // con esta funcion se elimina un elemento dependiendo de su id
-        function borrar_logicamente() {
+        function desactivar() {
 			$query = $this->conn->prepare('UPDATE productos SET active=0 WHERE id=:id');
 
 			$query->bindParam(':id',$this->id);
 			$query->execute();
         }
+        function borrar() {
+			$query = $this->conn->prepare('DELETE FROM productos WHERE id=:id');
+
+			$query->bindParam(':id',$this->id);
+			$query->execute();
+        }
+
 
         // Con esta funcion podremos cambiar un producto segun su ID con los valores que le pasemos
         function actualizar(){
@@ -186,15 +204,6 @@
             return $query->fetchAll();
             
         }
-
-        function search_like(String $nombre){
-            $query = $this->conn->prepare("SELECT * FROM productos WHERE active=1 and nombre LIKE '%$nombre%'");
-            // $query->bindParam(':aaa',$nombre);
-            $query->execute();
-            return $query->fetchAll();
-        }
-
-
 
         function search_inventario(){
             $query = "SELECT id,nombre,(SELECT SUM(cantidad) FROM entradas WHERE productos.id = id_producto) AS entradas,(SELECT SUM(cantidad) - (SELECT SUM(existencia) FROM entradas WHERE productos.id = id_producto) FROM entradas WHERE productos.id = id_producto) AS salidas, (SELECT SUM(existencia) FROM entradas WHERE productos.id = id_producto) AS existencia, precio_venta,(SELECT SUM(existencia) FROM entradas WHERE productos.id = id_producto) * precio_venta AS Total FROM productos";

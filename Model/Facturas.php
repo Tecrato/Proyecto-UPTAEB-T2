@@ -15,7 +15,7 @@
             DB::__construct();
         }
         
-        function search($id = null, $order = 'id DESC') {
+        function search($order = 'id DESC') {
             $query = "SELECT * FROM factura";
             if ($this->id) {
                 $query = $query . " WHERE id=:id";
@@ -56,8 +56,7 @@
 
         }
 
-        function search_detailsFact()
-        {
+        function search_detailsFact(){
             $query = $this->conn->prepare("SELECT id,fecha,(SELECT nombre FROM clientes WHERE registro_ventas.id_cliente = id) AS nombre, (SELECT Apellido FROM clientes WHERE registro_ventas.id_cliente = id) AS apellido, (SELECT Cedula FROM clientes WHERE registro_ventas.id_cliente = id) AS cedula,(SELECT documento FROM clientes WHERE registro_ventas.id_cliente = id) AS documento, metodo_pago,(SELECT nombre FROM usuarios WHERE registro_ventas.id_usuario = id) AS vendedor FROM registro_ventas WHERE id = :id");
     
             $query->bindParam(':id', $this->id);
@@ -65,16 +64,14 @@
             return $query->fetchAll()[0];
         }
     
-        function search_mountFact()
-        {
+        function search_mountFact(){
             $query = $this->conn->prepare("SELECT ROUND(monto_final - IVA) AS subtotal,IVA,monto_final FROM registro_ventas WHERE id = :id");
             $query->bindParam(':id', $this->id);
             $query->execute();
             return $query->fetchAll();
         }
     
-        function search_ProductFact()
-        {
+        function search_ProductFact(){
             $query = $this->conn->prepare("
                     SELECT cantidad,
                     (SELECT nombre FROM productos WHERE factura.id_productos = id) AS descripcion, 

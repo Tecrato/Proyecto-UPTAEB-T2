@@ -5,11 +5,8 @@
     $dir = $_GET['dir'];
     $page = intval($_GET['p']);
     $type = $_GET['type'];
-    if (isset($_GET['n_p'])) {
-        $pagination = intval($_GET['n_p']);
-    } else {
-        $pagination = 9;
-    }
+    $pagination = isset($_GET['n_p']) ?intval($_GET['n_p']) : 9;
+    $active = isset($_GET['active']) ?intval($_GET['active']) : 1;
 
     if ($type == 'productos') {
         require('../../Model/Productos.php');
@@ -34,7 +31,7 @@
     elseif ($type == 'ventas') {
         require('../../Model/Registro de ventas.php');
         $vart = new Registro_ventas();
-        $todos = $vart->COUNT();
+        $todos = $vart->COUNT($active);
     }
 
     if ($dir == 'next' && $page < ceil($todos / $pagination)-1){

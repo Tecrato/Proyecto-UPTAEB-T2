@@ -52,7 +52,7 @@
 		}
 
 		function borrar_logicamente() {
-			$query = $this->conn->prepare('UPDATE entradas SET active=0 WHERE id=:id');
+			$query = $this->conn->prepare('DELETE FROM productos WHERE id=:id');
 
 			$query->bindParam(':id',$this->id);
 			$query->execute();
@@ -73,7 +73,7 @@
                 array_push($lista, 'id_proveedor');
             }
             if ($lista) {
-            	$query .= ' WHERE';
+            	$query .= ' WHERE ';
             	$and = false;
             	foreach ($lista as $e){
             		if (!$and) {
@@ -81,14 +81,14 @@
             		} else {
             			$query .= ' AND';
             		}
-            		$query .= ' '.$e.'=:'.$e;
+            		$query .= ' '.$e.'=: '.$e;
             	}
             }
 
 
             $n = $n*$limite;
-			$query = $query . " ORDER BY $order";
-			$query = $query . " LIMIT :l OFFSET :n";
+			$query = $query . " ORDER BY $order ";
+			$query = $query . " LIMIT :l OFFSET :n ";
 
 
             $consulta = $this->conn->prepare($query);
