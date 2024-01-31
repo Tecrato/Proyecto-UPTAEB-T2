@@ -8,8 +8,10 @@
         private $apellido;
         private $telefono;
         private $direccion;
+        private $like_nombre;
+        private $like_cedula;
 
-        function __construct($id=null, $nombre=null,$cedula=null,$apellido=null,$documento=null,$direccion=null,$telefono=null){
+        function __construct($id=null, $nombre=null,$cedula=null,$apellido=null,$documento=null,$direccion=null,$telefono=null,$like_nombre='',$like_cedula=''){
             $this->id = $id;
             $this->nombre = $nombre;
             $this->cedula = $cedula;
@@ -17,6 +19,8 @@
             $this->apellido = $apellido;
             $this->telefono = $telefono;
             $this->direccion = $direccion;
+            $this->like_nombre = $like_nombre;
+            $this->like_cedula = $like_cedula;
             DB::__construct();
 
         }
@@ -62,7 +66,10 @@
         // Con esta otra funcion se busca entre los clientes en la base de datos
         function search($n=0,$limite=9){
             // Al igual que la clase anterior, puede buscar segun muchos valores o solo algunos
-            $query = "SELECT * FROM clientes WHERE active=1";
+            $query = "SELECT * FROM clientes 
+            WHERE active=1 AND 
+            nombre LIKE :like_nombre AND 
+            cedula LIKE :like_cedula";
 
             if ($this->id != null){
                 $query = $query." AND id=:id";
@@ -73,21 +80,21 @@
             $query = $query . " LIMIT :l OFFSET :n";
             $consulta = $this->conn->prepare($query);
 
-
+            
             $consulta->bindParam(':l',$limite, PDO::PARAM_INT);
             $consulta->bindParam(':n',$n, PDO::PARAM_INT);
             
+            $this->like_nombre = '%'.$this->like_nombre.'%';
+            $consulta->bindParam(':like_nombre',$this->like_nombre, PDO::PARAM_STR);
+            
+            $this->like_cedula = '%'.$this->like_cedula.'%';
+            $consulta->bindParam(':like_cedula',$this->like_cedula, PDO::PARAM_STR);
+
             if ($this->id != null){
                 $consulta->bindParam(':id',$this->id, PDO::PARAM_INT);
             }
             $consulta->execute();
             return $consulta->fetchAll();
-        }
-        function search_like($val){
-            $query = $this->conn->prepare("SELECT * FROM clientes WHERE cedula LIKE '%$val%'");
-            // $query->bindParam(':li',$this->nombre);
-            $query->execute();
-            return $query->fetchAll();
         }
         function COUNT(){
             return $this->conn->query("SELECT COUNT(*) as 'total' FROM clientes")->fetch()['total'];

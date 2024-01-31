@@ -3,9 +3,9 @@
     require '../../Model/Productos.php';
 
 
-	$clase = new Producto();
-	$result = $clase->stock_segun_categorias();
-	print_r($result);
+	// $clase = new Producto();
+	// $result = $clase->stock_segun_categorias();
+	// print_r($result);
 	// echo "
 	// <form method='POST' action='Controller/funcs_ajax/search.php'>
 	// 	<input type='text' name='randomnautica' value='stock_producto' />
@@ -14,27 +14,27 @@
 	// </form>
 
 	// ";
-	$consulta = $this->conn->prepare("SELECT 
-	a.id, 
-	b.nombre categoria,
-	c.nombre unidad,
-	a.nombre,
-	a.marca,
-	a.imagen,
-	(SELECT SUM(entradas.existencia) FROM entradas Where id_producto = a.id) as stock,
-	a.stock_min,
-	a.stock_max,
-	a.precio_venta,
-	a.IVA
-	FROM productos a 
-	INNER JOIN categoria b ON b.id = a.id_categoria 
-	INNER JOIN unidades c ON c.id = a.id_unidad
-	WHERE a.nombre LIKE :como AND
-	active = 1 
-	");
+	// $consulta = $this->conn->prepare("SELECT 
+	// a.id, 
+	// b.nombre categoria,
+	// c.nombre unidad,
+	// a.nombre,
+	// a.marca,
+	// a.imagen,
+	// (SELECT SUM(entradas.existencia) FROM entradas Where id_producto = a.id) as stock,
+	// a.stock_min,
+	// a.stock_max,
+	// a.precio_venta,
+	// a.IVA
+	// FROM productos a 
+	// INNER JOIN categoria b ON b.id = a.id_categoria 
+	// INNER JOIN unidades c ON c.id = a.id_unidad
+	// WHERE a.nombre LIKE :como AND
+	// active = 1 
+	// ");
 
-	$this->like = '%'.$this->like.'%';
-    $consulta->bindParam(':como',$this->like, PDO::PARAM_STR);
+	// $this->like = '%'.$this->like.'%';
+    // $consulta->bindParam(':como',$this->like, PDO::PARAM_STR);
 	
 	
 	// $c = new Usuario();
@@ -85,5 +85,11 @@
     // $a = null;
 	// print_r($a ? 'true' : 'false');
 
-
+    // Generar una semilla aleatoria
+    $semilla = rand(); // Opcionalmente, puedes usar mt_rand() en lugar de rand()
+    
+    // Usar la semilla para generar una cadena alfanumérica aleatoria
+    $longitud = 10; // Define la longitud de la cadena
+    $cadena_aleatoria = substr(str_shuffle(str_repeat($semilla, $longitud)), 0, $longitud);
+	echo $cadena_aleatoria;
 ?>

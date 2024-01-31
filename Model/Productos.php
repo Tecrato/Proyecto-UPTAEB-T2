@@ -122,8 +122,10 @@
         function search($n=0,$limite=9){
             // Al igual que la clase anterior, puede buscar segun muchos valores o solo algunos
             $query = "SELECT 
-                    a.id, 
+                    a.id,
+                    a.id_categoria,
                     b.nombre categoria,
+                    a.id_unidad,
                     c.nombre unidad,
                     a.nombre,
                     a.marca,

@@ -40,7 +40,10 @@
     }
     elseif ($_POST['randomnautica'] == "clientes") {
         require('../../Model/Clientes.php');
-        $clase = new Cliente();
+        $clase = new Cliente(
+            like_nombre:(isset($_POST['like_nombre']) ? $_POST['like_nombre'] : ''),
+            like_cedula:(isset($_POST['like_cedula']) ? $_POST['like_cedula'] : ''),
+        );
     }
     elseif ($_POST['randomnautica'] == "categorias") {
         require('../../Model/Categorias.php');
@@ -55,9 +58,6 @@
         $clase = new Registro_ventas();
     }
 
-    // if (isset($_POST['like']) and $_POST['like'] != "") {
-    //     $result = $clase->search_like($_POST['like']);
-    // }
     if (isset($_POST['subFunction'])) {
         if ($_POST['subFunction'] == 'proveedor_de_una_entrada') {
             $result = $clase->search_proveedor_from_product();
