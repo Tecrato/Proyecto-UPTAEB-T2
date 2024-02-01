@@ -231,7 +231,7 @@
             $query = $this->conn->prepare("SELECT * FROM productos
             WHERE active = 1
             ORDER BY id DESC
-            LIMIT 10;");
+            LIMIT 5;");
             $query->execute();
             return $query->fetchAll();
             
@@ -241,7 +241,8 @@
             FROM factura f
             JOIN productos p ON f.id_productos = p.id
             GROUP BY f.id_productos
-            ORDER BY total_vendido DESC;");
+            ORDER BY total_vendido DESC
+            LIMIT 3;");
             $query->execute();
             return $query->fetchAll();
             
@@ -251,7 +252,8 @@
             FROM factura f
             JOIN productos p ON f.id_productos = p.id
             GROUP BY f.id_productos
-            ORDER BY total_vendido ASC;");
+            ORDER BY total_vendido ASC
+            LIMIT 3;");
             $query->execute();
             return $query->fetchAll();
             

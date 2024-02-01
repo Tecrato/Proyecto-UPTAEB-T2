@@ -289,11 +289,7 @@ const tarjetas = (response) => {
   json.lista.forEach((item) => {
     tarjeta += `
               
-  <div id="${item.id}" data-supplier="${item.proveedor}" data-category="${
-      item.categoria
-    }" data-marca="${item.marca}" data-name="${item.nombre
-      .slice(0, 1)
-      .toUpperCase()}">
+  <div id="${item.id}" data-supplier="${item.proveedor}" data-category="${item.categoria}" data-marca="${item.marca}" data-name="${item.nombre.slice(0, 1).toUpperCase()}">
     <div class="uk-card uk-card-default uk-background-secondary uk-light uk-border-rounded">
         <div class="uk-visible-toggle" tabindex="-1">
             <article class="uk-transition-toggle">
@@ -325,11 +321,9 @@ const tarjetas = (response) => {
                     </ul>
                 </div>
                 <div>
-                    <div style="padding: 0px 10px;">
-                        <div>${item.nombre}</div>
-                        <div>stock: <b class="uk-text-success">${
-                          item.stock ? item.stock : 0
-                        }</b></div>
+                    <div style="padding: 0px 10px; width: 130px;">
+                        <div class="uk-text-truncate">${item.nombre}</div>
+                        <div>stock: <b class="uk-text-success">${item.stock ? item.stock : 0}</b></div>
                     </div>
                 </div>
             </article>
@@ -526,5 +520,46 @@ document.querySelector(".searchProduct").addEventListener("keyup", (e) => {
     });
   } else {
     cargarTargetProduct();
+  }
+});
+
+let inpNameProduct = document.querySelector(".NameUpdateProduct")
+inpNameProduct.addEventListener("keyup", (e) => {
+  let val = e.target.value.toLowerCase();
+  if (val != "") {
+    $.ajax({
+      url: "Controller/funcs_ajax/search.php",
+      type: "POST",
+      data: { randomnautica: "productos", like: val },
+      success: function (response) {
+       let json = JSON.parse(response)
+       json.lista.forEach((e)=>{
+        let nombre = e.nombre.toLowerCase()
+        if (nombre == val) {
+          inpNameProduct.setAttribute("uk-tooltip","title:El producto ya existe, use otro nombre; pos: left");
+          UIkit.tooltip(".NameUpdateProduct").show();
+          console.log('object');
+        } else {
+          inpNameProduct.removeAttribute("uk-tooltip");
+          if (document.querySelector('.uk-tooltip')) {
+            document.querySelector('.controller-modal').removeChild(document.querySelector('.uk-tooltip'))
+          }  
+        }
+       })
+        if (json.lista.length == 0) {
+          UIkit.tooltip(".NameUpdateProduct").hide()
+          inpNameProduct.removeAttribute("uk-tooltip");
+          if (document.querySelector('.uk-tooltip')) {
+            document.querySelector('.controller-modal').removeChild(document.querySelector('.uk-tooltip'))
+          }    
+          console.log('object2');
+        }
+      }
+    });
+  } else {
+      inpNameProduct.removeAttribute("uk-tooltip");
+      if (document.querySelector('.uk-tooltip')) {
+        document.querySelector('.controller-modal').removeChild(document.querySelector('.uk-tooltip'))
+      }
   }
 });

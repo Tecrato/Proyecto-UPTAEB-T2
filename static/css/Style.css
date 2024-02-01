@@ -172,6 +172,16 @@
 .Card-items{
     min-width: 400px;
 }
+@media (min-width: 815px) and (max-width: 1404px){
+    .Container-stats{
+        width: 210px;
+    }
+}
+@media (min-width: 1300px) and (max-width: 1404px){
+    .Container-stats{
+        width: 250px;
+    }
+}
 
 
 
