@@ -6,18 +6,20 @@
         private $id_cliente;
         private $id_usuario;
         private $IVA;
+        private $active;
 
-        function __construct($id=null, $monto_final=null,$metodo_pago=null,$id_cliente=null,$id_usuario=null,$IVA=null){
+        function __construct($id=null, $monto_final=null,$metodo_pago=null,$id_cliente=null,$id_usuario=null,$IVA=null,$active=1){
             $this->id = $id;
             $this->monto_final = $monto_final;
             $this->metodo_pago = $metodo_pago;
             $this->id_cliente = $id_cliente;
             $this->id_usuario = $id_usuario;
             $this->IVA = $IVA;
+            $this->active = $active;
             DB::__construct();
 
         }
-		function search($n=0,$limite=9,$order='id ASC', $active=true){
+		function search($n=0,$limite=9,$order='id ASC'){
 			$query = "SELECT 
             a.id,
             a.monto_final,
@@ -44,7 +46,7 @@
 
             $consulta = $this->conn->prepare($query);
 
-            $consulta->bindParam(':active',$active, PDO::PARAM_BOOL);
+            $consulta->bindParam(':active',$this->active, PDO::PARAM_BOOL);
             $consulta->bindParam(':l',$limite, PDO::PARAM_INT);
             $consulta->bindParam(':n',$n, PDO::PARAM_INT);
 
@@ -80,7 +82,7 @@
 			}
 		}
 
-        function borrar_logicamente(){
+        function desactivar(){
             $query = $this->conn->prepare("UPDATE registro_ventas SET active=0 WHERE id=:id");
 			$query->bindParam(':id',$this->id, PDO::PARAM_INT);
 
@@ -88,9 +90,9 @@
         }
 
 
-        function COUNT($active){
+        function COUNT(){
             $query = $this->conn->prepare("SELECT COUNT(*) as 'total' FROM registro_ventas WHERE active=:active");
-			$query->bindParam(':active',$active, PDO::PARAM_INT);
+			$query->bindParam(':active',$this->active, PDO::PARAM_INT);
             $query->execute();
             return $query->fetch()['total'];
         }

@@ -4,29 +4,31 @@
         private $id_producto;
         private $id_proveedor;
         private $cantidad;
-        private $fecha_c;
-        private $fecha_v;
+        private $fecha_compra;
+        private $fecha_vencimiento;
         private $precio_compra;
+        private $active;
 
-        function __construct($id=null, $id_producto=null,$id_proveedor=null,$cantidad=null,$fecha_c=null,$fecha_v=null,$precio_compra=null){
+        function __construct($id=null, $id_producto=null,$id_proveedor=null,$cantidad=null,$fecha_compra=null,$fecha_vencimiento=null,$precio_compra=null,$active=1){
             $this->id = $id;
             $this->id_producto = $id_producto;
             $this->id_proveedor = $id_proveedor;
             $this->cantidad = $cantidad;
-            $this->fecha_c = $fecha_c;
-            $this->fecha_v = $fecha_v;
+            $this->fecha_compra = $fecha_compra;
+            $this->fecha_vencimiento = $fecha_vencimiento;
             $this->precio_compra = $precio_compra;
+            $this->active = $active;
             DB::__construct();
         }
 
 		function agregar(){
-			$query = $this->conn->prepare("INSERT INTO entradas VALUES(null, :id1, :id2, :cantidad, :fecha_c, :fecha_v, :precio_compra, :cantidad, 1)");
+			$query = $this->conn->prepare("INSERT INTO entradas VALUES(null, :id1, :id2, :cantidad, :fecha_compra, :fecha_vencimiento, :precio_compra, :cantidad, 1)");
 
 			$query->bindParam(':id1',$this->id_producto);
 			$query->bindParam(':id2',$this->id_proveedor);
 			$query->bindParam(':cantidad',$this->cantidad);
-			$query->bindParam(':fecha_c',$this->fecha_c);
-			$query->bindParam(':fecha_v',$this->fecha_v);
+			$query->bindParam(':fecha_compra',$this->fecha_compra);
+			$query->bindParam(':fecha_vencimiento',$this->fecha_vencimiento);
 			$query->bindParam(':precio_compra',$this->precio_compra);
 			$query->bindParam(':cantidad',$this->cantidad);
 
@@ -51,7 +53,7 @@
 			}
 		}
 
-		function borrar_logicamente() {
+		function desactivar() {
 			$query = $this->conn->prepare('DELETE FROM productos WHERE id=:id');
 
 			$query->bindParam(':id',$this->id);
@@ -59,7 +61,7 @@
 		}
 
 		function search(Int $n=0,Int $limite=9, $order = ' id DESC '){
-			$query = "SELECT * FROM entradas";
+			$query = "SELECT * FROM entradas WHERE active=:active";
 
 			$lista = [];
 
@@ -73,15 +75,8 @@
                 array_push($lista, 'id_proveedor');
             }
             if ($lista) {
-            	$query .= ' WHERE ';
-            	$and = false;
             	foreach ($lista as $e){
-            		if (!$and) {
-            			$and = true;
-            		} else {
-            			$query .= ' AND';
-            		}
-            		$query .= ' '.$e.'=: '.$e;
+            		$query .= ' AND '.$e.'=:'.$e;
             	}
             }
 
@@ -95,6 +90,7 @@
 
             $consulta->bindParam(':l',$limite, PDO::PARAM_INT);
             $consulta->bindParam(':n',$n, PDO::PARAM_INT);
+            $consulta->bindParam(':active',$this->active, PDO::PARAM_INT);
 
             if ($this->id){
                 $consulta->bindParam(':id',$this->id, PDO::PARAM_INT);
@@ -119,7 +115,9 @@
 			return $query->fetchAll();
 		}
         function COUNT(){
-            
-            return $this->conn->query("SELECT COUNT(*) as 'total' FROM entradas")->fetch()['total'];
+            $query = $this->conn->prepare("SELECT COUNT(*) as 'total' FROM entradas WHERE active=:active");
+			$query->bindParam(':active',$this->active, PDO::PARAM_INT);
+            $query->execute();
+            return $query->fetch()['total'];
         }
 }

@@ -9,8 +9,11 @@
         private $telefono;
         private $correo;
         private $direccion;
+        private $active;
+        private $like;
 
-        function __construct($id=null, $nombre=null,$razon_social=null,$rif=null,$telefono=null,$correo=null,$direccion=null){
+
+        function __construct($id=null, $nombre=null,$razon_social=null,$rif=null,$telefono=null,$correo=null,$direccion=null,$active=1,$like=''){
             $this->id = $id;
             $this->nombre = $nombre;
             $this->razon_social = $razon_social;
@@ -18,6 +21,8 @@
             $this->telefono = $telefono;
             $this->correo = $correo;
             $this->direccion = $direccion;
+            $this->active = $active;
+            $this->like = $like;
             DB::__construct();
 
         }
@@ -37,7 +42,7 @@
         }
 
         // con esta funcion se elimina un elemento dependiendo de su id
-        function borrar_logicamente() {
+        function desactivar() {
 			$query = $this->conn->prepare('UPDATE proveedores SET active=0 WHERE id=:id');
 
 			$query->bindParam(':id',$this->id);
@@ -61,7 +66,7 @@
 
         // Con esta otra funcion se busca entre los productos en la base de datos
         function search($n=0,$limite=9){
-            $query = "SELECT * FROM proveedores WHERE active=1";
+            $query = "SELECT * FROM proveedores WHERE active=:active AND nombre LIKE :como";
 
             if ($this->id != null){
                 $query = $query." AND id=:id";
@@ -72,26 +77,25 @@
 
             $consulta = $this->conn->prepare($query);
 
+            $consulta->bindParam(':active',$this->active, PDO::PARAM_INT);
             $consulta->bindParam(':l',$limite, PDO::PARAM_INT);
             $consulta->bindParam(':n',$n, PDO::PARAM_INT);
             if ($this->id != null){
                 $consulta->bindParam(':id',$this->id, PDO::PARAM_INT);
             }
+            $this->like = '%'.$this->like.'%';
+            $consulta->bindParam(':como',$this->like, PDO::PARAM_STR);
 
         
             $consulta->execute();
             return $consulta->fetchAll();
         }
         
-        function search_like(){
-            $query = $this->conn->prepare("SELECT * FROM proveedores WHERE nombre LIKE '%:nombre%'");
-            $query->bindParam(':nombre',$this->nombre);
-
-            $query->execute();
-            return $query->fetchAll();
-        }
         function COUNT(){
-            return $this->conn->query("SELECT COUNT(*) 'total' FROM proveedores")->fetch()['total'];
+            $query = $this->conn->prepare("SELECT COUNT(*) as 'total' FROM proveedores WHERE active=:active");
+			$query->bindParam(':active',$this->active, PDO::PARAM_INT);
+            $query->execute();
+            return $query->fetch()['total'];
         }
     }
 ?>

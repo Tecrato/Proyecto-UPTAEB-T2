@@ -1,8 +1,8 @@
 <?php
     class Producto extends DB{
         private $id;
-        private $categoria;
-        private $unidades;
+        private $id_categoria;
+        private $id_unidades;
         private $nombre;
         private $marca;
         private $imagen;
@@ -10,20 +10,21 @@
         private $stock_max;
         private $precio_venta;
         private $IVA;
+        private $active;
         private $like;
 
         function __construct(
-            $id=null, $categoria=null,$unidades=null,$nombre=null,$marca=null,$imagen=null,$stock_min=null,
-            $stock_max=null,$precio_venta=null,$IVA=null,$like=''){
+            $id=null, $id_categoria=null,$id_unidades=null,$nombre=null,$marca=null,$imagen=null,$stock_min=null,
+            $stock_max=null,$precio_venta=null,$IVA=null,$active=1,$like=''){
             if($this->id and !preg_match("/^[0-9]+$/", $this->id)){
                 return new Exception('El id esta mal');
                 die;
             }
-            if($this->categoria and !preg_match("/^[0-9]+$/", $this->categoria)){
+            if($this->id_categoria and !preg_match("/^[0-9]+$/", $this->id_categoria)){
                 return new Exception('La categoria esta mal');
                 die;
             }
-            if($this->unidades and !preg_match("/^[0-9]+$/", $this->unidades)){
+            if($this->id_unidades and !preg_match("/^[0-9]+$/", $this->id_unidades)){
                 return new Exception('La unidad esta mal');
                 die;
             }
@@ -60,8 +61,8 @@
                 die;
             }
             $this->id = $id;
-            $this->categoria = $categoria;
-            $this->unidades = $unidades;
+            $this->id_categoria = $id_categoria;
+            $this->id_unidades = $id_unidades;
             $this->nombre = $nombre;
             $this->marca = $marca;
             $this->imagen = $imagen;
@@ -69,6 +70,7 @@
             $this->stock_max = $stock_max;
             $this->precio_venta = $precio_venta;
             $this->IVA = $IVA;
+            $this->active = $active;
             $this->like = $like;
             DB::__construct();
 
@@ -76,10 +78,10 @@
         // esta funcion agrega a la tabla productos un objeto con los valores que se le estan pasando
         function agregar(){
             
-            $query = $this->conn->prepare("INSERT INTO productos VALUES(null, :categoria, :unidades, :nombre, :marca, :imagen, :stock_min, :stock_max, :precio_venta, :IVA, 1)");
+            $query = $this->conn->prepare("INSERT INTO productos VALUES(null, :id_categoria, :id_unidades, :nombre, :marca, :imagen, :stock_min, :stock_max, :precio_venta, :IVA, 1)");
 
-            $query->bindParam(':categoria',$this->categoria);
-            $query->bindParam(':unidades',$this->unidades);
+            $query->bindParam(':id_categoria',$this->id_categoria);
+            $query->bindParam(':id_unidades',$this->id_unidades);
             $query->bindParam(':nombre',$this->nombre);
             $query->bindParam(':marca',$this->marca);
             $query->bindParam(':imagen',$this->imagen);
@@ -112,7 +114,7 @@
         function actualizar(){
             
             
-            $query = "UPDATE productos SET id_categoria=:categoria, id_unidad=:unidades, nombre=:nombre, marca=:marca, stock_min=:stock_min, stock_max=:stock_max, precio_venta=:precio_venta, IVA=:IVA";
+            $query = "UPDATE productos SET id_categoria=:id_categoria, id_unidad=:id_unidades, nombre=:nombre, marca=:marca, stock_min=:stock_min, stock_max=:stock_max, precio_venta=:precio_venta, IVA=:IVA";
             if ($this->imagen != null) {
                 $query = $query . ", imagen=:imagen ";
             }
@@ -120,8 +122,8 @@
             
             $query = $this->conn->prepare($query);
 
-            $query->bindParam(':categoria',$this->categoria);
-            $query->bindParam(':unidades',$this->unidades);
+            $query->bindParam(':id_categoria',$this->id_categoria);
+            $query->bindParam(':id_unidades',$this->id_unidades);
             $query->bindParam(':nombre',$this->nombre);
             $query->bindParam(':marca',$this->marca);
             $query->bindParam(':stock_min',$this->stock_min);
@@ -157,7 +159,7 @@
                     INNER JOIN categoria b ON b.id = a.id_categoria 
                     INNER JOIN unidades c ON c.id = a.id_unidad
                     WHERE a.nombre LIKE :como AND
-                    active=1 ";
+                    active=:active ";
 
                     
 			$lista = [];
@@ -174,15 +176,13 @@
             	}
             }
 
-            // if ($this->id != null){
-            //     $query = $query." WHERE a.id=:id";
-            // }
             $n = $n*$limite;
 
             $query = $query . " LIMIT :l OFFSET :n";
 
             $consulta = $this->conn->prepare($query);
 
+            $consulta->bindParam(':active',$this->active, PDO::PARAM_INT);
             $consulta->bindParam(':l',$limite, PDO::PARAM_INT);
             $consulta->bindParam(':n',$n, PDO::PARAM_INT);
             if ($this->id){
@@ -258,8 +258,10 @@
         }
 
         function COUNT(){
-            
-            return $this->conn->query("SELECT COUNT(*) as 'total' FROM productos")->fetch()['total'];
+            $query = $this->conn->prepare("SELECT COUNT(*) as 'total' FROM productos WHERE active=:active");
+			$query->bindParam(':active',$this->active, PDO::PARAM_INT);
+            $query->execute();
+            return $query->fetch()['total'];
         }
     }
 ?>
