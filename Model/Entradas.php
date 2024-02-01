@@ -37,7 +37,7 @@
 
 		function descontar(){
 
-			$entradas = $this->search(0,1000000000,order:' fecha_vencimiento ASC');
+			$entradas = $this->search(0,10000,order:' fecha_vencimiento ASC');
 
 			for ($i = 0; $this->cantidad >= 1; $i++) {
 				$entrada = $entradas[$i];
@@ -60,7 +60,7 @@
 			$query->execute();
 		}
 
-		function search(Int $n=0,Int $limite=9, $order = ' id DESC '){
+		function search($n=0,$limite=9, $order = ' id DESC '){
 			$query = "SELECT * FROM entradas WHERE active=:active";
 
 			$lista = [];

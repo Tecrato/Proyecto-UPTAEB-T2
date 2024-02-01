@@ -2,7 +2,7 @@
 $.ajax({
   url: "Controller/funcs_ajax/search.php",
   type: "POST",
-  data: { randomnautica: "ventas" },
+  data: { randomnautica: "ventas" , limite:500},
   success: function (response) {
     let json = JSON.parse(response);
     let ContainerTarget = document.querySelector(".Contanier_fact_item");

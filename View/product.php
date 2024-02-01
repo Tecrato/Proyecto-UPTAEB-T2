@@ -284,7 +284,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <hr class="uk-divider-icon Color-icon-detailProduct">
 
                                 <div>
