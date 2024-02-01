@@ -40,7 +40,7 @@
 
 
         // con esta funcion se elimina un elemento dependiendo de su id
-        function borrar_logicamente() {
+        function desactivar() {
 			$query = $this->conn->prepare('UPDATE clientes SET active=0 WHERE id=:id');
 
 			$query->bindParam(':id',$this->id);
