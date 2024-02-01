@@ -46,6 +46,18 @@
 .iconMoon, .iconSun{
     filter: invert(1);
 }
+.activeEmpty{
+    background-color: #fff;
+}
+.activeExpire{
+    background-color: #ff0000
+}
+.activeGood{
+    background-color: #007D35
+}
+.activeCloseToExpire{
+    background-color: #ff0
+}
 
 
                                 

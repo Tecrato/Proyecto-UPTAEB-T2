@@ -18,10 +18,10 @@
                     <?php for ($i=0; $i < count($categoria); $i++){ 
                         $row = $categoria[$i];
                         $url;
-                        if ($row['nombre'] == 'bebida') {
+                        if ($row['nombre'] == 'Bebida') {
                             $url = "./static/images/refresco.png";
 
-                        } elseif ($row['nombre'] == 'alimentos') {
+                        } elseif ($row['nombre'] == 'Alimentos') {
 
                             $url = "./static/images/alimentos.png";
                         } elseif ($row['nombre'] == 'Limpieza/Aseo personal'){
