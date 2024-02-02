@@ -35,9 +35,10 @@
             id_proveedor: isset($_POST['id_proveedor']) ? $_POST['id_proveedor']: null);
     }
     elseif ($_POST['randomnautica'] == "proveedores") {
-        include("../funcs/verificar_admin.php");
         require('../../Model/Proveedores.php');
-        $clase = new Proveedor();
+        $clase = new Proveedor(
+            like:(isset($_POST['like']) ? $_POST['like'] : '')
+        );
     }
     elseif ($_POST['randomnautica'] == "clientes") {
         require('../../Model/Clientes.php');
