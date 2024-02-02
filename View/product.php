@@ -148,7 +148,7 @@
                             </div>
                             <div class="uk-modal-footer uk-text-right">
                                 <button class="uk-button uk-button-default uk-modal-close cancelar" type="button">Cancelar</button>
-                                <label class="uk-button uk-button-secondary subir" type="submit" for="subirxd">Guardar</label>
+                                <label class="subir uk-button uk-button-secondary  uk-modal-close cancelar" type="submit" for="subirxd">Guardar</label>        
                             </div>
                         </div>
                     </div>

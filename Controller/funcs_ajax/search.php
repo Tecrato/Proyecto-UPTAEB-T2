@@ -24,6 +24,7 @@
             id:(isset($_POST['ID']) ? $_POST['ID'] : null),
             marca:(isset($_POST['marca']) ? $_POST['marca'] : null),
             nombre:(isset($_POST['nombre']) ? $_POST['nombre'] : null),
+            active:(isset($_POST['active']) ? $_POST['active'] : 1),
             like:(isset($_POST['like']) ? $_POST['like'] : '')
         );
     }

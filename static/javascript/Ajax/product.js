@@ -1,14 +1,14 @@
 //creamos una funcion que nos cargue todas las tarjetas y sus modales, dependiendo de que modal desea abrir
 var page = 0;
 //la varible val funcionara para usar el modal de registrar para editar, dependiendo del valor de val, la url de la peticion cambiara
-let val = false
+let val = false;
 
 $(".pag-btn-productos").click((ele) => {
   cambiar_pagina_ajax(
     ele.target.dataset["direccion"],
     "productos",
     cargarTargetProduct,
-    9
+    18
   );
 });
 
@@ -28,12 +28,19 @@ const modalDetalles = () => {
           let json = JSON.parse(response);
           json.lista.forEach((item) => {
             //segun el id, los datos del modal cambiaran
-            document.querySelector(".productDetailIMG").src = `Media/imagenes/${item.imagen}`;
-            document.querySelector(".productDetailName").textContent = item.nombre;    
-            document.querySelector(".productDetailmarca").textContent = item.marca;   
-            document.querySelector(".productDetailCategory").textContent = item.categoria; 
-            document.querySelector(".productDetailStock").textContent = item.stock;
-            document.querySelector(".productDetailPV").textContent = item.precio_venta;
+            document.querySelector(
+              ".productDetailIMG"
+            ).src = `Media/imagenes/${item.imagen}`;
+            document.querySelector(".productDetailName").textContent =
+              item.nombre;
+            document.querySelector(".productDetailmarca").textContent =
+              item.marca;
+            document.querySelector(".productDetailCategory").textContent =
+              item.categoria;
+            document.querySelector(".productDetailStock").textContent =
+              item.stock;
+            document.querySelector(".productDetailPV").textContent =
+              item.precio_venta;
           });
 
           //esta consulta es para cargar los lotes segun del id del producto y el proveedor
@@ -199,9 +206,11 @@ const modalModificar = () => {
 
   document.querySelectorAll(".UpdateProduct").forEach((L) => {
     L.addEventListener("click", () => {
-      val = true
+      val = true;
       let idProduct = L.dataset["id"];
-      document.querySelector(".ValueInpUpdate").setAttribute("value", idProduct);
+      document
+        .querySelector(".ValueInpUpdate")
+        .setAttribute("value", idProduct);
       // ejecutamos esta peticion para traer los proveedores de los productos a los select
       $.ajax({
         url: "Controller/funcs_ajax/search.php",
@@ -216,15 +225,20 @@ const modalModificar = () => {
             document.querySelector(".SMMUpdateProduct").value = i.stock_min;
             document.querySelector(".SMXUpdateProduct").value = i.stock_max;
             if (i.IVA == 0) {
-              document.querySelector(".IVA_EUpdateProduct").setAttribute("checked", "");
+              document
+                .querySelector(".IVA_EUpdateProduct")
+                .setAttribute("checked", "");
             } else {
-              document.querySelector(".IVA_NEUpdateProduct").setAttribute("checked", "");
+              document
+                .querySelector(".IVA_NEUpdateProduct")
+                .setAttribute("checked", "");
             }
           });
-          document.querySelector(".title_modal_reg_upd").textContent = "MODIFICAR PRODUCTO";
-          cargarCategoriaRegProduct()
-          cargarUnidadesRegProduct()
-            
+          document.querySelector(".title_modal_reg_upd").textContent =
+            "MODIFICAR PRODUCTO";
+          cargarCategoriaRegProduct();
+          cargarUnidadesRegProduct();
+
           UIkit.modal("#modal-register-product").show();
         },
       });
@@ -262,6 +276,7 @@ const modalEliminar = () => {
           processData: false,
           contentType: false,
           success: function (response) {
+          cargarTargetProductDesactive()
             //ocultamos el modal
             UIkit.modal("#eliminar_product").hide();
             //mostramos el mensaje de eliminacion exitosa
@@ -280,7 +295,7 @@ const modalEliminar = () => {
     });
   });
 };
-const tarjetas = (response) => {
+const tarjetas = (response,cont) => {
   //convertimos la respuesta en un objeto
   let json = JSON.parse(response);
   //tarjeta sera el template de las tarjetas
@@ -289,11 +304,7 @@ const tarjetas = (response) => {
   json.lista.forEach((item) => {
     tarjeta += `
               
-  <div id="${item.id}" data-supplier="${item.proveedor}" data-category="${
-      item.categoria
-    }" data-marca="${item.marca}" data-name="${item.nombre
-      .slice(0, 1)
-      .toUpperCase()}">
+  <div id="${item.id}" data-supplier="${item.proveedor}" data-category="${item.categoria}" data-marca="${item.marca}" data-name="${item.nombre.slice(0, 1).toUpperCase()}">
     <div class="uk-card uk-card-default uk-background-secondary uk-light uk-border-rounded">
         <div class="uk-visible-toggle" tabindex="-1">
             <article class="uk-transition-toggle">
@@ -304,11 +315,12 @@ const tarjetas = (response) => {
                     <a href="#modal-details-product" uk-toggle class="btnDetails" data-id="${
                       item.id
                     }">
+                      
                         <span class="Bg-info" uk-icon="icon: info; ratio: 1.5"></span>
                     </a>
                 </div>
-                <div class="uk-position-bottom-center ">
-                    <ul class="uk-iconnav uk-background-secondary uk-transition-slide-bottom-small" style="width: 105%; padding: 5px;">
+                <div class="uk-position-bottom-center btns_option_product">
+                    <ul class=" uk-iconnav uk-background-secondary uk-transition-slide-bottom-small" style="width: 105%; padding: 5px;">
                         <li><a href="#eliminar_product" uk-toggle uk-tooltip="title:Eliminar; delay: 500" class="uk-icon-button deleteID" uk-icon="icon: trash" data-id="${
                           item.id
                         }"></a></li>
@@ -325,8 +337,8 @@ const tarjetas = (response) => {
                     </ul>
                 </div>
                 <div>
-                    <div style="padding: 0px 10px;">
-                        <div>${item.nombre}</div>
+                    <div style="padding: 0px 10px; width: 130px;">
+                        <div class="uk-text-truncate">${item.nombre}</div>
                         <div>stock: <b class="uk-text-success">${
                           item.stock ? item.stock : 0
                         }</b></div>
@@ -337,15 +349,22 @@ const tarjetas = (response) => {
     </div>
 </div>
           `;
+
     //seleccionamos el contenedor de las tarjetas, y las insertamos
-    $(".container-target-product").html(tarjeta);
+    $(cont).html(tarjeta);
+    
+    //preguntamamos si la sesion es la de usuario, para eliminar los botones de accion
+    if (session_user_rol == 'Usuario') {
+      let options = document.querySelectorAll('.btns_option_product')
+      options.forEach(e => {
+        e.firstElementChild.remove()
+      })
+    }
   });
 
   if (json.lista.length == 0) {
-    document
-      .querySelector(".container_marca_agua")
-      .classList.remove("invisible");
-    document.querySelector(".uk-pagination").classList.add("invisible");
+      document.querySelector(".container_marca_agua").classList.remove("invisible");
+      document.querySelector(".uk-pagination").classList.add("invisible");
     $(".container-target-product").html("");
   } else {
     document.querySelector(".container_marca_agua").classList.add("invisible");
@@ -369,11 +388,38 @@ const cargarTargetProduct = () => {
       like: "",
     },
     success: function (response) {
-      tarjetas(response);
+      // console.log(response);
+      tarjetas(response,".container-target-product");
     },
   });
 };
-
+const cargarTargetProductDesactive = () => {
+  //hacemos la petion ajax
+  $.ajax({
+    url: "Controller/funcs_ajax/search.php",
+    type: "POST",
+    data: {
+      randomnautica: "productos",
+      n: page, // Aca va el numero de la pagina actual
+      limite: 18, // Aca va el numero maximo de tarjetas que se pueden imprimir
+      like: "",
+      active: 0
+    },
+    success: function (response) {
+      if (document.querySelector('.height_controller2').childElementCount == 0) {
+        document.querySelector(".container_marca_agua2").classList.remove('invisible')
+        document.querySelector(".uk-pagination").classList.remove('invisible')
+      } else {
+        document.querySelector(".container_marca_agua2").classList.add('invisible')
+        document.querySelector(".uk-pagination").classList.add('invisible')
+      }
+      // console.log(response);
+      tarjetas(response,".cont_product_desactive");
+      
+    },
+  });
+};
+cargarTargetProductDesactive()
 //***************************************************  Modal de Registro de productos  ******************************************************
 
 const cargarCategoriaRegProduct = () => {
@@ -388,7 +434,12 @@ const cargarCategoriaRegProduct = () => {
         options += `<option value="${date.id}">${date.nombre}</option>`;
       });
       document.getElementById("selectCat").innerHTML = options;
-      document.getElementById("selectCat").insertAdjacentHTML('afterbegin',`<option value="" disabled selected>Categoria</option>`)
+      document
+        .getElementById("selectCat")
+        .insertAdjacentHTML(
+          "afterbegin",
+          `<option value="" disabled selected>Categoria</option>`
+        );
     },
   });
 };
@@ -405,45 +456,56 @@ const cargarUnidadesRegProduct = () => {
         options += `<option value="${date.id}">${date.nombre}</option>`;
       });
       document.getElementById("selectUni").innerHTML = options;
-      document.getElementById("selectUni").insertAdjacentHTML('afterbegin',`<option value="" disabled selected>Unidad</option>`)
+      document
+        .getElementById("selectUni")
+        .insertAdjacentHTML(
+          "afterbegin",
+          `<option value="" disabled selected>Unidad</option>`
+        );
     },
   });
 };
 document.querySelector(".btn-modal-register").addEventListener("click", () => {
-  val = false
+  val = false;
   document.querySelector(".NameUpdateProduct").value = "";
   document.querySelector(".MarcaUpdateProduct").value = "";
   document.querySelector(".PVUpdateProduct").value = "";
   document.querySelector(".SMMUpdateProduct").value = "";
   document.querySelector(".SMXUpdateProduct").value = "";
-  document.querySelector(".title_modal_reg_upd").textContent = "REGISTRAR PRODUCTO";
+  document.querySelector(".title_modal_reg_upd").textContent =
+    "REGISTRAR PRODUCTO";
   cargarCategoriaRegProduct();
   cargarUnidadesRegProduct();
 });
-
-
+cargarTargetProductDesactive()
 let formAggProduct = document.getElementById("formAggProduct");
-  //captamos su evento submit, primero para evitar que la pagina se refresque, y segundo para insertar esos datos en un objeto FormData
-  formAggProduct.addEventListener("submit", (e) => {
-    let url
-    if (val == false) {
-      url = "Controller/funcs/agregar_cosas.php"
-    } else {
-      url = "Controller/funcs/modificar_cosas.php"
-    }
-    //aqui instanciamos el objeto formData y como parametro, le pasamos el formulario
-    //el formData es un objeto que actua con encapsulamiento de datos de los form
-    let formDataProduct = new FormData(formAggProduct);
-    //hacemos la peticion ajax
-    $.ajax({
-      url: url,
-      type: "POST",
-      data: formDataProduct,
-      processData: false,
-      contentType: false,
-      success: function (response) {
-        console.log(response);
-        //en la respuesta le mostramos un mensaje de producto creado correctamente
+//captamos su evento submit, primero para evitar que la pagina se refresque, y segundo para insertar esos datos en un objeto FormData
+formAggProduct.addEventListener("submit", (e) => {
+  let url;
+  if (val == false) {
+    url = "Controller/funcs/agregar_cosas.php";
+  } else {
+    url = "Controller/funcs/modificar_cosas.php";
+  }
+  //aqui instanciamos el objeto formData y como parametro, le pasamos el formulario
+  //el formData es un objeto que actua con encapsulamiento de datos de los form
+  let formDataProduct = new FormData(formAggProduct);
+  //hacemos la peticion ajax
+  $.ajax({
+    url: url,
+    type: "POST",
+    data: formDataProduct,
+    processData: false,
+    contentType: false,
+    success: function (response) {
+      console.log(response);
+      if (parseInt(response) > 1) {
+        UIkit.notification({
+          message: "<span uk-icon='icon: check'></span> a ocudi un error ",
+          status: "danger",
+          pos: "bottom-right",
+        });
+      } else {
         if (val == false) {
           UIkit.notification({
             message:
@@ -463,27 +525,16 @@ let formAggProduct = document.getElementById("formAggProduct");
         setTimeout(() => {
           UIkit.modal("#modal-register-product").hide();
         }, 400);
-        cargarTargetProduct();
-      },
-    });
-    e.preventDefault();
-  });
-// aqui insertaremos los proveedores, categoria y marcas para los filtros de los productos
+      }
+      //en la respuesta le mostramos un mensaje de producto creado correctamente
 
-//esta consulta sirve para cargar los datos de los proveedores en el filtro
-$.ajax({
-  url: "Controller/funcs_ajax/search.php",
-  type: "POST",
-  data: { randomnautica: "proveedores" },
-  success: function (response) {
-    let options = ``;
-    let json = JSON.parse(response);
-    json.lista.forEach((date) => {
-      options += `<li  uk-filter-control="filter: [data-supplier='${date.razon_social}']; group: supplier"><a class='filterS' href="#">${date.razon_social}</a></li>`;
-    });
-    document.querySelector(".filter_supplier").innerHTML += options;
-  },
+      cargarTargetProduct();
+
+    },
+  });
+  e.preventDefault();
 });
+
 //esta consulta sirve para cargar los datos de las categorias en el filtro
 $.ajax({
   url: "Controller/funcs_ajax/search.php",
@@ -526,5 +577,55 @@ document.querySelector(".searchProduct").addEventListener("keyup", (e) => {
     });
   } else {
     cargarTargetProduct();
+  }
+});
+
+let inpNameProduct = document.querySelector(".NameUpdateProduct");
+inpNameProduct.addEventListener("keyup", (e) => {
+  let val = e.target.value.toLowerCase();
+  if (val != "") {
+    $.ajax({
+      url: "Controller/funcs_ajax/search.php",
+      type: "POST",
+      data: { randomnautica: "productos", like: val },
+      success: function (response) {
+        let json = JSON.parse(response);
+        json.lista.forEach((e) => {
+          let nombre = e.nombre.toLowerCase();
+          if (nombre == val) {
+            inpNameProduct.setAttribute(
+              "uk-tooltip",
+              "title:El producto ya existe, use otro nombre; pos: left"
+            );
+            UIkit.tooltip(".NameUpdateProduct").show();
+            console.log("object");
+          } else {
+            inpNameProduct.removeAttribute("uk-tooltip");
+            if (document.querySelector(".uk-tooltip")) {
+              document
+                .querySelector(".controller-modal")
+                .removeChild(document.querySelector(".uk-tooltip"));
+            }
+          }
+        });
+        if (json.lista.length == 0) {
+          UIkit.tooltip(".NameUpdateProduct").hide();
+          inpNameProduct.removeAttribute("uk-tooltip");
+          if (document.querySelector(".uk-tooltip")) {
+            document
+              .querySelector(".controller-modal")
+              .removeChild(document.querySelector(".uk-tooltip"));
+          }
+          console.log("object2");
+        }
+      },
+    });
+  } else {
+    inpNameProduct.removeAttribute("uk-tooltip");
+    if (document.querySelector(".uk-tooltip")) {
+      document
+        .querySelector(".controller-modal")
+        .removeChild(document.querySelector(".uk-tooltip"));
+    }
   }
 });
