@@ -505,10 +505,7 @@ $.ajax({
       //capturamos el evento de pulsar una tecla
       input.addEventListener("keyup", (e) => {
         //esta variable guarda la cantidad de stock del producto en esa fila
-        let cantidad = parseInt(
-          input.parentElement.previousElementSibling.previousElementSibling
-            .firstElementChild.value
-        );
+        let cantidad = parseInt(input.parentElement.previousElementSibling.previousElementSibling.firstElementChild.value);
         //esta variable guarda el valor de lo que el usuario teclea
         let cantidadCliente = parseInt(e.target.value);
         if (cantidadCliente <= cantidad && cantidadCliente > 0) {
@@ -516,11 +513,7 @@ $.ajax({
         } else {
           input.classList.remove("succesc");
         }
-        if (
-          cantidadCliente > cantidad ||
-          cantidadCliente == 0 ||
-          /^([a-zA-Z]+)$/.test(e.target.value)
-        ) {
+        if (cantidadCliente > cantidad || cantidadCliente == 0 || /^([a-zA-Z]+)$/.test(e.target.value)){
           input.classList.add("danger");
         } else {
           input.classList.remove("danger");
@@ -870,6 +863,9 @@ $.ajax({
           type: "POST",
           data: { jsonString },
           success: function (response) {
+            setTimeout(()=> {
+              window.location = 'http://localhost/Proyecto-UPTAEB-T2/Ventas'
+            },2000)
             console.log(response);
           },
         });
@@ -882,11 +878,7 @@ $.ajax({
       .addEventListener("keyup", (e) => {
         if (e.target.matches("#SearchProduct-Fact")) {
           document.querySelectorAll(".TR-Product").forEach((r) => {
-            if (
-              r.firstElementChild.lastElementChild.textContent
-                .toLowerCase()
-                .includes(e.target.value)
-            ) {
+            if (r.firstElementChild.lastElementChild.textContent.toLowerCase().includes(e.target.value)){
               r.classList.remove("invisible");
             } else {
               r.classList.add("invisible");

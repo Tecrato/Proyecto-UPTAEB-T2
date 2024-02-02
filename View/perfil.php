@@ -35,7 +35,7 @@
             <ul class="switcherEdit" uk-tab uk-switcher>
                 <li><a href="#">Perfil</a></li>
                 <li><a href="#">Editar</a></li>
-                <li><a href="#">Registro de actividad</a></li>
+                <!-- <li><a href="#">Registro de actividad</a></li> -->
             </ul>
 
             <ul class="uk-switcher uk-margin">
@@ -94,7 +94,7 @@
                         </div>
                     </form>
                 </li>
-                <li>
+                <!-- <li>
                     <section>
                         <div class="uk-overflow-auto uk-light uk-margin-small-top">
                             <table class="uk-table uk-table-small uk-table-divider uk-table-hover">
@@ -119,7 +119,7 @@
                         </div>
                     </section>
 
-                </li>
+                </li> -->
             </ul>
         </div>
 

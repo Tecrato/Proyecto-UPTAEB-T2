@@ -1,4 +1,5 @@
 <?php
+    
     class Producto extends DB{
         private $id;
         private $id_categoria;
@@ -12,54 +13,12 @@
         private $IVA;
         private $active;
         private $like;
+        public $err;
 
         function __construct(
             $id=null, $id_categoria=null,$id_unidades=null,$nombre=null,$marca=null,$imagen=null,$stock_min=null,
             $stock_max=null,$precio_venta=null,$IVA=null,$active=1,$like=''){
-            if($this->id and !preg_match("/^[0-9]+$/", $this->id)){
-                return new Exception('El id esta mal');
-                die;
-            }
-            if($this->id_categoria and !preg_match("/^[0-9]+$/", $this->id_categoria)){
-                return new Exception('La categoria esta mal');
-                die;
-            }
-            if($this->id_unidades and !preg_match("/^[0-9]+$/", $this->id_unidades)){
-                return new Exception('La unidad esta mal');
-                die;
-            }
-            if($this->nombre and !preg_match("/^[a-z][a-z0-9]{2,20}$/", $this->nombre)){
-                return new Exception('El nombre esta mal');
-                die;
-            }
-            if($this->marca and !preg_match("/^[0-9]+$/", $this->marca)){
-                return new Exception('La marca esta mal');
-                die;
-            }
-            if($this->imagen and !preg_match("/^[0-9a-z]{2,}$/", $this->imagen)){
-                return new Exception('La imagen esta mal');
-                die;
-            }
-            if($this->stock_min and !preg_match("/^[0-9]+$/", $this->stock_min)){
-                return new Exception('El stock_min esta mal');
-                die;
-            }
-            if($this->stock_max and !preg_match("/^[0-9]+$/", $this->stock_max)){
-                return new Exception('El stock_max esta mal');
-                die;
-            }
-            if($this->precio_venta and !preg_match("/^[0-9]+$/", $this->precio_venta)){
-                return new Exception('El precio_venta esta mal');
-                die;
-            }
-            if($this->IVA and !preg_match("/^[0-1]$/", $this->IVA)){
-                return new Exception('El IVA esta mal');
-                die;
-            }
-            if($this->like and !preg_match("/^[a-z]+[a-z0-9]{2,20}+$/", $this->like)){
-                return new Exception('El like esta mal');
-                die;
-            }
+
             $this->id = $id;
             $this->id_categoria = $id_categoria;
             $this->id_unidades = $id_unidades;
@@ -91,7 +50,7 @@
             $query->bindParam(':IVA',$this->IVA);
 
 
-            $query->execute();
+            return $query->execute();
         }
 
 

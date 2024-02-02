@@ -93,8 +93,10 @@
     $cadena_aleatoria = substr(str_shuffle(str_repeat($semilla, $longitud)), 0, $longitud);
 	echo $cadena_aleatoria.'<br>';
 
-	$var = '8aaa';
+	$var = '8na';
 	if ($var and !preg_match("/^[a-z][a-z0-9]{2,20}$/", $var)){
-		throw new Exception('El id esta mal');
+		// throw new Exception('El id esta mal');
 	}
+	exit(404);
+	// echo 'nose';
 ?>

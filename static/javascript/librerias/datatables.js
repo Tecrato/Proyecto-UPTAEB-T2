@@ -4302,17 +4302,12 @@
 		var language = settings.oLanguage;
 		var previousSearch = settings.oPreviousSearch;
 		var features = settings.aanFeatures;
-		// var input = '<input  type="search" class="'+classes.sFilterInput+' uk-search-input"/>';
-		var input = `<form class="uk-search uk-search-default">
-						<span uk-search-icon></span>
-						<input placeholder="Uderrrr"  type="search" class="${+classes.sFilterInput} uk-search-input"/>
-    				</form>`
+		var input = '<input type="search" class="uk-search-input'+classes.sFilterInput+'"/>';
 	
 		var str = language.sSearch;
 		str = str.match(/_INPUT_/) ?
 			str.replace('_INPUT_', input) :
 			input;
-			// str+input;
 	
 		var filter = $('<div/>', {
 				'id': ! features.f ? tableId+'_filter' : null,
@@ -4954,7 +4949,7 @@
 			lengths  = d2 ? menu[0] : menu,
 			language = d2 ? menu[1] : menu;
 	
-		var select = $('<select class="uk-select" style="width: 70px"/>', {
+		var select = $('<select class="uk-select"/>', {
 			'name':          tableId+'_length',
 			'aria-controls': tableId,
 			'class':         classes.sLengthSelect
@@ -4969,7 +4964,7 @@
 			);
 		}
 	
-		var div = $('<div><label/></div>').addClass( classes.sLength );
+		var div = $('<div class="uk-margin-medium-bottom"><label class="uk-flex uk-flex-middle" style="gap: 10px;"/></div>').addClass( classes.sLength );
 		if ( ! settings.aanFeatures.l ) {
 			div[0].id = tableId+'_length';
 		}

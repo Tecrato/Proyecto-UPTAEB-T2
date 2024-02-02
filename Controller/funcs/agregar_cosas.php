@@ -6,7 +6,6 @@
     
     require('../../Model/Conexion.php');
     if ($tipo === 'producto'){
-        print_r($_POST);
         if ($_FILES['imagen1']['name'] != "") {
             $imagen = $_FILES['imagen1'];
             $nick = "producto_".$_POST['nombre'] . "_" . $imagen['name'];
@@ -24,6 +23,10 @@
         
         require('../../Model/Productos.php');
         $clase = new Producto(null,$_POST["categoria"],$_POST["unidad"],$_POST["nombre"],$_POST["marca"],$nick,$_POST["stock_min"],$_POST["stock_max"],$_POST["precio_venta"],$_POST["IVA"]); // Llama al modelo y le manda la instruccion
+        if ($clase->err){
+            echo ("$clase->err");
+            exit();
+        }
         try {
             print_r($clase->agregar());
         } catch (Exception $e) {

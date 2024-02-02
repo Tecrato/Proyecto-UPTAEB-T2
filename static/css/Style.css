@@ -265,7 +265,46 @@
     background-color: #106733;
     padding: 4px;
     border-radius: 5px;
-}  
+}
+.nav_link{
+    text-decoration: none !important;
+    display: block;
+    padding: 10px 0px;
+}
+.list_show{
+     width: 80%;
+     margin-left: auto;
+     border-left: 2px solid #fff;
+     list-style: none;
+     transition: height .4s;
+     height: 0px;
+}
+.arrow .list_arrow{
+    transform: rotate(90deg);
+}
+.list{
+    margin: 0px !important;
+    padding: 0px !important;
+    .list_item_click{
+        cursor: pointer;
+    }
+   .list_item{
+    list-style: none;
+    width: 100%;
+    overflow: hidden;
+    .list_botton{
+        display: flex;
+        align-items: center;
+        /* gap: 6em; */
+        width: 100%;
+        margin: 0px auto;
+        .list_arrow{
+            margin-left: auto;
+            transition: transform .3s;
+        }
+    }
+   }
+}
 @media (min-width: 350px) and (max-width: 376px){
     .Nav-img-2{
         width: 200px;
@@ -328,6 +367,15 @@
     .container-view-order{
         width: 300px;
     }
+    .filter_product{
+        margin-left: 10px;
+        margin-top: 15px;
+        justify-content: space-evenly;
+        width: 150%;
+    }
+    .cont_btns{
+        width: 220px;
+    }
 }
 @media (min-width: 376px) and (max-width: 767px){
     .form-search{
@@ -372,9 +420,10 @@
         width: 300px;
     }
     .filter_product{
-        display: block !important;
         margin-left: 10px;
         margin-top: 15px;
+        justify-content: space-evenly;
+        width: 150%;
     }
 }
 @media (min-width: 768px) and (max-width: 939px){
@@ -405,7 +454,14 @@
     .container-view-order{
         width: 300px;
     }
+    
 }
+@media (min-width: 375px) and (max-width: 565px){
+    .cont_btns{
+        width: 220px;
+    }
+}
+
                 /*-----------------------    Estilos del main registro de ventas -------------------------------*/
 
 .Client_register:hover{

@@ -23,8 +23,9 @@ const marcaAgua = () => {
   //esto hace que el fondo de pantalla y altura se modifiquen si hay tarjetas en los modulos
   let containerMarca_agua = document.querySelector(".container_marca_agua");
   let containerBody = document.querySelector(".Bg-Main-home");
-  let containerHeight =
-    document.querySelector(".height_controller").childElementCount;
+  let containerHeight = document.querySelector(".height_controller").childElementCount;
+  // let containerHeight2 = document.querySelector(".height_controller2").childElementCount;
+    
   let pagination = document.querySelector(".uk-pagination");
 
   if (containerHeight == 0) {

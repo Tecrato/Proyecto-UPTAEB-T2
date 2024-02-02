@@ -1,3 +1,10 @@
+
+if (screen < 1023) {
+  document.querySelector('.itemSwitcher1').innerHTML = `<img class="uk-preserve-width uk-margin-small-right img1ProductSwitcher" src="./static/images/cajas (2).png" width="30" height="30" alt="">`
+  document.querySelector('.itemSwitcher2').innerHTML = `<img class="uk-preserve-width uk-margin-small-right img2ProductSwitcher" src="./static/images/suministros.png" width="32" height="32" alt="">`
+  document.querySelector('.itemSwitcher3').innerHTML = `<img class="uk-preserve-width uk-margin-small-right img4ProductSwitcher" src="./static/images/papelera-de-reciclaje.png" width="32" height="32" alt="">`
+}
+
 //creamos una funcion que nos cargue todas las tarjetas y sus modales, dependiendo de que modal desea abrir
 var page = 0;
 //la varible val funcionara para usar el modal de registrar para editar, dependiendo del valor de val, la url de la peticion cambiara
@@ -12,7 +19,7 @@ $(".pag-btn-productos").click((ele) => {
   );
 });
 
-const modalDetalles = () => {
+const modalDetalles = (n) => {
   document.querySelectorAll(".btnDetails").forEach((info) => {
     //usamos el evento click para saber en cual pulsamos
     info.addEventListener("click", () => {
@@ -23,24 +30,19 @@ const modalDetalles = () => {
       $.ajax({
         url: "Controller/funcs_ajax/search.php",
         type: "POST",
-        data: { randomnautica: "productos", ID: idProduct },
+        data: { randomnautica: "productos", ID: idProduct, active:n },
         success: function (response) {
+          console.log(response);
           let json = JSON.parse(response);
           json.lista.forEach((item) => {
             //segun el id, los datos del modal cambiaran
-            document.querySelector(
-              ".productDetailIMG"
-            ).src = `Media/imagenes/${item.imagen}`;
-            document.querySelector(".productDetailName").textContent =
-              item.nombre;
-            document.querySelector(".productDetailmarca").textContent =
-              item.marca;
-            document.querySelector(".productDetailCategory").textContent =
-              item.categoria;
-            document.querySelector(".productDetailStock").textContent =
-              item.stock;
-            document.querySelector(".productDetailPV").textContent =
-              item.precio_venta;
+            document.querySelector(".productDetailIMG").src = `Media/imagenes/${item.imagen}`;
+            document.querySelector(".productDetailName").textContent = item.nombre;
+            document.querySelector(".productDetailmarca").textContent = item.marca;
+            document.querySelector(".productDetailCategory").textContent = item.categoria;
+            document.querySelector(".productDetailStock").textContent = item.stock ? item.stock : 0
+            document.querySelector(".productDetailPV").textContent = item.precio_venta;
+              
           });
 
           //esta consulta es para cargar los lotes segun del id del producto y el proveedor
@@ -353,6 +355,15 @@ const tarjetas = (response,cont) => {
     //seleccionamos el contenedor de las tarjetas, y las insertamos
     $(cont).html(tarjeta);
     
+    //esto es para acomodar la posicion de los botones dependiendo de la resolucion
+    if (screen < 938) {
+      let options = document.querySelectorAll('.btns_option_product')
+      options.forEach(e => {
+          e.classList.remove('uk-position-bottom-center')
+          e.classList.add('uk-position-bottom-right')
+      })
+    }
+
     //preguntamamos si la sesion es la de usuario, para eliminar los botones de accion
     if (session_user_rol == 'Usuario') {
       let options = document.querySelectorAll('.btns_option_product')
@@ -365,13 +376,18 @@ const tarjetas = (response,cont) => {
   if (json.lista.length == 0) {
       document.querySelector(".container_marca_agua").classList.remove("invisible");
       document.querySelector(".uk-pagination").classList.add("invisible");
+      document.querySelector(".uk-pagination2").classList.add('invisible')
+      document.querySelector(".container_marca_agua2").classList.remove('invisible')
+
     $(".container-target-product").html("");
   } else {
     document.querySelector(".container_marca_agua").classList.add("invisible");
+    document.querySelector(".container_marca_agua2").classList.add('invisible')
+
     document.querySelector(".uk-pagination").classList.remove("invisible");
+    document.querySelector(".uk-pagination2").classList.remove('invisible')
   }
 
-  modalDetalles();
   modalEntradas();
   modalEliminar();
   modalModificar();
@@ -390,6 +406,7 @@ const cargarTargetProduct = () => {
     success: function (response) {
       // console.log(response);
       tarjetas(response,".container-target-product");
+      modalDetalles(1)
     },
   });
 };
@@ -407,14 +424,15 @@ const cargarTargetProductDesactive = () => {
     },
     success: function (response) {
       if (document.querySelector('.height_controller2').childElementCount == 0) {
-        document.querySelector(".container_marca_agua2").classList.remove('invisible')
-        document.querySelector(".uk-pagination").classList.remove('invisible')
+        // document.querySelector(".container_marca_agua2").classList.remove('invisible')
+        document.querySelector(".uk-pagination2").classList.add('invisible')
       } else {
         document.querySelector(".container_marca_agua2").classList.add('invisible')
-        document.querySelector(".uk-pagination").classList.add('invisible')
+        document.querySelector(".uk-pagination2").classList.remove('invisible')
       }
       // console.log(response);
       tarjetas(response,".cont_product_desactive");
+      modalDetalles(0)
       
     },
   });
@@ -564,21 +582,28 @@ $.ajax({
   },
 });
 //esta funcion tiene el objetivo de mostrar los productos por nombre
-document.querySelector(".searchProduct").addEventListener("keyup", (e) => {
-  let val = e.target.value;
-  if (val != "") {
-    $.ajax({
-      url: "Controller/funcs_ajax/search.php",
-      type: "POST",
-      data: { randomnautica: "productos", like: val },
-      success: function (response) {
-        tarjetas(response);
-      },
-    });
-  } else {
-    cargarTargetProduct();
-  }
-});
+const buscarProducto = (clase,n)=>{
+  document.querySelector(clase).addEventListener("keyup", (e) => {
+    let val = e.target.value;
+    if (val != "") {
+      $.ajax({
+        url: "Controller/funcs_ajax/search.php",
+        type: "POST",
+        data: { randomnautica: "productos", like: val, active:n },
+        success: function (response) {
+          console.log(response);
+          tarjetas(response,".container-target-product")
+          tarjetas(response,".cont_product_desactive")
+        },
+      });
+    } else {
+      cargarTargetProduct();
+      cargarTargetProductDesactive();
+    }
+  });
+}
+buscarProducto(".searchProductActive",1)
+buscarProducto(".searchProductNotActive",0)
 
 let inpNameProduct = document.querySelector(".NameUpdateProduct");
 inpNameProduct.addEventListener("keyup", (e) => {
