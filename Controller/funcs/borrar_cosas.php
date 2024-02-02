@@ -47,11 +47,11 @@
 
         header('Location:../../Ventas'); // Y vuelve a la pagina donde estaba antes
     }
-    // elseif ($tipo == 'entradas'){
-    //     require('../../Model/Entradas.php');
-    //     $clase = new Entrada($_POST['ID']); // Llama al modelo y le manda la instruccion
-    //     $clase->borrar_logicamente();
+    elseif ($tipo == 'entradas'){
+        require('../../Model/Entradas.php');
+        $clase = new Entrada($_POST['ID']); // Llama al modelo y le manda la instruccion
+        $clase->borrar();
 
-    //     header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
-    // }
+        // header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
+    }
 ?>

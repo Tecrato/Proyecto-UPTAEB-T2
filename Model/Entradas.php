@@ -53,8 +53,8 @@
 			}
 		}
 
-		function desactivar() {
-			$query = $this->conn->prepare('DELETE FROM productos WHERE id=:id');
+		function borrar() {
+			$query = $this->conn->prepare('DELETE FROM entradas WHERE id=:id');
 
 			$query->bindParam(':id',$this->id);
 			$query->execute();
