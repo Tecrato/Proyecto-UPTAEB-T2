@@ -26,6 +26,14 @@ const modalDetalles = (n) => {
       let templateDetails = "";
       //obtenemos el id del producto para hacer la consulta
       let idProduct = info.dataset["id"];
+
+      // if (session_user_rol == 'Usuario') {
+      // let contProvDetail = document.querySelector('.container-prov_details')
+      // let contProvDetail1 = document.querySelector('.container-prov_details').firstElementChild
+      // let contProvDetail2 = document.querySelector('.container-prov_details').lastElementChild
+      // contProvDetail.removeChild(contProvDetail1)
+      // contProvDetail.removeChild(contProvDetail2)
+      // }
       //hacemos la peticion ajax para crear el esqueleto del modag
       $.ajax({
         url: "Controller/funcs_ajax/search.php",
@@ -377,7 +385,7 @@ const tarjetas = (response,cont) => {
     if (session_user_rol == 'Usuario') {
       let options = document.querySelectorAll('.btns_option_product')
       options.forEach(e => {
-        e.firstElementChild.remove()
+        e.removeChild(e.firstElementChild)
       })
     }
   });
@@ -440,7 +448,7 @@ const cargarTargetProductDesactive = () => {
     },
   });
 };
-cargarTargetProductDesactive()
+// cargarTargetProductDesactive()
 //***************************************************  Modal de Registro de productos  ******************************************************
 
 const cargarCategoriaRegProduct = () => {
@@ -455,12 +463,12 @@ const cargarCategoriaRegProduct = () => {
         options += `<option value="${date.id}">${date.nombre}</option>`;
       });
       document.getElementById("selectCat").innerHTML = options;
-      document
-        .getElementById("selectCat")
-        .insertAdjacentHTML(
-          "afterbegin",
-          `<option value="" disabled selected>Categoria</option>`
-        );
+      // document
+      //   .getElementById("selectCat")
+      //   .insertAdjacentHTML(
+      //     "afterbegin",
+      //     `<option value="" disabled selected>Categoria</option>`
+      //   );
     },
   });
 };
@@ -498,7 +506,7 @@ document.querySelector(".btn-modal-register").addEventListener("click", () => {
   cargarCategoriaRegProduct();
   cargarUnidadesRegProduct();
 });
-cargarTargetProductDesactive()
+// cargarTargetProductDesactive()
 let formAggProduct = document.getElementById("formAggProduct");
 //captamos su evento submit, primero para evitar que la pagina se refresque, y segundo para insertar esos datos en un objeto FormData
 formAggProduct.addEventListener("submit", (e) => {
