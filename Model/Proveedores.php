@@ -66,7 +66,7 @@
 
         // Con esta otra funcion se busca entre los productos en la base de datos
         function search($n=0,$limite=9){
-            $query = "SELECT * FROM proveedores WHERE active=:active AND nombre LIKE :como";
+            $query = "SELECT * FROM proveedores WHERE active=:active AND razon_social LIKE :como";
 
             if ($this->id != null){
                 $query = $query." AND id=:id";

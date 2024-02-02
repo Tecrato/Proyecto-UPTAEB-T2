@@ -8,7 +8,7 @@ def main(args):
 
 
 	em = EmailMessage()
-	em["from"] = email_reciver
+	em["from"] = email_sender
 	em["to"] = email_reciver
 	em["subject"] = "Minimarket Variedades el Poly."
 	em.set_content(texto)
@@ -28,8 +28,14 @@ if __name__ == '__main__':
 	'''
 		Para hacer pruebas antes de llamarlo con PHP
 	'''
-	result = main(["jaja",decouple.config('MAIL_TEST'),"testo<br>Musho testo"])
-else:
 	result = main(list(sys.argv))
+# 	result = main(["jaja",decouple.config('MAIL_TEST'),f"""
+# 				<!DOCTYPE html>
+# 				<html lang="es">
+# 				<body>
+# 				</body>
+# 				</html>
+# 				""",'12345'])
+# else:
 
 print(result,end="")
