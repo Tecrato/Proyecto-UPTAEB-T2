@@ -14,7 +14,7 @@
         //     print_r(realpath("../../Media/imagenes/".$imagen));
         //     unlink("../../Media/imagenes/".$imagen);
         // }
-        $clase->desactivar();
+        $clase->toggle_active();
     }
     elseif ($tipo == 'proveedor'){
         require('../../Model/Proveedores.php');

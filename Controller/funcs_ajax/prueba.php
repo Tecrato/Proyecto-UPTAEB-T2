@@ -86,17 +86,22 @@
 	// print_r($a ? 'true' : 'false');
 
     // Generar una semilla aleatoria
-    $semilla = rand(); // Opcionalmente, puedes usar mt_rand() en lugar de rand()
+    // $semilla = rand(); // Opcionalmente, puedes usar mt_rand() en lugar de rand()
     
     // Usar la semilla para generar una cadena alfanumérica aleatoria
-    $longitud = 10; // Define la longitud de la cadena
-    $cadena_aleatoria = substr(str_shuffle(str_repeat($semilla, $longitud)), 0, $longitud);
-	echo $cadena_aleatoria.'<br>';
+    // $longitud = 10; // Define la longitud de la cadena
+    // $cadena_aleatoria = substr(str_shuffle(str_repeat($semilla, $longitud)), 0, $longitud);
+	// echo $cadena_aleatoria.'<br>';
 
-	$var = '8na';
-	if ($var and !preg_match("/^[a-z][a-z0-9]{2,20}$/", $var)){
-		// throw new Exception('El id esta mal');
+	// $var = '8na';
+	// if ($var and !preg_match("/^[a-z][a-z0-9]{2,20}$/", $var)){
+	// 	// throw new Exception('El id esta mal');
+	// }
+	// exit(404);
+	if (1 == 1) {
+		echo 0;
+	} else {
+		echo 1;
 	}
-	exit(404);
-	// echo 'nose';
+	
 ?>
