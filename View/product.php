@@ -41,13 +41,6 @@
                                                 </ul>
                                             </div>
                                         </li>
-                                        <!-- <li>
-                                            <a href="#">PROVEEDOR <span uk-drop-parent-icon></span></a>
-                                            <div class="uk-dropdown">
-                                                <ul class="uk-nav uk-dropdown-nav filter_supplier">
-                                                </ul>
-                                            </div>
-                                        </li> -->
                                         <li>
                                             <a href="#">MARCA <span uk-drop-parent-icon></span></a>
                                             <div class="uk-dropdown">
@@ -108,10 +101,10 @@
                                     <input class="ValueInpUpdate" type="number" name="ID" style="display:none">
                                     <input type="text" name="tipo" value='producto' id="" style="display:none">
                                     <div class="uk-width-1-2">
-                                        <input class="NameUpdateProduct uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" required>
+                                        <input class="NameUpdateProduct uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="^[A-Z][a-z0-9]{2,20}$" required>
                                     </div>
                                     <div class="uk-width-1-2@s">
-                                        <input class="MarcaUpdateProduct uk-input" type="text" placeholder="Marca" aria-label="50" name="marca">
+                                        <input class="MarcaUpdateProduct uk-input" type="text" placeholder="Marca" aria-label="50" pattern="^[A-Z][a-z0-9]{2,20}$" name="marca">
                                     </div>
                                     <div class="uk-width-1-2@s">
                                         <select id="selectCat" class="uk-select" id="form-stacked-select" name="categoria" required>
@@ -124,13 +117,13 @@
                                         </select>
                                     </div>
                                     <div class="uk-width-1-2@s">
-                                        <input class="PVUpdateProduct uk-input" type="number" step="0.1" placeholder="precio_venta" aria-label="25" name="precio_venta" required>
+                                        <input class="PVUpdateProduct uk-input" type="number" min="0.01" step="0.1" placeholder="precio_venta" aria-label="25" name="precio_venta" required>
                                     </div>
                                     <div class="uk-width-1-2@s">
-                                        <input class="SMMUpdateProduct uk-input" type="number" placeholder="Stock mínimo" aria-label="25" name="stock_min" required>
+                                        <input class="SMMUpdateProduct uk-input" type="number" min="1" placeholder="Stock mínimo" aria-label="25" name="stock_min" required>
                                     </div>
                                     <div class="uk-width-1-2@s">
-                                        <input class="SMXUpdateProduct uk-input" type="number" placeholder="Stock maximo" aria-label="25" name="stock_max" required>
+                                        <input class="SMXUpdateProduct uk-input" type="number" min="1" placeholder="Stock maximo" aria-label="25" name="stock_max" required>
                                     </div>
                                     <div class="uk-width-1-2@s">
                                         <label class="uk-margin-medium-right" for="">IVA</label>
@@ -197,7 +190,7 @@
                                         <input class="uk-input" type="number" placeholder="Cantidad" aria-label="100" name="cantidad" required>
                                     </div>
                                     <div class="uk-width-1-3@s">
-                                        <input class="uk-input" type="number" step="0.1" placeholder="precio_compra" aria-label="25" name="precio_compra" required>
+                                        <input class="uk-input" type="number" min="0.01" step="0.1" placeholder="precio_compra" aria-label="25" name="precio_compra" required>
                                     </div>
                                     <div class="uk-width-1-1@s uk-flex uk-flex-middle">
                                         <label for="" style="width: 265px;">Fecha adquisicion</label>
@@ -366,13 +359,6 @@
                                                 </ul>
                                             </div>
                                         </li>
-                                        <!-- <li>
-                                            <a href="#">PROVEEDOR <span uk-drop-parent-icon></span></a>
-                                            <div class="uk-dropdown">
-                                                <ul class="uk-nav uk-dropdown-nav filter_supplier">
-                                                </ul>
-                                            </div>
-                                        </li> -->
                                         <li>
                                             <a href="#">MARCA <span uk-drop-parent-icon></span></a>
                                             <div class="uk-dropdown">

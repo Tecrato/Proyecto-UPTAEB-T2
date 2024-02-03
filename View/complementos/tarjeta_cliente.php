@@ -71,10 +71,10 @@
                 <input type="text" name="tipo" value="cliente" id="" style="display:none">
                 <input type=number value="'.$row['id'].'" name="ID" style="display:none">
                 <div class="uk-width-1-2@s">
-                    <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre">
+                    <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="^[A-Z][a-z0-9]{2,20}$" value="'.$row['nombre'].'" required>
                 </div>
                 <div class="uk-width-1-2@s">
-                    <input class="uk-input" type="text" placeholder="Apellido" aria-label="50" name="apellido">
+                    <input class="uk-input" type="text" placeholder="Apellido" value="'.$row['apellido'].'" aria-label="50" name="apellido" pattern="^[A-Z][a-z0-9]{2,20}$" required>
                 </div>
                 <div class="uk-width-1-2@s">
                     <select class="uk-select" name="documento" required>
@@ -84,20 +84,20 @@
                     </select>
                 </div>
                 <div class="uk-width-1-2@s">
-                    <input class="uk-input" type="number" placeholder="Numero de documento" aria-label="50" name="cedula">
+                    <input class="uk-input" type="number" placeholder="Numero de documento" aria-label="50" value="'.$row['cedula'].'" name="cedula" pattern="^[VeE]-?[\d]{1,8}$" required>
                 </div>
                 <div class="uk-width-1-2@s">
-                    <input class="uk-input" type="text" placeholder="Direccion" name="direccion" aria-label="50">
+                    <input class="uk-input" type="text" placeholder="Direccion" name="direccion" value="'.$row['direccion'].'" aria-label="50" minlength="5" maxlength="200" required>
                 </div>
                 <div class="uk-width-1-2@s">
-                    <input class="uk-input" type="text" placeholder="Telefono" name="telefono" aria-label="50">
+                    <input class="uk-input" type="text" placeholder="Telefono" name="telefono" value="'.$row['telefono'].'" aria-label="50" pattern="^\+([0-9]{2})\s-([0-9]{7,9})$" required>
                 </div>
-                <input type="submit" id="modificarCli" style="display:none">
+                <input type="submit" id="modificarCli'.$row['direccion'].'" style="display:none">
             </form>
         </div>
         <div class="uk-modal-footer uk-text-right">
             <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
-            <label class="uk-button uk-button-secondary" for="modificarCli" type="submit">Guardar</label>
+            <label class="uk-button uk-button-secondary" for="modificarCli'.$row['direccion'].'" type="submit">Guardar</label>
         </div>
     </div>
 </div>

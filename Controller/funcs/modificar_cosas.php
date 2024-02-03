@@ -39,8 +39,8 @@
     }
     elseif ($tipo === 'proveedor'){
         require('../../Model/Proveedores.php');
-        $clase = new Proveedor(); // Llama al modelo y le manda la instruccion
-        $clase->actualizar($_POST["ID"],$_POST["nombre"],$_POST["razon_social"],$_POST["rif"],$_POST["telefono"],$_POST["correo"],$_POST["direccion"]);
+        $clase = new Proveedor($_POST["ID"],$_POST["nombre"],$_POST["razon_social"],$_POST["rif"],$_POST["telefono"],$_POST["correo"],$_POST["direccion"]); // Llama al modelo y le manda la instruccion
+        $clase->actualizar();
         header('Location:../../Proveedores');
     }
     elseif ($tipo === 'cliente'){

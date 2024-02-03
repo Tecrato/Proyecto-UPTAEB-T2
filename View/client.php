@@ -9,9 +9,9 @@
                 <div class="uk-margin-right">
                     <div class="uk-flex uk-flex-wrap">
                         <div class="uk-margin formDelete">
-                            <form class="uk-search uk-search-default search-responsive-product">
-                                <span class="uk-search-icon-flip" uk-search-icon></span>
-                                <input class="uk-search-input" type="search" placeholder="Buscar" aria-label="Search">
+                            <form class="uk-search uk-search-default search-responsive-product" action="" method="GET">
+                                <button class="uk-search-icon-flip" type="submit" uk-search-icon></button>
+                                <input class="uk-search-input" type="text" placeholder="Buscar" name="like_nombre" aria-label="Search">
                             </form>
                         </div>
                         <div class="uk-margin-left">
@@ -21,51 +21,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- <nav uk-dropnav="mode: click">
-                        <ul class="uk-subnav filter_product" uk-margin>
-                            <li class="uk-active" uk-filter-control><a href="#">TODO</a></li>
-                            <li>
-                                <a href="#">CATEGORIA <span uk-drop-parent-icon></span></a>
-                                <div class="uk-dropdown">
-                                    <ul class="uk-nav uk-dropdown-nav">
-                                        <li uk-filter-control="filter: [data-color='white']; group: data-color"><a href="#">White</a></li>
-                                        <li uk-filter-control="filter: [data-color='blue']; group: data-color"><a href="#">Blue</a></li>
-                                        <li uk-filter-control="filter: [data-color='black']; group: data-color"><a href="#">Black</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li>
-                                <a href="#">PROVEEDOR <span uk-drop-parent-icon></span></a>
-                                <div class="uk-dropdown">
-                                    <ul class="uk-nav uk-dropdown-nav">
-                                        <li uk-filter-control="filter: [data-size='small']; group: size"><a href="#">Small</a></li>
-                                        <li uk-filter-control="filter: [data-size='medium']; group: size"><a href="#">Medium</a></li>
-                                        <li uk-filter-control="filter: [data-size='large']; group: size"><a href="#">Large</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li>
-                                <a href="#">MARCA <span uk-drop-parent-icon></span></a>
-                                <div class="uk-dropdown">
-                                    <ul class="uk-nav uk-dropdown-nav">
-                                        <li uk-filter-control="filter: [data-size='small']; group: size"><a href="#">Small</a></li>
-                                        <li uk-filter-control="filter: [data-size='medium']; group: size"><a href="#">Medium</a></li>
-                                        <li uk-filter-control="filter: [data-size='large']; group: size"><a href="#">Large</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li>
-                                <a href="#">PRESENTACION <span uk-drop-parent-icon></span></a>
-                                <div class="uk-dropdown">
-                                    <ul class="uk-nav uk-dropdown-nav">
-                                        <li uk-filter-control="filter: [data-size='small']; group: size"><a href="#">Small</a></li>
-                                        <li uk-filter-control="filter: [data-size='medium']; group: size"><a href="#">Medium</a></li>
-                                        <li uk-filter-control="filter: [data-size='large']; group: size"><a href="#">Large</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </nav> -->
             </div>
 
             <div class="uk-flex uk-margin-left container-view-order">
@@ -119,10 +74,10 @@
                 <form class="uk-grid-small" uk-grid method="POST" action="Controller/funcs/agregar_cosas.php" enctype="multipart/form-data">
                     <input type="text" name="tipo" value='cliente' id="" style="display:none">
                     <div class="uk-width-1-2@s">
-                        <input class="uk-input" type="text" placeholder="Nombre" name="nombre" aria-label="100">
+                        <input class="uk-input" type="text" placeholder="Nombre" name="nombre" aria-label="100" pattern="^[A-Z][a-z0-9]{2,20}$" required>
                     </div>
                     <div class="uk-width-1-2@s">
-                        <input class="uk-input" type="text" placeholder="Apellido" name="apellido" aria-label="50">
+                        <input class="uk-input" type="text" placeholder="Apellido" name="apellido" aria-label="50" pattern="^[A-Z][a-z0-9]{2,20}$" required>
                     </div>
                     <div class="uk-width-1-2@s">
                         <select class="uk-select" id="form-stacked-select" name="documento" required>
@@ -133,19 +88,19 @@
                         </select>
                     </div>
                     <div class="uk-width-1-2@s">
-                        <input class="uk-input" type="number" placeholder="cedula" name="cedula" aria-label="50">
+                        <input class="uk-input" type="number" placeholder="cedula" name="cedula" aria-label="50" pattern="^[VeEe]-?\d{1,8}$" required>
                     </div>
                     <div class="uk-width-1-2@s">
-                        <input class="uk-input" type="text" placeholder="Telefono" name="telefono" aria-label="50">
+                        <input class="uk-input" type="text" placeholder="Telefono" name="telefono" aria-label="50" pattern="^\+([0-9]{2})\s-([0-9]{7,9})$" required>
                     </div>
                     <div class="uk-width-1-2@s">
-                        <input class="uk-input" type="text" placeholder="Dirección" name="direccion" aria-label="50">
+                        <input class="uk-input" type="text" placeholder="Dirección" name="direccion" aria-label="50" minlength="5" maxlength="200" required>
                     </div>
-                    <input type="submit" id="subirC" style="display:none">
+                    <input type="submit" id="subirC" style="display:none" required>
                 </form>
             </div>
             <div class="uk-modal-footer uk-text-right">
-                <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
+            <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
                 <label class="uk-button uk-button-secondary" type="button" for="subirC">Guardar</label>
             </div>
         </div>
