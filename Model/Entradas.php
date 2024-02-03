@@ -60,7 +60,7 @@
 			$query->execute();
 		}
 
-		function search($n=0,$limite=9, $order = ' id DESC '){
+		function search($n=0,$limite=9, $order = ' id ASC '){
             $query = "SELECT 
                     a.id,
                     a.id_producto,

@@ -74,10 +74,10 @@
                     <form class="uk-grid-small" uk-grid method="POST" action="Controller/funcs/agregar_cosas.php">
                         <input type="text" name="tipo" value='proveedor' id="" style="display:none">
                         <div class="uk-width-1-2@s">
-                            <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="^[A-Z][A-Za-z0-9]{2,20}$" required>
+                            <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="^[A-Z][A-Za-z0-9ñ\s]{2,20}$" required>
                         </div>
                         <div class="uk-width-1-2@s">
-                            <input class="uk-input" type="text" placeholder="Razon Social" aria-label="100" name="razon_social" pattern="^[A-ZÑ][a-zA-Z0-9ñ]{2,50}$" required>
+                            <input class="uk-input" type="text" placeholder="Razon Social" aria-label="100" name="razon_social" pattern="^[A-ZÑ][a-zA-Z0-9ñ\s]{2,50}$" required>
                         </div>
                         <div class="uk-width-1-2@s">
                             <input class="uk-input" type="text" placeholder="Rif" aria-label="50" name="rif" pattern="^[VJEGPvjegp][\d]+$" value="j-00000000" required>
