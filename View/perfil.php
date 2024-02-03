@@ -166,15 +166,15 @@
                 <form class="uk-grid-small" uk-grid method="POST" action="./Controller/funcs/agregar_cosas.php">
                     <input type="text" name="tipo" value='usuarios' id="" style="display:none">
                     <div class="uk-width-1-2">
-                        <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre"
+                        <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="^([A-Z]+){1}[a-z]{2,5}$" 
                             required>
                     </div>
                     <div class="uk-width-1-2@s">
-                        <input class="uk-input" type="text" placeholder="Apellido" aria-label="50" name="apellido">
+                        <input class="uk-input" type="text" placeholder="Apellido" aria-label="50" name="apellido" pattern="^([A-Z]+){1}[a-z]{2,10}$" >
                     </div>
                     <div class="uk-width-1-2@s">
                         <input class="uk-input" type="text" placeholder="Correo Electronico" aria-label="100"
-                            name="correo" required>
+                            name="correo" parent="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$" required>
                     </div>
                     <div class="uk-width-1-2@s">
                         <select class="uk-select" id="form-stacked-select" name="rol" required>
@@ -184,7 +184,7 @@
                         </select>
                     </div>
                     <div class="uk-width-1-1@s">
-                        <input class="uk-input" type="password" placeholder="Contraseña" aria-label="100" name="password"
+                        <input class="uk-input" type="password" placeholder="Contraseña" aria-label="100" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}$" name="password"
                             required>
                     </div>
                     <input type="submit" id="subirC" style="display:none">

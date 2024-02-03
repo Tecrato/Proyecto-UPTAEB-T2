@@ -71,10 +71,10 @@
                 <input type="text" name="tipo" value="cliente" id="" style="display:none">
                 <input type=number value="'.$row['id'].'" name="ID" style="display:none">
                 <div class="uk-width-1-2@s">
-                    <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre">
+                    <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="^([A-Z]+){1}[a-z]{2,5}$" required>
                 </div>
                 <div class="uk-width-1-2@s">
-                    <input class="uk-input" type="text" placeholder="Apellido" aria-label="50" name="apellido">
+                    <input class="uk-input" type="text" placeholder="Apellido" aria-label="50" name="apellido" pattern="^([A-Z]+){1}[a-z]{2,10}$" required>
                 </div>
                 <div class="uk-width-1-2@s">
                     <select class="uk-select" name="documento" required>
@@ -84,13 +84,13 @@
                     </select>
                 </div>
                 <div class="uk-width-1-2@s">
-                    <input class="uk-input" type="number" placeholder="Numero de documento" aria-label="50" name="cedula">
+                    <input class="uk-input" type="number" placeholder="Numero de documento" aria-label="50" name="cedula" pattern="^[VeEe]-?\d{1,8}$" required>
                 </div>
                 <div class="uk-width-1-2@s">
-                    <input class="uk-input" type="text" placeholder="Direccion" name="direccion" aria-label="50">
+                    <input class="uk-input" type="text" placeholder="Direccion" name="direccion" aria-label="50" pattern="^(\w{5,7})\s([0-9]{1,2})entre(\w{5,7})\s([0-9]{1,2})y(\w{5,7})\s([0-9]{1,2})$" required>
                 </div>
                 <div class="uk-width-1-2@s">
-                    <input class="uk-input" type="text" placeholder="Telefono" name="telefono" aria-label="50">
+                    <input class="uk-input" type="text" placeholder="Telefono" name="telefono" aria-label="50" pattern="^\+([0-9]{2})\s-([0-9]{7,9})$" required>
                 </div>
                 <input type="submit" id="modificarCli" style="display:none">
             </form>

@@ -119,10 +119,10 @@
                 <form class="uk-grid-small" uk-grid method="POST" action="Controller/funcs/agregar_cosas.php" enctype="multipart/form-data">
                     <input type="text" name="tipo" value='cliente' id="" style="display:none">
                     <div class="uk-width-1-2@s">
-                        <input class="uk-input" type="text" placeholder="Nombre" name="nombre" aria-label="100">
+                        <input class="uk-input" type="text" placeholder="Nombre" name="nombre" aria-label="100" pattern="^([A-Z]+){1}[a-z]{2,5}$" required>
                     </div>
                     <div class="uk-width-1-2@s">
-                        <input class="uk-input" type="text" placeholder="Apellido" name="apellido" aria-label="50">
+                        <input class="uk-input" type="text" placeholder="Apellido" name="apellido" aria-label="50" pattern="^([A-Z]+){1}[a-z]{2,10}$" required>
                     </div>
                     <div class="uk-width-1-2@s">
                         <select class="uk-select" id="form-stacked-select" name="documento" required>
@@ -133,19 +133,19 @@
                         </select>
                     </div>
                     <div class="uk-width-1-2@s">
-                        <input class="uk-input" type="number" placeholder="cedula" name="cedula" aria-label="50">
+                        <input class="uk-input" type="number" placeholder="cedula" name="cedula" aria-label="50" pattern="^[VeEe]-?\d{1,8}$" required>
                     </div>
                     <div class="uk-width-1-2@s">
-                        <input class="uk-input" type="text" placeholder="Telefono" name="telefono" aria-label="50">
+                        <input class="uk-input" type="text" placeholder="Telefono" name="telefono" aria-label="50" pattern="^\+([0-9]{2})\s-([0-9]{7,9})$" required>
                     </div>
                     <div class="uk-width-1-2@s">
-                        <input class="uk-input" type="text" placeholder="Dirección" name="direccion" aria-label="50">
+                        <input class="uk-input" type="text" placeholder="Dirección" name="direccion" aria-label="50" pattern="^(\w{5,7})\s([0-9]{1,2})entre(\w{5,7})\s([0-9]{1,2})y(\w{5,7})\s([0-9]{1,2})$" required>
                     </div>
-                    <input type="submit" id="subirC" style="display:none">
+                    <input type="submit" id="subirC" style="display:none" required>
                 </form>
             </div>
             <div class="uk-modal-footer uk-text-right">
-                <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
+            <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
                 <label class="uk-button uk-button-secondary" type="button" for="subirC">Guardar</label>
             </div>
         </div>

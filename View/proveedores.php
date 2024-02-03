@@ -119,24 +119,24 @@
                     <form class="uk-grid-small" uk-grid method="POST" action="Controller/funcs/agregar_cosas.php">
                         <input type="text" name="tipo" value='proveedor' id="" style="display:none">
                         <div class="uk-width-1-2@s">
-                            <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" requierd>
+                            <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="^([A-Z]+){1}[a-z]{2,5}$" required>
                         </div>
                         <div class="uk-width-1-2@s">
-                            <input class="uk-input" type="text" placeholder="Razon Social" aria-label="100" name="razon_social">
+                            <input class="uk-input" type="text" placeholder="Razon Social" aria-label="100" name="razon_social" pattern="^[A-ZÑ&]{3,4}\d{6}[A-Z0-9]{3}$" required>
                         </div>
                         <div class="uk-width-1-2@s">
-                            <input class="uk-input" type="text" placeholder="Rif" aria-label="50" name="rif" value="j-00000000">
+                            <input class="uk-input" type="text" placeholder="Rif" aria-label="50" name="rif" pattern="^[VJEGP][\d]{9}$" value="j-00000000" required>
                         </div>
                         <div class="uk-width-1-2@s">
-                            <input class="uk-input" type="number" minlength="9" placeholder="Número de teléfono" aria-label="50" name="telefono" required>
+                            <input class="uk-input" type="number" minlength="9" placeholder="Número de teléfono" aria-label="50" name="telefono" pattern="^\+([0-9]{2})\s-([0-9]{7,9})$" required>
                         </div>
                         <div class="uk-width-1-2@s">
-                            <input class="uk-input" type="email" placeholder="Correo electrónico" aria-label="25" name="correo" required>
+                            <input class="uk-input" type="email" placeholder="Correo electrónico" aria-label="25" name="correo" pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$" required>
                         </div>
                         <div class="uk-width-1-2@s">
-                            <input class="uk-input" type="text" placeholder="Dirección" aria-label="25" name="direccion">
+                            <input class="uk-input" type="text" placeholder="Dirección" aria-label="25" name="direccion" pattern="^(\w{5,7})\s([0-9]{1,2}) entre (\w{5,7})\s([0-9]{1,2}) y (\w{5,7})\s([0-9]{1,2})$" required>
                         </div>
-                        <input type="submit" id="subirxd" style="display:none">
+                        <input type="submit" id="subirxd" style="display:none" required>
                     </form>
                 </div>
                 <div class="uk-modal-footer uk-text-right">

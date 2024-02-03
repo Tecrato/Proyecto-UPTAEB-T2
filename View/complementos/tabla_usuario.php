@@ -30,10 +30,10 @@ echo '
                 <input type=number value="'.$row['id'].'" name="ID" style="display:none">
                 <input type=text value="usuario" name="tipo" style="display:none">
                 <div class="uk-width-1-3@s">
-                    <input class="uk-input" type="text" placeholder="Nombre" value="'.$row['nombre'].'" aria-label="100" name="nombre" required>
+                    <input class="uk-input" type="text" placeholder="Nombre" value="'.$row['nombre'].'" aria-label="100" name="nombre" pattern="^([A-Z]+){1}[a-z]{2,5}$" required>
                 </div>
                 <div class="uk-width-1-3@s">
-                    <input class="uk-input" type="text" placeholder="Correo Electronico" value="'.$row['correo'].'"  aria-label="100" name="correo" required>
+                    <input class="uk-input" type="text" placeholder="Correo Electronico" value="'.$row['correo'].'"  aria-label="100" name="correo" pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$" required>
                 </div>
                 <div class="uk-width-1-2@s">
                     <select class="uk-select" name="rol" required>
@@ -43,7 +43,7 @@ echo '
                     </select>
                 </div>
                 <div class="uk-width-1-2@s">
-                    <input class="uk-input" type="text" placeholder="Contraseña" value="'.$row['password'].'" aria-label="100" name="password" required>
+                    <input class="uk-input" type="text" placeholder="Contraseña" value="'.$row['password'].'" aria-label="100" name="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}$" required>
                 </div>
                 <input type="submit" id="modificar'.$row['id'].'" style="display:none">
             </form>
