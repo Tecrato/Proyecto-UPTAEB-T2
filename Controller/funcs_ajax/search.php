@@ -32,7 +32,8 @@
         require('../../Model/Entradas.php');
         $clase = new Entrada(
             id_producto: isset($_POST['id_producto']) ? $_POST['id_producto']: null,
-            id_proveedor: isset($_POST['id_proveedor']) ? $_POST['id_proveedor']: null);
+            id_proveedor: isset($_POST['id_proveedor']) ? $_POST['id_proveedor']: null,
+            active:(isset($_POST['active']) ? $_POST['active'] : 1));
     }
     elseif ($_POST['randomnautica'] == "proveedores") {
         require('../../Model/Proveedores.php');

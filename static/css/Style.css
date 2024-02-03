@@ -48,15 +48,18 @@
 }
 .activeEmpty{
     background-color: #fff;
+    color: #111 !important;
 }
 .activeExpire{
-    background-color: #ff0000
+    background-color: #ff0000;
+    color: #111 !important;
 }
 .activeGood{
     background-color: #007D35
 }
 .activeCloseToExpire{
-    background-color: #ff0
+    background-color: #ff0;
+    color: #111 !important;
 }
 
 

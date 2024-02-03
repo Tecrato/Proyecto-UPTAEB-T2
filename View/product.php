@@ -159,10 +159,10 @@
                         <div class="uk-modal-dialog uk-margin-auto-vertical">
                             <div class="uk-modal-header uk-flex uk-flex-middle">
                                 <span class="uk-margin-small-right" uk-icon="icon: warning ; ratio: 2"></span>
-                                <h2 class="uk-modal-title uk-margin-remove-top">ELIMINAR</h2>
+                                <h2 class="uk-modal-title uk-margin-remove-top modalDeleteTitle">ELIMINAR</h2>
                             </div>
                             <div class="uk-modal-body">
-                                <p>Deseas eliminar este registro para siempre? No podras recuperlo mas adelante</p>
+                                <p class="modalDeleteBody">Deseas eliminar este registro para siempre? No podras recuperlo mas adelante</p>
                             </div>
                             <div class="uk-modal-footer uk-text-right">
                                 <button class="uk-button uk-button-default uk-modal-close cancelar" type="button">Cancelar</button>
@@ -306,79 +306,25 @@
 
 
             <li>
-                <section class="uk-flex container-entradas">
-                    <article style="width: 400px;" class="uk-background-secondary uk-padding uk-border-rounded uk-margin-medium-bottom">
+                <section class="uk-flex container-entradas" style="gap: 10px;">
+                    <article style="width: 200px; max-width: 200px; min-width: 200px;" class="uk-background-secondary uk-padding uk-border-rounded uk-margin-medium-bottom">
                         <form class="uk-search uk-search-default uk-margin-bottom" style="width: 100% !important;">
                             <input class="uk-search-input" type="search" placeholder="Buscar" aria-label="Search">
                         </form>
                         <nav class="nav">
                             <ul class="list">
-                                
+                                <!-- aqui se cargan los datos con js -->
                             </ul>
                         </nav>
                     </article>
                     <article>
                         <div>
                             <section class="uk-light uk-grid-small uk-flex-center" uk-grid>
-                                <div class="[email protected] uk-grid-medium uk-flex-center height_controller" uk-grid uk-height-match="target: > div > .uk-card">
-                                    <?php for ($i = 0; $i < 6; $i++) { ?>
-                                        <div>
-                                            <div class="uk-card uk-card-default uk-flex uk-padding-small uk-background-secondary uk-light uk-border-rounded">
-                                                <div style="width: 125px;">
-                                                    <div class="img_proveedor_container uk-border-rounded">
-                                                        <img src="static/images/btn_lote2.png" alt="" width="90px" />
-                                                        <h5 class="uk-margin-remove-left uk-margin-remove-right uk-margin-small-top uk-margin-small-bottom uk-text-center uk-text-bold">
-                                                            ENTRADA NRO 1
-                                                        </h5>
-                                                    </div>
-                                                </div>
+                                <!-- <div class="container_marca_agua">
+                                    <img class="marca_agua" src="static/images/logo_letras-minimarket.png" alt="">
+                                </div> -->
+                                <div class="[email protected] uk-grid-medium uk-flex-center cont_entry height_controller" uk-grid uk-height-match="target: > div > .uk-card">
 
-                                                <div style="width: 180px;">
-                                                    <div class="uk-flex uk-flex-middle uk-flex-between uk-margin-small-bottom">
-                                                        <h4 class="uk-margin-remove-bottom uk-margin-right uk-text-center">
-                                                            Nombre del producto
-                                                        </h4>
-                                                        <div>
-                                                            <a href="#eliminar_supplier" uk-toggle uk-tooltip="title:Eliminar; delay: 500" class="uk-icon-button uk-margin-small-right" uk-tooltip="title:Eliminar; delay: 500" type="button" style="border: none; cursor: pointer" type="button">
-                                                                <span uk-icon="icon: trash"></span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-
-                                                    <hr class="uk-margin-bottom uk-margin-remove-top hr_supplier" />
-
-                                                    <div class="Container-details-suppliers" style="width: 200px;">
-                                                        <div class="uk-flex">
-                                                            <h6 class="uk-margin-small">CANTIDAD</h6>
-                                                            <p class="uk-margin-small uk-margin-small-left uk-margin-remove-top uk-text-meta">
-                                                                10
-                                                            </p>
-                                                        </div>
-                                                        <div class="uk-flex">
-                                                            <h6 class="uk-margin-small">EXP</h6>
-                                                            <p class="uk-margin-small uk-margin-small-left uk-margin-remove-top uk-text-meta">
-                                                                J-5000000
-                                                            </p>
-                                                        </div>
-                                                        <div class="uk-flex">
-                                                            <h6 class="uk-margin-small">PRECIO COMPRA</h6>
-                                                            <p class="uk-margin-small uk-margin-small-left uk-margin-remove-top uk-text-meta">
-                                                                0000
-                                                            </p>
-                                                        </div>
-                                                        <div class="uk-flex">
-                                                            <div class="uk-margin-small-right">
-                                                                <h6>ESTADO</h6>
-                                                            </div>
-                                                            <div>
-                                                                <h6 class="uk-background-primary uk-margin-remove uk-text-center uk-border-rounded uk-text-bold state-entrys" style="width: 120px; padding: 2px 0px;">ACTIVO</h6>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    <?php } ?>
                                 </div>
                             </section>
                             <div class="uk-flex uk-flex-center">

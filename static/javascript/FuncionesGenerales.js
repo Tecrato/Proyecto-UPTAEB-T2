@@ -22,22 +22,42 @@ function cambiar_pagina_php(dir,type,limit=9) {
 const marcaAgua = () => {
   //esto hace que el fondo de pantalla y altura se modifiquen si hay tarjetas en los modulos
   let containerMarca_agua = document.querySelector(".container_marca_agua");
+  let containerMarca_agua2 = document.querySelector(".container_marca_agua2");
   let containerBody = document.querySelector(".Bg-Main-home");
   let containerHeight = document.querySelector(".height_controller").childElementCount;
-  // let containerHeight2 = document.querySelector(".height_controller2").childElementCount;
     
   let pagination = document.querySelector(".uk-pagination");
 
-  if (containerHeight == 0) {
-    // containerMarca_agua.parentElement.classList.add('uk-flex-center')
-    // containerBody.style.height = `115vh`;
-    containerMarca_agua.classList.remove('invisible')
-    pagination.classList.add("invisible");
+  if (document.querySelector(".height_controller2") && document.querySelector(".uk-pagination2")) {
+  let pagination2 = document.querySelector(".uk-pagination2");
+  let containerHeight2 = document.querySelector(".height_controller2").childElementCount;
+    if (containerHeight == 0 || containerHeight2 == 0) {
+      // containerMarca_agua.parentElement.classList.add('uk-flex-center')
+      // containerBody.style.height = `115vh`;
+      containerMarca_agua.classList.remove('invisible')
+      pagination.classList.add("invisible");
+      // pagination2.classList.add("invisible");
+    } else {
+      // containerMarca_agua.parentElement.classList.remove('uk-flex-center')
+      pagination.classList.remove("invisible");
+      pagination2.classList.remove("invisible");
+      containerMarca_agua.classList.add("invisible");
+    }
   } else {
-    // containerMarca_agua.parentElement.classList.remove('uk-flex-center')
-    pagination.classList.remove("invisible");
-    containerMarca_agua.classList.add("invisible");
+    if (containerHeight == 0) {
+      // containerMarca_agua.parentElement.classList.add('uk-flex-center')
+      // containerBody.style.height = `115vh`;
+      containerMarca_agua.classList.remove('invisible')
+      pagination.classList.add("invisible");
+      // pagination2.classList.add("invisible");
+    } else {
+      // containerMarca_agua.parentElement.classList.remove('uk-flex-center')
+      pagination.classList.remove("invisible");
+      // pagination2.classList.remove("invisible");
+      containerMarca_agua.classList.add("invisible");
+    }
   }
+  
 };
 marcaAgua()
 

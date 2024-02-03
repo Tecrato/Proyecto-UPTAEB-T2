@@ -52,8 +52,8 @@ const modalDetalles = (n) => {
             document.querySelector(".productDetailPV").textContent = item.precio_venta;
               
           });
-
-          //esta consulta es para cargar los lotes segun del id del producto y el proveedor
+          if (session_user_rol == 'Administrador') {
+            //esta consulta es para cargar los lotes segun del id del producto y el proveedor
           let supplierName = "";
           $.ajax({
             url: "Controller/funcs_ajax/search.php",
@@ -141,6 +141,10 @@ const modalDetalles = (n) => {
               });
             },
           });
+          } else {
+            document.querySelector('.container-prov_details').remove()
+          }
+          
         },
       });
     });
@@ -264,6 +268,8 @@ const modalEliminar = () => {
   document.querySelectorAll(".deleteID").forEach((btn) => {
     //usamos el evento click para saber en que tarjeta pulso, para luego capturar el id del producto
     btn.addEventListener("click", () => {
+      document.querySelector('.modalDeleteTitle').textContent = "ELIMINAR"
+      document.querySelector('.modalDeleteBody').textContent = "Deseas eliminar este producto? Podras restaurarlo al inventario desde papelera"
       //obtenemos el id del producto pulsado
       let idDelete = parseInt(btn.dataset["id"]);
       //le damos el atributo de value con el id del producto a eliminar
@@ -292,22 +298,80 @@ const modalEliminar = () => {
             UIkit.modal("#eliminar_product").hide();
             //mostramos el mensaje de eliminacion exitosa
             UIkit.notification.closeAll()
-            UIkit.notification({
-              message:
-                "<span uk-icon='icon: check'></span> Producto Eliminado correctamente ",
-              status: "success",
-              pos: "bottom-right",
-              group: idDelete
-            });
-            // setTimeout(()=>{
-            //   document.querySelector('.uk-notification').removeChild(document.querySelector('.uk-notification-message'))
-            // },800)
             
-            
+              UIkit.notification({
+                message:
+                  "<span uk-icon='icon: check'></span> Producto Eliminado correctamente ",
+                status: "success",
+                pos: "bottom-right",
+                group: idDelete
+              });
+        
             
             //para al final, llamar a la funcion de cargar las tarjetas
             cargarTargetProduct();
-            document.querySelector(".searchProduct").value = "";
+            document.querySelector(".searchProductActive").value = "";
+          },
+        });
+      });
+    });
+  });
+};
+const modalEliminarProductDesactive = () => {
+  //***************************************************  Modal de eliminar  ******************************************************
+
+  //seleccionamos todos los btn con la clase deleteID y lo recorremos
+  //esta parte tiene el fin de dar el id al input que se enviara para eliminar el producto
+  document.querySelectorAll(".deleteID2").forEach((btn) => {
+    //usamos el evento click para saber en que tarjeta pulso, para luego capturar el id del producto
+    btn.addEventListener("click", () => {
+      document.querySelector('.modalDeleteTitle').textContent = "RESTAURAR PRODUCTO"
+      document.querySelector('.modalDeleteBody').textContent = "Deseas restaurar este producto a su estado de inventario"
+
+      
+
+      //obtenemos el id del producto pulsado
+      let idDelete = parseInt(btn.dataset["id"]);
+      //le damos el atributo de value con el id del producto a eliminar
+      document
+        .getElementById("ValueInputDelete")
+        .setAttribute("value", idDelete);
+
+      //seleccionamos el form que esta en el modal de delete
+      let formDelete = document.querySelector("#formDelete");
+
+      //captamos su evento submit
+      formDelete.addEventListener("submit", (e) => {
+        e.preventDefault();
+        //creamos y luego pasamos por parametro los datos del form
+        let detailDelete = new FormData(formDelete);
+        //hacemos la peticion ajax
+        $.ajax({
+          url: "Controller/funcs/borrar_cosas.php",
+          type: "POST",
+          data: detailDelete,
+          processData: false,
+          contentType: false,
+          success: function (response) {
+            console.log(response);
+          cargarTargetProduct()
+            //ocultamos el modal
+            UIkit.modal("#eliminar_product").hide();
+            //mostramos el mensaje de eliminacion exitosa
+            UIkit.notification.closeAll()
+            
+              UIkit.notification({
+                message:
+                  "<span uk-icon='icon: check'></span>Producto Restaurado Correctamente",
+                status: "success",
+                pos: "bottom-right",
+                group: idDelete
+              });
+        
+            
+            //para al final, llamar a la funcion de cargar las tarjetas
+            cargarTargetProductDesactive()
+            document.querySelector(".searchProductNotActive").value = "";
           },
         });
       });
@@ -387,6 +451,7 @@ const tarjetas = (response,cont) => {
       options.forEach(e => {
         e.removeChild(e.firstElementChild)
       })
+
     }
   });
 
@@ -403,6 +468,85 @@ const tarjetas = (response,cont) => {
   modalEliminar();
   modalModificar();
 };
+const tarjetasProductosDesactive = (response,cont) => {
+  //convertimos la respuesta en un objeto
+  let json = JSON.parse(response);
+  //tarjeta sera el template de las tarjetas
+  let tarjeta = "";
+  //recorremos el json para crear las tarjetas
+  json.lista.forEach((item) => {
+    tarjeta += `
+              
+  <div id="${item.id}" data-supplier="${item.proveedor}" data-category="${item.categoria}" data-marca="${item.marca}" data-name="${item.nombre.slice(0, 1).toUpperCase()}">
+    <div class="uk-card uk-card-default uk-background-secondary uk-light uk-border-rounded">
+        <div class="uk-visible-toggle" tabindex="-1">
+            <article class="uk-transition-toggle">
+                <img src="Media/imagenes/${
+                  item.imagen
+                }"" alt="" class="img_product" width="150px" style="object-fit: cover; height: 215px;">
+                <div class="uk-position-top-right uk-transition-fade uk-position-small">
+                    <a href="#modal-details-product" uk-toggle class="btnDetails" data-id="${
+                      item.id
+                    }">
+                      
+                        <span class="Bg-info" uk-icon="icon: info; ratio: 1.5"></span>
+                    </a>
+                </div>
+                <div class="uk-position-bottom-right btns_option_product2">
+                    <ul class=" uk-iconnav uk-background-secondary uk-transition-slide-bottom-small" style="width: 105%; padding: 5px;">
+                        <li><a href="#eliminar_product" uk-toggle uk-tooltip="title:Eliminar; delay: 500" class="uk-icon-button deleteID2" uk-icon="icon: future" data-id="${
+                          item.id
+                        }"></a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div style="padding: 0px 10px; width: 130px;">
+                        <div class="uk-text-truncate">${item.nombre}</div>
+                        <div>stock: <b class="uk-text-success">${
+                          item.stock ? item.stock : 0
+                        }</b></div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</div>
+          `;
+
+    //seleccionamos el contenedor de las tarjetas, y las insertamos
+    $(cont).html(tarjeta);
+    
+    //esto es para acomodar la posicion de los botones dependiendo de la resolucion
+    if (screen < 938) {
+      let options = document.querySelectorAll('.btns_option_product2')
+      options.forEach(e => {
+          e.classList.remove('uk-position-bottom-center')
+          e.classList.add('uk-position-bottom-right')
+      })
+    }
+
+    //preguntamamos si la sesion es la de usuario, para eliminar los botones de accion
+    if (session_user_rol == 'Usuario') {
+      let options = document.querySelectorAll('.btns_option_product2')
+      options.forEach(e => {
+        e.removeChild(e.firstElementChild)
+      })
+    }
+  });
+
+  if (json.lista.length == 0) {
+      document.querySelector(".container_marca_agua2").classList.remove("invisible");
+      document.querySelector(".uk-pagination2").classList.add("invisible");
+    $(".cont_product_desactive").html("");
+  } else {
+    document.querySelector(".container_marca_agua2").classList.add("invisible");
+    document.querySelector(".uk-pagination2").classList.remove("invisible");
+  }
+
+  modalEntradas();
+  modalEliminarProductDesactive()
+  modalModificar();
+};
 const cargarTargetProduct = () => {
   //hacemos la petion ajax
   $.ajax({
@@ -416,6 +560,7 @@ const cargarTargetProduct = () => {
     },
     success: function (response) {
       // console.log(response);
+      marcaAgua()
       tarjetas(response,".container-target-product");
       modalDetalles(1)
     },
@@ -441,14 +586,12 @@ const cargarTargetProductDesactive = () => {
         document.querySelector(".container_marca_agua2").classList.add('invisible')
         document.querySelector(".uk-pagination2").classList.remove('invisible')
       }
-      // console.log(response);
-      tarjetas(response,".cont_product_desactive");
+      tarjetasProductosDesactive(response, ".cont_product_desactive")
       modalDetalles(0)
-      
     },
   });
 };
-// cargarTargetProductDesactive()
+cargarTargetProductDesactive()
 //***************************************************  Modal de Registro de productos  ******************************************************
 
 const cargarCategoriaRegProduct = () => {
@@ -506,7 +649,6 @@ document.querySelector(".btn-modal-register").addEventListener("click", () => {
   cargarCategoriaRegProduct();
   cargarUnidadesRegProduct();
 });
-// cargarTargetProductDesactive()
 let formAggProduct = document.getElementById("formAggProduct");
 //captamos su evento submit, primero para evitar que la pagina se refresque, y segundo para insertar esos datos en un objeto FormData
 formAggProduct.addEventListener("submit", (e) => {
@@ -600,6 +742,22 @@ document.querySelector(".searchProductActive").addEventListener("keyup", (e) => 
     });
   } else {
     cargarTargetProduct();
+  }
+});
+
+document.querySelector(".searchProductNotActive").addEventListener("keyup", (e) => {
+  let val = e.target.value;
+  if (val != "") {
+    $.ajax({
+      url: "Controller/funcs_ajax/search.php",
+      type: "POST",
+      data: { randomnautica: "productos", like: val, active: 0 },
+      success: function (response) {
+        tarjetasProductosDesactive(response,".cont_product_desactive")
+      },
+    });
+  } else {
+    cargarTargetProductDesactive()
   }
 });
 

@@ -12,9 +12,9 @@ $dia =  date('d/m/Y', $fecha);
                 <h3 class="uk-margin-remove uk-text-bolder">#<?php echo $row['id']; ?></h3>
             </div>
             <div>
-                <a class="ImprBtn" href="Detalles_factura?id=<?php echo $row['id']; ?>" uk-tooltip="title:Imprimir; delay: 500">
+                <!-- <a class="ImprBtn" href="Detalles_factura?id=<?php echo $row['id']; ?>" uk-tooltip="title:Imprimir; delay: 500">
                 	<span class="uk-margin-small-right uk-icon-button" uk-icon="icon: print"></span>
-                </a>
+                </a> -->
                 <?php if ($_SESSION['rol'] == 'Administrador') { ?>
                 <a href="#modal-borrar<?php echo $row['id']; ?>" uk-toggle uk-tooltip="title:Eliminar; delay: 500" class="uk-icon-button uk-margin-small-right" uk-icon="trash"></a>
             
