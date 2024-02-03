@@ -75,7 +75,7 @@
                     FROM entradas a 
                     INNER JOIN productos b ON b.id = a.id_producto
                     INNER JOIN proveedores c ON c.id = a.id_proveedor
-                    WHERE a.active=:active ";
+                    WHERE a.active=:active AND b.active=1";
 
 			$lista = [];
 

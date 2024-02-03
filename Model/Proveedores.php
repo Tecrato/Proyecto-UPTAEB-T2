@@ -52,10 +52,10 @@
         // Con esta funcion podremos cambiar un producto segun su ID con los valores que le pasemos
         function actualizar(){
             
-            $query = $this->conn->prepare("UPDATE proveedores SET nombre=:nombre, razon_social=:razon, rif=:rif, telefono=:tel, correo=:correo, direccion=:dir WHERE ID=:id");
+            $query = $this->conn->prepare("UPDATE proveedores SET nombre=:nombre, razon_social=:razon_social, rif=:rif, telefono=:tel, correo=:correo, direccion=:dir WHERE ID=:id");
         
             $query->bindParam(':nombre',$this->nombre);
-            $query->bindParam(':razon',$this->razon_social);
+            $query->bindParam(':razon_social',$this->razon_social);
             $query->bindParam(':rif',$this->rif);
             $query->bindParam(':tel',$this->telefono);
             $query->bindParam(':correo',$this->correo);
