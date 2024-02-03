@@ -23,7 +23,7 @@ $.ajax({
       } else if (diasRestantes > 10) {
         color = "activeGood"
         texto = "ACTIVO"
-      } else if (diasRestantes == 0) {
+      } else if (diasRestantes == 0 || diasRestantes < 0) {
         color = "EXPIRO"
       }
 
