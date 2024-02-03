@@ -190,7 +190,7 @@
                                         <input class="uk-input" type="number" placeholder="Cantidad" aria-label="100" name="cantidad" required>
                                     </div>
                                     <div class="uk-width-1-3@s">
-                                        <input class="uk-input" type="number" min="0.01" step="0.1" placeholder="precio_compra" aria-label="25" name="precio_compra" required>
+                                        <input class="uk-input" type="number" min="0.1" step="0.1" placeholder="precio_compra" aria-label="25" name="precio_compra" required>
                                     </div>
                                     <div class="uk-width-1-1@s uk-flex uk-flex-middle">
                                         <label for="" style="width: 265px;">Fecha adquisicion</label>
