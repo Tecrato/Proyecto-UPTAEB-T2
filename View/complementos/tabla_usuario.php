@@ -30,7 +30,7 @@ echo '
                 <input type=number value="'.$row['id'].'" name="ID" style="display:none">
                 <input type=text value="usuario" name="tipo" style="display:none">
                 <div class="uk-width-1-3@s">
-                    <input class="uk-input" type="text" placeholder="Nombre" value="'.$row['nombre'].'" aria-label="100" name="nombre" pattern="^[A-Z][a-z0-9]{2,20}$" required>
+                    <input class="uk-input" type="text" placeholder="Nombre" value="'.$row['nombre'].'" aria-label="100" name="nombre" pattern="^[A-Z][A-Za-z0-9]{2,20}$" required>
                 </div>
                 <div class="uk-width-1-3@s">
                     <input class="uk-input" type="text" placeholder="Correo Electronico" value="'.$row['correo'].'"  aria-label="100" name="correo" pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$" required>

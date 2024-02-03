@@ -140,11 +140,11 @@
                 <form class="uk-grid-small" uk-grid method="POST" action="./Controller/funcs/agregar_cosas.php">
                     <input type="text" name="tipo" value='usuarios' id="" style="display:none">
                     <div class="uk-width-1-2">
-                        <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="^[A-Z][a-z0-9]{2,20}$" 
+                        <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="^[A-Z][A-Za-z0-9]{2,20}$" 
                             required>
                     </div>
                     <div class="uk-width-1-2@s">
-                        <input class="uk-input" type="text" placeholder="Apellido" aria-label="50" name="apellido" pattern="^[A-Z][a-z0-9]{2,20}$" >
+                        <input class="uk-input" type="text" placeholder="Apellido" aria-label="50" name="apellido" pattern="^[A-Z][A-Za-z0-9]{2,20}$" >
                     </div>
                     <div class="uk-width-1-2@s">
                         <input class="uk-input" type="text" placeholder="Correo Electronico" aria-label="100"
