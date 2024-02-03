@@ -420,13 +420,6 @@
                                                 </ul>
                                             </div>
                                         </li>
-                                        <!-- <li>
-                                            <a href="#">PROVEEDOR <span uk-drop-parent-icon></span></a>
-                                            <div class="uk-dropdown">
-                                                <ul class="uk-nav uk-dropdown-nav filter_supplier">
-                                                </ul>
-                                            </div>
-                                        </li> -->
                                         <li>
                                             <a href="#">MARCA <span uk-drop-parent-icon></span></a>
                                             <div class="uk-dropdown">

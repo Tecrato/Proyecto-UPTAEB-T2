@@ -9,9 +9,9 @@
                     <div class="uk-margin-right">
                         <div class="uk-flex uk-flex-wrap">
                             <div class="uk-margin formDelete">
-                                <form class="uk-search uk-search-default search-responsive-product">
-                                    <span class="uk-search-icon-flip" uk-search-icon></span>
-                                    <input class="uk-search-input" type="search" placeholder="Buscar" aria-label="Search">
+                                <form class="uk-search uk-search-default search-responsive-product" action="" method="GET">
+                                    <button class="uk-search-icon-flip" type="submit" uk-search-icon></button>
+                                    <input class="uk-search-input" type="text" placeholder="Buscar" name="like" aria-label="Search">
                                 </form>
                             </div>
                             <div class="uk-margin-left">
@@ -21,51 +21,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <nav uk-dropnav="mode: click">
-                        <ul class="uk-subnav filter_product" uk-margin>
-                            <li class="uk-active" uk-filter-control><a href="#">TODO</a></li>
-                            <li>
-                                <a href="#">CATEGORIA <span uk-drop-parent-icon></span></a>
-                                <div class="uk-dropdown">
-                                    <ul class="uk-nav uk-dropdown-nav">
-                                        <li uk-filter-control="filter: [data-color='white']; group: data-color"><a href="#">White</a></li>
-                                        <li uk-filter-control="filter: [data-color='blue']; group: data-color"><a href="#">Blue</a></li>
-                                        <li uk-filter-control="filter: [data-color='black']; group: data-color"><a href="#">Black</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li>
-                                <a href="#">PROVEEDOR <span uk-drop-parent-icon></span></a>
-                                <div class="uk-dropdown">
-                                    <ul class="uk-nav uk-dropdown-nav">
-                                        <li uk-filter-control="filter: [data-size='small']; group: size"><a href="#">Small</a></li>
-                                        <li uk-filter-control="filter: [data-size='medium']; group: size"><a href="#">Medium</a></li>
-                                        <li uk-filter-control="filter: [data-size='large']; group: size"><a href="#">Large</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li>
-                                <a href="#">MARCA <span uk-drop-parent-icon></span></a>
-                                <div class="uk-dropdown">
-                                    <ul class="uk-nav uk-dropdown-nav">
-                                        <li uk-filter-control="filter: [data-size='small']; group: size"><a href="#">Small</a></li>
-                                        <li uk-filter-control="filter: [data-size='medium']; group: size"><a href="#">Medium</a></li>
-                                        <li uk-filter-control="filter: [data-size='large']; group: size"><a href="#">Large</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li>
-                                <a href="#">PRESENTACION <span uk-drop-parent-icon></span></a>
-                                <div class="uk-dropdown">
-                                    <ul class="uk-nav uk-dropdown-nav">
-                                        <li uk-filter-control="filter: [data-size='small']; group: size"><a href="#">Small</a></li>
-                                        <li uk-filter-control="filter: [data-size='medium']; group: size"><a href="#">Medium</a></li>
-                                        <li uk-filter-control="filter: [data-size='large']; group: size"><a href="#">Large</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </nav> -->
                 </div>
 
                 <div class="uk-flex uk-margin-left container-view-order">
@@ -119,22 +74,22 @@
                     <form class="uk-grid-small" uk-grid method="POST" action="Controller/funcs/agregar_cosas.php">
                         <input type="text" name="tipo" value='proveedor' id="" style="display:none">
                         <div class="uk-width-1-2@s">
-                            <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="^([A-Z]+){1}[a-z]{2,5}$" required>
+                            <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="^[A-Z][a-z0-9]{2,20}$" required>
                         </div>
                         <div class="uk-width-1-2@s">
-                            <input class="uk-input" type="text" placeholder="Razon Social" aria-label="100" name="razon_social" pattern="^[A-ZÑ&]{3,4}\d{6}[A-Z0-9]{3}$" required>
+                            <input class="uk-input" type="text" placeholder="Razon Social" aria-label="100" name="razon_social" pattern="^[A-ZÑ][a-zA-Z0-9ñ]{2,50}$" required>
                         </div>
                         <div class="uk-width-1-2@s">
                             <input class="uk-input" type="text" placeholder="Rif" aria-label="50" name="rif" pattern="^[VJEGP][\d]{9}$" value="j-00000000" required>
                         </div>
                         <div class="uk-width-1-2@s">
-                            <input class="uk-input" type="number" minlength="9" placeholder="Número de teléfono" aria-label="50" name="telefono" pattern="^\+([0-9]{2})\s-([0-9]{7,9})$" required>
+                            <input class="uk-input" type="number" minlength="9" placeholder="Número de teléfono" aria-label="50" name="telefono" pattern="^\+[0-9]{2,5}\s-[0-9]{7,9}$" required>
                         </div>
                         <div class="uk-width-1-2@s">
-                            <input class="uk-input" type="email" placeholder="Correo electrónico" aria-label="25" name="correo" pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$" required>
+                            <input class="uk-input" type="email" placeholder="Correo electrónico" aria-label="25" name="correo" pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$" required>
                         </div>
                         <div class="uk-width-1-2@s">
-                            <input class="uk-input" type="text" placeholder="Dirección" aria-label="25" name="direccion" pattern="^(\w{5,7})\s([0-9]{1,2}) entre (\w{5,7})\s([0-9]{1,2}) y (\w{5,7})\s([0-9]{1,2})$" required>
+                            <input class="uk-input" type="text" placeholder="Dirección" aria-label="25" name="direccion" minlength="5" maxlength="200" required> <!-- No hace falta restringirle la direccion wtf, con un rango es suficiente ^(\w{5,7})\s([0-9]{1,2}) entre (\w{5,7})\s([0-9]{1,2}) y (\w{5,7})\s([0-9]{1,2})$ -->
                         </div>
                         <input type="submit" id="subirxd" style="display:none" required>
                     </form>

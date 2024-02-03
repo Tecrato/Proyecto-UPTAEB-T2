@@ -94,32 +94,6 @@
                         </div>
                     </form>
                 </li>
-                <!-- <li>
-                    <section>
-                        <div class="uk-overflow-auto uk-light uk-margin-small-top">
-                            <table class="uk-table uk-table-small uk-table-divider uk-table-hover">
-                                <thead class="uk-background-secondary">
-                                    <tr>
-                                        <th>ACTIVIDAD</th>
-                                        <th>FECHA</th>
-                                        <th>HORA</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php for ($i=1; $i <= 5; $i++) { ?>
-                                    <tr>
-                                        <td>REGISTRO DE PRODUCTO</td>
-                                        <td>10/11/2023</td>
-                                        <td>10:55 AM</td>
-
-                                    </tr>
-                                    <?php } ?>
-                                </tbody>
-                            </table>
-                        </div>
-                    </section>
-
-                </li> -->
             </ul>
         </div>
 
@@ -166,11 +140,11 @@
                 <form class="uk-grid-small" uk-grid method="POST" action="./Controller/funcs/agregar_cosas.php">
                     <input type="text" name="tipo" value='usuarios' id="" style="display:none">
                     <div class="uk-width-1-2">
-                        <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="^([A-Z]+){1}[a-z]{2,5}$" 
+                        <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="^[A-Z][a-z0-9]{2,20}$" 
                             required>
                     </div>
                     <div class="uk-width-1-2@s">
-                        <input class="uk-input" type="text" placeholder="Apellido" aria-label="50" name="apellido" pattern="^([A-Z]+){1}[a-z]{2,10}$" >
+                        <input class="uk-input" type="text" placeholder="Apellido" aria-label="50" name="apellido" pattern="^[A-Z][a-z0-9]{2,20}$" >
                     </div>
                     <div class="uk-width-1-2@s">
                         <input class="uk-input" type="text" placeholder="Correo Electronico" aria-label="100"
@@ -184,8 +158,7 @@
                         </select>
                     </div>
                     <div class="uk-width-1-1@s">
-                        <input class="uk-input" type="password" placeholder="Contraseña" aria-label="100" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}$" name="password"
-                            required>
+                        <input class="uk-input" type="password" placeholder="Contraseña" aria-label="100" name="password" minlength="3" maxlength="50" required>
                     </div>
                     <input type="submit" id="subirC" style="display:none">
                 </form>
