@@ -53,15 +53,29 @@
 			}
 		}
 
-		function desactivar() {
-			$query = $this->conn->prepare('DELETE FROM productos WHERE id=:id');
+		function borrar() {
+			$query = $this->conn->prepare('DELETE FROM entradas WHERE id=:id');
 
 			$query->bindParam(':id',$this->id);
 			$query->execute();
 		}
 
 		function search($n=0,$limite=9, $order = ' id DESC '){
-			$query = "SELECT * FROM entradas WHERE active=:active";
+            $query = "SELECT 
+                    a.id,
+                    a.id_producto,
+                    b.nombre producto,
+                    a.id_proveedor,
+                    c.nombre proveedor,
+                    a.cantidad,
+                    a.fecha_compra,
+                    a.fecha_vencimiento,
+                    a.precio_compra,
+                    a.existencia
+                    FROM entradas a 
+                    INNER JOIN productos b ON b.id = a.id_producto
+                    INNER JOIN proveedores c ON c.id = a.id_proveedor
+                    WHERE a.active=:active ";
 
 			$lista = [];
 

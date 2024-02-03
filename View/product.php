@@ -286,7 +286,7 @@
                                 </div>
                                 <hr class="uk-divider-icon Color-icon-detailProduct">
 
-                                <div>
+                                <div class="container-prov_details">
                                     <div class="uk-flex uk-flex-center uk-flex-middle uk-margin-bottom">
                                         <span class="uk-margin-small-right Color-icon-detailProduct" uk-icon="icon: tag; ratio: 1.2"></span>
                                         <h5 class=" uk-text-bold uk-text-center uk-margin-remove">PROVEEDOR</h5>

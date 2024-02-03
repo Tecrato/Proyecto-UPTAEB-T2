@@ -26,6 +26,14 @@ const modalDetalles = (n) => {
       let templateDetails = "";
       //obtenemos el id del producto para hacer la consulta
       let idProduct = info.dataset["id"];
+
+      // if (session_user_rol == 'Usuario') {
+      // let contProvDetail = document.querySelector('.container-prov_details')
+      // let contProvDetail1 = document.querySelector('.container-prov_details').firstElementChild
+      // let contProvDetail2 = document.querySelector('.container-prov_details').lastElementChild
+      // contProvDetail.removeChild(contProvDetail1)
+      // contProvDetail.removeChild(contProvDetail2)
+      // }
       //hacemos la peticion ajax para crear el esqueleto del modag
       $.ajax({
         url: "Controller/funcs_ajax/search.php",
@@ -183,6 +191,7 @@ const modalEntradas = () => {
           contentType: false,
           success: function (response) {
             //en la respuesta le mostramos un mensaje de producto creado correctamente
+            UIkit.notification.closeAll()
             UIkit.notification({
               message:
                 "<span uk-icon='icon: check'></span> Entrada agregado correctamente ",
@@ -282,12 +291,20 @@ const modalEliminar = () => {
             //ocultamos el modal
             UIkit.modal("#eliminar_product").hide();
             //mostramos el mensaje de eliminacion exitosa
+            UIkit.notification.closeAll()
             UIkit.notification({
               message:
                 "<span uk-icon='icon: check'></span> Producto Eliminado correctamente ",
               status: "success",
               pos: "bottom-right",
+              group: idDelete
             });
+            // setTimeout(()=>{
+            //   document.querySelector('.uk-notification').removeChild(document.querySelector('.uk-notification-message'))
+            // },800)
+            
+            
+            
             //para al final, llamar a la funcion de cargar las tarjetas
             cargarTargetProduct();
             document.querySelector(".searchProduct").value = "";
@@ -368,7 +385,7 @@ const tarjetas = (response,cont) => {
     if (session_user_rol == 'Usuario') {
       let options = document.querySelectorAll('.btns_option_product')
       options.forEach(e => {
-        e.firstElementChild.remove()
+        e.removeChild(e.firstElementChild)
       })
     }
   });
@@ -376,16 +393,10 @@ const tarjetas = (response,cont) => {
   if (json.lista.length == 0) {
       document.querySelector(".container_marca_agua").classList.remove("invisible");
       document.querySelector(".uk-pagination").classList.add("invisible");
-      document.querySelector(".uk-pagination2").classList.add('invisible')
-      document.querySelector(".container_marca_agua2").classList.remove('invisible')
-
     $(".container-target-product").html("");
   } else {
     document.querySelector(".container_marca_agua").classList.add("invisible");
-    document.querySelector(".container_marca_agua2").classList.add('invisible')
-
     document.querySelector(".uk-pagination").classList.remove("invisible");
-    document.querySelector(".uk-pagination2").classList.remove('invisible')
   }
 
   modalEntradas();
@@ -437,7 +448,7 @@ const cargarTargetProductDesactive = () => {
     },
   });
 };
-cargarTargetProductDesactive()
+// cargarTargetProductDesactive()
 //***************************************************  Modal de Registro de productos  ******************************************************
 
 const cargarCategoriaRegProduct = () => {
@@ -452,12 +463,12 @@ const cargarCategoriaRegProduct = () => {
         options += `<option value="${date.id}">${date.nombre}</option>`;
       });
       document.getElementById("selectCat").innerHTML = options;
-      document
-        .getElementById("selectCat")
-        .insertAdjacentHTML(
-          "afterbegin",
-          `<option value="" disabled selected>Categoria</option>`
-        );
+      // document
+      //   .getElementById("selectCat")
+      //   .insertAdjacentHTML(
+      //     "afterbegin",
+      //     `<option value="" disabled selected>Categoria</option>`
+      //   );
     },
   });
 };
@@ -495,7 +506,7 @@ document.querySelector(".btn-modal-register").addEventListener("click", () => {
   cargarCategoriaRegProduct();
   cargarUnidadesRegProduct();
 });
-cargarTargetProductDesactive()
+// cargarTargetProductDesactive()
 let formAggProduct = document.getElementById("formAggProduct");
 //captamos su evento submit, primero para evitar que la pagina se refresque, y segundo para insertar esos datos en un objeto FormData
 formAggProduct.addEventListener("submit", (e) => {
@@ -516,15 +527,9 @@ formAggProduct.addEventListener("submit", (e) => {
     processData: false,
     contentType: false,
     success: function (response) {
-      console.log(response);
-      if (parseInt(response) > 1) {
-        UIkit.notification({
-          message: "<span uk-icon='icon: check'></span> a ocudi un error ",
-          status: "danger",
-          pos: "bottom-right",
-        });
-      } else {
+      
         if (val == false) {
+          UIkit.notification.closeAll()
           UIkit.notification({
             message:
               "<span uk-icon='icon: check'></span> Producto creado correctamente ",
@@ -532,6 +537,7 @@ formAggProduct.addEventListener("submit", (e) => {
             pos: "bottom-right",
           });
         } else {
+          UIkit.notification.closeAll()
           UIkit.notification({
             message:
               "<span uk-icon='icon: check'></span> Producto Modificado correctamente ",
@@ -543,7 +549,6 @@ formAggProduct.addEventListener("submit", (e) => {
         setTimeout(() => {
           UIkit.modal("#modal-register-product").hide();
         }, 400);
-      }
       //en la respuesta le mostramos un mensaje de producto creado correctamente
 
       cargarTargetProduct();
@@ -582,28 +587,21 @@ $.ajax({
   },
 });
 //esta funcion tiene el objetivo de mostrar los productos por nombre
-const buscarProducto = (clase,n)=>{
-  document.querySelector(clase).addEventListener("keyup", (e) => {
-    let val = e.target.value;
-    if (val != "") {
-      $.ajax({
-        url: "Controller/funcs_ajax/search.php",
-        type: "POST",
-        data: { randomnautica: "productos", like: val, active:n },
-        success: function (response) {
-          console.log(response);
-          tarjetas(response,".container-target-product")
-          tarjetas(response,".cont_product_desactive")
-        },
-      });
-    } else {
-      cargarTargetProduct();
-      cargarTargetProductDesactive();
-    }
-  });
-}
-buscarProducto(".searchProductActive",1)
-buscarProducto(".searchProductNotActive",0)
+document.querySelector(".searchProductActive").addEventListener("keyup", (e) => {
+  let val = e.target.value;
+  if (val != "") {
+    $.ajax({
+      url: "Controller/funcs_ajax/search.php",
+      type: "POST",
+      data: { randomnautica: "productos", like: val },
+      success: function (response) {
+        tarjetas(response,".container-target-product");
+      },
+    });
+  } else {
+    cargarTargetProduct();
+  }
+});
 
 let inpNameProduct = document.querySelector(".NameUpdateProduct");
 inpNameProduct.addEventListener("keyup", (e) => {

@@ -55,8 +55,8 @@
 
 
         // con esta funcion se elimina un elemento dependiendo de su id
-        function desactivar() {
-			$query = $this->conn->prepare('UPDATE productos SET active=0 WHERE id=:id');
+        function toggle_active() {
+			$query = $this->conn->prepare('UPDATE productos SET active=(NOT active) WHERE id=:id');
 
 			$query->bindParam(':id',$this->id);
 			$query->execute();
