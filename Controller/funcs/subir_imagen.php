@@ -7,7 +7,7 @@
 	    elseif (!in_array($imagen['type'], $extensiones)) {
 	        return 2;
 	    }
-	    elseif ($imagen['size'] > 20000000) {
+	    elseif ($imagen['size'] > (1024 * 1024 * 10)) {
 	        return 5;
 	    }
 	    elseif (file_exists('../../Media/imagenes/'.$inicial) and $replace) {

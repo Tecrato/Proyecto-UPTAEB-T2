@@ -559,7 +559,7 @@ const cargarTargetProduct = () => {
       like: "",
     },
     success: function (response) {
-      // console.log(response);
+      console.log(response);
       marcaAgua()
       tarjetas(response,".container-target-product");
       modalDetalles(1)

@@ -51,7 +51,7 @@ $pdf->SetY(35);
 $pdf->SetX(112);
 $pdf->SetFillColor(16, 103, 51);
 $pdf->SetFont('Arial','B',10);
-$pdf->Cell(84,10,$result2[0]['Total'].' Bs',1,0,'C',1);
+$pdf->Cell(84,10,bcdiv($result2[0]['Total'],"1","2").' Bs',1,0,'C',1);
 
 //CABECERA DE LOS NOMBRES DE LAS COLUMNAS__________________________________________________________________________________
 
@@ -88,7 +88,7 @@ foreach ($result as $variable) {
     $pdf->Cell(20,10,$variable['salidas'] ? $variable['salidas'] : 0,0,0,'C',0);
     $pdf->Cell(30,10,$variable['existencia'] ? $variable['existencia'] : 0,0,0,'C',0);
     $pdf->Cell(30,10,$variable['precio_venta'].' Bs',0,0,'C',0);
-    $pdf->Cell(24,10,$variable['Total'] ? $variable['Total'].' Bs' : 0 .' Bs',0,1,'C',1);
+    $pdf->Cell(24,10,$variable['Total'] ? bcdiv($variable['Total'],"1","2").' Bs' : 0 .' Bs',0,1,'C',1);
 }
 
 $pdf->Output();

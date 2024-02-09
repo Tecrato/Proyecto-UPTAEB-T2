@@ -91,7 +91,7 @@
                         <input class="uk-input" type="number" placeholder="cedula" name="cedula" aria-label="50" pattern="^[VeEe]-?\d{1,8}$" required>
                     </div>
                     <div class="uk-width-1-2@s">
-                        <input class="uk-input" type="text" placeholder="Telefono" name="telefono" aria-label="50" pattern="^\+([0-9]{2})\s-([0-9]{7,9})$" required>
+                        <input class="uk-input" type="text" placeholder="Telefono" name="telefono" aria-label="50" pattern="^\+[0-9]{2,5}[0-9]{7,10}$" required>
                     </div>
                     <div class="uk-width-1-2@s">
                         <input class="uk-input" type="text" placeholder="Dirección" name="direccion" aria-label="50" minlength="5" maxlength="200" required>

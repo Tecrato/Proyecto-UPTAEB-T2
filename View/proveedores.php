@@ -83,7 +83,7 @@
                             <input class="uk-input" type="text" placeholder="Rif" aria-label="50" name="rif" pattern="^[VJEGPvjegp][\d]+$" value="j-00000000" required>
                         </div>
                         <div class="uk-width-1-2@s">
-                            <input class="uk-input" type="text" minlength="9" placeholder="Número de teléfono" aria-label="50" name="telefono" pattern="^\+[0-9]{2,5}\s-[0-9]{7,9}$" required>
+                            <input class="uk-input" type="text" minlength="9" placeholder="Número de teléfono" aria-label="50" name="telefono" pattern="^\+[0-9]{2,5}[0-9]{7,10}$" required>
                         </div>
                         <div class="uk-width-1-2@s">
                             <input class="uk-input" type="email" placeholder="Correo electrónico" aria-label="25" name="correo" pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$" required>

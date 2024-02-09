@@ -5,7 +5,7 @@
         <ul uk-tab>
             <li><a class="itemSwitcher1" href="#"><img class="uk-preserve-width uk-margin-small-right img1ProductSwitcher" src="./static/images/cajas (2).png" width="30" height="30" alt="">PRODUCTOS</a></li>
             <li><a class="itemSwitcher2" href="#"><img class="uk-preserve-width uk-margin-small-right img2ProductSwitcher" src="./static/images/suministros.png" width="32" height="32" alt="">ENTRADAS</a></li>
-            <li><a class="itemSwitcher3" href="#"><img class="uk-preserve-width uk-margin-small-right img4ProductSwitcher" src="./static/images/papelera-de-reciclaje.png" width="32" height="32" alt="">PAPELERA</a></li>
+            <li><a class="itemSwitcher3" href="#"><img class="uk-preserve-width uk-margin-small-right img4ProductSwitcher" src="./static/images/papelera-de-reciclaje.png" width="32" height="32" alt="">PRODUCTOS DESACTIVADOS</a></li>
         </ul>
 
         <ul class="uk-switcher uk-margin">
