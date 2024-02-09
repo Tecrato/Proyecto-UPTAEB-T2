@@ -5,3 +5,5 @@
     header('Location:Inicio'); // POV: Lo redirecciona
 
 ?>
+
+<p>asdasd</p>
