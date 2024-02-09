@@ -80,7 +80,7 @@ echo '<div>
                     <input class="uk-input" type="text" placeholder="Rif" aria-label="50" value="'.$row['rif'].'" name="rif" pattern="^[VJEGPvjegp][\d]+$" required>
                 </div>
                 <div class="uk-width-1-2@s">
-                    <input class="uk-input" type="text" placeholder="Número de teléfono" aria-label="50" value="'.$row['telefono'].'" name="telefono"  required>
+                    <input class="uk-input" type="text" placeholder="Número de teléfono" aria-label="50" value="'.$row['telefono'].'" name="telefono" pattern="^[0-9]{7,12}^$" required>
                 </div>
                 <div class="uk-width-1-2@s">
                     <input class="uk-input" type="email" placeholder="Correo electrónico" aria-label="25" value="'.$row['correo'].'" name="correo" pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$" required>

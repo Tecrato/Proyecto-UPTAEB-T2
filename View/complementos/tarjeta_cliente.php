@@ -71,10 +71,10 @@
                 <input type="text" name="tipo" value="cliente" id="" style="display:none">
                 <input type=number value="'.$row['id'].'" name="ID" style="display:none">
                 <div class="uk-width-1-2@s">
-                    <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="^[A-Z][a-z0-9]{2,20}$" value="'.$row['nombre'].'" required>
+                    <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="^[A-Z][A-Za-z0-9ñ\s]{2,20}$" value="'.$row['nombre'].'" required>
                 </div>
                 <div class="uk-width-1-2@s">
-                    <input class="uk-input" type="text" placeholder="Apellido" value="'.$row['apellido'].'" aria-label="50" name="apellido" pattern="^[A-Z][a-z0-9]{2,20}$" required>
+                    <input class="uk-input" type="text" placeholder="Apellido" value="'.$row['apellido'].'" aria-label="50" name="apellido" pattern="^[A-Z][A-Za-z0-9ñ\s]{2,20}$" required>
                 </div>
                 <div class="uk-width-1-2@s">
                     <select class="uk-select" name="documento" required>
@@ -90,7 +90,7 @@
                     <input class="uk-input" type="text" placeholder="Direccion" name="direccion" value="'.$row['direccion'].'" aria-label="50" minlength="5" maxlength="200" required>
                 </div>
                 <div class="uk-width-1-2@s">
-                    <input class="uk-input" type="text" placeholder="Telefono" name="telefono" value="'.$row['telefono'].'" aria-label="50" pattern="^\+([0-9]{2})\s-([0-9]{7,9})$" required>
+                    <input class="uk-input" type="text" placeholder="Telefono" name="telefono" value="'.$row['telefono'].'" aria-label="50" pattern="^\[0-9]{7,12}$" required>
                 </div>
                 <input type="submit" id="modificarCli'.$row['direccion'].'" style="display:none">
             </form>

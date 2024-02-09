@@ -101,10 +101,10 @@
                                     <input class="ValueInpUpdate" type="number" name="ID" style="display:none">
                                     <input type="text" name="tipo" value='producto' id="" style="display:none">
                                     <div class="uk-width-1-2">
-                                        <input class="NameUpdateProduct uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="^[A-Z][a-z0-9]{2,20}$" required>
+                                        <input class="NameUpdateProduct uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="^[A-Z][A-Za-z0-9ñ\s]{2,20}$" required>
                                     </div>
                                     <div class="uk-width-1-2@s">
-                                        <input class="MarcaUpdateProduct uk-input" type="text" placeholder="Marca" aria-label="50" pattern="^[A-Z][a-z0-9]{2,20}$" name="marca">
+                                        <input class="MarcaUpdateProduct uk-input" type="text" placeholder="Marca" aria-label="50" pattern="^[A-Z][A-Za-z0-9ñ\s]{2,20}$" name="marca">
                                     </div>
                                     <div class="uk-width-1-2@s">
                                         <select id="selectCat" class="uk-select" id="form-stacked-select" name="categoria" required>
