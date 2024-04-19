@@ -35,7 +35,7 @@
             <ul class="switcherEdit" uk-tab uk-switcher>
                 <li><a href="#">Perfil</a></li>
                 <li><a href="#">Editar</a></li>
-                <!-- <li><a href="#">Registro de actividad</a></li> -->
+                <li><a href="#">Registro de actividad</a></li>
             </ul>
 
             <ul class="uk-switcher uk-margin">

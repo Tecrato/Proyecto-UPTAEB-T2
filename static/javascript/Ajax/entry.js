@@ -17,14 +17,15 @@ $.ajax({
       if (f.existencia == 0) {
         color = "activeEmpty"
         texto = "NO DISPONIBLE"
-      } else if (diasRestantes < 10) {
+      } else if (diasRestantes <= 10 && diasRestantes >= 1) {
         color = "activeCloseToExpire"
         texto = "POR VENCER"
       } else if (diasRestantes > 10) {
         color = "activeGood"
         texto = "ACTIVO"
       } else if (diasRestantes <= 0) {
-        color = "EXPIRO"
+        color = "activeExpire"
+        texto = "EXPIRO"
       }
 
       template = `<div>
