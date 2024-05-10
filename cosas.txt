@@ -10,6 +10,8 @@ hola
 
 Edouard:
  - hacer clave maestra para loguearse por si se pierde la contraseña.
+ - que el dueño genere una clave para que se pueda registrar un usuario.
+ - Encriptacionde contraseña.
 
 Luis:
 

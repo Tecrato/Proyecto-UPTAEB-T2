@@ -37,7 +37,7 @@ const modalDetalles = (n) => {
       //hacemos la peticion ajax para crear el esqueleto del modag
       $.ajax({
         url: "Controller/funcs_ajax/search.php",
-        type: "POST",
+        type: "GET",
         data: { randomnautica: "productos", ID: idProduct, active:n },
         success: function (response) {
           console.log(response);
@@ -57,7 +57,7 @@ const modalDetalles = (n) => {
           let supplierName = "";
           $.ajax({
             url: "Controller/funcs_ajax/search.php",
-            type: "POST",
+            type: "GET",
             data: {
               randomnautica: "entradas",
               subFunction: "proveedor_de_una_entrada",
@@ -89,7 +89,7 @@ const modalDetalles = (n) => {
                   let idProveedor =
                     sup.parentElement.getAttribute("idProveedor");
                   let contenedor = sup.nextElementSibling;
-                  $.post(
+                  $.get(
                     "Controller/funcs_ajax/search.php",
                     {
                       randomnautica: "entradas",
@@ -162,7 +162,7 @@ const modalEntradas = () => {
       // ejecutamos esta peticion para traer los proveedores de los productos a los select
       $.ajax({
         url: "Controller/funcs_ajax/search.php",
-        type: "POST",
+        type: "GET",
         data: { randomnautica: "proveedores" },
         success: function (response) {
           let options = ``;
@@ -229,7 +229,7 @@ const modalModificar = () => {
       // ejecutamos esta peticion para traer los proveedores de los productos a los select
       $.ajax({
         url: "Controller/funcs_ajax/search.php",
-        type: "POST",
+        type: "GET",
         data: { randomnautica: "productos", ID: idProduct },
         success: function (response) {
           let json = JSON.parse(response);
@@ -551,7 +551,7 @@ const cargarTargetProduct = () => {
   //hacemos la petion ajax
   $.ajax({
     url: "Controller/funcs_ajax/search.php",
-    type: "POST",
+    type: "GET",
     data: {
       randomnautica: "productos",
       n: page, // Aca va el numero de la pagina actual
@@ -559,7 +559,6 @@ const cargarTargetProduct = () => {
       like: "",
     },
     success: function (response) {
-      console.log(response);
       marcaAgua()
       tarjetas(response,".container-target-product");
       modalDetalles(1)
@@ -570,7 +569,7 @@ const cargarTargetProductDesactive = () => {
   //hacemos la petion ajax
   $.ajax({
     url: "Controller/funcs_ajax/search.php",
-    type: "POST",
+    type: "GET",
     data: {
       randomnautica: "productos",
       n: page, // Aca va el numero de la pagina actual
@@ -597,7 +596,7 @@ cargarTargetProductDesactive()
 const cargarCategoriaRegProduct = () => {
   $.ajax({
     url: "Controller/funcs_ajax/search.php",
-    type: "POST",
+    type: "GET",
     data: { randomnautica: "categorias" },
     success: function (response) {
       let options = ``;
@@ -619,7 +618,7 @@ const cargarUnidadesRegProduct = () => {
   //   //ejecutamos esta peticion para traer las unidades de los productos a los select
   $.ajax({
     url: "Controller/funcs_ajax/search.php",
-    type: "POST",
+    type: "GET",
     data: { randomnautica: "unidades" },
     success: function (response) {
       let options = ``;
@@ -703,7 +702,7 @@ formAggProduct.addEventListener("submit", (e) => {
 //esta consulta sirve para cargar los datos de las categorias en el filtro
 $.ajax({
   url: "Controller/funcs_ajax/search.php",
-  type: "POST",
+  type: "GET",
   data: { randomnautica: "categorias" },
   success: function (response) {
     let options = ``;
@@ -717,7 +716,7 @@ $.ajax({
 //esta consulta sirve para cargar los datos de las marcas en el filtro
 $.ajax({
   url: "Controller/funcs_ajax/search.php",
-  type: "POST",
+  type: "GET",
   data: { randomnautica: "productos", subFunction: "marca" },
   success: function (response) {
     let options = ``;
@@ -734,7 +733,7 @@ document.querySelector(".searchProductActive").addEventListener("keyup", (e) => 
   if (val != "") {
     $.ajax({
       url: "Controller/funcs_ajax/search.php",
-      type: "POST",
+      type: "GET",
       data: { randomnautica: "productos", like: val },
       success: function (response) {
         tarjetas(response,".container-target-product");
@@ -750,7 +749,7 @@ document.querySelector(".searchProductNotActive").addEventListener("keyup", (e) 
   if (val != "") {
     $.ajax({
       url: "Controller/funcs_ajax/search.php",
-      type: "POST",
+      type: "GET",
       data: { randomnautica: "productos", like: val, active: 0 },
       success: function (response) {
         tarjetasProductosDesactive(response,".cont_product_desactive")
@@ -767,7 +766,7 @@ inpNameProduct.addEventListener("keyup", (e) => {
   if (val != "") {
     $.ajax({
       url: "Controller/funcs_ajax/search.php",
-      type: "POST",
+      type: "GET",
       data: { randomnautica: "productos", like: val },
       success: function (response) {
         let json = JSON.parse(response);

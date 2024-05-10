@@ -1,7 +1,7 @@
 let hola = "";
 $.ajax({
   url: "Controller/funcs_ajax/search.php",
-  type: "POST",
+  type: "GET",
   data: { randomnautica: "entradas" },
   success: function (response) {
     let template;
@@ -95,7 +95,7 @@ $.ajax({
 
 $.ajax({
   url: "Controller/funcs_ajax/search.php",
-  type: "POST",
+  type: "GET",
   data: { randomnautica: "proveedores" },
   success: function (response) {
     let json = JSON.parse(response);
@@ -120,7 +120,7 @@ $.ajax({
         let template = "";
         $.ajax({
           url: "Controller/funcs_ajax/search.php",
-          type: "POST",
+          type: "GET",
           data: { randomnautica: "entradas", id_proveedor: idSup },
           success: function (response) {
             let json = JSON.parse(response);
@@ -149,7 +149,7 @@ $.ajax({
                 let template = "";
                 $.ajax({
                   url: "Controller/funcs_ajax/search.php",
-                  type: "POST",
+                  type: "GET",
                   data: {
                     randomnautica: "entradas",
                     id_proveedor: idProveedor,

@@ -4,67 +4,67 @@
     require('../../Model/Conexion.php');
     include("../funcs/verificar.php");
 
-    if (isset($_POST['limite'])) {
-        $limite = $_POST['limite'];
+    if (isset($_GET['limite'])) {
+        $limite = $_GET['limite'];
     }
     else {
         $limite = 9;
     }
-    if (isset($_POST['n']) and $_POST['n'] != "") {
-        $n = $_POST['n'];
+    if (isset($_GET['n']) and $_GET['n'] != "") {
+        $n = $_GET['n'];
     }
     else {
         $n = 0;
     }
      
 
-    if ($_POST['randomnautica'] == "productos") {
+    if ($_GET['randomnautica'] == "productos") {
         require('../../Model/Productos.php');
         $clase = new Producto(
-            id:(isset($_POST['ID']) ? $_POST['ID'] : null),
-            marca:(isset($_POST['marca']) ? $_POST['marca'] : null),
-            nombre:(isset($_POST['nombre']) ? $_POST['nombre'] : null),
-            active:(isset($_POST['active']) ? $_POST['active'] : 1),
-            like:(isset($_POST['like']) ? $_POST['like'] : '')
+            id:(isset($_GET['ID']) ? $_GET['ID'] : null),
+            marca:(isset($_GET['marca']) ? $_GET['marca'] : null),
+            nombre:(isset($_GET['nombre']) ? $_GET['nombre'] : null),
+            active:(isset($_GET['active']) ? $_GET['active'] : 1),
+            like:(isset($_GET['like']) ? $_GET['like'] : '')
         );
     }
-    elseif ($_POST['randomnautica'] == "entradas") {
+    elseif ($_GET['randomnautica'] == "entradas") {
         require('../../Model/Entradas.php');
         $clase = new Entrada(
-            id_producto: isset($_POST['id_producto']) ? $_POST['id_producto']: null,
-            id_proveedor: isset($_POST['id_proveedor']) ? $_POST['id_proveedor']: null,
-            active:(isset($_POST['active']) ? $_POST['active'] : 1));
+            id_producto: isset($_GET['id_producto']) ? $_GET['id_producto']: null,
+            id_proveedor: isset($_GET['id_proveedor']) ? $_GET['id_proveedor']: null,
+            active:(isset($_GET['active']) ? $_GET['active'] : 1));
     }
-    elseif ($_POST['randomnautica'] == "proveedores") {
+    elseif ($_GET['randomnautica'] == "proveedores") {
         require('../../Model/Proveedores.php');
         $clase = new Proveedor(
-            like:(isset($_POST['like']) ? $_POST['like'] : '')
+            like:(isset($_GET['like']) ? $_GET['like'] : '')
         );
     }
-    elseif ($_POST['randomnautica'] == "clientes") {
+    elseif ($_GET['randomnautica'] == "clientes") {
         require('../../Model/Clientes.php');
         $clase = new Cliente(
-            like_nombre:(isset($_POST['like_nombre']) ? $_POST['like_nombre'] : ''),
-            like_cedula:(isset($_POST['like_cedula']) ? $_POST['like_cedula'] : ''),
+            like_nombre:(isset($_GET['like_nombre']) ? $_GET['like_nombre'] : ''),
+            like_cedula:(isset($_GET['like_cedula']) ? $_GET['like_cedula'] : ''),
         );
     }
-    elseif ($_POST['randomnautica'] == "categorias") {
+    elseif ($_GET['randomnautica'] == "categorias") {
         require('../../Model/Categorias.php');
         $clase = new Categoria();
     }
-    elseif ($_POST['randomnautica'] == "unidades") {
+    elseif ($_GET['randomnautica'] == "unidades") {
         require('../../Model/Unidades.php');
         $clase = new Unidad();
     }
-    elseif ($_POST['randomnautica'] == "ventas") {
+    elseif ($_GET['randomnautica'] == "ventas") {
         require('../../Model/Registro de ventas.php');
         $clase = new Registro_ventas();
     }
 
-    if (isset($_POST['subFunction'])) {
-        if ($_POST['subFunction'] == 'proveedor_de_una_entrada') {
+    if (isset($_GET['subFunction'])) {
+        if ($_GET['subFunction'] == 'proveedor_de_una_entrada') {
             $result = $clase->search_proveedor_from_product();
-        } else if ($_POST['subFunction'] == 'marca') {
+        } else if ($_GET['subFunction'] == 'marca') {
             $result = $clase->search_marca();
         }
     }

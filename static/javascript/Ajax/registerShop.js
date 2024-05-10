@@ -354,7 +354,7 @@ document.getElementById("input-search-fact").addEventListener("keyup", (e) => {
   if (val != "") {
     $.ajax({
       url: "Controller/funcs_ajax/search.php",
-      type: "POST",
+      type: "GET",
       data: { randomnautica: "clientes", like_cedula: val },
       success: function (response) {
         console.log(response);
@@ -426,7 +426,7 @@ document.getElementById("input-search-fact").addEventListener("keyup", (e) => {
 //ajax
 $.ajax({
   url: "Controller/funcs_ajax/search.php",
-  type: "POST",
+  type: "GET",
   data: { randomnautica: "productos" },
   success: function (response) {
     let producto = JSON.parse(response);

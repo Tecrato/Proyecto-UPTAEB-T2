@@ -13,6 +13,10 @@ RewriteRule ^Proveedores$ Controller/C_proveedores.php
 RewriteRule ^Salir$ Controller/funcs/logout.php
 
 
+RewriteRule ^api_search$ Controller/funcs_ajax/search.php
+RewriteRule ^api_login$ Controller/funcs_ajax/login.php
+RewriteRule ^api_get_image$ Controller/funcs_ajax/image_downloader.php
+
 RewriteRule ^fd$ Controller/C_facturadirecta.php
 RewriteRule ^test$ Controller/funcs_ajax/prueba.php
 
