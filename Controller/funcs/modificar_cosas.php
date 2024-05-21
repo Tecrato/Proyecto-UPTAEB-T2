@@ -1,8 +1,8 @@
 <?php
     session_start();
     require("./verificar_admin_funcs.php");
-    require 'subir_imagen.php';
     require('../../Model/Conexion.php');
+    require 'subir_imagen.php';
     $tipo = $_POST['tipo']; // Depende de que es lo que queramos actualizar
 
     if ($tipo === 'producto'){
@@ -51,7 +51,8 @@
     }
     elseif ($tipo === 'usuario'){
         require('../../Model/Usuarios.php');
-        $clase = new Usuario($_POST["ID"],$_POST["nombre"],$_POST["correo"],$_POST["password"],isset($_POST["rol"]) ? $_POST["rol"] : null); 
+        $pass = isset($_POST["password"]) ? password_hash($_POST["password"],PASSWORD_DEFAULT) : null
+        $clase = new Usuario($_POST["ID"],$_POST["nombre"],$_POST["correo"],$pass,isset($_POST["rol"]) ? $_POST["rol"] : null); 
         $clase->actualizar();
 
         if (isset($_POST['self'])) {

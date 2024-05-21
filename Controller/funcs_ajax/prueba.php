@@ -1,6 +1,7 @@
 <?php
-    require '../../Model/Conexion.php';
-    require '../../Model/Productos.php';
+    require ('../../Model/Conexion.php');
+    require ('../../Model/Productos.php');
+    require('../../Model/Usuarios.php');
 
 
 	// $clase = new Producto();
@@ -98,10 +99,13 @@
 	// 	// throw new Exception('El id esta mal');
 	// }
 	// exit(404);
-	if (1 == 1) {
-		echo 0;
-	} else {
-		echo 1;
-	}
 	
+	// print_r(password_hash('1234',PASSWORD_DEFAULT));
+	// print_r(password_verify('buenas tardes','$2y$10$0BOTQWA8wlbBBh1lm4dT6eJsactYobNcp7VI6.ng6.FDbTdlwTGkm'));
+	
+
+    $usuario = new Usuario(null,null,'nose@gmail.com');
+    
+    $resultado = $usuario->verificar('12345');
+	print_r($resultado);
 ?>

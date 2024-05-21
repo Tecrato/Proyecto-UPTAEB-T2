@@ -78,14 +78,14 @@
                                 <input class="uk-input" value="<?php echo $tu['correo']?>" name="correo" type="email" placeholder="Correo">
                             </div>
                         </div>
-
+<!-- 
                         <div class="uk-margin">
                             <label class="uk-form-label" for="form-horizontal-text">Contraseña</label>
                             <div class="uk-form-controls">
                                 <input class="uk-input" value="<?php echo $tu['password']?>" type="text"
                                     placeholder="Contraseña" name="password">
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="uk-margin-small-top uk-flex uk-flex-center">
                             <div>
