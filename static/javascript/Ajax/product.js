@@ -2,7 +2,15 @@
 if (screen < 1023) {
   document.querySelector('.itemSwitcher1').innerHTML = `<img class="uk-preserve-width uk-margin-small-right img1ProductSwitcher" src="./static/images/cajas (2).png" width="30" height="30" alt="">`
   document.querySelector('.itemSwitcher2').innerHTML = `<img class="uk-preserve-width uk-margin-small-right img2ProductSwitcher" src="./static/images/suministros.png" width="32" height="32" alt="">`
-  document.querySelector('.itemSwitcher3').innerHTML = `<img class="uk-preserve-width uk-margin-small-right img4ProductSwitcher" src="./static/images/papelera-de-reciclaje.png" width="32" height="32" alt="">`
+  document.querySelector('.itemSwitcher3').innerHTML = `<img class="uk-preserve-width uk-margin-small-right img4ProductSwitcher" src="./static/images/menu.png" width="32" height="32" alt="">`
+  document.querySelector('.itemSwitcher4').innerHTML = `<img class="uk-preserve-width uk-margin-small-right img5ProductSwitcher" src="./static/images/papelera-de-reciclaje.png" width="32" height="32" alt="">`
+}
+
+if (screen < 1357) {
+  let table_expand = document.querySelectorAll(".uk-table-expand")
+  table_expand.forEach((e)=>{
+    e.classList.remove("uk-table-expand")
+  })
 }
 
 //creamos una funcion que nos cargue todas las tarjetas y sus modales, dependiendo de que modal desea abrir
@@ -559,6 +567,7 @@ const cargarTargetProduct = () => {
       like: "",
     },
     success: function (response) {
+      console.log(response);
       marcaAgua()
       tarjetas(response,".container-target-product");
       modalDetalles(1)
