@@ -35,6 +35,15 @@
             $consulta->execute();
             return $consulta->fetchAll();
         }
-
+		function agregar(){
+            $query = $this->conn->prepare('INSERT INTO categorias (nombre) VALUES (:nombre)');
+            $query->bindParam(':nombre',$this->nombre);
+            $query->execute();
+        }
+		function borrar(){
+            $query = $this->conn->prepare('DELETE FROM categorias WHERE id = :id');
+            $query->bindParam(':id',$this->id);
+            $query->execute();
+        }
 	}
 ?>

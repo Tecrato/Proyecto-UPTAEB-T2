@@ -11,5 +11,16 @@
 			$query = "SELECT * FROM unidades";
 			return $this->conn->query($query)->fetchAll();
 		}
+		function agregar(){
+            $query = $this->conn->prepare('INSERT INTO unidades (nombre) VALUES (:nombre)');
+            $query->bindParam(':nombre',$this->nombre);
+            $query->execute();
+        }
+		# y una funcion para borrar
+		function borrar(){
+            $query = $this->conn->prepare('DELETE FROM unidades WHERE id = :id');
+            $query->bindParam(':id',$this->id);
+            $query->execute();
+        }
 	}
 ?>

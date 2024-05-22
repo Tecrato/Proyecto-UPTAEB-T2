@@ -63,6 +63,32 @@
         $clase = new Usuario(null,$_POST["nombre"],$_POST["correo"],$hash,$_POST["rol"]); 
         $clase->agregar();
         header('Location:../../Administrar_perfil'); // Y vuelve a la pagina donde estaba antes
-    };
+    }
+    elseif ($tipo === 'proveedor'){
+        require('../../Model/Proveedores.php');
+        $clase = new Proveedor(null,$_POST["nombre"],$_POST["razon_social"],$_POST["rif"],$_POST["telefono"],$_POST["correo"],$_POST["direccion"]); // Llama al modelo y le manda la instruccion
+        $clase->agregar();
+        header('Location:../../Proveedores'); // Y vuelve a la pagina donde estaba antes
+    }
+    # ahora otro elseif para agregar unidades
+    elseif ($tipo === 'unidad'){
+        require('../../Model/Unidades.php');
+        $clase = new Proveedor(null,$_POST["nombre"]); // Llama al modelo y le manda la instruccion
+        $clase->agregar();
+        header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
+    }
+    elseif ($tipo === 'marca'){
+        require('../../Model/Marcas.php');
+        $clase = new Proveedor(null,$_POST["nombre"]); // Llama al modelo y le manda la instruccion
+        $clase->agregar();
+        header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
+    }
+    elseif ($tipo === 'categoria'){
+        require('../../Model/Categorias.php');
+        $clase = new Proveedor(null,$_POST["nombre"]); // Llama al modelo y le manda la instruccion
+        $clase->agregar();
+        header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
+    }
+
     
 ?>

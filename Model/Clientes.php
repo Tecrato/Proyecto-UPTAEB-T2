@@ -63,11 +63,8 @@
             return $query->execute(); 
         }
 
-        // Con esta otra funcion se busca entre los clientes en la base de datos
         function search($n=0,$limite=9){
-            // Al igual que la clase anterior, puede buscar segun muchos valores o solo algunos
-            $query = "SELECT * FROM clientes 
-            WHERE active=1 AND 
+            $query = "SELECT * FROM clientes WHERE active=1 AND 
             nombre LIKE :like_nombre AND 
             cedula LIKE :like_cedula";
 
