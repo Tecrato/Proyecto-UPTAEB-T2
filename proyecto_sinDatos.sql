@@ -40,7 +40,7 @@ DROP TABLE IF EXISTS `clientes`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `clientes` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(500) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
   `cedula` varchar(45) NOT NULL,
   `apellido` varchar(45) NOT NULL,
   `documento` varchar(1) NOT NULL,
@@ -50,6 +50,23 @@ CREATE TABLE `clientes` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `credito`
+--
+
+DROP TABLE IF EXISTS `credito`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `credito` (
+   id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_cliente VARCHAR(50) NOT NULL,
+    id_registro_de_ventas INT NOT NULL,
+    fecha_inicio DATE NOT NULL,
+    fecha_limite DATE NOT NULL,
+    porcentaje_inicial INT NOT NULL,
+    porcentaje_diario_extra INT NOT NULL
+);
 
 --
 -- Table structure for table `entradas`
@@ -77,13 +94,13 @@ CREATE TABLE `entradas` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `factura`
+-- Table structure for table `transacciones`
 --
 
-DROP TABLE IF EXISTS `factura`;
+DROP TABLE IF EXISTS `transacciones`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `factura` (
+CREATE TABLE `transacciones` (
   `id` int NOT NULL AUTO_INCREMENT,
   `id_registro_ventas` int NOT NULL,
   `id_productos` int NOT NULL,
@@ -96,6 +113,20 @@ CREATE TABLE `factura` (
   CONSTRAINT `fk_productos_has_registro_ventas_registro_ventas1` FOREIGN KEY (`id_registro_ventas`) REFERENCES `registro_ventas` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `pagos`
+--
+
+DROP TABLE IF EXISTS `pagos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE pagos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_venta INT NOT NULL,
+    metodo_de_pago VARCHAR(50) NOT NULL,
+    monto INT NOT NULL
+);
 
 --
 -- Table structure for table `productos`
@@ -146,14 +177,15 @@ CREATE TABLE `proveedores` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `registro_ventas`
+-- Table structure for table `detalles_factura`
 --
 
-DROP TABLE IF EXISTS `registro_ventas`;
+DROP TABLE IF EXISTS `detalles_factura`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `registro_ventas` (
+CREATE TABLE `detalles_factura` (
   `id` int NOT NULL AUTO_INCREMENT,
+  `estado` int NOT NULL DEFAULT '0',
   `monto_final` float NOT NULL,
   `metodo_pago` varchar(50) NOT NULL,
   `fecha` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -210,4 +242,4 @@ CREATE TABLE `usuarios` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-01-30 17:26:39
+
