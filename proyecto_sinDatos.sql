@@ -94,23 +94,23 @@ CREATE TABLE `entradas` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `transacciones`
+-- Table structure for table `detalles_factura`
 --
 
-DROP TABLE IF EXISTS `transacciones`;
+DROP TABLE IF EXISTS `detalles_factura`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `transacciones` (
+CREATE TABLE `detalles_factura` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `id_registro_ventas` int NOT NULL,
+  `id_detalles_factura` int NOT NULL,
   `id_productos` int NOT NULL,
   `cantidad` int NOT NULL,
   `coste_producto_total` float NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_productos_has_registro_ventas_registro_ventas1_idx` (`id_registro_ventas`),
+  KEY `fk_productos_has_registro_ventas_registro_ventas1_idx` (`id_detalles_factura`),
   KEY `fk_productos_has_registro_ventas_productos1_idx` (`id_productos`),
   CONSTRAINT `fk_productos_has_registro_ventas_productos1` FOREIGN KEY (`id_productos`) REFERENCES `productos` (`id`),
-  CONSTRAINT `fk_productos_has_registro_ventas_registro_ventas1` FOREIGN KEY (`id_registro_ventas`) REFERENCES `registro_ventas` (`id`)
+  CONSTRAINT `fk_productos_has_registro_ventas_registro_ventas1` FOREIGN KEY (`id_detalles_factura`) REFERENCES `detalles_factura` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -184,7 +184,7 @@ DROP TABLE IF EXISTS `detalles_factura`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `detalles_factura` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id_detalles_factura` int NOT NULL AUTO_INCREMENT,
   `estado` int NOT NULL DEFAULT '0',
   `monto_final` float NOT NULL,
   `metodo_pago` varchar(50) NOT NULL,
