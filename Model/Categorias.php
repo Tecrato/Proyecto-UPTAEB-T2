@@ -12,6 +12,16 @@
 			$this->descripcion = $descripcion;
 		}
 
+        function agregar(){
+            
+            $query = $this->conn->prepare("INSERT INTO categoria VALUES(null, :nombre, :descripcion)");
+
+            $query->bindParam(':nombre',$this->nombre);
+            $query->bindParam(':descripcion',$this->descripcion);
+
+            $query->execute();
+        }
+
         function search($n=0,$limite=100){
             // Al igual que la clase anterior, puede buscar segun muchos valores o solo algunos
             $query = "SELECT * FROM categoria";
@@ -30,20 +40,17 @@
             if ($this->id != null){
                 $consulta->bindParam(':id',$this->id, PDO::PARAM_INT);
             }
+            function borrar() {
+
+                $query = $this->conn->prepare("DELETE FROM categoria WHERE ID=:id");
+                
+                $query->execute([':id'=>$this->id]);
+            }
 
             
             $consulta->execute();
             return $consulta->fetchAll();
         }
-		function agregar(){
-            $query = $this->conn->prepare('INSERT INTO categorias (nombre) VALUES (:nombre)');
-            $query->bindParam(':nombre',$this->nombre);
-            $query->execute();
-        }
-		function borrar(){
-            $query = $this->conn->prepare('DELETE FROM categorias WHERE id = :id');
-            $query->bindParam(':id',$this->id);
-            $query->execute();
-        }
+
 	}
 ?>

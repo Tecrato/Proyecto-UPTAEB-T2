@@ -62,5 +62,12 @@
         }
 
         header('Location:../../Administrar_perfil'); // Y vuelve a la pagina donde estaba antes
-    };
+    }
+    elseif ($tipo === 'marcas'){
+        require('../../Model/Clientes.php');
+        $clase = new marcas($_POST["ID"],$_POST["nombre"]);
+        $clase->actualizar();
+        header('Location:../../Clientes');
+    }
+    ;
 ?>
