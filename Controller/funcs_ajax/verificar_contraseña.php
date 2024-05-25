@@ -4,10 +4,12 @@
     require('../../Model/Conexion.php');
     require('../../Model/Usuarios.php');
 
-    $usuario = new Usuarios(null,null,$_GET['correo']);
-    $resultado = $usuario->verificar($_GET['contrasena']);
+    $c = new Usuario(null,null,$correo); // Llamamos al modelos y se busca el usuario
+    $result = $c->search();
+    // $usuario = new Usuarios(null,null,$_GET['correo']);
+    // $resultado = $usuario->verificar(password_hash($_GET['contrasena'],PASSWORD_DEFAULT));
 
-    if($resultado){
+    if(password_verify($password,$result[0]['hash'])){
         echo "true";
     }else{
         echo "false";

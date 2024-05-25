@@ -74,10 +74,10 @@
                 <form class="uk-grid-small" uk-grid method="POST" action="Controller/funcs/agregar_cosas.php" enctype="multipart/form-data">
                     <input type="text" name="tipo" value='cliente' id="" style="display:none">
                     <div class="uk-width-1-2@s">
-                        <input class="uk-input" type="text" placeholder="Nombre" name="nombre" aria-label="100" pattern="^[A-Z][A-Za-z0-9ñ\s]{2,20}$" required>
+                        <input class="uk-input" type="text" placeholder="Nombre" name="nombre" aria-label="100" pattern="^([A-Z][a-z]{3,})( [A-Z][a-z]{3,})?$" required>
                     </div>
                     <div class="uk-width-1-2@s">
-                        <input class="uk-input" type="text" placeholder="Apellido" name="apellido" aria-label="50" pattern="^[A-Z][A-Za-z0-9ñ\s]{2,20}$" required>
+                        <input class="uk-input" type="text" placeholder="Apellido" name="apellido" aria-label="50" pattern="^([A-Z][a-z]{3,})( [A-Z][a-z]{3,})?$" required>
                     </div>
                     <div class="uk-width-1-2@s">
                         <select class="uk-select" id="form-stacked-select" name="documento" required>
@@ -88,10 +88,11 @@
                         </select>
                     </div>
                     <div class="uk-width-1-2@s">
-                        <input class="uk-input" type="number" placeholder="cedula" name="cedula" aria-label="50" pattern="^[VeEe]-?\d{1,8}$" required>
+                        <input class="uk-input" type="number" placeholder="cedula" name="cedula" aria-label="50" pattern="^([\d]{1,2})\.?([\d]{3})\.?([\d]{3})$" required>
                     </div>
                     <div class="uk-width-1-2@s">
-                        <input class="uk-input" type="text" placeholder="Telefono" name="telefono" aria-label="50" pattern="^[0-9]{7,12}$" required>
+                        <input class="uk-input" type="text" placeholder="Telefono" name="telefono" aria-label="50" pattern="^([\+\d]{2,4} ?)?([\d]{4}) ?\-?([\d]{3}) ?\-?([\d]{4})$" required>
+                        
                     </div>
                     <div class="uk-width-1-2@s">
                         <input class="uk-input" type="text" placeholder="Dirección" name="direccion" aria-label="50" minlength="5" maxlength="200" required>
