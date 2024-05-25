@@ -70,7 +70,6 @@
         $clase->agregar();
         header('Location:../../Proveedores'); // Y vuelve a la pagina donde estaba antes
     }
-    # ahora otro elseif para agregar unidades
     elseif ($tipo === 'unidad'){
         require('../../Model/Unidades.php');
         $clase = new Proveedor(null,$_POST["nombre"]); // Llama al modelo y le manda la instruccion

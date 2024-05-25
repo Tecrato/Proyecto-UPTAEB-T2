@@ -104,8 +104,15 @@
 	// print_r(password_verify('buenas tardes','$2y$10$0BOTQWA8wlbBBh1lm4dT6eJsactYobNcp7VI6.ng6.FDbTdlwTGkm'));
 	
 
-    $usuario = new Usuario(null,null,'nose@gmail.com');
+    // $usuario = new Usuario(null,null,'nose@gmail.com');
     
-    $resultado = $usuario->verificar('12345');
-	print_r($resultado);
-?>
+    // $resultado = $usuario->verificar('12345');
+	// print_r($resultado);
+
+	
+	?>
+	
+		<form action="">
+		<input type="text" pattern="[a-z]">
+		<input type="submit" value="">
+		</form>

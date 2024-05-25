@@ -74,19 +74,19 @@
                     <form class="uk-grid-small" uk-grid method="POST" action="Controller/funcs/agregar_cosas.php">
                         <input type="text" name="tipo" value='proveedor' id="" style="display:none">
                         <div class="uk-width-1-2@s">
-                            <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="^[A-Z][A-Za-z0-9ñ\s]{2,20}$" required>
+                            <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="^([A-ZÑ][a-zñ]{3,})( [A-Z][a-z]{3,})?$" required>
                         </div>
                         <div class="uk-width-1-2@s">
-                            <input class="uk-input" type="text" placeholder="Razon Social" aria-label="100" name="razon_social" pattern="^[A-ZÑ][a-zA-Z0-9ñ\s]{2,50}$" required>
+                            <input class="uk-input" type="text" placeholder="Razon Social" aria-label="100" name="razon_social" pattern="^([A-ZÑ][a-zñ]{3,})( [A-Z][a-z]{3,})?$" required>
                         </div>
                         <div class="uk-width-1-2@s">
                             <input class="uk-input" type="text" placeholder="Rif" aria-label="50" name="rif" pattern="^[VJEGPvjegp][\d]+$" value="j-00000000" required>
                         </div>
                         <div class="uk-width-1-2@s">
-                            <input class="uk-input" type="text" minlength="9" placeholder="Número de teléfono" aria-label="50" name="telefono" pattern="^[0-9]{7,12}$" required>
+                            <input class="uk-input" type="text" minlength="9" placeholder="Número de teléfono" aria-label="50" name="telefono" pattern="^([\+\d]{2,4} ?)?([\d]{4}) ?\-?([\d]{3}) ?\-?([\d]{4})$" required>
                         </div>
                         <div class="uk-width-1-2@s">
-                            <input class="uk-input" type="email" placeholder="Correo electrónico" aria-label="25" name="correo" pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$" required>
+                            <input class="uk-input" type="email" placeholder="Correo electrónico" aria-label="25" name="correo" pattern="^([A-Za-z0-9\.\_]+)@([\w]{3,8})\.([\w]{2,3})(\.[\w]{2,4})?(\.[\w]{2,3})?$" required>
                         </div>
                         <div class="uk-width-1-2@s">
                             <input class="uk-input" type="text" placeholder="Dirección" aria-label="25" name="direccion" minlength="5" maxlength="200" required> <!-- No hace falta restringirle la direccion wtf, con un rango es suficiente ^(\w{5,7})\s([0-9]{1,2}) entre (\w{5,7})\s([0-9]{1,2}) y (\w{5,7})\s([0-9]{1,2})$ -->

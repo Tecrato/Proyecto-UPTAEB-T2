@@ -71,22 +71,22 @@ echo '<div>
                 <input type="text" name="tipo" value="proveedor" id="" style="display:none">
                 <input type=number value="'.$row['id'].'" name="ID" style="display:none">
                 <div class="uk-width-1-2@s">
-                    <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" value="'.$row['nombre'].'" name="nombre" pattern="^[A-Z][A-Za-z0-9ñ\s]{2,20}$" requierd>
+                    <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" value="'.$row['nombre'].'" name="nombre" pattern="^([A-ZÑ][a-zñ]{3,})( [A-Z][a-z]{3,})?$" requierd>
                 </div>
                 <div class="uk-width-1-2@s">
-                    <input class="uk-input" type="text" placeholder="Razon Social" aria-label="100" value="'.$row['razon_social'].'" name="razon_social" pattern="^[A-ZÑ][a-zA-Z0-9ñ\s]{2,50}$" required>
+                    <input class="uk-input" type="text" placeholder="Razon Social" aria-label="100" value="'.$row['razon_social'].'" name="razon_social" pattern="^[\w]{2,50}$" required>
                 </div>
                 <div class="uk-width-1-2@s">
                     <input class="uk-input" type="text" placeholder="Rif" aria-label="50" value="'.$row['rif'].'" name="rif" pattern="^[VJEGPvjegp][\d]+$" required>
                 </div>
                 <div class="uk-width-1-2@s">
-                    <input class="uk-input" type="text" placeholder="Número de teléfono" aria-label="50" value="'.$row['telefono'].'" name="telefono" pattern="^[0-9]{7,12}^$" required>
+                    <input class="uk-input" type="text" placeholder="Número de teléfono" aria-label="50" value="'.$row['telefono'].'" name="telefono" pattern="^([\+\d]{2,4} ?)?([\d]{4}) ?\-?([\d]{3}) ?\-?([\d]{4})" required>
                 </div>
                 <div class="uk-width-1-2@s">
-                    <input class="uk-input" type="email" placeholder="Correo electrónico" aria-label="25" value="'.$row['correo'].'" name="correo" pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$" required>
+                    <input class="uk-input" type="email" placeholder="Correo electrónico" aria-label="25" value="'.$row['correo'].'" name="correo" pattern="^([A-Za-z0-9\.\_]+)@([\w]{3,8})\.([\w]{2,3})(\.[\w]{2,4})?(\.[\w]{2,3})?$" required>
                 </div>
                 <div class="uk-width-1-2@s">
-                    <input class="uk-input" type="text" placeholder="Dirección" aria-label="25" value="'.$row['direccion'].'" name="direccion" minlength="5" maxlength="200" required>
+                    <input class="uk-input" type="text" placeholder="Dirección" aria-label="25" value="'.$row['direccion'].'" name="direccion" patttern="^\w$" minlength="5" maxlength="200" required>
                 </div>
                 <input type="submit" id="modificarSup'.$row['direccion'].'" style="display:none">
             </form>
