@@ -3,6 +3,7 @@
 <main class="Bg-Main-home2 uk-padding uk-light">
 
     <section class="uk-flex uk-flex-center uk-margin-medium Gap Wraper">
+        
         <div class="uk-width-1-2@s uk-background-secondary Card-grafic">
             <div class="titleReport">
                 <h2 class="Bg-Grafic-title">Valor total del inventario</h2>
@@ -13,7 +14,10 @@
                                 <a href="#"><span uk-icon="icon: more; ratio: 1.5"></span></a>
                                 <div class="uk-dropdown">
                                     <ul class="uk-nav uk-dropdown-nav">
-                                        <li><a href="#" uk-icon="icon: file-pdf">Generar reporte</a></li>
+                                        <li>
+                                            <button  id="GenReport">Imprimir</button>
+                                            <!-- <a href="" uk-icon="icon: file-pdf">Generar reporte</a> -->
+                                        </li>
                                     </ul>
                                 </div>
                             </li>
@@ -23,6 +27,8 @@
             </div>
             <canvas id="inventoryChart"></canvas>
         </div>
+        
+
         <div class="uk-width-1-2@s uk-background-secondary Card-grafic">
             <div class="titleReport">
                 <h2 class="Bg-Grafic-title">Ganancias mensuales</h2>

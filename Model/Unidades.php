@@ -22,5 +22,12 @@
             $query->bindParam(':id',$this->id);
             $query->execute();
         }
+		function actualizar(){
+            $query = 'UPDATE unidades SET nombre=:nombre WHERE id=:id';
+            $query = $this->conn->prepare($query);
+            $query->bindParam(':nombre',$this->nombre);
+            $query->bindParam(':id',$this->id);
+            $query->execute(); 
+        }
 	}
 ?>

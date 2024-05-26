@@ -1,5 +1,5 @@
-Chart.defaults.color = "#fff";
-Chart.defaults.borderColor = "#444";
+// Chart.defaults.color = "#fff";
+// Chart.defaults.borderColor = "#444";
 
 const getDataColors = (opacity) => {
   const colors = [
@@ -26,6 +26,8 @@ const printChart = () => {
 };
 
 const renderModelsChart1 = () => {
+
+  
   // const data = {
   //     labels: ['Charcuteria', 'Cesta Basica', 'Aseo Personal'],
   //     datasets: [{
@@ -62,7 +64,16 @@ const renderModelsChart1 = () => {
       },
     ],
   };
-  new Chart("inventoryChart", { type: "bar", data });
+  let chart = new Chart("inventoryChart", { type: "bar", data });
+  let f = document.getElementById("GenReport").addEventListener("click", () => {
+    const link = document.createElement("a");
+    link.href = chart.toBase64Image();
+    
+    link.download = "chart.png";
+    link.click();
+    Chart.defaults.color = "#000";
+    Chart.defaults.borderColor = "#444";
+  });
 };
 
 const renderModelsChart2 = () => {

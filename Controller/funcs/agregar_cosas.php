@@ -72,9 +72,9 @@
     }
     elseif ($tipo === 'unidad'){
         require('../../Model/Unidades.php');
-        $clase = new Proveedor(null,$_POST["nombre"]); // Llama al modelo y le manda la instruccion
+        $clase = new Unidad(null,$_POST["nombre"]); // Llama al modelo y le manda la instruccion
         $clase->agregar();
-        header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
+        // header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }
     elseif ($tipo === 'marca'){
         require('../../Model/marcas.php');
@@ -84,9 +84,9 @@
     }
     elseif ($tipo === 'categoria'){
         require('../../Model/Categorias.php');
-        $clase = new Proveedor(null,$_POST["nombre"]); // Llama al modelo y le manda la instruccion
+        $clase = new Categoria(null,$_POST["nombre"]); // Llama al modelo y le manda la instruccion
         $clase->agregar();
-        header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
+        // header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }
 
     

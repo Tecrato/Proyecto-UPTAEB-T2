@@ -3,22 +3,16 @@
 
 		private $id;
 		private $nombre;
-		private $descripcion;
 
-		function __construct($id=null, $nombre=null, $descripcion=null){
+		function __construct($id=null, $nombre=null){
 			DB::__construct();
 			$this->id = $id;
 			$this->nombre = $nombre;
-			$this->descripcion = $descripcion;
 		}
 
         function agregar(){
-            
-            $query = $this->conn->prepare("INSERT INTO categoria VALUES(null, :nombre, :descripcion)");
-
+            $query = $this->conn->prepare("INSERT INTO categoria VALUES(null, :nombre)");
             $query->bindParam(':nombre',$this->nombre);
-            $query->bindParam(':descripcion',$this->descripcion);
-
             $query->execute();
         }
 
@@ -39,17 +33,23 @@
             $consulta->bindParam(':n',$n, PDO::PARAM_INT);
             if ($this->id != null){
                 $consulta->bindParam(':id',$this->id, PDO::PARAM_INT);
-            }
-            function borrar() {
-
-                $query = $this->conn->prepare("DELETE FROM categoria WHERE ID=:id");
-                
-                $query->execute([':id'=>$this->id]);
-            }
-
-            
+            }    
             $consulta->execute();
             return $consulta->fetchAll();
+        }
+
+        function borrar(){
+            $query = $this->conn->prepare('DELETE FROM categoria WHERE id = :id');
+            $query->bindParam(':id',$this->id);
+            $query->execute();
+        }
+
+        function actualizar(){
+            $query = 'UPDATE categoria SET nombre=:nombre WHERE id=:id';
+            $query = $this->conn->prepare($query);
+            $query->bindParam(':nombre',$this->nombre);
+            $query->bindParam(':id',$this->id);
+            $query->execute(); 
         }
 
 	}

@@ -56,20 +56,20 @@
     }
     elseif ($tipo === 'unidad'){
         require('../../Model/Unidades.php');
-        $clase = new Proveedor(null,$_POST["nombre"]); // Llama al modelo y le manda la instruccion
+        $clase = new Unidad($_POST["ID"]); // Llama al modelo y le manda la instruccion
         $clase->borrar();
-        header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
+        // header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }
     elseif ($tipo === 'marca'){
         require('../../Model/marcas.php');
         $clase = new marcas($_POST["ID"]); // Llama al modelo y le manda la instruccion
         $clase->borrar();
-        header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
+        // header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }
     elseif ($tipo === 'categoria'){
         require('../../Model/Categorias.php');
-        $clase = new Categoria(null,$_POST["nombre"]); // Llama al modelo y le manda la instruccion
+        $clase = new Categoria($_POST["ID"]); // Llama al modelo y le manda la instruccion
         $clase->borrar();
-        header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
+        // header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }
 ?>

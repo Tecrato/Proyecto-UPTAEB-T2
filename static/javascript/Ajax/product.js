@@ -567,7 +567,6 @@ const cargarTargetProduct = () => {
       like: "",
     },
     success: function (response) {
-      console.log(response);
       marcaAgua()
       tarjetas(response,".container-target-product");
       modalDetalles(1)
@@ -818,3 +817,136 @@ inpNameProduct.addEventListener("keyup", (e) => {
     }
   }
 });
+
+
+// estas funciones son para las marcas, unidades y categorias
+const Registrar_U_M_C = (form,tr,item_reset,notification)=>{
+  // seleccionamos el formulario
+  let Form_identificador = document.getElementById(form);
+  // captamos su evento submit
+  Form_identificador.addEventListener("submit", (e) => {
+    e.preventDefault();
+    // guardamos los datos del formulario en un formData
+    let Form_Send = new FormData(Form_identificador);
+    // enviamos los datos la backend con una peticion ajax
+    $.ajax({
+      url: "Controller/funcs/agregar_cosas.php",
+      type: "POST",
+      data: Form_Send,
+      processData: false,
+      contentType: false,
+      success: function (response) {
+        let result = tr()
+        document.querySelector(item_reset).value = ""
+        UIkit.notification.closeAll();
+        UIkit.notification({
+          message:
+            `<span uk-icon='icon: check'>${notification}</span>`,
+          status: "success",
+          pos: "bottom-right",
+        });
+      },
+    });
+  });  
+}
+const Edit_U_M_C = (tr)=>{
+  // seleccionamos todos los btn de editar de las tablas
+  let btnAction = document.querySelectorAll(".Edit-U_M_C");
+  // los recorremos
+  btnAction.forEach((b) => {
+    // y obtenemos el btn que pulso el usuario por su evento click
+    b.addEventListener("click", () => {
+      // obtenemos el id del registro
+      let id =
+        b.parentElement.parentElement.previousElementSibling
+          .previousElementSibling.textContent;
+          // obtenemos el tipo, ya sea marcas, categoria o unidades
+      let tipo = b.getAttribute("tipo");
+      // obtenemos el titulo del modal para renombrarlo segun el tipo
+      let modal_title = document.querySelector(".modal_title_rename");
+      modal_title.textContent = "EDITAR " + tipo.toUpperCase();
+
+      // aca obtenemos el input donde esta el valor que usuario coloco
+      let nombre_item = b.parentElement.parentElement.previousElementSibling.textContent;
+      // y le asignamos el valor que el usuario previamente guardo
+      document.querySelector(".name_U-C-M_edit").value = nombre_item;
+      // obtenemos el input que mandara el id del registro y se lo asignamos como value
+      let id_2 = document.getElementById("id_delete_edit-U-M-C");
+      id_2.value = id;
+      let type_edit = document.getElementById("Edit_type")
+      type_edit.value = tipo
+      let msj = ""
+      if (tipo == "unidad") {
+        msj = "Unidad Modificada correctamente"
+      } else if (tipo == "categoria") {
+        msj = "Categoria Modificada correctamente"
+      } else {
+        msj = "Marca Modificada correctamente"
+      }
+      let formEdit = document.getElementById("form_edit-U-C-M");
+
+      formEdit.addEventListener("submit", (e) => {
+        e.preventDefault();
+        let formDataEdit = new FormData(formEdit);
+
+        $.ajax({
+          url: "Controller/funcs/modificar_cosas.php",
+          type: "POST",
+          data: formDataEdit,
+          processData: false,
+          contentType: false,
+          success: function (response) {
+            let result = tr()
+            UIkit.notification.closeAll();
+            UIkit.notification({
+              message: `<span uk-icon='icon: check'>${msj}</span>`,
+              status: "success",
+              pos: "bottom-right",
+            });
+            setTimeout(() => {
+              UIkit.modal("#edit-U_M_C").hide();
+            }, 400);
+          },
+        });
+      });
+    });
+  });
+}
+const DELETE_U_M_C = (TR)=>{
+  let btnDeletes = document.querySelectorAll(".delete-U_M_C")
+  btnDeletes.forEach((b)=>{
+    b.addEventListener("click", ()=>{
+      let tipo = b.getAttribute("tipo");
+      let msj = ""
+     
+      let id = b.parentElement.parentElement.previousElementSibling.previousElementSibling.textContent
+      let deleteBtnSend = document.querySelector(".DELETE_U-M-C")
+      deleteBtnSend.addEventListener("click", ()=>{
+        $.ajax({
+          url: "Controller/funcs/borrar_cosas.php",
+          type: "POST",
+          data: {ID: id, tipo: tipo},
+          success: function (response) {
+            if (tipo == "unidad") {
+              msj = "Unidad Eliminada correctamente"
+            } else if (tipo == "categoria") {
+              msj = "Categoria Eliminada correctamente"
+            } else {
+              msj = "Marca Eliminada correctamente"
+            }
+            let result = TR()
+            UIkit.notification.closeAll();
+            UIkit.notification({
+              message: `<span uk-icon='icon: check'>${msj}</span>`,
+              status: "success",
+              pos: "bottom-right",
+            });
+            setTimeout(() => {
+              UIkit.modal("#eliminar-U_M_C").hide();
+            }, 400);
+          },
+        });
+      })
+    })
+  })
+}

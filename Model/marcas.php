@@ -51,14 +51,10 @@
             return $consulta->fetchAll();
         }
         function actualizar(){
-            $query = 'UPDATE marcas SET nombre=:nombre';
-
-            $query .= " WHERE id=:id";
+            $query = 'UPDATE unidades SET nombre=:nombre WHERE id=:id';
             $query = $this->conn->prepare($query);
-            
             $query->bindParam(':nombre',$this->nombre);
-
-
+            $query->bindParam(':id',$this->id);
             $query->execute(); 
         }
 

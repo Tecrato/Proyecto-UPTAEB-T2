@@ -366,7 +366,7 @@
                             </form>
                         </li>
                         <li>
-                            <form class="uk-form-horizontal uk-margin-large uk-padding">
+                            <form id="FORM_UNIDAD" method="post" class="uk-form-horizontal uk-margin-large uk-padding">
                                 <div class="uk-flex uk-flex-center uk-flex-middle uk-margin-medium-bottom" style="padding: 10px; background-color: #106733">
                                     <h4 style="margin: 0px;">
                                         <span uk-icon="icon: tag; ratio: 2"></span>
@@ -376,17 +376,18 @@
                                 <div class="uk-margin">
                                     <label class="uk-form-label" for="form-horizontal-text">Nombre</label>
                                     <div class="uk-form-controls">
-                                        <input class="uk-input" id="form-horizontal-text" type="text" placeholder="Nombre de marca">
+                                        <input name="nombre" class="uk-input nombre_unidad" id="form-horizontal-text" type="text" placeholder="Nombre de Unidad">
+                                        <input type="text" name="tipo" value='unidad' style="display:none">
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="uk-flex uk-flex-center uk-margin-medium-top">
-                                    <button class="uk-button uk-button-default">Guardar</button>
+                                    <button type="submit" class="uk-button uk-button-default">Guardar</button>
                                 </div>
                             </form>
                         </li>
                         <li>
-                            <form class="uk-form-horizontal uk-margin-large uk-padding">
+                            <form id="FORM_CATEGORIA" method="post" class="uk-form-horizontal uk-margin-large uk-padding">
                                 <div class="uk-flex uk-flex-center uk-flex-middle uk-margin-medium-bottom" style="padding: 10px; background-color: #106733">
                                     <h4 style="margin: 0px;">
                                         <span uk-icon="icon: tag; ratio: 2"></span>
@@ -396,7 +397,8 @@
                                 <div class="uk-margin">
                                     <label class="uk-form-label" for="form-horizontal-text">Nombre</label>
                                     <div class="uk-form-controls">
-                                        <input class="uk-input" id="form-horizontal-text" type="text" placeholder="Nombre de marca">
+                                        <input name="nombre" class="uk-input categoria_name" id="form-horizontal-text" type="text" placeholder="Nombre de marca">
+                                        <input type="text" name="tipo" value='categoria' style="display:none">
                                     </div>
                                 </div>
                                 <hr>
@@ -434,65 +436,13 @@
                                             <td>PAN</td>
                                             <td>
                                                 <div class="uk-flex">
-                                                    <a href="#edit-marca" uk-toggle uk-tooltip="title:Editar; delay: 500" class="uk-icon-button uk-margin-small-right" type="button" style="border: none; cursor: pointer">
+                                                    <a href="#edit-U_M_C" uk-toggle uk-tooltip="title:Editar; delay: 500" class="uk-icon-button uk-margin-small-right Edit-U_M_C" type="button" style="border: none; cursor: pointer">
                                                         <span uk-icon="icon: file-edit"></span>
                                                     </a>
-                                                    <a href="#eliminar_marca" uk-toggle uk-tooltip="title:Eliminar; delay: 500" class="uk-icon-button uk-margin-small-right" uk-tooltip="title:Eliminar; delay: 500" type="button" style="border: none; cursor: pointer" type="button">
+                                                    <a href="#eliminar-U_M_C" uk-toggle uk-tooltip="title:Eliminar; delay: 500" class="uk-icon-button uk-margin-small-right delete-U_M_C" uk-tooltip="title:Eliminar; delay: 500" type="button" style="border: none; cursor: pointer" type="button">
                                                         <span uk-icon="icon: trash"></span>
                                                     </a>
                                                 </div>
-
-                                                <div>
-                                                    <!-- *********************************modal de Editar********************************* -->
-
-                                                    <div class="uk-flex-top" id="edit-marca" uk-modal>
-                                                        <div class="uk-modal-dialog uk-margin-auto-vertical">
-                                                            <button class="uk-modal-close-default" type="button" uk-close></button>
-                                                            <div class="uk-modal-header">
-                                                                <h2 class="uk-modal-title">EDITAR MARCA</h2>
-                                                            </div>
-                                                            <div class="uk-modal-body">
-                                                                <form class="uk-form-horizontal uk-margin-large">
-                                                                    <div class="uk-margin">
-                                                                        <label class="uk-form-label" for="form-horizontal-text">Nombre</label>
-                                                                        <div class="uk-form-controls">
-                                                                            <input class="uk-input" id="form-horizontal-text" type="text" placeholder="Nombre de marca">
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                            <div class="uk-modal-footer uk-text-right">
-                                                                <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
-                                                                <button class="uk-button uk-button-secondary" type="button">Guardar</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <!-- *********************************modal de eliminar********************************* -->
-
-                                                    <div id="eliminar_marca" class="uk-flex-top uk-modal" uk-modal bg-close='false'>
-                                                        <div class="uk-modal-dialog uk-margin-auto-vertical">
-                                                            <div class="uk-modal-header uk-flex uk-flex-middle">
-                                                                <span class="uk-margin-small-right" uk-icon="icon: warning ; ratio: 2"></span>
-                                                                <h2 class="uk-modal-title uk-margin-remove-top modalDeleteTitle">ELIMINAR</h2>
-                                                            </div>
-                                                            <div class="uk-modal-body">
-                                                                <p class="modalDeleteBody">Deseas eliminar este registro para siempre? No podras recuperlo mas adelante</p>
-                                                            </div>
-                                                            <div class="uk-modal-footer uk-text-right">
-                                                                <button class="uk-button uk-button-default uk-modal-close cancelar" type="button">Cancelar</button>
-                                                                <label class="uk-button uk-button-secondary subir" type="button" for="btn">Aceptar</label>
-                                                                <form id="formDelete" action="" method="POST" style="display:none">
-                                                                    <input type=number id="ValueInputDelete" name="ID">
-                                                                    <input type=text value="producto" name="tipo">
-                                                                    <input type=submit id="btn">
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
                                             </td>
                                         </tr>
                                     <?php } ?>
@@ -515,73 +465,8 @@
                                         UNIDADES REGISTRADAS
                                     </h4>
                                 </div>
-                                <tbody>
-                                    <tr>
-                                        <td><img src="./static/images/logo_m.png" alt="" width="50"></td>
-                                        <td>1</td>
-                                        <td>PAN</td>
-                                        <td>
-                                            <div class="uk-flex">
-                                                <a href="#edit-unidad" uk-toggle uk-tooltip="title:Editar; delay: 500" class="uk-icon-button uk-margin-small-right" type="button" style="border: none; cursor: pointer">
-                                                    <span uk-icon="icon: file-edit"></span>
-                                                </a>
-                                                <a href="#eliminar_unidad" uk-toggle uk-tooltip="title:Eliminar; delay: 500" class="uk-icon-button uk-margin-small-right" uk-tooltip="title:Eliminar; delay: 500" type="button" style="border: none; cursor: pointer" type="button">
-                                                    <span uk-icon="icon: trash"></span>
-                                                </a>
+                                <tbody id="TemplateUnidad">
 
-                                                <div>
-                                                    <!-- *********************************modal de Editar********************************* -->
-
-                                                    <div class="uk-flex-top" id="edit-unidad" uk-modal>
-                                                        <div class="uk-modal-dialog uk-margin-auto-vertical">
-                                                            <button class="uk-modal-close-default" type="button" uk-close></button>
-                                                            <div class="uk-modal-header">
-                                                                <h2 class="uk-modal-title">EDITAR UNIDAD</h2>
-                                                            </div>
-                                                            <div class="uk-modal-body">
-                                                                <form class="uk-form-horizontal uk-margin-large">
-                                                                    <div class="uk-margin">
-                                                                        <label class="uk-form-label" for="form-horizontal-text">Nombre</label>
-                                                                        <div class="uk-form-controls">
-                                                                            <input class="uk-input" id="form-horizontal-text" type="text" placeholder="Nombre de Unidad">
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                            <div class="uk-modal-footer uk-text-right">
-                                                                <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
-                                                                <button class="uk-button uk-button-secondary" type="button">Guardar</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <!-- *********************************modal de eliminar********************************* -->
-
-                                                    <div id="eliminar_unidad" class="uk-flex-top uk-modal" uk-modal bg-close='false'>
-                                                        <div class="uk-modal-dialog uk-margin-auto-vertical">
-                                                            <div class="uk-modal-header uk-flex uk-flex-middle">
-                                                                <span class="uk-margin-small-right" uk-icon="icon: warning ; ratio: 2"></span>
-                                                                <h2 class="uk-modal-title uk-margin-remove-top modalDeleteTitle">ELIMINAR</h2>
-                                                            </div>
-                                                            <div class="uk-modal-body">
-                                                                <p class="modalDeleteBody">Deseas eliminar este registro para siempre? No podras recuperlo mas adelante</p>
-                                                            </div>
-                                                            <div class="uk-modal-footer uk-text-right">
-                                                                <button class="uk-button uk-button-default uk-modal-close cancelar" type="button">Cancelar</button>
-                                                                <label class="uk-button uk-button-secondary subir" type="button" for="btn">Aceptar</label>
-                                                                <form id="formDelete" action="" method="POST" style="display:none">
-                                                                    <input type=number id="ValueInputDelete" name="ID">
-                                                                    <input type=text value="producto" name="tipo">
-                                                                    <input type=submit id="btn">
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </li>
@@ -601,79 +486,65 @@
                                         CATEGORIAS REGISTRADAS
                                     </h4>
                                 </div>
-                                <tbody>
-                                    <tr>
-                                        <td><img src="./static/images/logo_m.png" alt="" width="50"></td>
-                                        <td>1</td>
-                                        <td>PAN</td>
-                                        <td>
-                                            <div class="uk-flex">
-                                                <a href="#edit-categoria" uk-toggle uk-tooltip="title:Editar; delay: 500" class="uk-icon-button uk-margin-small-right" type="button" style="border: none; cursor: pointer">
-                                                    <span uk-icon="icon: file-edit"></span>
-                                                </a>
-                                                <a href="#eliminar_categoria" uk-toggle uk-tooltip="title:Eliminar; delay: 500" class="uk-icon-button uk-margin-small-right" uk-tooltip="title:Eliminar; delay: 500" type="button" style="border: none; cursor: pointer" type="button">
-                                                    <span uk-icon="icon: trash"></span>
-                                                </a>
-
-
-                                                <div>
-                                                    <!-- *********************************modal de Editar********************************* -->
-
-                                                    <div class="uk-flex-top" id="edit-categoria" uk-modal>
-                                                        <div class="uk-modal-dialog uk-margin-auto-vertical">
-                                                            <button class="uk-modal-close-default" type="button" uk-close></button>
-                                                            <div class="uk-modal-header">
-                                                                <h2 class="uk-modal-title">EDITAR CATEGORIA</h2>
-                                                            </div>
-                                                            <div class="uk-modal-body">
-                                                                <form class="uk-form-horizontal uk-margin-large">
-                                                                    <div class="uk-margin">
-                                                                        <label class="uk-form-label" for="form-horizontal-text">Nombre</label>
-                                                                        <div class="uk-form-controls">
-                                                                            <input class="uk-input" id="form-horizontal-text" type="text" placeholder="Nombre de categoria">
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                            <div class="uk-modal-footer uk-text-right">
-                                                                <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
-                                                                <button class="uk-button uk-button-secondary" type="button">Guardar</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <!-- *********************************modal de eliminar********************************* -->
-
-                                                    <div id="eliminar_categoria" class="uk-flex-top uk-modal" uk-modal bg-close='false'>
-                                                        <div class="uk-modal-dialog uk-margin-auto-vertical">
-                                                            <div class="uk-modal-header uk-flex uk-flex-middle">
-                                                                <span class="uk-margin-small-right" uk-icon="icon: warning ; ratio: 2"></span>
-                                                                <h2 class="uk-modal-title uk-margin-remove-top modalDeleteTitle">ELIMINAR</h2>
-                                                            </div>
-                                                            <div class="uk-modal-body">
-                                                                <p class="modalDeleteBody">Deseas eliminar este registro para siempre? No podras recuperlo mas adelante</p>
-                                                            </div>
-                                                            <div class="uk-modal-footer uk-text-right">
-                                                                <button class="uk-button uk-button-default uk-modal-close cancelar" type="button">Cancelar</button>
-                                                                <label class="uk-button uk-button-secondary subir" type="button" for="btn">Aceptar</label>
-                                                                <form id="formDelete" action="" method="POST" style="display:none">
-                                                                    <input type=number id="ValueInputDelete" name="ID">
-                                                                    <input type=text value="producto" name="tipo">
-                                                                    <input type=submit id="btn">
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                <tbody id="TemplateCategoria">
+                                    
                                 </tbody>
                             </table>
                         </li>
                     </ul>
+
+                    <!-- MODALES PARA EDITAR Y ELIMINAR -->
+                    <div>
+                        <!-- *********************************modal de Editar********************************* -->
+
+                        <div class="uk-flex-top" id="edit-U_M_C" uk-modal>
+                            <div class="uk-modal-dialog uk-margin-auto-vertical">
+                                <button class="uk-modal-close-default" type="button" uk-close></button>
+                                <div class="uk-modal-header">
+                                    <h2 class="uk-modal-title modal_title_rename"></h2>
+                                </div>
+                                <div class="uk-modal-body">
+                                    <form id="form_edit-U-C-M" method="post" class="uk-form-horizontal uk-margin-large">
+                                        <div class="uk-margin">
+                                            <label class="uk-form-label" for="form-horizontal-text">Nombre</label>
+                                            <div class="uk-form-controls">
+                                                <input class="uk-input name_U-C-M_edit" name="nombre" id="form-horizontal-text" type="text" placeholder="Nombre de marca">
+                                                <input id="Edit_type" type="text" name="tipo" value='' style="display:none">
+                                                <input id="id_delete_edit-U-M-C" type="text" name="ID" value='' style="display:none">
+                                                <input type="submit" id="editar_U-M-C" style="display:none">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="uk-modal-footer uk-text-right">
+                                    <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
+                                    <label class="subir uk-button uk-button-secondary" for="editar_U-M-C">Guardar</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- *********************************modal de eliminar********************************* -->
+
+                        <div id="eliminar-U_M_C" class="uk-flex-top uk-modal" uk-modal bg-close='false'>
+                            <div class="uk-modal-dialog uk-margin-auto-vertical">
+                                <div class="uk-modal-header uk-flex uk-flex-middle">
+                                    <span class="uk-margin-small-right" uk-icon="icon: warning ; ratio: 2"></span>
+                                    <h2 class="uk-modal-title uk-margin-remove-top modalDeleteTitle">ELIMINAR</h2>
+                                </div>
+                                <div class="uk-modal-body">
+                                    <p class="modalDeleteBody">Deseas eliminar este registro para siempre? No podras recuperlo mas adelante</p>
+                                </div>
+                                <div class="uk-modal-footer uk-text-right">
+                                    <button class="uk-button uk-button-default uk-modal-close cancelar" type="button">Cancelar</button>
+                                    <button class="uk-button uk-button-secondary DELETE_U-M-C" type="button">Aceptar</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
+
             </li>
 
 
@@ -760,6 +631,8 @@
 <script src="static/javascript/librerias/dataTables.responsive.js"></script>
 <script src="static/javascript/Ajax/product.js"></script>
 <script src="static/javascript/Ajax/entry.js"></script>
+<script src="static/javascript/Ajax/unidades.js"></script>
+<script src="static/javascript/Ajax/categorias.js"></script>
 <script src="static/javascript/funcionDataTable.js"></script>
 
 

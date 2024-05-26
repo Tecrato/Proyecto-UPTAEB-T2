@@ -51,7 +51,7 @@
     }
     elseif ($tipo === 'usuario'){
         require('../../Model/Usuarios.php');
-        $pass = isset($_POST["password"]) ? password_hash($_POST["password"],PASSWORD_DEFAULT) : null
+        $pass = isset($_POST["password"]) ? password_hash($_POST["password"],PASSWORD_DEFAULT) : null;
         $clase = new Usuario($_POST["ID"],$_POST["nombre"],$_POST["correo"],$pass,isset($_POST["rol"]) ? $_POST["rol"] : null); 
         $clase->actualizar();
 
@@ -68,6 +68,16 @@
         $clase = new marcas($_POST["ID"],$_POST["nombre"]);
         $clase->actualizar();
         header('Location:../../Clientes');
+    }
+    elseif ($tipo === 'unidad'){
+        require('../../Model/Unidades.php');
+        $clase = new Unidad($_POST["ID"],$_POST["nombre"]);
+        $clase->actualizar();
+    }
+    elseif ($tipo === 'categoria'){
+        require('../../Model/Categorias.php');
+        $clase = new Categoria($_POST["ID"],$_POST["nombre"]);
+        $clase->actualizar();
     }
     ;
 ?>
