@@ -77,8 +77,8 @@
         // header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }
     elseif ($tipo === 'marca'){
-        require('../../Model/marcas.php');
-        $clase = new marcas(null,$_POST["nombre"]); // Llama al modelo y le manda la instruccion
+        require('../../Model/Marcas.php');
+        $clase = new Marca(null,$_POST["nombre"]); // Llama al modelo y le manda la instruccion
         $clase->agregar();
         header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }

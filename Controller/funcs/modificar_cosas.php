@@ -63,11 +63,11 @@
 
         header('Location:../../Administrar_perfil'); // Y vuelve a la pagina donde estaba antes
     }
-    elseif ($tipo === 'marcas'){
-        require('../../Model/Clientes.php');
-        $clase = new marcas($_POST["ID"],$_POST["nombre"]);
+    elseif ($tipo === 'marca'){
+        require('../../Model/Marcas.php');
+        $clase = new Marca($_POST["ID"],$_POST["nombre"]);
         $clase->actualizar();
-        header('Location:../../Clientes');
+        header('Location:../../Productos');
     }
     elseif ($tipo === 'unidad'){
         require('../../Model/Unidades.php');

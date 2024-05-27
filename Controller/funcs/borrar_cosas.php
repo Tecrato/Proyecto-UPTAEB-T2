@@ -61,8 +61,8 @@
         // header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }
     elseif ($tipo === 'marca'){
-        require('../../Model/marcas.php');
-        $clase = new marcas($_POST["ID"]); // Llama al modelo y le manda la instruccion
+        require('../../Model/Marca.php');
+        $clase = new Marca($_POST["ID"]); // Llama al modelo y le manda la instruccion
         $clase->borrar();
         // header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }

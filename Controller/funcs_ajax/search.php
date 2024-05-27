@@ -56,6 +56,10 @@
         require('../../Model/Unidades.php');
         $clase = new Unidad();
     }
+    elseif ($_GET['randomnautica'] == "marcas") {
+        require('../../Model/Marcas.php');
+        $clase = new Marca();
+    }
     elseif ($_GET['randomnautica'] == "ventas") {
         require('../../Model/Registro de ventas.php');
         $clase = new Registro_ventas();

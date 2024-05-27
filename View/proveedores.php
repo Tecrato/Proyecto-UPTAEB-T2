@@ -80,7 +80,7 @@
                             <input class="uk-input" type="text" placeholder="Razon Social" aria-label="100" name="razon_social" pattern="^([A-ZÑ][a-zñ]{3,})( [A-Z][a-z]{3,})?$" required>
                         </div>
                         <div class="uk-width-1-2@s">
-                            <input class="uk-input" type="text" placeholder="Rif" aria-label="50" name="rif" pattern="^[VJEGPvjegp][\d]+$" value="j-00000000" required>
+                            <input class="uk-input" type="text" placeholder="Rif" aria-label="50" name="rif" pattern="^[VJEGPvjegp]\-[\d]+$" value="j-00000000" required>
                         </div>
                         <div class="uk-width-1-2@s">
                             <input class="uk-input" type="text" minlength="9" placeholder="Número de teléfono" aria-label="50" name="telefono" pattern="^([\+\d]{2,4} ?)?([\d]{4}) ?\-?([\d]{3}) ?\-?([\d]{4})$" required>

@@ -77,7 +77,7 @@ echo '<div>
                     <input class="uk-input" type="text" placeholder="Razon Social" aria-label="100" value="'.$row['razon_social'].'" name="razon_social" pattern="^[\w]{2,50}$" required>
                 </div>
                 <div class="uk-width-1-2@s">
-                    <input class="uk-input" type="text" placeholder="Rif" aria-label="50" value="'.$row['rif'].'" name="rif" pattern="^[VJEGPvjegp][\d]+$" required>
+                    <input class="uk-input" type="text" placeholder="Rif" aria-label="50" value="'.$row['rif'].'" name="rif" pattern="^[VJEGPvjegp]\-[\d]+$" required>
                 </div>
                 <div class="uk-width-1-2@s">
                     <input class="uk-input" type="text" placeholder="Número de teléfono" aria-label="50" value="'.$row['telefono'].'" name="telefono" pattern="^([\+\d]{2,4} ?)?([\d]{4}) ?\-?([\d]{3}) ?\-?([\d]{4})" required>
