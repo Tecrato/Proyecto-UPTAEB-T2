@@ -67,6 +67,7 @@
         require('../../Model/Marcas.php');
         $clase = new Marca($_POST["ID"],$_POST["nombre"]);
         $clase->actualizar();
+        header('Location:../../Productos');
     }
     elseif ($tipo === 'unidad'){
         require('../../Model/Unidades.php');

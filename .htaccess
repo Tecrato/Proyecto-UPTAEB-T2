@@ -7,7 +7,6 @@ RewriteRule ^FacturaPDF$ Controller/C_FacturaPDF.php
 RewriteRule ^Ventas$ Controller/C_Ventas.php
 RewriteRule ^Inicio$ Controller/C_index.php
 RewriteRule ^InventarioPDF$ Controller/C_InventarioPDF.php
-RewriteRule ^prueba$ Controller/C_Prueba.php
 RewriteRule ^login$ Controller/C_login.php
 RewriteRule ^Productos$ Controller/C_product.php
 RewriteRule ^Proveedores$ Controller/C_proveedores.php

@@ -55,7 +55,7 @@
         require('../../Model/Unidades.php');
         $clase = new Unidad();
     }
-    elseif ($_GET['randomnautica'] == "marca") {
+    elseif ($_GET['randomnautica'] == "marcas") {
         require('../../Model/Marcas.php');
         $clase = new Marca();
     }

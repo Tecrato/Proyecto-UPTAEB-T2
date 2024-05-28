@@ -12,21 +12,16 @@
         }
 
         function agregar(){
-            $query = $this->conn->prepare("INSERT INTO marcas (nombre) VALUES(:nombre)");
+            $query = $this->conn->prepare("INSERT INTO marcas VALUES(:nombre)");
             $query->bindParam(':nombre',$this->nombre, PDO::PARAM_STR);
             $query->execute();
         }
-
-
-
         function borrar() {
-
             $query = $this->conn->prepare("DELETE FROM marcas WHERE ID=:id");
-            
-            $query->execute([':id'=>$this->id]);
+            $query->bindParam(':id',$this->id, PDO::PARAM_INT);
+            $query->execute();
         }
         function search($n=0,$limite=9){
-            // Al igual que la clase anterior, puede buscar segun muchos valores o solo algunos
             $query = "SELECT * FROM marcas";
 
             if ($this->id != null){
@@ -53,7 +48,7 @@
             $query = $this->conn->prepare($query);
             $query->bindParam(':nombre',$this->nombre);
             $query->bindParam(':id',$this->id);
-            $query->execute(); 
+            $query->execute();
         }
 
         function COUNT(){
