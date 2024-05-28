@@ -1,97 +1,58 @@
 let hola = "";
-$.ajax({
-  url: "Controller/funcs_ajax/search.php",
-  type: "GET",
-  data: { randomnautica: "entradas" },
-  success: function (response) {
-    let template;
-    let json = JSON.parse(response);
-    json.lista.forEach((f) => {
-      let fechaVencimiento = new Date(f.fecha_vencimiento);
-      let fechaActual = new Date();
-      fechaVencimiento.setMinutes(fechaVencimiento.getMinutes() + fechaVencimiento.getTimezoneOffset());
-      let diferencia = fechaVencimiento.getTime() - fechaActual.getTime();
-      let diasRestantes = Math.ceil(diferencia / (1000 * 60 * 60 * 24));
-      let color
-      let texto
-      if (f.existencia == 0) {
-        color = "activeEmpty"
-        texto = "NO DISPONIBLE"
-      } else if (diasRestantes <= 10 && diasRestantes >= 1) {
-        color = "activeCloseToExpire"
-        texto = "POR VENCER"
-      } else if (diasRestantes > 10) {
-        color = "activeGood"
-        texto = "ACTIVO"
-      } else if (diasRestantes <= 0) {
-        color = "activeExpire"
-        texto = "EXPIRO"
-      }
+const cargarEntrys = () => {
+  $.ajax({
+    url: "Controller/funcs_ajax/search.php",
+    type: "GET",
+    data: { randomnautica: "entradas" },
+    success: function (response) {
+      let template;
+      let json = JSON.parse(response);
+      json.lista.forEach((f) => {
+        let fechaVencimiento = new Date(f.fecha_vencimiento);
+        let fechaActual = new Date();
+        fechaVencimiento.setMinutes(
+          fechaVencimiento.getMinutes() + fechaVencimiento.getTimezoneOffset()
+        );
+        let diferencia = fechaVencimiento.getTime() - fechaActual.getTime();
+        let diasRestantes = Math.ceil(diferencia / (1000 * 60 * 60 * 24));
+        let color;
+        let texto;
+        if (f.existencia == 0) {
+          color = "activeEmpty";
+          texto = "NO DISPONIBLE";
+        } else if (diasRestantes <= 10 && diasRestantes >= 1) {
+          color = "activeCloseToExpire";
+          texto = "POR VENCER";
+        } else if (diasRestantes > 10) {
+          color = "activeGood";
+          texto = "ACTIVO";
+        } else if (diasRestantes <= 0) {
+          color = "activeExpire";
+          texto = "EXPIRO";
+        }
 
-      template = `<div>
-                      <div class="uk-card uk-card-default uk-flex uk-padding-small uk-background-secondary uk-light uk-border-rounded">
-                          <div style="width: 125px;">
-                              <div class="img_proveedor_container uk-border-rounded">
-                                  <img src="static/images/btn_lote2.png" alt="" width="90px" />
-                                  <h5 class="uk-margin-remove-left uk-margin-remove-right uk-margin-small-top uk-margin-small-bottom uk-text-center uk-text-bold">
-                                      ENTRADA NRO ${f.id}
-                                  </h5>
-                              </div>
-                          </div>
-
-                          <div style="width: 180px;">
-                              <div class="uk-flex uk-flex-middle uk-flex-between uk-margin-small-bottom">
-                                  <h4 class="uk-margin-remove-bottom uk-margin-right uk-text-center uk-text-truncate">
-                                      ${f.producto}
-                                  </h4>
-                                  <div>
-                                     
-                                  </div>
-                              </div>
-
-                              <hr class="uk-margin-bottom uk-margin-remove-top hr_supplier" />
-
-                              <div class="Container-details-suppliers" style="width: 200px;">
-                                  <div class="uk-flex">
-                                      <h6 class="uk-margin-small">CANTIDAD</h6>
-                                      <p class="uk-margin-small uk-margin-small-left uk-margin-remove-top uk-text-meta">
-                                          ${f.cantidad}
-                                      </p>
-                                  </div>
-                                  <div class="uk-flex">
-                                      <h6 class="uk-margin-small">EXISTENCIA</h6>
-                                      <p class="uk-margin-small uk-margin-small-left uk-margin-remove-top uk-text-meta">
-                                          ${f.existencia}
-                                      </p>
-                                  </div>
-                                  <div class="uk-flex">
-                                      <h6 class="uk-margin-small">EXP</h6>
-                                      <p class="uk-margin-small uk-margin-small-left uk-margin-remove-top uk-text-meta">
-                                          ${f.fecha_vencimiento}
-                                      </p>
-                                  </div>
-                                  <div class="uk-flex">
-                                      <h6 class="uk-margin-small">PRECIO COMPRA</h6>
-                                      <p class="uk-margin-small uk-margin-small-left uk-margin-remove-top uk-text-meta">
-                                          ${f.precio_compra}
-                                      </p>
-                                  </div>
-                                  <div class="uk-flex">
-                                      <div class="uk-margin-small-right">
-                                          <h6>ESTADO</h6>
-                                      </div>
-                                      <div>
-                                          <h6 class="${color} uk-margin-remove uk-text-center uk-border-rounded uk-text-bold state-entrys" style="width: 120px; padding: 2px 0px;">${texto}</h6>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>`;
+        template += `<tr data-proveedor="${f.proveedor}" data-productEntry="${f.producto}">
+                              <td><img src="./static/images/btn_lote2.png" alt="" width="40"></td>
+                              <td>${f.id}</td>
+                              <td>${f.producto}</td>
+                              <td>${f.fecha_vencimiento}</td>
+                              <td>${f.precio_compra} Bs</td>
+                              <td>
+                                  <div class="${color} uk-border-rounded uk-text-center" style="padding: 5px; width: 115px;">${texto}</div>
+                              </td>
+                          </tr>`;
+      });
       $(".cont_entry").append(template);
-    });
-  },
-});
+      let table_entry = document.querySelector(".cont_entry").childElementCount;
+      if (table_entry <= 0 || table_entry < 4) {
+        document.querySelector(".altura_table_entry").style.height = "300px";
+      } else {
+        document.querySelector(".altura_table_entry").style.height = "100%";
+      }
+    },
+  });
+};
+cargarEntrys()
 
 $.ajax({
   url: "Controller/funcs_ajax/search.php",
@@ -101,19 +62,12 @@ $.ajax({
     let json = JSON.parse(response);
     json.lista.forEach((p) => {
       hola += `      
-          <li class="list_item list_item_click">
-              <div class="list_botton list_botton_click" idSup="${p.id}">
-                  <div class="nav_link uk-text-uppercase uk-text-bold">${p.razon_social}</div>
-                  <img class="list_arrow" src="./static/images/bx-chevron-right.svg" alt="">
-              </div>
-              <ul class="list_show">
-                                        
-              </ul>
-          </li>`;
+        <li uk-filter-control="[data-proveedor='${p.razon_social}']"><a href="#" class="prov-entry-products" idSup="${p.id}">${p.razon_social}</a></li>    
+      `;
     });
-    $(".list").html(hola);
+    $(".filter_prov_entry").html(hola);
 
-    let listItem = document.querySelectorAll(".list_botton_click");
+    let listItem = document.querySelectorAll(".prov-entry-products");
     listItem.forEach((e) => {
       e.addEventListener("click", () => {
         let idSup = e.getAttribute("idSup");
@@ -125,107 +79,10 @@ $.ajax({
           success: function (response) {
             let json = JSON.parse(response);
             json.lista.forEach((l) => {
-              template += `<li class="list_inside">
-                                <div class="uk-flex uk-flex-middle" style="gap: 10px;" idProducto="${l.id_producto}" idProveedor="${l.id_proveedor}">
-                                    <img class="img3ProductSwitcher" src="./static/images/cajas (2).png" width="30" alt="">
-                                    <div class="nav_link nav_link_inside uk-text-uppercase uk-text-bold  btnPP">${l.producto}</div>
-                                </div> 
-                            </li>`;
+              template += `<li uk-filter-control="[data-productEntry='${l.producto}']"><a href="#">${l.producto}</a></li>`;
             });
-            e.nextElementSibling.innerHTML = template;
-            e.classList.toggle("arrow");
-            let height = 0;
-            let menu = e.nextElementSibling;
-            if (menu.clientHeight == "0") {
-              height = menu.scrollHeight;
-            }
-            menu.style.height = `${height}px`;
 
-            let option = document.querySelectorAll(".btnPP");
-            option.forEach((r) => {
-              r.addEventListener("click", () => {
-                let idProducto = r.parentElement.getAttribute("idProducto");
-                let idProveedor = r.parentElement.getAttribute("idProveedor");
-                let template = "";
-                $.ajax({
-                  url: "Controller/funcs_ajax/search.php",
-                  type: "GET",
-                  data: {
-                    randomnautica: "entradas",
-                    id_proveedor: idProveedor,
-                    id_producto: idProducto,
-                  },
-                  success: function (response) {
-                    let json = JSON.parse(response);
-                    json.lista.forEach((f) => {
-                      template += `<div>
-                      <div class="uk-card uk-card-default uk-flex uk-padding-small uk-background-secondary uk-light uk-border-rounded">
-                          <div style="width: 125px;">
-                              <div class="img_proveedor_container uk-border-rounded">
-                                  <img src="static/images/btn_lote2.png" alt="" width="90px" />
-                                  <h5 class="uk-margin-remove-left uk-margin-remove-right uk-margin-small-top uk-margin-small-bottom uk-text-center uk-text-bold">
-                                      ENTRADA NRO ${f.id}
-                                  </h5>
-                              </div>
-                          </div>
-
-                          <div style="width: 180px;">
-                              <div class="uk-flex uk-flex-middle uk-flex-between uk-margin-small-bottom">
-                                  <h4 class="uk-margin-remove-bottom uk-margin-right uk-text-center uk-text-truncate">
-                                      ${f.producto}
-                                  </h4>
-                                  <div>
-                                      <a href="#eliminar_supplier" uk-toggle uk-tooltip="title:Eliminar; delay: 500" class="uk-icon-button uk-margin-small-right" uk-tooltip="title:Eliminar; delay: 500" type="button" style="border: none; cursor: pointer" type="button">
-                                          <span uk-icon="icon: trash"></span>
-                                      </a>
-                                  </div>
-                              </div>
-
-                              <hr class="uk-margin-bottom uk-margin-remove-top hr_supplier" />
-
-                              <div class="Container-details-suppliers" style="width: 200px;">
-                                  <div class="uk-flex">
-                                      <h6 class="uk-margin-small">CANTIDAD</h6>
-                                      <p class="uk-margin-small uk-margin-small-left uk-margin-remove-top uk-text-meta">
-                                          ${f.cantidad}
-                                      </p>
-                                  </div>
-                                  <div class="uk-flex">
-                                      <h6 class="uk-margin-small">EXISTENCIA</h6>
-                                      <p class="uk-margin-small uk-margin-small-left uk-margin-remove-top uk-text-meta">
-                                          ${f.existencia}
-                                      </p>
-                                  </div>
-                                  <div class="uk-flex">
-                                      <h6 class="uk-margin-small">EXP</h6>
-                                      <p class="uk-margin-small uk-margin-small-left uk-margin-remove-top uk-text-meta">
-                                          ${f.fecha_vencimiento}
-                                      </p>
-                                  </div>
-                                  <div class="uk-flex">
-                                      <h6 class="uk-margin-small">PRECIO COMPRA</h6>
-                                      <p class="uk-margin-small uk-margin-small-left uk-margin-remove-top uk-text-meta">
-                                          ${f.precio_compra}
-                                      </p>
-                                  </div>
-                                  <div class="uk-flex">
-                                      <div class="uk-margin-small-right">
-                                          <h6>ESTADO</h6>
-                                      </div>
-                                      <div>
-                                          <h6 class="uk-background-primary uk-margin-remove uk-text-center uk-border-rounded uk-text-bold state-entrys" style="width: 120px; padding: 2px 0px;">ACTIVO</h6>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>`;
-                    });
-                    $(".cont_entry").html(template);
-                  },
-                });
-              });
-            });
+            $(".filter_prov_entry_product").html(template);
           },
         });
       });

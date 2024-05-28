@@ -98,33 +98,63 @@
                                 <h2 class="uk-modal-title title_modal_reg_upd">REGISTRAR PRODUCTO</h2>
                             </div>
                             <div class="uk-modal-body ">
-                                <form id="formAggProduct" class="uk-grid-small" uk-grid method="POST" action="" enctype="multipart/form-data">
+                                <form id="formAggProduct" class="uk-grid-small uk-form-stacked" uk-grid method="POST" action="" enctype="multipart/form-data">
                                     <input class="ValueInpUpdate" type="number" name="ID" style="display:none">
                                     <input type="text" name="tipo" value='producto' id="" style="display:none">
-                                    <div class="uk-width-1-2">
-                                        <input class="NameUpdateProduct uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="^[A-Z][A-Za-z0-9ñ\s]{2,20}$" required>
+                                    <div class="uk-width-1-1">
+                                        <label class="uk-form-label">Nombre</label>
+                                        <div class="uk-form-controls">
+                                            <input class="NameUpdateProduct uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="^[A-Z][A-Za-z0-9ñ\s]{2,20}$" required>
+                                        </div>
                                     </div>
                                     <div class="uk-width-1-2@s">
-                                        <input class="MarcaUpdateProduct uk-input" type="text" placeholder="Marca" aria-label="50" pattern="^[A-Z][A-Za-z0-9ñ\s]{2,20}$" name="marca">
-                                    </div>
-                                    <div class="uk-width-1-2@s">
-                                        <select id="selectCat" class="uk-select" id="form-stacked-select" name="categoria" required>
+                                        <label class="uk-form-label">Marca</label>
+                                        <div class="uk-form-controls">
+                                            <select id="selectMar" class="uk-select MarcaUpdateProduct" id="form-stacked-select" name="marca" required>
 
-                                        </select>
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="uk-width-1-2@s">
-                                        <select id="selectUni" class="uk-select" id="form-stacked-select" name="unidad" required>
+                                        <label class="uk-form-label">Categoria</label>
+                                        <div class="uk-form-controls">
+                                            <select id="selectCat" class="uk-select" id="form-stacked-select" name="categoria" required>
 
-                                        </select>
+                                            </select>
+                                        </div>
+
                                     </div>
                                     <div class="uk-width-1-2@s">
-                                        <input class="PVUpdateProduct uk-input" type="number" min="0.01" step="0.1" placeholder="precio_venta" aria-label="25" name="precio_venta" required>
+                                        <label class="uk-form-label">Valor Uni.</label>
+                                        <div class="uk-form-controls">
+                                            <input class="uk-input ValorUnidadUpdateProduct" type="number" name="valor_unidad">
+                                        </div>
                                     </div>
                                     <div class="uk-width-1-2@s">
-                                        <input class="SMMUpdateProduct uk-input" type="number" min="1" placeholder="Stock mínimo" aria-label="25" name="stock_min" required>
+                                        <label class="uk-form-label">Unidad</label>
+                                        <div class="uk-form-controls">
+                                            <select id="selectUni" class="uk-select" id="form-stacked-select" name="unidad" required>
+
+                                            </select>
+                                        </div>
                                     </div>
-                                    <div class="uk-width-1-2@s">
-                                        <input class="SMXUpdateProduct uk-input" type="number" min="1" placeholder="Stock maximo" aria-label="25" name="stock_max" required>
+                                    <div class="uk-width-1-3@s">
+                                        <label class="uk-form-label">Precio Venta</label>
+                                        <div class="uk-form-controls">
+                                            <input class="PVUpdateProduct uk-input" type="number" min="0.01" step="0.1" placeholder="precio_venta" aria-label="25" name="precio_venta" required>
+                                        </div>
+                                    </div>
+                                    <div class="uk-width-1-3@s">
+                                        <label class="uk-form-label">Stock Minimo</label>
+                                        <div class="uk-form-controls">
+                                            <input class="SMMUpdateProduct uk-input" type="number" min="1" placeholder="Stock mínimo" aria-label="25" name="stock_min" required>
+                                        </div>
+                                    </div>
+                                    <div class="uk-width-1-3@s">
+                                        <label class="uk-form-label">Stock Maximo</label>
+                                        <div class="uk-form-controls">
+                                            <input class="SMXUpdateProduct uk-input" type="number" min="1" placeholder="Stock maximo" aria-label="25" name="stock_max" required>
+                                        </div>
                                     </div>
                                     <div class="uk-width-1-2@s">
                                         <label class="uk-margin-medium-right" for="">IVA</label>
@@ -179,19 +209,28 @@
                                 <h2 class="uk-modal-title">DETALLES DE ENTRADA</h2>
                             </div>
                             <div class="uk-modal-body">
-                                <form id="formLotes" class="uk-grid-small" uk-grid method="POST" action="">
+                                <form id="formLotes" class="uk-grid-small uk-form-stacked" uk-grid method="POST" action="">
                                     <input type="text" name="tipo" value="lote" style="display:none">
                                     <input type="text" name="ID" id="ValueIdEntry" style="display:none">
                                     <div class="uk-width-1-3@s">
-                                        <select class="uk-select selectSupplier" id="form-stacked-select" name="proveedor" required>
-                                            <!-- aqui cargar las opciones en js -->
-                                        </select>
+                                        <label class="uk-form-label">Proveedor</label>
+                                        <div class="uk-form-controls">
+                                            <select class="uk-select selectSupplier" id="form-stacked-select" name="proveedor" required>
+                                                <!-- aqui cargar las opciones en js -->
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="uk-width-1-3@s">
-                                        <input class="uk-input" type="number" placeholder="Cantidad" aria-label="100" name="cantidad" required>
+                                        <label class="uk-form-label">Cantidad a comprar</label>
+                                        <div class="uk-form-controls">
+                                            <input class="uk-input" type="number" placeholder="Cantidad" aria-label="100" name="cantidad" required>
+                                        </div>
                                     </div>
                                     <div class="uk-width-1-3@s">
-                                        <input class="uk-input" type="number" min="0.1" step="0.1" placeholder="precio_compra" aria-label="25" name="precio_compra" required>
+                                        <label class="uk-form-label">Precio de compra</label>
+                                        <div class="uk-form-controls">
+                                            <input class="uk-input" type="number" min="0.1" step="0.1" placeholder="precio_compra" aria-label="25" name="precio_compra" required>
+                                        </div>
                                     </div>
                                     <div class="uk-width-1-1@s uk-flex uk-flex-middle">
                                         <label for="" style="width: 265px;">Fecha adquisicion</label>
@@ -300,38 +339,77 @@
 
 
             <li>
-                <section class="uk-flex container-entradas" style="gap: 10px;">
-                    <article style="width: 200px; max-width: 200px; min-width: 200px;" class="uk-background-secondary uk-padding uk-border-rounded uk-margin-medium-bottom">
-                        <form class="uk-search uk-search-default uk-margin-bottom" style="width: 100% !important;">
-                            <input class="uk-search-input" type="search" placeholder="Buscar" aria-label="Search">
-                        </form>
-                        <nav class="nav">
-                            <ul class="list">
-                                <!-- aqui se cargan los datos con js -->
-                            </ul>
-                        </nav>
-                    </article>
-                    <article>
-                        <div>
-                            <section class="uk-light uk-grid-small uk-flex-center" uk-grid>
-                                <!-- <div class="container_marca_agua">
-                                    <img class="marca_agua" src="static/images/logo_letras-minimarket.png" alt="">
-                                </div> -->
-                                <div class="[email protected] uk-grid-medium uk-flex-center cont_entry height_controller" uk-grid uk-height-match="target: > div > .uk-card">
 
-                                </div>
-                            </section>
+                <div class="height_controller">
+                    <main class="uk-background-secondary" uk-filter="target: .js-filter; animation: fade">
+                        <!-- container-filter sera el  que tenga todos los filtros de busqueda -->
+                        <section class="container-filter">
+                            <div>
+                                <nav uk-dropnav="mode: click">
+                                    <ul class="uk-subnav uk-margin-remove" style="gap: 25px;">
+                                        <li class="uk-active" uk-filter-control><a href="#">TODO</a></li>
+                                        <li>
+                                            <a href="#">PROVEEDORES <span uk-drop-parent-icon></span></a>
+                                            <div class="uk-dropdown">
+                                                <ul class="uk-nav uk-dropdown-nav filter_prov_entry">
+                                                    <!-- aqui se cargan los proveedores con js -->
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <a href="#">PRODUCTOS <span uk-drop-parent-icon></span></a>
+                                            <div class="uk-dropdown">
+                                                <ul class="uk-nav uk-dropdown-nav filter_prov_entry_product">
+
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+
+                            <!-- input_search sera el contenedor del input tipo search -->
+                            <div class="uk-margin">
+                                <form class="form_search_entrys uk-search uk-search-default" style="width: 500px;">
+                                    <span class="uk-search-icon-flip" uk-search-icon></span>
+                                    <input id="entrada" class="uk-search-input" type="search" placeholder="Search" aria-label="Search">
+                                </form>
+                            </div>
+                        </section>
+
+                        <!-- conatainer_table contendra la tabla -->
+                        <section>
+                            <div class="uk-overflow-auto altura_table_entry">
+                                <table class="uk-table uk-table-divider uk-table-hover">
+                                    <thead class="activeGood">
+                                        <tr>
+                                            <th></th>
+                                            <th>#</th>
+                                            <th>NOMBRE</th>
+                                            <th>FECHA DE EXPIRACION</th>
+                                            <th>PRECIO DE COMPRA</th>
+                                            <th>ESTADO</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="js-filter cont_entry">
+
+                                        <!-- tbody, donde se generaran los tr y td con programacion -->
+                                    </tbody>
+                                </table>
+                            </div>
                             <div class="uk-flex uk-flex-center">
                                 <ul class="uk-pagination uk-margin-large-top">
-                                    <li><a class="pag-btn-entradas" data-direccion="start"><span class="uk-margin-small-right" uk-pagination-previous></span><span class="uk-margin-small-right" uk-pagination-previous></span></a></li>
-                                    <li><a class="pag-btn-entradas" data-direccion="back">Previous</a></li>
-                                    <li><a class="pag-btn-entradas" data-direccion="next">Next</a></li>
-                                    <li><a class="pag-btn-entradas" data-direccion="end"><span class="uk-margin-small-left" uk-pagination-next></span><span class="uk-margin-small-left" uk-pagination-next></span></a></li>
+                                    <li><a class="pag-btn-productos" data-direccion="start"><span class="uk-margin-small-right" uk-pagination-previous></span><span class="uk-margin-small-right" uk-pagination-previous></span></a></li>
+                                    <li><a class="pag-btn-productos" data-direccion="back">Previous</a></li>
+                                    <li><a class="pag-btn-productos" data-direccion="next">Next</a></li>
+                                    <li><a class="pag-btn-productos" data-direccion="end"><span class="uk-margin-small-left" uk-pagination-next></span><span class="uk-margin-small-left" uk-pagination-next></span></a></li>
                                 </ul>
                             </div>
-                        </div>
-                    </article>
-                </section>
+                        </section>
+                    </main>
+
+                </div>
+
             </li>
 
 
@@ -346,7 +424,7 @@
                 <div class="uk-flex uk-flex-around uk-flex-wrap">
                     <ul class="uk-switcher switcher-container uk-background-secondary uk-margin-medium-top uk-border-rounded" style="border: 1px solid #999;">
                         <li>
-                            <form class="uk-form-horizontal uk-margin-large uk-padding">
+                            <form id="FORM_MARCA" method="post" class="uk-form-horizontal uk-margin-large uk-padding">
                                 <div class="uk-flex uk-flex-center uk-flex-middle uk-flex-middle uk-margin-medium-bottom" style="padding: 10px; background-color: #106733">
                                     <h4 style="margin: 0px;">
                                         <span uk-icon="icon: tag; ratio: 2"></span>
@@ -356,12 +434,13 @@
                                 <div class="uk-margin">
                                     <label class="uk-form-label" for="form-horizontal-text">Nombre</label>
                                     <div class="uk-form-controls">
-                                        <input class="uk-input" id="form-horizontal-text" type="text" placeholder="Nombre de marca">
+                                        <input name="nombre" class="uk-input marca_name" id="form-horizontal-text" type="text" placeholder="Nombre de marca">
+                                        <input type="text" name="tipo" value='marca' style="display:none">
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="uk-flex uk-flex-center uk-margin-medium-top">
-                                    <button class="uk-button uk-button-default">Guardar</button>
+                                    <button type="submit" class="uk-button uk-button-default">Guardar</button>
                                 </div>
                             </form>
                         </li>
@@ -397,7 +476,7 @@
                                 <div class="uk-margin">
                                     <label class="uk-form-label" for="form-horizontal-text">Nombre</label>
                                     <div class="uk-form-controls">
-                                        <input name="nombre" class="uk-input categoria_name" id="form-horizontal-text" type="text" placeholder="Nombre de marca">
+                                        <input name="nombre" class="uk-input categoria_name" id="form-horizontal-text" type="text" placeholder="Nombre de Categoria">
                                         <input type="text" name="tipo" value='categoria' style="display:none">
                                     </div>
                                 </div>
@@ -427,25 +506,8 @@
                                         MARCAS REGISTRADAS
                                     </h4>
                                 </div>
-                                <tbody>
-                                    <?php for ($i = 0; $i < 3; $i++) {  ?>
+                                <tbody id="TemplateMarca">
 
-                                        <tr>
-                                            <td><img src="./static/images/logo_m.png" alt="" width="50"></td>
-                                            <td>1</td>
-                                            <td>PAN</td>
-                                            <td>
-                                                <div class="uk-flex">
-                                                    <a href="#edit-U_M_C" uk-toggle uk-tooltip="title:Editar; delay: 500" class="uk-icon-button uk-margin-small-right Edit-U_M_C" type="button" style="border: none; cursor: pointer">
-                                                        <span uk-icon="icon: file-edit"></span>
-                                                    </a>
-                                                    <a href="#eliminar-U_M_C" uk-toggle uk-tooltip="title:Eliminar; delay: 500" class="uk-icon-button uk-margin-small-right delete-U_M_C" uk-tooltip="title:Eliminar; delay: 500" type="button" style="border: none; cursor: pointer" type="button">
-                                                        <span uk-icon="icon: trash"></span>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    <?php } ?>
                                 </tbody>
                             </table>
                         </li>
@@ -487,7 +549,7 @@
                                     </h4>
                                 </div>
                                 <tbody id="TemplateCategoria">
-                                    
+
                                 </tbody>
                             </table>
                         </li>
@@ -627,12 +689,15 @@
 </main>
 <script src="static/javaScript/librerias/jquery.js"></script>
 <script src="static/javascript/FuncionesGenerales.js"></script>
+
 <script src="static/javascript/librerias/datatables.js"></script>
 <script src="static/javascript/librerias/dataTables.responsive.js"></script>
 <script src="static/javascript/Ajax/product.js"></script>
 <script src="static/javascript/Ajax/entry.js"></script>
 <script src="static/javascript/Ajax/unidades.js"></script>
 <script src="static/javascript/Ajax/categorias.js"></script>
+<script src="static/javascript/Ajax/marcas.js"></script>
+<script src="static/javascript/tabla3.js"></script>
 <script src="static/javascript/funcionDataTable.js"></script>
 
 

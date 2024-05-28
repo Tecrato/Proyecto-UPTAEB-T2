@@ -22,7 +22,6 @@
         require('../../Model/Productos.php');
         $clase = new Producto(
             id:(isset($_GET['ID']) ? $_GET['ID'] : null),
-            marca:(isset($_GET['marca']) ? $_GET['marca'] : null),
             nombre:(isset($_GET['nombre']) ? $_GET['nombre'] : null),
             active:(isset($_GET['active']) ? $_GET['active'] : 1),
             like:(isset($_GET['like']) ? $_GET['like'] : '')
@@ -55,6 +54,10 @@
     elseif ($_GET['randomnautica'] == "unidades") {
         require('../../Model/Unidades.php');
         $clase = new Unidad();
+    }
+    elseif ($_GET['randomnautica'] == "marca") {
+        require('../../Model/Marcas.php');
+        $clase = new Marca();
     }
     elseif ($_GET['randomnautica'] == "ventas") {
         require('../../Model/Registro de ventas.php');

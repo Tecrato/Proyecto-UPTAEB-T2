@@ -66,7 +66,7 @@
                     a.id_producto,
                     b.nombre producto,
                     a.id_proveedor,
-                    c.nombre proveedor,
+                    c.razon_social proveedor,
                     a.cantidad,
                     a.fecha_compra,
                     a.fecha_vencimiento,

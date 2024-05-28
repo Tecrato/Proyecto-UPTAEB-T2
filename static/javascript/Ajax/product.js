@@ -48,7 +48,6 @@ const modalDetalles = (n) => {
         type: "GET",
         data: { randomnautica: "productos", ID: idProduct, active:n },
         success: function (response) {
-          console.log(response);
           let json = JSON.parse(response);
           json.lista.forEach((item) => {
             //segun el id, los datos del modal cambiaran
@@ -105,7 +104,6 @@ const modalDetalles = (n) => {
                       id_proveedor: idProveedor,
                     },
                     function (response) {
-                      console.log(response);
                       let json = JSON.parse(response);
                       json.lista.forEach((dat) => {
                         detailsLote += `
@@ -215,6 +213,7 @@ const modalEntradas = () => {
               UIkit.modal("#product-entry").hide();
             }, 300);
             cargarTargetProduct();
+            cargarEntrys()
           },
         });
         e.preventDefault();
@@ -241,12 +240,14 @@ const modalModificar = () => {
         data: { randomnautica: "productos", ID: idProduct },
         success: function (response) {
           let json = JSON.parse(response);
+          console.log(json);
           json.lista.forEach((i) => {
             document.querySelector(".NameUpdateProduct").value = i.nombre;
             document.querySelector(".MarcaUpdateProduct").value = i.marca;
             document.querySelector(".PVUpdateProduct").value = i.precio_venta;
             document.querySelector(".SMMUpdateProduct").value = i.stock_min;
             document.querySelector(".SMXUpdateProduct").value = i.stock_max;
+            document.querySelector(".ValorUnidadUpdateProduct").value = i.marca;
             if (i.IVA == 0) {
               document
                 .querySelector(".IVA_EUpdateProduct")
@@ -261,6 +262,7 @@ const modalModificar = () => {
             "MODIFICAR PRODUCTO";
           cargarCategoriaRegProduct();
           cargarUnidadesRegProduct();
+          cargarMarcasRegProduct()
 
           UIkit.modal("#modal-register-product").show();
         },
@@ -361,7 +363,6 @@ const modalEliminarProductDesactive = () => {
           processData: false,
           contentType: false,
           success: function (response) {
-            console.log(response);
           cargarTargetProduct()
             //ocultamos el modal
             UIkit.modal("#eliminar_product").hide();
@@ -644,6 +645,29 @@ const cargarUnidadesRegProduct = () => {
     },
   });
 };
+const cargarMarcasRegProduct = () => {
+  //   //ejecutamos esta peticion para traer las unidades de los productos a los select
+  $.ajax({
+    url: "Controller/funcs_ajax/search.php",
+    type: "GET",
+    data: { randomnautica: "marca" },
+    success: function (response) {
+      let options = ``;
+      let json = JSON.parse(response);
+      json.lista.forEach((date) => {
+        options += `<option value="${date.id}">${date.nombre}</option>`;
+      });
+      document.getElementById("selectMar").innerHTML = options;
+      document
+        .getElementById("selectMar")
+        .insertAdjacentHTML(
+          "afterbegin",
+          `<option value="" disabled selected>Marca</option>`
+        );
+    },
+  });
+};
+
 document.querySelector(".btn-modal-register").addEventListener("click", () => {
   val = false;
   document.querySelector(".NameUpdateProduct").value = "";
@@ -651,10 +675,13 @@ document.querySelector(".btn-modal-register").addEventListener("click", () => {
   document.querySelector(".PVUpdateProduct").value = "";
   document.querySelector(".SMMUpdateProduct").value = "";
   document.querySelector(".SMXUpdateProduct").value = "";
+  document.querySelector(".MarcaUpdateProduct").value = "";
+  document.querySelector(".ValorUnidadUpdateProduct").value = "";
   document.querySelector(".title_modal_reg_upd").textContent =
     "REGISTRAR PRODUCTO";
   cargarCategoriaRegProduct();
   cargarUnidadesRegProduct();
+  cargarMarcasRegProduct()
 });
 let formAggProduct = document.getElementById("formAggProduct");
 //captamos su evento submit, primero para evitar que la pagina se refresque, y segundo para insertar esos datos en un objeto FormData
@@ -725,12 +752,12 @@ $.ajax({
 $.ajax({
   url: "Controller/funcs_ajax/search.php",
   type: "GET",
-  data: { randomnautica: "productos", subFunction: "marca" },
+  data: { randomnautica: "marca" },
   success: function (response) {
     let options = ``;
     let json = JSON.parse(response);
     json.lista.forEach((E) => {
-      options += `<li  uk-filter-control="filter: [data-marca='${E.marca}']; group: marca"><a class='filterS' href="#">${E.marca}</a></li>`;
+      options += `<li  uk-filter-control="filter: [data-marca='${E.nombre}']; group: marca"><a class='filterS' href="#">${E.nombre}</a></li>`;
     });
     document.querySelector(".filter_marca").innerHTML += options;
   },
@@ -786,7 +813,6 @@ inpNameProduct.addEventListener("keyup", (e) => {
               "title:El producto ya existe, use otro nombre; pos: left"
             );
             UIkit.tooltip(".NameUpdateProduct").show();
-            console.log("object");
           } else {
             inpNameProduct.removeAttribute("uk-tooltip");
             if (document.querySelector(".uk-tooltip")) {
@@ -804,7 +830,6 @@ inpNameProduct.addEventListener("keyup", (e) => {
               .querySelector(".controller-modal")
               .removeChild(document.querySelector(".uk-tooltip"));
           }
-          console.log("object2");
         }
       },
     });

@@ -1,6 +1,6 @@
 <?php
 
-    class marcas extends DB{
+    class Marca extends DB{
         private $id;
         private $nombre;
 
@@ -12,10 +12,8 @@
         }
 
         function agregar(){
-            $query = $this->conn->prepare("INSERT INTO marcas VALUES(:nombre)");
-            
+            $query = $this->conn->prepare("INSERT INTO marcas (nombre) VALUES(:nombre)");
             $query->bindParam(':nombre',$this->nombre, PDO::PARAM_STR);
-
             $query->execute();
         }
 
@@ -51,7 +49,7 @@
             return $consulta->fetchAll();
         }
         function actualizar(){
-            $query = 'UPDATE unidades SET nombre=:nombre WHERE id=:id';
+            $query = 'UPDATE marcas SET nombre=:nombre WHERE id=:id';
             $query = $this->conn->prepare($query);
             $query->bindParam(':nombre',$this->nombre);
             $query->bindParam(':id',$this->id);

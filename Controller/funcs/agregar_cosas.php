@@ -22,7 +22,7 @@
         }
         
         require('../../Model/Productos.php');
-        $clase = new Producto(null,$_POST["categoria"],$_POST["unidad"],$_POST["nombre"],$_POST["marca"],$nick,$_POST["stock_min"],$_POST["stock_max"],$_POST["precio_venta"],$_POST["IVA"]); // Llama al modelo y le manda la instruccion
+        $clase = new Producto(null,$_POST["categoria"],$_POST["unidad"],$_POST["marca"],$_POST["valor_unidad"],$_POST["nombre"],$nick,$_POST["stock_min"],$_POST["stock_max"],$_POST["precio_venta"],$_POST["IVA"]); // Llama al modelo y le manda la instruccion
         if ($clase->err){
             echo ("$clase->err");
             exit();
@@ -77,8 +77,8 @@
         // header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }
     elseif ($tipo === 'marca'){
-        require('../../Model/marcas.php');
-        $clase = new marcas(null,$_POST["nombre"]); // Llama al modelo y le manda la instruccion
+        require('../../Model/Marcas.php');
+        $clase = new Marca(null,$_POST["nombre"]); // Llama al modelo y le manda la instruccion
         $clase->agregar();
         header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }

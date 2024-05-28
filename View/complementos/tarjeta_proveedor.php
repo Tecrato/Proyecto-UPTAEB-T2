@@ -67,11 +67,14 @@ echo '<div>
             <h3 class="uk-modal-title">MODIFICAR PROVEEDOR</h3>
         </div>
         <div class="uk-modal-body">
-            <form class="uk-grid-small" method="POST" action="Controller/funcs/modificar_cosas.php" uk-grid>
+            <form class="uk-grid-small uk-form-stacked" method="POST" action="Controller/funcs/modificar_cosas.php" uk-grid>
                 <input type="text" name="tipo" value="proveedor" id="" style="display:none">
                 <input type=number value="'.$row['id'].'" name="ID" style="display:none">
                 <div class="uk-width-1-2@s">
-                    <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" value="'.$row['nombre'].'" name="nombre" pattern="^([A-ZÑ][a-zñ]{3,})( [A-Z][a-z]{3,})?$" requierd>
+                    <label class="uk-form-label">Nombre</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" value="'.$row['nombre'].'" name="nombre" pattern="^([A-ZÑ][a-zñ]{3,})( [A-Z][a-z]{3,})?$" requierd>
+                    </div>
                 </div>
                 <div class="uk-width-1-2@s">
                     <input class="uk-input" type="text" placeholder="Razon Social" aria-label="100" value="'.$row['razon_social'].'" name="razon_social" pattern="^[\w]{2,50}$" required>

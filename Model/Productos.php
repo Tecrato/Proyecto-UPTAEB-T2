@@ -4,8 +4,9 @@
         private $id;
         private $id_categoria;
         private $id_unidades;
+        private $id_marcas;
+        private $valor_unidad;
         private $nombre;
-        private $marca;
         private $imagen;
         private $stock_min;
         private $stock_max;
@@ -16,14 +17,15 @@
         public $err;
 
         function __construct(
-            $id=null, $id_categoria=null,$id_unidades=null,$nombre=null,$marca=null,$imagen=null,$stock_min=null,
+            $id=null, $id_categoria=null,$id_unidades=null,$id_marcas=null,$valor_unidad=null,$nombre=null,$imagen=null,$stock_min=null,
             $stock_max=null,$precio_venta=null,$IVA=null,$active=1,$like=''){
 
             $this->id = $id;
             $this->id_categoria = $id_categoria;
             $this->id_unidades = $id_unidades;
+            $this->id_marcas = $id_marcas;
+            $this->valor_unidad = $valor_unidad;
             $this->nombre = $nombre;
-            $this->marca = $marca;
             $this->imagen = $imagen;
             $this->stock_min = $stock_min;
             $this->stock_max = $stock_max;
@@ -37,12 +39,13 @@
         // esta funcion agrega a la tabla productos un objeto con los valores que se le estan pasando
         function agregar(){
             
-            $query = $this->conn->prepare("INSERT INTO productos VALUES(null, :id_categoria, :id_unidades, :nombre, :marca, :imagen, :stock_min, :stock_max, :precio_venta, :IVA, 1)");
+            $query = $this->conn->prepare("INSERT INTO productos VALUES(null, :id_categoria, :id_unidades, :id_marcas, :valor_unidad, :nombre, :imagen, :stock_min, :stock_max, :precio_venta, :IVA, 1)");
 
             $query->bindParam(':id_categoria',$this->id_categoria);
             $query->bindParam(':id_unidades',$this->id_unidades);
+            $query->bindParam(':id_marcas',$this->id_marcas);
+            $query->bindParam(':valor_unidad',$this->valor_unidad);
             $query->bindParam(':nombre',$this->nombre);
-            $query->bindParam(':marca',$this->marca);
             $query->bindParam(':imagen',$this->imagen);
             $query->bindParam(':stock_min',$this->stock_min);
             $query->bindParam(':stock_max',$this->stock_max);
@@ -73,7 +76,7 @@
         function actualizar(){
             
             
-            $query = "UPDATE productos SET id_categoria=:id_categoria, id_unidad=:id_unidades, nombre=:nombre, marca=:marca, stock_min=:stock_min, stock_max=:stock_max, precio_venta=:precio_venta, IVA=:IVA";
+            $query = "UPDATE productos SET id_categoria=:id_categoria, id_unidad=:id_unidades, id_marca=:id_marcas, valor_unidad=:valor_unidad, nombre=:nombre, stock_min=:stock_min, stock_max=:stock_max, precio_venta=:precio_venta, IVA=:IVA";
             if ($this->imagen != null) {
                 $query = $query . ", imagen=:imagen ";
             }
@@ -83,8 +86,10 @@
 
             $query->bindParam(':id_categoria',$this->id_categoria);
             $query->bindParam(':id_unidades',$this->id_unidades);
+            $query->bindParam(':id_marcas',$this->id_marcas);
+            $query->bindParam(':valor_unidad',$this->valor_unidad);
             $query->bindParam(':nombre',$this->nombre);
-            $query->bindParam(':marca',$this->marca);
+            // $query->bindParam(':marca',$this->marca);
             $query->bindParam(':stock_min',$this->stock_min);
             $query->bindParam(':stock_max',$this->stock_max);
             $query->bindParam(':precio_venta',$this->precio_venta);
@@ -107,7 +112,9 @@
                     a.id_unidad,
                     c.nombre unidad,
                     a.nombre,
-                    a.marca,
+                    a.id_marca,
+                    m.nombre marca,
+                    a.valor_unidad marca,
                     a.imagen,
                     (SELECT SUM(entradas.existencia) FROM entradas Where id_producto = a.id) as stock,
                     a.stock_min,
@@ -117,6 +124,7 @@
                     FROM productos a 
                     INNER JOIN categoria b ON b.id = a.id_categoria 
                     INNER JOIN unidades c ON c.id = a.id_unidad
+                    INNER JOIN marcas m ON m.id = a.id_marca
                     WHERE a.nombre LIKE :como AND
                     active=:active ";
 
@@ -126,7 +134,7 @@
             if ($this->id){
             	array_push($lista,'id');
             }
-            if ($this->marca){
+            if ($this->id_marcas){
                 array_push($lista, 'marca');
             }
             if ($lista) {
@@ -149,8 +157,8 @@
             }
             $this->like = '%'.$this->like.'%';
             $consulta->bindParam(':como',$this->like, PDO::PARAM_STR);
-			if ($this->marca) {
-                $consulta->bindParam(':marca',$this->marca, PDO::PARAM_INT);
+			if ($this->id_marcas) {
+                $consulta->bindParam(':marca',$this->id_marcas, PDO::PARAM_INT);
 			}
 
             $consulta->execute();
