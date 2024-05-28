@@ -52,8 +52,8 @@ const modalDetalles = (n) => {
           json.lista.forEach((item) => {
             //segun el id, los datos del modal cambiaran
             document.querySelector(".productDetailIMG").src = `Media/imagenes/${item.imagen}`;
-            document.querySelector(".productDetailName").textContent = item.nombre;
-            document.querySelector(".productDetailmarca").textContent = item.marca;
+            document.querySelector(".productDetailName").textContent = item.nombre + " " + item.valor_unidad + " " + item.unidad;
+            document.querySelector(".productDetailmarca").textContent = item.marca
             document.querySelector(".productDetailCategory").textContent = item.categoria;
             document.querySelector(".productDetailStock").textContent = item.stock ? item.stock : 0
             document.querySelector(".productDetailPV").textContent = item.precio_venta;
@@ -211,9 +211,9 @@ const modalEntradas = () => {
             // y ocultamos el modal
             setTimeout(() => {
               UIkit.modal("#product-entry").hide();
+              cargarEntrys()
             }, 300);
             cargarTargetProduct();
-            cargarEntrys()
           },
         });
         e.preventDefault();

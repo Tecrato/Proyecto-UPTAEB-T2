@@ -114,7 +114,7 @@
                     a.nombre,
                     a.id_marca,
                     m.nombre marca,
-                    a.valor_unidad marca,
+                    a.valor_unidad,
                     a.imagen,
                     (SELECT SUM(entradas.existencia) FROM entradas Where id_producto = a.id) as stock,
                     a.stock_min,
