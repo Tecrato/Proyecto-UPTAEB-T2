@@ -339,7 +339,6 @@
 
 
             <li>
-
                 <div class="height_controller">
                     <main class="uk-background-secondary" uk-filter="target: .js-filter; animation: fade">
                         <!-- container-filter sera el  que tenga todos los filtros de busqueda -->

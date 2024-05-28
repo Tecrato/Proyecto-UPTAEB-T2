@@ -952,6 +952,7 @@ const DELETE_U_M_C = (TR)=>{
           type: "POST",
           data: {ID: id, tipo: tipo},
           success: function (response) {
+            console.log(response);
             if (tipo == "unidad") {
               msj = "Unidad Eliminada correctamente"
             } else if (tipo == "categoria") {
