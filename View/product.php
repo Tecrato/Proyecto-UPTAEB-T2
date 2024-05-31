@@ -570,8 +570,8 @@
                                             <label class="uk-form-label" for="form-horizontal-text">Nombre</label>
                                             <div class="uk-form-controls">
                                                 <input class="uk-input name_U-C-M_edit" name="nombre" id="form-horizontal-text" type="text" placeholder="Nombre de marca">
-                                                <input id="Edit_type" type="text" name="tipo" value='' style="display:none">
-                                                <input id="id_delete_edit-U-M-C" type="text" name="ID" value='' style="display:none">
+                                                <input id="Edit_type" type="text" name="tipo" style="display:none">
+                                                <input id="id_delete_edit-U-M-C" type="text" name="ID" style="display:none">
                                                 <input type="submit" id="editar_U-M-C" style="display:none">
                                             </div>
                                         </div>

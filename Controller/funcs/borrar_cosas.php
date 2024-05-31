@@ -57,19 +57,20 @@
     elseif ($tipo === 'unidad'){
         require('../../Model/Unidades.php');
         $clase = new Unidad($_POST["ID"]); // Llama al modelo y le manda la instruccion
-        $clase->borrar();
+        $clase->borrar($_SESSION['user_id'], $_POST["ID"]);
         // header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }
     elseif ($tipo === 'marca'){
         require('../../Model/Marcas.php');
         $clase = new Marca($_POST["ID"]); // Llama al modelo y le manda la instruccion
-        $clase->borrar();
+        $clase->borrar($_SESSION['user_id'], $_POST["ID"]);
+
         // header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }
     elseif ($tipo === 'categoria'){
         require('../../Model/Categorias.php');
         $clase = new Categoria($_POST["ID"]); // Llama al modelo y le manda la instruccion
-        $clase->borrar();
+        $clase->borrar($_SESSION['user_id'], $_POST["ID"]);
         // header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }
 ?>

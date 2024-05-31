@@ -79,13 +79,13 @@
     elseif ($tipo === 'marca'){
         require('../../Model/Marcas.php');
         $clase = new Marca(null,$_POST["nombre"]); // Llama al modelo y le manda la instruccion
-        $clase->agregar();
-        header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
+        $clase->agregar($_SESSION['user_id']);
+        // header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }
     elseif ($tipo === 'categoria'){
         require('../../Model/Categorias.php');
         $clase = new Categoria(null,$_POST["nombre"]); // Llama al modelo y le manda la instruccion
-        $clase->agregar();
+        $clase->agregar($_SESSION['user_id']);
         // header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }
 

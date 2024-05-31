@@ -861,7 +861,6 @@ const Registrar_U_M_C = (form,tr,item_reset,notification)=>{
       processData: false,
       contentType: false,
       success: function (response) {
-        console.log(response);
         let result = tr()
         document.querySelector(item_reset).value = ""
         UIkit.notification.closeAll();
@@ -898,9 +897,10 @@ const Edit_U_M_C = (tr)=>{
       document.querySelector(".name_U-C-M_edit").value = nombre_item;
       // obtenemos el input que mandara el id del registro y se lo asignamos como value
       let id_2 = document.getElementById("id_delete_edit-U-M-C");
-      id_2.value = id;
+      id_2.setAttribute('value',id)
+      
       let type_edit = document.getElementById("Edit_type")
-      type_edit.value = tipo
+      type_edit.setAttribute('value',tipo)
       let msj = ""
       if (tipo == "unidad") {
         msj = "Unidad Modificada correctamente"
@@ -933,18 +933,24 @@ const Edit_U_M_C = (tr)=>{
               UIkit.modal("#edit-U_M_C").hide();
             }, 400);
           },
+          
         });
+
+        id_2.removeAttribute('value')
+      type_edit.removeAttribute('value')
       });
+
+
     });
   });
 }
-const DELETE_U_M_C = (TR)=>{
-  let btnDeletes = document.querySelectorAll(".delete-U_M_C")
+const DELETE_U_M_C = (TR,BTN)=>{
+  let btnDeletes = document.querySelectorAll(BTN)
   btnDeletes.forEach((b)=>{
     b.addEventListener("click", ()=>{
       let tipo = b.getAttribute("tipo");
       let msj = ""
-     
+     console.log(tipo);
       let id = b.parentElement.parentElement.previousElementSibling.previousElementSibling.textContent
       let deleteBtnSend = document.querySelector(".DELETE_U-M-C")
       deleteBtnSend.addEventListener("click", ()=>{
@@ -973,6 +979,8 @@ const DELETE_U_M_C = (TR)=>{
             }, 400);
           },
         });
+
+     
       })
     })
   })

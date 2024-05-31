@@ -228,37 +228,36 @@ async function asyncfunc(){
   })
 }
 
-$.ajax({
-  url: "Controller/funcs_ajax/search.php",
-  type: "GET",
-  data: { randomnautica: "entradas" },
-  success: function (response) {
-    let json = JSON.parse(response);
-    console.log(json);
-      json.lista.forEach((f) => {
-        let fechaVencimiento = new Date(f.fecha_vencimiento);
-        let fechaActual = new Date();
-        fechaVencimiento.setMinutes(fechaVencimiento.getMinutes() + fechaVencimiento.getTimezoneOffset());
-        let diferencia = fechaVencimiento.getTime() - fechaActual.getTime();
-        let diasRestantes = Math.ceil(diferencia / (1000 * 60 * 60 * 24));
-        let color;
-        let texto;
-        if (f.existencia == 0) {
-          color = "activeEmpty";
-          texto = "NO DISPONIBLE";
-        } else if (diasRestantes <= 10 && diasRestantes >= 1) {
-          color = "activeCloseToExpire";
-          texto = "POR VENCER";
-        } else if (diasRestantes > 10) {
-          color = "activeGood";
-          texto = "ACTIVO";
-        } else if (diasRestantes <= 0) {
-          color = "activeExpire";
-          texto = "EXPIRO";
-        }
-      })
-  }
+// $.ajax({
+//   url: "Controller/funcs_ajax/search.php",
+//   type: "GET",
+//   data: { randomnautica: "entradas" },
+//   success: function (response) {
+//     let json = JSON.parse(response);
+//       json.lista.forEach((f) => {
+//         let fechaVencimiento = new Date(f.fecha_vencimiento);
+//         let fechaActual = new Date();
+//         fechaVencimiento.setMinutes(fechaVencimiento.getMinutes() + fechaVencimiento.getTimezoneOffset());
+//         let diferencia = fechaVencimiento.getTime() - fechaActual.getTime();
+//         let diasRestantes = Math.ceil(diferencia / (1000 * 60 * 60 * 24));
+//         let color;
+//         let texto;
+//         if (f.existencia == 0) {
+//           color = "activeEmpty";
+//           texto = "NO DISPONIBLE";
+//         } else if (diasRestantes <= 10 && diasRestantes >= 1) {
+//           color = "activeCloseToExpire";
+//           texto = "POR VENCER";
+//         } else if (diasRestantes > 10) {
+//           color = "activeGood";
+//           texto = "ACTIVO";
+//         } else if (diasRestantes <= 0) {
+//           color = "activeExpire";
+//           texto = "EXPIRO";
+//         }
+//       })
+//   }
 
-})
+// })
 
 asyncfunc()
