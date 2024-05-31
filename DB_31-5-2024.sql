@@ -16,6 +16,58 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `bitacora`
+--
+
+DROP TABLE IF EXISTS `bitacora`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `bitacora` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `usuario` varchar(45) NOT NULL,
+  `tabla` varchar(45) NOT NULL,
+  `accion` varchar(45) NOT NULL,
+  `fecha` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `detalles` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bitacora`
+--
+
+LOCK TABLES `bitacora` WRITE;
+/*!40000 ALTER TABLE `bitacora` DISABLE KEYS */;
+INSERT INTO `bitacora` VALUES (1,'6','Unidades','agregado','2024-05-31 13:43:56','se agrego una unidad');
+/*!40000 ALTER TABLE `bitacora` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `capital`
+--
+
+DROP TABLE IF EXISTS `capital`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `capital` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `monto` varchar(45) NOT NULL,
+  `movimiento` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `capital`
+--
+
+LOCK TABLES `capital` WRITE;
+/*!40000 ALTER TABLE `capital` DISABLE KEYS */;
+/*!40000 ALTER TABLE `capital` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `categoria`
 --
 
@@ -92,7 +144,7 @@ CREATE TABLE `entradas` (
   KEY `id_proveedor` (`id_proveedor`),
   CONSTRAINT `entradas_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id`),
   CONSTRAINT `entradas_ibfk_2` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedores` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -101,6 +153,7 @@ CREATE TABLE `entradas` (
 
 LOCK TABLES `entradas` WRITE;
 /*!40000 ALTER TABLE `entradas` DISABLE KEYS */;
+INSERT INTO `entradas` VALUES (14,31,7,5,'2024-04-28','2024-05-28',12,5,1),(15,33,7,5,'2024-05-07','2024-05-28',15,5,1);
 /*!40000 ALTER TABLE `entradas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -154,7 +207,7 @@ CREATE TABLE `marcas` (
 
 LOCK TABLES `marcas` WRITE;
 /*!40000 ALTER TABLE `marcas` DISABLE KEYS */;
-INSERT INTO `marcas` VALUES (1,'polar'),(3,'Juanaa');
+INSERT INTO `marcas` VALUES (1,'polar'),(3,'Juana');
 /*!40000 ALTER TABLE `marcas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -273,7 +326,7 @@ CREATE TABLE `unidades` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -282,7 +335,7 @@ CREATE TABLE `unidades` (
 
 LOCK TABLES `unidades` WRITE;
 /*!40000 ALTER TABLE `unidades` DISABLE KEYS */;
-INSERT INTO `unidades` VALUES (1,'g'),(2,'Kg');
+INSERT INTO `unidades` VALUES (1,'g'),(2,'Kg'),(24,'hola'),(25,'hola2'),(26,'Pan');
 /*!40000 ALTER TABLE `unidades` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -323,4 +376,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-28 16:40:46
+-- Dump completed on 2024-05-31 15:44:13

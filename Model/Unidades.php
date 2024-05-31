@@ -13,10 +13,11 @@
 			return $this->conn->query($query)->fetchAll();
 		}
 
-		function agregar(){
+		function agregar($usuario){
             $query = $this->conn->prepare('INSERT INTO unidades (nombre) VALUES (:nombre)');
             $query->bindParam(':nombre',$this->nombre);
             $query->execute();
+			$this->add_bitacora($usuario,"Unidades","agregado","se agrego una unidad");
         }
 		
 		function borrar(){

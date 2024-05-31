@@ -73,7 +73,7 @@
     elseif ($tipo === 'unidad'){
         require('../../Model/Unidades.php');
         $clase = new Unidad(null,$_POST["nombre"]); // Llama al modelo y le manda la instruccion
-        $clase->agregar();
+        $clase->agregar($_SESSION['user_id']);
         // header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }
     elseif ($tipo === 'marca'){

@@ -340,7 +340,7 @@
 
             <li>
                 <div class="height_controller">
-                    <main class="uk-background-secondary" uk-filter="target: .js-filter; animation: fade">
+                    <main class="uk-background-secondary uk-padding uk-border-rounded" uk-filter="target: .js-filter; animation: fade">
                         <!-- container-filter sera el  que tenga todos los filtros de busqueda -->
                         <section class="container-filter">
                             <div>
@@ -371,7 +371,7 @@
                             <div class="uk-margin">
                                 <form class="form_search_entrys uk-search uk-search-default" style="width: 500px;">
                                     <span class="uk-search-icon-flip" uk-search-icon></span>
-                                    <input id="entrada" class="uk-search-input" type="search" placeholder="Search" aria-label="Search">
+                                    <input id="entrada" class="uk-search-input" type="search" placeholder="Buscar Entrada" aria-label="Search">
                                 </form>
                             </div>
                         </section>
@@ -696,7 +696,6 @@
 <script src="static/javascript/Ajax/unidades.js"></script>
 <script src="static/javascript/Ajax/categorias.js"></script>
 <script src="static/javascript/Ajax/marcas.js"></script>
-<script src="static/javascript/tabla3.js"></script>
 <script src="static/javascript/funcionDataTable.js"></script>
 
 

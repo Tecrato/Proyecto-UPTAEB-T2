@@ -861,6 +861,7 @@ const Registrar_U_M_C = (form,tr,item_reset,notification)=>{
       processData: false,
       contentType: false,
       success: function (response) {
+        console.log(response);
         let result = tr()
         document.querySelector(item_reset).value = ""
         UIkit.notification.closeAll();

@@ -31,14 +31,14 @@ const cargarEntrys = () => {
           texto = "EXPIRO";
         }
 
-        template += `<tr data-proveedor="${f.proveedor}" data-productEntry="${f.producto}">
+        template +=     `<tr data-proveedor="${f.proveedor}" data-productEntry="${f.producto}">
                               <td><img src="./static/images/btn_lote2.png" alt="" width="40"></td>
                               <td>${f.id}</td>
                               <td>${f.producto}</td>
                               <td>${f.fecha_vencimiento}</td>
                               <td>${f.precio_compra} Bs</td>
                               <td>
-                                  <div class="${color} uk-border-rounded uk-text-center" style="padding: 5px; width: 115px;">${texto}</div>
+                                  <div class="${color} uk-border-rounded uk-text-center uk-text-bold" style="padding: 5px; width: 115px;">${texto}</div>
                               </td>
                           </tr>`;
       });
