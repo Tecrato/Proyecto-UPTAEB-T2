@@ -596,8 +596,13 @@
                                     <p class="modalDeleteBody">Deseas eliminar este registro para siempre? No podras recuperlo mas adelante</p>
                                 </div>
                                 <div class="uk-modal-footer uk-text-right">
-                                    <button class="uk-button uk-button-default uk-modal-close cancelar" type="button">Cancelar</button>
-                                    <button class="uk-button uk-button-secondary DELETE_U-M-C" type="button">Aceptar</button>
+                                    <form id="FORM-DELETE_U-M-C" action="post">
+                                        <input type=number id="IDDeleteM-U-C" name="ID" style="display: none;">
+                                        <input type=text id="IDTypeDeleteM-U-C" name="tipo" style="display: none;">
+                                        <button class="uk-button uk-button-default uk-modal-close cancelar" type="button">Cancelar</button>
+                                        <button class="uk-button uk-button-secondary" type="submit">Aceptar</button>
+                                    </form>
+
                                 </div>
                             </div>
                         </div>
