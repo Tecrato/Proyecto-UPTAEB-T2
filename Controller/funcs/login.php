@@ -7,6 +7,8 @@
     $correo = $_POST["correo"];
     $password = $_POST["contraseña"];
     
+    $d = new DB();
+    
     $c = new Usuario(null,null,$correo); // Llamamos al modelos y se busca el usuario
     $result = $c->search();
     
@@ -21,6 +23,7 @@
         else if ($rol == 2){
             $_SESSION['rol'] = "Usuario"; // Y tambien guarda el nombre para despues   
         }
+        $d->add_bitacora($row['id'],"login","logueado","el usuario ".$row['nombre']." se logueo");
         header('Location: ../../Inicio'); // y pa' la pagina que se va
     } else {
         header('Location: ../../login?err=1'); // Sino, lo devuelve al login

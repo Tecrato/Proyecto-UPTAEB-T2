@@ -37,6 +37,7 @@
     elseif ($_GET['randomnautica'] == "proveedores") {
         require('../../Model/Proveedores.php');
         $clase = new Proveedor(
+            id:(isset($_GET['ID']) ? $_GET['ID'] : null),
             like:(isset($_GET['like']) ? $_GET['like'] : '')
         );
     }
@@ -63,12 +64,17 @@
         require('../../Model/Registro de ventas.php');
         $clase = new Registro_ventas();
     }
+    elseif ($_GET['randomnautica'] == "bitacora") {
+        $clase = new DB();
+    }
 
     if (isset($_GET['subFunction'])) {
         if ($_GET['subFunction'] == 'proveedor_de_una_entrada') {
             $result = $clase->search_proveedor_from_product();
         } else if ($_GET['subFunction'] == 'marca') {
             $result = $clase->search_marca();
+        } else if ($_GET['subFunction'] == 'bitacora') {
+            $result = $clase->searh_bitacora(id:(isset($_GET['ID']) ? $_GET['ID'] : null));
         }
     }
     else {

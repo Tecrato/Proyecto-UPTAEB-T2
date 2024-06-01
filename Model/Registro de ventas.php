@@ -57,8 +57,8 @@
             $consulta->execute();
             return $consulta->fetchAll();
 		}
-		function agregar($datos){
-			
+		function agregar($usuario,$datos){
+			//agregar aki
 			$query = $this->conn->prepare("INSERT INTO registro_ventas (monto_final,metodo_pago, id_cliente, id_usuario, IVA) VALUES(:monto, :metodo, :id1, :id2, :iva)");
 
 
@@ -80,6 +80,8 @@
 				$clase_l = new Entrada(null,$lista->id_product,cantidad:$lista->cantidad);
 				$clase_l->descontar();
 			}
+            $this->add_bitacora($usuario,"registrar_ventas","agregar","se agrego una venta");
+
 		}
 
         function desactivar(){

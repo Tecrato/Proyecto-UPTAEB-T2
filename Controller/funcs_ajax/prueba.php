@@ -109,10 +109,12 @@
     // $resultado = $usuario->verificar('12345');
 	// print_r($resultado);
 
+	$a = new DB();
+	print_r($a->searh_bitacora());
 	
 	?>
 	
-		<form action="">
+		<!-- <form action="">
 		<input type="text" pattern="[a-z]">
 		<input type="submit" value="">
-		</form>
+		</form> -->

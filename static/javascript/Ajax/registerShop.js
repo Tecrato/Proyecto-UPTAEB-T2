@@ -863,9 +863,9 @@ $.ajax({
           type: "POST",
           data: { jsonString },
           success: function (response) {
-            setTimeout(()=> {
-              window.location = 'http://localhost/Proyecto-UPTAEB-T2/Ventas'
-            },2000)
+            // setTimeout(()=> {
+            //   window.location = 'http://localhost/Proyecto-UPTAEB-T2/Ventas'
+            // },2000)
             console.log(response);
           },
         });

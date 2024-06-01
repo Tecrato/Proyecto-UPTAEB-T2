@@ -587,6 +587,7 @@ const cargarTargetProductDesactive = () => {
       active: 0
     },
     success: function (response) {
+      console.log(response);
       if (document.querySelector('.height_controller2').childElementCount == 0) {
         // document.querySelector(".container_marca_agua2").classList.remove('invisible')
         document.querySelector(".uk-pagination2").classList.add('invisible')
