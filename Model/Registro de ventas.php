@@ -2,16 +2,14 @@
 	class Registro_ventas extends DB {
         private $id;
         private $monto_final;
-        private $metodo_pago;
         private $id_cliente;
         private $id_usuario;
         private $IVA;
         private $active;
 
-        function __construct($id=null, $monto_final=null,$metodo_pago=null,$id_cliente=null,$id_usuario=null,$IVA=null,$active=1){
+        function __construct($id=null, $monto_final=null,$id_cliente=null,$id_usuario=null,$IVA=null,$active=1){
             $this->id = $id;
             $this->monto_final = $monto_final;
-            $this->metodo_pago = $metodo_pago;
             $this->id_cliente = $id_cliente;
             $this->id_usuario = $id_usuario;
             $this->IVA = $IVA;
@@ -23,7 +21,6 @@
 			$query = "SELECT 
             a.id,
             a.monto_final,
-            a.metodo_pago,
             a.fecha,
             b.nombre nom_cliente,
             b.apellido apell_cliente,
