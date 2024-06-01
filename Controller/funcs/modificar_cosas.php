@@ -66,18 +66,17 @@
     elseif ($tipo === 'marca'){
         require('../../Model/Marcas.php');
         $clase = new Marca($_POST["ID"],$_POST["nombre"]);
-        $clase->actualizar();
-        header('Location:../../Productos');
+        $clase->actualizar($_SESSION['user_id'], $_POST["ID"]);
     }
     elseif ($tipo === 'unidad'){
         require('../../Model/Unidades.php');
         $clase = new Unidad($_POST["ID"],$_POST["nombre"]);
-        $clase->actualizar();
+        $clase->actualizar($_SESSION['user_id'], $_POST["ID"]);
     }
     elseif ($tipo === 'categoria'){
         require('../../Model/Categorias.php');
         $clase = new Categoria($_POST["ID"],$_POST["nombre"]);
-        $clase->actualizar();
+        $clase->actualizar($_SESSION['user_id'], $_POST["ID"]);
     }
     ;
 ?>

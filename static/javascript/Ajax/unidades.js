@@ -18,7 +18,7 @@ const UnidadesTable = () => {
                           <a href="#edit-U_M_C" uk-toggle uk-tooltip="title:Editar; delay: 500" class="uk-icon-button uk-margin-small-right Edit-U_M_C" type="button" style="border: none; cursor: pointer" tipo="unidad">
                               <span uk-icon="icon: file-edit"></span>
                           </a>
-                          <a href="#eliminar-U_M_C" uk-toggle uk-tooltip="title:Eliminar; delay: 500" class="uk-icon-button uk-margin-small-right delete-U_M_C" uk-tooltip="title:Eliminar; delay: 500" type="button" style="border: none; cursor: pointer" type="button" tipo="unidad">
+                          <a href="#eliminar-U_M_C" uk-toggle uk-tooltip="title:Eliminar; delay: 500" class="uk-icon-button uk-margin-small-right delete-U" uk-tooltip="title:Eliminar; delay: 500" type="button" style="border: none; cursor: pointer" type="button" tipo="unidad">
                               <span uk-icon="icon: trash"></span>
                           </a>
                       </div>
@@ -29,7 +29,7 @@ const UnidadesTable = () => {
       $("#TemplateUnidad").html(template);
 
       Edit_U_M_C(UnidadesTable)
-      DELETE_U_M_C(UnidadesTable)
+      DELETE_U_M_C(UnidadesTable,".delete-U")
 
     },
   });
