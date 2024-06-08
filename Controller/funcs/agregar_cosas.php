@@ -41,33 +41,33 @@
     elseif ($tipo === 'lote'){
         require('../../Model/Entradas.php');
         $clase = new Entrada(null,$_POST["ID"],$_POST["proveedor"],$_POST["cantidad"],$_POST["fecha_c"],$_POST["fecha_v"],$_POST["precio_compra"]); // Llama al modelo y le manda la instruccion
-        $clase->agregar();
+        $clase->agregar($_SESSION['user_id']);
         header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }
 
     elseif ($tipo === 'proveedor'){
         require('../../Model/Proveedores.php');
         $clase = new Proveedor(null,$_POST["nombre"],$_POST["razon_social"],$_POST["rif"],$_POST["telefono"],$_POST["correo"],$_POST["direccion"]); // Llama al modelo y le manda la instruccion
-        $clase->agregar();
+        $clase->agregar($_SESSION['user_id']);
         header('Location:../../Proveedores'); // Y vuelve a la pagina donde estaba antes
     }
     elseif ($tipo === 'cliente'){
         require('../../Model/Clientes.php');
         $clase = new Cliente(null,$_POST["nombre"],$_POST["cedula"],$_POST["apellido"],$_POST["documento"],$_POST["direccion"],$_POST["telefono"]); 
-        $clase->agregar();
+        $clase->agregar($_SESSION['user_id']);
         header('Location:../../Clientes'); // Y vuelve a la pagina donde estaba antes
     }
     elseif ($tipo === 'usuarios'){
         require('../../Model/Usuarios.php');
         $hash = password_hash($_POST["password"],PASSWORD_DEFAULT);
         $clase = new Usuario(null,$_POST["nombre"],$_POST["correo"],$hash,$_POST["rol"]); 
-        $clase->agregar();
+        $clase->agregar($_SESSION['user_id']);
         header('Location:../../Administrar_perfil'); // Y vuelve a la pagina donde estaba antes
     }
     elseif ($tipo === 'proveedor'){
         require('../../Model/Proveedores.php');
         $clase = new Proveedor(null,$_POST["nombre"],$_POST["razon_social"],$_POST["rif"],$_POST["telefono"],$_POST["correo"],$_POST["direccion"]); // Llama al modelo y le manda la instruccion
-        $clase->agregar();
+        $clase->agregar($_SESSION['user_id']);
         header('Location:../../Proveedores'); // Y vuelve a la pagina donde estaba antes
     }
     elseif ($tipo === 'unidad'){

@@ -40,20 +40,20 @@
     elseif ($tipo === 'proveedor'){
         require('../../Model/Proveedores.php');
         $clase = new Proveedor($_POST["ID"],$_POST["nombre"],$_POST["razon_social"],$_POST["rif"],$_POST["telefono"],$_POST["correo"],$_POST["direccion"]); // Llama al modelo y le manda la instruccion
-        $clase->actualizar();
+        $clase->actualizar($_SESSION['user_id'], $_POST["ID"]);
         header('Location:../../Proveedores');
     }
     elseif ($tipo === 'cliente'){
         require('../../Model/Clientes.php');
         $clase = new Cliente($_POST["ID"],$_POST["nombre"],$_POST["cedula"],$_POST["apellido"],$_POST["documento"],$_POST["direccion"],$_POST["telefono"]);
-        $clase->actualizar();
+        $clase->actualizar($_SESSION['user_id'], $_POST["ID"]);
         header('Location:../../Clientes');
     }
     elseif ($tipo === 'usuario'){
         require('../../Model/Usuarios.php');
         $pass = isset($_POST["password"]) ? password_hash($_POST["password"],PASSWORD_DEFAULT) : null;
         $clase = new Usuario($_POST["ID"],$_POST["nombre"],$_POST["correo"],$pass,isset($_POST["rol"]) ? $_POST["rol"] : null); 
-        $clase->actualizar();
+        $clase->actualizar($_SESSION['user_id'], $_POST["ID"]);
 
         if (isset($_POST['self'])) {
             session_start();

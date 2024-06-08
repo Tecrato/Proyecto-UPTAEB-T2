@@ -22,21 +22,21 @@
         require('../../Model/Productos.php');
         
         $clase = new Proveedor($_POST['ID']); // Llama al modelo y le manda la instruccion
-        $clase->desactivar();
+        $clase->desactivar($_SESSION['user_id'], $_POST["ID"]);
 
         header('Location:../../Proveedores'); // Y vuelve a la pagina donde estaba antes
     }
     elseif ($tipo == 'cliente'){
         require('../../Model/Clientes.php');
         $clase = new Cliente($_POST['ID']); // Llama al modelo y le manda la instruccion
-        $clase->desactivar();
+        $clase->desactivar($_SESSION['user_id'], $_POST["ID"]);
 
         header('Location:../../Clientes'); // Y vuelve a la pagina donde estaba antes
     }
     elseif ($tipo == 'usuarios'){
         require('../../Model/Usuarios.php');
         $clase = new Usuario($_POST['ID']); // Llama al modelo y le manda la instruccion
-        $clase->borrar();
+        $clase->borrar($_SESSION['user_id'], $_POST["ID"]);
 
         header('Location:../../Administrar_perfil'); // Y vuelve a la pagina donde estaba antes
     }

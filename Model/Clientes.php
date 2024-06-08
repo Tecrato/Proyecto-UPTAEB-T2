@@ -36,6 +36,7 @@
             $query->bindParam(':telefono',$this->telefono, PDO::PARAM_STR);
 
             $query->execute();
+            $this->add_bitacora($usuario,"Cliente","Registrar","Cliente Registrado");
         }
 
 
@@ -45,6 +46,7 @@
 
 			$query->bindParam(':id',$this->id);
 			$query->execute();
+			$this->add_bitacora($usuario,"Cliente","Desactivado","Cliente"." $id". " Desactivado");
         }
 
         // Con esta funcion podremos cambiar un cliente segun su ID con los valores que le pasemos
@@ -61,6 +63,7 @@
             $query->bindParam(':id',$this->id);
             
             return $query->execute(); 
+			$this->add_bitacora($usuario,"Cliente","Modificar","Cliente "."$id"." Modificado");
         }
 
         function search($n=0,$limite=9){

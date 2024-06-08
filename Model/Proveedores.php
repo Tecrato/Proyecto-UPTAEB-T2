@@ -39,6 +39,7 @@
             $query->bindParam(':correo',$this->correo);
             $query->bindParam(':dir',$this->direccion);
             $query->execute();
+            $this->add_bitacora($usuario,"Proveedores","Registrar","Proveedor Registrado");
         }
 
         // con esta funcion se elimina un elemento dependiendo de su id
@@ -47,6 +48,7 @@
 
 			$query->bindParam(':id',$this->id);
 			$query->execute();
+            $this->add_bitacora($usuario,"Proveedor","Desactivado","Proveedor"." $id". " Desactivado");
         }
 
         // Con esta funcion podremos cambiar un producto segun su ID con los valores que le pasemos
@@ -62,6 +64,7 @@
             $query->bindParam(':dir',$this->direccion);
             $query->bindParam(':id',$this->id);
             $query->execute();
+            $this->add_bitacora($usuario,"Proveedor","Modificar","Proveedor "."$id"." Modificado");
         }
 
         // Con esta otra funcion se busca entre los productos en la base de datos

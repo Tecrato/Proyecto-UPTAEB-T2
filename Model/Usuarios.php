@@ -26,6 +26,7 @@
             $query->bindParam(':hash',$this->hash, PDO::PARAM_STR);
             $query->bindParam(':rol',$this->rol, PDO::PARAM_STR);
             $query->execute();
+            $this->add_bitacora($usuario,"Usuarios","Registrar","Usuario Registrado");
         }
 
 
@@ -35,6 +36,7 @@
             $query = $this->conn->prepare("DELETE FROM usuarios WHERE ID=:id");
             
             $query->execute([':id'=>$this->id]);
+            $this->add_bitacora($usuario,"Usuarios","Eliminados","Usuario"." $id". " Eliminado");
         }
         function search($n=0,$limite=9){
             // Al igual que la clase anterior, puede buscar segun muchos valores o solo algunos
@@ -89,6 +91,7 @@
             }
 
             $query->execute(); 
+            $this->add_bitacora($usuario,"Usuario","Modificar","Usuario "."$id"." Modificado");
         }
         public function login(){
 
