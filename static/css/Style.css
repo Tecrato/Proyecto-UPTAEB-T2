@@ -719,6 +719,17 @@
     padding: 10px;
     border-radius: 10px;
 }
+.item_capital{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    /* background-color: #ff0000; */
+    font-size: 25px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 @media (min-width: 350px) and (max-width: 425px){
     .item_profile-target-2{
         width: 87%;
@@ -734,7 +745,7 @@
     }
     .newUser{
         margin: 15px 0px;
-        background-color: #333;
+        /* background-color: #333; */
         padding: 8px;
         border-radius: 5px;
     }
@@ -751,7 +762,7 @@
     }
     .newUser{
         margin: 15px 0px;
-        background-color: #333;
+        /* background-color: #333; */
         padding: 8px;
         border-radius: 5px;
     }
@@ -774,6 +785,13 @@
     .item_profile-target{
         width: 30%;
     }
+    
+}
+@media (max-width: 1344px){
+    .cont_item-CAPITAL{
+        width: 440px;
+    }
+    
 }
                                     /*-----------------------Estilos del supplier-------------------------------*/
 .img_proveedor_container{
