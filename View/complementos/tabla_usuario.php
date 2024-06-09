@@ -43,7 +43,7 @@ echo '
                     </select>
                 </div>
                 <div class="uk-width-1-2@s">
-                    <input class="uk-input" type="text" placeholder="Contraseña" value="'.$row['password'].'" aria-label="100" pattern="^[\S]{8,}$" name="password" minlength="8" maxlength="50" required>
+                    <input class="uk-input" type="text" placeholder="Contraseña" value="" aria-label="100" pattern="^[\S]{8,}$" name="password" minlength="8" maxlength="50" required>
                 </div>
                 <input type="submit" id="modificar'.$row['id'].'" style="display:none">
             </form>

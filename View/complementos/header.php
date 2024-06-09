@@ -15,7 +15,7 @@
     <script src="static/javaScript/librerias/uikit-icons.js"></script>
     
     <link rel="shortcut icon" href="static/images/logo_m.png" type="image/x-icon">
-    <title>Inventario-Inicio</title>
+    <title id="title">Inventario-Inicio</title>
 </head>
 <?php
 echo "

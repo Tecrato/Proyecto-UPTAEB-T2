@@ -91,8 +91,8 @@
 }
 .Bg-user{
     background-color: rgba(255, 255, 255, 0.133) !important;
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
     padding: 3px;
     display: flex;
@@ -228,11 +228,23 @@
     width: 85%;
 }
 .Plus-client{
-    border: 1px solid #fff;
-    padding: 10px;
-    height: 155px;
+    border: 1px solid #ffffff84;
+    /* padding: 10px; */
+    height: 105px;
     width: 175px;
-    border-radius: 20px;
+    /* border-radius: 10px; */
+}
+.container_config_fact{
+    border: 1px solid #ffffff84;
+    height: 215px;
+    /* overflow-y: auto; */
+}
+.scroll-detail-fact::-webkit-scrollbar,.Scroll_MP::-webkit-scrollbar{
+    width: 5px;
+}
+.scroll-detail-fact::-webkit-scrollbar-thumb,.Scroll_MP::-webkit-scrollbar-thumb{
+    background: #ffffff;
+    border-radius: 15px;
 }
 .container-result-fact{
     height: 550px;
@@ -240,7 +252,7 @@
 .Container-fact-price{
     padding: 15px;
     border-radius: 10px;
-    background-color: rgba(51, 51, 51, 0.288);
+    /* background-color: rgba(51, 51, 51, 0.288); */
 }
 .Fact-price{
     border: 1px solid rgb(81, 81, 81);
@@ -462,6 +474,22 @@
 @media (min-width: 375px) and (max-width: 565px){
     .cont_btns{
         width: 220px;
+    }
+}
+@media (max-width: 1290px){
+    .generate-fact > div{
+        flex-wrap: wrap;
+    }
+    .dates_fact{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .container_config_fact{
+        margin-top: 30px;
+    }
+    .cont_detail-venta{
+        flex-wrap: wrap;
     }
 }
 

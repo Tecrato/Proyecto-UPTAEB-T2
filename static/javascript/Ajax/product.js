@@ -969,26 +969,27 @@ const Edit_U_M_C = (tr) => {
   });
 };
 const DELETE_U_M_C = (TR, BTN) => {
+  //seleccionamos todos los btn de eliminar de el modulo correspondiente
   let btnDeletes = document.querySelectorAll(BTN);
   btnDeletes.forEach((b) => {
     b.addEventListener("click", () => {
 
+      //obtenemos el tipo del registro ya sea unidad, marca o categoria
       let tipo = b.getAttribute("tipo");
       let msj = "";
+      //obtenemos el id del registro
       let id = parseInt(b.parentElement.parentElement.previousElementSibling.previousElementSibling.textContent)
+      //seleccionamos los inputs del formulario de eliminar, tanto el que tendra el id del registro y el tipo de modelo
       let idInput = document.getElementById('IDDeleteM-U-C')
       let TypeInput = document.getElementById('IDTypeDeleteM-U-C')
-
+      //le asignamos los values
       idInput.setAttribute('value', id)
       TypeInput.setAttribute('value', tipo)
 
+      //usamos el form para captar su evento submit
       let FORM_DELETE = document.querySelector("#FORM-DELETE_U-M-C");
       FORM_DELETE.addEventListener("submit", (e) => {
         e.preventDefault()
-        
-
-       
-
         let data = new FormData(FORM_DELETE)
             
         $.ajax({
@@ -1018,7 +1019,6 @@ const DELETE_U_M_C = (TR, BTN) => {
             }, 400);
           },
         });
-
         idInput.removeAttribute('value')
         TypeInput.removeAttribute('value')
       });

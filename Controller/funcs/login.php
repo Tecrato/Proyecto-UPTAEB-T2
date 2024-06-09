@@ -23,7 +23,7 @@
         else if ($rol == 2){
             $_SESSION['rol'] = "Usuario"; // Y tambien guarda el nombre para despues   
         }
-        $d->add_bitacora($row['id'],"login","logueado","el usuario ".$row['nombre']." se logueo");
+        $d->add_bitacora($row['id'],"Login","logueado","El usuario ".$row['nombre']." inicio sesion");
         header('Location: ../../Inicio'); // y pa' la pagina que se va
     } else {
         header('Location: ../../login?err=1'); // Sino, lo devuelve al login

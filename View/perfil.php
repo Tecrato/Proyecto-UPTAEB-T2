@@ -2,22 +2,21 @@
 
 <main class="Bg-Main-home2 uk-padding uk-light">
 
-            <?php if ($_SESSION['rol'] == 'Administrador') { ?>
-    <div>
+    <?php if ($_SESSION['rol'] == 'Administrador') { ?>
         <div>
-            <div class="uk-flex uk-flex-middle uk-flex-between uk-flex-wrap uk-margin-small-bottom uk-light">
-                <h2 class="uk-margin-remove">ADMINISTRAR PERFIL</h2>
-                <div class="newUser uk-flex">
-                    <a href="#register_user" uk-toggle
-                        class="uk-button uk-button-link uk-flex uk-flex-middle uk-margin-medium-right">
-                        <span uk-icon="plus" class="uk-icon uk-margin-small-right"></span>
-                        <p class="uk-margin-remove">CREAR USUARIO</p>
-                    </a>
+            <div>
+                <div class="uk-flex uk-flex-middle uk-flex-between uk-flex-wrap uk-margin-small-bottom uk-light">
+                    <h2 class="uk-margin-remove">ADMINISTRAR PERFIL</h2>
+                    <div class="newUser uk-flex">
+                        <a href="#register_user" uk-toggle class="uk-button uk-button-link uk-flex uk-flex-middle uk-margin-medium-right">
+                            <span uk-icon="plus" class="uk-icon uk-margin-small-right"></span>
+                            <p class="uk-margin-remove">CREAR USUARIO</p>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-            <?php }; ?>
+    <?php }; ?>
 
     <section class="container-item_profile uk-flex">
 
@@ -36,6 +35,10 @@
                 <li><a href="#">Perfil</a></li>
                 <li><a href="#">Editar</a></li>
                 <li><a href="#">Registro de actividad</a></li>
+                <?php if ($_SESSION['rol'] == 'Administrador') { ?>
+                    <li><a href="#">Registro del sistema</a></li>
+                <?php }; ?>
+
             </ul>
 
             <ul class="uk-switcher uk-margin">
@@ -45,44 +48,44 @@
 
                     <div>
                         <h3>Detalles del perfil</h3>
-                            <div class="uk-flex">
-                                <p class="item-profile">Nombre </p><span class="uk-article-meta"> <?php echo $tu['nombre']; ?></span>
-                            </div>
-                        <?php 
-                        
+                        <div class="uk-flex">
+                            <p class="item-profile">Nombre </p><span class="uk-article-meta"> <?php echo $tu['nombre']; ?></span>
+                        </div>
+                        <?php
+
                         echo '
                             <div class="uk-flex">
-                                <p class="item-profile">Correo</p><span class="uk-article-meta">'.$tu['correo'].'</span>
+                                <p class="item-profile">Correo</p><span class="uk-article-meta">' . $tu['correo'] . '</span>
                             </div>
                             <div class="uk-flex">
                                 <p class="item-profile uk-margin-remove-bottom">Tipo de usuario</p>
-                                <span class="uk-article-meta">'.$_SESSION['rol'].'</span>
+                                <span class="uk-article-meta">' . $_SESSION['rol'] . '</span>
                             </div>';
                         ?>
                     </div>
                 </li>
                 <li>
                     <form class="uk-form-horizontal uk-margin-large" method="POST" action="Controller/funcs/modificar_cosas.php">
-                        <input type=number value=<?php echo $tu['id']?> name="ID" style="display:none">
+                        <input type=number value=<?php echo $tu['id'] ?> name="ID" style="display:none">
                         <input type=text value="usuario" name="tipo" style="display:none">
                         <input type=text value="zi" name="self" style="display:none">
                         <div class="uk-margin">
                             <label class="uk-form-label" for="form-horizontal-text">Nombre</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input" value="<?php echo $tu['nombre']?>"  type="text" placeholder="Nombre" name="nombre">
+                                <input class="uk-input" value="<?php echo $tu['nombre'] ?>" type="text" placeholder="Nombre" name="nombre">
                             </div>
                         </div>
                         <div class="uk-margin">
                             <label class="uk-form-label" for="form-horizontal-text">Correo</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input" value="<?php echo $tu['correo']?>" name="correo" type="email" placeholder="Correo">
+                                <input class="uk-input" value="<?php echo $tu['correo'] ?>" name="correo" type="email" placeholder="Correo">
                             </div>
                         </div>
-<!-- 
+                        <!-- 
                         <div class="uk-margin">
                             <label class="uk-form-label" for="form-horizontal-text">Contraseña</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input" value="<?php echo $tu['password']?>" type="text"
+                                <input class="uk-input" value="<?php echo $tu['password'] ?>" type="text"
                                     placeholder="Contraseña" name="password">
                             </div>
                         </div> -->
@@ -94,43 +97,80 @@
                         </div>
                     </form>
                 </li>
+                <li>
+                    <section>
+                        <div class="uk-overflow-auto uk-light uk-margin-small-top">
+                            <table class="uk-table uk-table-small uk-table-divider uk-table-hover">
+                                <thead class="uk-background-secondary">
+                                    <tr>
+                                        <th>ACTIVIDAD</th>
+                                        <th>FECHA</th>
+                                        <th>TABLA AFECTADA</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="registerActv">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </li>
+                <li>
+                    <section>
+                        <div class="uk-overflow-auto uk-light uk-margin-small-top">
+                            <table class="uk-table uk-table-small uk-table-divider uk-table-hover">
+                                <thead class="uk-background-secondary">
+                                    <tr>
+                                        <th>USUARIO</th>
+                                        <th>ACTIVIDAD</th>
+                                        <th>FECHA</th>
+                                        <th>TABLA AFECTADA</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="registerSystem">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </li>
             </ul>
         </div>
 
     </section>
     <?php if ($_SESSION['rol'] == 'Administrador') { ?>
-    <section>
-        <div class="uk-flex uk-flex-center uk-margin-medium-top">
-            <h2>USUARIOS REGISTRADOS</h2>
-        </div>
-        <div class="uk-overflow-auto uk-light uk-margin-small-top">
-            <table class="uk-table uk-table-small uk-table-divider uk-table-hover">
-                <thead class="uk-background-secondary">
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Correo</th>
-                        <th>Rol</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <?php
+        <section>
+            <div class="uk-flex uk-flex-center uk-margin-medium-top">
+                <h2>USUARIOS REGISTRADOS</h2>
+            </div>
+            <div class="uk-overflow-auto uk-light uk-margin-small-top">
+                <table class="uk-table uk-table-small uk-table-divider uk-table-hover">
+                    <thead class="uk-background-secondary">
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Correo</th>
+                            <th>Rol</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
 
-                    for ($i=0; $i < count($result); $i++) { 
-                        $row = $result[$i];
-                        require ('complementos/tabla_usuario.php');
-                    }
-                ?>
-                </tbody>
-            </table>
-        </div>
-    </section>
+                        for ($i = 0; $i < count($result); $i++) {
+                            $row = $result[$i];
+                            require('complementos/tabla_usuario.php');
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </section>
     <?php }; ?>
 
-     <!-- ************************************ Modal de registro ************************************ -->
+    <!-- ************************************ Modal de registro ************************************ -->
 
-     <div id="register_user" uk-modal>
+    <div id="register_user" uk-modal>
         <div class="uk-modal-dialog">
             <button class="uk-modal-close-default" type="button" uk-close></button>
             <div class="uk-modal-header">
@@ -140,15 +180,13 @@
                 <form class="uk-grid-small" uk-grid method="POST" action="./Controller/funcs/agregar_cosas.php">
                     <input type="text" name="tipo" value='usuarios' id="" style="display:none">
                     <div class="uk-width-1-2">
-                        <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="^([A-ZÑ][a-zñ]{3,})( [A-Zñ][a-zñ]{3,})?$" 
-                            required>
+                        <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="^([A-ZÑ][a-zñ]{3,})( [A-Zñ][a-zñ]{3,})?$" required>
                     </div>
                     <div class="uk-width-1-2@s">
-                        <input class="uk-input" type="text" placeholder="Apellido" aria-label="50" name="apellido" pattern="^([A-ZÑ][a-zñ]{3,})( [A-Zñ][a-zñ]{3,})?$" >
+                        <input class="uk-input" type="text" placeholder="Apellido" aria-label="50" name="apellido" pattern="^([A-ZÑ][a-zñ]{3,})( [A-Zñ][a-zñ]{3,})?$">
                     </div>
                     <div class="uk-width-1-2@s">
-                        <input class="uk-input" type="text" placeholder="Correo Electronico" aria-label="100"
-                            name="correo" parent="^([A-Za-z0-9\.\_]+)@([\w]{3,8})\.([\w]{2,3})(\.[\w]{2,4})?(\.[\w]{2,3})?$" required>
+                        <input class="uk-input" type="text" placeholder="Correo Electronico" aria-label="100" name="correo" parent="^([A-Za-z0-9\.\_]+)@([\w]{3,8})\.([\w]{2,3})(\.[\w]{2,4})?(\.[\w]{2,3})?$" required>
                     </div>
                     <div class="uk-width-1-2@s">
                         <select class="uk-select" id="form-stacked-select" name="rol" required>
@@ -177,7 +215,9 @@
 
 <script src="static/javaScript/librerias/jquery.js"></script>
 <script src="static/javaScript/ChangeColor.js"></script>
+<script src="static/javaScript/Ajax/user.js"></script>
 
 
 </body>
-</html>  
+
+</html>

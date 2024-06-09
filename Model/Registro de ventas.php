@@ -60,7 +60,7 @@
 
 
 			$query->bindParam(':monto',$this->monto_final);
-			$query->bindParam(':metodo',$this->metodo_pago, PDO::PARAM_STR);
+			// $query->bindParam(':metodo',$this->metodo_pago, PDO::PARAM_STR);
 			$query->bindParam(':id1',$this->id_cliente, PDO::PARAM_INT);
 			$query->bindParam(':id2',$this->id_usuario, PDO::PARAM_INT);
 			$query->bindParam(':iva',$this->IVA, PDO::PARAM_STR);

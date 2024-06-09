@@ -41,13 +41,8 @@
                 <div class="container_marca_agua invisible">
                     <img class="marca_agua" src="static/images/logo_letras-minimarket.png" alt="">
                 </div>
-                <div class="[email protected] uk-grid-mediumy uk-flex-center dataTable2 height_controller" uk-grid uk-height-match="target: > div > .uk-card">
-                    <?php
-                    for ($i = 0; $i < count($result); $i++) {
-                        $row = $result[$i];
-                        include 'complementos/tarjeta_cliente.php';
-                    }
-                    ?>
+                <div class="[email protected] uk-grid-mediumy uk-flex-center dataTable2 height_controller cont_client_cards" uk-grid uk-height-match="target: > div > .uk-card">
+                    
                 </div>
             </section>
             <div class="uk-flex uk-flex-center">
@@ -119,6 +114,7 @@
 
 <script src="static/javaScript/librerias/jquery.js"></script>
 <script src="static/javascript/FuncionesGenerales.js"></script>
+<script src="static/javascript/Ajax/client.js"></script>
 
 <script>
     $('.pag-btn-clientes').click(ele => {

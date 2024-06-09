@@ -1,4 +1,5 @@
 var page = 0;
+var dolar = 37
 
 function cambiar_pagina_ajax(dir,type,func,limit=9) {
   limit = limit ? limit : 9

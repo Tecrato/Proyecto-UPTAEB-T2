@@ -32,7 +32,7 @@ CREATE TABLE `bitacora` (
   PRIMARY KEY (`id`),
   KEY `id_usuario_idx` (`id_usuario`),
   CONSTRAINT `id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=205 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=218 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `bitacora` (
 
 LOCK TABLES `bitacora` WRITE;
 /*!40000 ALTER TABLE `bitacora` DISABLE KEYS */;
-INSERT INTO `bitacora` VALUES (200,6,'Categorias','Eliminar','2024-05-31 19:08:54','Categoria 12 Eliminada'),(201,6,'Unidades','Eliminar','2024-05-31 19:09:11','Unidad 31 Eliminada'),(202,6,'Unidades','Eliminar','2024-05-31 19:09:25','Unidad 29 Eliminada'),(203,6,'Marcas','Registrar','2024-05-31 19:09:38','Marca Registrada'),(204,6,'Marcas','Eliminar','2024-05-31 19:09:43','Marca 10 Eliminada');
+INSERT INTO `bitacora` VALUES (200,6,'Categorias','Eliminar','2024-05-31 19:08:54','Categoria 12 Eliminada'),(201,6,'Unidades','Eliminar','2024-05-31 19:09:11','Unidad 31 Eliminada'),(202,6,'Unidades','Eliminar','2024-05-31 19:09:25','Unidad 29 Eliminada'),(203,6,'Marcas','Registrar','2024-05-31 19:09:38','Marca Registrada'),(204,6,'Marcas','Eliminar','2024-05-31 19:09:43','Marca 10 Eliminada'),(205,6,'login','logueado','2024-06-01 17:31:41','el usuario Edouard se logueo'),(206,6,'Login','logueado','2024-06-02 09:33:17','El usuario Edouard inicio sesion'),(207,6,'Login','logueado','2024-06-02 20:38:37','El usuario Edouard inicio sesion'),(208,6,'Login','logueado','2024-06-04 11:37:21','El usuario Edouard inicio sesion'),(209,6,'Login','logueado','2024-06-04 19:22:36','El usuario Edouard inicio sesion'),(210,6,'Login','logueado','2024-06-07 09:46:25','El usuario Edouard inicio sesion'),(211,6,'Login','logueado','2024-06-07 15:18:08','El usuario Edouard inicio sesion'),(212,6,'Login','logueado','2024-06-07 22:51:05','El usuario Edouard inicio sesion'),(213,6,'Login','logueado','2024-06-08 07:38:00','El usuario Edouard inicio sesion'),(214,6,'deslogin','des-logueado','2024-06-08 10:08:47','el usuario Edouard se des-logueo'),(215,7,'Login','logueado','2024-06-08 10:09:00','El usuario John inicio sesion'),(216,7,'deslogin','des-logueado','2024-06-08 10:09:31','el usuario John se des-logueo'),(217,6,'Login','logueado','2024-06-08 10:10:00','El usuario Edouard inicio sesion');
 /*!40000 ALTER TABLE `bitacora` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -214,6 +214,29 @@ INSERT INTO `marcas` VALUES (1,'polar'),(3,'Juana');
 UNLOCK TABLES;
 
 --
+-- Table structure for table `metodo_pago`
+--
+
+DROP TABLE IF EXISTS `metodo_pago`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `metodo_pago` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `metodo_pago`
+--
+
+LOCK TABLES `metodo_pago` WRITE;
+/*!40000 ALTER TABLE `metodo_pago` DISABLE KEYS */;
+/*!40000 ALTER TABLE `metodo_pago` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `movimientos_capital`
 --
 
@@ -347,13 +370,14 @@ CREATE TABLE `registro_ventas` (
   `monto_final` float NOT NULL,
   `fecha` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `id_cliente` int NOT NULL,
-  `id_usuario` int DEFAULT NULL,
+  `id_usuario` int NOT NULL,
   `IVA` int NOT NULL DEFAULT '0',
   `active` tinyint NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `id_cliente_idx` (`id_cliente`),
   KEY `id_usuario_idx` (`id_usuario`),
-  CONSTRAINT `id_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id`)
+  CONSTRAINT `id_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id`),
+  CONSTRAINT `id_usuario2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -405,7 +429,7 @@ CREATE TABLE `usuarios` (
   `rol` int NOT NULL DEFAULT '3',
   `active` tinyint NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -414,7 +438,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (5,'asd','jaja@gmail.com','$2y$10$fdgc0QZ4YyBMB3ix3jV5AOesVSZFCRrTZ.UUHr61qjviWGq7zi7h2',1,1),(6,'Edouard','nose@gmail.com','$2y$10$7L2.rmi.NOr9wz7vSo1SYu58aIcXZLOVZkfZ2sZPx1moc4vfMjQBW',1,1);
+INSERT INTO `usuarios` VALUES (5,'asd','jaja@gmail.com','$2y$10$fdgc0QZ4YyBMB3ix3jV5AOesVSZFCRrTZ.UUHr61qjviWGq7zi7h2',1,1),(6,'Edouard','nose@gmail.com','$2y$10$7L2.rmi.NOr9wz7vSo1SYu58aIcXZLOVZkfZ2sZPx1moc4vfMjQBW',1,1),(7,'John','johnconnor@gmail.com','$2y$10$EgZWh1WmrpMGrsF9K2DjyeL5YTds6aS3.Rku/.h8P7wk7ltODzf9e',2,1);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -427,4 +451,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-01 14:07:37
+-- Dump completed on 2024-06-08 17:47:22

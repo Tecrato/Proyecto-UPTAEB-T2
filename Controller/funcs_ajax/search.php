@@ -74,7 +74,7 @@
         } else if ($_GET['subFunction'] == 'marca') {
             $result = $clase->search_marca();
         } else if ($_GET['subFunction'] == 'bitacora') {
-            $result = $clase->searh_bitacora(id:(isset($_GET['ID']) ? $_GET['ID'] : null));
+            $result = $clase->searh_bitacora(id:(isset($_GET['ID']) ? $_GET['ID'] : null),n:$n,limite:$limite);
         }
     }
     else {
