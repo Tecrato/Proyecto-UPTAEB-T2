@@ -7,9 +7,21 @@
             <div uk-grid>
                 <div class="uk-width-auto@m">
                     <ul class="uk-tab-left" uk-tab="connect: #component-tab-left; animation: uk-animation-fade">
-                        <li style="padding-bottom: 20px;"><a href="#">USUARIO</a></li>
-                        <li style="padding-bottom: 20px;"><a href="#">BITACORA</a></li>
-                        <li><a href="#">CAPITAL</a></li>
+                        <li style="padding-bottom: 20px;">
+                            <a href="#">
+                                <span class="uk-margin-small-right" uk-icon="user"></span> USUARIO
+                            </a>
+                        </li>
+                        <li style="padding-bottom: 20px;">
+                            <a href="#">
+                                <span class="uk-margin-small-right" uk-icon="history"></span> BITACORA
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="uk-margin-small-right" uk-icon="credit-card"></span>CAPITAL
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <div class="uk-width-expand@m">
@@ -160,6 +172,7 @@
                                                     <tr>
                                                         <th>ACTIVIDAD</th>
                                                         <th>FECHA</th>
+                                                        <th>HORA</th>
                                                         <th>TABLA AFECTADA</th>
                                                     </tr>
                                                 </thead>
@@ -179,6 +192,7 @@
                                                         <th>USUARIO</th>
                                                         <th>ACTIVIDAD</th>
                                                         <th>FECHA</th>
+                                                        <th>HORA</th>
                                                         <th>TABLA AFECTADA</th>
                                                     </tr>
                                                 </thead>

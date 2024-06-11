@@ -270,8 +270,8 @@ const modalModificar = () => {
                 .setAttribute("checked", "");
             }
           });
-          document.querySelector(".title_modal_reg_upd").textContent =
-            "MODIFICAR PRODUCTO";
+          document.querySelector(".title_modal_reg_upd").textContent ="MODIFICAR PRODUCTO";
+            
           cargarCategoriaRegProduct();
           cargarUnidadesRegProduct();
           cargarMarcasRegProduct();

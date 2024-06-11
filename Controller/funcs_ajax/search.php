@@ -44,6 +44,7 @@
     elseif ($_GET['randomnautica'] == "clientes") {
         require('../../Model/Clientes.php');
         $clase = new Cliente(
+            id:(isset($_GET['ID']) ? $_GET['ID'] : null),
             like_nombre:(isset($_GET['like_nombre']) ? $_GET['like_nombre'] : ''),
             like_cedula:(isset($_GET['like_cedula']) ? $_GET['like_cedula'] : ''),
         );

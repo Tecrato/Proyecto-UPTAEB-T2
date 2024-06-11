@@ -451,7 +451,7 @@ $.ajax({
                   <p class="uk-margin-remove">${producto.nombre}</p>
               </td>
               <td>
-                  <input class="uk-input uk-form-width-xsmall disponible" type="text" aria-label="disabled" value="${producto.stock ? producto.stock : 0 }" disabled>
+                  <input class="uk-input uk-form-width-xsmall disponible" type="text" aria-label="disabled" value="${producto.stock ? producto.stock : 0}" disabled>
               </td>
               <td>
                   <input class="uk-input uk-form-width-xsmall" type="text" aria-label="disabled" value="${producto.precio_venta}" disabled>
@@ -507,10 +507,10 @@ $.ajax({
       //capturamos el evento de pulsar una tecla
       input.addEventListener("keyup", (e) => {
         //esta variable guarda la cantidad de stock del producto en esa fila
-        let cantidad = parseInt( input.parentElement.previousElementSibling.previousElementSibling.firstElementChild.value);
-         
-            
-        
+        let cantidad = parseInt(input.parentElement.previousElementSibling.previousElementSibling.firstElementChild.value);
+
+
+
         //esta variable guarda el valor de lo que el usuario teclea
         let cantidadCliente = parseInt(e.target.value);
         if (cantidadCliente <= cantidad && cantidadCliente > 0) {
@@ -518,7 +518,7 @@ $.ajax({
         } else {
           input.classList.remove("succesc");
         }
-        if (cantidadCliente > cantidad || cantidadCliente == 0 || /^([a-zA-Z]+)$/.test(e.target.value)) {       
+        if (cantidadCliente > cantidad || cantidadCliente == 0 || /^([a-zA-Z]+)$/.test(e.target.value)) {
           input.classList.add("danger");
         } else {
           input.classList.remove("danger");
@@ -536,20 +536,20 @@ $.ajax({
       for (const algo of IvaController) {
         let IvaStatus = algo.getAttribute("iva");
         let cantidadProduct = parseFloat(algo.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent)
-        let valor$ = parseFloat(algo.parentElement.nextElementSibling.getAttribute('value')*cantidadProduct)
+        let valor$ = parseFloat(algo.parentElement.nextElementSibling.getAttribute('value') * cantidadProduct)
         priceDolar += valor$
         if (IvaStatus == 0) {
           let precioUndTotal = parseFloat(algo.parentElement.previousElementSibling.textContent);
           PriceExentIva += precioUndTotal;
-          
+
         } else {
           let precioUndTotal = parseFloat(algo.parentElement.previousElementSibling.textContent);
           PriceNoExentIva += precioUndTotal;
         }
       }
 
-     
-       
+
+
       // esta varible tendra la suma del total parcial
       let totalAPagarParcial = PriceExentIva + PriceNoExentIva;
       //obtenemos el contenedor del subtotal
@@ -562,8 +562,8 @@ $.ajax({
       let iva = PriceNoExentIva * 0.16;
 
       let TextIva = (document.getElementById("iva").textContent = iva.toFixed(2) + " BS");
-      
-        
+
+
       //con esta varible obtenemos el total a pagar
       let totalAPagar = totalAPagarParcial + iva;
 
@@ -575,22 +575,22 @@ $.ajax({
 
       document.getElementById("IGTF").textContent = "0.00 $"
       let INP = document.querySelectorAll(".AMOUNT-MP")
-      INP.forEach((B)=>{
+      INP.forEach((B) => {
         // captamos el evento de keyup, osea si el usuario teclea sobre el input
-          if (B.previousElementSibling.value == "Divisa") {
-            let IGTF = 0;
-            IGTF = parseFloat(B.value) * 0.3
-            if (B.value == "") {
-              document.getElementById("IGTF").textContent = "0.00 $"
-              document.getElementById("totalFact$").textContent = "0.00 $"
-            } else {
-                document.getElementById("IGTF").textContent = IGTF.toFixed(2) + " $"
-                let monto$ = parseFloat(document.getElementById("totalFact$").textContent)
-                monto$ += IGTF  
-                document.getElementById("totalFact$").textContent = monto$.toFixed(2) + " $"
-            }
-           
+        if (B.previousElementSibling.value == "Divisa") {
+          let IGTF = 0;
+          IGTF = parseFloat(B.value) * 0.3
+          if (B.value == "") {
+            document.getElementById("IGTF").textContent = "0.00 $"
+            document.getElementById("totalFact$").textContent = "0.00 $"
+          } else {
+            document.getElementById("IGTF").textContent = IGTF.toFixed(2) + " $"
+            let monto$ = parseFloat(document.getElementById("totalFact$").textContent)
+            monto$ += IGTF
+            document.getElementById("totalFact$").textContent = monto$.toFixed(2) + " $"
           }
+
+        }
       })
     };
 
@@ -607,7 +607,7 @@ $.ajax({
         let valor = boton.parentElement.parentElement.children;
         //esta variable contiene el nombre del producto, para luego hacer una comprobaciob
         let valor2 = boton.parentElement.parentElement.attributes.value.textContent;
-         
+
         // este array guardara los datos del producto que puso el cliente
         let array = [];
 
@@ -617,12 +617,12 @@ $.ajax({
           array.push(child.firstElementChild.value);
         }
         let ivaIdentifier = boton.previousElementSibling.value;
-       
-        let idProducto = valor2; 
+
+        let idProducto = valor2;
         let cantidad = parseInt(array[3]);
-        let precioUnitario = parseFloat(array[2]); 
-        let totalParcial = cantidad * precioUnitario; 
-    
+        let precioUnitario = parseFloat(array[2]);
+        let totalParcial = cantidad * precioUnitario;
+
         // Seleccionamos el tbody de la tabla de la derecha
         let tbody = document.getElementById("Detail-product-fact");
         let filas = tbody.getElementsByTagName("tr");
@@ -635,7 +635,7 @@ $.ajax({
             let nuevaCantidad = cantidadExistente + cantidad;
             fila.children[1].textContent = nuevaCantidad;  // Actualizamos la cantidad
             fila.children[4].textContent = (nuevaCantidad * precioUnitario) + " BS";  // Actualizamos el total parcial
-            
+
             // Restamos la cantidad del stock
             let idTableDetail = parseInt(fila.children[0].textContent);
             let StockDisponible = document.querySelectorAll(".stockHeight");
@@ -648,7 +648,7 @@ $.ajax({
                 boton.parentElement.previousElementSibling.firstElementChild.value = "";
               }
             });
-    
+
             existeProducto = true;
             break;
           }
@@ -684,7 +684,7 @@ $.ajax({
         }
         //en esta condicion mostraremos un mensaje si el campo de cantidad esta vacio
         if (array[3] == "") {
-          boton.parentElement.previousElementSibling.firstElementChild.setAttribute("uk-tooltip","title: Debe ingresar una cantidad");      
+          boton.parentElement.previousElementSibling.firstElementChild.setAttribute("uk-tooltip", "title: Debe ingresar una cantidad");
           boton.parentElement.previousElementSibling.firstElementChild.classList.add("tooltip-efect");
           UIkit.tooltip(".tooltip-efect").show();
 
@@ -694,7 +694,7 @@ $.ajax({
           }, 800);
         } else if (parseInt(array[3]) > parseInt(array[1]) || parseInt(array[3]) == 0) {
           //esta condicion es en caso que la cantidad que ingrese el usuario supere la cantidad en existencia
-          boton.parentElement.previousElementSibling.firstElementChild.setAttribute( "uk-tooltip","title: La cantidad ingresada no es valida");
+          boton.parentElement.previousElementSibling.firstElementChild.setAttribute("uk-tooltip", "title: La cantidad ingresada no es valida");
           boton.parentElement.previousElementSibling.firstElementChild.classList.add("tooltip-efect");
           UIkit.tooltip(".tooltip-efect").show();
 
@@ -703,7 +703,7 @@ $.ajax({
             boton.parentElement.previousElementSibling.firstElementChild.classList.remove("tooltip-efect");
           }, 800);
         } else if (/^([a-zA-Z]+)$/.test(array[3])) {
-          boton.parentElement.previousElementSibling.firstElementChild.setAttribute("uk-tooltip","title: Debe Ingresar solo numeros");   
+          boton.parentElement.previousElementSibling.firstElementChild.setAttribute("uk-tooltip", "title: Debe Ingresar solo numeros");
           boton.parentElement.previousElementSibling.firstElementChild.classList.add("tooltip-efect");
           UIkit.tooltip(".tooltip-efect").show();
 
@@ -720,7 +720,7 @@ $.ajax({
         //con esta variable guardamos los botones de eliminar de cada tr, de la tabla de la derecha
         let BtnDelete = document.querySelectorAll(".Btn-delete");
         let btnStock = parseInt(boton.parentElement.parentElement.getAttribute("value"));
-        
+
         //recorremos los botones para obtener la etiqueta html
         for (const btn of BtnDelete) {
           btn.addEventListener("click", () => {
@@ -732,7 +732,7 @@ $.ajax({
             // y luego actualizamos el total a pagar
             ActualizarTotal();
             let idTableDetail = parseInt(btn.parentElement.parentElement.firstElementChild.textContent);
-              
+
             StockDisponible.forEach((da) => {
               if (idTableDetail == parseInt(da.getAttribute("value"))) {
                 let cantidadUsuario = parseInt(btn.parentElement.parentElement.firstElementChild.nextElementSibling.textContent);
@@ -757,30 +757,31 @@ $.ajax({
 
     //funcion para agg metodos de pago
     //este contador se usa para determinar el id de cada pago, para manipular los eventos en dos lados
+    let bool = true
     let contador = 0
     let btnAggMetodoPago = document.querySelector(".btn_agg_metodoPago")
     // Agregar metodo de pago
-    btnAggMetodoPago.addEventListener('click', ()=>{
+    btnAggMetodoPago.addEventListener('click', () => {
       // Incrementar el contador para obtener el id único de cada pago
       contador++
-      
+
       // Obtener el contenedor de los métodos de pago
       let cont = document.querySelector(".cont_metodos_pagos")
-      
+
       // Obtener todos los select de métodos de pago existentes
       let selectOptions = document.querySelectorAll(".selectMetodoPago")
-      
+
       // Obtener los valores de los select seleccionados
       let options = []
-      selectOptions.forEach((select)=>{
-          let option = select.options[select.selectedIndex]
-          options.push(option.value)
+      selectOptions.forEach((select) => {
+        let option = select.options[select.selectedIndex]
+        options.push(option.value)
       })
-      
+
       // Filtrar las opciones disponibles que no estén seleccionadas
       let availableOptions = ["Divisa", "Transferencia"]
       availableOptions = availableOptions.filter(option => !options.includes(option))
-      
+
       // Crear la plantilla HTML para el nuevo método de pago
       let template = `<div class="inputPago" id="${contador}">
                           <!-- Contenedor principal del método de pago -->
@@ -806,62 +807,87 @@ $.ajax({
                           <p class="uk-margin-remove">0.00 BS</p>
                       </div>`
 
+
+      let contMetodos = document.querySelector(".cont_metodos_pagos")
+      if (contMetodos.childElementCount == 0) {
+        $(".cont_metodos_pagos").append(template)
+        // Agregar la nueva plantilla al contenedor de los métodos de pago finales
+        $(".metodo-pago_final").append(template2)
+        bool = false
+      }
+      if (contMetodos.lastElementChild.firstElementChild.firstElementChild.nextElementSibling.value == "") {
+        bool = false
+      }
+
+      if (bool == true) {
+        $(".cont_metodos_pagos").append(template)
+        // Agregar la nueva plantilla al contenedor de los métodos de pago finales
+        $(".metodo-pago_final").append(template2)
+      }
       // Agregar la nueva plantilla al contenedor de los métodos de pago
-      $(".cont_metodos_pagos").append(template)
-      
-      // Agregar la nueva plantilla al contenedor de los métodos de pago finales
-      $(".metodo-pago_final").append(template2)
 
 
-      
+
+
 
       //este sera el evento en donde colocaremos en pagos finales, el valor del input
       //seleccionamos todos los select
       let select = document.querySelectorAll(".selectMetodoPago")
-      
-      //los recorremos
-        select.forEach((s)=>{
-         
-          // captamos el evento de change, osea un cambio en el select
-          s.addEventListener("change",()=>{
-            ActualizarTotal()
-            //obtenemos el id del pago
-            let id = s.parentElement.parentElement.getAttribute("id")
-            //buscamos y recorremos los pagos finales
-            let c = document.querySelectorAll(".metodoFinal")
-            c.forEach((v)=>{
-              //si el id del select es igual al apartado de los pagos finales, entonces todo cambio en el select se plasmara en ese registro
-              //en especifico
-              if (v.getAttribute("id") == id) {
-                //captamos el primer elemento, en este caso, el tipo de pago y le asignamos el value del select
-                v.firstElementChild.textContent = s.value.toUpperCase()
-              } else {
-                ActualizarTotal()
-              }
-            })
-          })
-        })        
 
-        //este sera el evento en donde colocaremos en pagos finales, el valor del input
+      //los recorremos
+      select.forEach((s) => {
+
+        // captamos el evento de change, osea un cambio en el select
+        s.addEventListener("change", () => {
+          ActualizarTotal()
+          //obtenemos el id del pago
+          let id = s.parentElement.parentElement.getAttribute("id")
+          //buscamos y recorremos los pagos finales
+          let c = document.querySelectorAll(".metodoFinal")
+          c.forEach((v) => {
+            //si el id del select es igual al apartado de los pagos finales, entonces todo cambio en el select se plasmara en ese registro
+            //en especifico
+            if (v.getAttribute("id") == id) {
+              //captamos el primer elemento, en este caso, el tipo de pago y le asignamos el value del select
+              v.firstElementChild.textContent = s.value.toUpperCase()
+            } else {
+              ActualizarTotal()
+            }
+          })
+        })
+      })
+
+      //este sera el evento en donde colocaremos en pagos finales, el valor del input
       //seleccionamos todos los select
       let INP = document.querySelectorAll(".AMOUNT-MP")
-      INP.forEach((B)=>{
+      INP.forEach((B) => {
         // captamos el evento de keyup, osea si el usuario teclea sobre el input
-        B.addEventListener("change",()=>{
-          //obtenemos el id del pago
-          let valor = parseFloat(B.value)
-          ActualizarTotal()
-          let valor2 = parseFloat(B.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.textContent)
-          if (valor2 != 0 && B.value != "") {
-            B.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.textContent = (valor2 - valor).toFixed(2)
+        B.addEventListener("change", () => {
+          if (B.value == "") {
+            bool = false
+          } else {
+            bool = true
           }
-            
+
+
+          // //obtenemos el id del pago
+          // let valor = parseFloat(B.value)
+          // // ActualizarTotal()
+          // let valor2 = parseFloat(B.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.textContent)
+          // if (B.previousElementSibling.value == "Divisa" && valor2 != 0) {
+          //   B.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.textContent = (valor2 -(valor * dolar)).toFixed(2)
+          // } else if (valor2 != 0 && B.value != "") {
+          //   B.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.textContent = (valor2 - valor).toFixed(2)
+          // }
+
+
+
           let id = B.parentElement.parentElement.getAttribute("id")
           //buscamos y recorremos los pagos finales
           let c = document.querySelectorAll(".metodoFinal")
-          c.forEach((v)=>{
+          c.forEach((v) => {
             //si el id del inputt es igual al apartado de los pagos finales, entonces todo cambio en el input se plasmara en ese registro
-              //en especifico
+            //en especifico
             if (v.getAttribute("id") == id) {
               //captamos el ultimo elemento, en este caso, el monto del pago y le asignamos el value del input
               v.lastElementChild.textContent = B.value + " Bs"
@@ -869,19 +895,19 @@ $.ajax({
           })
         })
       })
-      
-      
+
+
       //esta parte es para eliminar un registro en los tipos de pago
       //seleccionamos todos los btn de eliminar, los recorremos y le asignamos el evento click
       let btnDeleteMP = document.querySelectorAll(".btn-deleteMP")
-      btnDeleteMP.forEach((btn)=>{
-        btn.addEventListener('click',()=>{
+      btnDeleteMP.forEach((btn) => {
+        btn.addEventListener('click', () => {
           //seleccionamos el contenedor de los tipos de pago en la izquierda, y removemos al hijo
           cont.removeChild(btn.parentElement.parentElement)
           // procedemos como los dos casos anteriores, tanto en el select y el input
           let id = btn.parentElement.parentElement.getAttribute("id")
           let c = document.querySelectorAll(".metodoFinal")
-          c.forEach((v)=>{
+          c.forEach((v) => {
             if (v.getAttribute("id") == id) {
               document.querySelector(".metodo-pago_final").removeChild(v)
             }
@@ -889,7 +915,15 @@ $.ajax({
           ActualizarTotal()
         })
       })
+
+
+      
     })
+
+    let INP = document.querySelectorAll(".AMOUNT-MP")
+    for (const L of INP) {
+      console.log(L);
+    }
 
 
     //funcion para verificar si ya se puede enviar los datos para hacer la factura
@@ -898,12 +932,12 @@ $.ajax({
     btnCreateFact.addEventListener("click", () => {
       let tipoPago = document.querySelector(".cont_metodos_pagos").childElementCount
       let TotalRestar = parseFloat(document.querySelector(".amount_MP").textContent)
-      
+
       // let idCasher = document.querySelector(".Casher").getAttribute("id");
       let idClient = document.getElementById("Client-datails").firstElementChild.getAttribute("value")
       let tableDetailProduct = document.getElementById("Detail-product-fact").childElementCount;
-      
-      
+
+
 
       //este json sera el que se envie al server para insertar los datos de la factura
       let json = {
@@ -913,11 +947,11 @@ $.ajax({
         IGTF: parseFloat(document.getElementById("IGTF").textContent).toFixed(2),
         monto_final: parseFloat(document.getElementById("totalFact").textContent).toFixed(2),
         detalles: [],
-        metodos_pago:[]
+        metodos_pago: []
       };
 
       if (tipoPago == 0) {
-        btnCreateFact.setAttribute("uk-tooltip","title:Debe ingresar forma de pago; pos: right;");
+        btnCreateFact.setAttribute("uk-tooltip", "title:Debe ingresar forma de pago; pos: right;");
         UIkit.tooltip(".btnCreateFact").show();
 
         setTimeout(() => {
@@ -952,7 +986,7 @@ $.ajax({
         }
 
         let select = document.querySelectorAll(".selectMetodoPago")
-        select.forEach((e)=>{
+        select.forEach((e) => {
           let valor = e.value
           let monto = e.nextElementSibling.value
 
@@ -973,14 +1007,14 @@ $.ajax({
           pos: "bottom-right",
         });
         document.querySelector(".cont_metodos_pagos").innerHTML = ""
-        document.getElementById("Client-datails" ).innerHTML = `<div class="uk-flex uk-flex-column uk-flex-middle" value="default">
+        document.getElementById("Client-datails").innerHTML = `<div class="uk-flex uk-flex-column uk-flex-middle" value="default">
                                                                   <h5 class="uk-text-bold">AÑADIR CLIENTE</h5>
                                                                   <a href="#" uk-icon="icon: plus-circle; ratio: 2.5"></a>
                                                                 </div>`;
-          
+
         document.getElementById("Detail-product-fact").innerHTML = "";
         document.getElementsByClassName("metodo-pago_final").innerHTML = "";
-        
+
         ActualizarTotal();
 
         setTimeout(() => {

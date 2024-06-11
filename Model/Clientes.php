@@ -1,6 +1,6 @@
 <?php
 
-    class Cliente extends DB{
+    class Cliente extends DB {
         private $id;
         private $nombre;
         private $cedula;
@@ -22,38 +22,29 @@
             $this->like_nombre = $like_nombre;
             $this->like_cedula = $like_cedula;
             DB::__construct();
-
         }
 
-        function agregar(){
+        function agregar($usuario){
             $query = $this->conn->prepare("INSERT INTO clientes (nombre, cedula, apellido, documento, direccion, telefono, active) VALUES(:nombre, :cedula, :apellido, :documento, :direccion, :telefono,1)");
-            
             $query->bindParam(':nombre',$this->nombre, PDO::PARAM_STR);
             $query->bindParam(':cedula',$this->cedula, PDO::PARAM_STR);
             $query->bindParam(':documento',$this->documento, PDO::PARAM_STR);
             $query->bindParam(':apellido',$this->apellido, PDO::PARAM_STR);
             $query->bindParam(':direccion',$this->direccion, PDO::PARAM_STR);
             $query->bindParam(':telefono',$this->telefono, PDO::PARAM_STR);
-
             $query->execute();
             $this->add_bitacora($usuario,"Cliente","Registrar","Cliente Registrado");
         }
 
-
-        // con esta funcion se elimina un elemento dependiendo de su id
-        function desactivar() {
+        function desactivar($usuario,$id){
 			$query = $this->conn->prepare('UPDATE clientes SET active=0 WHERE id=:id');
-
 			$query->bindParam(':id',$this->id);
 			$query->execute();
-			$this->add_bitacora($usuario,"Cliente","Desactivado","Cliente"." $id". " Desactivado");
+			$this->add_bitacora($usuario,"Cliente","Eliminar","Cliente"." $id". " Eliminado");
         }
 
-        // Con esta funcion podremos cambiar un cliente segun su ID con los valores que le pasemos
-        function actualizar(){
-            
+        function actualizar($usuario,$id){
             $query = $this->conn->prepare("UPDATE clientes SET nombre=:nombre, cedula=:cedula, documento=:documento, apellido=:apellido, Telefono=:telefono, direccion=:direccion WHERE id=:id");
-            
             $query->bindParam(':nombre',$this->nombre);
             $query->bindParam(':cedula',$this->cedula);
             $query->bindParam(':documento',$this->documento);
@@ -61,9 +52,8 @@
             $query->bindParam(':telefono',$this->telefono);
             $query->bindParam(':direccion',$this->direccion);
             $query->bindParam(':id',$this->id);
-            
             return $query->execute(); 
-			$this->add_bitacora($usuario,"Cliente","Modificar","Cliente "."$id"." Modificado");
+			$this->add_bitacora($usuario,"Cliente","Modificar","Cliente "." $id"." Modificado");
         }
 
         function search($n=0,$limite=9){
@@ -96,6 +86,7 @@
             $consulta->execute();
             return $consulta->fetchAll();
         }
+
         function COUNT(){
             return $this->conn->query("SELECT COUNT(*) as 'total' FROM clientes")->fetch()['total'];
         }

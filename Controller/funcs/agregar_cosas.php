@@ -47,15 +47,15 @@
 
     elseif ($tipo === 'proveedor'){
         require('../../Model/Proveedores.php');
-        $clase = new Proveedor(null,$_POST["nombre"],$_POST["razon_social"],$_POST["rif"],$_POST["telefono"],$_POST["correo"],$_POST["direccion"]); // Llama al modelo y le manda la instruccion
+        $clase = new Proveedor(null,$_POST["nombre"],$_POST["razon_social"],$_POST["T-D"]."-".$_POST["rif"],$_POST["TLFNO"],$_POST["correo"],$_POST["direccion"]); // Llama al modelo y le manda la instruccion
         $clase->agregar($_SESSION['user_id']);
-        header('Location:../../Proveedores'); // Y vuelve a la pagina donde estaba antes
+        // header('Location:../../Proveedores'); // Y vuelve a la pagina donde estaba antes
     }
     elseif ($tipo === 'cliente'){
         require('../../Model/Clientes.php');
-        $clase = new Cliente(null,$_POST["nombre"],$_POST["cedula"],$_POST["apellido"],$_POST["documento"],$_POST["direccion"],$_POST["telefono"]); 
+        $clase = new Cliente(null,$_POST["nombre"],$_POST["cedula"],$_POST["apellido"],$_POST["documento"],$_POST["direccion"],$_POST["TLFNO"]); 
         $clase->agregar($_SESSION['user_id']);
-        header('Location:../../Clientes'); // Y vuelve a la pagina donde estaba antes
+        // header('Location:../../Clientes'); // Y vuelve a la pagina donde estaba antes
     }
     elseif ($tipo === 'usuarios'){
         require('../../Model/Usuarios.php');
