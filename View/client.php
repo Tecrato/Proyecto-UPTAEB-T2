@@ -101,7 +101,7 @@
                         <div class="uk-width-1-2@s">
                             <label class="uk-form-label">Telefono</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input inputTLFNOUpdateClient" type="tel" id="tlfno_client" name="telefono" aria-label="50" pattern="^([\+\d]{2,4} ?)?([\d]{4}) ?\-?([\d]{3}) ?\-?([\d]{4})$" required>
+                                <input class="uk-input inputTLFNOUpdateClient" type="tel" id="tlfno_client" name="telefono" aria-label="50" pattern="^\d{11,12}$" required>
                             </div>
                         </div>
                         <div class="uk-width-1-1@s">

@@ -43,7 +43,7 @@
 			$this->add_bitacora($usuario,"Cliente","Eliminar","Cliente"." $id". " Eliminado");
         }
 
-        function actualizar($usuario,$id){
+        function actualizar($usuario){
             $query = $this->conn->prepare("UPDATE clientes SET nombre=:nombre, cedula=:cedula, documento=:documento, apellido=:apellido, Telefono=:telefono, direccion=:direccion WHERE id=:id");
             $query->bindParam(':nombre',$this->nombre);
             $query->bindParam(':cedula',$this->cedula);
@@ -52,8 +52,8 @@
             $query->bindParam(':telefono',$this->telefono);
             $query->bindParam(':direccion',$this->direccion);
             $query->bindParam(':id',$this->id);
+			$this->add_bitacora($usuario,"Cliente","Modificar","Cliente "." $this->id"." Modificado");
             return $query->execute(); 
-			$this->add_bitacora($usuario,"Cliente","Modificar","Cliente "." $id"." Modificado");
         }
 
         function search($n=0,$limite=9){

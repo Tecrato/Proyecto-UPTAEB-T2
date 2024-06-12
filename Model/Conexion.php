@@ -3,7 +3,7 @@
 
         public $conn;
         function __construct() {
-            $this->conn = new PDO("mysql:host=localhost;dbname=proyecto_3","root","12345");
+            $this->conn = new PDO("mysql:host=localhost;dbname=proyecto","root");
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
         function __destruct() {
@@ -18,7 +18,7 @@
             $query->bindParam(':de',$detalles);
             $query->execute();
         }
-        function searh_bitacora($id=null, $limite=9, $n=0) {
+        function search_bitacora($id=null, $limite=9, $n=0) {
             $query = "SELECT * FROM bitacora";
             if ($id != null){
                 $query .= " WHERE id_usuario=:id";

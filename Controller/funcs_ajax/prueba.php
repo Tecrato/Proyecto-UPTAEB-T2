@@ -2,6 +2,7 @@
     require ('../../Model/Conexion.php');
     require ('../../Model/Productos.php');
     require('../../Model/Usuarios.php');
+    require('../../Model/Metodos_pagos.php');
 
 
 	// $clase = new Producto();
@@ -109,8 +110,8 @@
     // $resultado = $usuario->verificar('12345');
 	// print_r($resultado);
 
-	$a = new DB();
-	print_r($a->searh_bitacora());
+	$a = new Metodo_pago();
+	print_r($a->search());
 	
 	?>
 	

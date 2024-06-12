@@ -45,8 +45,8 @@
     }
     elseif ($tipo === 'cliente'){
         require('../../Model/Clientes.php');
-        $clase = new Cliente($_POST["ID"],$_POST["nombre"],$_POST["cedula"],$_POST["apellido"],$_POST["documento"],$_POST["direccion"],$_POST["telefono"]);
-        $clase->actualizar($_SESSION['user_id'], $_POST["ID"]);
+        $clase = new Cliente($_POST["ID"],$_POST["nombre"],$_POST["cedula"],$_POST["apellido"],$_POST["documento"],$_POST["direccion"],$_POST["TLFNO"]);
+        $clase->actualizar($_SESSION['user_id']);
         // header('Location:../../Clientes');
     }
     elseif ($tipo === 'usuario'){
