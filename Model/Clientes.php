@@ -36,11 +36,11 @@
             $this->add_bitacora($usuario,"Cliente","Registrar","Cliente Registrado");
         }
 
-        function desactivar($usuario,$id){
+        function desactivar($usuario){
 			$query = $this->conn->prepare('UPDATE clientes SET active=0 WHERE id=:id');
 			$query->bindParam(':id',$this->id);
 			$query->execute();
-			$this->add_bitacora($usuario,"Cliente","Eliminar","Cliente"." $id". " Eliminado");
+			$this->add_bitacora($usuario,"Cliente","Eliminar","Cliente".$this->id." Eliminado");
         }
 
         function actualizar($usuario){
@@ -52,7 +52,7 @@
             $query->bindParam(':telefono',$this->telefono);
             $query->bindParam(':direccion',$this->direccion);
             $query->bindParam(':id',$this->id);
-			$this->add_bitacora($usuario,"Cliente","Modificar","Cliente "." $this->id"." Modificado");
+			$this->add_bitacora($usuario,"Cliente","Modificar","Cliente ".$this->id." Modificado");
             return $query->execute(); 
         }
 

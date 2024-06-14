@@ -40,7 +40,7 @@
     elseif ($tipo === 'proveedor'){
         require('../../Model/Proveedores.php');
         $clase = new Proveedor($_POST["ID"],$_POST["nombre"],$_POST["razon_social"],$_POST["T-D"]."-".$_POST["rif"],$_POST["TLFNO"],$_POST["correo"],$_POST["direccion"]); // Llama al modelo y le manda la instruccion
-        $clase->actualizar($_SESSION['user_id'], $_POST["ID"]);
+        $clase->actualizar($_SESSION['user_id']);
         // header('Location:../../Proveedores');
     }
     elseif ($tipo === 'cliente'){
@@ -53,7 +53,7 @@
         require('../../Model/Usuarios.php');
         $pass = isset($_POST["password"]) ? password_hash($_POST["password"],PASSWORD_DEFAULT) : null;
         $clase = new Usuario($_POST["ID"],$_POST["nombre"],$_POST["correo"],$pass,isset($_POST["rol"]) ? $_POST["rol"] : null); 
-        $clase->actualizar($_SESSION['user_id'], $_POST["ID"]);
+        $clase->actualizar($_SESSION['user_id']);
 
         if (isset($_POST['self'])) {
             session_start();
@@ -66,17 +66,31 @@
     elseif ($tipo === 'marca'){
         require('../../Model/Marcas.php');
         $clase = new Marca($_POST["ID"],$_POST["nombre"]);
-        $clase->actualizar($_SESSION['user_id'], $_POST["ID"]);
+        $clase->actualizar($_SESSION['user_id']);
     }
     elseif ($tipo === 'unidad'){
         require('../../Model/Unidades.php');
         $clase = new Unidad($_POST["ID"],$_POST["nombre"]);
-        $clase->actualizar($_SESSION['user_id'], $_POST["ID"]);
+        $clase->actualizar($_SESSION['user_id']);
     }
     elseif ($tipo === 'categoria'){
         require('../../Model/Categorias.php');
         $clase = new Categoria($_POST["ID"],$_POST["nombre"]);
-        $clase->actualizar($_SESSION['user_id'], $_POST["ID"]);
+        $clase->actualizar($_SESSION['user_id']);
     }
-    ;
+    elseif ($tipo === 'metodo_pago'){
+        require('../../Model/Metodos_Pagos.php');
+        $clase = new Metodo_Pago($_POST["ID"],$_POST["nombre"]);
+        $clase->actualizar($_SESSION['user_id']);
+    }
+    
+//   "tabAutocompleteModel": {
+//     "title": "qwen2",
+//     "provider": "gemini",
+//     "model": "gemini-1.5-pro-latest",
+//     "apiKey": "AIzaSyDFqzaU9e-kHb9cTBCv8YpPz1VWhy6sQpo",
+//     "systemMessage": "Soy programador, principalmente en python, aunque tambien trabajo aveces con PHP, HTML, CSS, JAVASCRIPT, y otros lenguajes, quiero que sirvas para autocompletarme cualquier codigo que este haciendo, responde solo con codigo, no describas nada, solo quiero codigo",
+//     "requestOptions": {
+//       "timeout": 7200
+//     }
 ?>

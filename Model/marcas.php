@@ -17,11 +17,11 @@
             $query->execute();
 			$this->add_bitacora($usuario,"Marcas","Registrar","Marca Registrada");
         }
-        function borrar($usuario, $id) {
+        function borrar($usuario) {
             $query = $this->conn->prepare("DELETE FROM marcas WHERE ID=:id");
             $query->bindParam(':id',$this->id, PDO::PARAM_INT);
             $query->execute();
-			$this->add_bitacora($usuario,"Marcas","Eliminar","Marca"." $id". " Eliminada");
+			$this->add_bitacora($usuario,"Marcas","Eliminar","Marca".$this->id. " Eliminada");
         }
         function search($n=0,$limite=9){
             $query = "SELECT * FROM marcas";
@@ -45,13 +45,13 @@
             $consulta->execute();
             return $consulta->fetchAll();
         }
-        function actualizar($usuario, $id){
+        function actualizar($usuario){
             $query = 'UPDATE marcas SET nombre=:nombre WHERE id=:id';
             $query = $this->conn->prepare($query);
             $query->bindParam(':nombre',$this->nombre);
             $query->bindParam(':id',$this->id);
             $query->execute();
-			$this->add_bitacora($usuario,"Marcas","Modificar","Marca "."$id"." Modificada");
+			$this->add_bitacora($usuario,"Marcas","Modificar","Marca ".$this->id." Modificada");
         }
 
         function COUNT(){

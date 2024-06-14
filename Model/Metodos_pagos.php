@@ -29,13 +29,13 @@ class Metodo_pago extends DB {
         $this->add_bitacora($usuario,"Metodos_pago","Eliminar","Metodo de pago".$this->id." Eliminado");
     }
 
-    function actualizar($usuario, $id){
+    function actualizar($usuario){
         $query = 'UPDATE metodo_pago SET nombre=:nombre WHERE id=:id';
         $query = $this->conn->prepare($query);
         $query->bindParam(':nombre',$this->nombre);
         $query->bindParam(':id',$this->id);
         $query->execute(); 
-        $this->add_bitacora($usuario,"Metodos_pago","Modificar","Metodo de pago".$id." Modificado");
+        $this->add_bitacora($usuario,"Metodos_pago","Modificar","Metodo de pago".$this->id." Modificado");
     }
 }
 ?>

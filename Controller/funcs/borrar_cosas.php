@@ -22,21 +22,21 @@
         require('../../Model/Productos.php');
         
         $clase = new Proveedor($_POST['ID']); // Llama al modelo y le manda la instruccion
-        $clase->desactivar($_SESSION['user_id'], $_POST["ID"]);
+        $clase->desactivar($_SESSION['user_id']);
 
         header('Location:../../Proveedores'); // Y vuelve a la pagina donde estaba antes
     }
     elseif ($tipo == 'cliente'){
         require('../../Model/Clientes.php');
         $clase = new Cliente($_POST['ID']); // Llama al modelo y le manda la instruccion
-        $clase->desactivar($_SESSION['user_id'], $_POST["ID"]);
+        $clase->desactivar($_SESSION['user_id']);
 
         header('Location:../../Clientes'); // Y vuelve a la pagina donde estaba antes
     }
     elseif ($tipo == 'usuarios'){
         require('../../Model/Usuarios.php');
         $clase = new Usuario($_POST['ID']); // Llama al modelo y le manda la instruccion
-        $clase->borrar($_SESSION['user_id'], $_POST["ID"]);
+        $clase->borrar($_SESSION['user_id']);
 
         header('Location:../../Administrar_perfil'); // Y vuelve a la pagina donde estaba antes
     }
@@ -57,20 +57,20 @@
     elseif ($tipo === 'unidad'){
         require('../../Model/Unidades.php');
         $clase = new Unidad($_POST["ID"]); // Llama al modelo y le manda la instruccion
-        $clase->borrar($_SESSION['user_id'], $_POST["ID"]);
+        $clase->borrar($_SESSION['user_id']);
         // header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }
     elseif ($tipo === 'marca'){
         require('../../Model/Marcas.php');
         $clase = new Marca($_POST["ID"]); // Llama al modelo y le manda la instruccion
-        $clase->borrar($_SESSION['user_id'], $_POST["ID"]);
+        $clase->borrar($_SESSION['user_id']);
 
         // header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }
     elseif ($tipo === 'categoria'){
         require('../../Model/Categorias.php');
         $clase = new Categoria($_POST["ID"]); // Llama al modelo y le manda la instruccion
-        $clase->borrar($_SESSION['user_id'], $_POST["ID"]);
+        $clase->borrar($_SESSION['user_id']);
         // header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }
 ?>

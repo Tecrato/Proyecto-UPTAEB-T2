@@ -20,20 +20,20 @@
 			$this->add_bitacora($usuario,"Unidades","Registrar","Unidad Registrada");
         }
 		
-		function borrar($usuario, $id){
+		function borrar($usuario){
             $query = $this->conn->prepare('DELETE FROM unidades WHERE id = :id');
             $query->bindParam(':id',$this->id);
             $query->execute();
-			$this->add_bitacora($usuario,"Unidades","Eliminar","Unidad"." $id". " Eliminada");
+			$this->add_bitacora($usuario,"Unidades","Eliminar","Unidad".$this->id." Eliminada");
         }
 
-		function actualizar($usuario, $id){
+		function actualizar($usuario){
             $query = 'UPDATE unidades SET nombre=:nombre WHERE id=:id';
             $query = $this->conn->prepare($query);
             $query->bindParam(':nombre',$this->nombre);
             $query->bindParam(':id',$this->id);
             $query->execute(); 
-			$this->add_bitacora($usuario,"Unidades","Modificar","Unidad "."$id"." Modificada");
+			$this->add_bitacora($usuario,"Unidades","Modificar","Unidad ".$this->id." Modificada");
         }
 	}
 ?>

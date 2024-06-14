@@ -93,7 +93,6 @@
             		$query .= ' AND '.$e.'=:'.$e;
             	}
             }
-            if 
 
 
             $n = $n*$limite;
