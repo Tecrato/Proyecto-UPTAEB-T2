@@ -21,6 +21,10 @@
         $result = $clase->min_ventas();
     }
 
+    $json = ['lista'=> $result];
+    $json = json_encode($json);
+    echo($json);
+
 // SELECT p.id, p.nombre, ((SELECT SUM(b.cantidad) FROM entradas as b WHERE id_producto=p.id)-(SELECT SUM(c.existencia) FROM entradas as c WHERE id_producto=p.id)) / (SELECT SUM(a.cantidad) FROM entradas as a WHERE id_producto=p.id) as ratio_ventas FROM productos as p
 // SELECT p.id, p.nombre, 1-((SELECT SUM(c.existencia) FROM entradas as c WHERE id_producto=p.id) / (SELECT SUM(a.cantidad) FROM entradas as a WHERE id_producto=p.id)) as ratio_ventas FROM productos as p
 

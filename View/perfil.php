@@ -78,14 +78,21 @@
                                                 <?php
 
                                                 echo '
-                            <div class="uk-flex">
-                                <p class="item-profile">Correo</p><span class="uk-article-meta">' . $tu['correo'] . '</span>
-                            </div>
-                            <div class="uk-flex">
-                                <p class="item-profile uk-margin-remove-bottom">Tipo de usuario</p>
-                                <span class="uk-article-meta">' . $_SESSION['rol'] . '</span>
-                            </div>';
+                                                    <div class="uk-flex">
+                                                        <p class="item-profile">Correo</p><span class="uk-article-meta">' . $tu['correo'] . '</span>
+                                                    </div>
+                                                    <div class="uk-flex">
+                                                        <p class="item-profile uk-margin-remove-bottom">Tipo de usuario</p>
+                                                        <span class="uk-article-meta">' . $_SESSION['rol'] . '</span>
+                                                    </div>';
                                                 ?>
+                                                <div class="uk-flex uk-margin-top">
+                                                    <p class="item-profile">Semilla</p>
+                                                    <span class="uk-article-meta uk-flex">
+                                                        <input class="uk-input uk-form-small uk-form-width-medium uk-border-rounded input-seed" type="text">
+                                                        <a class="uk-icon-button uk-margin-small-left btn-generate" uk-icon="refresh" uk-tooltip="Generar"></a>
+                                                    </span>
+                                                </div>
                                             </div>
                                         </li>
                                         <li>
@@ -105,14 +112,6 @@
                                                         <input class="uk-input" value="<?php echo $tu['correo'] ?>" name="correo" type="email" placeholder="Correo">
                                                     </div>
                                                 </div>
-                                                <!-- 
-                                                <div class="uk-margin">
-                                                    <label class="uk-form-label" for="form-horizontal-text">Contraseña</label>
-                                                    <div class="uk-form-controls">
-                                                        <input class="uk-input" value="<?php echo $tu['password'] ?>" type="text"
-                                                            placeholder="Contraseña" name="password">
-                                                    </div>
-                                                </div> -->
 
                                                 <div class="uk-margin-small-top uk-flex uk-flex-center">
                                                     <div>

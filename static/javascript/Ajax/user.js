@@ -57,3 +57,19 @@ $.ajax({
         $("#registerActv").html(template2)
     },
 });
+
+
+
+
+//   let seed = generateAlphanumericSeed(20);
+//   console.log(seed); // Puedes cambiar el número para ajustar la longitud de la semilla
+let btnGenerate = document.querySelector(".btn-generate")
+btnGenerate.addEventListener("click", () => {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    for (let i = 0; i < 20; i++) {
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    document.querySelector(".input-seed").value = result
+
+})

@@ -31,7 +31,7 @@
 
         <div class="uk-width-1-2@s uk-background-secondary Card-grafic">
             <div class="titleReport">
-                <h2 class="Bg-Grafic-title">Ganancias mensuales</h2>
+                <h2 class="Bg-Grafic-title">Entradas mensuales (BS)</h2>
                 <div class="Item_generate-report">
                     <nav uk-dropnav="mode: click">
                         <ul class="uk-subnav">
@@ -122,8 +122,8 @@
 
 </main>
 <script src="static/javaScript/librerias/chart.umd.js"></script>
-<script src="static/javaScript/graphicsController.js"></script>
 <script src="static/javaScript/librerias/jquery.js"></script>
+<script src="static/javaScript/graphicsController.js"></script>
 <script src="static/javascript/ChangeColor.js"></script>
 
 </body>

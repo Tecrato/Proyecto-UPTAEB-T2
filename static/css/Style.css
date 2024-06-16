@@ -709,7 +709,7 @@
 .item_profile-target-2{
     width: 75%;
     height: 370px;
-    overflow-y: auto;
+    overflow-y: hidden;
     background-color: rgba(34, 34, 34, 0.571);
     padding: 20px;
     border-radius: 20px;

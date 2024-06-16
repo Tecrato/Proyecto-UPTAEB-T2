@@ -238,8 +238,8 @@
                                                 </table>
                                             </div>
 
-                                            <div class="cont_detail-venta uk-flex uk-flex-around uk-margin-medium-top" style="background-color: rgba(51, 51, 51, 0.288);">
-                                                <div class="Container-fact-price">
+                                            <div class="cont_detail-venta uk-flex uk-flex-right uk-margin-medium-top">
+                                                <div class="Container-fact-price" style="background-color: rgba(51, 51, 51, 0.288);">
                                                     <div class="uk-flex uk-flex-between">
                                                         <div class="uk-margin-large-right">SUBTOTAL </div>
                                                         <div class="uk-flex uk-flex-middle">
@@ -272,14 +272,6 @@
                                                         <div class="uk-flex uk-flex-middle">
                                                             <p id="" class="Fact-price uk-text-success uk-margin-remove-bottom uk-text-bolder">36.02 Bs</p>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                                <div style="padding: 15px;">
-                                                    <div class="uk-flex uk-flex-center">
-                                                        <p>METODOS DE PAGO</p>
-                                                    </div>
-                                                    <div class="metodo-pago_final">
-                                                        <!-- aqui cargan los metodos con js -->
                                                     </div>
                                                 </div>
                                             </div>
