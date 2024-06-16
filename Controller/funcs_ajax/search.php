@@ -68,18 +68,17 @@
     elseif ($_GET['randomnautica'] == "bitacora") {
         $clase = new DB();
     }
-    elseif ($_GET['randomnautica'] == "metodo_pago") {
-        require('../../Model/Metodos_pagos.php');
+    elseif ($_GET['randomnautica'] == "metodos_pagos") {
+        require('../../Model/Metodos_pago.php');
         $clase = new Metodo_pago();
     }
-
     if (isset($_GET['subFunction'])) {
         if ($_GET['subFunction'] == 'proveedor_de_una_entrada') {
             $result = $clase->search_proveedor_from_product();
         } else if ($_GET['subFunction'] == 'marca') {
             $result = $clase->search_marca();
         } else if ($_GET['subFunction'] == 'bitacora') {
-            $result = $clase->searh_bitacora(id:(isset($_GET['ID']) ? $_GET['ID'] : null),n:$n,limite:$limite);
+            $result = $clase->search_bitacora(id:(isset($_GET['ID']) ? $_GET['ID'] : null),n:$n,limite:$limite);
         }
     }
     else {

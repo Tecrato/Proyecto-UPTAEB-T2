@@ -14,11 +14,9 @@
         private $IVA;
         private $active;
         private $like;
-        public $err;
 
-        function __construct(
-            $id=null, $id_categoria=null,$id_unidades=null,$id_marcas=null,$valor_unidad=null,$nombre=null,$imagen=null,$stock_min=null,
-            $stock_max=null,$precio_venta=null,$IVA=null,$active=1,$like=''){
+        function __construct($id=null, $id_categoria=null,$id_unidades=null,$id_marcas=null,$valor_unidad=null,$nombre=null,
+            $imagen=null,$stock_min=null,$stock_max=null,$precio_venta=null,$IVA=null,$active=1,$like=''){
 
             $this->id = $id;
             $this->id_categoria = $id_categoria;
@@ -116,7 +114,7 @@
                     m.nombre marca,
                     a.valor_unidad,
                     a.imagen,
-                    (SELECT SUM(entradas.existencia) FROM entradas Where id_producto = a.id) as stock,
+                    (SELECT SUM(entradas.existencia) FROM entradas Where id_producto = a.id AND entradas.fecha_vencimiento > NOW()) as stock,
                     a.stock_min,
                     a.stock_max,
                     a.precio_venta,

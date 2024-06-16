@@ -43,16 +43,16 @@
         }
 
         // con esta funcion se elimina un elemento dependiendo de su id
-        function desactivar($usuario,$id) {
+        function desactivar($usuario) {
 			$query = $this->conn->prepare('UPDATE proveedores SET active=0 WHERE id=:id');
 
 			$query->bindParam(':id',$this->id);
 			$query->execute();
-            $this->add_bitacora($usuario,"Proveedor","Desactivado","Proveedor"." $id". " Eliminado");
+            $this->add_bitacora($usuario,"Proveedor","Desactivado","Proveedor".$this->id." Eliminado");
         }
 
         // Con esta funcion podremos cambiar un producto segun su ID con los valores que le pasemos
-        function actualizar($usuario,$id) {
+        function actualizar($usuario) {
             
             $query = $this->conn->prepare("UPDATE proveedores SET nombre=:nombre, razon_social=:razon_social, rif=:rif, telefono=:tel, correo=:correo, direccion=:dir WHERE ID=:id");
         
@@ -64,7 +64,7 @@
             $query->bindParam(':dir',$this->direccion);
             $query->bindParam(':id',$this->id);
             $query->execute();
-            $this->add_bitacora($usuario,"Proveedor","Modificar","Proveedor "."$id"." Modificado");
+            $this->add_bitacora($usuario,"Proveedor","Modificar","Proveedor ".$this->id." Modificado");
         }
 
         // Con esta otra funcion se busca entre los productos en la base de datos

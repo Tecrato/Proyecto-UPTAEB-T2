@@ -39,20 +39,20 @@
             return $consulta->fetchAll();
         }
 
-        function borrar($usuario, $id){
+        function borrar($usuario){
             $query = $this->conn->prepare('DELETE FROM categoria WHERE id = :id');
             $query->bindParam(':id',$this->id);
             $query->execute();
-			$this->add_bitacora($usuario,"Categorias","Eliminar","Categoria"." $id". " Eliminada");
+			$this->add_bitacora($usuario,"Categorias","Eliminar","Categoria".$this->id." Eliminada");
         }
 
-        function actualizar($usuario, $id){
+        function actualizar($usuario){
             $query = 'UPDATE categoria SET nombre=:nombre WHERE id=:id';
             $query = $this->conn->prepare($query);
             $query->bindParam(':nombre',$this->nombre);
             $query->bindParam(':id',$this->id);
             $query->execute(); 
-			$this->add_bitacora($usuario,"Categorias","Modificar","Categoria "."$id"." Modificada");
+			$this->add_bitacora($usuario,"Categorias","Modificar","Categoria ".$this->id." Modificada");
         }
 
 	}

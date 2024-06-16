@@ -40,20 +40,20 @@
     elseif ($tipo === 'proveedor'){
         require('../../Model/Proveedores.php');
         $clase = new Proveedor($_POST["ID"],$_POST["nombre"],$_POST["razon_social"],$_POST["T-D"]."-".$_POST["rif"],$_POST["TLFNO"],$_POST["correo"],$_POST["direccion"]); // Llama al modelo y le manda la instruccion
-        $clase->actualizar($_SESSION['user_id'], $_POST["ID"]);
+        $clase->actualizar($_SESSION['user_id']);
         // header('Location:../../Proveedores');
     }
     elseif ($tipo === 'cliente'){
         require('../../Model/Clientes.php');
-        $clase = new Cliente($_POST["ID"],$_POST["nombre"],$_POST["cedula"],$_POST["apellido"],$_POST["documento"],$_POST["direccion"],$_POST["telefono"]);
-        $clase->actualizar($_SESSION['user_id'], $_POST["ID"]);
+        $clase = new Cliente($_POST["ID"],$_POST["nombre"],$_POST["cedula"],$_POST["apellido"],$_POST["documento"],$_POST["direccion"],$_POST["TLFNO"]);
+        $clase->actualizar($_SESSION['user_id']);
         // header('Location:../../Clientes');
     }
     elseif ($tipo === 'usuario'){
         require('../../Model/Usuarios.php');
         $pass = isset($_POST["password"]) ? password_hash($_POST["password"],PASSWORD_DEFAULT) : null;
         $clase = new Usuario($_POST["ID"],$_POST["nombre"],$_POST["correo"],$pass,isset($_POST["rol"]) ? $_POST["rol"] : null); 
-        $clase->actualizar($_SESSION['user_id'], $_POST["ID"]);
+        $clase->actualizar($_SESSION['user_id']);
 
         if (isset($_POST['self'])) {
             session_start();
@@ -66,17 +66,17 @@
     elseif ($tipo === 'marca'){
         require('../../Model/Marcas.php');
         $clase = new Marca($_POST["ID"],$_POST["nombre"]);
-        $clase->actualizar($_SESSION['user_id'], $_POST["ID"]);
+        $clase->actualizar($_SESSION['user_id']);
     }
     elseif ($tipo === 'unidad'){
         require('../../Model/Unidades.php');
         $clase = new Unidad($_POST["ID"],$_POST["nombre"]);
-        $clase->actualizar($_SESSION['user_id'], $_POST["ID"]);
+        $clase->actualizar($_SESSION['user_id']);
     }
     elseif ($tipo === 'categoria'){
         require('../../Model/Categorias.php');
         $clase = new Categoria($_POST["ID"],$_POST["nombre"]);
-        $clase->actualizar($_SESSION['user_id'], $_POST["ID"]);
+        $clase->actualizar($_SESSION['user_id']);
     }
     elseif ($tipo === 'metodo_pago'){
         require('../../Model/Metodos_pagos.php');
