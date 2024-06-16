@@ -31,7 +31,7 @@
 			$this->add_bitacora($usuario,"Metodo de Pago","Eliminar","Metodo de Pago"." $id". " Eliminado");
         }
         function search($n=0,$limite=9){
-            $query = "SELECT * FROM metodo_pago WHERE active = 1";
+            $query = "SELECT * FROM metodo_pago";
 
             if ($this->id != null){
                 $query = $query." WHERE id=:id";
