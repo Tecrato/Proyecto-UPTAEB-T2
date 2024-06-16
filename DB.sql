@@ -21,6 +21,7 @@
 
 DROP TABLE IF EXISTS `bitacora`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `bitacora` (
   `id` int NOT NULL AUTO_INCREMENT,
   `id_usuario` int NOT NULL,
@@ -31,7 +32,7 @@ CREATE TABLE `bitacora` (
   PRIMARY KEY (`id`),
   KEY `id_usuario_idx` (`id_usuario`),
   CONSTRAINT `id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=218 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,32 +41,37 @@ CREATE TABLE `bitacora` (
 
 LOCK TABLES `bitacora` WRITE;
 /*!40000 ALTER TABLE `bitacora` DISABLE KEYS */;
-INSERT INTO `bitacora` VALUES (200,6,'Categorias','Eliminar','2024-05-31 19:08:54','Categoria 12 Eliminada'),(201,6,'Unidades','Eliminar','2024-05-31 19:09:11','Unidad 31 Eliminada'),(202,6,'Unidades','Eliminar','2024-05-31 19:09:25','Unidad 29 Eliminada'),(203,6,'Marcas','Registrar','2024-05-31 19:09:38','Marca Registrada'),(204,6,'Marcas','Eliminar','2024-05-31 19:09:43','Marca 10 Eliminada'),(205,6,'login','logueado','2024-06-01 17:31:41','el usuario Edouard se logueo'),(206,6,'Login','logueado','2024-06-02 09:33:17','El usuario Edouard inicio sesion'),(207,6,'Login','logueado','2024-06-02 20:38:37','El usuario Edouard inicio sesion'),(208,6,'Login','logueado','2024-06-04 11:37:21','El usuario Edouard inicio sesion'),(209,6,'Login','logueado','2024-06-04 19:22:36','El usuario Edouard inicio sesion'),(210,6,'Login','logueado','2024-06-07 09:46:25','El usuario Edouard inicio sesion'),(211,6,'Login','logueado','2024-06-07 15:18:08','El usuario Edouard inicio sesion'),(212,6,'Login','logueado','2024-06-07 22:51:05','El usuario Edouard inicio sesion'),(213,6,'Login','logueado','2024-06-08 07:38:00','El usuario Edouard inicio sesion'),(214,6,'deslogin','des-logueado','2024-06-08 10:08:47','el usuario Edouard se des-logueo'),(215,7,'Login','logueado','2024-06-08 10:09:00','El usuario John inicio sesion'),(216,7,'deslogin','des-logueado','2024-06-08 10:09:31','el usuario John se des-logueo'),(217,6,'Login','logueado','2024-06-08 10:10:00','El usuario Edouard inicio sesion');
+INSERT INTO `bitacora` VALUES (30,6,'Metodos de Pago','Registrar','2024-06-15 21:48:14','Metodo de Pago Registrado'),(31,6,'Login','logueado','2024-06-16 09:34:45','El usuario Edouard inicio sesion'),(32,6,'Proveedor','Desactivado','2024-06-16 09:34:56','Proveedor14 Eliminado'),(33,6,'Metodo de Pago','Eliminar','2024-06-16 09:39:04','Metodo de Pago 9 Eliminado'),(34,6,'Metodo de Pago','Modificar','2024-06-16 09:39:11','Metodo de Pago 8 Modificado');
 /*!40000 ALTER TABLE `bitacora` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `capital`
+-- Table structure for table `caja`
 --
 
-DROP TABLE IF EXISTS `capital`;
+DROP TABLE IF EXISTS `caja`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `capital` (
+CREATE TABLE `caja` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `monto` varchar(45) NOT NULL,
-  `movimiento` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `id_usuario` int NOT NULL,
+  `monto_inicial` varchar(45) NOT NULL,
+  `monto_final` varchar(45) NOT NULL,
+  `fecha` datetime NOT NULL,
+  `status` blob NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_user_idx` (`id_usuario`),
+  CONSTRAINT `id_user` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `capital`
+-- Dumping data for table `caja`
 --
 
-LOCK TABLES `capital` WRITE;
-/*!40000 ALTER TABLE `capital` DISABLE KEYS */;
-/*!40000 ALTER TABLE `capital` ENABLE KEYS */;
+LOCK TABLES `caja` WRITE;
+/*!40000 ALTER TABLE `caja` DISABLE KEYS */;
+/*!40000 ALTER TABLE `caja` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -110,7 +116,7 @@ CREATE TABLE `clientes` (
   `telefono` varchar(15) NOT NULL,
   `active` tinyint DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,8 +125,63 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-INSERT INTO `clientes` VALUES (1,'Luis','12345','Vargas','V','frente a mi casa','0000000',0),(6,'Jose','25698863','Perez','V','Direccion tal','04126742231',1);
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `configuracion`
+--
+
+DROP TABLE IF EXISTS `configuracion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `configuracion` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `monto_capital` varchar(45) NOT NULL,
+  `monto_dolar_paralelo` varchar(45) NOT NULL,
+  `monto_dolar_bcv` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `configuracion`
+--
+
+LOCK TABLES `configuracion` WRITE;
+/*!40000 ALTER TABLE `configuracion` DISABLE KEYS */;
+/*!40000 ALTER TABLE `configuracion` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `credito`
+--
+
+DROP TABLE IF EXISTS `credito`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `credito` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_cliente` int NOT NULL,
+  `id_rv` int NOT NULL,
+  `fecha_limite` datetime NOT NULL,
+  `monto_final` float NOT NULL,
+  `status` blob NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_cliente_idx` (`id_cliente`),
+  KEY `id_registro_ventas_idx` (`id_rv`),
+  CONSTRAINT `id_client` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id`),
+  CONSTRAINT `id_rv` FOREIGN KEY (`id_rv`) REFERENCES `registro_ventas` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `credito`
+--
+
+LOCK TABLES `credito` WRITE;
+/*!40000 ALTER TABLE `credito` DISABLE KEYS */;
+/*!40000 ALTER TABLE `credito` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -199,7 +260,7 @@ CREATE TABLE `marcas` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -213,6 +274,20 @@ INSERT INTO `marcas` VALUES (1,'polar'),(3,'Juana');
 UNLOCK TABLES;
 
 --
+-- Temporary view structure for view `max_ventas`
+--
+
+DROP TABLE IF EXISTS `max_ventas`;
+/*!50001 DROP VIEW IF EXISTS `max_ventas`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `max_ventas` AS SELECT 
+ 1 AS `id`,
+ 1 AS `nombre`,
+ 1 AS `cantidad`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `metodo_pago`
 --
 
@@ -222,8 +297,9 @@ DROP TABLE IF EXISTS `metodo_pago`;
 CREATE TABLE `metodo_pago` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) NOT NULL,
+  `active` tinyint NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -232,8 +308,23 @@ CREATE TABLE `metodo_pago` (
 
 LOCK TABLES `metodo_pago` WRITE;
 /*!40000 ALTER TABLE `metodo_pago` DISABLE KEYS */;
+INSERT INTO `metodo_pago` VALUES (7,'Transferencias',1),(8,'Efectivos',1),(9,'Divisa',1);
 /*!40000 ALTER TABLE `metodo_pago` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `min_ventas`
+--
+
+DROP TABLE IF EXISTS `min_ventas`;
+/*!50001 DROP VIEW IF EXISTS `min_ventas`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `min_ventas` AS SELECT 
+ 1 AS `id`,
+ 1 AS `nombre`,
+ 1 AS `cantidad`*/;
+SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `movimientos_capital`
@@ -246,8 +337,9 @@ CREATE TABLE `movimientos_capital` (
   `id` int NOT NULL AUTO_INCREMENT,
   `monto` int NOT NULL,
   `descripcion` varchar(200) NOT NULL,
+  `fecha` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -269,12 +361,14 @@ DROP TABLE IF EXISTS `pagos`;
 CREATE TABLE `pagos` (
   `id` int NOT NULL AUTO_INCREMENT,
   `id_venta` int NOT NULL,
-  `metodo_de_pago` varchar(50) NOT NULL,
+  `id_metodo_pago` int NOT NULL,
   `monto` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_venta_idx` (`id_venta`),
+  KEY `id_metodo_pago_idx` (`id_metodo_pago`),
+  CONSTRAINT `id_metodo_pago` FOREIGN KEY (`id_metodo_pago`) REFERENCES `metodo_pago` (`id`),
   CONSTRAINT `id_venta` FOREIGN KEY (`id_venta`) REFERENCES `registro_ventas` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -339,12 +433,12 @@ CREATE TABLE `proveedores` (
   `nombre` varchar(50) NOT NULL,
   `razon_social` varchar(50) NOT NULL DEFAULT 'natural',
   `rif` varchar(15) NOT NULL,
-  `telefono` varchar(11) NOT NULL,
+  `telefono` varchar(20) NOT NULL,
   `correo` varchar(50) NOT NULL,
   `direccion` varchar(45) NOT NULL,
   `active` tinyint DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -353,9 +447,23 @@ CREATE TABLE `proveedores` (
 
 LOCK TABLES `proveedores` WRITE;
 /*!40000 ALTER TABLE `proveedores` DISABLE KEYS */;
-INSERT INTO `proveedores` VALUES (1,'tyrty','nn','j-00000000','1231231231','nose@gmail.com','54764576',1),(7,'montecarmelo','Montecarmelo','j-00000000','0000000','garnicaluis391@gmail.com','scacac',1),(8,'Jose','Pan','j-00000000','1231231231','ald@gmail.com','mmmda',1);
+INSERT INTO `proveedores` VALUES (1,'tyrty','nn','J-00000000','1231231231','nose@gmail.com','54764576',0),(7,'montecarmelo','Montecarmelo','J-00000000','0000000','garnicaluis391@gmail.com','scacac',0),(8,'Jose','Pan','J-00000000','1231231231','ald@gmail.com','mmmda',1),(9,'Alejandro','Tunal','V-30087582','+584126742231','garnicaluis391@gmail.com','Avenida 15, local numero5',0),(14,'Lorenzo','Hearshi','E-15930218','+584125915587','polar@gmail.com','Direccion tal',0),(15,'Mendoza','Chocolate','V-15930218','+584125915587','polar@gmail.com','Direccion tal',0);
 /*!40000 ALTER TABLE `proveedores` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `ratio_ventas`
+--
+
+DROP TABLE IF EXISTS `ratio_ventas`;
+/*!50001 DROP VIEW IF EXISTS `ratio_ventas`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `ratio_ventas` AS SELECT 
+ 1 AS `id`,
+ 1 AS `nombre`,
+ 1 AS `ratio_ventas`*/;
+SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `registro_ventas`
@@ -388,6 +496,33 @@ LOCK TABLES `registro_ventas` WRITE;
 /*!40000 ALTER TABLE `registro_ventas` DISABLE KEYS */;
 /*!40000 ALTER TABLE `registro_ventas` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `total_productos_categoria`
+--
+
+DROP TABLE IF EXISTS `total_productos_categoria`;
+/*!50001 DROP VIEW IF EXISTS `total_productos_categoria`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `total_productos_categoria` AS SELECT 
+ 1 AS `categoria`,
+ 1 AS `total_productos`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `total_stock_categoria`
+--
+
+DROP TABLE IF EXISTS `total_stock_categoria`;
+/*!50001 DROP VIEW IF EXISTS `total_stock_categoria`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `total_stock_categoria` AS SELECT 
+ 1 AS `id`,
+ 1 AS `nombre`,
+ 1 AS `total`*/;
+SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `unidades`
@@ -440,6 +575,96 @@ LOCK TABLES `usuarios` WRITE;
 INSERT INTO `usuarios` VALUES (5,'asd','jaja@gmail.com','$2y$10$fdgc0QZ4YyBMB3ix3jV5AOesVSZFCRrTZ.UUHr61qjviWGq7zi7h2',1,1),(6,'Edouard','nose@gmail.com','$2y$10$7L2.rmi.NOr9wz7vSo1SYu58aIcXZLOVZkfZ2sZPx1moc4vfMjQBW',1,1),(7,'John','johnconnor@gmail.com','$2y$10$EgZWh1WmrpMGrsF9K2DjyeL5YTds6aS3.Rku/.h8P7wk7ltODzf9e',2,1);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Final view structure for view `max_ventas`
+--
+
+/*!50001 DROP VIEW IF EXISTS `max_ventas`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `max_ventas` AS select `p`.`id` AS `id`,`p`.`nombre` AS `nombre`,(select sum(`f`.`cantidad`) from `factura` `f` where (`f`.`id_productos` = `p`.`id`)) AS `cantidad` from `productos` `p` where (`p`.`active` = 1) order by (select sum(`f`.`cantidad`) from `factura` `f` where (`f`.`id_productos` = `p`.`id`)) desc */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `min_ventas`
+--
+
+/*!50001 DROP VIEW IF EXISTS `min_ventas`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `min_ventas` AS select `p`.`id` AS `id`,`p`.`nombre` AS `nombre`,(select sum(`f`.`cantidad`) from `factura` `f` where (`f`.`id_productos` = `p`.`id`)) AS `cantidad` from `productos` `p` where (`p`.`active` = 1) order by (select sum(`f`.`cantidad`) from `factura` `f` where (`f`.`id_productos` = `p`.`id`)) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `ratio_ventas`
+--
+
+/*!50001 DROP VIEW IF EXISTS `ratio_ventas`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `ratio_ventas` AS select `p`.`id` AS `id`,`p`.`nombre` AS `nombre`,(1 - ((select sum(`c`.`existencia`) from `entradas` `c` where (`c`.`id_producto` = `p`.`id`)) / (select sum(`a`.`cantidad`) from `entradas` `a` where (`a`.`id_producto` = `p`.`id`)))) AS `ratio_ventas` from `productos` `p` where (`p`.`active` = 1) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `total_productos_categoria`
+--
+
+/*!50001 DROP VIEW IF EXISTS `total_productos_categoria`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `total_productos_categoria` AS select `c`.`nombre` AS `categoria`,count(`p`.`id`) AS `total_productos` from (`categoria` `c` left join `productos` `p` on((`c`.`id` = `p`.`id_categoria`))) where (`p`.`active` = 1) group by `c`.`id`,`c`.`nombre` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `total_stock_categoria`
+--
+
+/*!50001 DROP VIEW IF EXISTS `total_stock_categoria`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `total_stock_categoria` AS select `c`.`id` AS `id`,`c`.`nombre` AS `nombre`,(select sum((select sum(`e`.`existencia`) from `proyecto_4`.`entradas` `e` where (`e`.`id_producto` = `p`.`id`))) from `proyecto_4`.`productos` `p` where (`p`.`id_categoria` = `c`.`id`)) AS `total` from `proyecto_4`.`categoria` `c` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -450,4 +675,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-08 17:47:22
+-- Dump completed on 2024-06-16 10:05:23

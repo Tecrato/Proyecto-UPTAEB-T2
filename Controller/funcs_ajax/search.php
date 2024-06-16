@@ -68,8 +68,8 @@
     elseif ($_GET['randomnautica'] == "bitacora") {
         $clase = new DB();
     }
-    elseif ($_GET['randomnautica'] == "metodos_pagos") {
-        require('../../Model/Metodos_pago.php');
+    elseif ($_GET['randomnautica'] == "metodo_pago") {
+        require('../../Model/Metodos_pagos.php');
         $clase = new Metodo_pago();
     }
     if (isset($_GET['subFunction'])) {
