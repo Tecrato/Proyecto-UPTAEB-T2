@@ -5,6 +5,7 @@
 	require('../../Model/Entradas.php');
 	require('../../Model/Registro de ventas.php');
 	require('../../Model/Facturas.php');
+	require('../../Model/Metodos_pagos.php');
 
 
 	$var = json_decode($_POST['jsonString']);
