@@ -42,7 +42,7 @@
         require('../../Model/Entradas.php');
         $clase = new Entrada(null,$_POST["ID"],$_POST["proveedor"],$_POST["cantidad"],$_POST["fecha_c"],$_POST["fecha_v"],$_POST["precio_compra"]); // Llama al modelo y le manda la instruccion
         $clase->agregar($_SESSION['user_id']);
-        header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
+        // header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }
 
     elseif ($tipo === 'proveedor'){

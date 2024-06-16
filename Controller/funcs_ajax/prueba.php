@@ -1,8 +1,10 @@
 <?php
     require ('../../Model/Conexion.php');
-    require ('../../Model/Productos.php');
-    require('../../Model/Usuarios.php');
-    require('../../Model/Metodos_pagos.php');
+    // require ('../../Model/Productos.php');
+    // require('../../Model/Usuarios.php');
+    // require('../../Model/Metodos_pagos.php');
+    require('../../Model/Estadisticas.php');
+
 
 
 	// $clase = new Producto();
@@ -110,8 +112,8 @@
     // $resultado = $usuario->verificar('12345');
 	// print_r($resultado);
 
-	$a = new Metodo_pago();
-	print_r($a->search());
+    $clase = new Estadisticas();
+	print_r($clase->max_ventas());
 	
 	?>
 	

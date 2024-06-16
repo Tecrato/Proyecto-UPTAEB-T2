@@ -693,9 +693,6 @@
 </main>
 <script src="static/javaScript/librerias/jquery.js"></script>
 <script src="static/javascript/FuncionesGenerales.js"></script>
-
-<script src="static/javascript/librerias/datatables.js"></script>
-<script src="static/javascript/librerias/dataTables.responsive.js"></script>
 <script src="static/javascript/Ajax/product.js"></script>
 <script src="static/javascript/Ajax/entry.js"></script>
 <script src="static/javascript/Ajax/unidades.js"></script>

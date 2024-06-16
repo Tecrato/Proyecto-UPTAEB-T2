@@ -199,40 +199,50 @@ const modalEntradas = () => {
       });
 
       let formAggLote = document.getElementById("formLotes");
-      //captamos su evento submit, primero para evitar que la pagina se refresque, y segundo para insertar esos datos en un objeto FormData
-      formAggLote.addEventListener("submit", (e) => {
-        //aqui instanciamos el objeto formData y como parametro, le pasamos el formulario
-        //el formData es un objeto que actua con encapsulamiento de datos de los form
-        let formDataLote = new FormData(formAggLote);
-        //hacemos la peticion ajax
-        $.ajax({
-          url: "Controller/funcs/agregar_cosas.php",
-          type: "POST",
-          data: formDataLote,
-          processData: false,
-          contentType: false,
-          success: function (response) {
-            //en la respuesta le mostramos un mensaje de producto creado correctamente
-            UIkit.notification.closeAll();
-            UIkit.notification({
-              message:
-                "<span uk-icon='icon: check'></span> Entrada agregado correctamente ",
-              status: "success",
-              pos: "bottom-right",
-            });
-            // y ocultamos el modal
-            setTimeout(() => {
-              UIkit.modal("#product-entry").hide();
-              cargarEntrys();
-            }, 300);
-            cargarTargetProduct();
-          },
+      // Verificamos si el event listener ya ha sido añadido
+      if (!formAggLote.dataset.listenerAdded) {
+        //captamos su evento submit, primero para evitar que la pagina se refresque, y segundo para insertar esos datos en un objeto FormData
+        formAggLote.addEventListener("submit", (e) => {
+          e.preventDefault();
+          //aqui instanciamos el objeto formData y como parametro, le pasamos el formulario
+          //el formData es un objeto que actua con encapsulamiento de datos de los form
+          let formDataLote = new FormData(formAggLote);
+          //hacemos la peticion ajax
+          $.ajax({
+            url: "Controller/funcs/agregar_cosas.php",
+            type: "POST",
+            data: formDataLote,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+              console.log(response);
+              //en la respuesta le mostramos un mensaje de producto creado correctamente
+              UIkit.notification.closeAll();
+              UIkit.notification({
+                message:
+                  "<span uk-icon='icon: check'></span> Entrada agregada correctamente ",
+                status: "success",
+                pos: "bottom-right",
+              });
+              // y ocultamos el modal
+              setTimeout(() => {
+                UIkit.modal("#product-entry").hide();
+                cargarEntrys();
+              }, 300);
+              cargarTargetProduct();
+
+              $("#formLotes").trigger("reset");
+              document.getElementById("ValueIdEntry").removeAttribute("value");
+            },
+          });
         });
-        e.preventDefault();
-      });
+        // Marcamos que el event listener ha sido añadido
+        formAggLote.dataset.listenerAdded = "true";
+      }
     });
   });
 };
+
 const modalModificar = () => {
   //***************************************************  Modal de modificar producto  ******************************************************
 
@@ -574,7 +584,7 @@ const tarjetasProductosDesactive = (response, cont) => {
     document.querySelector(".uk-pagination2").classList.remove("invisible");
   }
 
-  modalEntradas();
+  // modalEntradas();
   modalEliminarProductDesactive();
   modalModificar();
 };

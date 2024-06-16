@@ -619,7 +619,7 @@ $.ajax({
         let ivaIdentifier = boton.previousElementSibling.value;
 
         let idProducto = valor2;
-        let cantidad = parseInt(array[3]);
+        let cantidad = array[3] == "" ? 0 : parseInt(array[3]);
         let precioUnitario = parseFloat(array[2]);
         let totalParcial = cantidad * precioUnitario;
 
@@ -758,34 +758,27 @@ $.ajax({
     //funcion para agg metodos de pago
     //este contador se usa para determinar el id de cada pago, para manipular los eventos en dos lados
     let bool = true
-    let contador = 0
     let btnAggMetodoPago = document.querySelector(".btn_agg_metodoPago")
     // Agregar metodo de pago
     btnAggMetodoPago.addEventListener('click', () => {
+      console.log("click");
       // Incrementar el contador para obtener el id único de cada pago
-      contador++
-
       // Obtener el contenedor de los métodos de pago
       let cont = document.querySelector(".cont_metodos_pagos")
-
       // Obtener todos los select de métodos de pago existentes
       let selectOptions = document.querySelectorAll(".selectMetodoPago")
-
       // Obtener los valores de los select seleccionados
       let options = []
       selectOptions.forEach((select) => {
         let option = select.options[select.selectedIndex]
         options.push(option.value)
       })
-
       let availableOptions = []
-
       $.ajax({
         url: "Controller/funcs_ajax/search.php",
         type: "GET",
         data: { randomnautica: "metodo_pago" },
         success: function (response) {
-          console.log(response);
           let json = JSON.parse(response);
           json.lista.forEach((date) => {
             // Solo agregar opciones que no hayan sido seleccionadas previamente
@@ -798,7 +791,7 @@ $.ajax({
           });
 
           // Crear la plantilla HTML para el nuevo método de pago
-          let template = `<div class="inputPago" id="${contador}">
+          let template = `<div class="inputPago">
                           <!-- Contenedor principal del método de pago -->
                           <div class="uk-flex uk-flex-around">
                               <!-- Select para el tipo de pago -->
@@ -809,17 +802,9 @@ $.ajax({
                               <!-- Input para el monto -->
                               <input class="uk-input uk-form-small uk-form-width-small AMOUNT-MP" placeholder="Monto" type="text" style="background-color: transparent; border: transparent;">
                               <!-- Botón para eliminar el método de pago -->
-                              <button class="btn-deleteMP" uk-icon="trash"></button>
+                               <button class="btn-deleteMP" uk-icon="trash"></button> 
                           </div>
                           <hr class="uk-margin-remove">
-                      </div>`
-
-          // Crear la plantilla HTML para mostrar el método de pago final
-          let template2 = `<div id="${contador}" class="uk-flex uk-flex-around uk-margin-small-bottom metodoFinal" style="width: 260px;">
-                          <!-- Nombre del método de pago -->
-                          <p class="uk-margin-remove">METODO DE PAGO</p>
-                          <!-- Monto del método de pago -->
-                          <p class="uk-margin-remove">0.00 BS</p>
                       </div>`
 
 
@@ -827,7 +812,6 @@ $.ajax({
           if (contMetodos.childElementCount == 0) {
             $(".cont_metodos_pagos").append(template)
             // Agregar la nueva plantilla al contenedor de los métodos de pago finales
-            $(".metodo-pago_final").append(template2)
             bool = false
           }
           if (contMetodos.lastElementChild.firstElementChild.firstElementChild.nextElementSibling.value == "") {
@@ -837,58 +821,28 @@ $.ajax({
           if (bool == true) {
             $(".cont_metodos_pagos").append(template)
             // Agregar la nueva plantilla al contenedor de los métodos de pago finales
-            $(".metodo-pago_final").append(template2)
           }
-          // Agregar la nueva plantilla al contenedor de los métodos de pago
-
-
-
-
-
-          //este sera el evento en donde colocaremos en pagos finales, el valor del input
-          //seleccionamos todos los select
+          // Agregar la nueva plantilla al contenedor de los métodos de 
           let select = document.querySelectorAll(".selectMetodoPago")
 
-          //los recorremos
-          select.forEach((s) => {
-
-            // captamos el evento de change, osea un cambio en el select
-            s.addEventListener("change", () => {
-              ActualizarTotal()
-              //obtenemos el id del pago
-              let id = s.parentElement.parentElement.getAttribute("id")
-              //buscamos y recorremos los pagos finales
-              let c = document.querySelectorAll(".metodoFinal")
-              c.forEach((v) => {
-                //si el id del select es igual al apartado de los pagos finales, entonces todo cambio en el select se plasmara en ese registro
-                //en especifico
-                if (v.getAttribute("id") == id) {
-                  //captamos el primer elemento, en este caso, el tipo de pago y le asignamos el value del select
-                  v.firstElementChild.textContent = s.value.toUpperCase()
-                } else {
-                  ActualizarTotal()
-                }
-              })
-            })
-          })
 
           //este sera el evento en donde colocaremos en pagos finales, el valor del input
           //seleccionamos todos los select
+          let amount = []
           let INP = document.querySelectorAll(".AMOUNT-MP")
           INP.forEach((B) => {
+
             // captamos el evento de keyup, osea si el usuario teclea sobre el input
             B.addEventListener("change", () => {
-
-              console.log(B.previousElementSibling);
               if (B.value == "") {
                 bool = false
               } else {
                 bool = true
               }
 
-
               //obtenemos el id del pago
-              let valor = parseFloat(B.value)
+              let valor = B.value == "" ? 0 : parseFloat(B.value)
+              console.log(valor);
               // ActualizarTotal()
               let valor2 = parseFloat(B.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.textContent)
               // if (B.previousElementSibling.value == "Divisa" && valor2 != 0) {
@@ -897,20 +851,6 @@ $.ajax({
               if (valor2 != 0 && B.value != "") {
                 B.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.textContent = (valor2 - valor).toFixed(2)
               }
-
-
-
-              let id = B.parentElement.parentElement.getAttribute("id")
-              //buscamos y recorremos los pagos finales
-              let c = document.querySelectorAll(".metodoFinal")
-              c.forEach((v) => {
-                //si el id del inputt es igual al apartado de los pagos finales, entonces todo cambio en el input se plasmara en ese registro
-                //en especifico
-                if (v.getAttribute("id") == id) {
-                  //captamos el ultimo elemento, en este caso, el monto del pago y le asignamos el value del input
-                  v.lastElementChild.textContent = B.value + " Bs"
-                }
-              })
             })
           })
 
@@ -922,33 +862,30 @@ $.ajax({
             btn.addEventListener('click', () => {
               //seleccionamos el contenedor de los tipos de pago en la izquierda, y removemos al hijo
               cont.removeChild(btn.parentElement.parentElement)
-              // procedemos como los dos casos anteriores, tanto en el select y el input
-              let id = btn.parentElement.parentElement.getAttribute("id")
-              let c = document.querySelectorAll(".metodoFinal")
-              c.forEach((v) => {
-                if (v.getAttribute("id") == id) {
-                  document.querySelector(".metodo-pago_final").removeChild(v)
-                }
-              })
-              ActualizarTotal()
+
+              for (const f of INP) {
+                console.log(f.value);
+              }
+              // amount.pop()
+              let result = 0
+
+              // console.log(amount);
+              // amount.forEach((a) => {
+              //   let number = a == "" ? 0 : parseFloat(a)
+              //   result += number
+              // })
+
+              // console.log(result);
+
+              // console.log(btn.parentElement.parentElement.parentElement);
+              
             })
           })
-
-
-
-
-
-
-
         }
       })
-
     })
 
-    let INP = document.querySelectorAll(".AMOUNT-MP")
-    for (const L of INP) {
-      console.log(L);
-    }
+
 
 
     //funcion para verificar si ya se puede enviar los datos para hacer la factura
@@ -966,7 +903,7 @@ $.ajax({
 
       //este json sera el que se envie al server para insertar los datos de la factura
       let json = {
-        // id_usuario: parseInt(idCasher),
+        id_usuario: 6,
         id_cliente: parseInt(idClient),
         IVA: parseFloat(document.getElementById("iva").textContent).toFixed(2),
         IGTF: parseFloat(document.getElementById("IGTF").textContent).toFixed(2),
@@ -1052,17 +989,19 @@ $.ajax({
         //preparamos el json
         let jsonString = JSON.stringify(json);
 
-        // $.ajax({
-        //   url: "Controller/funcs_ajax/hacer_factura.php",
-        //   type: "POST",
-        //   data: { jsonString },
-        //   success: function (response) {
-        //     // setTimeout(()=> {
-        //     //   window.location = 'http://localhost/Proyecto-UPTAEB-T2/Ventas'
-        //     // },2000)
-        //     console.log(response);
-        //   },
-        // });
+        console.log(jsonString);
+
+        $.ajax({
+          url: "Controller/funcs_ajax/hacer_factura.php",
+          type: "POST",
+          data: { jsonString },
+          success: function (response) {
+            // setTimeout(()=> {
+            //   window.location = 'http://localhost/Proyecto-UPTAEB-T2/Ventas'
+            // },2000)
+            console.log(response);
+          },
+        });
       }
     });
 

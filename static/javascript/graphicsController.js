@@ -1,5 +1,5 @@
-// Chart.defaults.color = "#fff";
-// Chart.defaults.borderColor = "#444";
+Chart.defaults.color = "#fff";
+Chart.defaults.borderColor = "#444";
 
 const getDataColors = (opacity) => {
   const colors = [
@@ -27,7 +27,7 @@ const printChart = () => {
 
 const renderModelsChart1 = () => {
 
-  
+
   // const data = {
   //     labels: ['Charcuteria', 'Cesta Basica', 'Aseo Personal'],
   //     datasets: [{
@@ -68,7 +68,7 @@ const renderModelsChart1 = () => {
   let f = document.getElementById("GenReport").addEventListener("click", () => {
     const link = document.createElement("a");
     link.href = chart.toBase64Image();
-    
+
     link.download = "chart.png";
     link.click();
     Chart.defaults.color = "#000";
@@ -127,56 +127,54 @@ const renderModelsChart3 = () => {
 };
 
 const renderModelsChart4 = () => {
-  //Datos de ejemplo nose
 
-  let productos = [
-    "Harina Pan",
-    "Mantequilla Deline 500g",
-    "Pasta Mary 1kg",
-    "Azúcar La Pastora 1kg",
-    "Harina Kaly",
-  ];
-  let ventas = [150, 200, 100, 50, 75];
+  let productos = []
+  let ventas = [];
 
-  //Obtener los indices de los productos ordenados de mayor a menor
 
-  let indicesMasVendidos = ventas
-    .map((valor, indice) => indice)
-    .sort((a, b) => ventas[b] - ventas[a]);
+  $.ajax({
+    url: "Controller/funcs_ajax/estadisticas.php",
+    type: "GET",
+    data: { select: "max_ventas" },
+    success: function (response) {
+      let json = JSON.parse(response);
+      for (const i of json.lista) {
+        let nombre = i.nombre + " " + i.marca + " " + i.unidad_valor + " " + i.unidad
+        let cantidad = i.cantidad == null ? 0 : i.cantidad
+        productos.push(nombre)
+        ventas.push(cantidad)
+      }
 
-  //Obtener los indices de los productos ordenados de menor a mayor
+      const data = {
+        labels: productos,
+        datasets: [
+          {
+            label: "Ventas",
+            data: ventas,
+            backgroundColor: getDataColors(),
+            borderColor: getDataColors(),
+          },
+        ],
+      };
 
-  let indicesMenosVendidos = ventas
-    .map((valor, indice) => indice)
-    .sort((a, b) => ventas[a] - ventas[b]);
+      const options = {
+        plugins: {
+          legend: { position: "left" },
+        },
+      };
 
-  //obtener nombres
-  let productosMasVendidos = indicesMasVendidos.map(
-    (indice) => productos[indice]
-  );
-  let productosMenosVendidos = indicesMenosVendidos.map(
-    (indice) => productos[indice]
-  );
+      new Chart("masVendidosChart", { type: "doughnut", data, options });
 
-  const data = {
-    labels: productosMasVendidos,
-    datasets: [
-      {
-        label: "ventas",
-        data: indicesMasVendidos.map((indice) => ventas[indice]),
-        backgroundColor: getDataColors(80),
-        borderColor: getDataColors(),
-      },
-    ],
-  };
 
-  const options = {
-    plugins: {
-      legend: { position: "left" },
-    },
-  };
+    }
+  })
 
-  new Chart("masVendidosChart", { type: "doughnut", data, options });
+
+
+
+
+
+
 };
 
 const renderModelsChart5 = () => {
