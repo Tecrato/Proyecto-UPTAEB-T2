@@ -47,7 +47,7 @@ const ModalEdit = () => {
                         document.querySelector(".inputTLFNOUpdateClient").value = element.telefono.slice(3, Infinity)
                         document.querySelector(".inputDirUpdateClient").value = element.direccion
                     });
-                    document.querySelector(".modal_title_client").textContent = "MODIFICAR PROVEEDOR"
+                    document.querySelector(".modal_title_client").textContent = "MODIFICAR CLIENTE"
                     UIkit.modal("#agregar_client").show();
                 }
 

@@ -778,18 +778,33 @@ $.ajax({
         options.push(option.value)
       })
 
-      // Filtrar las opciones disponibles que no estén seleccionadas
-      let availableOptions = ["Divisa", "Transferencia"]
-      availableOptions = availableOptions.filter(option => !options.includes(option))
+      let availableOptions = []
 
-      // Crear la plantilla HTML para el nuevo método de pago
-      let template = `<div class="inputPago" id="${contador}">
+      $.ajax({
+        url: "Controller/funcs_ajax/search.php",
+        type: "GET",
+        data: { randomnautica: "metodo_pago" },
+        success: function (response) {
+          console.log(response);
+          let json = JSON.parse(response);
+          json.lista.forEach((date) => {
+            // Solo agregar opciones que no hayan sido seleccionadas previamente
+            if (!options.includes(date.id.toString())) {
+              availableOptions.push({
+                nombre: date.nombre,
+                id: date.id
+              });
+            }
+          });
+
+          // Crear la plantilla HTML para el nuevo método de pago
+          let template = `<div class="inputPago" id="${contador}">
                           <!-- Contenedor principal del método de pago -->
                           <div class="uk-flex uk-flex-around">
                               <!-- Select para el tipo de pago -->
                               <select class="uk-select selectMetodoPago uk-form-small" name="" id="" style="background-color: transparent; border: transparent; width: 150px;">
-                                  <option>TIPO DE PAGO</option>
-                                  ${availableOptions.map(option => `<option value="${option}">${option}</option>`).join('')}
+                                  <option disabled selected>TIPO DE PAGO</option>
+                                  ${availableOptions.map(option => `<option value="${option.id}">${option.nombre}</option>`).join('')}
                               </select>
                               <!-- Input para el monto -->
                               <input class="uk-input uk-form-small uk-form-width-small AMOUNT-MP" placeholder="Monto" type="text" style="background-color: transparent; border: transparent;">
@@ -799,8 +814,8 @@ $.ajax({
                           <hr class="uk-margin-remove">
                       </div>`
 
-      // Crear la plantilla HTML para mostrar el método de pago final
-      let template2 = `<div id="${contador}" class="uk-flex uk-flex-around uk-margin-small-bottom metodoFinal" style="width: 260px;">
+          // Crear la plantilla HTML para mostrar el método de pago final
+          let template2 = `<div id="${contador}" class="uk-flex uk-flex-around uk-margin-small-bottom metodoFinal" style="width: 260px;">
                           <!-- Nombre del método de pago -->
                           <p class="uk-margin-remove">METODO DE PAGO</p>
                           <!-- Monto del método de pago -->
@@ -808,116 +823,126 @@ $.ajax({
                       </div>`
 
 
-      let contMetodos = document.querySelector(".cont_metodos_pagos")
-      if (contMetodos.childElementCount == 0) {
-        $(".cont_metodos_pagos").append(template)
-        // Agregar la nueva plantilla al contenedor de los métodos de pago finales
-        $(".metodo-pago_final").append(template2)
-        bool = false
-      }
-      if (contMetodos.lastElementChild.firstElementChild.firstElementChild.nextElementSibling.value == "") {
-        bool = false
-      }
-
-      if (bool == true) {
-        $(".cont_metodos_pagos").append(template)
-        // Agregar la nueva plantilla al contenedor de los métodos de pago finales
-        $(".metodo-pago_final").append(template2)
-      }
-      // Agregar la nueva plantilla al contenedor de los métodos de pago
-
-
-
-
-
-      //este sera el evento en donde colocaremos en pagos finales, el valor del input
-      //seleccionamos todos los select
-      let select = document.querySelectorAll(".selectMetodoPago")
-
-      //los recorremos
-      select.forEach((s) => {
-
-        // captamos el evento de change, osea un cambio en el select
-        s.addEventListener("change", () => {
-          ActualizarTotal()
-          //obtenemos el id del pago
-          let id = s.parentElement.parentElement.getAttribute("id")
-          //buscamos y recorremos los pagos finales
-          let c = document.querySelectorAll(".metodoFinal")
-          c.forEach((v) => {
-            //si el id del select es igual al apartado de los pagos finales, entonces todo cambio en el select se plasmara en ese registro
-            //en especifico
-            if (v.getAttribute("id") == id) {
-              //captamos el primer elemento, en este caso, el tipo de pago y le asignamos el value del select
-              v.firstElementChild.textContent = s.value.toUpperCase()
-            } else {
-              ActualizarTotal()
-            }
-          })
-        })
-      })
-
-      //este sera el evento en donde colocaremos en pagos finales, el valor del input
-      //seleccionamos todos los select
-      let INP = document.querySelectorAll(".AMOUNT-MP")
-      INP.forEach((B) => {
-        // captamos el evento de keyup, osea si el usuario teclea sobre el input
-        B.addEventListener("change", () => {
-          if (B.value == "") {
+          let contMetodos = document.querySelector(".cont_metodos_pagos")
+          if (contMetodos.childElementCount == 0) {
+            $(".cont_metodos_pagos").append(template)
+            // Agregar la nueva plantilla al contenedor de los métodos de pago finales
+            $(".metodo-pago_final").append(template2)
             bool = false
-          } else {
-            bool = true
+          }
+          if (contMetodos.lastElementChild.firstElementChild.firstElementChild.nextElementSibling.value == "") {
+            bool = false
           }
 
-
-          // //obtenemos el id del pago
-          // let valor = parseFloat(B.value)
-          // // ActualizarTotal()
-          // let valor2 = parseFloat(B.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.textContent)
-          // if (B.previousElementSibling.value == "Divisa" && valor2 != 0) {
-          //   B.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.textContent = (valor2 -(valor * dolar)).toFixed(2)
-          // } else if (valor2 != 0 && B.value != "") {
-          //   B.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.textContent = (valor2 - valor).toFixed(2)
-          // }
+          if (bool == true) {
+            $(".cont_metodos_pagos").append(template)
+            // Agregar la nueva plantilla al contenedor de los métodos de pago finales
+            $(".metodo-pago_final").append(template2)
+          }
+          // Agregar la nueva plantilla al contenedor de los métodos de pago
 
 
 
-          let id = B.parentElement.parentElement.getAttribute("id")
-          //buscamos y recorremos los pagos finales
-          let c = document.querySelectorAll(".metodoFinal")
-          c.forEach((v) => {
-            //si el id del inputt es igual al apartado de los pagos finales, entonces todo cambio en el input se plasmara en ese registro
-            //en especifico
-            if (v.getAttribute("id") == id) {
-              //captamos el ultimo elemento, en este caso, el monto del pago y le asignamos el value del input
-              v.lastElementChild.textContent = B.value + " Bs"
-            }
+
+
+          //este sera el evento en donde colocaremos en pagos finales, el valor del input
+          //seleccionamos todos los select
+          let select = document.querySelectorAll(".selectMetodoPago")
+
+          //los recorremos
+          select.forEach((s) => {
+
+            // captamos el evento de change, osea un cambio en el select
+            s.addEventListener("change", () => {
+              ActualizarTotal()
+              //obtenemos el id del pago
+              let id = s.parentElement.parentElement.getAttribute("id")
+              //buscamos y recorremos los pagos finales
+              let c = document.querySelectorAll(".metodoFinal")
+              c.forEach((v) => {
+                //si el id del select es igual al apartado de los pagos finales, entonces todo cambio en el select se plasmara en ese registro
+                //en especifico
+                if (v.getAttribute("id") == id) {
+                  //captamos el primer elemento, en este caso, el tipo de pago y le asignamos el value del select
+                  v.firstElementChild.textContent = s.value.toUpperCase()
+                } else {
+                  ActualizarTotal()
+                }
+              })
+            })
           })
-        })
+
+          //este sera el evento en donde colocaremos en pagos finales, el valor del input
+          //seleccionamos todos los select
+          let INP = document.querySelectorAll(".AMOUNT-MP")
+          INP.forEach((B) => {
+            // captamos el evento de keyup, osea si el usuario teclea sobre el input
+            B.addEventListener("change", () => {
+
+              console.log(B.previousElementSibling);
+              if (B.value == "") {
+                bool = false
+              } else {
+                bool = true
+              }
+
+
+              //obtenemos el id del pago
+              let valor = parseFloat(B.value)
+              // ActualizarTotal()
+              let valor2 = parseFloat(B.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.textContent)
+              // if (B.previousElementSibling.value == "Divisa" && valor2 != 0) {
+              //   B.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.textContent = (valor2 -(valor * dolar)).toFixed(2)
+              // } else
+              if (valor2 != 0 && B.value != "") {
+                B.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.textContent = (valor2 - valor).toFixed(2)
+              }
+
+
+
+              let id = B.parentElement.parentElement.getAttribute("id")
+              //buscamos y recorremos los pagos finales
+              let c = document.querySelectorAll(".metodoFinal")
+              c.forEach((v) => {
+                //si el id del inputt es igual al apartado de los pagos finales, entonces todo cambio en el input se plasmara en ese registro
+                //en especifico
+                if (v.getAttribute("id") == id) {
+                  //captamos el ultimo elemento, en este caso, el monto del pago y le asignamos el value del input
+                  v.lastElementChild.textContent = B.value + " Bs"
+                }
+              })
+            })
+          })
+
+
+          //esta parte es para eliminar un registro en los tipos de pago
+          //seleccionamos todos los btn de eliminar, los recorremos y le asignamos el evento click
+          let btnDeleteMP = document.querySelectorAll(".btn-deleteMP")
+          btnDeleteMP.forEach((btn) => {
+            btn.addEventListener('click', () => {
+              //seleccionamos el contenedor de los tipos de pago en la izquierda, y removemos al hijo
+              cont.removeChild(btn.parentElement.parentElement)
+              // procedemos como los dos casos anteriores, tanto en el select y el input
+              let id = btn.parentElement.parentElement.getAttribute("id")
+              let c = document.querySelectorAll(".metodoFinal")
+              c.forEach((v) => {
+                if (v.getAttribute("id") == id) {
+                  document.querySelector(".metodo-pago_final").removeChild(v)
+                }
+              })
+              ActualizarTotal()
+            })
+          })
+
+
+
+
+
+
+
+        }
       })
 
-
-      //esta parte es para eliminar un registro en los tipos de pago
-      //seleccionamos todos los btn de eliminar, los recorremos y le asignamos el evento click
-      let btnDeleteMP = document.querySelectorAll(".btn-deleteMP")
-      btnDeleteMP.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          //seleccionamos el contenedor de los tipos de pago en la izquierda, y removemos al hijo
-          cont.removeChild(btn.parentElement.parentElement)
-          // procedemos como los dos casos anteriores, tanto en el select y el input
-          let id = btn.parentElement.parentElement.getAttribute("id")
-          let c = document.querySelectorAll(".metodoFinal")
-          c.forEach((v) => {
-            if (v.getAttribute("id") == id) {
-              document.querySelector(".metodo-pago_final").removeChild(v)
-            }
-          })
-          ActualizarTotal()
-        })
-      })
-
-
-      
     })
 
     let INP = document.querySelectorAll(".AMOUNT-MP")
@@ -996,6 +1021,8 @@ $.ajax({
           });
 
         })
+
+        console.log(json);
 
 
 

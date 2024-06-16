@@ -73,4 +73,10 @@
         $clase->borrar($_SESSION['user_id'], $_POST["ID"]);
         // header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }
+    elseif ($tipo === 'metodo_pago'){
+        require('../../Model/Metodos_pagos.php');
+        $clase = new Metodo_pago($_POST["ID"]); // Llama al modelo y le manda la instruccion
+        $clase->desactivar($_SESSION['user_id'], $_POST["ID"]);
+        // $clase->borrar($_SESSION['user_id'], $_POST["ID"]);
+    }
 ?>

@@ -1,300 +1,345 @@
 <?php require("../View/complementos/header.php"); ?>
 
-<main class="Bg-Main-home2 uk-padding uk-padding-remove-bottom">
+<main class="Bg-Main-home2 uk-padding uk-padding-remove-bottom uk-light">
 
-    <section id="Container-modal-full" class="uk-background-secondary uk-padding uk-border-rounded" uk-filter="target: .js-filter">
-        <div>
-            <div class="uk-flex uk-flex-between" style="align-items: baseline;">
-                <div class="uk-flex uk-flex-wrap" style="align-items: baseline;">
-                    <div class="uk-margin-right">
-                        <div class="uk-flex" style="height: 50px;">
-                            <div class="uk-margin formDelete uk-light">
-                                <form class="uk-search uk-search-default uk-light">
-                                    <span class="uk-search-icon-flip uk-light" uk-search-icon></span>
-                                    <input class="uk-search-input uk-light" type="search" placeholder="Buscar" aria-label="Search">
-                                </form>
-                            </div>
-                            <div class="uk-margin-left uk-light">
-                                <a href="Detalles_factura" uk-icon="icon: print; ratio: 1.5" uk-tooltip="title:Imprimir Facturas; delay: 500"></a>
-                                <a href="#modal-full" uk-toggle uk-tooltip="title:Añadir Factura; delay: 500" class="uk-margin-small-left">
-                                    <img class="btn_agg" src="./static/images/btn_agg_factura2.png" alt="" width="35px">
-                                </a>
-                            </div>
-                            <nav uk-dropnav="mode: click">
-                                <ul class="uk-subnav uk-margin-remove">
-                                    <li>
-                                        <div class="">
-                                            <a href="" class="uk-icon-link icon-filter" uk-icon="icon: filter; ratio: 1.7"></a>
-                                        </div>
-                                        <div class="uk-dropdown uk-border-rounded">
-                                            <ul class="uk-nav uk-dropdown-nav uk-border-rounded">
-                                                <li class="uk-margin-small-bottom uk-text-center"><strong>FILTRAR</strong></li>
-                                                <li>
-                                                    <div class="">
-                                                        <form>
-                                                            <div class="uk-margin-small-top">
-                                                                <div class="uk-flex uk-flex-middle uk-margin-small-top">
-                                                                    <span class="uk-margin-small-right uk-text-bold">De</span>
-                                                                    <input class="uk-input" type="date" placeholder="100" aria-label="100">
-                                                                </div>
-                                                                <div class="uk-flex uk-flex-middle uk-margin-top">
-                                                                    <span class="uk-margin-small-right uk-text-bold">Hasta</span>
-                                                                    <input class="uk-input" type="date" placeholder="100" aria-label="100">
-                                                                </div>
+
+    <ul uk-tab>
+        <li><a href="#">FACTURA</a></li>
+        <li><a href="#">CREDITO</a></li>
+        <li><a href="#">CAJA</a></li>
+    </ul>
+
+    <div class="uk-switcher uk-margin">
+        <li>
+            <section id="Container-modal-full" class="uk-background-secondary uk-padding uk-border-rounded" uk-filter="target: .js-filter">
+                <div>
+                    <div class="uk-flex uk-flex-between" style="align-items: baseline;">
+                        <div class="uk-flex uk-flex-wrap" style="align-items: baseline;">
+                            <div class="uk-margin-right">
+                                <div class="uk-flex" style="height: 50px;">
+                                    <div class="uk-margin formDelete uk-light">
+                                        <form class="uk-search uk-search-default uk-light">
+                                            <span class="uk-search-icon-flip uk-light" uk-search-icon></span>
+                                            <input class="uk-search-input uk-light" type="search" placeholder="Buscar" aria-label="Search">
+                                        </form>
+                                    </div>
+                                    <div class="uk-margin-left uk-light">
+                                        <a href="Detalles_factura" uk-icon="icon: print; ratio: 1.5" uk-tooltip="title:Imprimir Facturas; delay: 500"></a>
+                                        <a href="#modal-full" uk-toggle uk-tooltip="title:Añadir Factura; delay: 500" class="uk-margin-small-left">
+                                            <img class="btn_agg" src="./static/images/btn_agg_factura2.png" alt="" width="35px">
+                                        </a>
+                                    </div>
+                                    <nav uk-dropnav="mode: click">
+                                        <ul class="uk-subnav uk-margin-remove">
+                                            <li>
+                                                <div class="">
+                                                    <a href="" class="uk-icon-link icon-filter" uk-icon="icon: filter; ratio: 1.7"></a>
+                                                </div>
+                                                <div class="uk-dropdown uk-border-rounded">
+                                                    <ul class="uk-nav uk-dropdown-nav uk-border-rounded">
+                                                        <li class="uk-margin-small-bottom uk-text-center"><strong>FILTRAR</strong></li>
+                                                        <li>
+                                                            <div class="">
+                                                                <form>
+                                                                    <div class="uk-margin-small-top">
+                                                                        <div class="uk-flex uk-flex-middle uk-margin-small-top">
+                                                                            <span class="uk-margin-small-right uk-text-bold">De</span>
+                                                                            <input class="uk-input" type="date" placeholder="100" aria-label="100">
+                                                                        </div>
+                                                                        <div class="uk-flex uk-flex-middle uk-margin-top">
+                                                                            <span class="uk-margin-small-right uk-text-bold">Hasta</span>
+                                                                            <input class="uk-input" type="date" placeholder="100" aria-label="100">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="uk-margin-top">
+                                                                        <div class="uk-flex uk-flex-center">
+                                                                            <input class="uk-button uk-button-secondary" type="submit" value="APLICAR">
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
                                                             </div>
-                                                            <div class="uk-margin-top">
-                                                                <div class="uk-flex uk-flex-center">
-                                                                    <input class="uk-button uk-button-secondary" type="submit" value="APLICAR">
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </nav>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="uk-flex uk-margin-left uk-light">
+                            <div class="uk-margin-right">
+                                <span class="uk-icon-link" id="list" uk-icon="icon: list; ratio: 1.3" style="cursor: pointer;"></span>
+                            </div>
+                            <div class="uk-width-auto uk-text-nowrap flechas">
+                                <span class="uk-active" uk-filter-control="sort: data-name"><a class="uk-icon-link" href="#" uk-icon="icon: arrow-down" aria-label="Sort ascending"></a></span>
+                                <span uk-filter-control="sort: data-name; order: desc"><a class="uk-icon-link" href="#" uk-icon="icon: arrow-up" aria-label="Sort descending"></a></span>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="uk-flex uk-margin-left uk-light">
-                    <div class="uk-margin-right">
-                        <span class="uk-icon-link" id="list" uk-icon="icon: list; ratio: 1.3" style="cursor: pointer;"></span>
+                    <div class="uk-light">
+                        <hr class="uk-margin-small-top uk-margin-remove-bottom uk-margin-remove-left uk-margin-remove-right">
                     </div>
-                    <div class="uk-width-auto uk-text-nowrap flechas">
-                        <span class="uk-active" uk-filter-control="sort: data-name"><a class="uk-icon-link" href="#" uk-icon="icon: arrow-down" aria-label="Sort ascending"></a></span>
-                        <span uk-filter-control="sort: data-name; order: desc"><a class="uk-icon-link" href="#" uk-icon="icon: arrow-up" aria-label="Sort descending"></a></span>
-                    </div>
-                </div>
-            </div>
-            <div class="uk-light">
-                <hr class="uk-margin-small-top uk-margin-remove-bottom uk-margin-remove-left uk-margin-remove-right">
-            </div>
-            <div class="uk-light">
-                <section class="uk-light uk-padding uk-padding-remove-left uk-padding-remove-right uk-grid-small dataTable" uk-grid>
-                    <div class="container_marca_agua">
-                        <img class="marca_agua" src="static/images/logo_letras-minimarket.png" alt="">
-                    </div>
-                    <div class="[email protected] uk-grid-medium uk-flex-center dataTable2 height_controller" uk-grid uk-height-match="target: > div > .uk-card">
-                        <!-- ****************** Ficha de la factura ****************** -->
-                        <?php
-                        for ($i = 0; $i < count($result); $i++) {
-                            $row = $result[$i];
-                            require 'complementos/tarjeta_venta.php';
-                        }
-                        ?>
-                    </div>
-                </section>
+                    <div class="uk-light">
+                        <section class="uk-light uk-padding uk-padding-remove-left uk-padding-remove-right uk-grid-small dataTable" uk-grid>
+                            <div class="container_marca_agua">
+                                <img class="marca_agua" src="static/images/logo_letras-minimarket.png" alt="">
+                            </div>
+                            <div class="[email protected] uk-grid-medium uk-flex-center dataTable2 height_controller" uk-grid uk-height-match="target: > div > .uk-card">
+                                <!-- ****************** Ficha de la factura ****************** -->
+                                <?php
+                                for ($i = 0; $i < count($result); $i++) {
+                                    $row = $result[$i];
+                                    require 'complementos/tarjeta_venta.php';
+                                }
+                                ?>
+                            </div>
+                        </section>
 
 
-                <!-- **************************Modal para crear facturas************************** -->
+                        <!-- **************************Modal para crear facturas************************** -->
 
-                <div id="modal-full" class="uk-modal-full" uk-modal>
-                    <div class="uk-modal-dialog uk-background-secondary uk-light">
-                        <button class="uk-modal-close-full uk-close-large uk-background-secondary" type="button" uk-close></button>
-                        <div class="uk-grid-collapse uk-child-width-1-2@s" uk-grid>
-                            <div class="uk-background-cover container_generate_fact" style="background-image: url('static/images/fondo2.jpg');" uk-height-viewport>
+                        <div id="modal-full" class="uk-modal-full" uk-modal>
+                            <div class="uk-modal-dialog uk-background-secondary uk-light">
+                                <button class="uk-modal-close-full uk-close-large uk-background-secondary" type="button" uk-close></button>
+                                <div class="uk-grid-collapse uk-child-width-1-2@s" uk-grid>
+                                    <div class="uk-background-cover container_generate_fact" style="background-image: url('static/images/fondo2.jpg');" uk-height-viewport>
 
-                                <h4 class="uk-text-bolder"></h4>
+                                        <h4 class="uk-text-bolder"></h4>
 
-                                <div class="generate-fact uk-margin-auto">
-                                    <div class="uk-flex uk-flex-center">
-                                        <div class="btn-close invisible">
-                                            <span uk-icon="icon: close"></span>
-                                        </div>
-                                        <!-- ********************** modal para Añadir el cliente **********************  -->
-                                        <nav id="nav" class="Nav1" uk-dropnav="mode: click">
+                                        <div class="generate-fact uk-margin-auto">
+                                            <div class="uk-flex uk-flex-center">
+                                                <div class="btn-close invisible">
+                                                    <span uk-icon="icon: close"></span>
+                                                </div>
+                                                <!-- ********************** modal para Añadir el cliente **********************  -->
+                                                <nav id="nav" class="Nav1" uk-dropnav="mode: click">
 
-                                            <ul class="uk-subnav uk-margin-remove uk-padding-remove">
-                                                <li class="uk-flex uk-flex-column uk-flex-middle">
-                                                    <div class="uk-flex uk-flex-around uk-border-rounded uk-margin-bottom" style="width: 172px; border: 1px solid #fff; padding: 3px;">
-                                                        <div>VENDEDOR</div>
-                                                        <div>LUIS</div>
-                                                    </div>
-                                                    <div class="Plus-client uk-flex uk-flex-column uk-flex-center uk-flex-middle uk-border-rounded">
-                                                        <div id="Client-datails" class="uk-flex uk-flex-column uk-flex-center uk-flex-middle">
-                                                            <div class="uk-flex uk-flex-column uk-flex-middle uk-flex-center pointer" value="default">
-                                                                <h5 class="uk-text-bold">AÑADIR CLIENTE</h5>
-                                                                <a href="#" uk-icon="icon: plus-circle; ratio: 2"></a>
+                                                    <ul class="uk-subnav uk-margin-remove uk-padding-remove">
+                                                        <li class="uk-flex uk-flex-column uk-flex-middle">
+                                                            <div class="uk-flex uk-flex-around uk-border-rounded uk-margin-bottom" style="width: 172px; border: 1px solid #fff; padding: 3px;">
+                                                                <div>VENDEDOR</div>
+                                                                <div>LUIS</div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="uk-dropdown uk-border-rounded uk-background-secondary">
-                                                        <ul class="uk-nav uk-dropdown-nav">
-                                                            <li class="uk-active uk-margin-small-bottom">
-                                                                <form class="uk-search uk-search-default">
-                                                                    <span class="uk-search-icon-flip" uk-search-icon></span>
-                                                                    <input id="input-search-fact" class="uk-search-input" type="search" placeholder="Buscar" aria-label="Buscar">
-                                                                </form>
-                                                            </li>
-                                                            <div id="Client">
-
+                                                            <div class="Plus-client uk-flex uk-flex-column uk-flex-center uk-flex-middle uk-border-rounded">
+                                                                <div id="Client-datails" class="uk-flex uk-flex-column uk-flex-center uk-flex-middle">
+                                                                    <div class="uk-flex uk-flex-column uk-flex-middle uk-flex-center pointer" value="default">
+                                                                        <h5 class="uk-text-bold">AÑADIR CLIENTE</h5>
+                                                                        <a href="#" uk-icon="icon: plus-circle; ratio: 2"></a>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </ul>
+
+                                                            <div class="uk-dropdown uk-border-rounded uk-background-secondary holz">
+                                                                <ul class="uk-nav uk-dropdown-nav">
+                                                                    <li class="uk-active uk-margin-small-bottom">
+                                                                        <form class="uk-search uk-search-default">
+                                                                            <span class="uk-search-icon-flip" uk-search-icon></span>
+                                                                            <input id="input-search-fact" class="uk-search-input" type="search" placeholder="Buscar" aria-label="Buscar">
+                                                                        </form>
+                                                                    </li>
+                                                                    <div id="Client">
+
+                                                                    </div>
+                                                                </ul>
+                                                            </div>
+
+                                                            <div class="uk-margin-top">
+                                                                <button class="btnCreateFact uk-button uk-button-default demo uk-border-rounded" type="button">
+                                                                    GENERAR FACTURA
+                                                                </button>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </nav>
+                                                <!-- ******************************************************************************  -->
+                                                <div class="uk-margin-medium-left">
+                                                    <div class="container_config_fact uk-border-rounded">
+                                                        <section style="width: 350px;">
+                                                            <article class="uk-flex uk-flex-around" style="padding: 5px;">
+                                                                <div>TIPO DE PAGO</div>
+                                                                <div class="amount_MP">0.00 BS</div>
+                                                            </article>
+                                                            <hr class="uk-margin-remove">
+                                                            <div class="Scroll_MP" style="height: 80%; overflow-y: auto;">
+                                                                <article class="cont_metodos_pagos" style="padding: 5px 10px;">
+                                                                    <!-- aqui cargan los metodos de pago con js -->
+                                                                </article>
+                                                                <article class="uk-flex uk-flex-middle uk-flex-center uk-margin-small-top btn_agg_metodoPago" style="cursor: pointer;">
+                                                                    <span class="uk-margin-small-right" uk-icon="plus-circle"></span>
+                                                                    <p class="uk-margin-remove" style="font-size: 13px;">AGREGAR TIPO DE PAGO</p>
+                                                                </article>
+                                                            </div>
+                                                        </section>
                                                     </div>
 
-                                                    <div class="uk-margin-top">
-                                                        <button class="btnCreateFact uk-button uk-button-default demo uk-border-rounded" type="button">
-                                                            GENERAR FACTURA
-                                                        </button>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </nav>
-                                        <!-- ******************************************************************************  -->
-                                        <div class="uk-margin-medium-left">
-                                            <div class="container_config_fact uk-border-rounded">
-                                                <section style="width: 350px;">
-                                                    <article class="uk-flex uk-flex-around" style="padding: 5px;">
-                                                        <div>TIPO DE PAGO</div>
-                                                        <div class="amount_MP">0.00 BS</div>
-                                                    </article>
-                                                    <hr class="uk-margin-remove">
-                                                    <div class="Scroll_MP" style="height: 80%; overflow-y: auto;">
-                                                        <article class="cont_metodos_pagos" style="padding: 5px 10px;">
-                                                            <!-- aqui cargan los metodos de pago con js -->
-                                                        </article>
-                                                        <article class="uk-flex uk-flex-middle uk-flex-center uk-margin-small-top btn_agg_metodoPago" style="cursor: pointer;">
-                                                            <span class="uk-margin-small-right" uk-icon="plus-circle"></span>
-                                                            <p class="uk-margin-remove" style="font-size: 13px;">AGREGAR TIPO DE PAGO</p>
-                                                        </article>
-                                                    </div>
-                                                </section>
+
+                                                </div>
                                             </div>
 
+                                            <hr class="uk-divider-icon">
+
+                                            <div class="uk-flex uk-flex-center">
+                                                <h5>ADICIONAR PRODUCTOS</h5>
+                                            </div>
+
+                                            <div>
+                                                <div class="uk-margin-small">
+                                                    <form class="uk-search uk-search-default">
+                                                        <span class="uk-search-icon-flip" uk-search-icon></span>
+                                                        <input id="SearchProduct-Fact" class="uk-search-input" type="search" placeholder="Buscar..." aria-label="Search">
+                                                    </form>
+                                                </div>
+
+                                                <div style="overflow: hidden; height: 280px;">
+                                                    <div class="uk-overflow-auto">
+                                                        <table class="uk-table uk-table-divider">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Producto</th>
+                                                                    <th>Disp.</th>
+                                                                    <th>Precio</th>
+                                                                    <th>Cantidad</th>
+                                                                    <th class="uk-flex uk-flex-center">Agregar</th>
+                                                                </tr>
+                                                            </thead>
+
+                                                            <tbody id="Product-detail-1">
+
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                         </div>
+
                                     </div>
-
-                                    <hr class="uk-divider-icon">
-
-                                    <div class="uk-flex uk-flex-center">
-                                        <h5>ADICIONAR PRODUCTOS</h5>
-                                    </div>
-
-                                    <div>
-                                        <div class="uk-margin-small">
-                                            <form class="uk-search uk-search-default">
-                                                <span class="uk-search-icon-flip" uk-search-icon></span>
-                                                <input id="SearchProduct-Fact" class="uk-search-input" type="search" placeholder="Buscar..." aria-label="Search">
-                                            </form>
-                                        </div>
-
-                                        <div style="overflow: hidden; height: 280px;">
-                                            <div class="uk-overflow-auto">
-                                                <table class="uk-table uk-table-divider">
+                                    <div style="padding: 55px;">
+                                        <h4 class="uk-text-bolder uk-padding-medium">DETALLES FACTURA</h4>
+                                        <div class="container-result-fact">
+                                            <div class="scroll-detail-fact" style="height: 300px; overflow: auto;">
+                                                <table class="uk-table uk-table-hover uk-table-divider uk-table-middle uk-light">
                                                     <thead>
                                                         <tr>
-                                                            <th>Producto</th>
-                                                            <th>Disp.</th>
-                                                            <th>Precio</th>
+                                                            <th>ID</th>
                                                             <th>Cantidad</th>
-                                                            <th class="uk-flex uk-flex-center">Agregar</th>
+                                                            <th>Nombre</th>
+                                                            <th>Precio unit.</th>
+                                                            <th>Precio total</th>
                                                         </tr>
                                                     </thead>
 
-                                                    <tbody id="Product-detail-1">
-
+                                                    <tbody id="Detail-product-fact">
 
                                                     </tbody>
                                                 </table>
                                             </div>
-                                        </div>
-                                    </div>
 
-                                </div>
-
-                            </div>
-                            <div style="padding: 55px;">
-                                <h4 class="uk-text-bolder uk-padding-medium">DETALLES FACTURA</h4>
-                                <div class="container-result-fact">
-                                    <div class="scroll-detail-fact" style="height: 300px; overflow: auto;">
-                                        <table class="uk-table uk-table-hover uk-table-divider uk-table-middle uk-light">
-                                            <thead>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>Cantidad</th>
-                                                    <th>Nombre</th>
-                                                    <th>Precio unit.</th>
-                                                    <th>Precio total</th>
-                                                </tr>
-                                            </thead>
-
-                                            <tbody id="Detail-product-fact">
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                    <div class="cont_detail-venta uk-flex uk-flex-around uk-margin-medium-top" style="background-color: rgba(51, 51, 51, 0.288);">
-                                        <div class="Container-fact-price">
-                                            <div class="uk-flex uk-flex-between">
-                                                <div class="uk-margin-large-right">SUBTOTAL </div>
-                                                <div class="uk-flex uk-flex-middle">
-                                                    <p id="subtotalFact" class="Fact-price uk-text-success">0.00</p>
-                                                    <p id="subtotalFact_$" class="Fact-price uk-text-success uk-margin-remove-top uk-margin-small-left">0.00</p>
+                                            <div class="cont_detail-venta uk-flex uk-flex-around uk-margin-medium-top" style="background-color: rgba(51, 51, 51, 0.288);">
+                                                <div class="Container-fact-price">
+                                                    <div class="uk-flex uk-flex-between">
+                                                        <div class="uk-margin-large-right">SUBTOTAL </div>
+                                                        <div class="uk-flex uk-flex-middle">
+                                                            <p id="subtotalFact" class="Fact-price uk-text-success">0.00</p>
+                                                            <p id="subtotalFact_$" class="Fact-price uk-text-success uk-margin-remove-top uk-margin-small-left">0.00</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="uk-flex uk-flex-between">
+                                                        <div class="uk-margin-large-right">IVA 16% </div>
+                                                        <div>
+                                                            <p id="iva" class="Fact-price uk-text-success">0.00</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="uk-flex uk-flex-between">
+                                                        <div class="uk-margin-large-right">IGTF 3% </div>
+                                                        <div>
+                                                            <p id="IGTF" class="Fact-price uk-text-success">0.00</p>
+                                                        </div>
+                                                    </div>
+                                                    <hr class="uk-margin-remove-top">
+                                                    <div class="uk-flex uk-flex-between">
+                                                        <div class="uk-margin-large-right uk-text-bolder">TOTAL </div>
+                                                        <div class="uk-flex uk-flex-middle">
+                                                            <p id="totalFact" class="Fact-price uk-text-success uk-margin-remove-bottom uk-text-bolder">0.00</p>
+                                                            <p id="totalFact$" class="Fact-price uk-text-success uk-margin-remove-bottom uk-text-bolder uk-margin-remove-top uk-margin-small-left">0.00</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="uk-flex uk-flex-between uk-margin-small-top">
+                                                        <div class="uk-margin-large-right uk-text-bolder">TASA $ </div>
+                                                        <div class="uk-flex uk-flex-middle">
+                                                            <p id="" class="Fact-price uk-text-success uk-margin-remove-bottom uk-text-bolder">36.02 Bs</p>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="uk-flex uk-flex-between">
-                                                <div class="uk-margin-large-right">IVA 16% </div>
-                                                <div>
-                                                    <p id="iva" class="Fact-price uk-text-success">0.00</p>
+                                                <div style="padding: 15px;">
+                                                    <div class="uk-flex uk-flex-center">
+                                                        <p>METODOS DE PAGO</p>
+                                                    </div>
+                                                    <div class="metodo-pago_final">
+                                                        <!-- aqui cargan los metodos con js -->
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="uk-flex uk-flex-between">
-                                                <div class="uk-margin-large-right">IGTF 3% </div>
-                                                <div>
-                                                    <p id="IGTF" class="Fact-price uk-text-success">0.00</p>
-                                                </div>
-                                            </div>
-                                            <hr class="uk-margin-remove-top">
-                                            <div class="uk-flex uk-flex-between">
-                                                <div class="uk-margin-large-right uk-text-bolder">TOTAL </div>
-                                                <div class="uk-flex uk-flex-middle">
-                                                    <p id="totalFact" class="Fact-price uk-text-success uk-margin-remove-bottom uk-text-bolder">0.00</p>
-                                                    <p id="totalFact$" class="Fact-price uk-text-success uk-margin-remove-bottom uk-text-bolder uk-margin-remove-top uk-margin-small-left">0.00</p>
-                                                </div>
-                                            </div>
-                                            <div class="uk-flex uk-flex-between uk-margin-small-top">
-                                                <div class="uk-margin-large-right uk-text-bolder">TASA $ </div>
-                                                <div class="uk-flex uk-flex-middle">
-                                                    <p id="" class="Fact-price uk-text-success uk-margin-remove-bottom uk-text-bolder">36.02 Bs</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div style="padding: 15px;">
-                                            <div class="uk-flex uk-flex-center">
-                                                <p>METODOS DE PAGO</p>
-                                            </div>
-                                            <div class="metodo-pago_final">
-                                                <!-- aqui cargan los metodos con js -->
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        <!-- ******************************************************************************************************* -->
+
+
+
+                        <div class="uk-flex uk-flex-center">
+                            <ul class="uk-pagination uk-margin-large-top" style="align-items: baseline;">
+                                <li><a class="pag-btn-facturas uk-text-decoration-none" data-direccion="start"><span class="uk-margin-small-right" uk-pagination-previous></span><span class="uk-margin-small-right" uk-pagination-previous></span></a></li>
+                                <li><a class="pag-btn-facturas uk-text-decoration-none" data-direccion="back">Previous</a></li>
+                                <li><a class="pag-btn-facturas uk-text-decoration-none" data-direccion="next">Next</a></li>
+                                <li><a class="pag-btn-facturas uk-text-decoration-none" data-direccion="end"><span class="uk-margin-small-left" uk-pagination-next></span><span class="uk-margin-small-left" uk-pagination-next></span></a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
+            </section>
+        </li>
 
-                <!-- ******************************************************************************************************* -->
-
-
-
-                <div class="uk-flex uk-flex-center">
-                    <ul class="uk-pagination uk-margin-large-top" style="align-items: baseline;">
-                        <li><a class="pag-btn-facturas uk-text-decoration-none" data-direccion="start"><span class="uk-margin-small-right" uk-pagination-previous></span><span class="uk-margin-small-right" uk-pagination-previous></span></a></li>
-                        <li><a class="pag-btn-facturas uk-text-decoration-none" data-direccion="back">Previous</a></li>
-                        <li><a class="pag-btn-facturas uk-text-decoration-none" data-direccion="next">Next</a></li>
-                        <li><a class="pag-btn-facturas uk-text-decoration-none" data-direccion="end"><span class="uk-margin-small-left" uk-pagination-next></span><span class="uk-margin-small-left" uk-pagination-next></span></a></li>
-                    </ul>
-                </div>
+        <li>
+            <div class="uk-background-secondary uk-light uk-padding-small">
+                <table class="uk-table uk-table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Cliente</th>
+                            <th>Inicio de credito</th>
+                            <th>Final de credito</th>
+                            <th>Estado</th>
+                            <th>Accion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Table Data</td>
+                            <td>Table Data</td>
+                            <td>Table Data</td>
+                            <td>Table Data</td>
+                            <td>Table Data</td>
+                            <td>Table Data</td>
+                        </tr>
+            
+                    </tbody>
+                </table>
             </div>
-        </div>
-    </section>
+
+        </li>
+
+
+        <li></li>
+    </div>
+
+
 </main>
 
 <script src="static/javaScript/librerias/jquery.js"></script>

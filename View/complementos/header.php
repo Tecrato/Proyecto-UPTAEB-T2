@@ -1,19 +1,21 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" style="background-color: #111;">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/css/MainInformation.css"></link>
-    <link rel="stylesheet" href="Plugins/build/css/intlTelInput.css"></link>
+    <link rel="stylesheet" href="static/css/MainInformation.css">
+    </link>
+    <link rel="stylesheet" href="Plugins/build/css/intlTelInput.css">
+    </link>
     <link rel="stylesheet" href="static/css/uikit.css">
     <link rel="stylesheet" href="static/css/Style.css">
     <link rel="stylesheet" href="static/css/dataTables.css">
     <link rel="stylesheet" href="static/css/responsive.dataTables.css">
     <script src="static/javaScript/librerias/uikit.js"></script>
     <script src="static/javaScript/librerias/uikit-icons.js"></script>
-    
+
     <link rel="shortcut icon" href="static/images/logo_m.png" type="image/x-icon">
     <title id="title">Inventario-Inicio</title>
 </head>
@@ -82,6 +84,8 @@ echo "
                             </ul>
                         </nav>
 
+                        <span uk-icon="icon: question; ratio: 1.5" style="cursor: pointer;"></span>
+
                         <nav class="Nav1" uk-dropnav="mode: click">
                             <ul class="uk-subnav uk-margin-remove">
                                 <li>
@@ -125,6 +129,10 @@ echo "
         <div class="dolar">
             <marquee behavior="alternative" direction="right" scrollamount="12" style="padding-top: 8px;width: 99%;">
                 <div class="uk-flex uk-flex-middle">
+                    <div class="uk-flex uk-flex-middle uk-margin-medium-right">
+                        <span class="uk-light uk-margin-small-right" uk-icon="icon: bag; ratio: 1.3"></span>
+                        <h5 class="uk-text-bolder uk-margin-remove" style="color: #fff;">CAJA: <span>ABIERTA</span></h5>
+                    </div>
                     <div class="uk-margin-medium-right uk-flex uk-flex-middle">
                         <img class="uk-margin-small-right" src="static/images/bcv.png" alt="" width="28px" height="25px">
                         <h5 class="uk-text-bolder uk-margin-remove" style="color: #fff;">BCV: <span id="BCV">35.85</span> BS</h5>
@@ -156,12 +164,12 @@ echo "
                     </li>
                     <?php if ($_SESSION['rol'] == 'Administrador') { ?>
 
-                    <li class="uk-margin-small-right Link" href="/Proyecto-UPTAEB-T2/Proveedores">
-                        <a class="uk-button uk-button-text enlace_nav" href="Proveedores">
-                            <span uk-icon="bookmark" class="uk-icon uk-margin-small-right uk-icon-button"></span>
-                            <p>Proveedores</p>
-                        </a>
-                    </li>
+                        <li class="uk-margin-small-right Link" href="/Proyecto-UPTAEB-T2/Proveedores">
+                            <a class="uk-button uk-button-text enlace_nav" href="Proveedores">
+                                <span uk-icon="bookmark" class="uk-icon uk-margin-small-right uk-icon-button"></span>
+                                <p>Proveedores</p>
+                            </a>
+                        </li>
                     <?php }; ?>
                     <li class="uk-margin-small-right Link" href="/Proyecto-UPTAEB-T2/Clientes">
                         <a class="uk-button uk-button-text enlace_nav" href="Clientes">

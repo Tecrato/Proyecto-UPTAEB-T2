@@ -17,9 +17,14 @@
                                 <span class="uk-margin-small-right" uk-icon="history"></span> BITACORA
                             </a>
                         </li>
-                        <li>
+                        <li style="padding-bottom: 20px;">
                             <a href="#">
                                 <span class="uk-margin-small-right" uk-icon="credit-card"></span>CAPITAL
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="uk-margin-small-right" uk-icon="cog"></span>AJUSTES
                             </a>
                         </li>
                     </ul>
@@ -33,8 +38,6 @@
                                         <div class="uk-flex uk-flex-middle uk-flex-between uk-flex-wrap uk-margin-small-bottom uk-light">
                                             <h2 class="uk-margin-remove">ADMINISTRAR PERFIL</h2>
                                             <div class="newUser uk-flex">
-                                                <a href="" class="uk-icon-button uk-margin-small-right" uk-icon="cog"></a>
-
                                                 <a href="#register_user" uk-toggle class="uk-button uk-button-default uk-flex uk-flex-middle uk-border-rounded">
                                                     <p class="uk-margin-remove">CREAR USUARIO</p>
                                                 </a>
@@ -285,6 +288,151 @@
                                 </table>
                             </section>
                         </div>
+
+
+
+                        <div>
+                            <div class="uk-child-width-1-1@s" uk-grid>
+                                <div>
+                                    <div uk-grid>
+                                        <div class="uk-width-auto@m">
+                                            <ul class="uk-tab-left" uk-tab="connect: #component-tab-leftt; animation: uk-animation-fade">
+                                                <li><a href="#">MONEDA</a></li>
+                                                <li><a href="#">METODOS DE PAGO</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="uk-width-expand@m">
+                                            <div id="component-tab-leftt" class="uk-switcher">
+                                                <li class="uk-background-secondary uk-padding uk-border-rounded">
+                                                    <div class="uk-flex uk-flex-between uk-flex-bottom">
+                                                        <div>
+                                                            <h3>PRECIO DEL DOLAR</h3>
+                                                            <section class="uk-flex uk-flex-middle uk-flex-wrap">
+                                                                <article class="uk-margin-right">
+                                                                    <label for="">DOLAR</label>
+                                                                </article>
+                                                                <article>
+                                                                    <input class="uk-input" type="number" name="" id="">
+                                                                </article>
+                                                                <article class="uk-margin-left">
+                                                                    <button class="uk-button uk-button-default">GUARDAR</button>
+                                                                </article>
+                                                            </section>
+                                                        </div>
+                                                        <div>
+                                                            <button class="uk-button uk-button-default">ACTUALIZAR</button>
+                                                        </div>
+                                                    </div>
+
+                                                    <section class="uk-flex uk-flex-around uk-flex-wrap uk-margin-medium-top" style="width: 100%;">
+                                                        <article class="uk-padding uk-margin-small uk-border-rounded" style="background-color: #333; width: 20%;">
+                                                            <div>
+                                                                <h4 class="uk-text-center">TASA ACTUAL</h4>
+                                                                <h4 class="uk-text-center">37.00 BS</h4>
+                                                                <img src="./static/images/logo_letras-minimarket.png" alt="" style="width: 100%; min-width: 50%;">
+                                                            </div>
+                                                        </article>
+                                                        <article class="uk-padding uk-margin-small uk-border-rounded" style="background-color: #333; width: 20%;">
+                                                            <div>
+                                                                <h4 class="uk-text-center">TASA BCV</h4>
+                                                                <h4 class="uk-text-center">37.00 BS</h4>
+                                                                <img src="./static/images/bcv2.png" alt="" style="width: 100%; min-width: 50%;">
+                                                            </div>
+                                                        </article>
+                                                        <article class="uk-padding uk-margin-small uk-border-rounded" style="background-color: #333; width: 20%;">
+                                                            <div>
+                                                                <h4 class="uk-text-center">TASA PARALELO</h4>
+                                                                <h4 class="uk-text-center">37.00 BS</h4>
+                                                                <img src="./static/images/paralelo2.png" alt="" style="width: 100%; min-width: 50%;">
+                                                            </div>
+                                                        </article>
+                                                    </section>
+                                                </li>
+
+
+                                                <li>
+                                                    <div class="uk-flex uk-flex-between uk-flex-middle">
+                                                        <div>
+                                                            <h2>Metodos de pago</h2>
+                                                            <h4>Modos de transacción para los pagos</h4>
+                                                        </div>
+                                                        <a href="#modal-metodo_pago" uk-toggle class="uk-button uk-button-default btnAggMetodo">
+                                                            <span uk-icon="icon: plus;"></span>AGREGAR</a>
+                                                    </div>
+
+                                                    <!-- ***************** MODAL DE REGISTRO ***************** -->
+
+                                                    <div class="uk-flex-top" id="modal-metodo_pago" uk-modal>
+                                                        <div class="uk-modal-dialog uk-margin-auto-vertical">
+                                                            <button class="uk-modal-close-default" type="button" uk-close></button>
+                                                            <div class="uk-modal-header">
+                                                                <h2 class="uk-modal-title titleModalmetodos">REGISTRAR METODO DE PAGO</h2>
+                                                            </div>
+                                                            <div class="uk-modal-body">
+                                                                <form id="FORM_METODO_PAGO" class="uk-form-horizontal uk-margin-large">
+                                                                    <input type="text" name="tipo" value='metodo_pago' style="display:none">
+                                                                    <input id="inputIdMetodo" type="text" name="ID" style="display:none">
+                                                                    <div class="uk-margin">
+                                                                        <label class="uk-form-label" for="form-horizontal-text">Nombre</label>
+                                                                        <div class="uk-form-controls">
+                                                                            <input class="uk-input inputUpdateMetodo" name="nombre" id="form-horizontal-text" type="text" placeholder="Nombre">
+                                                                        </div>
+                                                                    </div>
+                                                                    <input id="Send" type="submit" style="display: none;">
+                                                                </form>
+                                                            </div>
+                                                            <div class="uk-modal-footer uk-text-right">
+                                                                <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
+                                                                <label class="uk-button uk-button-secondary" for="Send">Guardar</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <!-- **************************Modal de confirmacion de eliminacion************************** -->
+
+                                                    <div id="eliminar_metodo" class="uk-flex-top" uk-modal>
+                                                        <div class="uk-modal-dialog uk-margin-auto-vertical">
+                                                            <div class="uk-modal-header uk-flex uk-flex-middle">
+                                                                <span class="uk-margin-small-right" uk-icon="icon: warning ; ratio: 2"></span>
+                                                                <h2 class="uk-modal-title uk-margin-remove-top">ELIMINAR</h2>
+                                                            </div>
+                                                            <div class="uk-modal-body">
+                                                                <p>Deseas eliminar este registro para siempre? No podras recuperlo mas adelante</p>
+                                                            </div>
+                                                            <div class="uk-modal-footer uk-text-right">
+                                                                <form id="formDeleteMetodo" action="" method="POST">
+                                                                    <input type=number id="IdDelete_Metodo" name="ID" style="display:none">
+                                                                    <input type=text value="metodo_pago" name="tipo" style="display:none">
+                                                                    <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
+                                                                    <button class="uk-button uk-button-secondary" type="submit">Aceptar</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <table class="uk-table uk-table-divider uk-table-middle">
+                                                        <thead class="uk-background-secondary">
+                                                            <tr>
+                                                                <th></th>
+                                                                <th>#</th>
+                                                                <th>Metodo</th>
+                                                                <th>Accion</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="Metodo-Pago-Table">
+
+
+                                                        </tbody>
+                                                    </table>
+                                                </li>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -342,6 +490,7 @@
 <script src="static/javaScript/librerias/jquery.js"></script>
 <script src="static/javaScript/ChangeColor.js"></script>
 <script src="static/javaScript/Ajax/user.js"></script>
+<script src="static/javaScript/Ajax/metodo_pago.js"></script>
 
 
 </body>

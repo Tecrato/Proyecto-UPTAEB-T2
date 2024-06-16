@@ -88,6 +88,12 @@
         $clase->agregar($_SESSION['user_id']);
         // header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }
+    elseif ($tipo === 'metodo_pago'){
+        require('../../Model/Metodos_pagos.php');
+        $clase = new Metodo_pago(null,$_POST["nombre"]); // Llama al modelo y le manda la instruccion
+        $clase->agregar($_SESSION['user_id']);
+        // header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
+    }
 
     
 ?>
