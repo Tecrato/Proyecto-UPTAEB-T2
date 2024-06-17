@@ -56,7 +56,7 @@
 		}
 		function agregar($usuario,$datos,$pagos){
 			//agregar aki
-			$query = $this->conn->prepare("INSERT INTO registro_ventas (monto_final,metodo_pago, id_cliente, id_usuario, IVA) VALUES(:monto, :metodo, :id1, :id2, :iva)");
+			$query = $this->conn->prepare("INSERT INTO registro_ventas (monto_final, id_cliente, id_usuario, IVA) VALUES(:monto, :id1, :id2, :iva)");
 
 
 			$query->bindParam(':monto',$this->monto_final);
@@ -78,9 +78,10 @@
 				$clase_l->descontar();
 			}
             for ($i=0; $i < count($pagos); $i++) {
-				$pago = $pagos[$i];
-				$clase_f = new Metodo_pago(null,$registro,$pago->metodo,$pago->monto);
-				$clase_f->agregar();
+				$lista = $pagos[$i];
+                print_r($lista);
+				$clase_f = new Pago(null,$registro['id'],$lista->metodo,$lista->monto);
+				$clase_f->agregar($usuario);
             }
             $this->add_bitacora($usuario,"registrar_ventas","agregar","se agrego una venta");
 
