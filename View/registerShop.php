@@ -299,9 +299,9 @@
         </li>
 
         <li>
-            <div class="uk-background-secondary uk-light uk-padding-small">
-                <table class="uk-table uk-table-striped">
-                    <thead>
+            <div class="uk-padding-small">
+                <table class="uk-table uk-light">
+                    <thead class="uk-background-secondary">
                         <tr>
                             <th>#</th>
                             <th>Cliente</th>
@@ -313,14 +313,18 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Table Data</td>
-                            <td>Table Data</td>
-                            <td>Table Data</td>
-                            <td>Table Data</td>
-                            <td>Table Data</td>
-                            <td>Table Data</td>
+                            <td>1</td>
+                            <td>Jose</td>
+                            <td>10/06/2024</td>
+                            <td>18/06/2024</td>
+                            <td>
+                                <div class="activeEmpty uk-border-rounded" style="padding: 5px; width: 50%">PENDIENTE</div>
+                            </td>
+                            <td>
+                                <a href="" class="uk-button uk-button-default">PAGAR</a>
+                            </td>
                         </tr>
-            
+
                     </tbody>
                 </table>
             </div>
@@ -328,7 +332,157 @@
         </li>
 
 
-        <li></li>
+        <li>
+            <a class="uk-button uk-button-default uk-margin-bottom uk-margin-top" uk-toggle href="#caja-modal">Apertura de Caja</a>
+
+            <div class="uk-light uk-padding-small">
+                <table class="uk-table uk-light">
+                    <thead class="uk-background-secondary">
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre Usuario</th>
+                            <th>Fecha de Apertura</th>
+                            <th>Monto Inicial</th>
+                            <th>Hora Apertura</th>
+                            <th>Hora Cierre</th>
+                            <th>Total de ventas</th>
+                            <th>Monto Final</th>
+                            <th>Estado</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Jose</td>
+                            <td>16/06/2024</td>
+                            <td>100.00</td>
+                            <td>8:30 AM</td>
+                            <td>8:30 PM</td>
+                            <td>15</td>
+                            <td>1500.00</td>
+                            <td>
+                                <div class="activeGood uk-border-rounded" style="padding: 5px;">ABIERTA</div>
+                            </td>
+                            <td>
+                                <a href="#cierre-caja" uk-toggle class="uk-button uk-button-default">CERRAR CAJA</a>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <!--***************************** MODAL CAJA *****************************-->
+            <div id="caja-modal" uk-modal>
+                <div class="uk-modal-dialog">
+                    <button class="uk-modal-close-default" type="button" uk-close></button>
+                    <div class="uk-modal-header">
+                        <h3 class="uk-modal-title modal_title_client">ARQUEO DE CAJA</h3>
+                    </div>
+                    <div class="uk-modal-body">
+                        <form class="uk-grid-small uk-form-stacked form_caja" uk-grid method="POST" action="" enctype="multipart/form-data">
+                            <input type="text" name="tipo" value='caja' style="display:none">
+                            <input class="" type="number" name="ID" style="display:none">
+
+                            <div class="uk-width-1-1@s">
+                                <label class="uk-form-label">Monto Inicial</label>
+                                <div class="uk-form-controls">
+                                    <input class="uk-input inputNameUpdateClient" type="text" placeholder="Monto Inicial" name="nombre" aria-label="100" pattern="^([\d])$" required>
+                                </div>
+                                <input type="date" name="fecha" style="display: none;">
+                                <input type="number" name="id_usuario" style="display: none;">
+                            </div>
+
+                            <input type="submit" id="subirC" style="display:none" required>
+                        </form>
+                    </div>
+                    <div class="uk-modal-footer uk-text-right">
+                        <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
+                        <label class="uk-button uk-button-secondary" type="button" for="subirC">Guardar</label>
+                    </div>
+                </div>
+            </div>
+            <!--***************************** *****************************-->
+
+            <!--***************************** MODAL CIERRR *****************************-->
+            <div id="cierre-caja" uk-modal>
+                <div class="uk-modal-dialog">
+                    <button class="uk-modal-close-default" type="button" uk-close></button>
+                    <div class="uk-modal-header">
+                        <h3 class="uk-modal-title modal_title_client">CIERRE DE CAJA</h3>
+                    </div>
+                    <div class="uk-modal-body">
+                        <form class="uk-grid-small uk-form-stacked form_caja" uk-grid method="POST" action="" enctype="multipart/form-data">
+                            <input type="text" name="tipo" value='caja' style="display:none">
+                            <input class="" type="number" name="ID" style="display:none">
+
+                            <div class="uk-width-1-2@s">
+                                <label class="uk-form-label">Monto Inicial</label>
+                                <div class="uk-form-controls">
+                                    <input class="uk-input inputNameUpdateClient" type="text" placeholder="Monto Inicial" name="nombre" aria-label="100" pattern="^([\d])$" disabled>
+                                </div>
+                                <input type="date" name="fecha" style="display: none;">
+                                <input type="number" name="id_usuario" style="display: none;">
+                            </div>
+
+                            <div class="uk-width-1-2@s">
+                                <label class="uk-form-label">Fecha Apertura</label>
+                                <div class="uk-form-controls">
+                                    <input class="uk-input inputNameUpdateClient" type="text" placeholder="Monto Inicial" name="nombre" aria-label="100" pattern="^([\d])$" disabled>
+                                </div>
+                                <input type="date" name="fecha" style="display: none;">
+                                <input type="number" name="id_usuario" style="display: none;">
+                            </div>
+
+                            <div class="uk-width-1-2@s">
+                                <label class="uk-form-label">Hora Apertura</label>
+                                <div class="uk-form-controls">
+                                    <input class="uk-input inputNameUpdateClient" type="text" placeholder="Monto Inicial" name="nombre" aria-label="100" pattern="^([\d])$" disabled>
+                                </div>
+                                <input type="date" name="fecha" style="display: none;">
+                                <input type="number" name="id_usuario" style="display: none;">
+                            </div>
+
+                            <div class="uk-width-1-2@s">
+                                <label class="uk-form-label">Hora Cierre</label>
+                                <div class="uk-form-controls">
+                                    <input class="uk-input inputNameUpdateClient" type="text" placeholder="Monto Inicial" name="nombre" aria-label="100" pattern="^([\d])$" disabled>
+                                </div>
+                                <input type="date" name="fecha" style="display: none;">
+                                <input type="number" name="id_usuario" style="display: none;">
+                            </div>
+
+                            <div class="uk-width-1-2@s">
+                                <label class="uk-form-label">Total Ventas</label>
+                                <div class="uk-form-controls">
+                                    <input class="uk-input inputNameUpdateClient" type="text" placeholder="Monto Inicial" name="nombre" aria-label="100" pattern="^([\d])$" disabled>
+                                </div>
+                                <input type="date" name="fecha" style="display: none;">
+                                <input type="number" name="id_usuario" style="display: none;">
+                            </div>
+
+                            <div class="uk-width-1-2@s">
+                                <label class="uk-form-label">Monto Final</label>
+                                <div class="uk-form-controls">
+                                    <input class="uk-input inputNameUpdateClient" type="text" placeholder="Monto Inicial" name="nombre" aria-label="100" pattern="^([\d])$" disabled>
+                                </div>
+                                <input type="date" name="fecha" style="display: none;">
+                                <input type="number" name="id_usuario" style="display: none;">
+                            </div>
+
+                            <input type="submit" id="subirC" style="display:none" required>
+                        </form>
+                    </div>
+                    <div class="uk-modal-footer uk-text-right">
+                        <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
+                        <label class="uk-button uk-button-secondary" type="button" for="subirC">Guardar</label>
+                    </div>
+                </div>
+            </div>
+            <!--***************************** *****************************-->
+
+        </li>
     </div>
 
 
