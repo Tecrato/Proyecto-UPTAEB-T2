@@ -74,6 +74,9 @@
         function cerrar(){
             $caja = new Caja(id_usuario:$this->id_usuario, estado:1);
             $caja = $this->search(order:' id DESC')[0];
+            if (count($caja) == 0) {
+                return;
+            }
             $query = $this->conn->prepare('UPDATE caja SET estado=1 WHERE id = :id');
             $query->bindParam(':id',$caja->id);
             $query->execute();

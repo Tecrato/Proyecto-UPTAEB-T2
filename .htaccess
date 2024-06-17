@@ -13,6 +13,8 @@ RewriteRule ^Proveedores$ Controller/C_proveedores.php
 RewriteRule ^Salir$ Controller/funcs/logout.php
 
 
+RewriteRule ^api_estadisticas$ Controller/funcs_ajax/estadisticas.php
+RewriteRule ^api_caja$ Controller/funcs_ajax/acciones_caja.php
 RewriteRule ^api_search$ Controller/funcs_ajax/search.php
 RewriteRule ^api_login$ Controller/funcs_ajax/login.php
 RewriteRule ^api_get_image$ Controller/funcs_ajax/image_downloader.php
