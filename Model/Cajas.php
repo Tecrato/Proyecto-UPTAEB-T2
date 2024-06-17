@@ -77,8 +77,9 @@
             if (count($caja) == 0) {
                 return;
             }
-            $query = $this->conn->prepare('UPDATE caja SET estado=1 WHERE id = :id');
+            $query = $this->conn->prepare('UPDATE caja SET monto_final=:mf, estado=1 WHERE id = :id');
             $query->bindParam(':id',$caja->id);
+            $query->bindParam(':mf',$this->monto_final);
             $query->execute();
 			$this->add_bitacora($this->id_usuario,"Caja","Cerrar","Caja cerrada");
         }

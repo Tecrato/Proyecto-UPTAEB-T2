@@ -4,6 +4,9 @@
     require("../Model/Usuarios.php");
 
 
+    echo '<script>var sesion_user_id = '.$_SESSION['user_id'].';</script>';
+    echo '<script>var sesion_user_name = "'.$_SESSION['user_name'].'";</script>';
+    
     if (isset($_GET['p'])){
         $num = $_GET['p'];
     }else {

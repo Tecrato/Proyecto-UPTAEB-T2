@@ -10,7 +10,7 @@
         $clase->abrir();
     }
     else if ($_POST['accion'] == 'cerrar') {
-        $clase = new Caja(null,$_SESSION['user_id']);
+        $clase = new Caja(null,$_SESSION['user_id'], null, $_POST['monto_final']);
         $clase->cerrar();
     }
 ?>

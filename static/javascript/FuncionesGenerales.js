@@ -1,15 +1,17 @@
 var page = 0;
 var dolar = 37
 
-function cambiar_pagina_ajax(dir, type, func, limit = 9) {
+function cambiar_pagina_ajax(dir, type, func, limit = 9, pagina=null) {
   limit = limit ? limit : 9
+  if (pagina == null) {
+    pagina = page
+  }
   $.ajax({
     url:
       `Controller/funcs_ajax/cambiar_pagina.php?dir=` + dir + "&p=" + page + "&type=" + type + "&n_p=" + limit,
     type: "GET",
     success: (response) => {
       page = parseInt(response);
-      console.log(response)
       func();
     },
   });

@@ -1,5 +1,4 @@
 <?php require("../View/complementos/header.php"); ?>
-
 <main class="Bg-Main-home2 uk-padding uk-light">
 
     <div class="uk-child-width-1-1@s" uk-grid>
@@ -182,6 +181,14 @@
 
                                                 </tbody>
                                             </table>
+                                            <div class="uk-flex uk-flex-center">
+                                                <ul class="uk-pagination uk-margin-large-top">
+                                                    <li><a class="pag-btn-bitacora-personal" data-direccion="start"><span class="uk-margin-small-right" uk-pagination-previous></span><span class="uk-margin-small-right" uk-pagination-previous></span></a></li>
+                                                    <li><a class="pag-btn-bitacora-personal" data-direccion="back">Previous</a></li>
+                                                    <li><a class="pag-btn-bitacora-personal" data-direccion="next">Next</a></li>
+                                                    <li><a class="pag-btn-bitacora-personal" data-direccion="end"><span class="uk-margin-small-left" uk-pagination-next></span><span class="uk-margin-small-left" uk-pagination-next></span></a></li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </section>
                                 </div>
@@ -202,6 +209,14 @@
 
                                                 </tbody>
                                             </table>
+                                            <div class="uk-flex uk-flex-center">
+                                                <ul class="uk-pagination uk-margin-large-top">
+                                                    <li><a class="pag-btn-bitacora-general" data-direccion="start"><span class="uk-margin-small-right" uk-pagination-previous></span><span class="uk-margin-small-right" uk-pagination-previous></span></a></li>
+                                                    <li><a class="pag-btn-bitacora-general" data-direccion="back">Previous</a></li>
+                                                    <li><a class="pag-btn-bitacora-general" data-direccion="next">Next</a></li>
+                                                    <li><a class="pag-btn-bitacora-general" data-direccion="end"><span class="uk-margin-small-left" uk-pagination-next></span><span class="uk-margin-small-left" uk-pagination-next></span></a></li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </section>
                                 </div>
@@ -484,6 +499,7 @@
     <!-- ************************************************************************************************************ -->
 
 </main>
+
 
 
 <script src="static/javaScript/librerias/jquery.js" defer></script>
