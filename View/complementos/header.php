@@ -98,9 +98,6 @@ echo "
                                         <ul class="uk-nav uk-dropdown-nav ">
                                             <li class="uk-active uk-flex uk-flex-middle uk-flex-between">
                                                 <a href="#"><?php echo $_SESSION['user_name']; ?></a>
-                                                <div class="uk-overflow-hidden btn-ModeColorView">
-                                                    <img class="iconMoon" src="static/images/moon-solid.svg" alt="" width="18px">
-                                                </div>
                                             </li>
                                             <li>
                                                 <a class="uk-padding-remove-vertical" href="Administrar_perfil">

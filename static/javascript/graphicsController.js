@@ -178,54 +178,46 @@ const renderModelsChart4 = () => {
 };
 
 const renderModelsChart5 = () => {
-  //Datos de ejemplo nose
 
-  let productos = [
-    "Leche La Campiña 500g",
-    "Arroz 500g",
-    "Pasta Mary 500kg",
-    "Refresco Glup 1.5L",
-    "Sardina 250g",
-  ];
-  let ventas = [150, 200, 100, 50, 75];
+  let productos = []
+  let ventas = [];
 
-  //Obtener los indices de los productos ordenados de mayor a menor
-  let indicesMasVendidos = ventas
-    .map((valor, indice) => indice)
-    .sort((a, b) => ventas[b] - ventas[a]);
 
-  //Obtener los indices de los productos ordenados de menor a mayor
-  let indicesMenosVendidos = ventas
-    .map((valor, indice) => indice)
-    .sort((a, b) => ventas[a] - ventas[b]);
+  $.ajax({
+    url: "Controller/funcs_ajax/estadisticas.php",
+    type: "GET",
+    data: { select: "min_ventas" },
+    success: function (response) {
+      let json = JSON.parse(response);
+      for (const i of json.lista) {
+        let nombre = i.nombre + " " + i.marca + " " + i.unidad_valor + " " + i.unidad
+        let cantidad = i.cantidad == null ? 0 : i.cantidad
+        productos.push(nombre)
+        ventas.push(cantidad)
+      }
 
-  //obtener nombres
-  let productosMasVendidos = indicesMasVendidos.map(
-    (indice) => productos[indice]
-  );
-  let productosMenosVendidos = indicesMenosVendidos.map(
-    (indice) => productos[indice]
-  );
+      const data = {
+        labels: productos,
+        datasets: [
+          {
+            label: "Ventas",
+            data: ventas,
+            backgroundColor: getDataColors(),
+            borderColor: getDataColors(),
+          },
+        ],
+      };
 
-  const data = {
-    labels: productosMenosVendidos,
-    datasets: [
-      {
-        label: "ventas",
-        data: indicesMenosVendidos.map((indice) => ventas[indice]),
-        backgroundColor: getDataColors(80),
-        borderColor: getDataColors(),
-      },
-    ],
-  };
+      const options = {
+        plugins: {
+          legend: { position: "left" },
+        },
+      };
 
-  const options = {
-    plugins: {
-      legend: { position: "left" },
-    },
-  };
-
-  new Chart("menosVendidosChart", { type: "doughnut", data, options });
+      new Chart("menosVendidosChart", { type: "doughnut", data, options });
+    }
+  })
 };
+
 
 printChart();
