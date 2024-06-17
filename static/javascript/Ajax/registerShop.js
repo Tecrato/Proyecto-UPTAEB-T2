@@ -796,7 +796,7 @@ $.ajax({
                           <div class="uk-flex uk-flex-around">
                               <!-- Select para el tipo de pago -->
                               <select class="uk-select selectMetodoPago uk-form-small" name="" id="" style="background-color: transparent; border: transparent; width: 150px;">
-                                  <option disabled selected>TIPO DE PAGO</option>
+                                  <option disabled>TIPO DE PAGO</option>
                                   ${availableOptions.map(option => `<option value="${option.id}">${option.nombre}</option>`).join('')}
                               </select>
                               <!-- Input para el monto -->
@@ -949,6 +949,8 @@ $.ajax({
 
         let select = document.querySelectorAll(".selectMetodoPago")
         select.forEach((e) => {
+
+          console.log(e.value);
           let valor = e.value
           let monto = e.nextElementSibling.value
 
@@ -991,17 +993,17 @@ $.ajax({
 
         console.log(jsonString);
 
-        $.ajax({
-          url: "Controller/funcs_ajax/hacer_factura.php",
-          type: "POST",
-          data: { jsonString },
-          success: function (response) {
-            // setTimeout(()=> {
-            //   window.location = 'http://localhost/Proyecto-UPTAEB-T2/Ventas'
-            // },2000)
-            console.log(response);
-          },
-        });
+        // $.ajax({
+        //   url: "Controller/funcs_ajax/hacer_factura.php",
+        //   type: "POST",
+        //   data: { jsonString },
+        //   success: function (response) {
+        //     // setTimeout(()=> {
+        //     //   window.location = 'http://localhost/Proyecto-UPTAEB-T2/Ventas'
+        //     // },2000)
+        //     console.log(response);
+        //   },
+        // });
       }
     });
 
