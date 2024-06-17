@@ -32,7 +32,7 @@ CREATE TABLE `bitacora` (
   PRIMARY KEY (`id`),
   KEY `id_usuario_idx` (`id_usuario`),
   CONSTRAINT `id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `bitacora` (
 
 LOCK TABLES `bitacora` WRITE;
 /*!40000 ALTER TABLE `bitacora` DISABLE KEYS */;
-INSERT INTO `bitacora` VALUES (30,6,'Metodos de Pago','Registrar','2024-06-15 21:48:14','Metodo de Pago Registrado'),(31,6,'Login','logueado','2024-06-16 09:34:45','El usuario Edouard inicio sesion'),(32,6,'Proveedor','Desactivado','2024-06-16 09:34:56','Proveedor14 Eliminado'),(33,6,'Metodo de Pago','Eliminar','2024-06-16 09:39:04','Metodo de Pago 9 Eliminado'),(34,6,'Metodo de Pago','Modificar','2024-06-16 09:39:11','Metodo de Pago 8 Modificado');
+INSERT INTO `bitacora` VALUES (30,6,'Metodos de Pago','Registrar','2024-06-15 21:48:14','Metodo de Pago Registrado'),(31,6,'Login','logueado','2024-06-16 09:34:45','El usuario Edouard inicio sesion'),(32,6,'Proveedor','Desactivado','2024-06-16 09:34:56','Proveedor14 Eliminado'),(33,6,'Metodo de Pago','Eliminar','2024-06-16 09:39:04','Metodo de Pago 9 Eliminado'),(34,6,'Metodo de Pago','Modificar','2024-06-16 09:39:11','Metodo de Pago 8 Modificado'),(35,6,'deslogin','des-logueado','2024-06-16 13:40:53','el usuario Edouard se des-logueo'),(36,6,'Login','logueado','2024-06-16 13:41:08','El usuario Edouard inicio sesion'),(37,6,'Cliente','Registrar','2024-06-16 14:03:12','Cliente Registrado'),(38,6,'Login','logueado','2024-06-16 19:38:56','El usuario Edouard inicio sesion'),(39,6,'Pagos','Registrar','2024-06-16 22:08:24','Pago Registrado'),(40,6,'registrar_ventas','agregar','2024-06-16 22:08:24','se agrego una venta');
 /*!40000 ALTER TABLE `bitacora` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -116,7 +116,7 @@ CREATE TABLE `clientes` (
   `telefono` varchar(15) NOT NULL,
   `active` tinyint DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -125,6 +125,7 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
+INSERT INTO `clientes` VALUES (12,'Alejandro','30087582','Vargas','V','Avenida 15, local numero5','+584126742231',1);
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -206,7 +207,7 @@ CREATE TABLE `entradas` (
   KEY `id_proveedor` (`id_proveedor`),
   CONSTRAINT `entradas_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id`),
   CONSTRAINT `entradas_ibfk_2` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedores` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -215,7 +216,7 @@ CREATE TABLE `entradas` (
 
 LOCK TABLES `entradas` WRITE;
 /*!40000 ALTER TABLE `entradas` DISABLE KEYS */;
-INSERT INTO `entradas` VALUES (14,31,7,5,'2024-04-28','2024-05-28',12,3,1),(15,33,7,5,'2024-05-07','2024-05-28',15,5,1),(16,31,7,10,'2024-06-05','2024-06-19',2,10,1);
+INSERT INTO `entradas` VALUES (67,31,8,5,'2024-05-27','2024-06-29',15,0,1),(68,32,8,2,'2024-05-27','2024-06-29',5,0,1),(69,33,8,5,'2024-05-27','2024-07-06',9,1,1);
 /*!40000 ALTER TABLE `entradas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -237,7 +238,7 @@ CREATE TABLE `factura` (
   KEY `fk_productos_has_registro_ventas_productos1_idx` (`id_productos`),
   CONSTRAINT `fk_productos_has_registro_ventas_productos1` FOREIGN KEY (`id_productos`) REFERENCES `productos` (`id`),
   CONSTRAINT `fk_productos_has_registro_ventas_registro_ventas1` FOREIGN KEY (`id_registro_ventas`) REFERENCES `registro_ventas` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -246,6 +247,7 @@ CREATE TABLE `factura` (
 
 LOCK TABLES `factura` WRITE;
 /*!40000 ALTER TABLE `factura` DISABLE KEYS */;
+INSERT INTO `factura` VALUES (1,1,31,2,20),(2,50,31,2,20.02),(3,51,31,2,20.02),(4,52,32,1,10.01),(5,53,31,1,10.01),(6,54,32,1,10.01),(7,55,33,3,45.03),(8,56,33,1,15.01);
 /*!40000 ALTER TABLE `factura` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -284,6 +286,9 @@ SET @saved_cs_client     = @@character_set_client;
 /*!50001 CREATE VIEW `max_ventas` AS SELECT 
  1 AS `id`,
  1 AS `nombre`,
+ 1 AS `unidad_valor`,
+ 1 AS `unidad`,
+ 1 AS `marca`,
  1 AS `cantidad`*/;
 SET character_set_client = @saved_cs_client;
 
@@ -323,6 +328,9 @@ SET @saved_cs_client     = @@character_set_client;
 /*!50001 CREATE VIEW `min_ventas` AS SELECT 
  1 AS `id`,
  1 AS `nombre`,
+ 1 AS `unidad_valor`,
+ 1 AS `unidad`,
+ 1 AS `marca`,
  1 AS `cantidad`*/;
 SET character_set_client = @saved_cs_client;
 
@@ -368,7 +376,7 @@ CREATE TABLE `pagos` (
   KEY `id_metodo_pago_idx` (`id_metodo_pago`),
   CONSTRAINT `id_metodo_pago` FOREIGN KEY (`id_metodo_pago`) REFERENCES `metodo_pago` (`id`),
   CONSTRAINT `id_venta` FOREIGN KEY (`id_venta`) REFERENCES `registro_ventas` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -377,6 +385,7 @@ CREATE TABLE `pagos` (
 
 LOCK TABLES `pagos` WRITE;
 /*!40000 ALTER TABLE `pagos` DISABLE KEYS */;
+INSERT INTO `pagos` VALUES (1,56,7,15);
 /*!40000 ALTER TABLE `pagos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -417,7 +426,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES (1,1,1,1,150,'pan','afafef',5,10,15,0,0),(31,1,2,1,1,'Azucar','producto_Azucar_5e5294ee-d7d2-424d-ac2e-5802bbad41ab.jpeg',5,10,10.01,1,1),(32,2,2,3,1,'Harina','producto_Harina_2551fe44-3bc1-476e-b084-e7ff84eb8600.jpeg',10,20,10.01,0,1),(33,2,2,1,1,'Arroz','producto_Arroz_2c51307c-9d9f-41fb-9419-1e61a44891f0.jpeg',5,10,15.01,0,1);
+INSERT INTO `productos` VALUES (1,1,1,1,150,'pan','afafef',5,10,15,0,1),(31,1,2,1,1,'Azucar','producto_Azucar_5e5294ee-d7d2-424d-ac2e-5802bbad41ab.jpeg',5,10,10.01,1,1),(32,2,2,3,1,'Harina','producto_Harina_2551fe44-3bc1-476e-b084-e7ff84eb8600.jpeg',10,20,10.01,0,1),(33,2,2,1,1,'Arroz','producto_Arroz_2c51307c-9d9f-41fb-9419-1e61a44891f0.jpeg',5,10,15.01,0,1);
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -485,7 +494,7 @@ CREATE TABLE `registro_ventas` (
   KEY `id_usuario_idx` (`id_usuario`),
   CONSTRAINT `id_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id`),
   CONSTRAINT `id_usuario2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -494,6 +503,7 @@ CREATE TABLE `registro_ventas` (
 
 LOCK TABLES `registro_ventas` WRITE;
 /*!40000 ALTER TABLE `registro_ventas` DISABLE KEYS */;
+INSERT INTO `registro_ventas` VALUES (1,20,'2024-06-15 21:48:14',12,6,3,1),(50,23.22,'2024-06-16 21:47:06',12,6,3,1),(51,23.22,'2024-06-16 21:52:23',12,6,3,1),(52,10.01,'2024-06-16 21:52:50',12,6,0,1),(53,11.61,'2024-06-16 21:53:20',12,6,2,1),(54,10.01,'2024-06-16 22:04:17',12,6,0,1),(55,45.03,'2024-06-16 22:07:08',12,6,0,1),(56,15.01,'2024-06-16 22:08:24',12,6,0,1);
 /*!40000 ALTER TABLE `registro_ventas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -589,7 +599,7 @@ UNLOCK TABLES;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `max_ventas` AS select `p`.`id` AS `id`,`p`.`nombre` AS `nombre`,(select sum(`f`.`cantidad`) from `factura` `f` where (`f`.`id_productos` = `p`.`id`)) AS `cantidad` from `productos` `p` where (`p`.`active` = 1) order by (select sum(`f`.`cantidad`) from `factura` `f` where (`f`.`id_productos` = `p`.`id`)) desc */;
+/*!50001 VIEW `max_ventas` AS select `p`.`id` AS `id`,`p`.`nombre` AS `nombre`,`p`.`valor_unidad` AS `unidad_valor`,(select `unidades`.`nombre` from `unidades` where (`unidades`.`id` = `p`.`id_unidad`)) AS `unidad`,(select `marcas`.`nombre` from `marcas` where (`marcas`.`id` = `p`.`id_marca`)) AS `marca`,(select sum(`f`.`cantidad`) from `factura` `f` where (`f`.`id_productos` = `p`.`id`)) AS `cantidad` from `productos` `p` where (`p`.`active` = 1) order by (select sum(`f`.`cantidad`) from `factura` `f` where (`f`.`id_productos` = `p`.`id`)) desc */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -607,7 +617,7 @@ UNLOCK TABLES;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `min_ventas` AS select `p`.`id` AS `id`,`p`.`nombre` AS `nombre`,(select sum(`f`.`cantidad`) from `factura` `f` where (`f`.`id_productos` = `p`.`id`)) AS `cantidad` from `productos` `p` where (`p`.`active` = 1) order by (select sum(`f`.`cantidad`) from `factura` `f` where (`f`.`id_productos` = `p`.`id`)) */;
+/*!50001 VIEW `min_ventas` AS select `p`.`id` AS `id`,`p`.`nombre` AS `nombre`,`p`.`valor_unidad` AS `unidad_valor`,(select `unidades`.`nombre` from `unidades` where (`unidades`.`id` = `p`.`id_unidad`)) AS `unidad`,(select `marcas`.`nombre` from `marcas` where (`marcas`.`id` = `p`.`id_marca`)) AS `marca`,(select sum(`f`.`cantidad`) from `factura` `f` where (`f`.`id_productos` = `p`.`id`)) AS `cantidad` from `productos` `p` where (`p`.`active` = 1) order by (select sum(`f`.`cantidad`) from `factura` `f` where (`f`.`id_productos` = `p`.`id`)) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -661,7 +671,7 @@ UNLOCK TABLES;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `total_stock_categoria` AS select `c`.`id` AS `id`,`c`.`nombre` AS `nombre`,(select sum((select sum(`e`.`existencia`) from `proyecto_4`.`entradas` `e` where (`e`.`id_producto` = `p`.`id`))) from `proyecto_4`.`productos` `p` where (`p`.`id_categoria` = `c`.`id`)) AS `total` from `proyecto_4`.`categoria` `c` */;
+/*!50001 VIEW `total_stock_categoria` AS select `c`.`id` AS `id`,`c`.`nombre` AS `nombre`,(select sum((select sum(`e`.`existencia`) from `entradas` `e` where (`e`.`id_producto` = `p`.`id`))) from `productos` `p` where (`p`.`id_categoria` = `c`.`id`)) AS `total` from `categoria` `c` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -675,4 +685,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-16 10:05:23
+-- Dump completed on 2024-06-16 22:41:13
