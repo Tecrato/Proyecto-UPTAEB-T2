@@ -28,7 +28,7 @@
 			$this->add_bitacora($this->id_usuario,"Caja","Abriendo","Caja abierta");
         }
 
-        function search($n=0,$limite=100){
+        function search($n=0,$limite=100, $order=' id DESC '){
             // Al igual que la clase anterior, puede buscar segun muchos valores o solo algunos
             $query = "SELECT * FROM caja";
 
@@ -72,10 +72,10 @@
         }
 
         function cerrar(){
-            $caja = new Caja(id_usuario:$this->id_usuario);
-            $caja = $this->search(order:'id DESC')[0];
+            $caja = new Caja(id_usuario:$this->id_usuario, estado:1);
+            $caja = $this->search(order:' id DESC')[0];
             $query = $this->conn->prepare('UPDATE caja SET estado=1 WHERE id = :id');
-            $query->bindParam(':id',$this->id);
+            $query->bindParam(':id',$caja->id);
             $query->execute();
 			$this->add_bitacora($this->id_usuario,"Caja","Cerrar","Caja cerrada");
         }
