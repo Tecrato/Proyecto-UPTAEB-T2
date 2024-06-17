@@ -17,16 +17,19 @@
                                 <span class="uk-margin-small-right" uk-icon="history"></span> BITACORA
                             </a>
                         </li>
-                        <li style="padding-bottom: 20px;">
-                            <a href="#">
-                                <span class="uk-margin-small-right" uk-icon="credit-card"></span>CAPITAL
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="uk-margin-small-right" uk-icon="cog"></span>AJUSTES
-                            </a>
-                        </li>
+                        <?php if ($_SESSION['rol'] == 'Administrador') { ?>
+                            <li style="padding-bottom: 20px;">
+                                <a href="#">
+                                    <span class="uk-margin-small-right" uk-icon="credit-card"></span>CAPITAL
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="uk-margin-small-right" uk-icon="cog"></span>AJUSTES
+                                </a>
+                            </li>
+                        <?php }; ?>
+
                     </ul>
                 </div>
                 <div class="uk-width-expand@m">

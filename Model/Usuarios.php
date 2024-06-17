@@ -18,7 +18,7 @@
 
         }
 
-        function agregar(){
+        function agregar($usuario){
             $query = $this->conn->prepare("INSERT INTO usuarios (nombre, correo, hash, rol) VALUES(:nombre, :correo, :hash, :rol)");
             
             $query->bindParam(':nombre',$this->nombre, PDO::PARAM_STR);

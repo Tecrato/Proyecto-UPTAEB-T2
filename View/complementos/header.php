@@ -174,12 +174,15 @@ echo "
                             <p>Clientes</p>
                         </a>
                     </li>
-                    <li class="uk-margin-small-right Link" href="/Proyecto-UPTAEB-T2/Estadisticas">
-                        <a class="uk-button uk-button-text enlace_nav" href="Estadisticas">
-                            <span uk-icon="statitics" class="uk-icon uk-margin-small-right uk-icon-button"></span>
-                            <p>Estadisticas</p>
-                        </a>
-                    </li>
+                    <?php if ($_SESSION['rol'] == 'Administrador') { ?>
+                        <li class="uk-margin-small-right Link" href="/Proyecto-UPTAEB-T2/Estadisticas">
+                            <a class="uk-button uk-button-text enlace_nav" href="Estadisticas">
+                                <span uk-icon="statitics" class="uk-icon uk-margin-small-right uk-icon-button"></span>
+                                <p>Estadisticas</p>
+                            </a>
+                        </li>
+                    <?php }; ?>
+
                     <li class="uk-margin-small-right Link" href="/Proyecto-UPTAEB-T2/Ventas">
                         <a class="uk-button uk-button-text enlace_nav" href="Ventas">
                             <span uk-icon="factura" class="uk-icon uk-margin-small-right uk-icon-button"></span>
