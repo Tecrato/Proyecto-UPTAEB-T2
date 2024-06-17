@@ -993,17 +993,17 @@ $.ajax({
 
         console.log(jsonString);
 
-        // $.ajax({
-        //   url: "Controller/funcs_ajax/hacer_factura.php",
-        //   type: "POST",
-        //   data: { jsonString },
-        //   success: function (response) {
-        //     // setTimeout(()=> {
-        //     //   window.location = 'http://localhost/Proyecto-UPTAEB-T2/Ventas'
-        //     // },2000)
-        //     console.log(response);
-        //   },
-        // });
+        $.ajax({
+          url: "Controller/funcs_ajax/hacer_factura.php",
+          type: "POST",
+          data: { jsonString },
+          success: function (response) {
+            // setTimeout(()=> {
+            //   window.location = 'http://localhost/Proyecto-UPTAEB-T2/Ventas'
+            // },2000)
+            console.log(response);
+          },
+        });
       }
     });
 
