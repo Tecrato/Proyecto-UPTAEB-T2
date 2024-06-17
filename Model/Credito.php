@@ -35,11 +35,11 @@
         $query = $this->conn->prepare('UPDATE credito SET active=0 WHERE id=:id');
         $query->bindParam(':id',$this->id);
         $query->execute();
-        $this->add_bitacora($usuario,"Credito","Eliminar","Credito".$this->id." Eliminado");
+        $this->add_bitacora($usuario,"Credito","Desactivado","Credito".$this->id." Eliminado");
     }
 
     function actualizar($usuario){
-        $query = $this->conn->prepare("INSERT INTO credito (id, id_cliente, fecha_limite, id_rv, monto_final, telefono, active) VALUES(:id, :id_cliente, :fecha_limite, :id_rv, :monto_final,1)");
+        $query = $this->conn->prepare("UPDATE INTO credito (id, id_cliente, fecha_limite, id_rv, monto_final, telefono, active) VALUES(:id, :id_cliente, :fecha_limite, :id_rv, :monto_final,1)");
         $query->bindParam(':id',$this->id, PDO::PARAM_STR);
         $query->bindParam(':id_cliente',$this->id_cliente, PDO::PARAM_STR);
         $query->bindParam(':id_rv',$this->id_rv, PDO::PARAM_STR);
