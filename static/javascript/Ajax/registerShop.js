@@ -909,7 +909,7 @@ $.ajax({
         IGTF: parseFloat(document.getElementById("IGTF").textContent).toFixed(2),
         monto_final: parseFloat(document.getElementById("totalFact").textContent).toFixed(2),
         detalles: [],
-        metodos_pago: []
+        pagos: []
       };
 
       if (tipoPago == 0) {
@@ -952,7 +952,7 @@ $.ajax({
           let valor = e.value
           let monto = e.nextElementSibling.value
 
-          json.metodos_pago.push({
+          json.pagos.push({
             metodo: valor,
             monto: monto
           });
