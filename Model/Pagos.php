@@ -18,7 +18,7 @@
 		}
 
 		function agregar($usuario){
-            $query = $this->conn->prepare('INSERT INTO pagos (id_venta,metodo_de_pago,monto) VALUES (:id_venta,:metodo_de_pago,:monto)');
+            $query = $this->conn->prepare('INSERT INTO pagos (id_venta,id_metodo_pago,monto) VALUES (:id_venta,:metodo_de_pago,:monto)');
             $query->bindParam(':id_venta',$this->id_venta);
             $query->bindParam(':metodo_de_pago',$this->metodo_de_pago);
             $query->bindParam(':monto',$this->monto);
