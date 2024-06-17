@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require("./verificar_admin_funcs.php");
+    require("../funcs/verificar_admin_funcs.php");
     require('../../Model/Conexion.php');
     require('../../Model/Cajas.php');
 
@@ -11,6 +11,6 @@
     }
     else if ($_POST['accion'] == 'cerrar') {
         $clase = new Caja(null,$_SESSION['user_id']);
-        $clase->abrir();
+        $clase->cerrar();
     }
 ?>
