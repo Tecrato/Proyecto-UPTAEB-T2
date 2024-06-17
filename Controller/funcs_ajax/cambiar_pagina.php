@@ -23,6 +23,9 @@
         require('../../Model/Registro de ventas.php');
         $vart = new Registro_ventas();
         $todos = $vart->COUNT();
+    } elseif ($type == 'bitacora') {
+        $vart = new DB();
+        $todos = $vart->COUNT_bitacora();
     }
 
     if ($dir === 'next' && $page < ceil($todos / $pagination)-1){
@@ -34,6 +37,6 @@
     } elseif ($dir === 'end') {
         $page = ceil($todos/$pagination)-1;
     }
-    // echo $_GET['p'];
+    
     echo $page;
 ?>

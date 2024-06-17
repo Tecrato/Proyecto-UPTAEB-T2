@@ -18,7 +18,7 @@
             $query->bindParam(':de',$detalles);
             $query->execute();
         }
-        function search_bitacora($id=null, $limite=9, $n=0) {
+        function search_bitacora($id=null, $limite=9, $n=0, $order=" id DESC") {
             $query = "SELECT * FROM bitacora";
             if ($id != null){
                 $query .= " WHERE id_usuario=:id";
@@ -26,7 +26,8 @@
 
             $n = $n*$limite;
 
-            $query = $query . " ORDER BY id DESC LIMIT :l OFFSET :n";
+			$query .= " ORDER BY ".$order ;
+            $query .= " LIMIT :l OFFSET :n";
 
             $consulta = $this->conn->prepare($query);
             if ($id != null){
@@ -37,6 +38,12 @@
             
             $consulta->execute();
             return $consulta->fetchAll();
+        }
+        function COUNT_bitacora() {
+            $query = $this->conn->prepare("SELECT COUNT(*) as 'total' FROM bitacora");
+            $query->execute();
+            return $query->fetch()['total'];
+            
         }
     }
     

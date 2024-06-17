@@ -5,13 +5,13 @@
     include("../funcs/verificar.php");
 
     if (isset($_GET['limite'])) {
-        $limite = $_GET['limite'];
+        $limite = intval($_GET['limite']);
     }
     else {
         $limite = 9;
     }
     if (isset($_GET['n']) and $_GET['n'] != "") {
-        $n = $_GET['n'];
+        $n = intval($_GET['n']);
     }
     else {
         $n = 0;
@@ -72,6 +72,14 @@
         require('../../Model/Metodos_pagos.php');
         $clase = new Metodo_pago();
     }
+    elseif ($_GET['randomnautica'] == "caja") {
+        require('../../Model/Cajas.php');
+        $clase = new Caja();
+    }
+
+
+
+
     if (isset($_GET['subFunction'])) {
         if ($_GET['subFunction'] == 'proveedor_de_una_entrada') {
             $result = $clase->search_proveedor_from_product();
