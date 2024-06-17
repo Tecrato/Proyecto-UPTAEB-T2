@@ -486,10 +486,10 @@
 </main>
 
 
-<script src="static/javaScript/librerias/jquery.js"></script>
-<script src="static/javaScript/ChangeColor.js"></script>
-<script src="static/javaScript/Ajax/user.js"></script>
-<script src="static/javaScript/Ajax/metodo_pago.js"></script>
+<script src="static/javaScript/librerias/jquery.js" defer></script>
+<script src="static/javaScript/ChangeColor.js" defer></script>
+<script src="static/javaScript/Ajax/user.js" defer></script>
+<script src="static/javaScript/Ajax/metodo_pago.js" defer></script>
 
 
 </body>

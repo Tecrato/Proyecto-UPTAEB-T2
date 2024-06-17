@@ -26,7 +26,7 @@
 
             $n = $n*$limite;
 
-            $query = $query . " LIMIT :l OFFSET :n";
+            $query = $query . " ORDER BY id DESC LIMIT :l OFFSET :n";
 
             $consulta = $this->conn->prepare($query);
             if ($id != null){
