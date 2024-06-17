@@ -76,6 +76,10 @@
         require('../../Model/Cajas.php');
         $clase = new Caja();
     }
+    elseif ($_GET['randomnautica'] == "credito") {
+        require('../../Model/Credito.php');
+        $clase = new Credito();
+    }
 
 
 

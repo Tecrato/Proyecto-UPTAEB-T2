@@ -94,6 +94,12 @@
         $clase->agregar($_SESSION['user_id']);
         // header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
     }
+    elseif ($tipo === 'Credito'){
+        require('../../Model/Credito.php');
+        $clase = new Credito(null,$_POST["ID"],$_POST["ID_cliente"],$_POST["ID_rv"],$_POST["fecha_limite"],$_POST["monto_final"]); // Llama al modelo y le manda la instruccion
+        $clase->agregar($_SESSION['user_id']);
+        // header('Location:../../Productos'); // Y vuelve a la pagina donde estaba antes
+    }
 
     
 ?>
