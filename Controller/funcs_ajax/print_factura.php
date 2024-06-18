@@ -8,7 +8,6 @@ $lista = array();
 $lista = [
     'vendedor' => $result['vendedor'],
     'nombre' => $result['nombre'],
-    'metodo_pago' => $result['metodo_pago'],
     'id' => $result['id'],
     'fecha' => $result['fecha'],
     'cedula' => $result['cedula'],
@@ -26,3 +25,5 @@ foreach ($amount as $i) {
     );
 }
 $product = $clase->search_ProductFact();
+
+$pagos = $clase->search_pagos();

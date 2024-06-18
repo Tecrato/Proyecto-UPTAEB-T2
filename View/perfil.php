@@ -171,7 +171,7 @@
                                 <div>
                                     <section>
                                         <div class="uk-overflow-auto uk-light uk-margin-small-top">
-                                            <table class="uk-table uk-table-small uk-table-divider uk-table-hover">
+                                            <table class="uk-table uk-table-small uk-table-divider uk-table-hover uk-light">
                                                 <thead class="uk-background-secondary">
                                                     <tr>
                                                         <th>ACTIVIDAD</th>
@@ -198,7 +198,7 @@
                                 <div>
                                     <section>
                                         <div class="uk-overflow-auto uk-light uk-margin-small-top">
-                                            <table class="uk-table uk-table-small uk-table-divider uk-table-hover">
+                                            <table class="uk-table uk-table-small uk-table-divider uk-table-hover uk-light">
                                                 <thead class="uk-background-secondary">
                                                     <tr>
                                                         <th>USUARIO</th>
@@ -468,26 +468,41 @@
                 <h2 class="uk-modal-title">REGISTRO USUARIO</h2>
             </div>
             <div class="uk-modal-body ">
-                <form class="uk-grid-small" uk-grid method="POST" action="./Controller/funcs/agregar_cosas.php">
+                <form class="uk-grid-small uk-form-stacked" uk-grid method="POST" action="./Controller/funcs/agregar_cosas.php">
                     <input type="text" name="tipo" value='usuarios' id="" style="display:none">
-                    <div class="uk-width-1-2">
-                        <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="^([A-ZÑ][a-zñ]{3,})( [A-Zñ][a-zñ]{3,})?$" required>
+                    <div class="uk-width-1-2@s">
+                        <label class="uk-form-label">Nombre</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="^([A-ZÑ][a-zñ]{3,})( [A-Zñ][a-zñ]{3,})?$" required>
+                        </div>
                     </div>
                     <div class="uk-width-1-2@s">
-                        <input class="uk-input" type="text" placeholder="Apellido" aria-label="50" name="apellido" pattern="^([A-ZÑ][a-zñ]{3,})( [A-Zñ][a-zñ]{3,})?$">
+                        <label class="uk-form-label">Apellido</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" placeholder="Apellido" aria-label="50" name="apellido" pattern="^([A-ZÑ][a-zñ]{3,})( [A-Zñ][a-zñ]{3,})?$">
+                        </div>
                     </div>
                     <div class="uk-width-1-2@s">
-                        <input class="uk-input" type="text" placeholder="Correo Electronico" aria-label="100" name="correo" parent="^([A-Za-z0-9\.\_]+)@([\w]{3,8})\.([\w]{2,3})(\.[\w]{2,4})?(\.[\w]{2,3})?$" required>
+                        <label class="uk-form-label">Correo Electronico</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="text" placeholder="Correo Electronico" aria-label="100" name="correo" parent="^([A-Za-z0-9\.\_]+)@([\w]{3,8})\.([\w]{2,3})(\.[\w]{2,4})?(\.[\w]{2,3})?$" required>
+                        </div>
                     </div>
                     <div class="uk-width-1-2@s">
-                        <select class="uk-select" id="form-stacked-select" name="rol" required>
-                            <option selected disabled>Tipo de usuario</option>
-                            <option value="1">Administrador</option>
-                            <option value="2">Usuario</option>
-                        </select>
+                        <label class="uk-form-label">Tipo de usuario</label>
+                        <div class="uk-form-controls">
+                            <select class="uk-select" id="form-stacked-select" name="rol" required>
+                                <option selected disabled>Tipo de usuario</option>
+                                <option value="1">Administrador</option>
+                                <option value="2">Usuario</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="uk-width-1-1@s">
-                        <input class="uk-input" type="password" placeholder="Contraseña" aria-label="100" name="password" minlength="3" maxlength="50" required>
+                        <label class="uk-form-label">Contraseña</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" type="password" placeholder="Contraseña" aria-label="100" name="password" minlength="3" maxlength="50" required>
+                        </div>
                     </div>
                     <input type="submit" id="subirC" style="display:none">
                 </form>

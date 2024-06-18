@@ -120,8 +120,8 @@ foreach ($product as $p) {
     $pdf->Cell(10);
     $pdf->Cell(15, 10, $p['cantidad'], 0, 0, 'C', 1);
     $pdf->Cell(95, 10, utf8_decode($p['descripcion']), 0, 0, 'C', 1);
-    $pdf->Cell(25, 10, $p['valor_unit'], 0, 0, 'C', 1);
-    $pdf->Cell(30, 10, $p['Total'], 0, 1, 'C', 1);
+    $pdf->Cell(25, 10, number_format($p['valor_unit'], 2, '.', ''), 0, 0, 'C', 1);
+    $pdf->Cell(30, 10, number_format($p['Total'],2, '.', ''), 0, 1, 'C', 1);
 }
 $pdf->Ln(5);
 $pdf->Cell(78);
@@ -169,10 +169,20 @@ $pdf->Ln(10);
 
 $pdf->SetFont('Arial', 'B', 10);
 $pdf->SetTextColor(0, 0, 0);
-$pdf->Cell(20);
-$pdf->Cell(30, 10, utf8_decode('FORMA DE PAGO: ' . strtoupper($lista['metodo_pago'])), 0, 0, 'C');
+$pdf->Cell(10);
+$pdf->Cell(30, 10, utf8_decode('FORMAS DE PAGO:'), 0, 0, 'C');
 $pdf->Cell(30);
 $pdf->Cell(30, 10, utf8_decode('VENDEDOR: ' . strtoupper($lista['vendedor'])), 0, 0, 'C');
+$pdf->Ln(10);
+foreach ($pagos as $pago) {
+    $pdf->SetFont('Arial', 'B', 10);
+    $pdf->Cell(13);
+    $pdf->Cell(15, 10, strtoupper($pago['nombre']), 0, 0, 'C', 0);
+    $pdf->Cell(30, 10, utf8_decode($pago['monto']), 0, 1, 'C', 0);
+    // $pdf->Cell(25, 10, $p['valor_unit'], 0, 0, 'C', 1);
+    // $pdf->Cell(30, 10, $p['Total'], 0, 1, 'C', 1);
+}
+
 
 // Posición: a 1,5 cm del final
 $pdf->SetY(-15);

@@ -31,7 +31,7 @@
 
 
 
-        function borrar() {
+        function borrar($usuario) {
 
             $query = $this->conn->prepare("DELETE FROM usuarios WHERE ID=:id");
             
@@ -74,7 +74,7 @@
             $consulta->execute();
             return $consulta->fetchAll();
         }
-        function actualizar(){
+        function actualizar($usuario){
             $query = 'UPDATE usuarios SET nombre=:nombre, correo=:correo, hash=:pass';
             if ($this->rol) {
                 $query .= ', rol=:rol';

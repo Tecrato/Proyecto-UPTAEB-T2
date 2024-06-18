@@ -104,8 +104,7 @@ $(".pag-btn-bitacora-personal").click((ele) => {
 generar_bitacora_general(page_general)
 generar_bitacora_personal(page_personal)
 
-  //   let seed = generateAlphanumericSeed(20);
-//   console.log(seed); // Puedes cambiar el número para ajustar la longitud de la semilla
+
 let btnGenerate = document.querySelector(".btn-generate")
 btnGenerate.addEventListener("click", () => {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
