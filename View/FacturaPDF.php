@@ -137,7 +137,7 @@ $pdf->Cell(120);
 $pdf->Cell(15, 10, 'SUBTOTAL Bs', 0, 0, 'C', 0);
 
 $pdf->Cell(15);
-$pdf->Cell(15, 10, $resultAmount['subtotal'], 0, 0, 'C', 0);
+$pdf->Cell(15, 10, round($resultAmount['subtotal'], 2), 0, 0, 'C', 0);
 
 $pdf->Ln(7);
 

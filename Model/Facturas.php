@@ -70,7 +70,7 @@ class Factura extends DB
 
     function search_mountFact()
     {
-        $query = $this->conn->prepare("SELECT ROUND(monto_final - IVA) AS subtotal,IVA,monto_final FROM registro_ventas WHERE id = :id");
+        $query = $this->conn->prepare("SELECT monto_final - IVA AS subtotal,IVA,monto_final FROM registro_ventas WHERE id = :id");
         $query->bindParam(':id', $this->id);
         $query->execute();
         return $query->fetchAll();

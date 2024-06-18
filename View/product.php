@@ -24,7 +24,7 @@
                                             </form>
                                         </div>
                                         <div class="uk-margin-left">
-                                            <a href="InventarioPDF" target="_blank" class="uk-icon-link" uk-tooltip="title:Imprimir Inventario; delay: 500" uk-icon="icon: print; ratio: 1.5"></a>
+                                            <a href="InventarioPDF" target="_blank" class="uk-icon-link" uk-tooltip="title:Reporte Inventario; delay: 500" uk-icon="icon: file-pdf; ratio: 1.5"></a>
                                             <a href="#modal-register-product" uk-toggle uk-tooltip="title:Añadir; delay: 500" class="uk-margin-small-left btn-modal-register">
                                                 <img class="btn_agg" src="./static/images/btn_agg.png" alt="" width="35px">
                                             </a>

@@ -24,7 +24,7 @@
                                         </form>
                                     </div>
                                     <div class="uk-margin-left uk-light">
-                                        <a href="Detalles_factura" uk-icon="icon: print; ratio: 1.5" uk-tooltip="title:Imprimir Facturas; delay: 500"></a>
+                                        <a href="Detalles_factura" uk-icon="icon: file-pdf; ratio: 1.5" uk-tooltip="title:PDF Factura; delay: 500"></a>
                                         <a href="#modal-full" uk-toggle uk-tooltip="title:Añadir Factura; delay: 500" class="uk-margin-small-left">
                                             <img class="btn_agg" src="./static/images/btn_agg_factura2.png" alt="" width="35px">
                                         </a>
