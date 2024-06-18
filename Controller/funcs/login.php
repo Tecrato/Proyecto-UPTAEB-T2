@@ -6,6 +6,19 @@
     
     $correo = $_POST["correo"];
     $password = $_POST["contraseña"];
+    $codigo = $_POST['codigo'];
+
+    // print_r($codigo);
+    // echo '<br>';
+    // print_r($_SESSION['codigo_verificacion']);
+    // echo '<br>';
+    // print_r($_SESSION['codigo_verificacion'] == sha1($codigo));
+
+    if (!($_SESSION['codigo_verificacion'] == sha1($codigo))) {
+        header('Location: ../../login?err=2');
+        exit(0);
+        die();
+    }
     
     $d = new DB();
     

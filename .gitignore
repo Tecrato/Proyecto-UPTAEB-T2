@@ -4,5 +4,5 @@ Media/imagenes/*.*
 rar.rar
 .env
 
-Conexion.php
+Model/Conexion.php
 Model/Conexion.php
