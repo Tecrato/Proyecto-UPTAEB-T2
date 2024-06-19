@@ -52,7 +52,7 @@
     elseif ($tipo === 'usuario'){
         require('../../Model/Usuarios.php');
         $pass = isset($_POST["password"]) ? password_hash($_POST["password"],PASSWORD_DEFAULT) : null;
-        $clase = new Usuario($_POST["ID"],$_POST["nombre"],$_POST["correo"],$pass,isset($_POST["rol"]) ? $_POST["rol"] : null); 
+        $clase = new Usuario($_POST["ID"],$_POST["nombre"],$_POST["correo"],$pass,isset($_POST["rol"]) ? $_POST["rol"] : null, substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, 20)); 
         $clase->actualizar($_SESSION['user_id']);
 
         if (isset($_POST['self'])) {
@@ -83,5 +83,5 @@
         $clase = new Metodo_pago($_POST["ID"],$_POST["nombre"]);
         $clase->actualizar($_SESSION['user_id'], $_POST["ID"]);
     }
-    ;
+    
 ?>

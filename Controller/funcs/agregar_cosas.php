@@ -60,7 +60,7 @@
     elseif ($tipo === 'usuarios'){
         require('../../Model/Usuarios.php');
         $hash = password_hash($_POST["password"],PASSWORD_DEFAULT);
-        $clase = new Usuario(null,$_POST["nombre"],$_POST["correo"],$hash,$_POST["rol"]); 
+        $clase = new Usuario(null,$_POST["nombre"],$_POST["correo"],$hash,$_POST["rol"],substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, 20)); 
         $clase->agregar($_SESSION['user_id']);
         header('Location:../../Administrar_perfil'); // Y vuelve a la pagina donde estaba antes
     }

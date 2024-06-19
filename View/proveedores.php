@@ -72,7 +72,7 @@
                         <div class="uk-width-1-2@s">
                             <label class="uk-form-label">Nombre</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input nameProvUpdate" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="^([A-ZÑ][a-zñ]{3,})( [A-Z][a-z]{3,})?$" required>
+                                <input class="uk-input nameProvUpdate" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="^[A-ZÑ][a-zñ]{3,} [A-Z][a-z]{3,}?$" required>
                             </div>
                         </div>
                         <div class="uk-width-1-2@s">

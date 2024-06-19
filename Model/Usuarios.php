@@ -6,25 +6,28 @@
         private $correo;
         private $hash;
         private $rol;
+        private $semilla;
 
 
-        function __construct($id=null, $nombre=null,$correo=null,$hash=null,$rol=null){           
+        function __construct($id=null, $nombre=null,$correo=null,$hash=null,$rol=null,$semilla=null){           
             $this->id = $id;
             $this->nombre = $nombre;
             $this->correo = $correo;
             $this->hash = $hash;
             $this->rol = $rol;
+            $this->semilla = $semilla;
             DB::__construct();
 
         }
 
         function agregar($usuario){
-            $query = $this->conn->prepare("INSERT INTO usuarios (nombre, correo, hash, rol) VALUES(:nombre, :correo, :hash, :rol)");
+            $query = $this->conn->prepare("INSERT INTO usuarios (nombre, correo, hash, rol,semilla) VALUES(:nombre, :correo, :hash, :rol,:semilla)");
             
             $query->bindParam(':nombre',$this->nombre, PDO::PARAM_STR);
             $query->bindParam(':correo',$this->correo, PDO::PARAM_STR);
             $query->bindParam(':hash',$this->hash, PDO::PARAM_STR);
             $query->bindParam(':rol',$this->rol, PDO::PARAM_STR);
+            $query->bindParam(':semilla',$this->semilla, PDO::PARAM_STR);
             $query->execute();
             $this->add_bitacora($usuario,"Usuarios","Registrar","Usuario Registrado");
         }
