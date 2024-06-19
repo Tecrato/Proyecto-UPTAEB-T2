@@ -900,10 +900,9 @@ $.ajax({
       let tableDetailProduct = document.getElementById("Detail-product-fact").childElementCount;
 
 
-
       //este json sera el que se envie al server para insertar los datos de la factura
       let json = {
-        id_usuario: 6,
+        id_usuario: session_user_id,
         id_cliente: parseInt(idClient),
         IVA: parseFloat(document.getElementById("iva").textContent).toFixed(2),
         IGTF: parseFloat(document.getElementById("IGTF").textContent).toFixed(2),

@@ -346,6 +346,7 @@
                             <th>Hora Apertura</th>
                             <th>Hora Cierre</th>
                             <th>Total de ventas</th>
+                            <th>Monto Credito</th>
                             <th>Monto Final</th>
                             <th>Estado</th>
                             <th>Acción</th>
@@ -360,6 +361,7 @@
                             <td>8:30 AM</td>
                             <td>8:30 PM</td>
                             <td>15</td>
+                            <td>600.00</td>
                             <td>1500.00</td>
                             <td>
                                 <div class="activeGood uk-border-rounded" style="padding: 5px;">ABIERTA</div>

@@ -32,7 +32,7 @@ CREATE TABLE `bitacora` (
   PRIMARY KEY (`id`),
   KEY `id_usuario_idx` (`id_usuario`),
   CONSTRAINT `id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8mb4
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `bitacora` (
 
 LOCK TABLES `bitacora` WRITE;
 /*!40000 ALTER TABLE `bitacora` DISABLE KEYS */;
-INSERT INTO `bitacora` VALUES (30,6,'Metodos de Pago','Registrar','2024-06-15 21:48:14','Metodo de Pago Registrado'),(31,6,'Login','logueado','2024-06-16 09:34:45','El usuario Edouard inicio sesion'),(32,6,'Proveedor','Desactivado','2024-06-16 09:34:56','Proveedor14 Eliminado'),(33,6,'Metodo de Pago','Eliminar','2024-06-16 09:39:04','Metodo de Pago 9 Eliminado'),(34,6,'Metodo de Pago','Modificar','2024-06-16 09:39:11','Metodo de Pago 8 Modificado'),(35,6,'deslogin','des-logueado','2024-06-16 13:40:53','el usuario Edouard se des-logueo'),(36,6,'Login','logueado','2024-06-16 13:41:08','El usuario Edouard inicio sesion'),(37,6,'Cliente','Registrar','2024-06-16 14:03:12','Cliente Registrado'),(38,6,'Login','logueado','2024-06-16 19:38:56','El usuario Edouard inicio sesion'),(39,6,'Pagos','Registrar','2024-06-16 22:08:24','Pago Registrado'),(40,6,'registrar_ventas','agregar','2024-06-16 22:08:24','se agrego una venta');
+INSERT INTO `bitacora` VALUES (30,6,'Metodos de Pago','Registrar','2024-06-15 21:48:14','Metodo de Pago Registrado'),(31,6,'Login','logueado','2024-06-16 09:34:45','El usuario Edouard inicio sesion'),(32,6,'Proveedor','Desactivado','2024-06-16 09:34:56','Proveedor14 Eliminado'),(33,6,'Metodo de Pago','Eliminar','2024-06-16 09:39:04','Metodo de Pago 9 Eliminado'),(34,6,'Metodo de Pago','Modificar','2024-06-16 09:39:11','Metodo de Pago 8 Modificado'),(35,6,'deslogin','des-logueado','2024-06-16 13:40:53','el usuario Edouard se des-logueo'),(36,6,'Login','logueado','2024-06-16 13:41:08','El usuario Edouard inicio sesion'),(37,6,'Cliente','Registrar','2024-06-16 14:03:12','Cliente Registrado'),(38,6,'Login','logueado','2024-06-16 19:38:56','El usuario Edouard inicio sesion'),(39,6,'Pagos','Registrar','2024-06-16 22:08:24','Pago Registrado'),(40,6,'registrar_ventas','agregar','2024-06-16 22:08:24','se agrego una venta'),(41,6,'deslogin','des-logueado','2024-06-16 23:05:10','el usuario Edouard se des-logueo'),(42,6,'Login','logueado','2024-06-16 23:06:17','El usuario Edouard inicio sesion'),(43,6,'Usuarios','Registrar','2024-06-16 23:07:42','Usuario Registrado'),(44,6,'deslogin','des-logueado','2024-06-16 23:07:52','el usuario Edouard se des-logueo'),(45,6,'Login','logueado','2024-06-16 23:08:32','El usuario Edouard inicio sesion'),(46,6,'Usuarios','Registrar','2024-06-16 23:09:10','Usuario Registrado'),(47,6,'deslogin','des-logueado','2024-06-16 23:09:16','el usuario Edouard se des-logueo'),(48,10,'Login','logueado','2024-06-16 23:09:24','El usuario Alfredo inicio sesion'),(49,10,'deslogin','des-logueado','2024-06-16 23:23:16','el usuario Alfredo se des-logueo'),(50,6,'Login','logueado','2024-06-16 23:23:23','El usuario Edouard inicio sesion'),(51,6,'Usuarios','Eliminados','2024-06-17 00:57:07','Usuario  Eliminado'),(52,6,'Usuarios','Eliminados','2024-06-17 00:57:14','Usuario  Eliminado'),(53,6,'deslogin','des-logueado','2024-06-17 08:49:32','el usuario Edouard se des-logueo'),(54,6,'Login','logueado','2024-06-17 08:55:31','El usuario Edouard inicio sesion'),(55,6,'Usuarios','Registrar','2024-06-17 08:59:16','Usuario Registrado'),(56,6,'Marcas','Registrar','2024-06-17 09:07:48','Marca Registrada'),(57,6,'deslogin','des-logueado','2024-06-17 10:16:39','el usuario Edouard se des-logueo'),(58,6,'Login','logueado','2024-06-17 10:19:24','El usuario Edouard inicio sesion'),(59,6,'Login','logueado','2024-06-18 10:41:53','El usuario Edouard inicio sesion'),(60,6,'Pagos','Registrar','2024-06-18 11:37:59','Pago Registrado'),(61,6,'Pagos','Registrar','2024-06-18 11:37:59','Pago Registrado'),(62,6,'registrar_ventas','agregar','2024-06-18 11:37:59','se agrego una venta'),(63,6,'Metodo de Pago','Modificar','2024-06-18 11:43:21','Metodo de Pago 7 Modificado'),(64,6,'Metodo de Pago','Modificar','2024-06-18 11:43:27','Metodo de Pago 8 Modificado'),(65,6,'deslogin','des-logueado','2024-06-18 11:49:36','el usuario Edouard se des-logueo'),(66,6,'Login','logueado','2024-06-18 11:50:04','El usuario Edouard inicio sesion'),(67,6,'Pagos','Registrar','2024-06-18 11:55:45','Pago Registrado'),(68,6,'registrar_ventas','agregar','2024-06-18 11:55:45','se agrego una venta'),(69,6,'deslogin','des-logueado','2024-06-18 11:56:18','el usuario Edouard se des-logueo'),(70,10,'Login','logueado','2024-06-18 11:56:37','El usuario Alfredo inicio sesion'),(71,10,'deslogin','des-logueado','2024-06-18 12:04:44','el usuario Alfredo se des-logueo'),(72,6,'Login','logueado','2024-06-18 18:42:34','El usuario Edouard inicio sesion'),(73,6,'deslogin','des-logueado','2024-06-19 00:03:02','el usuario Edouard se des-logueo'),(74,6,'Login','logueado','2024-06-19 00:03:25','El usuario Edouard inicio sesion'),(75,6,'Pagos','Registrar','2024-06-19 00:36:21','Pago Registrado'),(76,6,'registrar_ventas','agregar','2024-06-19 00:36:21','se agrego una venta');
 /*!40000 ALTER TABLE `bitacora` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -62,7 +62,7 @@ CREATE TABLE `caja` (
   PRIMARY KEY (`id`),
   KEY `id_user_idx` (`id_usuario`),
   CONSTRAINT `id_user` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -142,7 +142,7 @@ CREATE TABLE `configuracion` (
   `monto_dolar_paralelo` varchar(45) NOT NULL,
   `monto_dolar_bcv` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -163,17 +163,14 @@ DROP TABLE IF EXISTS `credito`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `credito` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `id_cliente` int NOT NULL,
   `id_rv` int NOT NULL,
   `fecha_limite` datetime NOT NULL,
   `monto_final` float NOT NULL,
   `status` blob NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `id_cliente_idx` (`id_cliente`),
   KEY `id_registro_ventas_idx` (`id_rv`),
-  CONSTRAINT `id_client` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id`),
   CONSTRAINT `id_rv` FOREIGN KEY (`id_rv`) REFERENCES `registro_ventas` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -207,7 +204,7 @@ CREATE TABLE `entradas` (
   KEY `id_proveedor` (`id_proveedor`),
   CONSTRAINT `entradas_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id`),
   CONSTRAINT `entradas_ibfk_2` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedores` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -216,7 +213,7 @@ CREATE TABLE `entradas` (
 
 LOCK TABLES `entradas` WRITE;
 /*!40000 ALTER TABLE `entradas` DISABLE KEYS */;
-INSERT INTO `entradas` VALUES (67,31,8,5,'2024-05-27','2024-06-29',15,0,1),(68,32,8,2,'2024-05-27','2024-06-29',5,0,1),(69,33,8,5,'2024-05-27','2024-07-06',9,1,1);
+INSERT INTO `entradas` VALUES (67,31,8,5,'2024-05-27','2024-06-29',15,0,1),(68,32,8,2,'2024-05-27','2024-06-29',5,0,1),(69,33,8,5,'2024-05-27','2024-07-06',9,0,1),(70,31,8,5,'2024-05-26','2024-07-06',10,5,1),(71,34,8,5,'2024-05-26','2024-07-27',15,5,1),(72,31,8,215,'2024-06-06','2024-07-05',21,210,1);
 /*!40000 ALTER TABLE `entradas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -238,7 +235,7 @@ CREATE TABLE `factura` (
   KEY `fk_productos_has_registro_ventas_productos1_idx` (`id_productos`),
   CONSTRAINT `fk_productos_has_registro_ventas_productos1` FOREIGN KEY (`id_productos`) REFERENCES `productos` (`id`),
   CONSTRAINT `fk_productos_has_registro_ventas_registro_ventas1` FOREIGN KEY (`id_registro_ventas`) REFERENCES `registro_ventas` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -247,7 +244,7 @@ CREATE TABLE `factura` (
 
 LOCK TABLES `factura` WRITE;
 /*!40000 ALTER TABLE `factura` DISABLE KEYS */;
-INSERT INTO `factura` VALUES (1,1,31,2,20),(2,50,31,2,20.02),(3,51,31,2,20.02),(4,52,32,1,10.01),(5,53,31,1,10.01),(6,54,32,1,10.01),(7,55,33,3,45.03),(8,56,33,1,15.01);
+INSERT INTO `factura` VALUES (1,59,31,2,20.02);
 /*!40000 ALTER TABLE `factura` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -262,7 +259,7 @@ CREATE TABLE `marcas` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -271,7 +268,7 @@ CREATE TABLE `marcas` (
 
 LOCK TABLES `marcas` WRITE;
 /*!40000 ALTER TABLE `marcas` DISABLE KEYS */;
-INSERT INTO `marcas` VALUES (1,'polar'),(3,'Juana');
+INSERT INTO `marcas` VALUES (1,'polar'),(3,'Juana'),(12,'La cristal');
 /*!40000 ALTER TABLE `marcas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -304,7 +301,7 @@ CREATE TABLE `metodo_pago` (
   `nombre` varchar(45) NOT NULL,
   `active` tinyint NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -313,7 +310,7 @@ CREATE TABLE `metodo_pago` (
 
 LOCK TABLES `metodo_pago` WRITE;
 /*!40000 ALTER TABLE `metodo_pago` DISABLE KEYS */;
-INSERT INTO `metodo_pago` VALUES (7,'Transferencias',1),(8,'Efectivos',1),(9,'Divisa',1);
+INSERT INTO `metodo_pago` VALUES (7,'Transferencia',1),(8,'Efectivo',1),(9,'Divisa',1);
 /*!40000 ALTER TABLE `metodo_pago` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -347,7 +344,7 @@ CREATE TABLE `movimientos_capital` (
   `descripcion` varchar(200) NOT NULL,
   `fecha` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -370,13 +367,13 @@ CREATE TABLE `pagos` (
   `id` int NOT NULL AUTO_INCREMENT,
   `id_venta` int NOT NULL,
   `id_metodo_pago` int NOT NULL,
-  `monto` int NOT NULL,
+  `monto` float NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_venta_idx` (`id_venta`),
   KEY `id_metodo_pago_idx` (`id_metodo_pago`),
   CONSTRAINT `id_metodo_pago` FOREIGN KEY (`id_metodo_pago`) REFERENCES `metodo_pago` (`id`),
   CONSTRAINT `id_venta` FOREIGN KEY (`id_venta`) REFERENCES `registro_ventas` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -385,7 +382,7 @@ CREATE TABLE `pagos` (
 
 LOCK TABLES `pagos` WRITE;
 /*!40000 ALTER TABLE `pagos` DISABLE KEYS */;
-INSERT INTO `pagos` VALUES (1,56,7,15);
+INSERT INTO `pagos` VALUES (1,59,7,23.22);
 /*!40000 ALTER TABLE `pagos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -409,6 +406,7 @@ CREATE TABLE `productos` (
   `precio_venta` float NOT NULL DEFAULT '0',
   `IVA` tinyint NOT NULL,
   `active` tinyint DEFAULT '1',
+  `ganancia` float NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nombre` (`nombre`),
   KEY `id_categoria_idx` (`id_categoria`),
@@ -417,7 +415,7 @@ CREATE TABLE `productos` (
   CONSTRAINT `id_categoria` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id`),
   CONSTRAINT `id_marca` FOREIGN KEY (`id_marca`) REFERENCES `marcas` (`id`),
   CONSTRAINT `id_unidad` FOREIGN KEY (`id_unidad`) REFERENCES `unidades` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -426,7 +424,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES (1,1,1,1,150,'pan','afafef',5,10,15,0,1),(31,1,2,1,1,'Azucar','producto_Azucar_5e5294ee-d7d2-424d-ac2e-5802bbad41ab.jpeg',5,10,10.01,1,1),(32,2,2,3,1,'Harina','producto_Harina_2551fe44-3bc1-476e-b084-e7ff84eb8600.jpeg',10,20,10.01,0,1),(33,2,2,1,1,'Arroz','producto_Arroz_2c51307c-9d9f-41fb-9419-1e61a44891f0.jpeg',5,10,15.01,0,1);
+INSERT INTO `productos` VALUES (1,1,1,1,150,'pan','afafef',5,10,15,0,1,0),(31,1,2,1,1,'Azucar','producto_Azucar_5e5294ee-d7d2-424d-ac2e-5802bbad41ab.jpeg',5,10,10.01,1,1,0),(32,2,2,3,1,'Harina','producto_Harina_2551fe44-3bc1-476e-b084-e7ff84eb8600.jpeg',10,20,10.01,0,1,0),(33,2,2,1,1,'Arroz','producto_Arroz_2c51307c-9d9f-41fb-9419-1e61a44891f0.jpeg',5,10,15.01,0,1,0),(34,2,2,12,1,'Pasta','producto_Pasta_arroz.jpeg',5,20,15,0,1,0);
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -487,14 +485,17 @@ CREATE TABLE `registro_ventas` (
   `fecha` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `id_cliente` int NOT NULL,
   `id_usuario` int NOT NULL,
-  `IVA` int NOT NULL DEFAULT '0',
+  `id_caja` int DEFAULT NULL,
+  `IVA` float NOT NULL DEFAULT '0',
   `active` tinyint NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `id_cliente_idx` (`id_cliente`),
   KEY `id_usuario_idx` (`id_usuario`),
+  KEY `id_caja_idx` (`id_caja`),
+  CONSTRAINT `id_caja` FOREIGN KEY (`id_caja`) REFERENCES `caja` (`id`),
   CONSTRAINT `id_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id`),
   CONSTRAINT `id_usuario2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -503,7 +504,7 @@ CREATE TABLE `registro_ventas` (
 
 LOCK TABLES `registro_ventas` WRITE;
 /*!40000 ALTER TABLE `registro_ventas` DISABLE KEYS */;
-INSERT INTO `registro_ventas` VALUES (1,20,'2024-06-15 21:48:14',12,6,3,1),(50,23.22,'2024-06-16 21:47:06',12,6,3,1),(51,23.22,'2024-06-16 21:52:23',12,6,3,1),(52,10.01,'2024-06-16 21:52:50',12,6,0,1),(53,11.61,'2024-06-16 21:53:20',12,6,2,1),(54,10.01,'2024-06-16 22:04:17',12,6,0,1),(55,45.03,'2024-06-16 22:07:08',12,6,0,1),(56,15.01,'2024-06-16 22:08:24',12,6,0,1);
+INSERT INTO `registro_ventas` VALUES (59,23.22,'2024-06-19 00:36:21',12,6,NULL,3.2,1);
 /*!40000 ALTER TABLE `registro_ventas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -572,8 +573,9 @@ CREATE TABLE `usuarios` (
   `hash` text NOT NULL,
   `rol` int NOT NULL DEFAULT '3',
   `active` tinyint NOT NULL DEFAULT '1',
+  `semilla` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -582,7 +584,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (5,'asd','jaja@gmail.com','$2y$10$fdgc0QZ4YyBMB3ix3jV5AOesVSZFCRrTZ.UUHr61qjviWGq7zi7h2',1,1),(6,'Edouard','nose@gmail.com','$2y$10$7L2.rmi.NOr9wz7vSo1SYu58aIcXZLOVZkfZ2sZPx1moc4vfMjQBW',1,1),(7,'John','johnconnor@gmail.com','$2y$10$EgZWh1WmrpMGrsF9K2DjyeL5YTds6aS3.Rku/.h8P7wk7ltODzf9e',2,1);
+INSERT INTO `usuarios` VALUES (5,'asd','jaja@gmail.com','$2y$10$fdgc0QZ4YyBMB3ix3jV5AOesVSZFCRrTZ.UUHr61qjviWGq7zi7h2',1,1,''),(6,'Edouard','nose@gmail.com','$2y$10$7L2.rmi.NOr9wz7vSo1SYu58aIcXZLOVZkfZ2sZPx1moc4vfMjQBW',1,1,''),(7,'John','johnconnor@gmail.com','$2y$10$EgZWh1WmrpMGrsF9K2DjyeL5YTds6aS3.Rku/.h8P7wk7ltODzf9e',2,1,''),(10,'Alfredo','alfredo@gmail.com','$2y$10$8nUZSX2kXCVysLvCLirVyuhfeUSB0uICkZsl3kiDJY4kqlZCI8DKu',2,1,''),(11,'Pedro','garnicaluis391@gmail.com','$2y$10$hK9fotzmkm/BvMtkUEiK0e8kdG/PtmF13R.Wpn.lIRWC29F1c1i3m',1,1,'');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -685,4 +687,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-16 22:41:13
+-- Dump completed on 2024-06-19  0:39:14

@@ -4,7 +4,6 @@ $.ajax({
   type: "GET",
   data: { randomnautica: "ventas" , limite:500},
   success: function (response) {
-    console.log(response);
     let json = JSON.parse(response);
     let ContainerTarget = document.querySelector(".Contanier_fact_item");
     let template = "";
