@@ -24,12 +24,10 @@
             a.fecha,
             b.nombre nom_cliente,
             b.apellido apell_cliente,
-            u.nombre vendedor,
+            a.id_usuario vendedor,
             a.IVA 
             FROM registro_ventas a 
-            INNER JOIN clientes b ON b.id = a.id_cliente
-            INNER JOIN caja c ON c.id=a.id_caja
-            INNER JOIN usuarios u ON u.id=c.id_usuario";
+            INNER JOIN clientes b ON b.id = a.id_cliente";
 
             if ($this->id != null){
                 $query = $query." WHERE a.id=:id";
