@@ -2,6 +2,7 @@
     // Con este archivo se buscan datos de ciertas maneras, dependiendo de lo que pase como "randomnautica"
     
     require('../../Model/Conexion.php');
+    require('../../Model/Permisos.php');
     include("../funcs/verificar.php");
 
     if (isset($_GET['limite'])) {
@@ -16,7 +17,14 @@
     else {
         $n = 0;
     }
-     
+
+    $other_class = new Permiso(null,$_SESSION['user_id'],$_GET['randomnautica'],'buscar');
+    
+    if ($other_class->search() <= 0) {
+        echo json_encode(['status' => 'active','error'=>'Permiso Error (sus-pechoso)']);
+        exit(0);
+        die();
+    }
 
     if ($_GET['randomnautica'] == "productos") {
         require('../../Model/Productos.php');
@@ -80,6 +88,10 @@
         require('../../Model/Credito.php');
         $clase = new Credito();
     }
+    elseif ($_GET['randomnautica'] == "premiso") {
+        require('../../Model/Permisos.php');
+        $clase = new Permiso();
+    }
 
 
 
@@ -96,7 +108,6 @@
     else {
         $result = $clase->search(n:$n,limite:$limite);
     }
-
 
     $json = [
         'lista'=> $result

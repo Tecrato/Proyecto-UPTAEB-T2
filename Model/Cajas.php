@@ -16,7 +16,7 @@
 			$this->monto_final = $monto_final;
 			$this->fecha = $fecha;
 			$this->estado = $estado;
-		}
+		} # SELECT (SELECT SUM(r.monto_final) FROM registro_ventas as r WHERE r.id_caja=c.id) from caja c
 
         function abrir(){
             $query = $this->conn->prepare("INSERT INTO caja(id_usuario,monto_inicial,monto_final,estado) VALUES(null, :id_usuario, :monto_inicial, :monto_final, :estado)");
@@ -30,7 +30,7 @@
 
         function search($n=0,$limite=100, $order=' id DESC '){
             // Al igual que la clase anterior, puede buscar segun muchos valores o solo algunos
-            $query = "SELECT * FROM caja";
+            $query = "SELECT * FROM caja as a WHERE 1";
 
                     
 			$lista = [];
@@ -82,6 +82,15 @@
             $query->bindParam(':mf',$this->monto_final);
             $query->execute();
 			$this->add_bitacora($this->id_usuario,"Caja","Cerrar","Caja cerrada");
+        }
+
+        function buscar_ultima() {
+            $caja = new Caja(id_usuario:$this->id_usuario, estado:1);
+            $caja = $this->search(order:' id DESC')[0];
+            if (count($caja) == 0) {
+                return;
+                }
+            return $caja[0];
         }
 
 	}
