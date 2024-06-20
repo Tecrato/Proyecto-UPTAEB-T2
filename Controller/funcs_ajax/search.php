@@ -19,9 +19,9 @@
     }
 
     $other_class = new Permiso(null,$_SESSION['user_id'],$_GET['randomnautica'],'buscar');
-    
-    if ($other_class->search() <= 0) {
-        echo json_encode(['status' => 'active','error'=>'Permiso Error (sus-pechoso)']);
+    $result = $other_class->search();
+    if (count($result) <= 0) {
+        echo json_encode(['status' => 'error','error'=>'Permiso Error (bueno ps)']);
         exit(0);
         die();
     }
@@ -65,7 +65,7 @@
         require('../../Model/Unidades.php');
         $clase = new Unidad();
     }
-    elseif ($_GET['randomnautica'] == "marca") {
+    elseif ($_GET['randomnautica'] == "marcas") {
         require('../../Model/Marcas.php');
         $clase = new Marca();
     }

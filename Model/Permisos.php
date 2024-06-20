@@ -30,18 +30,19 @@
 			$this->add_bitacora($usuario,"Permisos","Eliminar","Permiso".$this->id. " Eliminado");
         }
         function search($n=0,$limite=9){
-            $query = "SELECT * FROM permisos WHERE 1";
+            $query = "SELECT * FROM permisos as a WHERE 1";
 
+            $lista=[];
             if ($this->id){
             	array_push($lista,'id');
             }
             if ($this->id_usuario){
                 array_push($lista, 'id_usuario');
             }
-            if ($this->estado){
+            if ($this->tabla){
                 array_push($lista, 'tabla');
             }
-            if ($this->estado){
+            if ($this->permiso){
                 array_push($lista, 'permiso');
             }
             if ($lista) {
@@ -63,14 +64,14 @@
             if ($this->id != null){
                 $consulta->bindParam(':id',$this->id, PDO::PARAM_INT);
             }
-            if ($this->id != null){
-                $consulta->bindParam(':id_usuario',$this->id, PDO::PARAM_INT);
+            if ($this->id_usuario != null){
+                $consulta->bindParam(':id_usuario',$this->id_usuario, PDO::PARAM_INT);
             }
-            if ($this->id != null){
-                $consulta->bindParam(':tabla',$this->id, PDO::PARAM_INT);
+            if ($this->tabla != null){
+                $consulta->bindParam(':tabla',$this->tabla, PDO::PARAM_STR);
             }
-            if ($this->id != null){
-                $consulta->bindParam(':permiso',$this->id, PDO::PARAM_INT);
+            if ($this->permiso != null){
+                $consulta->bindParam(':permiso',$this->permiso, PDO::PARAM_STR);
             }
             $consulta->execute();
             return $consulta->fetchAll();
