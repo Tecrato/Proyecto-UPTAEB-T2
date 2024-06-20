@@ -1,12 +1,67 @@
 <?php require("../View/complementos/header.php"); ?>
 
 <main class="Bg-Main-home2">
-<!-- <h2 class="uk-text-bolder uk-light uk-margin-remove-bottom uk-padding uk-padding-remove-bottom">BIENVENIDO USUARIO</h2> -->
-<div class="uk-margin uk-heading-line uk-text-left uk-margin-remove-bottom uk-padding uk-padding-remove-bottom">
-    <h2 class="uk-text-bolder uk-text-uppercase uk-light">BIENVENIDO <?php echo $_SESSION['user_name']; ?></h2>
-</div>
+    <!-- <h2 class="uk-text-bolder uk-light uk-margin-remove-bottom uk-padding uk-padding-remove-bottom">BIENVENIDO USUARIO</h2> -->
+    <div class="uk-margin uk-heading-line uk-text-left uk-margin-remove-bottom uk-padding uk-padding-remove-bottom">
+        <h2 class="uk-text-bolder uk-text-uppercase uk-light">BIENVENIDO <?php echo $_SESSION['user_name']; ?></h2>
+    </div>
 
     <div class="[email protected] uk-grid-small uk-flex-wrap uk-flex-center uk-padding-small" uk-grid>
+
+        <div class="uk-width-1-1 uk-margin-medium-top">
+            <div class="[email protected] uk-grid-small uk-flex-wrap uk-flex-center uk-padding-small" uk-grid>
+                <div class="uk-width-1-4">
+                    <section class="uk-car uk-flex uk-flex-between uk-flex-middle uk-card-default uk-card-body uk-background-secondary uk-light">
+                        <article>
+                            <h2 class="uk-margin-remove-top">0.00</h2>
+                            <p class="uk-margin-remove-bottom">GANANCIAS</p>
+                        </article>
+                        <article>
+                            <span uk-icon="icon: dolar; ratio: 5"></span>
+                        </article>
+                    </section>
+                </div>
+
+
+                <div class="uk-width-1-4">
+                    <section class="uk-car uk-flex uk-flex-between uk-flex-middle uk-card-default uk-card-body uk-background-secondary uk-light">
+                        <article>
+                            <h2 class="uk-margin-remove-top">0.00</h2>
+                            <p class="uk-margin-remove-bottom">CLIENTES</p>
+                        </article>
+                        <article>
+                            <span uk-icon="icon: users; ratio: 4"></span>
+                        </article>
+                    </section>
+                </div>
+
+                <div class="uk-width-1-4">
+                    <section class="uk-car uk-flex uk-flex-between uk-flex-middle uk-card-default uk-card-body uk-background-secondary uk-light">
+                        <article>
+                            <h2 class="uk-margin-remove-top">0.00</h2>
+                            <p class="uk-margin-remove-bottom">PROVEEDORES</p>
+                        </article>
+                        <article>
+                            <span uk-icon="icon: bookmark; ratio: 4"></span>
+                        </article>
+                    </section>
+                </div>
+
+                <div class="uk-width-1-4">
+                    <section class="uk-car uk-flex uk-flex-between uk-flex-middle uk-card-default uk-card-body uk-background-secondary uk-light">
+                        <article>
+                            <h2 class="uk-margin-remove-top">0.00</h2>
+                            <p class="uk-margin-remove-bottom">FACTURAS</p>
+                        </article>
+                        <article>
+                            <span uk-icon="icon: factura; ratio: 4"></span>
+                        </article>
+                    </section>
+                </div>
+
+            </div>
+        </div>
+
         <div class="uk-width-1-2 uk-margin-medium-top Card-items">
             <div class="uk-card uk-card-default uk-card-body uk-background-secondary uk-light">
                 <article>
@@ -15,31 +70,43 @@
                 </article>
                 <hr class="uk-divide">
                 <section class="uk-flex uk-flex-center uk-flex-wrap section-home uk-margin-medium-top uk-margin-medium-bottom">
-                    <?php for ($i=0; $i < count($categoria); $i++){ 
-                        $row = $categoria[$i];
-                        $url;
-                        if ($row['nombre'] == 'Bebida') {
-                            $url = "./static/images/refresco.png";
+                    <article class="uk-flex uk-flex-center Container-stats ">
+                        <span uk-icon="icon: category; ratio: 4.5"></span>
+                        <div class="uk-margin-small-left uk-text-truncate">
+                            <h3>5</h3>
+                            <p class="">Bebidas</p>
+                        </div>
+                    </article>
 
-                        } elseif ($row['nombre'] == 'Alimentos') {
+                    
+                    <article class="uk-flex uk-flex-center Container-stats ">
+                        <span uk-icon="icon: category; ratio: 4.5"></span>
+                        <div class="uk-margin-small-left uk-text-truncate">
+                            <h3>5</h3>
+                            <p class="">Bebidas</p>
+                        </div>
+                    </article>
 
-                            $url = "./static/images/alimentos.png";
-                        } elseif ($row['nombre'] == 'Limpieza/Aseo personal'){
+                    
+                    <article class="uk-flex uk-flex-center Container-stats ">
+                        <span uk-icon="icon: category; ratio: 4.5"></span>
+                        <div class="uk-margin-small-left uk-text-truncate">
+                            <h3>5</h3>
+                            <p class="">Bebidas</p>
+                        </div>
+                    </article>
 
-                            $url = "./static/images/higiene-personal.png";
+                    
+                    <article class="uk-flex uk-flex-center Container-stats ">
+                        <span uk-icon="icon: category; ratio: 4.5"></span>
+                        <div class="uk-margin-small-left uk-text-truncate">
+                            <h3>5</h3>
+                            <p class="">Bebidas</p>
+                        </div>
+                    </article>
 
-                        } elseif ($row['nombre'] == 'Chucherias') {
-                            $url = "./static/images/aperitivos.png";
-                        }
-                         
-                    echo '  <article class="uk-flex uk-flex-center Container-stats ">
-                                <img src="'.$url.'" alt="" width="115px">
-                                <div class="uk-margin-small-left uk-text-truncate">
-                                    <h3>'.$row['maximo_stock'].'</h3>
-                                    <p class="">'.$row['nombre'].'</p>
-                                </div>
-                            </article>';
-                    }?>
+                    
+
                 </section>
                 <hr class="uk-divide">
                 <div class="uk-flex uk-flex-center ">
@@ -47,10 +114,6 @@
                 </div>
             </div>
         </div>
-
-
-
-
 
         <div class="uk-width-1-2 uk-margin-medium-top padding Card-items">
             <div class="uk-card uk-card-default uk-card-body uk-background-secondary uk-light">
@@ -73,16 +136,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php for ($i=0; $i < count($result); $i++) { 
-                                    $row = $result[$i]; 
-                                    echo '
+                            <?php for ($i = 0; $i < count($result); $i++) {
+                                $row = $result[$i];
+                                echo '
                                 <tr>
-                                    <td><img class="uk-preserve-width uk-border-circle" src="./Media/imagenes/'.$row['imagen'].'" style="width: 48px; height: 48px; object-fit: cover;" alt=""></td>
-                                    <td>'.$row['nombre'].'</td>
-                                    <td>'.$row['precio_venta'].'</td>
+                                    <td><img class="uk-preserve-width uk-border-circle" src="./Media/imagenes/' . $row['imagen'] . '" style="width: 48px; height: 48px; object-fit: cover;" alt=""></td>
+                                    <td>' . $row['nombre'] . '</td>
+                                    <td>' . $row['precio_venta'] . '</td>
 
                                 </tr>';
-                             } ?>
+                            } ?>
                         </tbody>
 
                     </table>
@@ -93,44 +156,57 @@
         <div class="uk-width-1-2 uk-margin-medium-top Card-items">
             <div class="uk-card uk-card-default uk-card-body uk-background-secondary uk-light">
                 <div>
-                    <h3 class="uk-text-center uk-text-bold">PRODUCTOS MAS VENDIDOS</h3>
+                    <h3 class="uk-text-center uk-text-bold">RATIO VENTAS</h3>
                     <hr class="uk-margin-remove">
                 </div>
-                <?php  for ($i=0; $i < count($MasV); $i++)  {  
-                        $row = $MasV[$i];
-                    echo '
-                    <section class="uk-flex uk-flex-around uk-margin-medium-top">
-                        <article>
-                            <img class="uk-preserve-width uk-border-circle" src="./static/images/logo_m.png" width="60" height="60" alt="">
-                            <span class="uk-text-lead uk-text-bold uk-margin-left uk-text-uppercase">'.$row['nombre'].'</span>
-                        </article>
-                        <article>
-                            <h3 class="uk-text-bolder" style="font-size: 33px;">'.$row['total_vendido'].'</h3>
-                        </article>
-                    </section>';
-                } ?>
+
+                <table class="uk-table uk-table-divider">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>#</th>
+                            <th>PRODUCTO</th>
+                            <th>%</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span uk-icon="icon: factura; ratio: 1.5"></span></td>
+                            <td>1</td>
+                            <td>HARINA</td>
+                            <td>9 %</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
         <div class="uk-width-1-2 uk-margin-medium-top Card-items">
             <div class="uk-card uk-card-default uk-card-body uk-background-secondary uk-light">
                 <div>
-                    <h3 class="uk-text-center uk-text-bold">PRODUCTOS MENOS VENDIDOS</h3>
+                    <h3 class="uk-text-center uk-text-bold">CLIENTES FRECUENTES</h3>
                     <hr class="uk-margin-remove">
                 </div>
-                <?php  for ($i=0; $i < count($MenosV); $i++){ 
-                    $row = $MenosV[$i];
-                    echo'
-                    <section class="uk-flex uk-flex-around uk-margin-medium-top">
-                        <article>
-                            <img class="uk-preserve-width uk-border-circle" src="./static/images/logo_m.png" width="60" height="60" alt="">
-                            <span class="uk-text-lead uk-text-bold uk-margin-left uk-text-uppercase">'.$row['nombre'].'</span>
-                        </article>
-                        <article>
-                            <h3 class="uk-text-bolder" style="font-size: 33px;">'.$row['total_vendido'].'</h3>
-                        </article>
-                    </section>
-                ';} ?>
+
+                <table class="uk-table uk-table-divider">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>#</th>
+                            <th>CLIENTE</th>
+                            <th>COMPRAS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span uk-icon="icon: user; ratio: 1.5"></span></td>
+                            <td>1</td>
+                            <td>JOSE</td>
+                            <td>9</td>
+                        </tr>
+                    </tbody>
+                </table>
+
             </div>
         </div>
     </div>
@@ -140,4 +216,5 @@
 <script src="static/javascript/ChangeColor.js"></script>
 
 </body>
+
 </html>
