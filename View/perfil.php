@@ -33,53 +33,80 @@
                 </div>
                 <div class="uk-width-expand@m">
                     <div id="component-tab-left" class="uk-switcher">
+
                         <div>
-                            <?php if ($_SESSION['rol'] == 'Administrador') { ?>
+
+                            <div class="uk-child-width-1-1@s" uk-grid>
                                 <div>
-                                    <div>
-                                        <div class="uk-flex uk-flex-middle uk-flex-between uk-flex-wrap uk-margin-small-bottom uk-light">
-                                            <h2 class="uk-margin-remove">ADMINISTRAR PERFIL</h2>
-                                            <div class="newUser uk-flex">
-                                                <a href="#register_user" uk-toggle class="uk-button uk-button-default uk-flex uk-flex-middle uk-border-rounded">
-                                                    <p class="uk-margin-remove">CREAR USUARIO</p>
-                                                </a>
-                                            </div>
+                                    <div uk-grid>
+                                        <div class="uk-width-auto@m">
+                                            <ul class="uk-tab-left" uk-tab="connect: #component-tab-user; animation: uk-animation-fade">
+                                                <li>
+                                                    <a href="#">
+                                                        <span class="uk-margin-small-right" uk-icon="users"></span>USUARIO
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <span class="uk-margin-small-right" uk-icon="settings"></span>ROLES Y FUNCIONES
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <span class="uk-margin-small-right" uk-icon="album"></span>ASIGNAR MODULOS
+                                                    </a>
+                                                </li>
+                                            </ul>
                                         </div>
-                                    </div>
-                                </div>
-                            <?php }; ?>
+                                        <div class="uk-width-expand@m">
+                                            <div id="component-tab-user" class="uk-switcher">
+                                                <li>
+                                                    <?php if ($_SESSION['rol'] == 'Administrador') { ?>
+                                                        <div>
+                                                            <div>
+                                                                <div class="uk-flex uk-flex-middle uk-flex-between uk-flex-wrap uk-margin-small-bottom uk-light">
+                                                                    <h2 class="uk-margin-remove">ADMINISTRAR PERFIL</h2>
+                                                                    <div class="newUser uk-flex">
+                                                                        <a href="#register_user" uk-toggle class="uk-button uk-button-default uk-flex uk-flex-middle uk-border-rounded">
+                                                                            <p class="uk-margin-remove">CREAR USUARIO</p>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    <?php }; ?>
 
-                            <section class="container-item_profile uk-flex">
+                                                    <section class="container-item_profile uk-flex">
 
-                                <div class="item_profile-target">
-                                    <div class="uk-margin">
-                                        <img width="160px" src="static/images/undraw_profile.svg" alt="">
-                                    </div>
-                                    <div>
-                                        <h3 class="uk-text-center "><?php echo $_SESSION['user_name']; ?></h3>
-                                        <p class="uk-text-center uk-margin-remove-bottom"><?php echo $_SESSION['rol']; ?></p>
-                                    </div>
-                                </div>
+                                                        <div class="item_profile-target">
+                                                            <div class="uk-margin">
+                                                                <img width="160px" src="static/images/undraw_profile.svg" alt="">
+                                                            </div>
+                                                            <div>
+                                                                <h3 class="uk-text-center "><?php echo $_SESSION['user_name']; ?></h3>
+                                                                <p class="uk-text-center uk-margin-remove-bottom"><?php echo $_SESSION['rol']; ?></p>
+                                                            </div>
+                                                        </div>
 
-                                <div class="item_profile-target-2">
-                                    <ul class="switcherEdit" uk-tab uk-switcher>
-                                        <li><a href="#">Perfil</a></li>
-                                        <li><a href="#">Editar</a></li>
-                                    </ul>
+                                                        <div class="item_profile-target-2">
+                                                            <ul class="switcherEdit" uk-tab uk-switcher>
+                                                                <li><a href="#">Perfil</a></li>
+                                                                <li><a href="#">Editar</a></li>
+                                                            </ul>
 
-                                    <ul class="uk-switcher uk-margin">
-                                        <li>
-                                            <h3>Acerca de</h3>
-                                            <p class="uk-article-meta uk-margin-small">Sistema de facturacion</p>
+                                                            <ul class="uk-switcher uk-margin">
+                                                                <li>
+                                                                    <h3>Acerca de</h3>
+                                                                    <p class="uk-article-meta uk-margin-small">Sistema de facturacion</p>
 
-                                            <div>
-                                                <h3>Detalles del perfil</h3>
-                                                <div class="uk-flex">
-                                                    <p class="item-profile">Nombre </p><span class="uk-article-meta"> <?php echo $tu['nombre']; ?></span>
-                                                </div>
-                                                <?php
+                                                                    <div>
+                                                                        <h3>Detalles del perfil</h3>
+                                                                        <div class="uk-flex">
+                                                                            <p class="item-profile">Nombre </p><span class="uk-article-meta"> <?php echo $tu['nombre']; ?></span>
+                                                                        </div>
+                                                                        <?php
 
-                                                echo '
+                                                                        echo '
                                                     <div class="uk-flex">
                                                         <p class="item-profile">Correo</p><span class="uk-article-meta">' . $tu['correo'] . '</span>
                                                     </div>
@@ -87,75 +114,390 @@
                                                         <p class="item-profile uk-margin-remove-bottom">Tipo de usuario</p>
                                                         <span class="uk-article-meta">' . $_SESSION['rol'] . '</span>
                                                     </div>';
-                                                ?>
-                                                <div class="uk-flex uk-margin-top">
-                                                    <p class="item-profile">Semilla</p>
-                                                    <span class="uk-article-meta uk-flex">
-                                                        <input class="uk-input uk-form-small uk-form-width-medium uk-border-rounded input-seed" type="text">
-                                                        <a class="uk-icon-button uk-margin-small-left btn-generate" uk-icon="refresh" uk-tooltip="Generar"></a>
-                                                    </span>
-                                                </div>
+                                                                        ?>
+                                                                        <div class="uk-flex uk-margin-top">
+                                                                            <p class="item-profile">Semilla</p>
+                                                                            <span class="uk-article-meta uk-flex">
+                                                                                <input class="uk-input uk-form-small uk-form-width-medium uk-border-rounded input-seed" type="text">
+                                                                                <a class="uk-icon-button uk-margin-small-left btn-generate" uk-icon="refresh" uk-tooltip="Generar"></a>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    <form class="uk-form-horizontal uk-margin-large" method="POST" action="Controller/funcs/modificar_cosas.php">
+                                                                        <input type=number value=<?php echo $tu['id'] ?> name="ID" style="display:none">
+                                                                        <input type=text value="usuario" name="tipo" style="display:none">
+                                                                        <input type=text value="zi" name="self" style="display:none">
+                                                                        <div class="uk-margin">
+                                                                            <label class="uk-form-label" for="form-horizontal-text">Nombre</label>
+                                                                            <div class="uk-form-controls">
+                                                                                <input class="uk-input" value="<?php echo $tu['nombre'] ?>" type="text" placeholder="Nombre" name="nombre">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="uk-margin">
+                                                                            <label class="uk-form-label" for="form-horizontal-text">Correo</label>
+                                                                            <div class="uk-form-controls">
+                                                                                <input class="uk-input" value="<?php echo $tu['correo'] ?>" name="correo" type="email" placeholder="Correo">
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="uk-margin-small-top uk-flex uk-flex-center">
+                                                                            <div>
+                                                                                <input class="uk-button uk-button-default" type="submit" value="Guardar">
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </li>
+
+                                                            </ul>
+                                                        </div>
+
+                                                    </section>
+                                                    <?php if ($_SESSION['rol'] == 'Administrador') { ?>
+                                                        <section>
+                                                            <div class="uk-flex uk-flex-center uk-margin-medium-top">
+                                                                <h2>USUARIOS REGISTRADOS</h2>
+                                                            </div>
+                                                            <div class="uk-overflow-auto uk-light uk-margin-small-top">
+                                                                <table class="uk-table uk-table-small uk-table-divider uk-table-hover">
+                                                                    <thead class="uk-background-secondary">
+                                                                        <tr>
+                                                                            <th>ID</th>
+                                                                            <th>Nombre</th>
+                                                                            <th>Correo</th>
+                                                                            <th>Rol</th>
+                                                                            <th>Acciones</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <?php
+
+                                                                        for ($i = 0; $i < count($result); $i++) {
+                                                                            $row = $result[$i];
+                                                                            require('complementos/tabla_usuario.php');
+                                                                        }
+                                                                        ?>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </section>
+                                                    <?php }; ?>
+                                                </li>
+
+
+                                                <li>
+                                                    <h3>ROLES</h3>
+
+                                                    <a href="#modal_rol" uk-toggle class="uk-button uk-button-default">AGREGAR ROL</a>
+                                                    <table class="uk-table uk-table-hover uk-table-divider uk-light">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>ROL</th>
+                                                                <th>CONSULTAR</th>
+                                                                <th>AGREGAR</th>
+                                                                <th>MODIFICAR</th>
+                                                                <th>ELIMINAR</th>
+                                                                <th>IMPRIMIR</th>
+                                                                <th>FACTURAR</th>
+                                                                <th>CREDITO</th>
+                                                                <th>CAJA</th>
+                                                                <th>ACCION</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>ADMINISTRADOR</td>
+                                                                <td><button disabled class="uk-icon-button" uk-icon="check"></button></td>
+                                                                <td><button disabled class="uk-icon-button" uk-icon="check"></button></td>
+                                                                <td><button disabled class="uk-icon-button" uk-icon="close"></button></td>
+                                                                <td><button disabled class="uk-icon-button" uk-icon="check"></button></td>
+                                                                <td><button disabled class="uk-icon-button" uk-icon="check"></button></td>
+                                                                <td><button disabled class="uk-icon-button" uk-icon="check"></button></td>
+                                                                <td><button disabled class="uk-icon-button" uk-icon="check"></button></td>
+                                                                <td><button disabled class="uk-icon-button" uk-icon="check"></button></td>
+                                                                <td>
+                                                                    <div class="uk-flex">
+                                                                        <a href="" class="uk-icon-button uk-margin-small-right" uk-icon="pencil"></a>
+                                                                        <a href="" class="uk-icon-button" uk-icon="trash"></a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+
+
+                                                    <!--******************* MODAL DE AGREGAR ROL *******************-->
+
+                                                    <div id="modal_rol" uk-modal>
+                                                        <div class="uk-modal-dialog">
+                                                            <button class="uk-modal-close-default" type="button" uk-close></button>
+                                                            <div class="uk-modal-header">
+                                                                <h2 class="uk-modal-title">REGISTRAR ROL</h2>
+                                                            </div>
+                                                            <div class="uk-modal-body">
+                                                                <section class="uk-flex uk-flex-center">
+                                                                    <form class="uk-form-horizontal">
+
+                                                                        <div class="uk-margin">
+                                                                            <label class="uk-form-label" for="form-horizontal-text">TODO</label>
+                                                                            <div class="uk-form-controls">
+                                                                                <label for="" class="uk-margin-medium-right">
+                                                                                    <input class="uk-radio" type="radio" name="hola">
+                                                                                    SI
+                                                                                </label>
+                                                                                <label for="">
+                                                                                    <input class="uk-radio" type="radio" name="hola">
+                                                                                    NO
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="uk-margin">
+                                                                            <label class="uk-form-label" for="form-horizontal-text">CONSULTAR</label>
+                                                                            <div class="uk-form-controls">
+                                                                                <label for="" class="uk-margin-medium-right">
+                                                                                    <input class="uk-radio" type="radio" name="hola">
+                                                                                    SI
+                                                                                </label>
+                                                                                <label for="">
+                                                                                    <input class="uk-radio" type="radio" name="hola">
+                                                                                    NO
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="uk-margin">
+                                                                            <label class="uk-form-label" for="form-horizontal-text">AGREGAR</label>
+                                                                            <div class="uk-form-controls">
+                                                                                <label for="" class="uk-margin-medium-right">
+                                                                                    <input class="uk-radio" type="radio" name="hola">
+                                                                                    SI
+                                                                                </label>
+                                                                                <label for="">
+                                                                                    <input class="uk-radio" type="radio" name="hola">
+                                                                                    NO
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="uk-margin">
+                                                                            <label class="uk-form-label" for="form-horizontal-text">MODIFICAR</label>
+                                                                            <div class="uk-form-controls">
+                                                                                <label for="" class="uk-margin-medium-right">
+                                                                                    <input class="uk-radio" type="radio" name="hola">
+                                                                                    SI
+                                                                                </label>
+                                                                                <label for="">
+                                                                                    <input class="uk-radio" type="radio" name="hola">
+                                                                                    NO
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="uk-margin">
+                                                                            <label class="uk-form-label" for="form-horizontal-text">ELIMINAR</label>
+                                                                            <div class="uk-form-controls">
+                                                                                <label for="" class="uk-margin-medium-right">
+                                                                                    <input class="uk-radio" type="radio" name="hola">
+                                                                                    SI
+                                                                                </label>
+                                                                                <label for="">
+                                                                                    <input class="uk-radio" type="radio" name="hola">
+                                                                                    NO
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="uk-margin">
+                                                                            <label class="uk-form-label" for="form-horizontal-text">IMPRIMIR</label>
+                                                                            <div class="uk-form-controls">
+                                                                                <label for="" class="uk-margin-medium-right">
+                                                                                    <input class="uk-radio" type="radio" name="hola">
+                                                                                    SI
+                                                                                </label>
+                                                                                <label for="">
+                                                                                    <input class="uk-radio" type="radio" name="hola">
+                                                                                    NO
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="uk-margin">
+                                                                            <label class="uk-form-label" for="form-horizontal-text">FACTURAR</label>
+                                                                            <div class="uk-form-controls">
+                                                                                <label for="" class="uk-margin-medium-right">
+                                                                                    <input class="uk-radio" type="radio" name="hola">
+                                                                                    SI
+                                                                                </label>
+                                                                                <label for="">
+                                                                                    <input class="uk-radio" type="radio" name="hola">
+                                                                                    NO
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                        <div class="uk-margin">
+                                                                            <label class="uk-form-label" for="form-horizontal-text">CREDITO</label>
+                                                                            <div class="uk-form-controls">
+                                                                                <label for="" class="uk-margin-medium-right">
+                                                                                    <input class="uk-radio" type="radio" name="hola">
+                                                                                    SI
+                                                                                </label>
+                                                                                <label for="">
+                                                                                    <input class="uk-radio" type="radio" name="hola">
+                                                                                    NO
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="uk-margin">
+                                                                            <label class="uk-form-label" for="form-horizontal-text">CAJA</label>
+                                                                            <div class="uk-form-controls">
+                                                                                <label for="" class="uk-margin-medium-right">
+                                                                                    <input class="uk-radio" type="radio" name="hola">
+                                                                                    SI
+                                                                                </label>
+                                                                                <label for="">
+                                                                                    <input class="uk-radio" type="radio" name="hola">
+                                                                                    NO
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </form>
+                                                                </section>
+                                                            </div>
+                                                            <div class="uk-modal-footer uk-text-right">
+                                                                <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
+                                                                <button class="uk-button uk-button-secondary" type="button">Guardar</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!--******************* ******************** *******************-->
+                                                </li>
+
+
+
+                                                <li>
+
+                                                    <h3>PERMISOS DE MODULOS</h3>
+                                                    <a href="#modal_asignar_rol" uk-toggle class="uk-button uk-button-default">ASIGNAR MODULO</a>
+
+                                                    <table class="uk-table uk-table-divider uk-light">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>USUARIO</th>
+                                                                <th>ROL ASIGNADO</th>
+                                                                <th>MODULOS ASIG</th>
+                                                                <th>ACCION</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>FELIX</td>
+                                                                <td>ADMINISTRADOR</td>
+                                                                <td>
+                                                                    <progress class="uk-progress uk-margin-remove" value="5" max="100"></progress>
+                                                                    <div class="uk-text-center">
+                                                                        <div>12% de 4/18</div>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="uk-flex">
+                                                                        <a href="" class="uk-icon-button uk-margin-small-right" uk-icon="pencil"></a>
+                                                                        <a href="" class="uk-icon-button" uk-icon="trash"></a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+
+
+                                                    <!--******************* MODAL DE ASIGNAR ROL *******************-->
+
+                                                    <div id="modal_asignar_rol" uk-modal>
+                                                        <div class="uk-modal-dialog">
+                                                            <button class="uk-modal-close-default" type="button" uk-close></button>
+                                                            <div class="uk-modal-header">
+                                                                <h2 class="uk-modal-title">ASIGNAR ROL</h2>
+                                                            </div>
+                                                            <div class="uk-modal-body">
+
+                                                                <form class="uk-grid-small" uk-grid>
+                                                                    <div class="uk-width-1-1">
+                                                                        <select class="uk-select" name="" id="">
+                                                                            <option value="1">LUIS</option>
+                                                                            <option value="2">JOSE</option>
+                                                                            <option value="3">JUAN</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="uk-width-1-1@s">
+                                                                        <div class="uk-panel uk-panel-scrollable">
+                                                                            <ul class="uk-list">
+                                                                                <li><label><input class="uk-checkbox" type="checkbox">INICIO</label></li>
+                                                                                <li>
+                                                                                    <label><input class="uk-checkbox" type="checkbox">ADMINISTRAR</label>
+                                                                                    <ul class="uk-list uk-list-square">
+                                                                                        <li><label><input class="uk-checkbox" type="checkbox">USUARIOS</label></li>
+                                                                                        <ul class="uk-list uk-list-square">
+                                                                                            <li><label><input class="uk-checkbox" type="checkbox">USUARIOS</label></li>
+                                                                                            <li><label><input class="uk-checkbox" type="checkbox">ROLES Y FUNCIONES</label></li>
+                                                                                            <li><label><input class="uk-checkbox" type="checkbox">ASIGNAR MODULOS</label></li>
+                                                                                        </ul>
+                                                                                        <li><label><input class="uk-checkbox" type="checkbox">BITOCARA</label></li>
+                                                                                        <li><label><input class="uk-checkbox" type="checkbox">CAPITAL</label></li>
+                                                                                        <li><label><input class="uk-checkbox" type="checkbox">AJUSTES</label></li>
+                                                                                    </ul>
+                                                                                </li>
+                                                                                <li><label><input class="uk-checkbox" type="checkbox">REGISTROS</label></li>
+                                                                                <ul class="uk-list uk-list-square">
+                                                                                    <li><label><input class="uk-checkbox" type="checkbox">PRODUCTOS</label></li>
+                                                                                    <li><label><input class="uk-checkbox" type="checkbox">ENTRADAS</label></li>
+                                                                                    <li><label><input class="uk-checkbox" type="checkbox">PROVEEDORES</label></li>
+                                                                                    <li><label><input class="uk-checkbox" type="checkbox">CLIENTES</label></li>
+                                                                                    <li><label><input class="uk-checkbox" type="checkbox">ESTADISTICAS</label></li>
+                                                                                </ul>
+                                                                                <li><label><input class="uk-checkbox" type="checkbox">VENTAS</label></li>
+                                                                                <ul class="uk-list uk-list-square">
+                                                                                    <li><label><input class="uk-checkbox" type="checkbox">FACTURA</label></li>
+                                                                                    <li><label><input class="uk-checkbox" type="checkbox">CAJA</label></li>
+                                                                                    <li><label><input class="uk-checkbox" type="checkbox">CREDITO</label></li>
+                                                                                </ul>
+                                                                            </ul>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+
+                                                            </div>
+                                                            <div class="uk-modal-footer uk-text-right">
+                                                                <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
+                                                                <button class="uk-button uk-button-secondary" type="button">Guardar</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!--******************* ******************** *******************-->
+
+
+                                                </li>
+
                                             </div>
-                                        </li>
-                                        <li>
-                                            <form class="uk-form-horizontal uk-margin-large" method="POST" action="Controller/funcs/modificar_cosas.php">
-                                                <input type=number value=<?php echo $tu['id'] ?> name="ID" style="display:none">
-                                                <input type=text value="usuario" name="tipo" style="display:none">
-                                                <input type=text value="zi" name="self" style="display:none">
-                                                <div class="uk-margin">
-                                                    <label class="uk-form-label" for="form-horizontal-text">Nombre</label>
-                                                    <div class="uk-form-controls">
-                                                        <input class="uk-input" value="<?php echo $tu['nombre'] ?>" type="text" placeholder="Nombre" name="nombre">
-                                                    </div>
-                                                </div>
-                                                <div class="uk-margin">
-                                                    <label class="uk-form-label" for="form-horizontal-text">Correo</label>
-                                                    <div class="uk-form-controls">
-                                                        <input class="uk-input" value="<?php echo $tu['correo'] ?>" name="correo" type="email" placeholder="Correo">
-                                                    </div>
-                                                </div>
-
-                                                <div class="uk-margin-small-top uk-flex uk-flex-center">
-                                                    <div>
-                                                        <input class="uk-button uk-button-default" type="submit" value="Guardar">
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </li>
-
-                                    </ul>
+                                        </div>
+                                    </div>
                                 </div>
+                            </div>
 
-                            </section>
-                            <?php if ($_SESSION['rol'] == 'Administrador') { ?>
-                                <section>
-                                    <div class="uk-flex uk-flex-center uk-margin-medium-top">
-                                        <h2>USUARIOS REGISTRADOS</h2>
-                                    </div>
-                                    <div class="uk-overflow-auto uk-light uk-margin-small-top">
-                                        <table class="uk-table uk-table-small uk-table-divider uk-table-hover">
-                                            <thead class="uk-background-secondary">
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>Nombre</th>
-                                                    <th>Correo</th>
-                                                    <th>Rol</th>
-                                                    <th>Acciones</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php
 
-                                                for ($i = 0; $i < count($result); $i++) {
-                                                    $row = $result[$i];
-                                                    require('complementos/tabla_usuario.php');
-                                                }
-                                                ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </section>
-                            <?php }; ?>
+
                         </div>
 
 
