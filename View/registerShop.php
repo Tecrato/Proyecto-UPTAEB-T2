@@ -120,13 +120,18 @@
                                                         <li class="uk-flex uk-flex-column uk-flex-middle">
                                                             <div class="uk-flex uk-flex-around uk-border-rounded uk-margin-bottom" style="width: 172px; border: 1px solid #fff; padding: 3px;">
                                                                 <div>VENDEDOR</div>
-                                                                <div>LUIS</div>
+                                                                <div id="nameVendedor">LUIS</div>
                                                             </div>
+
+                                                            <div class="uk-flex uk-flex-around uk-border-rounded uk-margin-bottom" style="width: 172px; border: 1px solid #fff; padding: 3px;">
+                                                                <label><input class="uk-checkbox credito_check" type="checkbox"> CREDITO</label>
+                                                            </div>
+
                                                             <div class="Plus-client uk-flex uk-flex-column uk-flex-center uk-flex-middle uk-border-rounded">
                                                                 <div id="Client-datails" class="uk-flex uk-flex-column uk-flex-center uk-flex-middle">
                                                                     <div class="uk-flex uk-flex-column uk-flex-middle uk-flex-center pointer" value="default">
-                                                                        <h5 class="uk-text-bold">AÑADIR CLIENTE</h5>
-                                                                        <a href="#" uk-icon="icon: plus-circle; ratio: 2"></a>
+                                                                        <h5 class="uk-text-bold uk-margin-remove">AÑADIR CLIENTE</h5>
+                                                                        <a class="uk-margin-small-top" href="#" uk-icon="icon: plus-circle; ratio: 1.5"></a>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -158,11 +163,25 @@
                                                     <div class="container_config_fact uk-border-rounded">
                                                         <section style="width: 350px;">
                                                             <article class="uk-flex uk-flex-around" style="padding: 5px;">
-                                                                <div>TIPO DE PAGO</div>
+                                                                <div class="name_MP">TIPO DE PAGO</div>
                                                                 <div class="amount_MP">0.00 BS</div>
                                                             </article>
                                                             <hr class="uk-margin-remove">
-                                                            <div class="Scroll_MP" style="height: 80%; overflow-y: auto;">
+                                                            <div class="Scroll_MP switcher_credit" style="height: 80%; overflow-y: auto;">
+
+                                                                <form class="uk-form-horizontal formCredito uk-padding-small">
+                                                                    <div class="uk-margin uk-flex">
+                                                                        <label class="uk-form-label" for="form-horizontal-select">INICIO</label>
+                                                                        <input class="uk-input uk-form-width-medium" type="date">
+                                                                    </div>
+
+                                                                    <div class="uk-margin uk-flex">
+                                                                        <label class="uk-form-label" for="form-horizontal-select">VENCIMIENTO</label>
+                                                                        <input class="uk-input uk-form-width-medium" type="date">
+                                                                    </div>
+                                                                </form>
+
+
                                                                 <article class="cont_metodos_pagos" style="padding: 5px 10px;">
                                                                     <!-- aqui cargan los metodos de pago con js -->
                                                                 </article>

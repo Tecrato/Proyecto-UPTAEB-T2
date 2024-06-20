@@ -389,7 +389,7 @@ document.getElementById("input-search-fact").addEventListener("keyup", (e) => {
 
             ClienteDetails = ` 
                               <div class="uk-flex uk-flex-column uk-flex-middle pointer" value="${ID}" >
-                                <a class="Bg-user uk-margin-small-bottom" uk-icon="icon: user; ratio: 1.5"></a>
+                                <a class="Bg-user" uk-icon="icon: user; ratio: 1"></a>
                                 <p class="uk-margin-remove uk-margin-small-bottom uk-text-meta">Cliente: <b>${name}</b></p>
                                 <p class="uk-margin-remove uk-text-meta">Cedula: <b>${CI}</b></p>
                               </div>
@@ -423,6 +423,7 @@ document.getElementById("input-search-fact").addEventListener("keyup", (e) => {
   }
 });
 
+document.getElementById("nameVendedor").textContent = session_user_name
 
 //ajax
 $.ajax({
@@ -878,11 +879,39 @@ $.ajax({
               // console.log(result);
 
               // console.log(btn.parentElement.parentElement.parentElement);
-              
+
             })
           })
         }
       })
+    })
+
+    //aqui hacemos la funcion para el credito
+
+    let checkCredito = document.querySelector(".credito_check")
+    $('.formCredito').hide()
+
+
+    checkCredito.addEventListener("change", () => {
+
+      if (checkCredito.checked == true) {
+        $('.cont_metodos_pagos').hide()
+        $('.btn_agg_metodoPago').hide()
+        $('.amount_MP').hide()
+        document.querySelector(".name_MP").textContent = "FECHA DE CREDITO"
+        $('.formCredito').show()
+
+
+
+
+
+      } else {
+        $('.cont_metodos_pagos').show()
+        $('.btn_agg_metodoPago').show()
+        $('.amount_MP').show()
+        document.querySelector(".name_MP").textContent = "TIPO DE PAGO"
+        $('.formCredito').hide()
+      }
     })
 
 
@@ -972,9 +1001,9 @@ $.ajax({
           pos: "bottom-right",
         });
         document.querySelector(".cont_metodos_pagos").innerHTML = ""
-        document.getElementById("Client-datails").innerHTML = `<div class="uk-flex uk-flex-column uk-flex-middle" value="default">
-                                                                  <h5 class="uk-text-bold">AÑADIR CLIENTE</h5>
-                                                                  <a href="#" uk-icon="icon: plus-circle; ratio: 2.5"></a>
+        document.getElementById("Client-datails").innerHTML = `<div class="uk-flex uk-flex-column uk-flex-middle uk-flex-center pointer" value="default">
+                                                                    <h5 class="uk-text-bold uk-margin-remove">AÑADIR CLIENTE</h5>
+                                                                    <a class="uk-margin-small-top" href="#" uk-icon="icon: plus-circle; ratio: 1.5"></a>
                                                                 </div>`;
 
         document.getElementById("Detail-product-fact").innerHTML = "";
