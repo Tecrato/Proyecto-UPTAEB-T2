@@ -386,6 +386,17 @@ INSERT INTO `pagos` VALUES (1,59,7,23.22);
 /*!40000 ALTER TABLE `pagos` ENABLE KEYS */;
 UNLOCK TABLES;
 
+CREATE TABLE `permisos` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `id_usuario` INT NOT NULL,
+  `tabla` VARCHAR(20) NULL,
+  `permiso` VARCHAR(20) NULL,
+  PRIMARY KEY (`id`),
+  INDEX `id_usuarios_idx` (`id_usuario`),
+  CONSTRAINT `id_usuarios`
+    FOREIGN KEY (`id_usuario`)
+    REFERENCES `proyecto`.`usuarios` (`id`));
+
 --
 -- Table structure for table `productos`
 --
