@@ -101,10 +101,16 @@
                                 <form id="formAggProduct" class="uk-grid-small uk-form-stacked" uk-grid method="POST" action="" enctype="multipart/form-data">
                                     <input class="ValueInpUpdate" type="number" name="ID" style="display:none">
                                     <input type="text" name="tipo" value='producto' id="" style="display:none">
-                                    <div class="uk-width-1-1">
+                                    <div class="uk-width-1-2@s">
                                         <label class="uk-form-label">Nombre</label>
                                         <div class="uk-form-controls">
                                             <input class="NameUpdateProduct uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="^[A-Z][A-Za-z0-9ñ\s]{2,20}$" required>
+                                        </div>
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <label class="uk-form-label">Código</label>
+                                        <div class="uk-form-controls">
+                                            <input class="CodeUpdateProduct uk-input" type="number" placeholder="Código" aria-label="100" name="codigo" pattern="^/d$" required>
                                         </div>
                                     </div>
                                     <div class="uk-width-1-2@s">
@@ -261,7 +267,9 @@
 
                                 <div class="uk-flex uk-flex-center uk-flex-wrap  container-detailProduct">
                                     <div class="uk-margin-small-right margin-img-detailPoduct">
-                                        <img class="productDetailIMG" alt="" width="155px" style="height: 195px; object-fit: cover;">
+                                        <!-- <img class="productDetailIMG" alt="" width="155px" style="height: 195px; object-fit: cover;">        -->
+                                        <svg class="productDetailIMG" id="Bard">
+                                        </svg>
                                     </div>
                                     <div class="container-stats-productDetail">
                                         <div class="uk-flex uk-flex-middle" style="height: 45px;">
@@ -692,6 +700,7 @@
 
 </main>
 <script src="static/javaScript/librerias/jquery.js"></script>
+<script src="static/javaScript/librerias/JsBardcode.js"></script>
 <script src="static/javascript/FuncionesGenerales.js"></script>
 <script src="static/javascript/Ajax/product.js"></script>
 <script src="static/javascript/Ajax/entry.js"></script>
@@ -699,6 +708,8 @@
 <script src="static/javascript/Ajax/categorias.js"></script>
 <script src="static/javascript/Ajax/marcas.js"></script>
 <script src="static/javascript/funcionDataTable.js"></script>
+
+
 
 
 </body>

@@ -16,7 +16,7 @@
         }
 
         require('../../Model/Productos.php');
-        $clase = new Producto($_POST['ID'],$_POST["categoria"],$_POST["unidad"],$_POST["nombre"],$_POST["marca"],$nick,$_POST["stock_min"],$_POST["stock_max"],$_POST["precio_venta"],$_POST["IVA"]); // Llama al modelo y le manda la instruccion
+        $clase = new Producto($_POST['ID'],$_POST["categoria"],$_POST["unidad"],$_POST["nombre"],$_POST["marca"],$nick,$_POST["stock_min"],$_POST["stock_max"],$_POST["precio_venta"],$_POST["IVA"],$_POST["codigo"]); // Llama al modelo y le manda la instruccion
 
         try {
             $clase->actualizar();

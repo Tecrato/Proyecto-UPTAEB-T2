@@ -57,10 +57,7 @@ const modalDetalles = (n) => {
         success: function (response) {
           let json = JSON.parse(response);
           json.lista.forEach((item) => {
-            //segun el id, los datos del modal cambiaran
-            document.querySelector(
-              ".productDetailIMG"
-            ).src = `Media/imagenes/${item.imagen}`;
+    
             document.querySelector(".productDetailName").textContent =
               item.nombre + " " + item.valor_unidad + " " + item.unidad;
             document.querySelector(".productDetailmarca").textContent =
@@ -71,6 +68,17 @@ const modalDetalles = (n) => {
               item.stock ? item.stock : 0;
             document.querySelector(".productDetailPV").textContent =
               item.precio_venta;
+            // JsBarcode("#Bard","001000000001", {
+            //   format: "CODE128",
+            //   textMargin: 0,
+            //   fontOptions: "bold",
+            //   width: 1,
+            //   height: 50
+            // })
+            JsBarcode("#Bard",item.codigo,{
+              width: 1.3
+            })
+
           });
           if (session_user_rol == "Administrador") {
             //esta consulta es para cargar los lotes segun del id del producto y el proveedor
@@ -270,6 +278,7 @@ const modalModificar = () => {
             document.querySelector(".SMMUpdateProduct").value = i.stock_min;
             document.querySelector(".SMXUpdateProduct").value = i.stock_max;
             document.querySelector(".ValorUnidadUpdateProduct").value = i.marca;
+            document.querySelector(".CodeUpdateProduct").value = i.codigo;
             if (i.IVA == 0) {
               document
                 .querySelector(".IVA_EUpdateProduct")
@@ -280,8 +289,8 @@ const modalModificar = () => {
                 .setAttribute("checked", "");
             }
           });
-          document.querySelector(".title_modal_reg_upd").textContent ="MODIFICAR PRODUCTO";
-            
+          document.querySelector(".title_modal_reg_upd").textContent = "MODIFICAR PRODUCTO";
+
           cargarCategoriaRegProduct();
           cargarUnidadesRegProduct();
           cargarMarcasRegProduct();
@@ -417,37 +426,31 @@ const tarjetas = (response, cont) => {
   json.lista.forEach((item) => {
     tarjeta += `
               
-  <div id="${item.id}" data-supplier="${item.proveedor}" data-category="${
-      item.categoria
-    }" data-marca="${item.marca}" data-name="${item.nombre
-      .slice(0, 1)
-      .toUpperCase()}">
+  <div id="${item.id}" data-supplier="${item.proveedor}" data-category="${item.categoria
+      }" data-marca="${item.marca}" data-name="${item.nombre
+        .slice(0, 1)
+        .toUpperCase()}">
     <div class="uk-card uk-card-default uk-background-secondary uk-light uk-border-rounded">
         <div class="uk-visible-toggle" tabindex="-1">
             <article class="uk-transition-toggle">
-                <img src="Media/imagenes/${
-                  item.imagen
-                }"" alt="" class="img_product" width="150px" style="object-fit: cover; height: 215px;">
+                <img src="Media/imagenes/${item.imagen
+      }"" alt="" class="img_product" width="150px" style="object-fit: cover; height: 215px;">
                 <div class="uk-position-top-right uk-transition-fade uk-position-small">
-                    <a href="#modal-details-product" uk-toggle class="btnDetails" data-id="${
-                      item.id
-                    }">
+                    <a href="#modal-details-product" uk-toggle class="btnDetails" data-id="${item.id
+      }">
                       
                         <span class="Bg-info" uk-icon="icon: info; ratio: 1.5"></span>
                     </a>
                 </div>
                 <div class="uk-position-bottom-center btns_option_product">
                     <ul class=" uk-iconnav uk-background-secondary uk-transition-slide-bottom-small" style="width: 105%; padding: 5px;">
-                        <li><a href="#eliminar_product" uk-toggle uk-tooltip="title:Eliminar; delay: 500" class="uk-icon-button deleteID" uk-icon="icon: trash" data-id="${
-                          item.id
-                        }"></a></li>
-                        <li><a href="#Producto-modificar" uk-tooltip="title:Modificar; delay: 500" class="uk-icon-button UpdateProduct" uk-icon="icon: file-edit" data-id="${
-                          item.id
-                        }"></a></li>
+                        <li><a href="#eliminar_product" uk-toggle uk-tooltip="title:Eliminar; delay: 500" class="uk-icon-button deleteID" uk-icon="icon: trash" data-id="${item.id
+      }"></a></li>
+                        <li><a href="#Producto-modificar" uk-tooltip="title:Modificar; delay: 500" class="uk-icon-button UpdateProduct" uk-icon="icon: file-edit" data-id="${item.id
+      }"></a></li>
                         <li>
-                            <a href="#product-entry" uk-toggle class="Lote" uk-tooltip="title:Añadir Entrada; delay: 500" data-id="${
-                              item.id
-                            }">
+                            <a href="#product-entry" uk-toggle class="Lote" uk-tooltip="title:Añadir Entrada; delay: 500" data-id="${item.id
+      }">
                                 <img src="./static/images/btn_lote2.png" alt="" width="35px">
                             </a>
                         </li>
@@ -456,9 +459,8 @@ const tarjetas = (response, cont) => {
                 <div>
                     <div style="padding: 0px 10px; width: 130px;">
                         <div class="uk-text-truncate">${item.nombre}</div>
-                        <div>stock: <b class="uk-text-success">${
-                          item.stock ? item.stock : 0
-                        }</b></div>
+                        <div>stock: <b class="uk-text-success">${item.stock ? item.stock : 0
+      }</b></div>
                     </div>
                 </div>
             </article>
@@ -512,38 +514,33 @@ const tarjetasProductosDesactive = (response, cont) => {
   json.lista.forEach((item) => {
     tarjeta += `
               
-  <div id="${item.id}" data-supplier="${item.proveedor}" data-category="${
-      item.categoria
-    }" data-marca="${item.marca}" data-name="${item.nombre
-      .slice(0, 1)
-      .toUpperCase()}">
+  <div id="${item.id}" data-supplier="${item.proveedor}" data-category="${item.categoria
+      }" data-marca="${item.marca}" data-name="${item.nombre
+        .slice(0, 1)
+        .toUpperCase()}">
     <div class="uk-card uk-card-default uk-background-secondary uk-light uk-border-rounded">
         <div class="uk-visible-toggle" tabindex="-1">
             <article class="uk-transition-toggle">
-                <img src="Media/imagenes/${
-                  item.imagen
-                }"" alt="" class="img_product" width="150px" style="object-fit: cover; height: 215px;">
+                <img src="Media/imagenes/${item.imagen
+      }"" alt="" class="img_product" width="150px" style="object-fit: cover; height: 215px;">
                 <div class="uk-position-top-right uk-transition-fade uk-position-small">
-                    <a href="#modal-details-product" uk-toggle class="btnDetails" data-id="${
-                      item.id
-                    }">
+                    <a href="#modal-details-product" uk-toggle class="btnDetails" data-id="${item.id
+      }">
                       
                         <span class="Bg-info" uk-icon="icon: info; ratio: 1.5"></span>
                     </a>
                 </div>
                 <div class="uk-position-bottom-right btns_option_product2">
                     <ul class=" uk-iconnav uk-background-secondary uk-transition-slide-bottom-small" style="width: 105%; padding: 5px;">
-                        <li><a href="#eliminar_product" uk-toggle uk-tooltip="title:Eliminar; delay: 500" class="uk-icon-button deleteID2" uk-icon="icon: future" data-id="${
-                          item.id
-                        }"></a></li>
+                        <li><a href="#eliminar_product" uk-toggle uk-tooltip="title:Eliminar; delay: 500" class="uk-icon-button deleteID2" uk-icon="icon: future" data-id="${item.id
+      }"></a></li>
                     </ul>
                 </div>
                 <div>
                     <div style="padding: 0px 10px; width: 130px;">
                         <div class="uk-text-truncate">${item.nombre}</div>
-                        <div>stock: <b class="uk-text-success">${
-                          item.stock ? item.stock : 0
-                        }</b></div>
+                        <div>stock: <b class="uk-text-success">${item.stock ? item.stock : 0
+      }</b></div>
                     </div>
                 </div>
             </article>
@@ -706,13 +703,7 @@ const cargarMarcasRegProduct = () => {
 
 document.querySelector(".btn-modal-register").addEventListener("click", () => {
   val = false;
-  document.querySelector(".NameUpdateProduct").value = "";
-  document.querySelector(".MarcaUpdateProduct").value = "";
-  document.querySelector(".PVUpdateProduct").value = "";
-  document.querySelector(".SMMUpdateProduct").value = "";
-  document.querySelector(".SMXUpdateProduct").value = "";
-  document.querySelector(".MarcaUpdateProduct").value = "";
-  document.querySelector(".ValorUnidadUpdateProduct").value = "";
+  $("#formAggProduct").trigger("reset");
   document.querySelector(".title_modal_reg_upd").textContent =
     "REGISTRAR PRODUCTO";
   cargarCategoriaRegProduct();
@@ -739,6 +730,7 @@ formAggProduct.addEventListener("submit", (e) => {
     processData: false,
     contentType: false,
     success: function (response) {
+      console.log(response);
       if (val == false) {
         UIkit.notification.closeAll();
         UIkit.notification({
@@ -1001,7 +993,7 @@ const DELETE_U_M_C = (TR, BTN) => {
       FORM_DELETE.addEventListener("submit", (e) => {
         e.preventDefault()
         let data = new FormData(FORM_DELETE)
-            
+
         $.ajax({
           url: "Controller/funcs/borrar_cosas.php",
           type: "POST",

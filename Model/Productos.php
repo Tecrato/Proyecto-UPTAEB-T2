@@ -13,10 +13,11 @@
         private $precio_venta;
         private $IVA;
         private $active;
+        private $codigo;
         private $like;
 
         function __construct($id=null, $id_categoria=null,$id_unidades=null,$id_marcas=null,$valor_unidad=null,$nombre=null,
-            $imagen=null,$stock_min=null,$stock_max=null,$precio_venta=null,$IVA=null,$active=1,$like=''){
+            $imagen=null,$stock_min=null,$stock_max=null,$precio_venta=null,$IVA=null,$active=1,$codigo=null,$like=''){
 
             $this->id = $id;
             $this->id_categoria = $id_categoria;
@@ -30,6 +31,7 @@
             $this->precio_venta = $precio_venta;
             $this->IVA = $IVA;
             $this->active = $active;
+            $this->codigo = $codigo;
             $this->like = $like;
             DB::__construct();
 
@@ -37,7 +39,7 @@
         // esta funcion agrega a la tabla productos un objeto con los valores que se le estan pasando
         function agregar(){
             
-            $query = $this->conn->prepare("INSERT INTO productos VALUES(null, :id_categoria, :id_unidades, :id_marcas, :valor_unidad, :nombre, :imagen, :stock_min, :stock_max, :precio_venta, :IVA, 1)");
+            $query = $this->conn->prepare("INSERT INTO productos VALUES(null, :id_categoria, :id_unidades, :id_marcas, :valor_unidad, :nombre, :imagen, :stock_min, :stock_max, :precio_venta, :IVA, 1, :codigo)");
 
             $query->bindParam(':id_categoria',$this->id_categoria);
             $query->bindParam(':id_unidades',$this->id_unidades);
@@ -49,6 +51,7 @@
             $query->bindParam(':stock_max',$this->stock_max);
             $query->bindParam(':precio_venta',$this->precio_venta);
             $query->bindParam(':IVA',$this->IVA);
+            $query->bindParam(':codigo',$this->codigo);
 
 
             return $query->execute();
@@ -74,7 +77,7 @@
         function actualizar(){
             
             
-            $query = "UPDATE productos SET id_categoria=:id_categoria, id_unidad=:id_unidades, id_marca=:id_marcas, valor_unidad=:valor_unidad, nombre=:nombre, stock_min=:stock_min, stock_max=:stock_max, precio_venta=:precio_venta, IVA=:IVA";
+            $query = "UPDATE productos SET id_categoria=:id_categoria, id_unidad=:id_unidades, id_marca=:id_marcas, valor_unidad=:valor_unidad, nombre=:nombre, stock_min=:stock_min, stock_max=:stock_max, precio_venta=:precio_venta, IVA=:IVA, codigo=:codigo ";
             if ($this->imagen != null) {
                 $query = $query . ", imagen=:imagen ";
             }
@@ -92,6 +95,7 @@
             $query->bindParam(':stock_max',$this->stock_max);
             $query->bindParam(':precio_venta',$this->precio_venta);
             $query->bindParam(':IVA',$this->IVA);
+            $query->bindParam(':codigo',$this->codigo);
             if ($this->imagen != null) {
                 $query->bindParam(':imagen',$this->imagen);
             }
@@ -118,7 +122,8 @@
                     a.stock_min,
                     a.stock_max,
                     a.precio_venta,
-                    a.IVA
+                    a.IVA,
+                    a.codigo
                     FROM productos a 
                     INNER JOIN categoria b ON b.id = a.id_categoria 
                     INNER JOIN unidades c ON c.id = a.id_unidad
