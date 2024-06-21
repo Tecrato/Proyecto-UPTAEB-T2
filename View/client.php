@@ -11,11 +11,11 @@
                             <div class="uk-margin formDelete">
                                 <form class="uk-search uk-search-default search-responsive-product" action="" method="GET">
                                     <button class="uk-search-icon-flip" type="submit" uk-search-icon></button>
-                                    <input class="uk-search-input" type="text" placeholder="Buscar" name="like_nombre" aria-label="Search">
+                                    <input id="SearchCustomer" class="uk-search-input" type="text" placeholder="Buscar" name="like_nombre" aria-label="Search">
                                 </form>
                             </div>
                             <div class="uk-margin-left">
-                                <a href="#agregar_client" uk-toggle uk-tooltip="title:Añadir Proveedor; delay: 500" class="uk-margin-small-left btn-agg_client">
+                                <a id="registerCustomer" href="#agregar_client" uk-toggle uk-tooltip="title:Añadir Proveedor; delay: 500" class="uk-margin-small-left btn-agg_client">
                                     <img class="btn_agg" src="./static/images/btn_agg.png" alt="" width="35px">
                                 </a>
                             </div>
@@ -73,13 +73,13 @@
                         <div class="uk-width-1-2@s">
                             <label class="uk-form-label">Nombre</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input inputNameUpdateClient" type="text" placeholder="Nombre" name="nombre" aria-label="100" pattern="^([A-Z][a-z]{3,})( [A-Z][a-z]{3,})?$" required>
+                                <input class="uk-input inputNameUpdateClient" type="text" placeholder="Nombre" name="nombre" aria-label="100" pattern="^([A-Zñ+áéó]|[a-zñáéó]){3,}( ([A-Zñ+áéó]|[a-zñáéó]){3,})?$" required>
                             </div>
                         </div>
                         <div class="uk-width-1-2@s">
                             <label class="uk-form-label">Apellido</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input inputLastNameUpdateClient" type="text" placeholder="Apellido" name="apellido" aria-label="50" pattern="^([A-Z][a-z]{3,})( [A-Z][a-z]{3,})?$" required>
+                                <input class="uk-input inputLastNameUpdateClient" type="text" placeholder="Apellido" name="apellido" aria-label="50" pattern="([A-Zñ+áéó]|[a-zñáéó]){3,}( ([A-Zñ+áéó]|[a-zñáéó]){3,})?$" required>
                             </div>
                         </div>
                         <div class="uk-width-1-4@s">
@@ -101,7 +101,7 @@
                         <div class="uk-width-1-2@s">
                             <label class="uk-form-label">Telefono</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input inputTLFNOUpdateClient" type="tel" id="tlfno_client" name="telefono" aria-label="50" pattern="^\d{11,12}$" required>
+                                <input class="uk-input inputTLFNOUpdateClient" type="tel" id="tlfno_client" name="telefono" aria-label="50" pattern="^([\+\d]{2,4} ?)?([\d]{4}) ?\-?([\d]{3}) ?\-?([\d]{4})$" required>
                             </div>
                         </div>
                         <div class="uk-width-1-1@s">

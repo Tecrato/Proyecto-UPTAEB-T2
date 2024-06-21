@@ -7,23 +7,23 @@
                 <div class="uk-width-auto@m">
                     <ul class="uk-tab-left" uk-tab="connect: #component-tab-left; animation: uk-animation-fade">
                         <li style="padding-bottom: 20px;">
-                            <a href="#">
+                            <a id="aUser" href="#">
                                 <span class="uk-margin-small-right" uk-icon="user"></span> USUARIO
                             </a>
                         </li>
                         <li style="padding-bottom: 20px;">
-                            <a href="#">
+                            <a id="aBinnacle" href="#">
                                 <span class="uk-margin-small-right" uk-icon="history"></span> BITACORA
                             </a>
                         </li>
                         <?php if ($_SESSION['rol_num'] <= 2) { ?>
                             <li style="padding-bottom: 20px;">
-                                <a href="#">
+                                <a id="aCapital" href="#">
                                     <span class="uk-margin-small-right" uk-icon="credit-card"></span>CAPITAL
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a id="aSets" href="#">
                                     <span class="uk-margin-small-right" uk-icon="cog"></span>AJUSTES
                                 </a>
                             </li>
@@ -62,7 +62,7 @@
                                                                 <div class="uk-flex uk-flex-middle uk-flex-between uk-flex-wrap uk-margin-small-bottom uk-light">
                                                                     <h2 class="uk-margin-remove">ADMINISTRAR PERFIL</h2>
                                                                     <div class="newUser uk-flex">
-                                                                        <a href="#register_user" uk-toggle class="uk-button uk-button-default uk-flex uk-flex-middle uk-border-rounded">
+                                                                        <a id="btnRegisterUser" href="#register_user" uk-toggle class="uk-button uk-button-default uk-flex uk-flex-middle uk-border-rounded">
                                                                             <p class="uk-margin-remove">CREAR USUARIO</p>
                                                                         </a>
                                                                     </div>
@@ -110,7 +110,7 @@
                                                         <span class="uk-article-meta">' . $_SESSION['rol'] . '</span>
                                                     </div>';
                                                                         ?>
-                                                                        <div class="uk-flex uk-margin-top">
+                                                                        <div id="seedGenerator" class="uk-flex uk-margin-top">
                                                                             <p class="item-profile">Semilla</p>
                                                                             <span class="uk-article-meta uk-flex">
                                                                                 <input class="uk-input uk-form-small uk-form-width-medium uk-border-rounded input-seed" type="text">
@@ -150,7 +150,7 @@
 
                                                     </section>
                                                     <?php if ($_SESSION['rol_num'] <= 2) { ?>
-                                                        <section>
+                                                        <section id="tableUsers">
                                                             <div class="uk-flex uk-flex-center uk-margin-medium-top">
                                                                 <h2>USUARIOS REGISTRADOS</h2>
                                                             </div>
@@ -630,19 +630,19 @@
                     <div class="uk-width-1-2@s">
                         <label class="uk-form-label">Nombre</label>
                         <div class="uk-form-controls">
-                            <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="^([A-ZÑ][a-zñ]{3,})( [A-Zñ][a-zñ]{3,})?$" required>
+                            <input class="uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="^([A-Zñ+áéó]|[a-zñáéó]){3,}( ([A-Zñ+áéó]|[a-zñáéó]){3,})?$" required>
                         </div>
                     </div>
                     <div class="uk-width-1-2@s">
                         <label class="uk-form-label">Apellido</label>
                         <div class="uk-form-controls">
-                            <input class="uk-input" type="text" placeholder="Apellido" aria-label="50" name="apellido" pattern="^([A-ZÑ][a-zñ]{3,})( [A-Zñ][a-zñ]{3,})?$">
+                            <input class="uk-input" type="text" placeholder="Apellido" aria-label="50" name="apellido" pattern="^([A-Zñ+áéó]|[a-zñáéó]){3,}( ([A-Zñ+áéó]|[a-zñáéó]){3,})?$">
                         </div>
                     </div>
                     <div class="uk-width-1-2@s">
                         <label class="uk-form-label">Correo Electronico</label>
                         <div class="uk-form-controls">
-                            <input class="uk-input" type="text" placeholder="Correo Electronico" aria-label="100" name="correo" parent="^([A-Za-z0-9\.\_]+)@([\w]{3,8})\.([\w]{2,3})(\.[\w]{2,4})?(\.[\w]{2,3})?$" required>
+                            <input class="uk-input" type="email" placeholder="Correo Electronico" aria-label="100" name="correo" pattern="^([A-Za-z0-9\.\_]+)@([\w]{3,8})\.([\w]{2,3})(\.[\w]{2,4})?(\.[\w]{2,3})?$" required>
                         </div>
                     </div>
                     <div class="uk-width-1-2@s">
@@ -658,7 +658,7 @@
                     <div class="uk-width-1-1@s">
                         <label class="uk-form-label">Contraseña</label>
                         <div class="uk-form-controls">
-                            <input class="uk-input" type="password" placeholder="Contraseña" aria-label="100" name="password" minlength="3" maxlength="50" required>
+                            <input class="uk-input" type="password" placeholder="Contraseña" aria-label="100" name="password" minlength="8" maxlength="50" pattern="^[\w\S]{8,}$" required>
                         </div>
                     </div>
                     <input type="submit" id="subirC" style="display:none">

@@ -11,11 +11,11 @@
                             <div class="uk-margin formDelete">
                                 <form class="uk-search uk-search-default search-responsive-product" action="" method="GET">
                                     <button class="uk-search-icon-flip" type="submit" uk-search-icon></button>
-                                    <input class="uk-search-input" type="text" placeholder="Buscar" name="like" aria-label="Search">
+                                    <input id="SearchSupplier" class="uk-search-input" type="text" placeholder="Buscar" name="like" aria-label="Search">
                                 </form>
                             </div>
                             <div class="uk-margin-left">
-                                <a href="#register_supplier" uk-toggle uk-tooltip="title:Añadir Proveedor; delay: 500" class="uk-margin-small-left btn-aggSupplier">
+                                <a id="registerSupplier" href="#register_supplier" uk-toggle uk-tooltip="title:Añadir Proveedor; delay: 500" class="uk-margin-small-left btn-aggSupplier">
                                     <img class="btn_agg" src="./static/images/btn_agg.png" alt="" width="35px">
                                 </a>
                             </div>
@@ -72,13 +72,13 @@
                         <div class="uk-width-1-2@s">
                             <label class="uk-form-label">Nombre</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input nameProvUpdate" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="^[A-ZÑ][a-zñ]{3,} [A-Z][a-z]{3,}?$" required>
+                                <input class="uk-input nameProvUpdate" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="([A-Zñ+áéó]|[a-zñáéó]){3,}( ([A-Zñ+áéó]|[a-zñáéó]){3,})?$" required>
                             </div>
                         </div>
                         <div class="uk-width-1-2@s">
                             <label class="uk-form-label">Razon Social</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input Razon_SocialProvUpdate" type="text" placeholder="Razon Social" aria-label="100" name="razon_social" pattern="^([A-ZÑ][a-zñ]{3,})( [A-Z][a-z]{3,})?$" required>
+                                <input class="uk-input Razon_SocialProvUpdate" type="text" placeholder="Razon Social" aria-label="100" name="razon_social" pattern="([A-Zñ+áéó]|[a-zñáéó]){3,}( ([A-Zñ+áéó]|[a-zñáéó]){3,})?$" required>
                             </div>
                         </div>
                         <div class="uk-width-1-4@s">
@@ -94,7 +94,7 @@
                         <div class="uk-width-1-4@s">
                             <label class="uk-form-label">Nro Documento</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input Nro_DocumentoProvUpdate" type="text" placeholder="Nro" aria-label="50" name="rif" pattern="^[\d]+$" required>
+                                <input class="uk-input Nro_DocumentoProvUpdate" type="text" placeholder="Nro" aria-label="50" name="rif" pattern="^[\d]{6,}+$" minlength="6" maxlength="10" required>
                             </div>
                         </div>
 

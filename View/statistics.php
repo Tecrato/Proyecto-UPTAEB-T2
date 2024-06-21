@@ -4,7 +4,7 @@
 
     <section class="uk-flex uk-flex-center uk-margin-medium Gap Wraper">
         
-        <div class="uk-width-1-2@s uk-background-secondary Card-grafic">
+        <div id="inventoryValue" class="uk-width-1-2@s uk-background-secondary Card-grafic">
             <div class="titleReport">
                 <h2 class="Bg-Grafic-title">Valor total del inventario</h2>
                 <div class="Item_generate-report">
@@ -29,7 +29,7 @@
         </div>
         
 
-        <div class="uk-width-1-2@s uk-background-secondary Card-grafic">
+        <div id="monthlyEntries" class="uk-width-1-2@s uk-background-secondary Card-grafic">
             <div class="titleReport">
                 <h2 class="Bg-Grafic-title">Entradas mensuales (BS)</h2>
                 <div class="Item_generate-report">
@@ -53,7 +53,7 @@
 
 
     <section class="uk-flex uk-flex-center uk-margin-medium ">
-        <div class="uk-width-1-1@s uk-padding uk-background-secondary card-graphics2">
+        <div id="inventoryRotation" class="uk-width-1-1@s uk-padding uk-background-secondary card-graphics2">
             <div class="titleReport">
                 <h2 class="Bg-Grafic-title">Rotación del inventario</h2>
                 <div class="Item_generate-report">
@@ -77,7 +77,7 @@
 
 
     <section class="uk-flex uk-flex-center uk-margin-medium Wraper Gap">
-        <div class="uk-width-1-2@s  uk-background-secondary Card-grafic">
+        <div id="MostSelledProducts" class="uk-width-1-2@s  uk-background-secondary Card-grafic">
             <div class="titleReport titleReport2">
                 <h2 class="Bg-Grafic-title">Productos más vendidos</h2>
                 <div class="Item_generate-report">
@@ -98,7 +98,7 @@
 
             <canvas id="masVendidosChart" height=170px></canvas>
         </div>
-        <div class="uk-width-1-2@s uk-background-secondary Card-grafic">
+        <div id="LeastSelledProducts" class="uk-width-1-2@s uk-background-secondary Card-grafic">
             <div class="titleReport titleReport2">
                 <h2 class="Bg-Grafic-title">Productos menos vendidos</h2>
                 <div class="Item_generate-report">
@@ -124,7 +124,7 @@
 <script src="static/javaScript/librerias/chart.umd.js"></script>
 <script src="static/javaScript/librerias/jquery.js"></script>
 <script src="static/javaScript/graphicsController.js"></script>
-<script src="static/javascript/Color.js"></script>
+<script src="static/javascript/ChangeColor.js"></script>
 
 </body>
 
