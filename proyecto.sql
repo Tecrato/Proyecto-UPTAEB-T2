@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-06-2024 a las 02:11:15
+-- Tiempo de generación: 21-06-2024 a las 02:31:32
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -104,7 +104,8 @@ INSERT INTO `bitacora` (`id`, `id_usuario`, `tabla`, `accion`, `fecha`, `detalle
 (91, 6, 'Pagos', 'Registrar', '2024-06-20 17:31:25', 'Pago Registrado'),
 (92, 6, 'registrar_ventas', 'agregar', '2024-06-20 17:31:25', 'se agrego una venta'),
 (93, 6, 'deslogin', 'des-logueado', '2024-06-20 19:59:24', 'el usuario Edouard se des-logueo'),
-(94, 6, 'Login', 'logueado', '2024-06-20 19:59:36', 'El usuario Edouard inicio sesion');
+(94, 6, 'Login', 'logueado', '2024-06-20 19:59:36', 'El usuario Edouard inicio sesion'),
+(95, 6, 'Caja', 'Abriendo', '2024-06-20 20:27:43', 'Caja abierta');
 
 -- --------------------------------------------------------
 
@@ -117,16 +118,17 @@ CREATE TABLE `caja` (
   `id_usuario` int(11) NOT NULL,
   `monto_inicial` varchar(45) NOT NULL,
   `monto_final` varchar(45) NOT NULL,
-  `fecha` datetime NOT NULL,
-  `status` tinyint(1) NOT NULL
+  `fecha` datetime NOT NULL DEFAULT current_timestamp(),
+  `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `caja`
 --
 
-INSERT INTO `caja` (`id`, `id_usuario`, `monto_inicial`, `monto_final`, `fecha`, `status`) VALUES
-(1, 6, '100', '', '2024-06-20 23:23:53', 0);
+INSERT INTO `caja` (`id`, `id_usuario`, `monto_inicial`, `monto_final`, `fecha`, `estado`) VALUES
+(1, 6, '100', '', '2024-06-20 23:23:53', 0),
+(2, 6, '10000', '0', '2024-06-20 20:27:43', 1);
 
 -- --------------------------------------------------------
 
@@ -385,7 +387,6 @@ CREATE TABLE `permisos` (
 --
 
 INSERT INTO `permisos` (`id`, `id_usuario`, `tabla`, `permiso`) VALUES
-(1, 6, 'productos', 'buscar'),
 (2, 6, 'categorias', 'buscar'),
 (3, 6, 'marcas', 'buscar'),
 (4, 6, 'productos', 'modificar'),
@@ -749,13 +750,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
 -- AUTO_INCREMENT de la tabla `caja`
 --
 ALTER TABLE `caja`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `categoria`
