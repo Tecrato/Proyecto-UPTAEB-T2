@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-06-2024 a las 02:31:32
+-- Tiempo de generación: 21-06-2024 a las 02:42:13
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -229,6 +229,17 @@ INSERT INTO `entradas` (`id`, `id_producto`, `id_proveedor`, `cantidad`, `fecha_
 (70, 31, 8, 5, '2024-05-26', '2024-07-06', 10, 5, 1),
 (71, 34, 8, 5, '2024-05-26', '2024-07-27', 15, 5, 1),
 (72, 31, 8, 215, '2024-06-06', '2024-07-05', 21, 202, 1);
+
+--
+-- Disparadores `entradas`
+--
+DELIMITER $$
+CREATE TRIGGER `nombre` AFTER INSERT ON `entradas` FOR EACH ROW BEGIN
+    UPDATE productos as p1 
+    SET precio_venta=NEW.precio_compra*(1+(SELECT ganancia FROM productos p WHERE p.id=NEW.id_producto)) Where p1.id=NEW.id_producto ;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 

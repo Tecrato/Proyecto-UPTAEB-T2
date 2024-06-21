@@ -93,6 +93,10 @@
         require('../../Model/Permisos.php');
         $clase = new Permiso(id_usuario:(isset($_GET['ID']) ? $_GET['ID'] : null));
     }
+    elseif ($_GET['randomnautica'] == "capital") {  
+        require('../../Model/Capital.php');
+        $clase = new Capital();
+    }
 
 
 
