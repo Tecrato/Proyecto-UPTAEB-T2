@@ -2,12 +2,12 @@ var template = ""
 var template2 = ""
 
 const hora = (f) => {
-    const fecha = new Date(f);
-    const horas = fecha.getHours();
-    const minutos = fecha.getMinutes();
-    const periodo = horas >= 12 ? "PM" : "AM";
-    const horas12 = horas % 12 || 12;
-    const horaFormateada = `${horas12}:${minutos < 10 ? `0${minutos}` : minutos} ${periodo}`;
+        const fecha = new Date(f);
+        const horas = fecha.getHours();
+        const minutos = fecha.getMinutes();
+        const periodo = horas >= 12 ? "PM" : "AM";
+        const horas12 = horas % 12 || 12;
+        const horaFormateada = `${horas12}:${minutos < 10 ? `0${minutos}` : minutos} ${periodo}`;
     return horaFormateada
 }
 const fecha = (f) => {
@@ -29,7 +29,7 @@ function generar_bitacora_general(page) {
         type: "GET",
         data: { randomnautica: "bitacora", subFunction: "bitacora", limite: 10, n:page},
         success: function (response) {
-            console.log(response)
+           /*  console.log(response) */
             let json = JSON.parse(response)
             json.lista.forEach(element => {
                 template += `

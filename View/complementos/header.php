@@ -156,7 +156,7 @@ echo "
                             <p>Productos</p>
                         </a>
                     </li>
-                    <?php if ($_SESSION['rol'] == 'Administrador') { ?>
+                    <?php if ($_SESSION['rol_num'] <= 2) { ?>
 
                         <li class="uk-margin-small-right Link" href="/Proyecto-UPTAEB-T2/Proveedores">
                             <a class="uk-button uk-button-text enlace_nav" href="Proveedores">
@@ -171,7 +171,7 @@ echo "
                             <p>Clientes</p>
                         </a>
                     </li>
-                    <?php if ($_SESSION['rol'] == 'Administrador') { ?>
+                    <?php if ($_SESSION['rol_num'] <= 2) { ?>
                         <li class="uk-margin-small-right Link" href="/Proyecto-UPTAEB-T2/Estadisticas">
                             <a class="uk-button uk-button-text enlace_nav" href="Estadisticas">
                                 <span uk-icon="statitics" class="uk-icon uk-margin-small-right uk-icon-button"></span>

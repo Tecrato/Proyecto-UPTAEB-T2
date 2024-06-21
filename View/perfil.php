@@ -16,7 +16,7 @@
                                 <span class="uk-margin-small-right" uk-icon="history"></span> BITACORA
                             </a>
                         </li>
-                        <?php if ($_SESSION['rol'] == 'Administrador') { ?>
+                        <?php if ($_SESSION['rol_num'] <= 2) { ?>
                             <li style="padding-bottom: 20px;">
                                 <a href="#">
                                     <span class="uk-margin-small-right" uk-icon="credit-card"></span>CAPITAL
@@ -61,7 +61,7 @@
                                         <div class="uk-width-expand@m">
                                             <div id="component-tab-user" class="uk-switcher">
                                                 <li>
-                                                    <?php if ($_SESSION['rol'] == 'Administrador') { ?>
+                                                    <?php if ($_SESSION['rol_num'] <= 2) { ?>
                                                         <div>
                                                             <div>
                                                                 <div class="uk-flex uk-flex-middle uk-flex-between uk-flex-wrap uk-margin-small-bottom uk-light">
@@ -154,7 +154,7 @@
                                                         </div>
 
                                                     </section>
-                                                    <?php if ($_SESSION['rol'] == 'Administrador') { ?>
+                                                    <?php if ($_SESSION['rol_num'] <= 2) { ?>
                                                         <section>
                                                             <div class="uk-flex uk-flex-center uk-margin-medium-top">
                                                                 <h2>USUARIOS REGISTRADOS</h2>
@@ -504,7 +504,7 @@
                         <div>
                             <ul uk-tab>
                                 <li><a href="#">REGISTRO DE USUARIO</a></li>
-                                <?php if ($_SESSION['rol'] == 'Administrador') { ?>
+                                <?php if ($_SESSION['rol_num'] <= 2) { ?>
                                     <li><a href="#">REGISTRO DE SISTEMA</a></li>
                                 <?php }; ?>
                             </ul>

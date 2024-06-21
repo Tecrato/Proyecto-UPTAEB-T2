@@ -12,7 +12,7 @@
 	$var = json_decode($_POST['jsonString']);
 	// print_r($var->IVA);
 
-	$otra_clase_mas = new Caja(id_usuario:$_SESSION['user_id'], status:1);
+	$otra_clase_mas = new Caja(id_usuario:$_SESSION['user_id'], estado:1);
 	$ultima_caja = $otra_clase_mas->buscar_ultima();
 	if ($ultima_caja == NULL) {
 		echo json_encode(['status' => 'error','error'=>'Caja Error (sus-pechoso)']);
