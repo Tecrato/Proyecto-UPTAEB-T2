@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-06-2024 a las 02:42:13
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Tiempo de generación: 21-06-2024 a las 17:46:25
+-- Versión del servidor: 10.4.27-MariaDB
+-- Versión de PHP: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -105,7 +105,21 @@ INSERT INTO `bitacora` (`id`, `id_usuario`, `tabla`, `accion`, `fecha`, `detalle
 (92, 6, 'registrar_ventas', 'agregar', '2024-06-20 17:31:25', 'se agrego una venta'),
 (93, 6, 'deslogin', 'des-logueado', '2024-06-20 19:59:24', 'el usuario Edouard se des-logueo'),
 (94, 6, 'Login', 'logueado', '2024-06-20 19:59:36', 'El usuario Edouard inicio sesion'),
-(95, 6, 'Caja', 'Abriendo', '2024-06-20 20:27:43', 'Caja abierta');
+(95, 6, 'Caja', 'Abriendo', '2024-06-20 20:27:43', 'Caja abierta'),
+(96, 6, 'Login', 'logueado', '2024-06-21 10:34:45', 'El usuario Edouard inicio sesion'),
+(97, 6, 'deslogin', 'des-logueado', '2024-06-21 10:38:27', 'el usuario Edouard se des-logueo'),
+(98, 6, 'Login', 'logueado', '2024-06-21 10:39:37', 'El usuario Edouard inicio sesion'),
+(99, 6, 'Pagos', 'Registrar', '2024-06-21 10:52:26', 'Pago Registrado'),
+(100, 6, 'registrar_ventas', 'agregar', '2024-06-21 10:52:26', 'se agrego una venta'),
+(101, 6, 'Login', 'logueado', '2024-06-21 11:07:33', 'El usuario Edouard inicio sesion'),
+(102, 6, 'Login', 'logueado', '2024-06-21 11:09:22', 'El usuario Edouard inicio sesion'),
+(103, 6, 'Login', 'logueado', '2024-06-21 11:09:38', 'El usuario Edouard inicio sesion'),
+(104, 6, 'Pagos', 'Registrar', '2024-06-21 11:11:45', 'Pago Registrado'),
+(105, 6, 'registrar_ventas', 'agregar', '2024-06-21 11:11:45', 'se agrego una venta'),
+(106, 6, 'Usuarios', 'Registrar', '2024-06-21 11:16:34', 'Usuario Registrado'),
+(107, 12, 'Login', 'logueado', '2024-06-21 11:25:54', 'El usuario Juan inicio sesion'),
+(108, 6, 'Pagos', 'Registrar', '2024-06-21 11:40:48', 'Pago Registrado'),
+(109, 6, 'registrar_ventas', 'agregar', '2024-06-21 11:40:48', 'se agrego una venta');
 
 -- --------------------------------------------------------
 
@@ -119,16 +133,18 @@ CREATE TABLE `caja` (
   `monto_inicial` varchar(45) NOT NULL,
   `monto_final` varchar(45) NOT NULL,
   `fecha` datetime NOT NULL DEFAULT current_timestamp(),
-  `estado` tinyint(1) NOT NULL
+  `estado` tinyint(1) NOT NULL,
+  `monto_credito` int(11) DEFAULT 0,
+  `fecha_cierre` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `caja`
 --
 
-INSERT INTO `caja` (`id`, `id_usuario`, `monto_inicial`, `monto_final`, `fecha`, `estado`) VALUES
-(1, 6, '100', '', '2024-06-20 23:23:53', 0),
-(2, 6, '10000', '0', '2024-06-20 20:27:43', 1);
+INSERT INTO `caja` (`id`, `id_usuario`, `monto_inicial`, `monto_final`, `fecha`, `estado`, `monto_credito`, `fecha_cierre`) VALUES
+(1, 6, '100', '', '2024-06-20 23:23:53', 0, 0, NULL),
+(2, 6, '10000', '0', '2024-06-20 20:27:43', 1, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -226,9 +242,9 @@ INSERT INTO `entradas` (`id`, `id_producto`, `id_proveedor`, `cantidad`, `fecha_
 (67, 31, 8, 5, '2024-05-27', '2024-06-29', 15, 0, 1),
 (68, 32, 8, 2, '2024-05-27', '2024-06-29', 5, 0, 1),
 (69, 33, 8, 5, '2024-05-27', '2024-07-06', 9, 0, 1),
-(70, 31, 8, 5, '2024-05-26', '2024-07-06', 10, 5, 1),
-(71, 34, 8, 5, '2024-05-26', '2024-07-27', 15, 5, 1),
-(72, 31, 8, 215, '2024-06-06', '2024-07-05', 21, 202, 1);
+(70, 31, 8, 5, '2024-05-26', '2024-07-06', 10, 0, 1),
+(71, 34, 8, 5, '2024-05-26', '2024-07-27', 15, 4, 1),
+(72, 31, 8, 215, '2024-06-06', '2024-07-05', 21, 0, 1);
 
 --
 -- Disparadores `entradas`
@@ -267,7 +283,12 @@ INSERT INTO `factura` (`id`, `id_registro_ventas`, `id_productos`, `cantidad`, `
 (5, 63, 31, 1, 10.01),
 (6, 64, 31, 1, 10.01),
 (7, 65, 31, 1, 10.01),
-(8, 66, 31, 2, 20.02);
+(8, 66, 31, 2, 20.02),
+(9, 67, 31, 200, 2002),
+(10, 68, 31, 7, 70.07),
+(11, 69, 31, 7, 70.07),
+(12, 70, 31, 7, 70.07),
+(19, 77, 34, 1, 15);
 
 -- --------------------------------------------------------
 
@@ -378,7 +399,10 @@ INSERT INTO `pagos` (`id`, `id_venta`, `id_metodo_pago`, `monto`) VALUES
 (5, 63, 7, 11.61),
 (6, 64, 7, 11.61),
 (7, 65, 7, 11.61),
-(8, 66, 7, 23.22);
+(8, 66, 7, 23.22),
+(9, 67, 7, 2322.32),
+(10, 68, 7, 81.28),
+(11, 77, 7, -736);
 
 -- --------------------------------------------------------
 
@@ -507,7 +531,12 @@ INSERT INTO `registro_ventas` (`id`, `monto_final`, `fecha`, `id_cliente`, `id_c
 (63, 11.61, '2024-06-20 17:28:16', 12, NULL, 1.6, 1),
 (64, 11.61, '2024-06-20 17:29:35', 12, 1, 1.6, 1),
 (65, 11.61, '2024-06-20 17:30:28', 12, 1, 1.6, 1),
-(66, 23.22, '2024-06-20 17:31:25', 12, 1, 3.2, 1);
+(66, 23.22, '2024-06-20 17:31:25', 12, 1, 3.2, 1),
+(67, 2322.32, '2024-06-21 10:52:26', 12, 1, 320.32, 1),
+(68, 81.28, '2024-06-21 11:11:45', 12, 1, 11.21, 1),
+(69, 81.28, '2024-06-21 11:11:48', 12, 1, 11.21, 1),
+(70, 81.28, '2024-06-21 11:12:58', 12, 1, 11.21, 1),
+(77, 15, '2024-06-21 11:40:48', 12, 1, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -577,7 +606,8 @@ INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `hash`, `rol`, `active`, `semi
 (6, 'Edouard', 'nose@gmail.com', '$2y$10$7L2.rmi.NOr9wz7vSo1SYu58aIcXZLOVZkfZ2sZPx1moc4vfMjQBW', 1, 1, ''),
 (7, 'John', 'johnconnor@gmail.com', '$2y$10$EgZWh1WmrpMGrsF9K2DjyeL5YTds6aS3.Rku/.h8P7wk7ltODzf9e', 2, 1, ''),
 (10, 'Alfredo', 'alfredo@gmail.com', '$2y$10$8nUZSX2kXCVysLvCLirVyuhfeUSB0uICkZsl3kiDJY4kqlZCI8DKu', 2, 1, ''),
-(11, 'Pedro', 'garnicaluis391@gmail.com', '$2y$10$hK9fotzmkm/BvMtkUEiK0e8kdG/PtmF13R.Wpn.lIRWC29F1c1i3m', 1, 1, '');
+(11, 'Pedro', 'garnicaluis391@gmail.com', '$2y$10$hK9fotzmkm/BvMtkUEiK0e8kdG/PtmF13R.Wpn.lIRWC29F1c1i3m', 1, 1, ''),
+(12, 'Juan', 'depanajuaner@gmail.com', '$2y$10$W7XfRH4IOSoK.KP67LnOUuaN4DzXX7jRwF4QfQxphpqCd38xVSDbu', 1, 1, 'MSKR0rIA3x95JGubVUWq');
 
 -- --------------------------------------------------------
 
@@ -586,7 +616,7 @@ INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `hash`, `rol`, `active`, `semi
 --
 DROP TABLE IF EXISTS `max_ventas`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `max_ventas`  AS SELECT `p`.`id` AS `id`, `p`.`nombre` AS `nombre`, `p`.`valor_unidad` AS `unidad_valor`, (select `unidades`.`nombre` from `unidades` where `unidades`.`id` = `p`.`id_unidad`) AS `unidad`, (select `marcas`.`nombre` from `marcas` where `marcas`.`id` = `p`.`id_marca`) AS `marca`, (select sum(`f`.`cantidad`) from `factura` `f` where `f`.`id_productos` = `p`.`id`) AS `cantidad` FROM `productos` AS `p` WHERE `p`.`active` = 1 ORDER BY (select sum(`f`.`cantidad`) from `factura` `f` where `f`.`id_productos` = `p`.`id`) DESC ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `max_ventas`  AS SELECT `p`.`id` AS `id`, `p`.`nombre` AS `nombre`, `p`.`valor_unidad` AS `unidad_valor`, (select `unidades`.`nombre` from `unidades` where `unidades`.`id` = `p`.`id_unidad`) AS `unidad`, (select `marcas`.`nombre` from `marcas` where `marcas`.`id` = `p`.`id_marca`) AS `marca`, (select sum(`f`.`cantidad`) from `factura` `f` where `f`.`id_productos` = `p`.`id`) AS `cantidad` FROM `productos` AS `p` WHERE `p`.`active` = 1 ORDER BY (select sum(`f`.`cantidad`) from `factura` `f` where `f`.`id_productos` = `p`.`id`) AS `DESCdesc` ASC  ;
 
 -- --------------------------------------------------------
 
@@ -595,7 +625,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `min_ventas`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `min_ventas`  AS SELECT `p`.`id` AS `id`, `p`.`nombre` AS `nombre`, `p`.`valor_unidad` AS `unidad_valor`, (select `unidades`.`nombre` from `unidades` where `unidades`.`id` = `p`.`id_unidad`) AS `unidad`, (select `marcas`.`nombre` from `marcas` where `marcas`.`id` = `p`.`id_marca`) AS `marca`, (select sum(`f`.`cantidad`) from `factura` `f` where `f`.`id_productos` = `p`.`id`) AS `cantidad` FROM `productos` AS `p` WHERE `p`.`active` = 1 ORDER BY (select sum(`f`.`cantidad`) from `factura` `f` where `f`.`id_productos` = `p`.`id`) ASC ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `min_ventas`  AS SELECT `p`.`id` AS `id`, `p`.`nombre` AS `nombre`, `p`.`valor_unidad` AS `unidad_valor`, (select `unidades`.`nombre` from `unidades` where `unidades`.`id` = `p`.`id_unidad`) AS `unidad`, (select `marcas`.`nombre` from `marcas` where `marcas`.`id` = `p`.`id_marca`) AS `marca`, (select sum(`f`.`cantidad`) from `factura` `f` where `f`.`id_productos` = `p`.`id`) AS `cantidad` FROM `productos` AS `p` WHERE `p`.`active` = 1 ORDER BY (select sum(`f`.`cantidad`) from `factura` `f` where `f`.`id_productos` = `p`.`id`) ASC  ;
 
 -- --------------------------------------------------------
 
@@ -604,7 +634,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `ratio_ventas`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ratio_ventas`  AS SELECT `p`.`id` AS `id`, `p`.`nombre` AS `nombre`, 1 - (select sum(`c`.`existencia`) from `entradas` `c` where `c`.`id_producto` = `p`.`id`) / (select sum(`a`.`cantidad`) from `entradas` `a` where `a`.`id_producto` = `p`.`id`) AS `ratio_ventas` FROM `productos` AS `p` WHERE `p`.`active` = 1 ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ratio_ventas`  AS SELECT `p`.`id` AS `id`, `p`.`nombre` AS `nombre`, 1 - (select sum(`c`.`existencia`) from `entradas` `c` where `c`.`id_producto` = `p`.`id`) / (select sum(`a`.`cantidad`) from `entradas` `a` where `a`.`id_producto` = `p`.`id`) AS `ratio_ventas` FROM `productos` AS `p` WHERE `p`.`active` = 11  ;
 
 -- --------------------------------------------------------
 
@@ -613,7 +643,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `total_productos_categoria`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `total_productos_categoria`  AS SELECT `c`.`nombre` AS `categoria`, count(`p`.`id`) AS `total_productos` FROM (`categoria` `c` left join `productos` `p` on(`c`.`id` = `p`.`id_categoria`)) WHERE `p`.`active` = 1 GROUP BY `c`.`id`, `c`.`nombre` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `total_productos_categoria`  AS SELECT `c`.`nombre` AS `categoria`, count(`p`.`id`) AS `total_productos` FROM (`categoria` `c` left join `productos` `p` on(`c`.`id` = `p`.`id_categoria`)) WHERE `p`.`active` = 1 GROUP BY `c`.`id`, `c`.`nombre``nombre`  ;
 
 -- --------------------------------------------------------
 
@@ -622,7 +652,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `total_stock_categoria`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `total_stock_categoria`  AS SELECT `c`.`id` AS `id`, `c`.`nombre` AS `nombre`, (select sum((select sum(`e`.`existencia`) from `entradas` `e` where `e`.`id_producto` = `p`.`id`)) from `productos` `p` where `p`.`id_categoria` = `c`.`id`) AS `total` FROM `categoria` AS `c` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `total_stock_categoria`  AS SELECT `c`.`id` AS `id`, `c`.`nombre` AS `nombre`, (select sum((select sum(`e`.`existencia`) from `entradas` `e` where `e`.`id_producto` = `p`.`id`)) from `productos` `p` where `p`.`id_categoria` = `c`.`id`) AS `total` FROM `categoria` AS `c``c`  ;
 
 --
 -- Índices para tablas volcadas
@@ -761,7 +791,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- AUTO_INCREMENT de la tabla `caja`
@@ -803,7 +833,7 @@ ALTER TABLE `entradas`
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `marcas`
@@ -827,7 +857,7 @@ ALTER TABLE `movimientos_capital`
 -- AUTO_INCREMENT de la tabla `pagos`
 --
 ALTER TABLE `pagos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
@@ -851,7 +881,7 @@ ALTER TABLE `proveedores`
 -- AUTO_INCREMENT de la tabla `registro_ventas`
 --
 ALTER TABLE `registro_ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- AUTO_INCREMENT de la tabla `unidades`
@@ -863,7 +893,7 @@ ALTER TABLE `unidades`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Restricciones para tablas volcadas
