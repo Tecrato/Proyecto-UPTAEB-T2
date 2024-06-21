@@ -207,3 +207,28 @@ const DeleteClientProv = (BTN, FORM, IDSETTER, TR, notification) => {
     })
   })
 }
+
+
+// let  BG = document.querySelectorAll(".uk-background-secondary");
+// let ukLight = document.querySelectorAll(".uk-light");
+// document.getElementById("html").style.backgroundColor = "#fff";
+// document.querySelector(".Bg-Main-home").style.backgroundColor = "#fff";
+
+// BG.forEach((b)=>{
+//     b.classList.remove("uk-background-secondary");
+//     b.classList.add("uk-background-muted");
+// })
+
+// ukLight.forEach((l)=>{
+//     l.classList.remove("uk-light");
+//     l.classList.add("uk-dark");
+// })
+
+// document.querySelector(".Nav-bg").classList.add("uk-light")
+// let cardSupplier = document.querySelectorAll(".target_supplier")
+
+
+
+// .style.background = "none"
+// document.querySelector(".target_supplier").classList.add("uk-background-muted")
+

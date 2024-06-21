@@ -213,7 +213,7 @@
 </main>
 
 <script src="static/javaScript/librerias/jquery.js"></script>
-<script src="static/javascript/ChangeColor.js"></script>
+<script src="static/javascript/Color.js"></script>
 
 </body>
 

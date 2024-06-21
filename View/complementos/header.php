@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" style="background-color: #111;">
+<html lang="es" style="background-color: #111;" id="html">
 
 <head>
     <meta charset="UTF-8">
@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="static/css/responsive.dataTables.css">
     <script src="static/javaScript/librerias/uikit.js"></script>
     <script src="static/javaScript/librerias/uikit-icons.js"></script>
-
     <link rel="shortcut icon" href="static/images/logo_m.png" type="image/x-icon">
     <title id="title">Inventario-Inicio</title>
 </head>
@@ -47,12 +46,12 @@ echo "
                             <li class="uk-flex uk-flex-middle">
                                 <a href="Inicio"><img src="static/images/Logo Minimarket 2.png" alt="" class="Nav-img uk-margin-medium-right"></a>
 
-                                <form action="" class="uk-flex uk-flex-middle formSearchHeader">
+                                <!-- <form action="" class="uk-flex uk-flex-middle formSearchHeader">
                                     <input class="uk-input uk-margin-small-right uk-border-pill" type="text" placeholder="Buscar">
                                     <button class="uk-button uk-button-link" type="submit">
                                         <span uk-icon="search"></span>
                                     </button>
-                                </form>
+                                </form> -->
                             </li>
                         </ul>
                     </div>
@@ -99,6 +98,7 @@ echo "
                                         <ul class="uk-nav uk-dropdown-nav ">
                                             <li class="uk-active uk-flex uk-flex-middle uk-flex-between">
                                                 <a href="#"><?php echo $_SESSION['user_name']; ?></a>
+                                                <span class="btn-ModeColorView" uk-icon="icon: moon; ratio: 1.5"></span>
                                             </li>
                                             <li>
                                                 <a class="uk-padding-remove-vertical" href="Administrar_perfil">
