@@ -3,10 +3,10 @@
 <main class="Bg-Main-home2 uk-padding uk-padding-remove-bottom main-Product uk-light">
     <section class="">
         <ul uk-tab>
-            <li><a class="itemSwitcher1" href="#"><img class="uk-preserve-width uk-margin-small-right img1ProductSwitcher" src="./static/images/cajas (2).png" width="30" height="30" alt="">PRODUCTOS</a></li>
-            <li><a class="itemSwitcher2" href="#"><img class="uk-preserve-width uk-margin-small-right img2ProductSwitcher" src="./static/images/suministros.png" width="32" height="32" alt="">ENTRADAS</a></li>
-            <li><a class="itemSwitcher3" href="#"><img class="uk-preserve-width uk-margin-small-right img4ProductSwitcher" src="./static/images/menu.png" width="32" height="32" alt="">OTROS</a></li>
-            <li><a class="itemSwitcher4" href="#"><img class="uk-preserve-width uk-margin-small-right img5ProductSwitcher" src="./static/images/papelera-de-reciclaje.png" width="32" height="32" alt="">PRODUCTOS DESACTIVADOS</a></li>
+            <li><a id="aProductos" class="itemSwitcher1" href="#"><img class="uk-preserve-width uk-margin-small-right img1ProductSwitcher" src="./static/images/cajas (2).png" width="30" height="30" alt="">PRODUCTOS</a></li>
+            <li><a id="aEntradas" class="itemSwitcher2" href="#"><img class="uk-preserve-width uk-margin-small-right img2ProductSwitcher" src="./static/images/suministros.png" width="32" height="32" alt="">ENTRADAS</a></li>
+            <li><a id="aOtros" class="itemSwitcher3" href="#"><img class="uk-preserve-width uk-margin-small-right img4ProductSwitcher" src="./static/images/menu.png" width="32" height="32" alt="">OTROS</a></li>
+            <li><a id="aProductsDesct" class="itemSwitcher4" href="#"><img class="uk-preserve-width uk-margin-small-right img5ProductSwitcher" src="./static/images/papelera-de-reciclaje.png" width="32" height="32" alt="">PRODUCTOS DESACTIVADOS</a></li>
         </ul>
 
         <ul class="uk-switcher uk-margin">
@@ -18,14 +18,14 @@
                                 <div class="uk-margin-right">
                                     <div class="uk-flex uk-flex-wrap">
                                         <div class="uk-margin formDelete">
-                                            <form class="uk-search uk-search-default search-responsive-product">
+                                            <form id="formSearch" class="uk-search uk-search-default search-responsive-product">
                                                 <span class="uk-search-icon-flip" uk-search-icon></span>
                                                 <input class="uk-search-input searchProductActive" type="search" placeholder="Buscar" aria-label="Search">
                                             </form>
                                         </div>
                                         <div class="uk-margin-left">
-                                            <a href="InventarioPDF" target="_blank" class="uk-icon-link" uk-tooltip="title:Reporte Inventario; delay: 500" uk-icon="icon: file-pdf; ratio: 1.5"></a>
-                                            <a href="#modal-register-product" uk-toggle uk-tooltip="title:Añadir; delay: 500" class="uk-margin-small-left btn-modal-register">
+                                            <a id="iconReportInv" href="InventarioPDF" target="_blank" class="uk-icon-link" uk-tooltip="title:Reporte Inventario; delay: 500" uk-icon="icon: file-pdf; ratio: 1.5"></a>
+                                            <a id="registerProduct" href="#modal-register-product" uk-toggle uk-tooltip="title:Añadir; delay: 500" class="uk-margin-small-left btn-modal-register">
                                                 <img class="btn_agg" src="./static/images/btn_agg.png" alt="" width="35px">
                                             </a>
                                         </div>
@@ -33,9 +33,9 @@
                                 </div>
                                 <nav uk-dropnav="mode: click">
                                     <ul class="uk-subnav filter_product" uk-margin>
-                                        <li class="uk-active" uk-filter-control><a href="#">TODO</a></li>
+                                        <li id="productFilterAll" class="uk-active" uk-filter-control><a href="#">TODO</a></li>
                                         <li>
-                                            <a href="#">CATEGORIA <span uk-drop-parent-icon></span></a>
+                                            <a id="productFilterCategory" href="#">CATEGORIA <span uk-drop-parent-icon></span></a>
                                             <div class="uk-dropdown">
                                                 <ul class="uk-nav uk-dropdown-nav filter_category">
                                                     <!-- aqui se cargan las categorias con js -->
@@ -43,7 +43,7 @@
                                             </div>
                                         </li>
                                         <li>
-                                            <a href="#">MARCA <span uk-drop-parent-icon></span></a>
+                                            <a id="productFilterMarca" href="#">MARCA <span uk-drop-parent-icon></span></a>
                                             <div class="uk-dropdown">
                                                 <ul class="uk-nav uk-dropdown-nav filter_marca">
 
@@ -104,13 +104,13 @@
                                     <div class="uk-width-1-2@s">
                                         <label class="uk-form-label">Nombre</label>
                                         <div class="uk-form-controls">
-                                            <input class="NameUpdateProduct uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="^[A-Z][A-Za-z0-9ñ\s]{2,20}$" required>
+                                            <input class="NameUpdateProduct uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="([A-Zñ+áéó]|[a-zñáéó]){3,}( ([A-Zñ+áéó]|[a-zñáéó]){3,})?$" required>
                                         </div>
                                     </div>
                                     <div class="uk-width-1-2@s">
                                         <label class="uk-form-label">Código</label>
                                         <div class="uk-form-controls">
-                                            <input class="CodeUpdateProduct uk-input" type="number" placeholder="Código" aria-label="100" name="codigo" pattern="^/d$" required>
+                                            <input class="CodeUpdateProduct uk-input" type="text" placeholder="Código" aria-label="100" name="codigo" pattern="^\d{12}$" minlength="12" maxlength="12"  autocomplete="off"required>
                                         </div>
                                     </div>
                                     <div class="uk-width-1-2@s">
@@ -133,7 +133,7 @@
                                     <div class="uk-width-1-2@s">
                                         <label class="uk-form-label">Valor Uni.</label>
                                         <div class="uk-form-controls">
-                                            <input class="uk-input ValorUnidadUpdateProduct" type="number" name="valor_unidad">
+                                            <input class="uk-input ValorUnidadUpdateProduct" type="text" pattern="^([\d]){1,4}?$" name="valor_unidad" minlength="1" maxlength="4" required>
                                         </div>
                                     </div>
                                     <div class="uk-width-1-2@s">
@@ -147,7 +147,7 @@
                                     <div class="uk-width-1-3@s">
                                         <label class="uk-form-label">Precio Venta</label>
                                         <div class="uk-form-controls">
-                                            <input class="PVUpdateProduct uk-input" type="number" min="0.1" step="0.1" placeholder="precio_venta" aria-label="25" name="precio_venta" required>
+                                            <input class="PVUpdateProduct uk-input" type="number" pattern="^([\d]){1,4}(.[\d]{1,2})?$" min="0.1" step="0.1" placeholder="precio_venta" aria-label="25" name="precio_venta" required>
                                         </div>
                                     </div>
                                     <div class="uk-width-1-3@s">
@@ -240,7 +240,7 @@
                                     </div>
                                     <div class="uk-width-1-1@s uk-flex uk-flex-middle">
                                         <label for="" style="width: 265px;">Fecha adquisicion</label>
-                                        <input class="uk-input" type="date" step="0.01" aria-label="25" name="fecha_c" required>
+                                        <input class="uk-input" type="date" step="0.01" aria-label="25" name="fecha_c" value="<?php echo date('Y-m-d'); ?>" required>
                                     </div>
                                     <div class="uk-width-1-1@s uk-flex uk-flex-middle">
                                         <label for="" style="width: 265px;">Fecha de vencimiento</label>
@@ -354,9 +354,9 @@
                             <div>
                                 <nav uk-dropnav="mode: click">
                                     <ul class="uk-subnav uk-margin-remove" style="gap: 25px;">
-                                        <li class="uk-active" uk-filter-control><a href="#">TODO</a></li>
+                                        <li id="SupplierFilterAll" class="uk-active" uk-filter-control><a href="#">TODO</a></li>
                                         <li>
-                                            <a href="#">PROVEEDORES <span uk-drop-parent-icon></span></a>
+                                            <a id="SupplierFilterOne" href="#">PROVEEDORES <span uk-drop-parent-icon></span></a>
                                             <div class="uk-dropdown">
                                                 <ul class="uk-nav uk-dropdown-nav filter_prov_entry">
                                                     <!-- aqui se cargan los proveedores con js -->
@@ -364,7 +364,7 @@
                                             </div>
                                         </li>
                                         <li>
-                                            <a href="#">PRODUCTOS <span uk-drop-parent-icon></span></a>
+                                            <a id="SupplierFilterProducts" href="#">PRODUCTOS <span uk-drop-parent-icon></span></a>
                                             <div class="uk-dropdown">
                                                 <ul class="uk-nav uk-dropdown-nav filter_prov_entry_product">
 
@@ -424,9 +424,9 @@
             <!-- este es el nuevo item, contiene las marcas, categorias y unidades -->
             <li>
                 <ul class="uk-subnav uk-subnav-pill uk-margin-medium-top uk-background-secondary uk-flex uk-flex-center" uk-switcher="connect: .switcher-container" style="padding: 10px;">
-                    <li><a href="#">Marcas</a></li>
-                    <li><a href="#">Unidades</a></li>
-                    <li><a href="#">Categorias</a></li>
+                    <li><a id="liMarcas" href="#">Marcas</a></li>
+                    <li><a id="liUnidades" href="#">Unidades</a></li>
+                    <li><a id="liCategorias" href="#">Categorias</a></li>
                 </ul>
                 <div class="uk-flex uk-flex-around uk-flex-wrap">
                     <ul class="uk-switcher switcher-container uk-background-secondary uk-margin-medium-top uk-border-rounded" style="border: 1px solid #999;">
@@ -441,7 +441,7 @@
                                 <div class="uk-margin">
                                     <label class="uk-form-label" for="form-horizontal-text">Nombre</label>
                                     <div class="uk-form-controls">
-                                        <input name="nombre" class="uk-input marca_name" id="form-horizontal-text" type="text" placeholder="Nombre de marca">
+                                        <input name="nombre" class="uk-input marca_name" id="form-horizontal-text" type="text" placeholder="Nombre de marca" pattern="^([A-Zñ+áéó]|[a-zñáéó]){3,}( ([A-Zñ+áéó]|[a-zñáéó]){3,})?$" required>
                                         <input type="text" name="tipo" value='marca' style="display:none">
                                     </div>
                                 </div>
@@ -462,7 +462,7 @@
                                 <div class="uk-margin">
                                     <label class="uk-form-label" for="form-horizontal-text">Nombre</label>
                                     <div class="uk-form-controls">
-                                        <input name="nombre" class="uk-input nombre_unidad" id="form-horizontal-text" type="text" placeholder="Nombre de Unidad">
+                                        <input name="nombre" class="uk-input nombre_unidad" id="form-horizontal-text" type="text" placeholder="Nombre de Unidad" pattern="^([A-Zñ+áéó]|[a-zñáéó]){1,}$" required>
                                         <input type="text" name="tipo" value='unidad' style="display:none">
                                     </div>
                                 </div>
@@ -483,7 +483,7 @@
                                 <div class="uk-margin">
                                     <label class="uk-form-label" for="form-horizontal-text">Nombre</label>
                                     <div class="uk-form-controls">
-                                        <input name="nombre" class="uk-input categoria_name" id="form-horizontal-text" type="text" placeholder="Nombre de Categoria">
+                                        <input name="nombre" class="uk-input categoria_name" id="form-horizontal-text" type="text" placeholder="Nombre de Categoria" pattern="^([A-Zñ+áéó]|[a-zñáéó]){3,}( ([A-Zñ+áéó]|[a-zñáéó]){3,})?$" required>
                                         <input type="text" name="tipo" value='categoria' style="display:none">
                                     </div>
                                 </div>
@@ -577,7 +577,7 @@
                                         <div class="uk-margin">
                                             <label class="uk-form-label" for="form-horizontal-text">Nombre</label>
                                             <div class="uk-form-controls">
-                                                <input class="uk-input name_U-C-M_edit" name="nombre" id="form-horizontal-text" type="text" placeholder="Nombre de marca">
+                                                <input class="uk-input name_U-C-M_edit" name="nombre" id="form-horizontal-text" type="text" placeholder="Nombre de marca" pattern="^([A-Zñ+áéó]|[a-zñáéó]){3,}( ([A-Zñ+áéó]|[a-zñáéó]){3,})?$">
                                                 <input id="Edit_type" type="text" name="tipo" style="display:none">
                                                 <input id="id_delete_edit-U-M-C" type="text" name="ID" style="display:none">
                                                 <input type="submit" id="editar_U-M-C" style="display:none">
@@ -632,16 +632,16 @@
                                         <div class="uk-margin formDelete">
                                             <form class="uk-search uk-search-default search-responsive-product">
                                                 <span class="uk-search-icon-flip" uk-search-icon></span>
-                                                <input class="uk-search-input searchProductNotActive" type="search" placeholder="Buscar" aria-label="Search">
+                                                <input id="SearchProductsOff" class="uk-search-input searchProductNotActive" type="search" placeholder="Buscar" aria-label="Search">
                                             </form>
                                         </div>
                                     </div>
                                 </div>
                                 <nav uk-dropnav="mode: click">
                                     <ul class="uk-subnav filter_product" uk-margin>
-                                        <li class="uk-active" uk-filter-control><a href="#">TODO</a></li>
+                                        <li class="uk-active" uk-filter-control><a id="productOffFilterAll" href="#">TODO</a></li>
                                         <li>
-                                            <a href="#">CATEGORIA <span uk-drop-parent-icon></span></a>
+                                            <a id="productOffFilterCategory" href="#">CATEGORIA <span uk-drop-parent-icon></span></a>
                                             <div class="uk-dropdown">
                                                 <ul class="uk-nav uk-dropdown-nav filter_category">
                                                     <!-- aqui se cargan las categorias con js -->
@@ -649,7 +649,7 @@
                                             </div>
                                         </li>
                                         <li>
-                                            <a href="#">MARCA <span uk-drop-parent-icon></span></a>
+                                            <a id="productOffFilterMarca" href="#">MARCA <span uk-drop-parent-icon></span></a>
                                             <div class="uk-dropdown">
                                                 <ul class="uk-nav uk-dropdown-nav filter_marca">
 

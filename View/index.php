@@ -13,7 +13,7 @@
                 <div class="uk-width-1-4">
                     <section class="uk-car uk-flex uk-flex-between uk-flex-middle uk-card-default uk-card-body uk-background-secondary uk-light">
                         <article>
-                            <h2 class="uk-margin-remove-top">0.00</h2>
+                            <h2 id="aaa" class="uk-margin-remove-top">0.00</h2>
                             <p class="uk-margin-remove-bottom">GANANCIAS</p>
                         </article>
                         <article>
@@ -213,7 +213,7 @@
 </main>
 
 <script src="static/javaScript/librerias/jquery.js"></script>
-<script src="static/javascript/Color.js"></script>
+<script src="static/javascript/ChangeColor.js"></script>
 
 </body>
 

@@ -13,6 +13,11 @@
     <link rel="stylesheet" href="static/css/Style.css">
     <link rel="stylesheet" href="static/css/dataTables.css">
     <link rel="stylesheet" href="static/css/responsive.dataTables.css">
+    <link rel="stylesheet" href="static/css/introjs.min.css">
+    <link rel="stylesheet" href="static/css/introjs-modern.css">
+    <script src="static/javaScript/librerias/jquery.js"></script>
+    <script src="static/javaScript/librerias/intro.min.js"></script>
+    <script src="static/javaScript/Tooltip-help.js" defer></script>
     <script src="static/javaScript/librerias/uikit.js"></script>
     <script src="static/javaScript/librerias/uikit-icons.js"></script>
     <link rel="shortcut icon" href="static/images/logo_m.png" type="image/x-icon">
@@ -56,7 +61,7 @@ echo "
                         </ul>
                     </div>
                     <div class="uk-navbar-right">
-                        <nav class="iconNotification" uk-dropnav="mode: click">
+                        <nav id="iconNotification" class="iconNotification" uk-dropnav="mode: click">
                             <ul class="uk-subnav uk-margin-remove">
                                 <li>
                                     <a class="uk-flex uk-flex-center uk-flex-middle" href="#">
@@ -84,11 +89,11 @@ echo "
                             </ul>
                         </nav>
 
-                        <span uk-icon="icon: question; ratio: 1.5" style="cursor: pointer;"></span>
+                        <span id="Tooltip-help" uk-icon="icon: question; ratio: 1.5" style="cursor: pointer;"></span>
 
                         <nav class="Nav1" uk-dropnav="mode: click">
                             <ul class="uk-subnav uk-margin-remove">
-                                <li>
+                                <li id="iconSets">
                                     <a href="#">
                                         <!-- <span class="uk-icon uk-margin-small-right Bg-user" uk-icon="icon: user; ratio: 1.5"></span> -->
                                         <img class="uk-preserve-width uk-border-circle uk-margin-small-right" src="static/images/undraw_profile.svg" width="40" height="40" alt="">
@@ -125,7 +130,7 @@ echo "
 
 
         <div class="dolar">
-            <marquee behavior="alternative" direction="right" scrollamount="12" style="padding-top: 8px;width: 99%;">
+            <marquee id="tasaDolar" behavior="alternative" direction="right" scrollamount="12" style="padding-top: 8px;width: 99%;">
                 <div class="uk-flex uk-flex-middle">
                     <div class="uk-flex uk-flex-middle uk-margin-medium-right">
                         <span class="uk-light uk-margin-small-right" uk-icon="icon: bag; ratio: 1.3"></span>
@@ -145,13 +150,13 @@ echo "
             <div class="uk-navbar-left ">
                 <ul class="uk-navbar-nav uk-margin-large-left">
                     <li class="uk-margin-small-right Link" href="/Proyecto-UPTAEB-T2/Inicio">
-                        <a class="uk-button uk-button-text enlace_nav" href="Inicio">
+                        <a  id="linkInicio" class="uk-button uk-button-text enlace_nav" href="Inicio">
                             <span uk-icon="thumbnails" class="uk-icon uk-margin-small-right uk-icon-button"></span>
                             <p>Inicio</p>
                         </a>
                     </li>
                     <li class="uk-margin-small-right Link" href="/Proyecto-UPTAEB-T2/Productos">
-                        <a class="uk-button uk-button-text enlace_nav" href="Productos">
+                        <a id="linkProductos" class="uk-button uk-button-text enlace_nav" href="Productos">
                             <span uk-icon="product" class="uk-icon uk-margin-small-right uk-icon-button"></span>
                             <p>Productos</p>
                         </a>
@@ -159,21 +164,21 @@ echo "
                     <?php if ($_SESSION['rol_num'] <= 2) { ?>
 
                         <li class="uk-margin-small-right Link" href="/Proyecto-UPTAEB-T2/Proveedores">
-                            <a class="uk-button uk-button-text enlace_nav" href="Proveedores">
+                            <a id="linkProveedores" class="uk-button uk-button-text enlace_nav" href="Proveedores">
                                 <span uk-icon="bookmark" class="uk-icon uk-margin-small-right uk-icon-button"></span>
                                 <p>Proveedores</p>
                             </a>
                         </li>
                     <?php }; ?>
                     <li class="uk-margin-small-right Link" href="/Proyecto-UPTAEB-T2/Clientes">
-                        <a class="uk-button uk-button-text enlace_nav" href="Clientes">
+                        <a id="linkClientes" class="uk-button uk-button-text enlace_nav" href="Clientes">
                             <span uk-icon="users" class="uk-icon uk-margin-small-right uk-icon-button"></span>
                             <p>Clientes</p>
                         </a>
                     </li>
                     <?php if ($_SESSION['rol_num'] <= 2) { ?>
                         <li class="uk-margin-small-right Link" href="/Proyecto-UPTAEB-T2/Estadisticas">
-                            <a class="uk-button uk-button-text enlace_nav" href="Estadisticas">
+                            <a id="linkEstadisticas" class="uk-button uk-button-text enlace_nav" href="Estadisticas">
                                 <span uk-icon="statitics" class="uk-icon uk-margin-small-right uk-icon-button"></span>
                                 <p>Estadisticas</p>
                             </a>
@@ -181,7 +186,7 @@ echo "
                     <?php }; ?>
 
                     <li class="uk-margin-small-right Link" href="/Proyecto-UPTAEB-T2/Ventas">
-                        <a class="uk-button uk-button-text enlace_nav" href="Ventas">
+                        <a id="linkVentas" class="uk-button uk-button-text enlace_nav" href="Ventas">
                             <span uk-icon="factura" class="uk-icon uk-margin-small-right uk-icon-button"></span>
                             <p>Registro de ventas</p>
                         </a>

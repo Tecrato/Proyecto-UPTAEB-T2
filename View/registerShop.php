@@ -4,9 +4,9 @@
 
 
     <ul uk-tab>
-        <li><a href="#">FACTURA</a></li>
-        <li><a href="#">CREDITO</a></li>
-        <li><a href="#">CAJA</a></li>
+        <li><a id="FACTURA" href="#">FACTURA</a></li>
+        <li><a id="CREDITO" href="#">CREDITO</a></li>
+        <li><a id="CAJA" href="#">CAJA</a></li>
     </ul>
 
     <div class="uk-switcher uk-margin">

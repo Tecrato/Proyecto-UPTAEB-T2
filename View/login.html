@@ -29,19 +29,19 @@
 
                             <div class="uk-inline">
                                 <span class="uk-form-icon" uk-icon="icon: user"></span>
-                                <input class="uk-input" placeholder="Correo Electronico" type="email" aria-label="Not clickable icon" name="correo" required>
+                                <input class="uk-input" placeholder="Correo Electronico" type="email" aria-label="Not clickable icon" name="correo" pattern="^([A-Za-z0-9\.\_]+)@([\w]{3,8})\.([\w]{2,3})(\.[\w]{2,4})?(\.[\w]{2,3})?$" required>
                             </div>
                         </div>
                         <div class="uk-width-1-1@s uk-flex uk-flex-center">
                             <div class="uk-inline">
                                 <span class="uk-form-icon" uk-icon="icon: lock"></span>
-                                <input class="uk-input" placeholder="Contraseña" type="password" aria-label="Not clickable icon" name="contraseña" required>
+                                <input class="uk-input" placeholder="Contraseña" type="password" aria-label="Not clickable icon" name="contraseña" pattern="^[\w\S]{8,}$" required>
                             </div>
                         </div>
                         <div class="uk-width-1-1@s uk-flex uk-flex-center">
                             <div class="uk-inline">
                                 <span class="uk-form-icon" uk-icon="icon: question"></span>
-                                <input class="uk-input uk-form-blank" placeholder="Codigo" type="text" aria-label="Not clickable icon" name="codigo" required>
+                                <input class="uk-input uk-form-blank" placeholder="Codigo" type="text" aria-label="Not clickable icon" name="codigo" required autocomplete="off">
                             </div>
                         </div>
                         <div class="uk-width-1-1@s uk-flex uk-flex-middle uk-flex-center">
