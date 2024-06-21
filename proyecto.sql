@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-06-2024 a las 00:56:22
+-- Tiempo de generación: 21-06-2024 a las 02:11:15
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -102,7 +102,9 @@ INSERT INTO `bitacora` (`id`, `id_usuario`, `tabla`, `accion`, `fecha`, `detalle
 (89, 6, 'Pagos', 'Registrar', '2024-06-20 17:30:28', 'Pago Registrado'),
 (90, 6, 'registrar_ventas', 'agregar', '2024-06-20 17:30:28', 'se agrego una venta'),
 (91, 6, 'Pagos', 'Registrar', '2024-06-20 17:31:25', 'Pago Registrado'),
-(92, 6, 'registrar_ventas', 'agregar', '2024-06-20 17:31:25', 'se agrego una venta');
+(92, 6, 'registrar_ventas', 'agregar', '2024-06-20 17:31:25', 'se agrego una venta'),
+(93, 6, 'deslogin', 'des-logueado', '2024-06-20 19:59:24', 'el usuario Edouard se des-logueo'),
+(94, 6, 'Login', 'logueado', '2024-06-20 19:59:36', 'El usuario Edouard inicio sesion');
 
 -- --------------------------------------------------------
 
@@ -386,7 +388,8 @@ INSERT INTO `permisos` (`id`, `id_usuario`, `tabla`, `permiso`) VALUES
 (1, 6, 'productos', 'buscar'),
 (2, 6, 'categorias', 'buscar'),
 (3, 6, 'marcas', 'buscar'),
-(4, 6, 'productos', 'modificar');
+(4, 6, 'productos', 'modificar'),
+(5, 6, 'unidades', 'buscar');
 
 -- --------------------------------------------------------
 
@@ -420,7 +423,8 @@ INSERT INTO `productos` (`id`, `id_categoria`, `id_unidad`, `id_marca`, `valor_u
 (31, 1, 2, 1, 1, 'Azucar', 'producto_Azucar_5e5294ee-d7d2-424d-ac2e-5802bbad41ab.jpeg', 5, 10, 10.01, 1, 1, 0, ''),
 (32, 2, 2, 3, 1, 'Harina', 'producto_Harina_2551fe44-3bc1-476e-b084-e7ff84eb8600.jpeg', 10, 20, 10.01, 0, 1, 0, ''),
 (33, 2, 2, 1, 1, 'Arroz', 'producto_Arroz_2c51307c-9d9f-41fb-9419-1e61a44891f0.jpeg', 5, 10, 15.01, 0, 1, 0, ''),
-(34, 2, 2, 12, 1, 'Pasta', 'producto_Pasta_arroz.jpeg', 5, 20, 15, 0, 1, 0, '');
+(34, 2, 2, 12, 1, 'Pasta', 'producto_Pasta_arroz.jpeg', 5, 20, 15, 0, 1, 0, ''),
+(35, 1, 2, 1, 10, 'Hfgrtg', 'producto_Hfgrtg_1626311193_Naruto - boruto (383).jpg', 1, 12, 10, 1, 1, 0, '111111111111');
 
 -- --------------------------------------------------------
 
@@ -745,7 +749,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
 -- AUTO_INCREMENT de la tabla `caja`
@@ -817,13 +821,13 @@ ALTER TABLE `pagos`
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedores`
