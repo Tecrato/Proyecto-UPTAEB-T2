@@ -8,7 +8,7 @@
     require('../../Model/Permisos.php');
 
     
-    $other_class = new Permiso(null,$_SESSION['user_id'],$_GET['randomnautica'],'agregar');
+    $other_class = new Permiso(null,$_SESSION['user_id'],$_POST['tipo'],'agregar');
     $result = $other_class->search();
 
     if ($_SESSION['rol_num'] > 1 and count($result) <= 0) {
@@ -97,7 +97,6 @@
         $clase = new Credito(null,$_POST["ID"],$_POST["ID_rv"],$_POST["fecha_limite"],$_POST["monto_final"]);
     }
     elseif ($tipo === 'permiso'){
-        require('../../Model/Permisos.php');
         $clase = new Permiso(null,$_POST["id_usuario"],$_POST["tabla"],$_POST["permiso"]);
     }
     if ($tipo != 'producto') {

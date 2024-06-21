@@ -9,7 +9,7 @@
         $limite = intval($_GET['limite']);
     }
     else {
-        $limite = 9;
+        $limite = 90;
     }
     if (isset($_GET['n']) and $_GET['n'] != "") {
         $n = intval($_GET['n']);
@@ -90,12 +90,15 @@
         $clase = new Credito();
     }
     elseif ($_GET['randomnautica'] == "permiso") {  
-        require('../../Model/Permisos.php');
         $clase = new Permiso(id_usuario:(isset($_GET['ID']) ? $_GET['ID'] : null));
     }
     elseif ($_GET['randomnautica'] == "capital") {  
         require('../../Model/Capital.php');
         $clase = new Capital();
+    }
+    elseif ($_GET['randomnautica'] == "usuario") {  
+        require('../../Model/Usuarios.php');
+        $clase = new Usuario();
     }
 
 

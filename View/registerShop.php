@@ -371,24 +371,8 @@
                             <th>Acción</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Jose</td>
-                            <td>16/06/2024</td>
-                            <td>100.00</td>
-                            <td>8:30 AM</td>
-                            <td>8:30 PM</td>
-                            <td>15</td>
-                            <td>600.00</td>
-                            <td>1500.00</td>
-                            <td>
-                                <div class="activeGood uk-border-rounded" style="padding: 5px;">ABIERTA</div>
-                            </td>
-                            <td>
-                                <a href="#cierre-caja" uk-toggle class="uk-button uk-button-default">CERRAR CAJA</a>
-                            </td>
-                        </tr>
+                    <tbody id="tbody_caja">
+                        
 
                     </tbody>
                 </table>
@@ -402,25 +386,25 @@
                         <h3 class="uk-modal-title modal_title_client">ARQUEO DE CAJA</h3>
                     </div>
                     <div class="uk-modal-body">
-                        <form class="uk-grid-small uk-form-stacked form_caja" uk-grid method="POST" action="" enctype="multipart/form-data">
-                            <input type="text" name="tipo" value='caja' style="display:none">
-                            <input class="" type="number" name="ID" style="display:none">
+                        <form id="FormCaja" class="uk-grid-small uk-form-stacked form_caja" uk-grid>
+                            <!-- <input type="text" name="tipo" value='caja' style="display:none"> -->
+                            <!-- <input class="" type="number" name="ID" style="display:none"> -->
 
                             <div class="uk-width-1-1@s">
                                 <label class="uk-form-label">Monto Inicial</label>
                                 <div class="uk-form-controls">
-                                    <input class="uk-input inputNameUpdateClient" type="text" placeholder="Monto Inicial" name="nombre" aria-label="100" pattern="^([\d])$" required>
+                                    <input class="uk-input" type="text" placeholder="Monto Inicial" name="monto_inicial" aria-label="100" required>
                                 </div>
                                 <input type="date" name="fecha" style="display: none;">
                                 <input type="number" name="id_usuario" style="display: none;">
                             </div>
 
-                            <input type="submit" id="subirC" style="display:none" required>
+                            <input type="submit" id="subirCaja" style="display:none" required>
                         </form>
                     </div>
                     <div class="uk-modal-footer uk-text-right">
                         <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
-                        <label class="uk-button uk-button-secondary" type="button" for="subirC">Guardar</label>
+                        <label class="uk-button uk-button-secondary" type="button" for="subirCaja">Guardar</label>
                     </div>
                 </div>
             </div>
@@ -513,6 +497,7 @@
 <script src="static/javaScript/librerias/hammer.min.js"></script>
 <script src="static/javascript/FuncionesGenerales.js"></script>
 <script src="static/javascript/Ajax/registerShop.js"></script>
+<script src="static/javascript/Ajax/caja.js"></script>
 
 <script>
     $('.pag-btn-facturas').click(ele => {

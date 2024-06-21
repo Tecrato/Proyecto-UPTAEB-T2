@@ -232,3 +232,7 @@ const DeleteClientProv = (BTN, FORM, IDSETTER, TR, notification) => {
 // .style.background = "none"
 // document.querySelector(".target_supplier").classList.add("uk-background-muted")
 
+
+//aqui empezamos con los permisos y roles de usuario
+
+

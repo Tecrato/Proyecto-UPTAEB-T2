@@ -19,7 +19,7 @@
 		} # SELECT (SELECT SUM(r.monto_final) FROM registro_ventas as r WHERE r.id_caja=c.id) from caja c
 
         function abrir(){
-            $query = $this->conn->prepare("INSERT INTO caja(id,id_usuario,monto_inicial,monto_final,estado) VALUES(null, :id_usuario, :monto_inicial, 0, 1)");
+            $query = $this->conn->prepare("INSERT INTO caja(id_usuario,monto_inicial,monto_final,estado) VALUES(:id_usuario, :monto_inicial, 0, 1)");
             $query->bindParam(':id_usuario',$this->id_usuario, PDO::PARAM_INT);
             $query->bindParam(':monto_inicial',$this->monto_inicial, PDO::PARAM_INT);
             $query->execute();

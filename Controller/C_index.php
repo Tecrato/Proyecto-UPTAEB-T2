@@ -11,14 +11,14 @@
     $result = new Producto;
     $result = $result->search_RecienAgregado();
 
-    $categoria = new Producto;
-    $categoria = $categoria->stock_segun_categorias();
+    // $categoria = new Producto;
+    // $categoria = $categoria->stock_segun_categorias();
 
-    $MasV = new Producto;
-    $MasV = $MasV->search_MasVendidos();
+    // $MasV = new Producto;
+    // $MasV = $MasV->search_MasVendidos();
 
-    $MenosV = new Producto;
-    $MenosV = $MenosV->search_MenosVendidos();
+    // $MenosV = new Producto;
+    // $MenosV = $MenosV->search_MenosVendidos();
     include('../View/index.php');
 
 
