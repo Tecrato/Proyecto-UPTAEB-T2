@@ -1,13 +1,14 @@
 const MarcasTable = () => {
     $.ajax({
-      url: "Controller/funcs_ajax/search.php",
-      type: "GET",
-      data: { randomnautica: "marca" },
-      success: function (response) {
-        let template = "";
-        let json = JSON.parse(response);
-        json.lista.forEach((U) => {
-          template += `
+        url: "Controller/funcs_ajax/search.php",
+        type: "GET",
+        data: { randomnautica: "marcas" },
+        success: function(response) {
+            console.log(response);
+            let template = "";
+            let json = JSON.parse(response);
+            json.lista.forEach((U) => {
+                template += `
                 <tr>
                     <td><img src="./static/images/logo_m.png" alt="" width="50"></td>
                     <td>${U.id}</td>
@@ -24,14 +25,14 @@ const MarcasTable = () => {
                     </td>
                 </tr>
         `;
-        });
-        $("#TemplateMarca").html(template);
-  
-        Edit_U_M_C(MarcasTable)
-        DELETE_U_M_C(MarcasTable,".delete-M")
-  
-      },
+            });
+            $("#TemplateMarca").html(template);
+
+            Edit_U_M_C(MarcasTable)
+            DELETE_U_M_C(MarcasTable, ".delete-M")
+
+        },
     });
-  };
-  MarcasTable();
-  Registrar_U_M_C("FORM_MARCA",MarcasTable,".marca_name","Marca Creada correctamente");
+};
+MarcasTable();
+Registrar_U_M_C("FORM_MARCA", MarcasTable, ".marca_name", "Marca Creada correctamente");

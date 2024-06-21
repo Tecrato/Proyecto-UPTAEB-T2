@@ -54,38 +54,42 @@
             $consulta->execute();
             return $consulta->fetchAll();
 		}
-		function agregar($usuario,$datos,$pagos){
-			//agregar aki
-			$query = $this->conn->prepare("INSERT INTO registro_ventas (monto_final, id_cliente, id_caja, IVA) VALUES(:monto, :id1, :id2, :iva)");
+        function agregar($usuario, $datos, $pagos) {
+            try {
+                $this->conn->beginTransaction();
 
+                $query = $this->conn->prepare("INSERT INTO registro_ventas (monto_final, id_cliente, id_caja, IVA) VALUES(:monto, :id1, :id2, :iva)");
+                $query->bindParam(':monto', $this->monto_final);
+                $query->bindParam(':id1', $this->id_cliente, PDO::PARAM_INT);
+                $query->bindParam(':id2', $this->id_caja, PDO::PARAM_INT);
+                $query->bindParam(':iva', $this->IVA, PDO::PARAM_STR);
+                $query->execute();
 
-			$query->bindParam(':monto',$this->monto_final);
-			// $query->bindParam(':metodo',$this->metodo_pago, PDO::PARAM_STR);
-			$query->bindParam(':id1',$this->id_cliente, PDO::PARAM_INT);
-			$query->bindParam(':id2',$this->id_caja, PDO::PARAM_INT);
-			$query->bindParam(':iva',$this->IVA, PDO::PARAM_STR);
+                $this->conn->commit();
 
-			$query->execute();
-			
-			$registro = $this->search(order:'id DESC')[0];
+                $registro = $this->search(order: 'id DESC')[0];
 
+                for ($i = 0; $i < count($datos); $i++) {
+                    $lista = $datos[$i];
+                    $clase_f = new Factura(null, $registro['id'], $lista->id_product, $lista->cantidad, $lista->precio);
+                    $clase_f->agregar();
+                    $clase_l = new Entrada(null, $lista->id_product, cantidad: $lista->cantidad);
+                    $clase_l->descontar();
+                }
 
-			for ($i=0; $i < count($datos); $i++) { 
-				$lista = $datos[$i];
-				$clase_f = new Factura(null,$registro['id'],$lista->id_product,$lista->cantidad,$lista->precio);
-				$clase_f->agregar();
-				$clase_l = new Entrada(null,$lista->id_product,cantidad:$lista->cantidad);
-				$clase_l->descontar();
-			}
-            for ($i=0; $i < count($pagos); $i++) {
-				$lista = $pagos[$i];
-                print_r($lista);
-				$clase_f = new Pago(null,$registro['id'],$lista->metodo,$lista->monto);
-				$clase_f->agregar($usuario);
+                for ($i = 0; $i < count($pagos); $i++) {
+                    $lista = $pagos[$i];
+                    $clase_f = new Pago(null, $registro['id'], $lista->metodo, $lista->monto);
+                    $clase_f->agregar($usuario);
+                }
+
+                $this->add_bitacora($usuario, "registrar_ventas", "agregar", "se agrego una venta");
+                return 1;
+            } catch (Exception $e) {
+                $this->conn->rollBack();
+                return 0;
             }
-            $this->add_bitacora($usuario,"registrar_ventas","agregar","se agrego una venta");
-
-		}
+        }
 
         function desactivar(){
             $query = $this->conn->prepare("UPDATE registro_ventas SET active=0 WHERE id=:id");

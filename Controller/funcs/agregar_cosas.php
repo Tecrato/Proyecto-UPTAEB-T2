@@ -102,5 +102,5 @@
     if ($tipo != 'producto') {
         $clase->agregar($_SESSION['user_id']);
     }
-    
+    echo json_encode(['status' => 'active']);
 ?>
