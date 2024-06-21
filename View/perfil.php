@@ -51,11 +51,6 @@
                                                         <span class="uk-margin-small-right" uk-icon="settings"></span>ROLES Y FUNCIONES
                                                     </a>
                                                 </li>
-                                                <li>
-                                                    <a href="#">
-                                                        <span class="uk-margin-small-right" uk-icon="album"></span>ASIGNAR MODULOS
-                                                    </a>
-                                                </li>
                                             </ul>
                                         </div>
                                         <div class="uk-width-expand@m">
@@ -187,300 +182,120 @@
 
 
                                                 <li>
-                                                    <h3>ROLES</h3>
-
-                                                    <a href="#modal_rol" uk-toggle class="uk-button uk-button-default">AGREGAR ROL</a>
-                                                    <table class="uk-table uk-table-hover uk-table-divider uk-light">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>#</th>
-                                                                <th>ROL</th>
-                                                                <th>CONSULTAR</th>
-                                                                <th>AGREGAR</th>
-                                                                <th>MODIFICAR</th>
-                                                                <th>ELIMINAR</th>
-                                                                <th>IMPRIMIR</th>
-                                                                <th>FACTURAR</th>
-                                                                <th>CREDITO</th>
-                                                                <th>CAJA</th>
-                                                                <th>ACCION</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>1</td>
-                                                                <td>ADMINISTRADOR</td>
-                                                                <td><button disabled class="uk-icon-button" uk-icon="check"></button></td>
-                                                                <td><button disabled class="uk-icon-button" uk-icon="check"></button></td>
-                                                                <td><button disabled class="uk-icon-button" uk-icon="close"></button></td>
-                                                                <td><button disabled class="uk-icon-button" uk-icon="check"></button></td>
-                                                                <td><button disabled class="uk-icon-button" uk-icon="check"></button></td>
-                                                                <td><button disabled class="uk-icon-button" uk-icon="check"></button></td>
-                                                                <td><button disabled class="uk-icon-button" uk-icon="check"></button></td>
-                                                                <td><button disabled class="uk-icon-button" uk-icon="check"></button></td>
-                                                                <td>
-                                                                    <div class="uk-flex">
-                                                                        <a href="" class="uk-icon-button uk-margin-small-right" uk-icon="pencil"></a>
-                                                                        <a href="" class="uk-icon-button" uk-icon="trash"></a>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-
-                                                        </tbody>
-                                                    </table>
-
-
-                                                    <!--******************* MODAL DE AGREGAR ROL *******************-->
-
-                                                    <div id="modal_rol" uk-modal>
-                                                        <div class="uk-modal-dialog">
-                                                            <button class="uk-modal-close-default" type="button" uk-close></button>
-                                                            <div class="uk-modal-header">
-                                                                <h2 class="uk-modal-title">REGISTRAR ROL</h2>
-                                                            </div>
-                                                            <div class="uk-modal-body">
-                                                                <section class="uk-flex uk-flex-center">
-                                                                    <form class="uk-form-horizontal">
-
-                                                                        <div class="uk-margin">
-                                                                            <label class="uk-form-label" for="form-horizontal-text">TODO</label>
-                                                                            <div class="uk-form-controls">
-                                                                                <label for="" class="uk-margin-medium-right">
-                                                                                    <input class="uk-radio" type="radio" name="hola">
-                                                                                    SI
-                                                                                </label>
-                                                                                <label for="">
-                                                                                    <input class="uk-radio" type="radio" name="hola">
-                                                                                    NO
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="uk-margin">
-                                                                            <label class="uk-form-label" for="form-horizontal-text">CONSULTAR</label>
-                                                                            <div class="uk-form-controls">
-                                                                                <label for="" class="uk-margin-medium-right">
-                                                                                    <input class="uk-radio" type="radio" name="hola">
-                                                                                    SI
-                                                                                </label>
-                                                                                <label for="">
-                                                                                    <input class="uk-radio" type="radio" name="hola">
-                                                                                    NO
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="uk-margin">
-                                                                            <label class="uk-form-label" for="form-horizontal-text">AGREGAR</label>
-                                                                            <div class="uk-form-controls">
-                                                                                <label for="" class="uk-margin-medium-right">
-                                                                                    <input class="uk-radio" type="radio" name="hola">
-                                                                                    SI
-                                                                                </label>
-                                                                                <label for="">
-                                                                                    <input class="uk-radio" type="radio" name="hola">
-                                                                                    NO
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="uk-margin">
-                                                                            <label class="uk-form-label" for="form-horizontal-text">MODIFICAR</label>
-                                                                            <div class="uk-form-controls">
-                                                                                <label for="" class="uk-margin-medium-right">
-                                                                                    <input class="uk-radio" type="radio" name="hola">
-                                                                                    SI
-                                                                                </label>
-                                                                                <label for="">
-                                                                                    <input class="uk-radio" type="radio" name="hola">
-                                                                                    NO
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="uk-margin">
-                                                                            <label class="uk-form-label" for="form-horizontal-text">ELIMINAR</label>
-                                                                            <div class="uk-form-controls">
-                                                                                <label for="" class="uk-margin-medium-right">
-                                                                                    <input class="uk-radio" type="radio" name="hola">
-                                                                                    SI
-                                                                                </label>
-                                                                                <label for="">
-                                                                                    <input class="uk-radio" type="radio" name="hola">
-                                                                                    NO
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="uk-margin">
-                                                                            <label class="uk-form-label" for="form-horizontal-text">IMPRIMIR</label>
-                                                                            <div class="uk-form-controls">
-                                                                                <label for="" class="uk-margin-medium-right">
-                                                                                    <input class="uk-radio" type="radio" name="hola">
-                                                                                    SI
-                                                                                </label>
-                                                                                <label for="">
-                                                                                    <input class="uk-radio" type="radio" name="hola">
-                                                                                    NO
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="uk-margin">
-                                                                            <label class="uk-form-label" for="form-horizontal-text">FACTURAR</label>
-                                                                            <div class="uk-form-controls">
-                                                                                <label for="" class="uk-margin-medium-right">
-                                                                                    <input class="uk-radio" type="radio" name="hola">
-                                                                                    SI
-                                                                                </label>
-                                                                                <label for="">
-                                                                                    <input class="uk-radio" type="radio" name="hola">
-                                                                                    NO
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-
-
-                                                                        <div class="uk-margin">
-                                                                            <label class="uk-form-label" for="form-horizontal-text">CREDITO</label>
-                                                                            <div class="uk-form-controls">
-                                                                                <label for="" class="uk-margin-medium-right">
-                                                                                    <input class="uk-radio" type="radio" name="hola">
-                                                                                    SI
-                                                                                </label>
-                                                                                <label for="">
-                                                                                    <input class="uk-radio" type="radio" name="hola">
-                                                                                    NO
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="uk-margin">
-                                                                            <label class="uk-form-label" for="form-horizontal-text">CAJA</label>
-                                                                            <div class="uk-form-controls">
-                                                                                <label for="" class="uk-margin-medium-right">
-                                                                                    <input class="uk-radio" type="radio" name="hola">
-                                                                                    SI
-                                                                                </label>
-                                                                                <label for="">
-                                                                                    <input class="uk-radio" type="radio" name="hola">
-                                                                                    NO
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-
-                                                                    </form>
-                                                                </section>
-                                                            </div>
-                                                            <div class="uk-modal-footer uk-text-right">
-                                                                <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
-                                                                <button class="uk-button uk-button-secondary" type="button">Guardar</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <!--******************* ******************** *******************-->
-                                                </li>
-
-
-
-                                                <li>
 
                                                     <h3>PERMISOS DE MODULOS</h3>
                                                     <a href="#modal_asignar_rol" uk-toggle class="uk-button uk-button-default">ASIGNAR MODULO</a>
 
-                                                    <table class="uk-table uk-table-divider uk-light">
-                                                        <thead>
+                                                    <table class="uk-table uk-table-hover uk-table-divider uk-light uk-table-responsive">
+                                                        <thead class="uk-background-secondary">
                                                             <tr>
                                                                 <th>#</th>
                                                                 <th>USUARIO</th>
-                                                                <th>ROL ASIGNADO</th>
-                                                                <th>MODULOS ASIG</th>
-                                                                <th>ACCION</th>
+                                                                <th>MODULO</th>
+                                                                <th>PERMISO</th>
                                                             </tr>
                                                         </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>1</td>
-                                                                <td>FELIX</td>
-                                                                <td>ADMINISTRADOR</td>
-                                                                <td>
-                                                                    <progress class="uk-progress uk-margin-remove" value="5" max="100"></progress>
-                                                                    <div class="uk-text-center">
-                                                                        <div>12% de 4/18</div>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="uk-flex">
-                                                                        <a href="" class="uk-icon-button uk-margin-small-right" uk-icon="pencil"></a>
-                                                                        <a href="" class="uk-icon-button" uk-icon="trash"></a>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
+                                                        <tbody id="table-rol">
+                                                            
+
                                                         </tbody>
                                                     </table>
 
 
+
                                                     <!--******************* MODAL DE ASIGNAR ROL *******************-->
 
-                                                    <div id="modal_asignar_rol" uk-modal>
+                                                    <div id="modal_asignar_rol" class="uk-modal-container" uk-modal>
                                                         <div class="uk-modal-dialog">
                                                             <button class="uk-modal-close-default" type="button" uk-close></button>
                                                             <div class="uk-modal-header">
-                                                                <h2 class="uk-modal-title">ASIGNAR ROL</h2>
+                                                                <h2 class="uk-modal-title">PERMISOS</h2>
                                                             </div>
                                                             <div class="uk-modal-body">
-
-                                                                <form class="uk-grid-small" uk-grid>
-                                                                    <div class="uk-width-1-1">
-                                                                        <select class="uk-select" name="" id="">
-                                                                            <option value="1">LUIS</option>
-                                                                            <option value="2">JOSE</option>
-                                                                            <option value="3">JUAN</option>
-                                                                        </select>
+                                                                <form class="uk-grid-small uk-form-stacked" uk-grid>
+                                                                    <div class="uk-width-1-1@s">
+                                                                        <label class="uk-form-label" for="form-stacked-text">Usuario</label>
+                                                                        <div class="uk-form-controls">
+                                                                            <select class="uk-select select-user-rol" name="" id="">
+                                                                                <!-- Las opciones se agregarán dinámicamente -->
+                                                                            </select>
+                                                                        </div>
                                                                     </div>
                                                                     <div class="uk-width-1-1@s">
-                                                                        <div class="uk-panel uk-panel-scrollable">
-                                                                            <ul class="uk-list">
-                                                                                <li><label><input class="uk-checkbox" type="checkbox">INICIO</label></li>
-                                                                                <li>
-                                                                                    <label><input class="uk-checkbox" type="checkbox">ADMINISTRAR</label>
-                                                                                    <ul class="uk-list uk-list-square">
-                                                                                        <li><label><input class="uk-checkbox" type="checkbox">USUARIOS</label></li>
-                                                                                        <ul class="uk-list uk-list-square">
-                                                                                            <li><label><input class="uk-checkbox" type="checkbox">USUARIOS</label></li>
-                                                                                            <li><label><input class="uk-checkbox" type="checkbox">ROLES Y FUNCIONES</label></li>
-                                                                                            <li><label><input class="uk-checkbox" type="checkbox">ASIGNAR MODULOS</label></li>
-                                                                                        </ul>
-                                                                                        <li><label><input class="uk-checkbox" type="checkbox">BITOCARA</label></li>
-                                                                                        <li><label><input class="uk-checkbox" type="checkbox">CAPITAL</label></li>
-                                                                                        <li><label><input class="uk-checkbox" type="checkbox">AJUSTES</label></li>
-                                                                                    </ul>
-                                                                                </li>
-                                                                                <li><label><input class="uk-checkbox" type="checkbox">REGISTROS</label></li>
-                                                                                <ul class="uk-list uk-list-square">
-                                                                                    <li><label><input class="uk-checkbox" type="checkbox">PRODUCTOS</label></li>
-                                                                                    <li><label><input class="uk-checkbox" type="checkbox">ENTRADAS</label></li>
-                                                                                    <li><label><input class="uk-checkbox" type="checkbox">PROVEEDORES</label></li>
-                                                                                    <li><label><input class="uk-checkbox" type="checkbox">CLIENTES</label></li>
-                                                                                    <li><label><input class="uk-checkbox" type="checkbox">ESTADISTICAS</label></li>
-                                                                                </ul>
-                                                                                <li><label><input class="uk-checkbox" type="checkbox">VENTAS</label></li>
-                                                                                <ul class="uk-list uk-list-square">
-                                                                                    <li><label><input class="uk-checkbox" type="checkbox">FACTURA</label></li>
-                                                                                    <li><label><input class="uk-checkbox" type="checkbox">CAJA</label></li>
-                                                                                    <li><label><input class="uk-checkbox" type="checkbox">CREDITO</label></li>
-                                                                                </ul>
-                                                                            </ul>
-
+                                                                        <label class="uk-form-label" for="form-stacked-text">PERMISOS POR MODULO</label>
+                                                                        <div class="uk-form-controls">
+                                                                            <table class="uk-table uk-table-striped uk-table-responsive table_permisos">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th>MODULO</th>
+                                                                                        <th>AGREGAR</th>
+                                                                                        <th>MODIFICAR</th>
+                                                                                        <th>ELIMINAR</th>
+                                                                                        <th>IMPRIMIR</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td>PRODUCTOS</td>
+                                                                                        <td>
+                                                                                            <div>
+                                                                                                <label for=""><input class="uk-radio" accion="agregar" name="productos_agregar" value="Si" type="radio"> Si</label>
+                                                                                                <label for=""><input class="uk-radio radio_no" accion="agregar" name="productos_agregar" value="No" type="radio"> No</label>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div>
+                                                                                                <label for=""><input class="uk-radio" accion="modificar" name="productos_modificar" value="Si" type="radio"> Si</label>
+                                                                                                <label for=""><input class="uk-radio radio_no" accion="modificar" name="productos_modificar" value="No" type="radio"> No</label>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div>
+                                                                                                <label for=""><input class="uk-radio" accion="eliminar" name="productos_eliminar" value="Si" type="radio"> Si</label>
+                                                                                                <label for=""><input class="uk-radio radio_no" accion="eliminar" name="productos_eliminar" value="No" type="radio"> No</label>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div>
+                                                                                                <label for=""><input class="uk-radio" accion="imprimir" name="productos_imprimir" value="Si" type="radio"> Si</label>
+                                                                                                <label for=""><input class="uk-radio radio_no" accion="imprimir" name="productos_imprimir" value="No" type="radio"> No</label>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>PROVEEDORES</td>
+                                                                                        <td>
+                                                                                            <div>
+                                                                                                <label for=""><input class="uk-radio" accion="agregar" name="proveedores_agregar" value="Si" type="radio"> Si</label>
+                                                                                                <label for=""><input class="uk-radio radio_no" accion="agregar" name="proveedores_agregar" value="No" type="radio"> No</label>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div>
+                                                                                                <label for=""><input class="uk-radio" accion="modificar" name="proveedores_modificar" value="Si" type="radio"> Si</label>
+                                                                                                <label for=""><input class="uk-radio radio_no" accion="modificar" name="proveedores_modificar" value="No" type="radio"> No</label>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div>
+                                                                                                <label for=""><input class="uk-radio" accion="eliminar" name="proveedores_eliminar" value="Si" type="radio"> Si</label>
+                                                                                                <label for=""><input class="uk-radio radio_no" accion="eliminar" name="proveedores_eliminar" value="No" type="radio"> No</label>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div>
+                                                                                                <label for=""><input class="uk-radio" accion="imprimir" name="proveedores_imprimir" value="Si" type="radio"> Si</label>
+                                                                                                <label for=""><input class="uk-radio radio_no" accion="imprimir" name="proveedores_imprimir" value="No" type="radio"> No</label>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
                                                                         </div>
                                                                     </div>
                                                                 </form>
 
-                                                            </div>
-                                                            <div class="uk-modal-footer uk-text-right">
-                                                                <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
-                                                                <button class="uk-button uk-button-secondary" type="button">Guardar</button>
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -866,6 +681,8 @@
 <script src="static/javaScript/ChangeColor.js" defer></script>
 <script src="static/javaScript/Ajax/user.js" defer></script>
 <script src="static/javaScript/Ajax/metodo_pago.js" defer></script>
+<script src="static/javaScript/Roles.js" defer></script>
+
 
 
 </body>

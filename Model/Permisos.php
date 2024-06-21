@@ -16,7 +16,7 @@
         }
 
         function agregar($usuario){
-            $query = $this->conn->prepare("INSERT INTO permisos(id_usuario,tabla,permiso) VALUES(null, :id_usuario,:tabla,:permiso)");
+            $query = $this->conn->prepare("INSERT INTO permisos(id_usuario,tabla,permiso) VALUES(:id_usuario,:tabla,:permiso)");
             $query->bindParam(':id_usuario',$this->id_usuario);
             $query->bindParam(':tabla',$this->tabla);
             $query->bindParam(':permiso',$this->permiso);
@@ -24,13 +24,17 @@
 			$this->add_bitacora($usuario,"Permisos","Registrar","Permiso Registrado");
         }
         function borrar($usuario) {
-            $query = $this->conn->prepare("DELETE FROM permisos WHERE id=:id");
-            $query->bindParam(':id',$this->id, PDO::PARAM_INT);
+            $query = $this->conn->prepare("DELETE FROM permisos WHERE id_usuario=:id_usuario AND tabla=:tabla AND permiso=:permiso");
+            $query->bindParam(':id_usuario',$this->id_usuario);
+            $query->bindParam(':tabla',$this->tabla);
+            $query->bindParam(':permiso',$this->permiso);
             $query->execute();
 			$this->add_bitacora($usuario,"Permisos","Eliminar","Permiso".$this->id. " Eliminado");
         }
         function search($n=0,$limite=9){
-            $query = "SELECT * FROM permisos as a WHERE 1";
+            $query = "SELECT a.id, a.id_usuario, b.nombre as nombre, a.tabla, a.permiso FROM permisos as a
+            INNER JOIN usuarios as b ON a.id_usuario=b.id
+            WHERE 1";
 
             $lista=[];
             if ($this->id){

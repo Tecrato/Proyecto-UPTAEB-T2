@@ -97,7 +97,6 @@
         $clase = new Credito(null,$_POST["ID"],$_POST["ID_rv"],$_POST["fecha_limite"],$_POST["monto_final"]);
     }
     elseif ($tipo === 'permiso'){
-        require('../../Model/Permisos.php');
         $clase = new Permiso(null,$_POST["id_usuario"],$_POST["tabla"],$_POST["permiso"]);
     }
     if ($tipo != 'producto') {

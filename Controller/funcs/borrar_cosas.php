@@ -6,7 +6,7 @@
     $tipo = $_POST['tipo']; // Depende de que es lo que queramos borrar
 
 
-    $other_class = new Permiso(null,$_SESSION['user_id'],$_GET['randomnautica'],'borrar');
+    $other_class = new Permiso(null,$_SESSION['user_id'],$_POST['tipo'],'borrar');
     $result = $other_class->search();
 
     if ($_SESSION['rol_num'] > 1 and count($result) <= 0) {
@@ -84,8 +84,7 @@
         $clase->desactivar($_SESSION['user_id']);
     }
     elseif ($tipo === 'permiso'){
-        require('../../Model/Permisos.php');
-        $clase = new Permiso($_POST["ID"]);
+        $clase = new Permiso(null,$_POST["id_usuario"],$_POST["tabla"],$_POST["accion"]);
         $clase->borrar($_SESSION['user_id']);
     }
 ?>
