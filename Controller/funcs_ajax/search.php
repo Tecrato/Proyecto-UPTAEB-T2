@@ -89,7 +89,7 @@
         require('../../Model/Credito.php');
         $clase = new Credito();
     }
-    elseif ($_GET['randomnautica'] == "premiso") {  
+    elseif ($_GET['randomnautica'] == "permiso") {  
         require('../../Model/Permisos.php');
         $clase = new Permiso(id_usuario:(isset($_GET['ID']) ? $_GET['ID'] : null));
     }
