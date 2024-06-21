@@ -1,9 +1,14 @@
 <?php
-    require ('../../Model/Conexion.php');
+    // require ('../../Model/Conexion.php');
     // require ('../../Model/Productos.php');
     // require('../../Model/Usuarios.php');
     // require('../../Model/Metodos_pagos.php');
-    require('../../Model/Estadisticas.php');
+    // require('../../Model/Cajas.php');
+    // require('./acciones_caja.php');
+    session_start();
+    // require("../funcs/verificar_admin_funcs.php");
+    require('../../Model/Conexion.php');
+    require('../../Model/Cajas.php');
 
 
 
@@ -112,8 +117,20 @@
     // $resultado = $usuario->verificar('12345');
 	// print_r($resultado);
 
-    $clase = new Estadisticas();
-	print_r($clase->max_ventas());
+    // $clase = new Caja();
+	// print_r($clase->max_ventas());
+
+	// $clase = new Caja(null,$_SESSION['user_id'],monto_inicial:10000);
+	// $clase->abrir();
+	
+	$otra_clase_mas = new Caja(id_usuario:$_SESSION['user_id'], estado:1);
+	$ultima_caja = $otra_clase_mas->buscar_ultima();
+	if ($ultima_caja == NULL) {
+		echo json_encode(['status' => 'error','estado'=>'no']);
+		exit(0);
+		die();
+	}
+	echo json_encode(['status' => 'active','estado'=>'si']);
 	
 	?>
 	

@@ -14,7 +14,7 @@
         $clase->cerrar();
     }
     else if ($_POST['accion'] == 'check') {
-        $otra_clase_mas = new Caja(id_usuario:$_SESSION['user_id'], status:1);
+        $otra_clase_mas = new Caja(id_usuario:$_SESSION['user_id'], estado:1);
         $ultima_caja = $otra_clase_mas->buscar_ultima();
         if ($ultima_caja == NULL) {
             echo json_encode(['status' => 'error','estado'=>'no']);
