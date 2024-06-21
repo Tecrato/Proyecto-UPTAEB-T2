@@ -5,6 +5,7 @@
     $tipo = $_POST['tipo']; // Depende de que es lo que queramos insertar
     
     require('../../Model/Conexion.php');
+    require('../../Model/Permisos.php');
 
     
     $other_class = new Permiso(null,$_SESSION['user_id'],$_GET['randomnautica'],'agregar');

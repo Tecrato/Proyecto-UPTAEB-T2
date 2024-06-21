@@ -2,6 +2,7 @@
     session_start();
     require("./verificar_admin_funcs.php");
     require('../../Model/Conexion.php');
+    require('../../Model/Permisos.php');
     require 'subir_imagen.php';
     $tipo = $_POST['tipo']; // Depende de que es lo que queramos actualizar
 
