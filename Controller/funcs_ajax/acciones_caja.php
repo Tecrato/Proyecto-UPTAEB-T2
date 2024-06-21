@@ -13,4 +13,8 @@
         $clase = new Caja(null,$_SESSION['user_id'], null, $_POST['monto_final']);
         $clase->cerrar();
     }
+    else if ($_POST['accion'] == 'check') {
+        $clase = new Caja(null,$_SESSION['user_id'],estado:1);
+        $clase->cerrar();
+    }
 ?>

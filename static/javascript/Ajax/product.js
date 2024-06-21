@@ -782,7 +782,6 @@ $.ajax({
   type: "GET",
   data: { randomnautica: "marcas" },
   success: function (response) {
-    console.log(response);
     let options = ``;
     let json = JSON.parse(response);
     json.lista.forEach((E) => {

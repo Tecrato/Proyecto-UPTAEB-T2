@@ -20,7 +20,8 @@
 
     $other_class = new Permiso(null,$_SESSION['user_id'],$_GET['randomnautica'],'buscar');
     $result = $other_class->search();
-    if (count($result) <= 0) {
+
+    if ($_SESSION['rol_num'] > 2 and count($result) <= 0) {
         echo json_encode(['status' => 'error','error'=>'Permiso Error (bueno ps)']);
         exit(0);
         die();
@@ -88,9 +89,9 @@
         require('../../Model/Credito.php');
         $clase = new Credito();
     }
-    elseif ($_GET['randomnautica'] == "premiso") {
+    elseif ($_GET['randomnautica'] == "premiso") {  
         require('../../Model/Permisos.php');
-        $clase = new Permiso();
+        $clase = new Permiso(id_usuario:(isset($_GET['ID']) ? $_GET['ID'] : null));
     }
 
 

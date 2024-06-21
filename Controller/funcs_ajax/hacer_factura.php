@@ -15,12 +15,12 @@
 	$otra_clase_mas = new Caja(id_usuario:$_SESSION['user_id'], status:1);
 	$ultima_caja = $otra_clase_mas->buscar_ultima();
 	if ($ultima_caja == NULL) {
-		echo json_encode(['status' => 'active','error'=>'Caja Error (sus-pechoso)']);
+		echo json_encode(['status' => 'error','error'=>'Caja Error (sus-pechoso)']);
         exit(0);
         die();
 	}
 	
 	$clase2 = new Registro_ventas(null,$var->monto_final,$var->id_cliente, $ultima_caja,$var->IVA);
 	$clase2->agregar($_SESSION['user_id'], $var->detalles, $var->pagos);
-	echo 'hola';
+	echo json_encode(['status' => 'eso','error'=>'Caja funciona (bienvenido)']);
 ?>
