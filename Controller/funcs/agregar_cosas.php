@@ -6,6 +6,16 @@
     
     require('../../Model/Conexion.php');
 
+    
+    $other_class = new Permiso(null,$_SESSION['user_id'],$_GET['randomnautica'],'agregar');
+    $result = $other_class->search();
+
+    if ($_SESSION['rol_num'] > 1 and count($result) <= 0) {
+        echo json_encode(['status' => 'error','error'=>'Permiso Error (bueno ps)']);
+        exit(0);
+        die();
+    }
+
     if ($tipo === 'producto'){
         if ($_FILES['imagen1']['name'] != "") {
             $imagen = $_FILES['imagen1'];
