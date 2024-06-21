@@ -39,7 +39,7 @@
             $query = $this->conn->prepare("DELETE FROM usuarios WHERE ID=:id");
             
             $query->execute([':id'=>$this->id]);
-            $this->add_bitacora($usuario,"Usuarios","Eliminados","Usuario"." $id". " Eliminado");
+            $this->add_bitacora($usuario,"Usuarios","Eliminados","Usuario".$this->id." Eliminado");
         }
         function search($n=0,$limite=9){
             // Al igual que la clase anterior, puede buscar segun muchos valores o solo algunos
@@ -118,6 +118,13 @@
             $resultado = password_verify($contraseña,$consulta->fetchAll()[0]['hash']);
             return $resultado;
         }
-}
+        function cambiar_password() {
+            $query = "UPDATE usuarios SET hash=:hash WHERE correo=:correo";
+            $consulta = $this->conn->prepare($query);
+            $consulta->bindParam(':correo',$this->correo, PDO::PARAM_STR);
+            $consulta->bindParam(':hash',$this->hash, PDO::PARAM_STR);
+            $consulta->execute();
+        }
+}       
 
 ?>

@@ -3,6 +3,8 @@ Media/imagenes/*.*
 
 rar.rar
 .env
+.vscode
+.vscode/
 
 Model/Conexion.php
 Model/Conexion.php
