@@ -8,7 +8,7 @@
     require('../../Model/Permisos.php');
 
     
-    $other_class = new Permiso(null,$_SESSION['user_id'],$_GET['randomnautica'],'agregar');
+    $other_class = new Permiso(null,$_SESSION['user_id'],$_POST['tipo'],'agregar');
     $result = $other_class->search();
 
     if ($_SESSION['rol_num'] > 1 and count($result) <= 0) {
@@ -103,5 +103,5 @@
     if ($tipo != 'producto') {
         $clase->agregar($_SESSION['user_id']);
     }
-    
+    echo json_encode(['status' => 'active']);
 ?>
