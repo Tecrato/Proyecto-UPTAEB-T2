@@ -24,11 +24,11 @@
 			$this->add_bitacora($usuario,"Marcas","Eliminar","Marca".$this->id." Eliminada");
         }
 
-        function desactivar($usuario,$id){
+        function desactivar($usuario){
 			$query = $this->conn->prepare('UPDATE metodo_pago SET active=0 WHERE id=:id');
 			$query->bindParam(':id',$this->id);
 			$query->execute();
-			$this->add_bitacora($usuario,"Metodo de Pago","Eliminar","Metodo de Pago"." $id". " Eliminado");
+			$this->add_bitacora($usuario,"Metodo de Pago","Eliminar","Metodo de Pago".$this->id. " Eliminado");
         }
         function search($n=0,$limite=9){
             $query = "SELECT * FROM metodo_pago";

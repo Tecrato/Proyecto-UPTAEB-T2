@@ -23,6 +23,7 @@ echo "
 <script>var session_user_name = '" . $_SESSION['user_name'] . "'</script>
 <script>const session_user_id = " . $_SESSION['user_id'] . "</script>
 <script>const session_user_rol = '" . $_SESSION['rol'] . "'</script>
+<script>const session_user_rol_num = '" . $_SESSION['rol_num'] . "'</script>
 
 "
 ?>

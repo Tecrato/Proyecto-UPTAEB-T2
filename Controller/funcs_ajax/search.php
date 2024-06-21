@@ -2,6 +2,7 @@
     // Con este archivo se buscan datos de ciertas maneras, dependiendo de lo que pase como "randomnautica"
     
     require('../../Model/Conexion.php');
+    require('../../Model/Permisos.php');
     include("../funcs/verificar.php");
 
     if (isset($_GET['limite'])) {
@@ -16,7 +17,15 @@
     else {
         $n = 0;
     }
-     
+
+    $other_class = new Permiso(null,$_SESSION['user_id'],$_GET['randomnautica'],'buscar');
+    $result = $other_class->search();
+
+    if ($_SESSION['rol_num'] > 1 and count($result) <= 0) {
+        echo json_encode(['status' => 'error','error'=>'Permiso Error (bueno ps)']);
+        exit(0);
+        die();
+    }
 
     if ($_GET['randomnautica'] == "productos") {
         require('../../Model/Productos.php');
@@ -57,7 +66,7 @@
         require('../../Model/Unidades.php');
         $clase = new Unidad();
     }
-    elseif ($_GET['randomnautica'] == "marca") {
+    elseif ($_GET['randomnautica'] == "marcas") {
         require('../../Model/Marcas.php');
         $clase = new Marca();
     }
@@ -80,6 +89,14 @@
         require('../../Model/Credito.php');
         $clase = new Credito();
     }
+    elseif ($_GET['randomnautica'] == "permiso") {  
+        require('../../Model/Permisos.php');
+        $clase = new Permiso(id_usuario:(isset($_GET['ID']) ? $_GET['ID'] : null));
+    }
+    elseif ($_GET['randomnautica'] == "capital") {  
+        require('../../Model/Capital.php');
+        $clase = new Capital();
+    }
 
 
 
@@ -96,7 +113,6 @@
     else {
         $result = $clase->search(n:$n,limite:$limite);
     }
-
 
     $json = [
         'lista'=> $result

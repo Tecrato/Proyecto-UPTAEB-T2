@@ -3,15 +3,15 @@
         private $id;
         private $monto_final;
         private $id_cliente;
-        private $id_usuario;
+        private $id_caja;
         private $IVA;
         private $active;
 
-        function __construct($id=null, $monto_final=null,$id_cliente=null,$id_usuario=null,$IVA=null,$active=1){
+        function __construct($id=null, $monto_final=null,$id_cliente=null,$id_caja=null,$IVA=null,$active=1){
             $this->id = $id;
             $this->monto_final = $monto_final;
             $this->id_cliente = $id_cliente;
-            $this->id_usuario = $id_usuario;
+            $this->id_caja = $id_caja;
             $this->IVA = $IVA;
             $this->active = $active;
             DB::__construct();
@@ -24,7 +24,7 @@
             a.fecha,
             b.nombre nom_cliente,
             b.apellido apell_cliente,
-            a.id_usuario vendedor,
+            a.id_caja vendedor,
             a.IVA 
             FROM registro_ventas a 
             INNER JOIN clientes b ON b.id = a.id_cliente";
@@ -56,13 +56,13 @@
 		}
 		function agregar($usuario,$datos,$pagos){
 			//agregar aki
-			$query = $this->conn->prepare("INSERT INTO registro_ventas (monto_final, id_cliente, id_usuario, IVA) VALUES(:monto, :id1, :id2, :iva)");
+			$query = $this->conn->prepare("INSERT INTO registro_ventas (monto_final, id_cliente, id_caja, IVA) VALUES(:monto, :id1, :id2, :iva)");
 
 
 			$query->bindParam(':monto',$this->monto_final);
 			// $query->bindParam(':metodo',$this->metodo_pago, PDO::PARAM_STR);
 			$query->bindParam(':id1',$this->id_cliente, PDO::PARAM_INT);
-			$query->bindParam(':id2',$this->id_usuario, PDO::PARAM_INT);
+			$query->bindParam(':id2',$this->id_caja, PDO::PARAM_INT);
 			$query->bindParam(':iva',$this->IVA, PDO::PARAM_STR);
 
 			$query->execute();

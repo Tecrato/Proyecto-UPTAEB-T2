@@ -17,7 +17,7 @@
         private $like;
 
         function __construct($id=null, $id_categoria=null,$id_unidades=null,$id_marcas=null,$valor_unidad=null,$nombre=null,
-            $imagen=null,$stock_min=null,$stock_max=null,$precio_venta=null,$IVA=null,$active=1,$codigo=null,$like=''){
+            $imagen=null,$stock_min=null,$stock_max=null,$precio_venta=null,$IVA=null,$codigo=null,$active=1,$like=''){
 
             $this->id = $id;
             $this->id_categoria = $id_categoria;
@@ -39,7 +39,7 @@
         // esta funcion agrega a la tabla productos un objeto con los valores que se le estan pasando
         function agregar(){
             
-            $query = $this->conn->prepare("INSERT INTO productos VALUES(null, :id_categoria, :id_unidades, :id_marcas, :valor_unidad, :nombre, :imagen, :stock_min, :stock_max, :precio_venta, :IVA, 1, :codigo)");
+            $query = $this->conn->prepare("INSERT INTO productos VALUES(null, :id_categoria, :id_unidades, :id_marcas, :valor_unidad, :nombre, :imagen, :stock_min, :stock_max, :precio_venta, :IVA, 1, 0, :codigo)");
 
             $query->bindParam(':id_categoria',$this->id_categoria);
             $query->bindParam(':id_unidades',$this->id_unidades);

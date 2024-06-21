@@ -16,21 +16,19 @@
 			$this->monto_final = $monto_final;
 			$this->fecha = $fecha;
 			$this->estado = $estado;
-		}
+		} # SELECT (SELECT SUM(r.monto_final) FROM registro_ventas as r WHERE r.id_caja=c.id) from caja c
 
         function abrir(){
-            $query = $this->conn->prepare("INSERT INTO caja(id_usuario,monto_inicial,monto_final,estado) VALUES(null, :id_usuario, :monto_inicial, :monto_final, :estado)");
-            $query->bindParam(':id_usuario',$this->id_usuario);
-            $query->bindParam(':monto_inicial',$this->monto_inicial);
-            $query->bindParam(':monto_final',$this->monto_final);
-            $query->bindParam(':estado',0);
+            $query = $this->conn->prepare("INSERT INTO caja(id,id_usuario,monto_inicial,monto_final,estado) VALUES(null, :id_usuario, :monto_inicial, 0, 1)");
+            $query->bindParam(':id_usuario',$this->id_usuario, PDO::PARAM_INT);
+            $query->bindParam(':monto_inicial',$this->monto_inicial, PDO::PARAM_INT);
             $query->execute();
 			$this->add_bitacora($this->id_usuario,"Caja","Abriendo","Caja abierta");
         }
 
         function search($n=0,$limite=100, $order=' id DESC '){
             // Al igual que la clase anterior, puede buscar segun muchos valores o solo algunos
-            $query = "SELECT * FROM caja";
+            $query = "SELECT * FROM caja as a WHERE 1";
 
                     
 			$lista = [];
@@ -61,10 +59,10 @@
             if ($this->id != null){
                 $consulta->bindParam(':id',$this->id, PDO::PARAM_INT);
             }
-			if ($this->id_usuario) {
+			if ($this->id_usuario != null) {
                 $consulta->bindParam(':id_usuario',$this->id_usuario, PDO::PARAM_INT);
 			}
-			if ($this->estado) {
+			if ($this->estado != null) {
                 $consulta->bindParam(':estado',$this->estado, PDO::PARAM_INT);
 			}
             $consulta->execute();
@@ -82,6 +80,15 @@
             $query->bindParam(':mf',$this->monto_final);
             $query->execute();
 			$this->add_bitacora($this->id_usuario,"Caja","Cerrar","Caja cerrada");
+        }
+
+        function buscar_ultima() {
+            $caja = new Caja(id_usuario:$this->id_usuario, estado:1);
+            $caja = $this->search(order:' id DESC');
+            if (count($caja) == 0) {
+                return;
+                }
+            return $caja[0];
         }
 
 	}

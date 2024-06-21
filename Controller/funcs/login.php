@@ -29,11 +29,15 @@
         $row = $result[0];
         $_SESSION['user_name'] = $row['nombre']; // Y tambien guarda el nombre para despues
         $_SESSION['user_id'] = $row['id']; // Y el id
+        $_SESSION['rol_num'] = $row['rol'];
         $rol = $row['rol'];
         if ($rol == 1){
-            $_SESSION['rol'] = "Administrador"; // Y tambien guarda el nombre para despues   
+            $_SESSION['rol'] = "Super-Administrador"; // Y tambien guarda el nombre para despues   
         }
         else if ($rol == 2){
+            $_SESSION['rol'] = "Administrador"; // Y tambien guarda el nombre para despues   
+        }
+        else if ($rol == 3){
             $_SESSION['rol'] = "Usuario"; // Y tambien guarda el nombre para despues   
         }
         $d->add_bitacora($row['id'],"Login","logueado","El usuario ".$row['nombre']." inicio sesion");

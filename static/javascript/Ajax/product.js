@@ -506,6 +506,7 @@ const tarjetas = (response, cont) => {
   modalModificar();
 };
 const tarjetasProductosDesactive = (response, cont) => {
+  console.log(response)
   //convertimos la respuesta en un objeto
   let json = JSON.parse(response);
   //tarjeta sera el template de las tarjetas
@@ -683,7 +684,7 @@ const cargarMarcasRegProduct = () => {
   $.ajax({
     url: "Controller/funcs_ajax/search.php",
     type: "GET",
-    data: { randomnautica: "marca" },
+    data: { randomnautica: "marcas" },
     success: function (response) {
       let options = ``;
       let json = JSON.parse(response);
@@ -766,6 +767,7 @@ $.ajax({
   type: "GET",
   data: { randomnautica: "categorias" },
   success: function (response) {
+    console.log(response);
     let options = ``;
     let json = JSON.parse(response);
     json.lista.forEach((date) => {
@@ -778,7 +780,7 @@ $.ajax({
 $.ajax({
   url: "Controller/funcs_ajax/search.php",
   type: "GET",
-  data: { randomnautica: "marca" },
+  data: { randomnautica: "marcas" },
   success: function (response) {
     let options = ``;
     let json = JSON.parse(response);
