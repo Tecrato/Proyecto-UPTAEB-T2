@@ -26,7 +26,7 @@
                 <div class="uk-width-1-4">
                     <section class="uk-car uk-flex uk-flex-between uk-flex-middle uk-card-default uk-card-body uk-background-secondary uk-light">
                         <article>
-                            <h2 class="uk-margin-remove-top">0.00</h2>
+                            <h2 class="uk-margin-remove-top"><?php echo $cliente; ?></h2>
                             <p class="uk-margin-remove-bottom">CLIENTES</p>
                         </article>
                         <article>
@@ -38,7 +38,7 @@
                 <div class="uk-width-1-4">
                     <section class="uk-car uk-flex uk-flex-between uk-flex-middle uk-card-default uk-card-body uk-background-secondary uk-light">
                         <article>
-                            <h2 class="uk-margin-remove-top">0.00</h2>
+                            <h2 class="uk-margin-remove-top"><?php echo $proveedor; ?></h2>
                             <p class="uk-margin-remove-bottom">PROVEEDORES</p>
                         </article>
                         <article>
@@ -50,7 +50,7 @@
                 <div class="uk-width-1-4">
                     <section class="uk-car uk-flex uk-flex-between uk-flex-middle uk-card-default uk-card-body uk-background-secondary uk-light">
                         <article>
-                            <h2 class="uk-margin-remove-top">0.00</h2>
+                            <h2 class="uk-margin-remove-top"><?php echo $factura; ?></h2>
                             <p class="uk-margin-remove-bottom">FACTURAS</p>
                         </article>
                         <article>
@@ -214,6 +214,7 @@
 
 <script src="static/javaScript/librerias/jquery.js"></script>
 <script src="static/javascript/ChangeColor.js"></script>
+<script src="static/javascript/Ajax/index.js"></script>
 
 </body>
 

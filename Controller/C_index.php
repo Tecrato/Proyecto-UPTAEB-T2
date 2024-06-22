@@ -8,17 +8,17 @@
         $num = 0;
     }
     include('../Model/Productos.php');
+    include('../Model/Clientes.php');
+    include('../Model/Proveedores.php');
+    include('../Model/Registro de ventas.php');
     $result = new Producto;
     $result = $result->search_RecienAgregado();
-
-    // $categoria = new Producto;
-    // $categoria = $categoria->stock_segun_categorias();
-
-    // $MasV = new Producto;
-    // $MasV = $MasV->search_MasVendidos();
-
-    // $MenosV = new Producto;
-    // $MenosV = $MenosV->search_MenosVendidos();
+    $cliente = new Cliente();
+    $cliente = $cliente->COUNT();
+    $proveedor = new Proveedor();
+    $proveedor = $proveedor->COUNT();
+    $factura = new Registro_ventas();
+    $factura = $factura->COUNT();
     include('../View/index.php');
 
 

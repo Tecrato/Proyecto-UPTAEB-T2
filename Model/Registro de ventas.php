@@ -109,8 +109,7 @@
 
 
         function COUNT(){
-            $query = $this->conn->prepare("SELECT COUNT(*) as 'total' FROM registro_ventas WHERE active=:active");
-			$query->bindParam(':active',$this->active, PDO::PARAM_INT);
+            $query = $this->conn->prepare("SELECT COUNT(*) as 'total' FROM registro_ventas WHERE active=1");
             $query->execute();
             return $query->fetch()['total'];
         }
