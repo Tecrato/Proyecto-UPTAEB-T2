@@ -94,8 +94,6 @@ formCaja.addEventListener("submit", (e) => {
             });
         }
     })
-
-
 })
 
 

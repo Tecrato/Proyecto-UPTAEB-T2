@@ -68,13 +68,14 @@
 
         function cerrar(){
             
-            $caja = new Caja(id_usuario:$this->id_usuario, estado:0);
+            $caja = new Caja(id:$this->id, estado:0);
             $caja = $this->search()[0];
             if (count($caja) == 0) {
                 return;
             }
-            $stmt = $this->conn->prepare('CALL AsignarTotalVentasDia(6)');
-            // $stmt->bindParam(':id_usuario', $this->id_usuario, PDO::PARAM_INT);
+            print_r("en cajas cerrar medio");
+            $stmt = $this->conn->prepare('CALL AsignarTotalVentasDia(:id)');
+            $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
             $stmt->execute();
             // $query = $this->conn->prepare('UPDATE caja SET monto_final=:mf, estado=0 WHERE id = :id');
             // $query->bindParam(':id',$caja->id);
@@ -85,7 +86,7 @@
 
         function buscar_ultima() {
             print_r("en cajas arrivba");
-            $caja = new Caja(null, $this->id_usuario, null, 0);
+            $caja = new Caja(null, $this->id_usuario);
             $result = $caja->search(0, 1, 'id DESC');
             print_r("en cajas medio");
             print_r($result);
