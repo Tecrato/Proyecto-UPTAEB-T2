@@ -23,9 +23,19 @@
         }
 
         function search($n=0, $limite=100, $order=' id DESC '){
-            $query = "SELECT a.id, b.nombre, a.monto_final, a.monto_inicial, a.estado, a.fecha, a.fecha_cierre FROM caja as a 
-                      INNER JOIN usuarios as b ON b.id = a.id_usuario
-                      WHERE 1";
+            $query = "SELECT 
+                        a.id, 
+                        b.nombre, 
+                        a.monto_final, 
+                        a.monto_inicial, 
+                        a.estado, 
+                        a.fecha,
+                        a.fecha_cierre,
+                        a.total_ventas as total_ventas,
+                        a.monto_credito as monto_credito
+                        FROM caja as a 
+                        INNER JOIN usuarios as b ON b.id = a.id_usuario
+                        WHERE 1";
     
             $lista = [];
     
