@@ -11,7 +11,7 @@
     }
 }
 .invisible{
-    display: none;
+    display: none !important;
     transition: all 300ms ease;
 }
 .succesc{

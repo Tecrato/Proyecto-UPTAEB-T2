@@ -15,7 +15,7 @@
                                 </form>
                             </div>
                             <div class="uk-margin-left">
-                                <a id="registerSupplier" href="#register_supplier" uk-toggle uk-tooltip="title:Añadir Proveedor; delay: 500" class="uk-margin-small-left btn-aggSupplier">
+                                <a id="registerSupplier" href="#register_supplier" uk-toggle uk-tooltip="title:Añadir Proveedor; delay: 500" class="uk-margin-small-left btn-aggSupplier invisible">
                                     <img class="btn_agg" src="./static/images/btn_agg.png" alt="" width="35px">
                                 </a>
                             </div>

@@ -130,6 +130,42 @@ const cardProv = () => {
       });
 
       $(".cont_prov_cards").html(template)
+
+
+      let j = document.querySelectorAll(".edit_prov")
+      j.forEach((g) => {
+        g.classList.add("invisible")
+      })
+
+      let n = document.querySelectorAll(".delete_prov")
+      n.forEach((g) => {
+        g.classList.add("invisible")
+      })
+
+
+      $.ajax({
+        url: "Controller/funcs_ajax/search.php",
+        type: "GET",
+        data: { randomnautica: "permiso", ID: session_user_id },
+        success: function (response) {
+          let json = JSON.parse(response);
+
+          json.lista.forEach((r) => {
+
+            if (r.permiso == "modificar" && r.tabla == "proveedores") {
+              j.forEach((g) => {
+                g.classList.remove("invisible")
+              })
+            } else if (r.permiso == "eliminar" && r.tabla == "proveedores") {
+              n.forEach((g) => {
+                g.classList.remove("invisible")
+              })
+            } else if (r.permiso == "agregar" && r.tabla == "proveedores") {
+              document.querySelector(".btn-aggSupplier").classList.remove("invisible")
+            }
+          })
+        }
+      })
       marcaAgua()
       ModalEdit()
       DeleteClientProv(".delete_prov", "#formDelete_supplier", "#IdDelete_supplier", cardProv, "Proveedoredor eliminado correctamente")
