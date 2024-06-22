@@ -172,12 +172,12 @@
                                                                 <form class="uk-form-horizontal formCredito uk-padding-small">
                                                                     <div class="uk-margin uk-flex">
                                                                         <label class="uk-form-label" for="form-horizontal-select">INICIO</label>
-                                                                        <input class="uk-input uk-form-width-medium" type="date">
+                                                                        <input class="uk-input uk-form-width-medium fecha_inicio_credito" type="date">
                                                                     </div>
 
                                                                     <div class="uk-margin uk-flex">
                                                                         <label class="uk-form-label" for="form-horizontal-select">VENCIMIENTO</label>
-                                                                        <input class="uk-input uk-form-width-medium" type="date">
+                                                                        <input class="uk-input uk-form-width-medium fecha_cierre_credito" type="date">
                                                                     </div>
                                                                 </form>
 
@@ -317,6 +317,7 @@
             </section>
         </li>
 
+        
         <li>
             <div class="uk-padding-small">
                 <table class="uk-table uk-light">
@@ -355,7 +356,7 @@
             <a class="uk-button uk-button-default uk-margin-bottom uk-margin-top" uk-toggle href="#caja-modal">Apertura de Caja</a>
 
             <div class="uk-light uk-padding-small">
-                <table class="uk-table uk-light">
+                <table class="uk-table uk-light uk-table-divider">
                     <thead class="uk-background-secondary">
                         <tr>
                             <th>#</th>
@@ -498,6 +499,7 @@
 <script src="static/javascript/FuncionesGenerales.js"></script>
 <script src="static/javascript/Ajax/registerShop.js"></script>
 <script src="static/javascript/Ajax/caja.js"></script>
+<script src="static/javascript/Ajax/credito.js"></script>
 
 <script>
     $('.pag-btn-facturas').click(ele => {

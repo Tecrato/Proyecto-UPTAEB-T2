@@ -1,6 +1,7 @@
 let show = false;
 document.getElementById('Tooltip-help').addEventListener("click", function(event) {
     if (show == false) {
+        show = true;
         introJs().refresh()
         introJs().setOptions({
             exitOnOverlayClick: false,
@@ -244,7 +245,7 @@ document.getElementById('Tooltip-help').addEventListener("click", function(event
                 },
             ]
         }).addHints().start()
-        show = true;
+        
     } else {
         introJs().hideHints();
         introJs().exit();
@@ -252,4 +253,3 @@ document.getElementById('Tooltip-help').addEventListener("click", function(event
         show = false;
     }
 });
-document.addEventListener('DOMContentLoaded', function() {});

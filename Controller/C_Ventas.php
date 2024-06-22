@@ -15,6 +15,7 @@
     $result = new Registro_ventas();
     $result = $result->search(n:$num);
 
+
 	include('../View/registerShop.php');
 
 

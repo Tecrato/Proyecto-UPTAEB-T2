@@ -24,10 +24,13 @@
             a.fecha,
             b.nombre nom_cliente,
             b.apellido apell_cliente,
-            a.id_caja vendedor,
-            a.IVA 
+            d.nombre vendedor,
+            a.IVA,
+            c.id id_caja
             FROM registro_ventas a 
-            INNER JOIN clientes b ON b.id = a.id_cliente";
+            INNER JOIN clientes b ON b.id = a.id_cliente
+            INNER JOIN caja c ON c.id = a.id_caja
+            INNER JOIN usuarios d ON d.id = c.id_usuario";
 
             if ($this->id != null){
                 $query = $query." WHERE a.id=:id";
@@ -54,18 +57,18 @@
             $consulta->execute();
             return $consulta->fetchAll();
 		}
-        function agregar($usuario, $datos, $pagos) {
+        function agregar($usuario, $datos, $pagos, $credito, $fecha_inicio, $fecha_vencimiento) {
             try {
-                $this->conn->beginTransaction();
+                // $this->conn->beginTransaction();
 
-                $query = $this->conn->prepare("INSERT INTO registro_ventas (monto_final, id_cliente, id_caja, IVA) VALUES(:monto, :id1, :id2, :iva)");
+                $query = $this->conn->prepare("INSERT INTO registro_ventas (monto_final, id_cliente, id_caja, IVA, active) VALUES(:monto, :id1, :id2, :iva,1)");
                 $query->bindParam(':monto', $this->monto_final);
                 $query->bindParam(':id1', $this->id_cliente, PDO::PARAM_INT);
                 $query->bindParam(':id2', $this->id_caja, PDO::PARAM_INT);
                 $query->bindParam(':iva', $this->IVA, PDO::PARAM_STR);
                 $query->execute();
 
-                $this->conn->commit();
+                // $this->conn->commit();
 
                 $registro = $this->search(order: 'id DESC')[0];
 
@@ -76,16 +79,22 @@
                     $clase_l = new Entrada(null, $lista->id_product, cantidad: $lista->cantidad);
                     $clase_l->descontar();
                 }
-
-                for ($i = 0; $i < count($pagos); $i++) {
-                    $lista = $pagos[$i];
-                    $clase_f = new Pago(null, $registro['id'], $lista->metodo, $lista->monto);
-                    $clase_f->agregar($usuario);
+                if ($credito == true) {
+                    $clase5 = new Credito(null, $registro['id'], $fecha_vencimiento, 0);
+                    $clase5->agregar($usuario);
+                }
+                else {
+                    for ($i = 0; $i < count($pagos); $i++) {
+                        $lista = $pagos[$i];
+                        $clase_f = new Pago(null, $registro['id'], $lista->metodo, $lista->monto);
+                        $clase_f->agregar($usuario);
+                    }
                 }
 
                 $this->add_bitacora($usuario, "registrar_ventas", "agregar", "se agrego una venta");
                 return 1;
             } catch (Exception $e) {
+                print_r($e);
                 $this->conn->rollBack();
                 return 0;
             }

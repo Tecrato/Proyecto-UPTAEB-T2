@@ -936,18 +936,21 @@ $.ajax({
         IVA: parseFloat(document.getElementById("iva").textContent).toFixed(2),
         IGTF: parseFloat(document.getElementById("IGTF").textContent).toFixed(2),
         monto_final: parseFloat(document.getElementById("totalFact").textContent).toFixed(2),
+        credito: checkCredito.checked,
+        fecha_inicio_credito : document.querySelector('.fecha_inicio_credito').value,
+        fecha_cierre_credito: document.querySelector('.fecha_cierre_credito').value,
         detalles: [],
         pagos: []
       };
 
-      if (tipoPago == 0) {
+      if (tipoPago == 0 && !checkCredito.checked) {
         btnCreateFact.setAttribute("uk-tooltip", "title:Debe ingresar forma de pago; pos: right;");
         UIkit.tooltip(".btnCreateFact").show();
 
         setTimeout(() => {
           btnCreateFact.removeAttribute("uk-tooltip");
         }, 1000);
-      } else if (TotalRestar != 0) {
+      } else if (TotalRestar != 0 && !checkCredito.checked) {
         btnCreateFact.setAttribute("uk-tooltip", "title:Debe ingresar un monto en el pago; pos: right");
         UIkit.tooltip(".btnCreateFact").show();
         setTimeout(() => {
@@ -989,6 +992,7 @@ $.ajax({
 
         })
 
+        console.log();
         console.log(json);
 
 

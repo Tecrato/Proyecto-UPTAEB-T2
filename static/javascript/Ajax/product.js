@@ -67,7 +67,7 @@ const modalDetalles = (n) => {
             document.querySelector(".productDetailStock").textContent =
               item.stock ? item.stock : 0;
             document.querySelector(".productDetailPV").textContent =
-              item.precio_venta;
+              parseFloat(item.precio_venta).toFixed(2);
             // JsBarcode("#Bard","001000000001", {
             //   format: "CODE128",
             //   textMargin: 0,
@@ -80,7 +80,7 @@ const modalDetalles = (n) => {
             })
 
           });
-          if (session_user_rol == "Administrador") {
+          if (session_user_rol_num < 3) {
             //esta consulta es para cargar los lotes segun del id del producto y el proveedor
             let supplierName = "";
             $.ajax({
