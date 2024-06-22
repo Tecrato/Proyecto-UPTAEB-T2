@@ -144,19 +144,30 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="uk-width-1-3@s">
+                                    <div class="uk-width-1-2@s">
+                                        <label class="uk-form-label">Metodo de ganancia</label>
+                                        <div class="uk-form-controls">
+                                            <select class="uk-select select_metodo_ganancia" name="algoritmo">
+                                                <option value="0">MANUAL</option>
+                                                <option value="1">PEPS</option>
+                                                <option value="2">MEDIA PONDERADA</option>
+                                                <option value="3">UEPS</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="uk-width-1-2@s">
                                         <label class="uk-form-label">Precio Venta</label>
                                         <div class="uk-form-controls">
                                             <input class="PVUpdateProduct uk-input" type="number" pattern="^([\d]){1,4}(.[\d]{1,2})?$" min="0.1" step="0.1" placeholder="precio_venta" aria-label="25" name="precio_venta" required>
                                         </div>
                                     </div>
-                                    <div class="uk-width-1-3@s">
+                                    <div class="uk-width-1-2@s">
                                         <label class="uk-form-label">Stock Minimo</label>
                                         <div class="uk-form-controls">
                                             <input class="SMMUpdateProduct uk-input" type="number" min="1" placeholder="Stock mínimo" aria-label="25" name="stock_min" required>
                                         </div>
                                     </div>
-                                    <div class="uk-width-1-3@s">
+                                    <div class="uk-width-1-2@s">
                                         <label class="uk-form-label">Stock Maximo</label>
                                         <div class="uk-form-controls">
                                             <input class="SMXUpdateProduct uk-input" type="number" min="1" placeholder="Stock maximo" aria-label="25" name="stock_max" required>

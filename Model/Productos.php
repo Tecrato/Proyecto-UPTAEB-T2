@@ -34,6 +34,7 @@
             $this->active = $active;
             $this->codigo = $codigo;
             $this->algoritmo = $algoritmo;
+            $this->algoritmo = $algoritmo;
             $this->like = $like;
             DB::__construct();
 
@@ -41,7 +42,7 @@
         // esta funcion agrega a la tabla productos un objeto con los valores que se le estan pasando
         function agregar(){
             
-            $query = $this->conn->prepare("INSERT INTO productos VALUES(null, :id_categoria, :id_unidad, :id_marca, :valor_unidad, :nombre, :imagen, :stock_min, :stock_max, :precio_venta, :IVA, 1, 0, :codigo, 1)");
+            $query = $this->conn->prepare("INSERT INTO productos VALUES(null, :id_categoria, :id_unidad, :id_marca, :valor_unidad, :nombre, :imagen, :stock_min, :stock_max, :precio_venta, :IVA, 1, 0, :codigo, :algoritmo)");
 
             $query->bindParam(':id_categoria',$this->id_categoria);
             $query->bindParam(':id_unidad',$this->id_unidad);
@@ -54,6 +55,7 @@
             $query->bindParam(':precio_venta',$this->precio_venta);
             $query->bindParam(':IVA',$this->IVA);
             $query->bindParam(':codigo',$this->codigo);
+            $query->bindParam(':algoritmo',$this->algoritmo);
             /* $query->bindParam(':algoritmo',$this->algoritmo); */
 
 

@@ -34,6 +34,18 @@ $(".pag-btn-productos").click((ele) => {
   );
 });
 
+let selectMetodoGanancia = document.querySelector(".select_metodo_ganancia");
+
+selectMetodoGanancia.addEventListener("change", ()=>{
+  if (selectMetodoGanancia.value != 0) {
+    document.querySelector(".PVUpdateProduct").setAttribute("disabled","")
+    document.querySelector(".PVUpdateProduct").value = ""
+  } else {
+    document.querySelector(".PVUpdateProduct").removeAttribute("disabled")
+    document.querySelector(".PVUpdateProduct").value = 0
+  }
+})
+
 const modalDetalles = (n) => {
   document.querySelectorAll(".btnDetails").forEach((info) => {
     //usamos el evento click para saber en cual pulsamos
@@ -277,7 +289,7 @@ const modalModificar = () => {
             document.querySelector(".PVUpdateProduct").value = i.precio_venta;
             document.querySelector(".SMMUpdateProduct").value = i.stock_min;
             document.querySelector(".SMXUpdateProduct").value = i.stock_max;
-            document.querySelector(".ValorUnidadUpdateProduct").value = i.marca;
+            document.querySelector(".ValorUnidadUpdateProduct").value = i.valor_unidad;
             document.querySelector(".CodeUpdateProduct").value = i.codigo;
             if (i.IVA == 0) {
               document
