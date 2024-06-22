@@ -69,43 +69,8 @@
                     <p>Bienvenido, estos son los niveles actuales de productos</p>
                 </article>
                 <hr class="uk-divide">
-                <section class="uk-flex uk-flex-center uk-flex-wrap section-home uk-margin-medium-top uk-margin-medium-bottom">
-                    <article class="uk-flex uk-flex-center Container-stats ">
-                        <span uk-icon="icon: category; ratio: 4.5"></span>
-                        <div class="uk-margin-small-left uk-text-truncate">
-                            <h3>5</h3>
-                            <p class="">Bebidas</p>
-                        </div>
-                    </article>
-
-                    
-                    <article class="uk-flex uk-flex-center Container-stats ">
-                        <span uk-icon="icon: category; ratio: 4.5"></span>
-                        <div class="uk-margin-small-left uk-text-truncate">
-                            <h3>5</h3>
-                            <p class="">Bebidas</p>
-                        </div>
-                    </article>
-
-                    
-                    <article class="uk-flex uk-flex-center Container-stats ">
-                        <span uk-icon="icon: category; ratio: 4.5"></span>
-                        <div class="uk-margin-small-left uk-text-truncate">
-                            <h3>5</h3>
-                            <p class="">Bebidas</p>
-                        </div>
-                    </article>
-
-                    
-                    <article class="uk-flex uk-flex-center Container-stats ">
-                        <span uk-icon="icon: category; ratio: 4.5"></span>
-                        <div class="uk-margin-small-left uk-text-truncate">
-                            <h3>5</h3>
-                            <p class="">Bebidas</p>
-                        </div>
-                    </article>
-
-                    
+                <section class="uk-flex uk-flex-center uk-flex-wrap section-home uk-margin-medium-top uk-margin-medium-bottom cont-stats-index">
+                                    
 
                 </section>
                 <hr class="uk-divide">
@@ -169,13 +134,8 @@
                             <th>%</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td><span uk-icon="icon: factura; ratio: 1.5"></span></td>
-                            <td>1</td>
-                            <td>HARINA</td>
-                            <td>9 %</td>
-                        </tr>
+                    <tbody id="tbody_ratio_ventas">
+                        
                     </tbody>
                 </table>
             </div>
@@ -197,13 +157,8 @@
                             <th>COMPRAS</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td><span uk-icon="icon: user; ratio: 1.5"></span></td>
-                            <td>1</td>
-                            <td>JOSE</td>
-                            <td>9</td>
-                        </tr>
+                    <tbody id="tbody_clientes_frecuentes">
+
                     </tbody>
                 </table>
 

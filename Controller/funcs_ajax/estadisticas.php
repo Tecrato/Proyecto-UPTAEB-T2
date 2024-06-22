@@ -20,6 +20,9 @@
     else if ($_GET['select'] == 'min_ventas') {
         $result = $clase->min_ventas();
     }
+    else if ($_GET['select'] == 'clientes_frecuentes') {
+        $result = $clase->clientes_frecuentes();
+    }
 
     $json = ['lista'=> $result];
     $json = json_encode($json);

@@ -29,6 +29,12 @@
             $query->execute();
             return $query->fetchAll();
         }
+
+        function clientes_frecuentes(){
+            $query = $this->conn->prepare('SELECT * FROM clientesfrecuentes;');
+            $query->execute();
+            return $query->fetchAll();
+        }
     }
 ?>
 

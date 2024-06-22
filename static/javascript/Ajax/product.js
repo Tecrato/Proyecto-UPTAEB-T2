@@ -604,6 +604,8 @@ const cargarTargetProduct = () => {
     },
   });
 };
+
+cargarTargetProduct()
 const cargarTargetProductDesactive = () => {
   //hacemos la petion ajax
   $.ajax({
@@ -633,7 +635,7 @@ const cargarTargetProductDesactive = () => {
     },
   });
 };
-cargarTargetProductDesactive();
+// cargarTargetProductDesactive();
 //***************************************************  Modal de Registro de productos  ******************************************************
 
 const cargarCategoriaRegProduct = () => {
