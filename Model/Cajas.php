@@ -83,7 +83,6 @@
             if (count($caja) == 0) {
                 return;
             }
-            print_r("en cajas cerrar medio");
             $stmt = $this->conn->prepare('CALL AsignarTotalVentasDia(:id)');
             $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
             $stmt->execute();
@@ -95,17 +94,11 @@
         }
 
         function buscar_ultima() {
-            print_r("en cajas arrivba");
             $caja = new Caja(null, $this->id_usuario);
             $result = $caja->search(0, 1, 'id DESC');
-            print_r("en cajas medio");
-            print_r($result);
             if (count($result) == 0) {
                 return null;
             }
-            print_r("en cajas abajo");
-            print_r($result);
-            
             return $result[0];
         }
 

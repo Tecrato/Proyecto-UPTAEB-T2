@@ -6,8 +6,6 @@ const cargarCajas = () => {
         success: function (response) {
             let json = JSON.parse(response);
             let template = ""
-
-            console.log(json);
             json.lista.forEach(element => {
                 template += `<tr>
                                 <td>${element.id}</td>
@@ -72,6 +70,24 @@ const cargarCajas = () => {
 }
 cargarCajas()
 
+
+const checkCaja = ()=>{
+    $.ajax({
+        url: "api_caja",
+        type: "POST",
+        data: { accion: "check" },
+        success: function (response) {
+            let json = JSON.parse(response);
+            if (json.estado == "no") {
+                document.getElementById("check_box").textContent = "CERRADA";
+            } else {
+                document.getElementById("check_box").textContent = "ABIERTA";
+            }
+        }
+    })
+}
+
+checkCaja()
 const hora = (f) => {
     const fecha = new Date(f);
     const horas = fecha.getHours();
@@ -105,6 +121,7 @@ formCaja.addEventListener("submit", (e) => {
         processData: false,
         success: function (response) {
             cargarCajas()
+            checkCaja()
             console.log(response);
             UIkit.notification.closeAll();
             UIkit.notification({
@@ -115,6 +132,4 @@ formCaja.addEventListener("submit", (e) => {
         }
     })
 })
-
-
 

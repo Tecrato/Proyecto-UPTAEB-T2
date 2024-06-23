@@ -28,6 +28,11 @@
             echo json_encode(['status' => 'error','estado'=>'no']);
             exit(0);
             die();
+        } 
+        elseif ($ultima_caja['estado'] == 1) {
+            echo json_encode(['status' => 'error','estado'=>'no']);
+            exit(0);
+            die();
         }
         echo json_encode(['status' => 'active','estado'=>'si']);
     }
