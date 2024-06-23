@@ -317,7 +317,7 @@
             </section>
         </li>
 
-        
+
         <li>
             <div class="uk-padding-small">
                 <table class="uk-table uk-light">
@@ -373,7 +373,7 @@
                         </tr>
                     </thead>
                     <tbody id="tbody_caja">
-                        
+
 
                     </tbody>
                 </table>
@@ -412,77 +412,22 @@
             <!--***************************** *****************************-->
 
             <!--***************************** MODAL CIERRR *****************************-->
-            <div id="cierre-caja" uk-modal>
-                <div class="uk-modal-dialog">
-                    <button class="uk-modal-close-default" type="button" uk-close></button>
-                    <div class="uk-modal-header">
-                        <h3 class="uk-modal-title modal_title_client">CIERRE DE CAJA</h3>
+
+            <div id="cierre-caja" class="uk-flex-top uk-modal" uk-modal bg-close='false'>
+                <div class="uk-modal-dialog uk-margin-auto-vertical">
+                    <div class="uk-modal-header uk-flex uk-flex-middle">
+                        <span class="uk-margin-small-right" uk-icon="icon: warning ; ratio: 2"></span>
+                        <h2 class="uk-modal-title uk-margin-remove-top modalDeleteTitle">ELIMINAR</h2>
                     </div>
                     <div class="uk-modal-body">
-                        <form class="uk-grid-small uk-form-stacked form_caja" uk-grid method="POST" action="" enctype="multipart/form-data">
-                            <input type="text" name="tipo" value='caja' style="display:none">
-                            <input class="" type="number" name="ID" style="display:none">
-
-                            <div class="uk-width-1-2@s">
-                                <label class="uk-form-label">Monto Inicial</label>
-                                <div class="uk-form-controls">
-                                    <input class="uk-input inputNameUpdateClient" type="text" placeholder="Monto Inicial" name="nombre" aria-label="100" pattern="^([\d])$" disabled>
-                                </div>
-                                <input type="date" name="fecha" style="display: none;">
-                                <input type="number" name="id_usuario" style="display: none;">
-                            </div>
-
-                            <div class="uk-width-1-2@s">
-                                <label class="uk-form-label">Fecha Apertura</label>
-                                <div class="uk-form-controls">
-                                    <input class="uk-input inputNameUpdateClient" type="text" placeholder="Monto Inicial" name="nombre" aria-label="100" pattern="^([\d])$" disabled>
-                                </div>
-                                <input type="date" name="fecha" style="display: none;">
-                                <input type="number" name="id_usuario" style="display: none;">
-                            </div>
-
-                            <div class="uk-width-1-2@s">
-                                <label class="uk-form-label">Hora Apertura</label>
-                                <div class="uk-form-controls">
-                                    <input class="uk-input inputNameUpdateClient" type="text" placeholder="Monto Inicial" name="nombre" aria-label="100" pattern="^([\d])$" disabled>
-                                </div>
-                                <input type="date" name="fecha" style="display: none;">
-                                <input type="number" name="id_usuario" style="display: none;">
-                            </div>
-
-                            <div class="uk-width-1-2@s">
-                                <label class="uk-form-label">Hora Cierre</label>
-                                <div class="uk-form-controls">
-                                    <input class="uk-input inputNameUpdateClient" type="text" placeholder="Monto Inicial" name="nombre" aria-label="100" pattern="^([\d])$" disabled>
-                                </div>
-                                <input type="date" name="fecha" style="display: none;">
-                                <input type="number" name="id_usuario" style="display: none;">
-                            </div>
-
-                            <div class="uk-width-1-2@s">
-                                <label class="uk-form-label">Total Ventas</label>
-                                <div class="uk-form-controls">
-                                    <input class="uk-input inputNameUpdateClient" type="text" placeholder="Monto Inicial" name="nombre" aria-label="100" pattern="^([\d])$" disabled>
-                                </div>
-                                <input type="date" name="fecha" style="display: none;">
-                                <input type="number" name="id_usuario" style="display: none;">
-                            </div>
-
-                            <div class="uk-width-1-2@s">
-                                <label class="uk-form-label">Monto Final</label>
-                                <div class="uk-form-controls">
-                                    <input class="uk-input inputNameUpdateClient" type="text" placeholder="Monto Inicial" name="nombre" aria-label="100" pattern="^([\d])$" disabled>
-                                </div>
-                                <input type="date" name="fecha" style="display: none;">
-                                <input type="number" name="id_usuario" style="display: none;">
-                            </div>
-
-                            <input type="submit" id="subirC" style="display:none" required>
-                        </form>
+                        <p class="modalDeleteBody">Deseas Cerrar esta caja? No podras abrirla mas adelante</p>
                     </div>
                     <div class="uk-modal-footer uk-text-right">
-                        <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
-                        <label class="uk-button uk-button-secondary" type="button" for="subirC">Guardar</label>
+                        <form id="FORM-CLOSE-BOX" action="post">
+                            <button class="uk-button uk-button-default uk-modal-close cancelar" type="button">Cancelar</button>
+                            <button class="uk-button uk-button-secondary" type="submit">Aceptar</button>
+                        </form>
+
                     </div>
                 </div>
             </div>

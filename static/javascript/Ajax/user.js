@@ -106,12 +106,13 @@ generar_bitacora_personal(page_personal)
 
 
 let btnGenerate = document.querySelector(".btn-generate")
-btnGenerate.addEventListener("click", () => {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let result = '';
-    for (let i = 0; i < 20; i++) {
-      result += characters.charAt(Math.floor(Math.random() * characters.length));
-    }
-    document.querySelector(".input-seed").value = result
 
-})
+// btnGenerate.addEventListener("click", () => {
+//     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+//     let result = '';
+//     for (let i = 0; i < 20; i++) {
+//       result += characters.charAt(Math.floor(Math.random() * characters.length));
+//     }
+//     document.querySelector(".input-seed").value = result
+
+// })

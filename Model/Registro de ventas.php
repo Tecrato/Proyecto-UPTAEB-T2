@@ -59,7 +59,7 @@
 		}
         function agregar($usuario, $datos, $pagos, $credito, $fecha_inicio, $fecha_vencimiento) {
             try {
-                // $this->conn->beginTransaction();
+                $this->conn->beginTransaction();
 
                 $query = $this->conn->prepare("INSERT INTO registro_ventas (monto_final, id_cliente, id_caja, IVA, active) VALUES(:monto, :id1, :id2, :iva,1)");
                 $query->bindParam(':monto', $this->monto_final);
@@ -68,7 +68,7 @@
                 $query->bindParam(':iva', $this->IVA, PDO::PARAM_STR);
                 $query->execute();
 
-                // $this->conn->commit();
+                $this->conn->commit();
 
                 $registro = $this->search(order: 'id DESC')[0];
 

@@ -17,8 +17,8 @@ const cargarCajas = () => {
                                 <td>${hora(element.fecha)}</td>
                                 <td>${element.fecha_cierre == null ? "00:00" : hora(element.fecha_cierre)}</td>
                                 <td>${element.total_ventas}</td>
-                                <td>${element.monto_credito}</td>
-                                <td>${element.monto_final = "NaN" ? 0.00 : parseFloat(element.monto_final).toFixed(2)}</td>
+                                <td>${parseFloat(element.monto_credito).toFixed(2)}</td>
+                                <td>${parseFloat(element.monto_final).toFixed(2)}</td>
                                 <td>
                                     <div class="${element.estado == 0 ? "activeGood" : "activeExpire"} uk-border-rounded" style="padding: 5px;">${element.estado == 0 ? "ABIERTA" : "CERRADA"}</div>
                                 </td>
@@ -30,21 +30,42 @@ const cargarCajas = () => {
 
             $("#tbody_caja").html(template)
 
-            let btn = document.querySelectorAll(".cerrarCaja")
+            let cerrarCaja = document.querySelectorAll(".cerrarCaja");
+            cerrarCaja.forEach((element) => {
+                element.addEventListener("click", () => {
+                    let id = element.parentElement.parentElement.firstElementChild.textContent
 
-            btn.forEach((r) => {
-                r.addEventListener('click', () => {
-                    $.ajax({
-                        url: "api_caja",
-                        type: "POST",
-                        data: {accion: "cerrar", id_caja : r.parentElement.parentElement.firstElementChild.textContent},
-                        success: function (response) {
-                            console.log(response);
-                            cargarCajas()
-                        }
+                    let formCloseBox = document.querySelector("#FORM-CLOSE-BOX")
+                    formCloseBox.addEventListener('submit',(e)=>{
+                        e.preventDefault()
+                        let data = new FormData(formCloseBox)
+                        data.append('id_caja',id)
+                        data.append('accion',"cerrar")
+
+                        $.ajax({
+                            url:'api_caja',
+                            type:'POST',
+                            data:data,
+                            processData:false,
+                            contentType:false,
+                            success: function(response){
+                                console.log(response);
+                                cargarCajas()
+                                UIkit.notification.closeAll();
+                                UIkit.notification({
+                                    message: `<span uk-icon='icon: check'>Caja Cerrada</span>`,
+                                    status: "success",
+                                    pos: "bottom-right",
+                                });
+                            }
+                        })
                     })
+
+
                 })
             })
+
+            
 
         }
     })
@@ -75,7 +96,6 @@ formCaja.addEventListener("submit", (e) => {
     e.preventDefault();
     let data = new FormData(formCaja);
     data.append("accion", "abrir");
-
 
     $.ajax({
         url: "api_caja",

@@ -113,8 +113,7 @@
                                                                         <div id="seedGenerator" class="uk-flex uk-margin-top">
                                                                             <p class="item-profile">Semilla</p>
                                                                             <span class="uk-article-meta uk-flex">
-                                                                                <input class="uk-input uk-form-small uk-form-width-medium uk-border-rounded input-seed" type="text">
-                                                                                <a class="uk-icon-button uk-margin-small-left btn-generate" uk-icon="refresh" uk-tooltip="Generar"></a>
+                                                                                <input class="uk-input uk-form-small uk-form-width-medium uk-border-rounded input-seed" value="<?= $tu['semilla'] ?>" type="text">
                                                                             </span>
                                                                         </div>
                                                                     </div>

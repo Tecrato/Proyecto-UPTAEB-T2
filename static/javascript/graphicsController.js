@@ -27,17 +27,6 @@ const printChart = () => {
 
 const renderModelsChart1 = () => {
 
-
-  // const data = {
-  //     labels: ['Charcuteria', 'Cesta Basica', 'Aseo Personal'],
-  //     datasets: [{
-  //         label:'Valor del inventario',
-  //         data: [5000, 4000, 3000, 2000],
-  //         backgroundColor: ['rgb(0, 156, 0)', 'rgb(255, 100, 0)', 'rgb(85, 0, 150)'],
-  //         borderColor: ['#fff', '#fff', '#fff']
-  //     }]
-  // }
-
   const data = {
     labels: ["Valor del inventario"],
     datasets: [

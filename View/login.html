@@ -35,8 +35,7 @@
                         <div class="uk-width-1-1@s uk-flex uk-flex-center">
                             <div class="uk-inline">
                                 <span class="uk-form-icon" uk-icon="icon: lock"></span>
-                                <!-- <input class="uk-input" placeholder="Contraseña" type="password" aria-label="Not clickable icon" name="contraseña" pattern="^[\w\S]{8,}$" required> -->
-                                <input class="uk-input" placeholder="Contraseña" type="password" aria-label="Not clickable icon" name="contraseña" pattern="^[\w\S]{5,}$" required>
+                                <input class="uk-input" placeholder="Contraseña" type="password" aria-label="Not clickable icon" name="contraseña" pattern="^[\w\S]{8,}$" required>
                             </div>
                         </div>
                         <div class="uk-width-1-1@s uk-flex uk-flex-center">
@@ -66,14 +65,18 @@
                         <h3>Recuperar Contraseña</h3>
                     </div>
                     <div class="uk-flex uk-flex-column uk-flex-middle" method="POST">
-                        <div class="uk-margin">
-                            <div class="uk-inline">
+                        <div class="uk-margin uk-flex uk-flex-column uk-flex-middle">
+                            <div class="uk-inline uk-margin-small-bottom">
                                 <span class="uk-form-icon" uk-icon="icon: user"></span>
                                 <input class="uk-input" placeholder="Correo Electronico" type="email" id="email" aria-label="Not clickable icon" name="correo" required>
-                                <!-- otro input para la semilla -->
+                            </div>
+                            <div class="uk-inline uk-margin-small-bottom">
+                                <span class="uk-form-icon" uk-icon="icon: user"></span>
+                                <input class="uk-input" placeholder="Semilla de recuperación" type="text" id="semillaRecuperacion" aria-label="" name="semilla" required>
                             </div>
                             <div class="uk-inline">
-                                <input class="uk-input" placeholder="Semilla de recuperación" type="text" id="semillaRecuperacion" aria-label="" name="semilla" required>
+                                <span class="uk-form-icon" uk-icon="icon: user"></span>
+                                <input class="uk-input" placeholder="Nueva Contraseña" type="text" id="newPassRecuperacion" aria-label="" name="password" required>
                             </div>
                         </div>
                     </div>
@@ -83,9 +86,11 @@
                                 <textarea class="uk-textarea" placeholder="Asunto" name="" id="" cols="30" rows="5" required></textarea>
                             </div>
                         </div> -->
-                    <div>
-                        <button class="uk-button uk-button-default uk-margin-small-top" id="forget-pass" type="submit">ENVIAR</button>
-                        <button class="uk-button uk-button-default uk-margin-small-top" id="cancel" type="submit">CANCELAR</button>
+                    <div class="uk-flex uk-flex-center">
+                        <div>
+                            <button class="uk-button uk-button-default uk-margin-small-top" id="forget-pass" type="submit">ENVIAR</button>
+                            <button class="uk-button uk-button-default uk-margin-small-top" id="cancel" type="submit">CANCELAR</button>
+                        </div>
                     </div>
                 </div>
                 </div>

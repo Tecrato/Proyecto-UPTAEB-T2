@@ -132,6 +132,9 @@
 	}
 	echo json_encode(['status' => 'active','estado'=>'si']);
 	
+
+	print_r(phpinfo());
+
 	?>
 	
 		<!-- <form action="">
