@@ -140,7 +140,7 @@
         }
 
         function notification(){
-            $query = $this->conn->prepare("SELECT * FROM notificaciones");
+            $query = $this->conn->prepare("SELECT * FROM notificaciones WHERE status = 0");
             $query->execute();
             return $query->fetchAll();
         }

@@ -64,25 +64,29 @@ echo "
                         <nav id="iconNotification" class="iconNotification" uk-dropnav="mode: click">
                             <ul class="uk-subnav uk-margin-remove">
                                 <li>
-                                    <a class="uk-flex uk-flex-center uk-flex-middle messi"  href="#">
+                                    <a class="uk-flex uk-flex-center uk-flex-middle messi" href="#">
                                         <span class="uk-badge"></span>
                                         <span uk-icon="icon: bell; ratio: 1.5" id="btn_notify"></span>
                                         <span uk-drop-parent-icon></span>
                                     </a>
                                     <div class="uk-dropdown uk-padding-remove uk-border-rounded uk-light">
-                                        <ul class="uk-nav uk-dropdown-nav uk-border-rounded cont_notify">
-                                            <li class="item_notification-header"><strong>Centro de Notificaciones</strong></li>
-                                            <!-- <li>
-                                                <a href="#" class="uk-flex Container_notify">
-                                                    <div>
-                                                        <span class="uk-margin-small-right" uk-icon="icon: info; ratio: 2"></span>
-                                                    </div>
-                                                    <div>
-                                                        <p class="uk-margin-remove date_notify">20/20/2000</p>
-                                                        <p class="uk-margin-remove"><b>Datos de notificacion</b></p>
-                                                    </div>
-                                                </a>
-                                            </li> -->
+                                        <ul class="uk-nav uk-dropdown-nav uk-border-rounded">
+                                            <div>
+                                                <li class="item_notification-header"><strong>Centro de Notificaciones</strong></li>
+                                            </div>
+                                            <div class="cont_notify">
+                                                <li>
+                                                    <a href="#" class="uk-flex Container_notify">
+                                                        <div>
+                                                            <span class="uk-margin-small-right" style="color: #333;" uk-icon="icon: info; ratio: 2"></span>
+                                                        </div>
+                                                        <div>
+                                                            <p class="uk-margin-remove date_notify" style="color: #888;">20/20/2000</p>
+                                                            <p class="uk-margin-remove" style="color: #888;"><b>Datos de notificacion</b></p>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            </div>
                                         </ul>
                                     </div>
                                 </li>
@@ -150,7 +154,7 @@ echo "
             <div class="uk-navbar-left ">
                 <ul class="uk-navbar-nav uk-margin-large-left">
                     <li class="uk-margin-small-right Link" href="/Proyecto-UPTAEB-T2/Inicio">
-                        <a  id="linkInicio" class="uk-button uk-button-text enlace_nav" href="Inicio">
+                        <a id="linkInicio" class="uk-button uk-button-text enlace_nav" href="Inicio">
                             <span uk-icon="thumbnails" class="uk-icon uk-margin-small-right uk-icon-button"></span>
                             <p>Inicio</p>
                         </a>
