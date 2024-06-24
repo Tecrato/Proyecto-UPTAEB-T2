@@ -10,7 +10,6 @@
     
     $other_class = new Permiso(null,$_SESSION['user_id'],$_POST['tipo'],'agregar');
     $result = $other_class->search();
-    $notification = new DB();
 
     if ($_SESSION['rol_num'] > 1 and count($result) <= 0) {
         echo json_encode(['status' => 'error','error'=>'Permiso Error (bueno ps)']);
