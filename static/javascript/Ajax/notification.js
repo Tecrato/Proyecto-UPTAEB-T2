@@ -61,6 +61,7 @@ $.ajax({
             let btn_notify = document.querySelectorAll(".Container_notify");
             btn_notify.forEach((btn) => {
                 btn.addEventListener("click", (e) => {
+                    btn.classList.toggle("notify-write");
                     let id = btn.getAttribute("id");
                     $.ajax({
                         url: "Controller/funcs/modificar_cosas.php",
