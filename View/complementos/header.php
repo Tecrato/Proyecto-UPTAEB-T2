@@ -64,15 +64,15 @@ echo "
                         <nav id="iconNotification" class="iconNotification" uk-dropnav="mode: click">
                             <ul class="uk-subnav uk-margin-remove">
                                 <li>
-                                    <a class="uk-flex uk-flex-center uk-flex-middle" href="#">
-                                        <span class="uk-badge">1</span>
-                                        <span uk-icon="icon: bell; ratio: 1.5"></span>
+                                    <a class="uk-flex uk-flex-center uk-flex-middle messi"  href="#">
+                                        <span class="uk-badge"></span>
+                                        <span uk-icon="icon: bell; ratio: 1.5" id="btn_notify"></span>
                                         <span uk-drop-parent-icon></span>
                                     </a>
                                     <div class="uk-dropdown uk-padding-remove uk-border-rounded uk-light">
-                                        <ul class="uk-nav uk-dropdown-nav uk-border-rounded">
+                                        <ul class="uk-nav uk-dropdown-nav uk-border-rounded cont_notify">
                                             <li class="item_notification-header"><strong>Centro de Notificaciones</strong></li>
-                                            <li>
+                                            <!-- <li>
                                                 <a href="#" class="uk-flex Container_notify">
                                                     <div>
                                                         <span class="uk-margin-small-right" uk-icon="icon: info; ratio: 2"></span>
@@ -82,7 +82,7 @@ echo "
                                                         <p class="uk-margin-remove"><b>Datos de notificacion</b></p>
                                                     </div>
                                                 </a>
-                                            </li>
+                                            </li> -->
                                         </ul>
                                     </div>
                                 </li>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-06-2024 a las 18:53:41
+-- Tiempo de generación: 24-06-2024 a las 22:08:20
 -- Versión del servidor: 8.0.34
 -- Versión de PHP: 8.2.12
 
@@ -31,10 +31,58 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `AsignarTotalVentasDia` (IN `id_caja
 	UPDATE caja c SET c.monto_final = asignar_total_ventas, c.fecha_cierre = CURRENT_TIMESTAMP, c.estado = 1, c.total_ventas = (SELECT COUNT(rv2.id) FROM registro_ventas rv2 WHERE rv2.id_caja = c.id) WHERE c.id = id_caja AND c.estado = 0;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `check_and_notify` ()   BEGIN
+    DECLARE done INT DEFAULT FALSE;
+    DECLARE entrada_id INT;
+    DECLARE entrada_fecha_venc DATE;
+    DECLARE diff INT;
+    DECLARE cur CURSOR FOR SELECT id, fecha_vencimiento FROM entradas WHERE active = 1;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+    OPEN cur;
+
+    read_loop: LOOP
+        FETCH cur INTO entrada_id, entrada_fecha_venc;
+        IF done THEN
+            LEAVE read_loop;
+        END IF;
+
+        SET diff = dias_diferencia(entrada_fecha_venc, CURDATE());
+
+        CASE diff
+            WHEN 10 THEN
+                INSERT INTO notificaciones (id_usuario, status, mensaje, fecha)
+                VALUES (1, 0, CONCAT('La entrada con ID ', entrada_id, ' vence en 10 días.'), NOW());
+            WHEN 5 THEN
+                INSERT INTO notificaciones (id_usuario, status, mensaje, fecha)
+                VALUES (1, 0, CONCAT('La entrada con ID ', entrada_id, ' vence en 5 días.'), NOW());
+            WHEN 2 THEN
+                INSERT INTO notificaciones (id_usuario, status, mensaje, fecha)
+                VALUES (1, 0, CONCAT('La entrada con ID ', entrada_id, ' vence en 2 días.'), NOW());
+            WHEN 0 THEN
+                INSERT INTO notificaciones (id_usuario, status, mensaje, fecha)
+                VALUES (1, 0, CONCAT('La entrada con ID ', entrada_id, ' vence hoy.'), NOW());
+     ELSE
+     	SELECT * FROM entradas;
+        END CASE;
+
+    END LOOP;
+
+    CLOSE cur;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `HOLA` (IN `id_caja` INT(250))   BEGIN
     DECLARE asignar_total_ventas FLOAT;
 	SELECT SUM(rv.monto_final) INTO asignar_total_ventas FROM registro_ventas rv WHERE rv.id_caja = id_caja;
 	UPDATE caja c SET c.monto_final = asignar_total_ventas, c.fecha_cierre = CURRENT_TIMESTAMP, c.estado = 1, c.total_ventas = (SELECT COUNT(rv2.id) FROM registro_ventas rv2 WHERE rv2.id_caja = c.id) WHERE c.id = id_caja AND c.estado = 0;
+END$$
+
+--
+-- Funciones
+--
+CREATE DEFINER=`root`@`localhost` FUNCTION `dias_diferencia` (`fecha1` DATE, `fecha2` DATE) RETURNS INT READS SQL DATA BEGIN
+	RETURN DATEDIFF(fecha1, fecha2);
+RETURN 1;
 END$$
 
 DELIMITER ;
@@ -68,7 +116,18 @@ INSERT INTO `bitacora` (`id`, `id_usuario`, `tabla`, `accion`, `fecha`, `detalle
 (213, 6, 'registrar_ventas', 'agregar', '2024-06-23 12:32:20', 'se agrego una venta'),
 (214, 6, 'Permisos', 'Eliminar', '2024-06-23 12:52:20', 'Permiso Eliminado'),
 (215, 6, 'Permisos', 'Eliminar', '2024-06-23 12:52:22', 'Permiso Eliminado'),
-(216, 6, 'Permisos', 'Eliminar', '2024-06-23 12:52:23', 'Permiso Eliminado');
+(216, 6, 'Permisos', 'Eliminar', '2024-06-23 12:52:23', 'Permiso Eliminado'),
+(217, 6, 'Caja', 'Abriendo', '2024-06-23 13:06:12', 'Caja abierta'),
+(218, 6, 'Caja', 'Abriendo', '2024-06-23 15:55:18', 'Caja abierta'),
+(219, 6, 'Caja', 'Abriendo', '2024-06-23 16:06:40', 'Caja abierta'),
+(220, 6, 'Pagos', 'Registrar', '2024-06-23 16:07:32', 'Pago Registrado'),
+(221, 6, 'registrar_ventas', 'agregar', '2024-06-23 16:07:32', 'se agrego una venta'),
+(222, 6, 'Caja', 'Abriendo', '2024-06-23 16:11:44', 'Caja abierta'),
+(223, 6, 'Caja', 'Abriendo', '2024-06-23 16:14:09', 'Caja abierta'),
+(224, 6, 'Caja', 'Abriendo', '2024-06-23 16:21:15', 'Caja abierta'),
+(225, 6, 'Caja', 'Abriendo', '2024-06-23 16:22:33', 'Caja abierta'),
+(226, 6, 'Login', 'logueado', '2024-06-24 00:10:47', 'El usuario Edouard inicio sesion'),
+(227, 6, 'Login', 'logueado', '2024-06-24 14:29:24', 'El usuario Edouard inicio sesion');
 
 -- --------------------------------------------------------
 
@@ -80,7 +139,7 @@ CREATE TABLE `caja` (
   `id` int NOT NULL,
   `id_usuario` int NOT NULL,
   `monto_inicial` float NOT NULL,
-  `monto_final` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `monto_final` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '0',
   `fecha` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `estado` tinyint(1) NOT NULL DEFAULT '0',
   `fecha_cierre` datetime DEFAULT NULL,
@@ -93,7 +152,8 @@ CREATE TABLE `caja` (
 --
 
 INSERT INTO `caja` (`id`, `id_usuario`, `monto_inicial`, `monto_final`, `fecha`, `estado`, `fecha_cierre`, `monto_credito`, `total_ventas`) VALUES
-(23, 6, 1000, '95.69999694824219', '2024-06-23 12:31:43', 1, '2024-06-23 12:49:30', 0, 1);
+(29, 6, 4000, NULL, '2024-06-23 16:21:15', 1, '2024-06-23 16:22:25', 0, 0),
+(30, 6, 45, NULL, '2024-06-23 16:22:33', 1, '2024-06-23 16:23:05', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -218,7 +278,7 @@ CREATE TABLE `dinero` (
 --
 
 INSERT INTO `dinero` (`id`, `monto`, `fecha`) VALUES
-(1, 192, '2024-06-22 09:11:17');
+(1, -348, '2024-06-22 09:11:17');
 
 -- --------------------------------------------------------
 
@@ -243,9 +303,10 @@ CREATE TABLE `entradas` (
 --
 
 INSERT INTO `entradas` (`id`, `id_producto`, `id_proveedor`, `cantidad`, `fecha_compra`, `fecha_vencimiento`, `precio_compra`, `existencia`, `active`) VALUES
-(93, 31, 8, 5, '2024-06-22', '2024-06-29', 55, 2, 1),
-(96, 36, 8, 5, '2024-06-22', '2024-06-29', 75, 5, 1),
-(101, 37, 8, 5, '2024-06-22', '2024-06-28', 25, 5, 1);
+(106, 39, 8, 5, '2024-06-24', '2024-07-04', 6.8, 5, 1),
+(107, 31, 8, 5, '2024-06-24', '2024-07-02', 4.9, 5, 1),
+(108, 32, 8, 4, '2024-06-24', '2024-08-30', 6, 4, 1),
+(109, 36, 8, 1, '2024-06-24', '2024-07-04', 21, 1, 1);
 
 --
 -- Disparadores `entradas`
@@ -312,13 +373,6 @@ CREATE TABLE `factura` (
   `cantidad` int NOT NULL,
   `coste_producto_total` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
---
--- Volcado de datos para la tabla `factura`
---
-
-INSERT INTO `factura` (`id`, `id_registro_ventas`, `id_productos`, `cantidad`, `coste_producto_total`) VALUES
-(48, 113, 31, 1, 82.5);
 
 -- --------------------------------------------------------
 
@@ -413,7 +467,16 @@ INSERT INTO `movimientos_capital` (`id`, `monto`, `descripcion`, `fecha`) VALUES
 (4, -375, 'Egreso por nuevas entradas', '2024-06-22 17:37:16'),
 (9, -125, 'Egreso por nuevas entradas', '2024-06-22 17:49:47'),
 (10, 191, 'Ingreso por facturacion', '2024-06-23 12:01:07'),
-(11, 96, 'Ingreso por facturacion', '2024-06-23 12:32:20');
+(11, 96, 'Ingreso por facturacion', '2024-06-23 12:32:20'),
+(12, 96, 'Ingreso por facturacion', '2024-06-23 16:07:32'),
+(13, -75, 'Egreso por nuevas entradas', '2024-06-23 19:04:47'),
+(14, -150, 'Egreso por nuevas entradas', '2024-06-23 19:07:46'),
+(15, -300, 'Egreso por nuevas entradas', '2024-06-23 19:09:37'),
+(16, -8, 'Egreso por nuevas entradas', '2024-06-23 19:10:02'),
+(17, -34, 'Egreso por nuevas entradas', '2024-06-23 20:56:57'),
+(18, -24, 'Egreso por nuevas entradas', '2024-06-24 00:18:04'),
+(19, -24, 'Egreso por nuevas entradas', '2024-06-24 00:18:56'),
+(20, -21, 'Egreso por nuevas entradas', '2024-06-24 00:27:12');
 
 --
 -- Disparadores `movimientos_capital`
@@ -428,6 +491,28 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `notificaciones`
+--
+
+CREATE TABLE `notificaciones` (
+  `id` int NOT NULL,
+  `id_usuario` int NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `mensaje` varchar(250) NOT NULL,
+  `fecha` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `notificaciones`
+--
+
+INSERT INTO `notificaciones` (`id`, `id_usuario`, `status`, `mensaje`, `fecha`) VALUES
+(24, 1, 0, 'La entrada con ID 106 vence en 10 días.', '2024-06-24 16:07:00'),
+(25, 1, 0, 'La entrada con ID 109 vence en 10 días.', '2024-06-24 16:07:00');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `pagos`
 --
 
@@ -437,13 +522,6 @@ CREATE TABLE `pagos` (
   `id_metodo_pago` int NOT NULL,
   `monto` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `pagos`
---
-
-INSERT INTO `pagos` (`id`, `id_venta`, `id_metodo_pago`, `monto`) VALUES
-(33, 113, 8, 95.7);
 
 --
 -- Disparadores `pagos`
@@ -509,15 +587,15 @@ CREATE TABLE `productos` (
 
 INSERT INTO `productos` (`id`, `id_categoria`, `id_unidad`, `id_marca`, `valor_unidad`, `nombre`, `imagen`, `stock_min`, `stock_max`, `precio_venta`, `IVA`, `active`, `ganancia`, `codigo`, `algoritmo`) VALUES
 (1, 1, 1, 1, 150, 'pan', 'afafef', 5, 10, 29.718, 0, 1, 0.3, '123456789012', 2),
-(31, 1, 2, 1, 1, 'Azucar', 'producto_Azucar_5e5294ee-d7d2-424d-ac2e-5802bbad41ab.jpeg', 5, 10, 82.5, 1, 1, 0.5, '', 1),
-(32, 2, 2, 3, 1, 'Harina', 'producto_Harina_2551fe44-3bc1-476e-b084-e7ff84eb8600.jpeg', 10, 20, 12.5, 0, 1, 0, '', 2),
+(31, 1, 2, 1, 1, 'Azucar', 'producto_Azucar_5e5294ee-d7d2-424d-ac2e-5802bbad41ab.jpeg', 5, 10, 7.35, 1, 1, 0.5, '', 1),
+(32, 2, 2, 3, 1, 'Harina', 'producto_Harina_2551fe44-3bc1-476e-b084-e7ff84eb8600.jpeg', 10, 20, 9.25, 0, 1, 0, '', 2),
 (33, 2, 2, 1, 1, 'Arroz', 'producto_Arroz_2c51307c-9d9f-41fb-9419-1e61a44891f0.jpeg', 5, 10, 15.01, 0, 1, 0, '', NULL),
 (34, 2, 2, 12, 1, 'Pasta', 'producto_Pasta_arroz.jpeg', 5, 20, 15, 0, 1, 0, '', NULL),
 (35, 1, 2, 1, 10, 'Hfgrtg', 'producto_Hfgrtg_1626311193_Naruto - boruto (383).jpg', 1, 12, 10, 1, 1, 0, '111111111111', NULL),
-(36, 15, 1, 1, 1, 'Alcohol', 'producto_Alcohol_ImgThumb.jpg', 5, 10, 75, 0, 1, 0, '754123698547', 1),
+(36, 15, 1, 1, 1, 'Alcohol', 'producto_Alcohol_ImgThumb.jpg', 5, 10, 21, 0, 1, 0, '754123698547', 1),
 (37, 14, 1, 1, 1, 'mmaamama', 'producto_mmaamama_leche-en-polvo-la-campiña-250g_pic299027ni0t0.jpg', 8, 78, 25, 1, 1, 0, '785412369524', 1),
 (38, 2, 2, 3, 1, 'pollo', 'producto_pollo_DIABLITOS-UNDERWOOD.jpg', 8, 78, 85, 0, 1, 0, '785412369524', 1),
-(39, 2, 1, 1, 30, 'Atun', 'producto_Atun_unnamed (1).jpg', 2, 6, 100, 0, 1, 0, '123456788888', 1);
+(39, 2, 1, 1, 30, 'Atun', 'producto_Atun_unnamed (1).jpg', 2, 6, 6.8, 0, 1, 0, '123456788888', 1);
 
 -- --------------------------------------------------------
 
@@ -578,13 +656,6 @@ CREATE TABLE `registro_ventas` (
   `IVA` float NOT NULL DEFAULT '0',
   `active` tinyint NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
---
--- Volcado de datos para la tabla `registro_ventas`
---
-
-INSERT INTO `registro_ventas` (`id`, `monto_final`, `fecha`, `id_cliente`, `id_caja`, `IVA`, `active`) VALUES
-(113, 95.7, '2024-06-23 12:32:20', 12, 23, 13.2, 1);
 
 -- --------------------------------------------------------
 
@@ -826,6 +897,12 @@ ALTER TABLE `movimientos_capital`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `notificaciones`
+--
+ALTER TABLE `notificaciones`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `pagos`
 --
 ALTER TABLE `pagos`
@@ -884,13 +961,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=217;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=228;
 
 --
 -- AUTO_INCREMENT de la tabla `caja`
 --
 ALTER TABLE `caja`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de la tabla `categoria`
@@ -926,13 +1003,13 @@ ALTER TABLE `dinero`
 -- AUTO_INCREMENT de la tabla `entradas`
 --
 ALTER TABLE `entradas`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT de la tabla `marcas`
@@ -950,13 +1027,19 @@ ALTER TABLE `metodo_pago`
 -- AUTO_INCREMENT de la tabla `movimientos_capital`
 --
 ALTER TABLE `movimientos_capital`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT de la tabla `notificaciones`
+--
+ALTER TABLE `notificaciones`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `pagos`
 --
 ALTER TABLE `pagos`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
@@ -980,7 +1063,7 @@ ALTER TABLE `proveedores`
 -- AUTO_INCREMENT de la tabla `registro_ventas`
 --
 ALTER TABLE `registro_ventas`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
 
 --
 -- AUTO_INCREMENT de la tabla `unidades`
@@ -1057,6 +1140,14 @@ ALTER TABLE `productos`
 ALTER TABLE `registro_ventas`
   ADD CONSTRAINT `id_caja` FOREIGN KEY (`id_caja`) REFERENCES `caja` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `id_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+DELIMITER $$
+--
+-- Eventos
+--
+CREATE DEFINER=`root`@`localhost` EVENT `check_and_notify` ON SCHEDULE EVERY 1 DAY STARTS '2024-06-23 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO CALL check_and_notify()$$
+
+DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

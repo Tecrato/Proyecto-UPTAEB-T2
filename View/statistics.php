@@ -125,6 +125,8 @@
 <script src="static/javaScript/librerias/jquery.js"></script>
 <script src="static/javaScript/graphicsController.js"></script>
 <script src="static/javascript/ChangeColor.js"></script>
+<script src="static/javaScript/Ajax/notification.js"></script>
+
 
 </body>
 

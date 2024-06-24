@@ -719,6 +719,7 @@
 <script src="static/javascript/Ajax/categorias.js"></script>
 <script src="static/javascript/Ajax/marcas.js"></script>
 <script src="static/javascript/funcionDataTable.js"></script>
+<script src="static/javaScript/Ajax/notification.js"></script>
 
 
 

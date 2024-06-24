@@ -681,6 +681,7 @@
 <script src="static/javaScript/Ajax/user.js" defer></script>
 <script src="static/javaScript/Ajax/metodo_pago.js" defer></script>
 <script src="static/javaScript/Roles.js" defer></script>
+<script src="static/javaScript/Ajax/notification.js"></script>
 
 
 

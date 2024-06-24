@@ -1,3 +1,19 @@
+const checkCaja = ()=>{
+    $.ajax({
+        url: "api_caja",
+        type: "POST",
+        data: { accion: "check" },
+        success: function (response) {
+            let json = JSON.parse(response);
+            if (json.estado == "no") {
+                document.getElementById("check_box").textContent = "CERRADA";
+            } else {
+                document.getElementById("check_box").textContent = "ABIERTA";
+            }
+        }
+    })
+}
+
 const cargarCajas = () => {
     $.ajax({
         url: "Controller/funcs_ajax/search.php",
@@ -5,6 +21,7 @@ const cargarCajas = () => {
         data: { randomnautica: "caja" },
         success: function (response) {
             let json = JSON.parse(response);
+            console.log(json);
             let template = ""
             json.lista.forEach(element => {
                 template += `<tr>
@@ -16,7 +33,7 @@ const cargarCajas = () => {
                                 <td>${element.fecha_cierre == null ? "00:00" : hora(element.fecha_cierre)}</td>
                                 <td>${element.total_ventas}</td>
                                 <td>${parseFloat(element.monto_credito).toFixed(2)}</td>
-                                <td>${parseFloat(element.monto_final).toFixed(2)}</td>
+                                <td>${element.monto_final == null ? "0.00" : parseFloat(element.monto_final).toFixed(2)}</td>
                                 <td>
                                     <div class="${element.estado == 0 ? "activeGood" : "activeExpire"} uk-border-rounded" style="padding: 5px;">${element.estado == 0 ? "ABIERTA" : "CERRADA"}</div>
                                 </td>
@@ -49,12 +66,16 @@ const cargarCajas = () => {
                             success: function(response){
                                 console.log(response);
                                 cargarCajas()
+                                checkCaja()
                                 UIkit.notification.closeAll();
                                 UIkit.notification({
                                     message: `<span uk-icon='icon: check'>Caja Cerrada</span>`,
                                     status: "success",
                                     pos: "bottom-right",
                                 });
+                                setTimeout(() => {
+                                    UIkit.modal("#cierre-caja").hide();
+                                },400)
                             }
                         })
                     })
@@ -71,21 +92,7 @@ const cargarCajas = () => {
 cargarCajas()
 
 
-const checkCaja = ()=>{
-    $.ajax({
-        url: "api_caja",
-        type: "POST",
-        data: { accion: "check" },
-        success: function (response) {
-            let json = JSON.parse(response);
-            if (json.estado == "no") {
-                document.getElementById("check_box").textContent = "CERRADA";
-            } else {
-                document.getElementById("check_box").textContent = "ABIERTA";
-            }
-        }
-    })
-}
+
 
 checkCaja()
 const hora = (f) => {
@@ -129,6 +136,9 @@ formCaja.addEventListener("submit", (e) => {
                 status: "success",
                 pos: "bottom-right",
             });
+            setTimeout(() => {
+                UIkit.modal("#caja-modal").hide();
+            },400)
         }
     })
 })

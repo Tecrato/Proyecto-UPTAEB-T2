@@ -411,7 +411,7 @@
             </div>
             <!--***************************** *****************************-->
 
-            <!--***************************** MODAL CIERRR *****************************-->
+            <!--***************************** MODAL CERRAR CAJA *****************************-->
 
             <div id="cierre-caja" class="uk-flex-top uk-modal" uk-modal bg-close='false'>
                 <div class="uk-modal-dialog uk-margin-auto-vertical">
@@ -445,6 +445,8 @@
 <script src="static/javascript/Ajax/registerShop.js"></script>
 <script src="static/javascript/Ajax/caja.js"></script>
 <script src="static/javascript/Ajax/credito.js"></script>
+<script src="static/javaScript/Ajax/notification.js"></script>
+
 
 <script>
     $('.pag-btn-facturas').click(ele => {

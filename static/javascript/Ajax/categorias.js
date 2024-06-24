@@ -34,4 +34,3 @@ const CategoriasTable = () => {
 
 CategoriasTable()
 Registrar_U_M_C("FORM_CATEGORIA",CategoriasTable,".categoria_name","Categoria Creada correctamente");
-

@@ -161,6 +161,8 @@
 <script src="static/javascript/FuncionesGenerales.js"></script>
 <script src="Plugins/build/js/intlTelInput.js"></script>
 <script src="static/javascript/Ajax/supplier.js"></script>
+<script src="static/javaScript/Ajax/notification.js"></script>
+
 
 <script>
     $('.pag-btn-proveedores').click(ele => {
