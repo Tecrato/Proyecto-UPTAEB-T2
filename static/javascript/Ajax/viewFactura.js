@@ -65,3 +65,16 @@ $.ajax({
     });
   },
 });
+$.ajax({
+  url: "api_caja",
+  type: "POST",
+  data: { accion: "check" },
+  success: function (response) {
+      let json = JSON.parse(response);
+      if (json.estado == "no") {
+          document.getElementById("check_box").textContent = "CERRADA";
+      } else {
+          document.getElementById("check_box").textContent = "ABIERTA";
+      }
+  }
+})

@@ -233,5 +233,34 @@ const DeleteClientProv = (BTN, FORM, IDSETTER, TR, notification) => {
 // document.querySelector(".target_supplier").classList.add("uk-background-muted")
 
 
+$.ajax({
+  url: "api_caja",
+  type: "POST",
+  data: { accion: "check" },
+  success: function (response) {
+      let json = JSON.parse(response);
+      if (json.estado == "no") {
+          document.getElementById("check_box").textContent = "CERRADA";
+      } else {
+          document.getElementById("check_box").textContent = "ABIERTA";
+      }
+  }
+})
 
-
+const hora = (f) => {
+  const fecha = new Date(f);
+  const horas = fecha.getHours();
+  const minutos = fecha.getMinutes();
+  const periodo = horas >= 12 ? "PM" : "AM";
+  const horas12 = horas % 12 || 12;
+  const horaFormateada = `${horas12}:${minutos < 10 ? `0${minutos}` : minutos} ${periodo}`;
+  return horaFormateada
+}
+const fecha = (f) => {
+  const fecha = new Date(f);
+  const dia = fecha.getDate();
+  const mes = fecha.getMonth() + 1;
+  const anio = fecha.getFullYear();
+  const fechaFormateada = `${dia}/${mes}/${anio}`;
+  return fechaFormateada
+}

@@ -17,7 +17,6 @@ const cargarEntrys = () => {
         let diasRestantes = Math.ceil(diferencia / (1000 * 60 * 60 * 24));
         let color;
         let texto;
-        console.log(diasRestantes)
         if (f.existencia == 0) {
           color = "activeEmpty";
           texto = "NO DISPONIBLE";
