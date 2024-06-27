@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="static/css/introjs-modern.css">
     <script src="static/javaScript/librerias/jquery.js"></script>
     <script src="static/javaScript/librerias/intro.min.js"></script>
-    <script src="static/javaScript/Tooltip-help.js"></script>
+    <script src="static/javaScript/Tooltip-help.js" defer></script>
     <script src="static/javaScript/librerias/uikit.js"></script>
     <script src="static/javaScript/librerias/uikit-icons.js"></script>
     <link rel="shortcut icon" href="static/images/logo_m.png" type="image/x-icon">
