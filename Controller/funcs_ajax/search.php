@@ -100,25 +100,23 @@
         require('../../Model/Usuarios.php');
         $clase = new Usuario();
     }
+    elseif ($_GET['randomnautica'] === 'notificaciones'){
+        require('../../Model/Notificaciones.php');
+        $clase = new Notificacion(
+            id:(isset($_GET['ID']) ? $_GET['ID'] : null),
+            status:(isset($_GET['status']) ? $_GET['status'] : null),
+    );
+    }
 
 
 
 
     if (isset($_GET['subFunction'])) {
-        if ($_GET['subFunction'] == 'proveedor_de_una_entrada') {
-            $result = $clase->search_proveedor_from_product();
-        } 
-        else if ($_GET['subFunction'] == 'badge') {
-            $result = $clase->COUNT_notification();
-        }
-        else if ($_GET['subFunction'] == 'notification') {
-            $result = $clase->notification();
-        }
-        else if ($_GET['subFunction'] == 'marca') {
-            $result = $clase->search_marca();
-        }
-         else if ($_GET['subFunction'] == 'bitacora') {
+        if ($_GET['subFunction'] == 'bitacora') {
             $result = $clase->search_bitacora(id:(isset($_GET['ID']) ? $_GET['ID'] : null),n:$n,limite:$limite);
+        }
+        else if ($_GET['subFunction'] == 'count') {
+            $result = $clase->COUNT();
         }
     }
     else {

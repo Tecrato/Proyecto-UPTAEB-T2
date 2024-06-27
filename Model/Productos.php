@@ -110,7 +110,7 @@
         }
 
         // Con esta otra funcion se busca entre los productos en la base de datos
-        function search($n=0,$limite=9){
+        function search($n=0,$limite=9, $order=' id ASC '){
             // Al igual que la clase anterior, puede buscar segun muchos valores o solo algunos
             $query = "SELECT 
                     a.id,
@@ -153,7 +153,7 @@
 
             $n = $n*$limite;
 
-            $query = $query . " LIMIT :l OFFSET :n";
+            $query = $query . " ORDER BY $order  LIMIT :l OFFSET :n";
 
             $consulta = $this->conn->prepare($query);
 
@@ -203,37 +203,11 @@
         }
 
         function search_RecienAgregado() {
-            $query = $this->conn->prepare("SELECT * FROM productos
-            WHERE active = 1
-            ORDER BY id DESC
-            LIMIT 5;");
+            $query = $this->conn->prepare("SELECT * FROM productos WHERE active = 1 ORDER BY id DESC LIMIT 5");
             $query->execute();
             return $query->fetchAll();
             
         }
-        function search_MasVendidos() {
-            $query = $this->conn->prepare("SELECT p.nombre, SUM(f.cantidad) as total_vendido
-            FROM factura f
-            JOIN productos p ON f.id_productos = p.id
-            GROUP BY f.id_productos
-            ORDER BY total_vendido DESC
-            LIMIT 3;");
-            $query->execute();
-            return $query->fetchAll();
-            
-        }
-        function search_MenosVendidos() {
-            $query = $this->conn->prepare("SELECT p.nombre, SUM(f.cantidad) as total_vendido
-            FROM factura f
-            JOIN productos p ON f.id_productos = p.id
-            GROUP BY f.id_productos
-            ORDER BY total_vendido ASC
-            LIMIT 3;");
-            $query->execute();
-            return $query->fetchAll();
-            
-        }
-
         function COUNT(){
             $query = $this->conn->prepare("SELECT COUNT(*) as 'total' FROM productos WHERE active=:active");
 			$query->bindParam(':active',$this->active, PDO::PARAM_INT);

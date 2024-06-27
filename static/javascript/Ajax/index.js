@@ -17,7 +17,7 @@ const fecha = (f) => {
 }
 
 $.ajax({
-    url: "Controller/funcs_ajax/estadisticas.php",
+    url: "api_estadisticas",
     type: "GET",
     data: { select: "ratio_ventas" },
     success: function (response) {
@@ -39,7 +39,7 @@ $.ajax({
 })
 
 $.ajax({
-    url: "Controller/funcs_ajax/estadisticas.php",
+    url: "api_estadisticas",
     type: "GET",
     data: { select: "clientes_frecuentes" },
     success: function (response) {
@@ -62,7 +62,7 @@ $.ajax({
 
 
 $.ajax({
-    url: "Controller/funcs_ajax/estadisticas.php",
+    url: "api_estadisticas",
     type: "GET",
     data: { select: "total_productos_categoria" },
     success: function (response) {

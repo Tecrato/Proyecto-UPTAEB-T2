@@ -100,7 +100,7 @@ CREATE TABLE `bitacora` (
   `accion` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
   `fecha` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `detalles` varchar(45) COLLATE utf8mb4_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `bitacora`
@@ -145,7 +145,7 @@ CREATE TABLE `caja` (
   `fecha_cierre` datetime DEFAULT NULL,
   `monto_credito` float NOT NULL DEFAULT '0',
   `total_ventas` int NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `caja`
@@ -233,7 +233,7 @@ CREATE TABLE `configuracion` (
   `monto_capital` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
   `monto_dolar_paralelo` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
   `monto_dolar_bcv` varchar(45) COLLATE utf8mb4_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -247,7 +247,7 @@ CREATE TABLE `credito` (
   `fecha_limite` datetime NOT NULL,
   `monto_final` float NOT NULL,
   `status` tinyint NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Disparadores `credito`
@@ -271,7 +271,7 @@ CREATE TABLE `dinero` (
   `id` int NOT NULL,
   `monto` float NOT NULL,
   `fecha` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `dinero`
@@ -383,7 +383,7 @@ CREATE TABLE `factura` (
 CREATE TABLE `marcas` (
   `id` int NOT NULL,
   `nombre` varchar(100) COLLATE utf8mb4_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `marcas`
@@ -419,7 +419,7 @@ CREATE TABLE `metodo_pago` (
   `id` int NOT NULL,
   `nombre` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
   `active` tinyint NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `metodo_pago`
@@ -456,7 +456,7 @@ CREATE TABLE `movimientos_capital` (
   `monto` int NOT NULL,
   `descripcion` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
   `fecha` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `movimientos_capital`
@@ -500,7 +500,7 @@ CREATE TABLE `notificaciones` (
   `status` tinyint(1) NOT NULL,
   `mensaje` varchar(250) NOT NULL,
   `fecha` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `notificaciones`
@@ -521,7 +521,7 @@ CREATE TABLE `pagos` (
   `id_venta` int NOT NULL,
   `id_metodo_pago` int NOT NULL,
   `monto` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Disparadores `pagos`
@@ -545,7 +545,7 @@ CREATE TABLE `permisos` (
   `id_usuario` int NOT NULL,
   `tabla` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `permiso` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `permisos`

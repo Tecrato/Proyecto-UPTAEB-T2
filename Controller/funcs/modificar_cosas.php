@@ -94,11 +94,5 @@
         $clase = new Metodo_pago($_POST["ID"],$_POST["nombre"]);
         $clase->actualizar($_SESSION['user_id'], $_POST["ID"]);
     }
-    elseif ($tipo === 'entrada'){
-        require('../../Model/Entradas.php');
-        $clase = new Entrada($_POST["ID"]);
-        print_r($_POST);
-        $clase->setStatusNotification();
-    }
     
 ?>

@@ -23,6 +23,9 @@
     else if ($_GET['select'] == 'clientes_frecuentes') {
         $result = $clase->clientes_frecuentes();
     }
+    else if ($_GET['select'] == 'proveedor_de_una_entrada') {
+        $result = $clase->search_proveedor_from_product($_GET['id_producto']);
+    }
 
     $json = ['lista'=> $result];
     $json = json_encode($json);

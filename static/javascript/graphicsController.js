@@ -122,7 +122,7 @@ const renderModelsChart4 = () => {
 
 
   $.ajax({
-    url: "Controller/funcs_ajax/estadisticas.php",
+    url: "api_estadisticas",
     type: "GET",
     data: { select: "max_ventas" },
     success: function (response) {
@@ -173,7 +173,7 @@ const renderModelsChart5 = () => {
 
 
   $.ajax({
-    url: "Controller/funcs_ajax/estadisticas.php",
+    url: "api_estadisticas",
     type: "GET",
     data: { select: "min_ventas" },
     success: function (response) {

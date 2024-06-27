@@ -96,11 +96,10 @@ const modalDetalles = (n) => {
             //esta consulta es para cargar los lotes segun del id del producto y el proveedor
             let supplierName = "";
             $.ajax({
-              url: "Controller/funcs_ajax/search.php",
+              url: "api_estadisticas",
               type: "GET",
               data: {
-                randomnautica: "entradas",
-                subFunction: "proveedor_de_una_entrada",
+                select: "proveedor_de_una_entrada",
                 id_producto: idProduct,
               },
               success: function (response) {

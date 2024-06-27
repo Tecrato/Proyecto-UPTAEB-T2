@@ -2,7 +2,7 @@ setInterval(() => {
     $.ajax({
         url: "Controller/funcs_ajax/search.php",
         type: "GET",
-        data: { randomnautica: "entradas", subFunction: "badge" },
+        data: { randomnautica: "notificaciones", status: 1 , subFunction: 'count'},
         success: function (response) {
             let json = JSON.parse(response);
             let badge = document.querySelector(".uk-badge");
@@ -15,7 +15,7 @@ const cargarNotify = () =>{
     $.ajax({
         url: "Controller/funcs_ajax/search.php",
         type: "GET",
-        data: { randomnautica: "entradas", subFunction: "notification" },
+        data: { randomnautica: "notificaciones" },
         success: function (response) {
             let templete = ``
             let json = JSON.parse(response);
@@ -55,11 +55,10 @@ const cargarNotify = () =>{
                         btn.classList.toggle("notify-write");
                         let id = btn.getAttribute("id");
                         $.ajax({
-                            url: "Controller/funcs/modificar_cosas.php",
+                            url: "Controller/funcs/borrar_cosas.php",
                             type: "POST",
-                            data: { tipo: "entrada", ID: id },
+                            data: { tipo: "notificaciones", ID: id },
                             success: (response) => {
-                                
                             }
                         })
                     })

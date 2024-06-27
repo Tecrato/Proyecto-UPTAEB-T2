@@ -119,35 +119,10 @@
             $consulta->execute();
             return $consulta->fetchAll();
 		}
-
-		function search_proveedor_from_product(){
-			$query = $this->conn->prepare("SELECT id_proveedor, (SELECT razon_social FROM proveedores p WHERE p.id = entradas.id_proveedor) AS proveedor FROM entradas WHERE id_producto=:id GROUP BY id_proveedor LIMIT 50");
-			$query->bindParam(':id',$this->id_producto);
-			$query->execute();
-			return $query->fetchAll();
-		}
         function COUNT(){
             $query = $this->conn->prepare("SELECT COUNT(*) as 'total' FROM entradas WHERE active=:active");
 			$query->bindParam(':active',$this->active, PDO::PARAM_INT);
             $query->execute();
             return $query->fetch()['total'];
-        }
-
-        function COUNT_notification(){
-            $query = $this->conn->prepare("SELECT COUNT(*) as 'total' FROM notificaciones WHERE status=0");
-            $query->execute();
-            return $query->fetch()['total'];
-        }
-
-        function notification(){
-            $query = $this->conn->prepare("SELECT * FROM notificaciones WHERE status = 0");
-            $query->execute();
-            return $query->fetchAll();
-        }
-
-        function setStatusNotification(){
-            $query = $this->conn->prepare("UPDATE notificaciones SET status = 1 WHERE id = :idset");
-            $query->bindParam(':idset',$this->id);
-            $query->execute();
         }
 }

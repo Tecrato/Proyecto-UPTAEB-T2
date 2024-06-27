@@ -87,4 +87,9 @@
         $clase = new Permiso(null,$_POST["id_usuario"],$_POST["tabla"],$_POST["accion"]);
         $clase->borrar($_SESSION['user_id']);
     }
+    elseif ($tipo == 'notificaciones'){
+        require('../../Model/Notificaciones.php');
+        $clase = new Notificacion($_POST['ID']);
+        $clase->desactivar();
+    }
 ?>

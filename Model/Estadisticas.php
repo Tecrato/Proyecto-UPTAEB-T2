@@ -35,6 +35,12 @@
             $query->execute();
             return $query->fetchAll();
         }
+        function search_proveedor_from_product($id_producto){
+            $query = $this->conn->prepare('SELECT id_proveedor, (SELECT razon_social FROM proveedores p WHERE p.id = entradas.id_proveedor) AS proveedor FROM entradas WHERE id_producto=:id GROUP BY id_proveedor');
+            $query->bindParam(':id',$id_producto);
+            $query->execute();
+            return $query->fetchAll();
+        }
     }
 ?>
 

@@ -68,14 +68,6 @@
         exit(0);
         die();
     }
-    elseif ($tipo === 'proveedor'){
-        require('../../Model/Proveedores.php');
-        $clase = new Proveedor(null,$_POST["nombre"],$_POST["razon_social"],$_POST["rif"],$_POST["telefono"],$_POST["correo"],$_POST["direccion"]); // Llama al modelo y le manda la instruccion
-        $clase->agregar($_SESSION['user_id']);
-        header('Location:../../Proveedores');
-        exit(0);
-        die();
-    }
     elseif ($tipo === 'unidad'){
         require('../../Model/Unidades.php');
         $clase = new Unidad(null,$_POST["nombre"]);
