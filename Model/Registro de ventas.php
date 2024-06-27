@@ -59,7 +59,14 @@
 		}
         function agregar($usuario, $datos, $pagos, $credito, $fecha_inicio, $fecha_vencimiento) {
             try {
+
                 $this->conn->beginTransaction();
+                for ($i = 0; $i < count($datos); $i++) {
+                    $lista = $datos[$i];
+                    $clase_l = new Entrada(null, $lista->id_product, cantidad: $lista->cantidad);
+                    $clase_l->descontar();
+                }
+                $this->conn->commit();
 
                 $query = $this->conn->prepare("INSERT INTO registro_ventas (monto_final, id_cliente, id_caja, IVA, active) VALUES(:monto, :id1, :id2, :iva,1)");
                 $query->bindParam(':monto', $this->monto_final);
@@ -68,7 +75,6 @@
                 $query->bindParam(':iva', $this->IVA, PDO::PARAM_STR);
                 $query->execute();
 
-                $this->conn->commit();
 
                 $registro = $this->search(order: 'id DESC')[0];
 
@@ -76,9 +82,8 @@
                     $lista = $datos[$i];
                     $clase_f = new Factura(null, $registro['id'], $lista->id_product, $lista->cantidad, $lista->precio);
                     $clase_f->agregar();
-                    $clase_l = new Entrada(null, $lista->id_product, cantidad: $lista->cantidad);
-                    $clase_l->descontar();
                 }
+
                 if ($credito == true) {
                     $clase5 = new Credito(null, $registro['id'], $fecha_vencimiento, 0);
                     $clase5->agregar($usuario);
@@ -94,7 +99,6 @@
                 $this->add_bitacora($usuario, "registrar_ventas", "agregar", "se agrego una venta");
                 return 1;
             } catch (Exception $e) {
-                print_r($e);
                 $this->conn->rollBack();
                 return 0;
             }
