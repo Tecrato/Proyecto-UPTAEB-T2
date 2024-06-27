@@ -69,7 +69,7 @@
                 $consulta->bindParam(':id_usuario', $this->id_usuario, PDO::PARAM_INT);
             }
             if ($this->estado != null) {
-                $consulta->bindParam(':estado', $this->estado, PDO::PARAM_INT);
+                $consulta->bindParam(':estado', $this->estado, PDO::PARAM_BOOL);
             }
     
             $consulta->execute();
@@ -94,11 +94,16 @@
         }
 
         function buscar_ultima() {
-            $caja = new Caja(null, $this->id_usuario);
-            $result = $caja->search(0, 1, 'id DESC');
-            if (count($result) == 0) {
+            $consulta = $this->conn->prepare('SELECT * FROM caja WHERE estado=0 AND id_usuario=:id');
+            $consulta->bindParam(':id', $this->id_usuario, PDO::PARAM_INT);
+            $consulta->execute();
+            $result = $consulta->fetchAll();
+            
+            if (count($result) < 1) {
                 return null;
             }
+            // $caja = new Caja(null, $this->id_usuario, null, 0);
+            // $result = $caja->search();
             return $result[0];
         }
 
