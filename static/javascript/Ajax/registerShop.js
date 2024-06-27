@@ -937,7 +937,7 @@ $.ajax({
         IGTF: parseFloat(document.getElementById("IGTF").textContent).toFixed(2),
         monto_final: parseFloat(document.getElementById("totalFact").textContent).toFixed(2),
         credito: checkCredito.checked,
-        fecha_inicio_credito : document.querySelector('.fecha_inicio_credito').value,
+        fecha_inicio_credito: document.querySelector('.fecha_inicio_credito').value,
         fecha_cierre_credito: document.querySelector('.fecha_cierre_credito').value,
         detalles: [],
         pagos: []
@@ -998,12 +998,7 @@ $.ajax({
 
 
         //luego de enviar los datos reseteamos el modal
-        UIkit.notification({
-          message:
-            "<span uk-icon='icon: check'></span> Factura generada correctamente ",
-          status: "success",
-          pos: "bottom-right",
-        });
+
         document.querySelector(".cont_metodos_pagos").innerHTML = ""
         document.getElementById("Client-datails").innerHTML = `<div class="uk-flex uk-flex-column uk-flex-middle uk-flex-center pointer" value="default">
                                                                     <h5 class="uk-text-bold uk-margin-remove">AÑADIR CLIENTE</h5>
@@ -1048,6 +1043,13 @@ $.ajax({
                 message:
                   "<span uk-icon='icon: check'></span>Error Inesperado",
                 status: "danger",
+                pos: "bottom-right",
+              });
+            } else {
+              UIkit.notification({
+                message:
+                  "<span uk-icon='icon: check'></span> Factura generada correctamente ",
+                status: "success",
                 pos: "bottom-right",
               });
             }
