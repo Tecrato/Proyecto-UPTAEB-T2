@@ -81,7 +81,7 @@
             $caja = new Caja(id:$this->id, estado:0);
             $caja = $this->search()[0];
             if (count($caja) == 0) {
-                return;
+                return [];
             }
             $stmt = $this->conn->prepare('CALL AsignarTotalVentasDia(:id)');
             $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
@@ -100,7 +100,7 @@
             $result = $consulta->fetchAll();
             
             if (count($result) < 1) {
-                return null;
+                return [];
             }
             // $caja = new Caja(null, $this->id_usuario, null, 0);
             // $result = $caja->search();
