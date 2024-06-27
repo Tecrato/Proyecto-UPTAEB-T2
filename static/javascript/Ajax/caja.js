@@ -4,6 +4,7 @@ const checkCaja = ()=>{
         type: "POST",
         data: { accion: "check" },
         success: function (response) {
+            console.log(response);
             let json = JSON.parse(response);
             if (json.estado == "no") {
                 document.getElementById("check_box").textContent = "CERRADA";

@@ -1033,7 +1033,24 @@ $.ajax({
             // setTimeout(()=> {
             //   window.location = 'http://localhost/Proyecto-UPTAEB-T2/Ventas'
             // },2000)
-            console.log(response);
+            let json = JSON.parse(response);
+            if (json.error == "Caja Error") {
+              UIkit.notification.closeAll();
+              UIkit.notification({
+                message:
+                  "<span uk-icon='icon: check'></span>No hay cajas abiertas",
+                status: "danger",
+                pos: "bottom-right",
+              });
+            } else if (json.error == "Te ganaron") {
+              UIkit.notification.closeAll();
+              UIkit.notification({
+                message:
+                  "<span uk-icon='icon: check'></span>Error Inesperado",
+                status: "danger",
+                pos: "bottom-right",
+              });
+            }
           },
         });
       }
