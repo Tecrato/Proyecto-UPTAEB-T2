@@ -14,21 +14,14 @@
 
 	$otra_clase_mas = new Caja(id_usuario:$_SESSION['user_id'], estado:0);
 	$ultima_caja = $otra_clase_mas->buscar_ultima();
-	print_r($ultima_caja);
 	if ($ultima_caja == NULL or count($ultima_caja) == 0) {
 		echo json_encode(['status' => 'error','error'=>'Caja Error (sus-pechoso)']);
         exit(0);
         die();
 	}
-	print_r("en contr mewdio");
-	print_r($ultima_caja);
 	$clase2 = new Registro_ventas(null,$var->monto_final,$var->id_cliente, $ultima_caja['0'],$var->IVA);
-	print_r("en contr mewdio-abajoo");
-	print_r($var);
 	$result = $clase2->agregar($_SESSION['user_id'], $var->detalles, $var->pagos, $var->credito, $var->fecha_inicio_credito, $var->fecha_cierre_credito);
 	
-	print_r("en contr mewdio-abajoo");
-	print_r($result);
 	if ($result == 1) {
 		echo json_encode(['status' => 'active']);
 	} else {
