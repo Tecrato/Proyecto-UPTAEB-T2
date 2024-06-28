@@ -18,14 +18,14 @@
         $n = 0;
     }
 
-    $other_class = new Permiso(null,$_SESSION['user_id'],$_GET['randomnautica'],'buscar');
-    $result = $other_class->search();
+    // $other_class = new Permiso(null,$_SESSION['user_id'],$_GET['randomnautica'],'buscar');
+    // $result = $other_class->search();
 
-    if ($_SESSION['rol_num'] > 1 and count($result) <= 0) {
-        echo json_encode(['status' => 'error','error'=>'Permiso Error (bueno ps)']);
-        exit(0);
-        die();
-    }
+    // if ($_SESSION['rol_num'] > 1 and count($result) <= 0) {
+    //     echo json_encode(['status' => 'error','error'=>'Permiso Error (bueno ps)']);
+    //     exit(0);
+    //     die();
+    // }
 
     if ($_GET['randomnautica'] == "productos") {
         require('../../Model/Productos.php');
