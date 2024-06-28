@@ -64,7 +64,9 @@
                 for ($i = 0; $i < count($datos); $i++) {
                     $lista = $datos[$i];
                     $clase_l = new Entrada(null, $lista->id_product, cantidad: $lista->cantidad);
-                    $clase_l->descontar();
+                    if ($clase_l->descontar() != 1){
+                        throw new Exception("Algo paso, nose", 1);
+                    }
                 }
                 $this->conn->commit();
 

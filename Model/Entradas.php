@@ -38,19 +38,25 @@
 		function descontar(){
 
 			$entradas = $this->search(0,10000,order:' fecha_vencimiento ASC');
-
-			for ($i = 0; $this->cantidad >= 1; $i++) {
-				$entrada = $entradas[$i];
-				if ($entrada['existencia'] > $this->cantidad) {
-					$query = "UPDATE entradas SET existencia=" . $entrada['existencia'] - $this->cantidad . " WHERE id=" . $entrada['id'];
-					$this->conn->query($query);
-					$this->cantidad = 0;
-				} else {
-					$query = "UPDATE entradas SET existencia=0 WHERE id=" . $entrada['id'];
-					$this->conn->query($query);
-					$this->cantidad -= $entrada['existencia'];
-				}
-			}
+            try {
+                
+                for ($i = 0; $this->cantidad >= 1; $i++) {
+                    $entrada = $entradas[$i];
+                    if ($entrada['existencia'] > $this->cantidad) {
+                        $query = "UPDATE entradas SET existencia=" . $entrada['existencia'] - $this->cantidad . " WHERE id=" . $entrada['id'];
+                        $this->conn->query($query);
+                        $this->cantidad = 0;
+                    } else {
+                        $query = "UPDATE entradas SET existencia=0 WHERE id=" . $entrada['id'];
+                        $this->conn->query($query);
+                        $this->cantidad -= $entrada['existencia'];
+                    }
+                }
+                return 1;
+            }
+            catch (Exception $e){
+                return 0;
+            }
 		}
 
 		function borrar() {

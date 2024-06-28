@@ -1029,7 +1029,7 @@ $.ajax({
             // setTimeout(()=> {
             //   window.location = 'http://localhost/Proyecto-UPTAEB-T2/Ventas'
             // },2000)
-            let json = JSON.parse(response);
+            let json = JSON.parse('{'+response.split('{')[1]);
             if (json.error == "Caja Error") {
               UIkit.notification.closeAll();
               UIkit.notification({
