@@ -94,8 +94,8 @@
         }
 
         function buscar_ultima() {
-            $consulta = $this->conn->prepare('SELECT * FROM caja WHERE estado=0 AND id_usuario=:id');
-            $consulta->bindParam(':id', $this->id_usuario, PDO::PARAM_INT);
+            $consulta = $this->conn->prepare('SELECT * FROM caja WHERE estado=0 AND id=:id');
+            $consulta->bindParam(':id', $this->id, PDO::PARAM_INT);
             $consulta->execute();
             $result = $consulta->fetchAll();
             

@@ -11,6 +11,7 @@ if ($_POST['accion'] == 'abrir') {
 } else if ($_POST['accion'] == 'cerrar') {
     $otra_clase_mas = new Caja(id: $_POST['id_caja'], estado: 0);
     $ultima_caja = $otra_clase_mas->buscar_ultima();
+    print_r($ultima_caja);
     if (count($ultima_caja) == 0) {
         echo json_encode(['status' => 'error', 'estado' => 'no']);
         exit(0);

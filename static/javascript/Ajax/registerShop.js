@@ -444,10 +444,10 @@ $.ajax({
     const InsertarProductos = () => {
       productos.forEach((producto) => {
         //esta condicion es para que agg el tr, pero modificando el tamaño del input de cantidad, para que se vea bien en versiones mobiles
-        if (screen >= 1024) {
+        if (screen >= 1100) {
           tr += `
           <tr value="${producto.id}" class="TR-Product uk-light">
-              <td>
+              <td class="uk-text-nowrap">
                   <input type="hidden" value="${producto.nombre}">
                   <p class="uk-margin-remove">${producto.nombre}</p>
               </td>
@@ -996,24 +996,6 @@ $.ajax({
         console.log(json);
 
 
-
-        //luego de enviar los datos reseteamos el modal
-
-        document.querySelector(".cont_metodos_pagos").innerHTML = ""
-        document.getElementById("Client-datails").innerHTML = `<div class="uk-flex uk-flex-column uk-flex-middle uk-flex-center pointer" value="default">
-                                                                    <h5 class="uk-text-bold uk-margin-remove">AÑADIR CLIENTE</h5>
-                                                                    <a class="uk-margin-small-top" href="#" uk-icon="icon: plus-circle; ratio: 1.5"></a>
-                                                                </div>`;
-
-        document.getElementById("Detail-product-fact").innerHTML = "";
-        document.getElementsByClassName("metodo-pago_final").innerHTML = "";
-
-        ActualizarTotal();
-
-        setTimeout(() => {
-          UIkit.modal("#modal-full").hide();
-        }, 800);
-
         //envio de datos con ajax
         //preparamos el json
         let jsonString = JSON.stringify(json);
@@ -1029,7 +1011,7 @@ $.ajax({
             // setTimeout(()=> {
             //   window.location = 'http://localhost/Proyecto-UPTAEB-T2/Ventas'
             // },2000)
-            let json = JSON.parse('{'+response.split('{')[1]);
+            let json = JSON.parse('{' + response.split('{')[1]);
             if (json.error == "Caja Error") {
               UIkit.notification.closeAll();
               UIkit.notification({
@@ -1047,6 +1029,25 @@ $.ajax({
                 pos: "bottom-right",
               });
             } else {
+
+              //luego de enviar los datos reseteamos el modal
+
+              document.querySelector(".cont_metodos_pagos").innerHTML = ""
+              document.getElementById("Client-datails").innerHTML = `<div class="uk-flex uk-flex-column uk-flex-middle uk-flex-center pointer" value="default">
+                                                            <h5 class="uk-text-bold uk-margin-remove">AÑADIR CLIENTE</h5>
+                                                            <a class="uk-margin-small-top" href="#" uk-icon="icon: plus-circle; ratio: 1.5"></a>
+                                                        </div>`;
+
+              document.getElementById("Detail-product-fact").innerHTML = "";
+              document.getElementsByClassName("metodo-pago_final").innerHTML = "";
+
+              ActualizarTotal();
+
+              setTimeout(() => {
+                UIkit.modal("#modal-full").hide();
+              }, 800);
+
+
               UIkit.notification({
                 message:
                   "<span uk-icon='icon: check'></span> Factura generada correctamente ",

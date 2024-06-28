@@ -367,7 +367,7 @@
         width: 300px !important;
     }
     .img_product{
-        width: 400px;
+        width: 200px;
         height: 350px;
         object-fit: cover;
     }
@@ -390,13 +390,17 @@
         width: 300px;
     }
     .filter_product{
-        margin-left: 10px;
+        margin-left: -20px;
         margin-top: 15px;
         justify-content: space-evenly;
         width: 150%;
     }
     .cont_btns{
         width: 220px;
+    }
+    .conts_btns_nav_product{
+        position: absolute;
+        right: 70px !important;
     }
 }
 @media (min-width: 376px) and (max-width: 767px){
@@ -412,11 +416,11 @@
     padding-left: 0px !important;
    }
    .uk-search-default{
-    width: 260px !important;
+    width: 160px !important;
     margin-right: 5px;
    }
    .img_product{
-    width: 400px;
+    width: 300px;
     height: 350px;
     object-fit: cover;
    }
@@ -442,7 +446,7 @@
         width: 300px;
     }
     .filter_product{
-        margin-left: 10px;
+        margin-left: -3px;
         margin-top: 15px;
         justify-content: space-evenly;
         width: 150%;
@@ -499,6 +503,15 @@
         flex-wrap: wrap;
     }
 }
+@media (min-width: 375px) and (max-width: 678px){
+    .conts_btns_nav_product{
+        position: absolute;
+        right: 85px;
+    }
+    .flechas{
+        display: none;
+    }
+}
 
                 /*-----------------------    Estilos del main registro de ventas -------------------------------*/
 
@@ -543,6 +556,9 @@
     .generate-fact {
         padding: 0px !important;
     }
+    .cont_type_page{
+        margin-left: 0px !important;
+    }
 }
 
 @media (min-width: 1024px){
@@ -552,7 +568,48 @@
     .Container-fact-price{
         width: 50%;
     }
+    .
     
+}
+
+@media (min-width: 350px) and (max-width: 767px){
+    .cont_btns_fact{
+        width: 120px;
+    }
+    .container-result-fact{
+        height: 630px;
+    }
+    .generate-fact{
+        width: 100% !important;
+    }
+    .cont_cash_fact{
+        padding: 15px !important;
+    }
+}
+
+@media (min-width: 350px) and (max-width: 900px){
+    .cont_btns_fact{
+        width: 120px;
+    }
+    .container-result-fact{
+        height: 630px;
+    }
+    .generate-fact{
+        width: 100% !important;
+    }
+    .cont_cash_fact{
+        padding: 15px !important;
+    }
+}
+
+@media (min-width: 350px) and (max-width: 425px){
+    .form_btns_search{
+        width: 130px !important;
+    }
+    .cont_btns_fact{
+        width: 80px;
+        margin-left: 15px !important;
+    }
 }
 
                         /*-----------------------    Estilos del viewFactura -------------------------------*/
@@ -834,5 +891,16 @@
     }
     .hr_supplier{
         width: 170px;
+    }
+}
+
+/*-----------------------Estilos del client-------------------------------*/
+@media (min-width: 350px) and (max-width: 767px){
+    .cont_btns_client-action{
+        width: 70px;
+        margin-left: 0 !important;
+    }
+    .cont_target_client_controller{
+        justify-content: center;
     }
 }

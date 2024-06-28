@@ -9,7 +9,7 @@
             <li><a id="aProductsDesct" class="itemSwitcher4" href="#"><img class="uk-preserve-width uk-margin-small-right img5ProductSwitcher" src="./static/images/papelera-de-reciclaje.png" width="32" height="32" alt="">PRODUCTOS DESACTIVADOS</a></li>
         </ul>
 
-        <ul class="uk-switcher uk-margin">
+        <ul class="uk-switcher uk-margin" data-uk-switcher="{swiping:false}">
             <li>
                 <section class="uk-background-secondary uk-padding uk-border-rounded" uk-filter="target: .js-filter">
                     <div>
@@ -23,7 +23,7 @@
                                                 <input class="uk-search-input searchProductActive" type="search" placeholder="Buscar" aria-label="Search">
                                             </form>
                                         </div>
-                                        <div class="uk-margin-left">
+                                        <div class="uk-margin-left conts_btns_nav_product">
                                             <a id="iconReportInv" href="InventarioPDF" target="_blank" class="uk-icon-link" uk-tooltip="title:Reporte Inventario; delay: 500" uk-icon="icon: file-pdf; ratio: 1.5"></a>
                                             <a id="registerProduct" href="#modal-register-product" uk-toggle uk-tooltip="title:Añadir; delay: 500" class="uk-margin-small-left btn-modal-register">
                                                 <img class="btn_agg" src="./static/images/btn_agg.png" alt="" width="35px">
@@ -55,9 +55,9 @@
                             </div>
 
                             <div class="uk-flex uk-margin-left container-view-order">
-                                <div class="uk-margin-right">
+                                <!-- <div class="uk-margin-right">
                                     <span class="uk-icon-link" id="list" uk-icon="icon: list; ratio: 1.3" style="cursor: pointer;"></span>
-                                </div>
+                                </div> -->
                                 <div class="uk-width-auto uk-text-nowrap flechas">
                                     <span class="uk-active" uk-filter-control="sort: data-name"><a class="uk-icon-link" href="#" uk-icon="icon: arrow-down" aria-label="Sort ascending"></a></span>
                                     <span uk-filter-control="sort: data-name; order: desc"><a class="uk-icon-link" href="#" uk-icon="icon: arrow-up" aria-label="Sort descending"></a></span>

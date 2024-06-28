@@ -13,12 +13,13 @@
 		}
 		
 		function desactivar(){
-			$this->conn->query("UPDATE notificaciones SET status=1 WHERE id = :id");
+			$query = $this->conn->prepare("UPDATE notificaciones SET status=1 WHERE id=:id");
             $query->bindParam(':id',$this->id);
+            $query->execute();
 
 		}
         function COUNT(){
-            $query = $this->conn->prepare("SELECT COUNT(*) as 'total' FROM notificaciones WHERE status=0");
+            $query = $this->conn->prepare("SELECT COUNT(*) as 'total' FROM notificaciones WHERE status = 0");
             $query->execute();
             return $query->fetch()['total'];
         }

@@ -34,11 +34,11 @@ const cargarCajas = () => {
                                 <td>${element.fecha_cierre == null ? "00:00" : hora(element.fecha_cierre)}</td>
                                 <td>${element.total_ventas}</td>
                                 <td>${parseFloat(element.monto_credito).toFixed(2)}</td>
-                                <td>${element.monto_final == null ? "0.00" : parseFloat(element.monto_final).toFixed(2)}</td>
+                                <td>${element.monto_final == null ? element.monto_inicial : parseFloat(element.monto_final).toFixed(2)}</td>
                                 <td>
                                     <div class="${element.estado == 0 ? "activeGood" : "activeExpire"} uk-border-rounded" style="padding: 5px;">${element.estado == 0 ? "ABIERTA" : "CERRADA"}</div>
                                 </td>
-                                <td>
+                                <td class="${element.estado == 1 ? "invisible" : ""}">
                                     <a  href="#cierre-caja" uk-toggle class="uk-button uk-button-default cerrarCaja">CERRAR CAJA</a>
                                 </td>
                             </tr>`

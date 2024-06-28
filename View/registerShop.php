@@ -18,12 +18,12 @@
                             <div class="uk-margin-right">
                                 <div class="uk-flex" style="height: 50px;">
                                     <div class="uk-margin formDelete uk-light">
-                                        <form class="uk-search uk-search-default uk-light">
+                                        <form class="uk-search uk-search-default uk-light form_btns_search">
                                             <span class="uk-search-icon-flip uk-light" uk-search-icon></span>
                                             <input class="uk-search-input uk-light" type="search" placeholder="Buscar" aria-label="Search">
                                         </form>
                                     </div>
-                                    <div class="uk-margin-left uk-light">
+                                    <div class="uk-margin-left uk-light cont_btns_fact">
                                         <a href="Detalles_factura" uk-icon="icon: file-pdf; ratio: 1.5" uk-tooltip="title:PDF Factura; delay: 500"></a>
                                         <a href="#modal-full" uk-toggle uk-tooltip="title:Añadir Factura; delay: 500" class="uk-margin-small-left">
                                             <img class="btn_agg" src="./static/images/btn_agg_factura2.png" alt="" width="35px">
@@ -69,9 +69,9 @@
                         </div>
 
                         <div class="uk-flex uk-margin-left uk-light">
-                            <div class="uk-margin-right">
+                            <!-- <div class="uk-margin-right">
                                 <span class="uk-icon-link" id="list" uk-icon="icon: list; ratio: 1.3" style="cursor: pointer;"></span>
-                            </div>
+                            </div> -->
                             <div class="uk-width-auto uk-text-nowrap flechas">
                                 <span class="uk-active" uk-filter-control="sort: data-name"><a class="uk-icon-link" href="#" uk-icon="icon: arrow-down" aria-label="Sort ascending"></a></span>
                                 <span uk-filter-control="sort: data-name; order: desc"><a class="uk-icon-link" href="#" uk-icon="icon: arrow-up" aria-label="Sort descending"></a></span>
@@ -159,7 +159,7 @@
                                                     </ul>
                                                 </nav>
                                                 <!-- ******************************************************************************  -->
-                                                <div class="uk-margin-medium-left">
+                                                <div class="uk-margin-medium-left cont_type_page">
                                                     <div class="container_config_fact uk-border-rounded">
                                                         <section style="width: 350px;">
                                                             <article class="uk-flex uk-flex-around" style="padding: 5px;">
@@ -212,15 +212,15 @@
                                                 </div>
 
                                                 <div style="overflow: hidden; height: 280px;">
-                                                    <div class="uk-overflow-auto">
+                                                    <div>
                                                         <table class="uk-table uk-table-divider">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>Producto</th>
-                                                                    <th>Disp.</th>
-                                                                    <th>Precio</th>
-                                                                    <th>Cantidad</th>
-                                                                    <th class="uk-flex uk-flex-center">Agregar</th>
+                                                                    <th class="uk-text-truncate uk-table-shrink">Producto</th>
+                                                                    <th class="uk-text-truncate">Disp.</th>
+                                                                    <th class="uk-text-truncate">Precio</th>
+                                                                    <th class="uk-text-truncate">Cantidad</th>
+                                                                    <th class="">Agregar</th>
                                                                 </tr>
                                                             </thead>
 
@@ -236,18 +236,18 @@
                                         </div>
 
                                     </div>
-                                    <div style="padding: 55px;">
+                                    <div style="padding: 55px;" class="cont_cash_fact">
                                         <h4 class="uk-text-bolder uk-padding-medium">DETALLES FACTURA</h4>
                                         <div class="container-result-fact">
                                             <div class="scroll-detail-fact" style="height: 300px; overflow: auto;">
                                                 <table class="uk-table uk-table-hover uk-table-divider uk-table-middle uk-light">
                                                     <thead>
                                                         <tr>
-                                                            <th>ID</th>
-                                                            <th>Cantidad</th>
-                                                            <th>Nombre</th>
-                                                            <th>Precio unit.</th>
-                                                            <th>Precio total</th>
+                                                            <th class="uk-text-truncate">ID</th>
+                                                            <th class="uk-text-truncate">Cantidad</th>
+                                                            <th class="uk-text-truncate">Nombre</th>
+                                                            <th class="uk-text-truncate">Precio unit.</th>
+                                                            <th class="uk-text-truncate">Precio total</th>
                                                         </tr>
                                                     </thead>
 

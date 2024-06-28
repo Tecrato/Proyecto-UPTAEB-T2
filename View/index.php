@@ -10,7 +10,7 @@
 
         <div class="uk-width-1-1 uk-margin-medium-top">
             <div class="[email protected] uk-grid-small uk-flex-wrap uk-flex-center uk-padding-small" uk-grid>
-                <div class="uk-width-1-4">
+                <div class="uk-width-1-4@s">
                     <section class="uk-car uk-flex uk-flex-between uk-flex-middle uk-card-default uk-card-body uk-background-secondary uk-light">
                         <article>
                             <h2 id="aaa" class="uk-margin-remove-top">0.00</h2>
@@ -23,7 +23,7 @@
                 </div>
 
 
-                <div class="uk-width-1-4">
+                <div class="uk-width-1-4@s">
                     <section class="uk-car uk-flex uk-flex-between uk-flex-middle uk-card-default uk-card-body uk-background-secondary uk-light">
                         <article>
                             <h2 class="uk-margin-remove-top"><?php echo $cliente; ?></h2>
@@ -35,7 +35,7 @@
                     </section>
                 </div>
 
-                <div class="uk-width-1-4">
+                <div class="uk-width-1-4@s">
                     <section class="uk-car uk-flex uk-flex-between uk-flex-middle uk-card-default uk-card-body uk-background-secondary uk-light">
                         <article>
                             <h2 class="uk-margin-remove-top"><?php echo $proveedor; ?></h2>
@@ -47,7 +47,7 @@
                     </section>
                 </div>
 
-                <div class="uk-width-1-4">
+                <div class="uk-width-1-4@s">
                     <section class="uk-car uk-flex uk-flex-between uk-flex-middle uk-card-default uk-card-body uk-background-secondary uk-light">
                         <article>
                             <h2 class="uk-margin-remove-top"><?php echo $factura; ?></h2>

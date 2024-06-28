@@ -82,17 +82,17 @@ $(function () {
 const screen = window.screen.availWidth;
 let modal = "";
 
-if (screen < 768) {
-  let main = document.querySelector(".Bg-Main-home2");
-  let hammer = new Hammer(main);
-  hammer.on("swipeleft swiperight", (e) => {
-    let tipo = e.type;
-    if (tipo === "swiperight") {
-      UIkit.offcanvas("#offcanvas-nav").show();
-    }
-  });
-  // let btnImpr = (document.querySelector(".ImprBtn").href = "fd");
-}
+// if (screen < 768) {
+//   let main = document.querySelector(".Bg-Main-home2");
+//   let hammer = new Hammer(main);
+//   hammer.on("swipeleft swiperight", (e) => {
+//     let tipo = e.type;
+//     if (tipo === "swiperight") {
+//       UIkit.offcanvas("#offcanvas-nav").show();
+//     }
+//   });
+//   // let btnImpr = (document.querySelector(".ImprBtn").href = "fd");
+// }
 
 async function asyncfunc() {
   $.ajax({
@@ -264,3 +264,4 @@ const fecha = (f) => {
   const fechaFormateada = `${dia}/${mes}/${anio}`;
   return fechaFormateada
 }
+

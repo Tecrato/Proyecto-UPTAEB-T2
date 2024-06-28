@@ -7,14 +7,14 @@
             <div class="uk-flex uk-flex-between" style="align-items: baseline;">
                 <div class="uk-flex uk-flex-wrap" style="align-items: baseline;">
                     <div class="uk-margin-right">
-                        <div class="uk-flex uk-flex-wrap">
+                        <div class="uk-flex">
                             <div class="uk-margin formDelete">
                                 <form class="uk-search uk-search-default search-responsive-product" action="" method="GET">
                                     <button class="uk-search-icon-flip" type="submit" uk-search-icon></button>
                                     <input id="SearchCustomer" class="uk-search-input" type="text" placeholder="Buscar" name="like_nombre" aria-label="Search">
                                 </form>
                             </div>
-                            <div class="uk-margin-left">
+                            <div class="uk-margin-left cont_btns_client-action">
                                 <a id="registerCustomer" href="#agregar_client" uk-toggle uk-tooltip="title:Añadir Proveedor; delay: 500" class="uk-margin-small-left btn-agg_client">
                                     <img class="btn_agg" src="./static/images/btn_agg.png" alt="" width="35px">
                                 </a>
@@ -24,9 +24,9 @@
                 </div>
 
                 <div class="uk-flex uk-margin-left container-view-order">
-                    <div class="uk-margin-right">
+                    <!-- <div class="uk-margin-right">
                         <span class="uk-icon-link" id="list" uk-icon="icon: list; ratio: 1.3" style="cursor: pointer;"></span>
-                    </div>
+                    </div> -->
                     <div class="uk-width-auto uk-text-nowrap flechas">
                         <span class="uk-active" uk-filter-control="sort: data-name"><a class="uk-icon-link" href="#" uk-icon="icon: arrow-down" aria-label="Sort ascending"></a></span>
                         <span uk-filter-control="sort: data-name; order: desc"><a class="uk-icon-link" href="#" uk-icon="icon: arrow-up" aria-label="Sort descending"></a></span>
@@ -37,7 +37,7 @@
 
 
             <div>
-                <section class="uk-light uk-padding uk-padding-remove-left uk-padding-remove-right uk-grid-small dataTable" uk-grid>
+                <section class="uk-light uk-padding uk-padding-remove-left uk-padding-remove-right uk-grid-small dataTable cont_target_client_controller" uk-grid>
                     <div class="container_marca_agua invisible">
                         <img class="marca_agua" src="static/images/logo_letras-minimarket.png" alt="">
                     </div>
