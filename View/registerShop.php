@@ -319,7 +319,7 @@
 
 
         <li>
-            <div class="uk-padding-small">
+            <div class="uk-padding-small uk-overflow-auto">
                 <table class="uk-table uk-light">
                     <thead class="uk-background-secondary">
                         <tr>
@@ -355,7 +355,7 @@
         <li>
             <a class="uk-button uk-button-default uk-margin-bottom uk-margin-top" uk-toggle href="#caja-modal">Apertura de Caja</a>
 
-            <div class="uk-light uk-padding-small">
+            <div class="uk-light uk-padding-small uk-overflow-auto">
                 <table class="uk-table uk-light uk-table-divider">
                     <thead class="uk-background-secondary">
                         <tr>

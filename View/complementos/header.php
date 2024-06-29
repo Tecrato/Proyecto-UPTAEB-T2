@@ -249,12 +249,6 @@ echo "
                                 <span uk-icon="users" class="uk-icon uk-icon-button"></span>
                             </a>
                         </li>
-                        <!-- <li class="Link">
-                        <a class="uk-button uk-button-text" href="Estadisticas">
-                            <span uk-icon="bell" class="uk-icon uk-icon-button"></span>
-                        </a>
-                        
-                    </li> -->
                         <li class="Link">
                             <a class="uk-button uk-button-text" href="Ventas">
                                 <span uk-icon="factura" class="uk-icon uk-icon-button"></span>
@@ -305,18 +299,16 @@ echo "
                     </li>
                     <li class="Link Link-subMenu">
                         <a href="Proveedores">
-                            <span class="uk-margin-small-right" uk-icon="icon: bookmark">
-
-                            </span>
+                            <span class="uk-margin-small-right" uk-icon="icon: bookmark"></span>
                             <p>Proveedores</p>
                         </a>
                     </li>
-                    <!-- <li class="Link Link-subMenu">
+                    <li class="Link Link-subMenu">
                         <a href="Estadisticas">
                             <span class="uk-margin-small-right" uk-icon="statitics"></span>
                             <p>Estadisticas</p>
                         </a>
-                    </li> -->
+                    </li>
                 </ul>
             </div>
         </div>

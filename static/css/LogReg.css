@@ -15,7 +15,7 @@
 }
 
 .Register {
-    width: 400px;
+    width: 340px;
     padding: 40px 20px;
     background-color: rgba(0, 0, 0, 0.274);
     border-radius: 15px;
@@ -46,6 +46,9 @@
 @media (min-width: 350px) and (max-width: 424px) {
     .Register {
         width: 300px;
+    }
+    .Item {
+        width: 320px;
     }
 }
 
