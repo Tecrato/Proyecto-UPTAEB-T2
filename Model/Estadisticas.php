@@ -9,6 +9,11 @@
             $query->execute();
             return $query->fetchAll();
         }
+        function ValorTotalInventario(){
+            $query = $this->conn->prepare('SELECT * FROM valortotalinventario');
+            $query->execute();
+            return $query->fetchAll();
+        }
         function total_productos_categoria(){
             $query = $this->conn->prepare('SELECT * FROM total_productos_categoria');
             $query->execute();

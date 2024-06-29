@@ -14,6 +14,7 @@
 
 	$otra_clase_mas = new Caja(id_usuario:$_SESSION['user_id'], estado:0);
 	$ultima_caja = $otra_clase_mas->buscar_ultima();
+	print_r($ultima_caja);
 	if ($ultima_caja == NULL or count($ultima_caja) == 0) {
 		echo json_encode(['status' => 'error','error'=>'Caja Error']);
         exit(0);

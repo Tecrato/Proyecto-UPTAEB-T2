@@ -6,8 +6,8 @@
         
         <div id="inventoryValue" class="uk-width-1-2@s uk-background-secondary Card-grafic">
             <div class="titleReport">
-                <h2 class="Bg-Grafic-title">Valor total del inventario</h2>
-                <div class="Item_generate-report">
+                <h2 class="Bg-Grafic-title">RATIO VENTAS</h2>
+                <!-- <div class="Item_generate-report">
                     <nav uk-dropnav="mode: click">
                         <ul class="uk-subnav">
                             <li>
@@ -16,16 +16,16 @@
                                     <ul class="uk-nav uk-dropdown-nav">
                                         <li>
                                             <button  id="GenReport">Imprimir</button>
-                                            <!-- <a href="" uk-icon="icon: file-pdf">Generar reporte</a> -->
+                                            <a href="" uk-icon="icon: file-pdf">Generar reporte</a> 
                                         </li>
                                     </ul>
                                 </div>
                             </li>
                         </ul>
                     </nav>
-                </div>
+                </div> -->
             </div>
-            <canvas id="inventoryChart"></canvas>
+            <canvas id="ratioChart"></canvas>
         </div>
         
 

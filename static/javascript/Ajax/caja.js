@@ -1,4 +1,4 @@
-const checkCaja = ()=>{
+const checkCaja = () => {
     $.ajax({
         url: "api_caja",
         type: "POST",
@@ -34,7 +34,9 @@ const cargarCajas = () => {
                                 <td>${element.fecha_cierre == null ? "00:00" : hora(element.fecha_cierre)}</td>
                                 <td>${element.total_ventas}</td>
                                 <td>${parseFloat(element.monto_credito).toFixed(2)}</td>
-                                <td>${element.monto_final == null ? element.monto_inicial : parseFloat(element.monto_final).toFixed(2)}</td>
+                                <td>
+                                    <a uk-tooltip="Imprimir Cierre" href="CierreCajaPDF?C=${element.id}" class="btn_print_closeBox">${element.monto_final == null ? element.monto_inicial : parseFloat(element.monto_final).toFixed(2)}</a>
+                                </td>
                                 <td>
                                     <div class="${element.estado == 0 ? "activeGood" : "activeExpire"} uk-border-rounded" style="padding: 5px;">${element.estado == 0 ? "ABIERTA" : "CERRADA"}</div>
                                 </td>
@@ -52,19 +54,19 @@ const cargarCajas = () => {
                     let id = element.parentElement.parentElement.firstElementChild.textContent
 
                     let formCloseBox = document.querySelector("#FORM-CLOSE-BOX")
-                    formCloseBox.addEventListener('submit',(e)=>{
+                    formCloseBox.addEventListener('submit', (e) => {
                         e.preventDefault()
                         let data = new FormData(formCloseBox)
-                        data.append('id_caja',id)
-                        data.append('accion',"cerrar")
+                        data.append('id_caja', id)
+                        data.append('accion', "cerrar")
 
                         $.ajax({
-                            url:'api_caja',
-                            type:'POST',
-                            data:data,
-                            processData:false,
-                            contentType:false,
-                            success: function(response){
+                            url: 'api_caja',
+                            type: 'POST',
+                            data: data,
+                            processData: false,
+                            contentType: false,
+                            success: function (response) {
                                 console.log(response);
                                 cargarCajas()
                                 checkCaja()
@@ -76,17 +78,12 @@ const cargarCajas = () => {
                                 });
                                 setTimeout(() => {
                                     UIkit.modal("#cierre-caja").hide();
-                                },400)
+                                }, 400)
                             }
                         })
                     })
-
-
                 })
             })
-
-            
-
         }
     })
 }
@@ -123,7 +120,7 @@ formCaja.addEventListener("submit", (e) => {
             });
             setTimeout(() => {
                 UIkit.modal("#caja-modal").hide();
-            },400)
+            }, 400)
         }
     })
 })

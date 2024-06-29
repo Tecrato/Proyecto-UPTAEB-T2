@@ -474,7 +474,7 @@ $.ajax({
           <tr value="${producto.id}" class="TR-Product uk-light">
               <td>
                   <input type="hidden" value="${producto.nombre}">
-                  <p class="uk-margin-remove">${producto.nombre}</p>
+                  <p class="uk-margin-remove uk-text-truncate">${producto.nombre}</p>
               </td>
               <td>
                   <input class="uk-input uk-form-width-xsmall" type="text" aria-label="disabled" value="${producto.stock ? producto.stock : 0

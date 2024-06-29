@@ -503,7 +503,7 @@
         flex-wrap: wrap;
     }
 }
-@media (min-width: 375px) and (max-width: 678px){
+@media (min-width: 340px) and (max-width: 678px){
     .conts_btns_nav_product{
         position: absolute;
         right: 85px;
@@ -580,10 +580,13 @@
         height: 630px;
     }
     .generate-fact{
-        width: 100% !important;
+        width: 50% !important;
     }
     .cont_cash_fact{
         padding: 15px !important;
+    }
+    .uk-table td{
+        padding: 16px 5px !important;
     }
 }
 

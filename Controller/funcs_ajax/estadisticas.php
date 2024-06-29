@@ -26,6 +26,9 @@
     else if ($_GET['select'] == 'proveedor_de_una_entrada') {
         $result = $clase->search_proveedor_from_product($_GET['id_producto']);
     }
+    else if ($_GET['select'] == 'valor_total_inventario') {
+        $result = $clase->ValorTotalInventario();
+    }
 
     $json = ['lista'=> $result];
     $json = json_encode($json);

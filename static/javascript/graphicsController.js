@@ -25,44 +25,54 @@ const printChart = () => {
   renderModelsChart5();
 };
 
+
+
 const renderModelsChart1 = () => {
 
-  const data = {
-    labels: ["Valor del inventario"],
-    datasets: [
-      {
-        label: "Charcuteria",
-        data: [90],
-        backgroundColor: getDataColors(80)[0],
-        borderColor: getDataColors()[0],
-        borderWidth: 3,
-      },
-      {
-        label: "Cesta Basica",
-        data: [60],
-        backgroundColor: getDataColors(80)[1],
-        borderColor: getDataColors()[1],
-        borderWidth: 3,
-      },
-      {
-        label: "Aseo Personal",
-        data: [30, 10],
-        backgroundColor: getDataColors(80)[2],
-        borderColor: getDataColors()[2],
-        borderWidth: 3,
-      },
-    ],
-  };
-  let chart = new Chart("inventoryChart", { type: "bar", data });
-  let f = document.getElementById("GenReport").addEventListener("click", () => {
-    const link = document.createElement("a");
-    link.href = chart.toBase64Image();
 
-    link.download = "chart.png";
-    link.click();
-    Chart.defaults.color = "#000";
-    Chart.defaults.borderColor = "#444";
-  });
+  $.ajax({
+    url: "api_estadisticas",
+    type: "GET",
+    data: { select: "ratio_ventas" },
+    success: function (response) {
+      let json = JSON.parse(response);
+      // console.log(json);
+      let array = []
+
+      json.lista.forEach(element => {
+        if ((element.ratio_ventas == null ? 0 : parseFloat(element.ratio_ventas) * 100) > 0) {
+          array.push
+            ({
+              label: `${element.nombre + " " + element.marca + " de " + element.unidad_valor + " " + element.unidad}`,
+              data: [element.ratio_ventas == null ? 0 : parseFloat(element.ratio_ventas) * 100],
+              backgroundColor: getDataColors()[parseInt(Math.random() * 10)],
+              borderColor: getDataColors(0),
+              borderWidth: 0,
+            })
+        }
+
+      });
+
+      const data = {
+        labels: ["VOLUMEN DE PRODUCTOS VENDIDIDOS %"],
+        datasets: array
+      };
+
+
+      let chart = new Chart("ratioChart", { type: "bar", data });
+    }
+  })
+
+
+  // let f = document.getElementById("GenReport").addEventListener("click", () => {
+  //   const link = document.createElement("a");
+  //   link.href = chart.toBase64Image();
+
+  //   link.download = "chart.png";
+  //   link.click();
+  //   Chart.defaults.color = "#000";
+  //   Chart.defaults.borderColor = "#444";
+  // });
 };
 
 const renderModelsChart2 = () => {
@@ -178,6 +188,7 @@ const renderModelsChart5 = () => {
     data: { select: "min_ventas" },
     success: function (response) {
       let json = JSON.parse(response);
+      console.log(json);
       for (const i of json.lista) {
         let nombre = i.nombre + " " + i.marca + " " + i.unidad_valor + " " + i.unidad
         let cantidad = i.cantidad == null ? 0 : i.cantidad
@@ -207,6 +218,9 @@ const renderModelsChart5 = () => {
     }
   })
 };
+
+
+
 
 
 printChart();

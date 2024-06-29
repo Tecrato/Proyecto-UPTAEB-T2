@@ -1,3 +1,7 @@
+Chart.defaults.color = "#fff";
+Chart.defaults.borderColor = "#444";
+
+
 const hora = (f) => {
     const fecha = new Date(f);
     const horas = fecha.getHours();
@@ -98,3 +102,58 @@ $.ajax({
         }
     }
 })
+
+const getDataColors = (opacity) => {
+    const colors = [
+        "#7448c2",
+        "#21c0d7",
+        "#d99e2b",
+        "#cd3a81",
+        "#9c99cc",
+        "#e14eca",
+        "#ffffff",
+        "#ff0000",
+        "#d6ff00",
+        "#0038ff",
+    ];
+    return colors.map((color) => (opacity ? `${color + opacity}` : color));
+};
+
+
+const renderModelsChart6 = () => {
+
+    console.log("object");
+    $.ajax({
+        url: "api_estadisticas",
+        type: "GET",
+        data: { select: "valor_total_inventario" },
+        success: function (response) {
+            console.log(response);
+            let json = JSON.parse(response);
+            console.log(json);
+            let array = []
+            json.lista.forEach(element => {
+                if ((element.valor == null ? 0 : parseFloat(element.valor) * 100) > 0) {
+                    array.push
+                        ({
+                            label: `${element.nombre}`,
+                            data: [element.valor == null ? 0 : parseFloat(element.valor), "Bs"] ,
+                            backgroundColor: getDataColors()[parseInt(Math.random() * 10)],
+                            borderColor: getDataColors(0),
+                            borderWidth: 0,
+                        })
+                }
+            });
+
+            const data = {
+                labels: ["VALOR DE INVENTARIO POR CATEGORIA"],
+                datasets: array
+            };
+
+
+            let chart = new Chart("inventoryChart", { type: "bar", data });
+        }
+    })
+};
+
+renderModelsChart6()

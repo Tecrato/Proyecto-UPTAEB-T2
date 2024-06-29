@@ -8,10 +8,10 @@
 
     <div class="[email protected] uk-grid-small uk-flex-wrap uk-flex-center uk-padding-small" uk-grid>
 
-        <div class="uk-width-1-1 uk-margin-medium-top">
+        <div class="uk-width-1-1 uk-margin-medium-top uk-light">
             <div class="[email protected] uk-grid-small uk-flex-wrap uk-flex-center uk-padding-small" uk-grid>
                 <div class="uk-width-1-4@s">
-                    <section class="uk-car uk-flex uk-flex-between uk-flex-middle uk-card-default uk-card-body uk-background-secondary uk-light">
+                    <a href="" class="uk-car uk-flex uk-flex-between uk-flex-middle uk-card-default uk-card-body uk-background-secondary uk-light">
                         <article>
                             <h2 id="aaa" class="uk-margin-remove-top">0.00</h2>
                             <p class="uk-margin-remove-bottom">GANANCIAS</p>
@@ -19,12 +19,11 @@
                         <article>
                             <span uk-icon="icon: dolar; ratio: 5"></span>
                         </article>
-                    </section>
+                    </a href="">
                 </div>
 
-
                 <div class="uk-width-1-4@s">
-                    <section class="uk-car uk-flex uk-flex-between uk-flex-middle uk-card-default uk-card-body uk-background-secondary uk-light">
+                    <a href="Clientes" class="uk-link-reset uk-car uk-flex uk-flex-between uk-flex-middle uk-card-default uk-card-body uk-background-secondary uk-light">
                         <article>
                             <h2 class="uk-margin-remove-top"><?php echo $cliente; ?></h2>
                             <p class="uk-margin-remove-bottom">CLIENTES</p>
@@ -32,11 +31,11 @@
                         <article>
                             <span uk-icon="icon: users; ratio: 4"></span>
                         </article>
-                    </section>
+                    </a>
                 </div>
 
                 <div class="uk-width-1-4@s">
-                    <section class="uk-car uk-flex uk-flex-between uk-flex-middle uk-card-default uk-card-body uk-background-secondary uk-light">
+                    <a href="Proveedores" class="uk-link-reset uk-car uk-flex uk-flex-between uk-flex-middle uk-card-default uk-card-body uk-background-secondary uk-light">
                         <article>
                             <h2 class="uk-margin-remove-top"><?php echo $proveedor; ?></h2>
                             <p class="uk-margin-remove-bottom">PROVEEDORES</p>
@@ -44,11 +43,11 @@
                         <article>
                             <span uk-icon="icon: bookmark; ratio: 4"></span>
                         </article>
-                    </section>
+                    </a>
                 </div>
 
                 <div class="uk-width-1-4@s">
-                    <section class="uk-car uk-flex uk-flex-between uk-flex-middle uk-card-default uk-card-body uk-background-secondary uk-light">
+                    <a href="Ventas" class="uk-link-reset uk-car uk-flex uk-flex-between uk-flex-middle uk-card-default uk-card-body uk-background-secondary uk-light">
                         <article>
                             <h2 class="uk-margin-remove-top"><?php echo $factura; ?></h2>
                             <p class="uk-margin-remove-bottom">FACTURAS</p>
@@ -56,7 +55,7 @@
                         <article>
                             <span uk-icon="icon: factura; ratio: 4"></span>
                         </article>
-                    </section>
+                    </a>
                 </div>
 
             </div>
@@ -107,7 +106,7 @@
                                 <tr>
                                     <td><img class="uk-preserve-width uk-border-circle" src="./Media/imagenes/' . $row['imagen'] . '" style="width: 48px; height: 48px; object-fit: cover;" alt=""></td>
                                     <td>' . $row['nombre'] . '</td>
-                                    <td>' . $row['precio_venta'] . '</td>
+                                    <td>' . $row['precio_venta'] . ' BS'. '</td>
 
                                 </tr>';
                             } ?>
@@ -121,23 +120,11 @@
         <div class="uk-width-1-2 uk-margin-medium-top Card-items">
             <div class="uk-card uk-card-default uk-card-body uk-background-secondary uk-light">
                 <div>
-                    <h3 class="uk-text-center uk-text-bold">RATIO VENTAS</h3>
+                    <h3 class="uk-text-center uk-text-bold">VALOR TOTAL INVENTARIO</h3>
                     <hr class="uk-margin-remove">
                 </div>
 
-                <table class="uk-table uk-table-divider">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>#</th>
-                            <th>PRODUCTO</th>
-                            <th>%</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbody_ratio_ventas">
-                        
-                    </tbody>
-                </table>
+            <canvas id="inventoryChart"></canvas>
             </div>
         </div>
 
@@ -169,8 +156,10 @@
 
 <script src="static/javaScript/librerias/jquery.js"></script>
 <script src="static/javascript/Color.js"></script>
-<script src="static/javascript/Ajax/index.js"></script>
 <script src="static/javaScript/Ajax/notification.js"></script>
+<script src="static/javaScript/librerias/chart.umd.js"></script>
+<script src="static/javascript/Ajax/index.js"></script>
+
 
 </body>
 

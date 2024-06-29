@@ -25,5 +25,4 @@ foreach ($amount as $i) {
     );
 }
 $product = $clase->search_ProductFact();
-
 $pagos = $clase->search_pagos();

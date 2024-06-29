@@ -216,11 +216,11 @@
                                                         <table class="uk-table uk-table-divider">
                                                             <thead>
                                                                 <tr>
-                                                                    <th class="uk-text-truncate uk-table-shrink">Producto</th>
+                                                                    <th class="uk-text-truncate uk-table-shrink">Prod.</th>
                                                                     <th class="uk-text-truncate">Disp.</th>
                                                                     <th class="uk-text-truncate">Precio</th>
                                                                     <th class="uk-text-truncate">Cantidad</th>
-                                                                    <th class="">Agregar</th>
+                                                                    <th class="uk-text-truncate">Agregar</th>
                                                                 </tr>
                                                             </thead>
 

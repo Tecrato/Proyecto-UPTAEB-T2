@@ -23,7 +23,6 @@
             $query->bindParam(':metodo_de_pago',$this->metodo_de_pago);
             $query->bindParam(':monto',$this->monto);
             $query->execute();
-			$this->add_bitacora($usuario,"Pagos","Registrar","Pago Registrado");
         }
 		
 	}
