@@ -8,7 +8,7 @@ hola
 
 Edouard:
     
-Luis:
+Luis: Modifiquen el archivo php.init y descomentan la extension gd, eso es para el captcha
 
 Felix:
 

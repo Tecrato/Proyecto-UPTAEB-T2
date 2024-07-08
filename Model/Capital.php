@@ -5,7 +5,7 @@
 		private $monto;
 		private $descripcion;
 
-		function __construct($id=null, $nombre=null, $monto=null, ){
+		function __construct($id=null, $descripcion=null, $monto=null, ){
 			DB::__construct();
 			$this->id = $id;
 			$this->monto = $monto;

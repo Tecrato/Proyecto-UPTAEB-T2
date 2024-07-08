@@ -1,4 +1,6 @@
+<?php require("../View/complementos/loader.php"); ?>
 <?php require("../View/complementos/header.php"); ?>
+
 
 <main class="Bg-Main-home2 uk-padding uk-padding-remove-bottom main-Product uk-light">
     <section class="">
@@ -397,8 +399,8 @@
 
                         <!-- conatainer_table contendra la tabla -->
                         <section>
-                            <div class="uk-overflow-auto altura_table_entry">
-                                <table class="uk-table uk-table-divider uk-table-hover">
+                            <div class="uk-overflow-auto altura_table_entry ">
+                                <table class="uk-table uk-table-divider uk-table-hover uk-light">
                                     <thead class="activeGood">
                                         <tr>
                                             <th></th>
@@ -713,6 +715,7 @@
 <script src="static/javaScript/librerias/jquery.js"></script>
 <script src="static/javaScript/librerias/JsBardcode.js"></script>
 <script src="static/javascript/FuncionesGenerales.js"></script>
+<script src="static/javascript/Color.js"></script>
 <script src="static/javascript/Ajax/product.js"></script>
 <script src="static/javascript/Ajax/entry.js"></script>
 <script src="static/javascript/Ajax/unidades.js"></script>

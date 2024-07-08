@@ -8,6 +8,7 @@ RewriteRule ^Ventas$ Controller/C_Ventas.php
 RewriteRule ^Inicio$ Controller/C_index.php
 RewriteRule ^InventarioPDF$ Controller/C_InventarioPDF.php
 RewriteRule ^CierreCajaPDF$ Controller/C_CierreCaja.php
+RewriteRule ^MaxMinPDF$ Controller/C_MaxMinPDF.php
 RewriteRule ^login$ Controller/C_login.php
 RewriteRule ^Productos$ Controller/C_product.php
 RewriteRule ^Proveedores$ Controller/C_proveedores.php

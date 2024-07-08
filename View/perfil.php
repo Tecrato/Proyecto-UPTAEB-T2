@@ -114,6 +114,7 @@
                                                                             <p class="item-profile">Semilla</p>
                                                                             <span class="uk-article-meta uk-flex">
                                                                                 <input class="uk-input uk-form-small uk-form-width-medium uk-border-rounded input-seed" value="<?= $tu['semilla'] ?>" type="text">
+                                                                                <span class="uk-margin-small-left" uk-icon="icon: info; ratio: 1.2"></span>
                                                                             </span>
                                                                         </div>
                                                                     </div>
@@ -195,7 +196,7 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody id="table-rol">
-                                                            
+
 
                                                         </tbody>
                                                     </table>
@@ -387,9 +388,6 @@
                         <div>
                             <section class="uk-flex uk-flex-around uk-flex-wrap uk-padding-small uk-border-rounded" style="border: 1px solid #555;">
                                 <article>
-                                    <div>
-                                        <h4>CAPITAL ACTUAL: 1000.00</h4>
-                                    </div>
                                     <div>
                                         <form class="uk-form-stacked">
 
@@ -677,7 +675,7 @@
 
 
 <script src="static/javaScript/librerias/jquery.js" defer></script>
-<script src="static/javaScript/ChangeColor.js" defer></script>
+<script src="static/javaScript/Color.js" defer></script>
 <script src="static/javaScript/Ajax/user.js" defer></script>
 <script src="static/javaScript/Ajax/metodo_pago.js" defer></script>
 <script src="static/javaScript/Roles.js" defer></script>

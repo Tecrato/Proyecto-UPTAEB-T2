@@ -341,13 +341,44 @@
                                 <div class="activeEmpty uk-border-rounded" style="padding: 5px; width: 50%">PENDIENTE</div>
                             </td>
                             <td>
-                                <a href="" class="uk-button uk-button-default">PAGAR</a>
+                                <a uk-toggle href="#credito_page" class="uk-button uk-button-default">PAGAR</a>
                             </td>
                         </tr>
 
                     </tbody>
                 </table>
             </div>
+
+
+            <div id="credito_page" class="uk-flex-top" uk-modal>
+                <div class="uk-modal-dialog uk-margin-auto-vertical">
+                    <button class="uk-modal-close-default" type="button" uk-close></button>
+                    <div class="uk-modal-header uk-flex">
+                        <h2 class="uk-modal-title">PAGAR CREDITO: </h2>
+                        <h2 class="uk-margin-remove-top total_credito">2000.00 Bs</h2>
+                    </div>
+                    <div class="uk-modal-body">
+                        <section>
+                            <div class="inputPago">
+                                
+                            </div>
+                            <div>
+                                <article class="uk-flex uk-flex-middle uk-flex-center uk-margin-small-top btn_agg_metodoPago2" style="cursor: pointer;">
+                                    <span class="uk-margin-small-right" uk-icon="plus-circle"></span>
+                                    <p class="uk-margin-remove" style="font-size: 13px;">AGREGAR TIPO DE PAGO</p>
+                                </article>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="uk-modal-footer uk-text-right">
+                        <button class="uk-button uk-button-default uk-modal-close" type="button">CANCELAR</button>
+                        <button class="uk-button uk-button-secondary" type="button">PAGAR</button>
+                    </div>
+                </div>
+            </div>
+
+
+
 
         </li>
 
@@ -442,6 +473,7 @@
 <script src="static/javaScript/librerias/jquery.js"></script>
 <script src="static/javaScript/librerias/hammer.min.js"></script>
 <script src="static/javascript/FuncionesGenerales.js"></script>
+<script src="static/javascript/Color.js"></script>
 <script src="static/javascript/Ajax/registerShop.js"></script>
 <script src="static/javascript/Ajax/caja.js"></script>
 <script src="static/javascript/Ajax/credito.js"></script>

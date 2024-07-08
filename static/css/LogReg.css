@@ -3,13 +3,23 @@
     transition: 800ms all ease;
 }
 
+input[type="password"]::-ms-reveal {
+    display: none;
+}
+input[type="password"]::-webkit-reveal-button,
+input[type="password"]::-webkit-search-cancel-button {
+    display: none;
+}
+
 .Login{
     display:flex;
 }
 .SetPassword {
     display:flex;
 }
-
+.SetRegister {
+    display:flex;
+}
 .display-none {
     display:none;
 }

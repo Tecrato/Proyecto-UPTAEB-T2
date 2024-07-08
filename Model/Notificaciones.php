@@ -24,7 +24,7 @@
             return $query->fetch()['total'];
         }
 		function search($n=0, $limite=9){
-            $query = "SELECT * FROM notificaciones WHERE 1";
+            $query = "SELECT * FROM notificaciones WHERE status = 0 ORDER BY id DESC";
 
 			$lista = [];
             if ($this->id){

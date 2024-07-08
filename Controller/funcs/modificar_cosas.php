@@ -6,8 +6,8 @@
     require 'subir_imagen.php';
     $tipo = $_POST['tipo']; // Depende de que es lo que queramos actualizar
 
-    
-    $other_class = new Permiso(null,$_SESSION['user_id'],$_GET['randomnautica'],'modificar');
+    print_r($_POST);
+    $other_class = new Permiso(null,$_SESSION['user_id'],$tipo,'modificar');
     $result = $other_class->search();
 
     if ($_SESSION['rol_num'] > 1 and count($result) <= 0) {
@@ -27,7 +27,7 @@
         }
 
         require('../../Model/Productos.php');
-        $clase = new Producto($_POST['ID'],$_POST["categoria"],$_POST["unidad"],$_POST["nombre"],$_POST["marca"],$nick,$_POST["stock_min"],$_POST["stock_max"],$_POST["precio_venta"],$_POST["IVA"],$_POST["codigo"]); // Llama al modelo y le manda la instruccion
+        $clase = new Producto($_POST['ID'],$_POST["categoria"],$_POST["unidad"],$_POST["marca"],$_POST["valor_unidad"],$_POST["nombre"],$nick,$_POST["stock_min"],$_POST["stock_max"],$_POST["precio_venta"],$_POST["IVA"],$_POST["codigo"]); // Llama al modelo y le manda la instruccion
 
         try {
             $clase->actualizar();

@@ -1,3 +1,9 @@
+.cont_notify{
+    height: 240px;
+    overflow-y: auto;
+    width: 280px;
+}
+
 .holz{
     left: -50px !important;
 }
@@ -33,6 +39,82 @@
     top: 129px;
 }
 
+
+.theme-switch {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    direction: rtl;
+  }
+  
+  #theme-checkbox {
+    display: none;
+  }
+  
+  #theme-checkbox + label {
+    /* change the font-size below to change the size of the switch button*/
+    font-size: 1.5rem;
+    height: 1em;
+    width: 2.5em;
+    border-radius: 0.25em;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    background-color: #cecece;
+    position: relative;
+  }
+  
+  #theme-checkbox:checked + label {
+    background-color: #3a3a3a;
+  }
+  
+  #theme-checkbox + label:active {
+    transform: scale(0.85);
+    transition: transform 0.2s;
+  }
+  
+  #theme-checkbox + label div {
+    width: 0.8em;
+    height: 0.8em;
+    border-radius: inherit;
+    position: absolute;
+    top: 0.1em;
+    left: 0.1em;
+    z-index: 10;
+    transition: 0.5s cubic-bezier(1, 0.33, 0.11, 1.34);
+    background-color: #f2f2f2;
+  }
+  
+  #theme-checkbox:checked + label div {
+    /* left: calc(2.5em - .8em - .1em); */
+    left: 1.6em;
+    background-color: #212121;
+  }
+  
+  #theme-checkbox + label span {
+    display: flex;
+  }
+  
+  #theme-checkbox + label svg {
+    display: inline-block;
+    height: 1em;
+    width: 1em;
+    padding: 0.15em;
+    box-sizing: border-box;
+  }
+  
+  #theme-checkbox + label span:first-of-type {
+    color: #3a3a3a;
+  }
+  
+  #theme-checkbox + label span:last-of-type {
+    color: #cecece;
+  }
+  
+
+
+
+
 /* este es el boton para el modo oscuro/claro */
 .btn-ModeColorView, .btn-ModeColorView2{
     width: 25px;
@@ -50,7 +132,7 @@
     transition: 300ms ease;
 }
 .iconMoon, .iconSun{
-    filter: invert(1);
+    /* filter: invert(1); */
 }
 .activeEmpty{
     background-color: #fff;
@@ -132,7 +214,7 @@
     text-transform: uppercase;
 }
 .Container_notify{
-    padding: 20px 30px !important;
+    padding: 15px !important;
     border-bottom: 1px solid rgb(78, 78, 78);
 }
 .divider_notify{

@@ -1,7 +1,7 @@
-Chart.defaults.color = "#fff";
+Chart.defaults.color = "#888";
 Chart.defaults.borderColor = "#444";
 
-const getDataColors = (opacity) => {
+const getDataColors2 = (opacity) => {
   const colors = [
     "#7448c2",
     "#21c0d7",
@@ -17,6 +17,14 @@ const getDataColors = (opacity) => {
   return colors.map((color) => (opacity ? `${color + opacity}` : color));
 };
 
+const getDataColors = () => {
+  let numer1 = parseInt((Math.random() * 255))
+  let numer2 = parseInt((Math.random() * 255))
+  let numer3 = parseInt((Math.random() * 255))
+  return `rgb(${numer1},${numer2},${numer3})`
+}
+
+
 const printChart = () => {
   renderModelsChart1();
   renderModelsChart2();
@@ -24,8 +32,6 @@ const printChart = () => {
   renderModelsChart4();
   renderModelsChart5();
 };
-
-
 
 const renderModelsChart1 = () => {
 
@@ -45,8 +51,8 @@ const renderModelsChart1 = () => {
             ({
               label: `${element.nombre + " " + element.marca + " de " + element.unidad_valor + " " + element.unidad}`,
               data: [element.ratio_ventas == null ? 0 : parseFloat(element.ratio_ventas) * 100],
-              backgroundColor: getDataColors()[parseInt(Math.random() * 10)],
-              borderColor: getDataColors(0),
+              backgroundColor: getDataColors(),
+              borderColor: getDataColors(),
               borderWidth: 0,
             })
         }
@@ -62,17 +68,6 @@ const renderModelsChart1 = () => {
       let chart = new Chart("ratioChart", { type: "bar", data });
     }
   })
-
-
-  // let f = document.getElementById("GenReport").addEventListener("click", () => {
-  //   const link = document.createElement("a");
-  //   link.href = chart.toBase64Image();
-
-  //   link.download = "chart.png";
-  //   link.click();
-  //   Chart.defaults.color = "#000";
-  //   Chart.defaults.borderColor = "#444";
-  // });
 };
 
 const renderModelsChart2 = () => {
@@ -84,10 +79,12 @@ const renderModelsChart2 = () => {
       {
         label: "Ganacias mensuales",
         data: gananciasMensuales,
-        backgroundColor: getDataColors(80)[1],
+        backgroundColor: getDataColors(),
         fill: true,
-        borderColor: getDataColors()[1],
-        pointBorderWidth: 5,
+        borderColor: getDataColors(),
+        pointBorderWidth: 0,
+        borderWidth: 0,
+
       },
     ],
   };
@@ -150,8 +147,8 @@ const renderModelsChart4 = () => {
           {
             label: "Ventas",
             data: ventas,
-            backgroundColor: getDataColors(),
-            borderColor: getDataColors(),
+            backgroundColor: getDataColors2(),
+            borderColor: getDataColors2(),
           },
         ],
       };
@@ -162,9 +159,19 @@ const renderModelsChart4 = () => {
         },
       };
 
-      new Chart("masVendidosChart", { type: "doughnut", data, options });
+      let chart = new Chart("masVendidosChart", { type: "pie", data, options });
+      function captureChart() {
+        var canvas = document.getElementById('masVendidosChart');
+        var imgData = canvas.toDataURL('image/png');
+        document.getElementById('imgMax_png').value = imgData;
+      }
 
-
+      // Capturar el gráfico cuando se envía el formulario
+      document.getElementById('formPDF4').addEventListener('submit', function () {
+        
+        captureChart();
+        Chart.defaults.color = "#000";
+      });
     }
   })
 
@@ -202,8 +209,8 @@ const renderModelsChart5 = () => {
           {
             label: "Ventas",
             data: ventas,
-            backgroundColor: getDataColors(),
-            borderColor: getDataColors(),
+            backgroundColor: getDataColors2(),
+            borderColor: getDataColors2(),
           },
         ],
       };
@@ -214,13 +221,48 @@ const renderModelsChart5 = () => {
         },
       };
 
-      new Chart("menosVendidosChart", { type: "doughnut", data, options });
+      new Chart("menosVendidosChart", { type: "pie", data, options });
+
+      function captureChart() {
+        var canvas = document.getElementById('menosVendidosChart');
+        var imgData = canvas.toDataURL('image/png');
+        document.getElementById('imgMin_png').value = imgData;
+      }
+
+      // Capturar el gráfico cuando se envía el formulario
+      document.getElementById('formPDF5').addEventListener('submit', function () {
+        
+        captureChart();
+        Chart.defaults.color = "#000";
+      });
     }
   })
 };
 
 
-
-
-
 printChart();
+
+
+$.ajax({
+  url: "api_caja",
+  type: "POST",
+  data: { accion: "check" },
+  success: function (response) {
+      console.log(response);
+      let json = JSON.parse(response);
+      if (json.estado == "no") {
+          document.getElementById("check_box").textContent = "CERRADA";
+      } else {
+          document.getElementById("check_box").textContent = "ABIERTA";
+      }
+  }
+}) 
+
+const fecha = (f) => {
+    const fecha = new Date(f);
+    const dia = fecha.getDate();
+    const mes = fecha.getMonth() + 1;
+    const anio = fecha.getFullYear();
+    const fechaFormateada = `${dia}/${mes}/${anio}`;
+    return fechaFormateada
+  }

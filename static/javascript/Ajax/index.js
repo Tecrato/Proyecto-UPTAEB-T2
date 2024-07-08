@@ -1,4 +1,4 @@
-Chart.defaults.color = "#fff";
+Chart.defaults.color = "#888";
 Chart.defaults.borderColor = "#444";
 
 

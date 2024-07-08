@@ -169,6 +169,7 @@ const cardProv = () => {
       marcaAgua()
       ModalEdit()
       DeleteClientProv(".delete_prov", "#formDelete_supplier", "#IdDelete_supplier", cardProv, "Proveedoredor eliminado correctamente")
+      colorDefault()
     },
   });
 }

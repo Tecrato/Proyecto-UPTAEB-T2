@@ -1,3 +1,4 @@
+
 setInterval(() => {
     $.ajax({
         url: "Controller/funcs_ajax/search.php",
@@ -24,7 +25,7 @@ const cargarNotify = () =>{
                     <li>
                         <a href="#" class="uk-flex Container_notify">
                             <div>
-                                <span class="uk-margin-small-right" style="color: #888;" uk-icon="icon: info; ratio: 2"></span>
+                                <span class="uk-margin-small-right" style="color: #888;" uk-icon="icon: bell; ratio: 2"></span>
                             </div>
                             <div>
                                 <p class="uk-margin-remove" style="color: #888;"><b>No tiene notificaciones</b></p>
@@ -37,12 +38,12 @@ const cargarNotify = () =>{
                     templete += `
                     <li>
                         <a href="Productos" class="uk-flex Container_notify ${e.status == 1 ? "notify-write" : ""}" id=${e.id}>
-                            <div>
-                                <span class="uk-margin-small-right" style="color: #333;" uk-icon="icon: info; ratio: 2"></span>
+                            <div style="width: 90px">
+                                <span class="uk-margin-small-right" style="color: #333;" uk-icon="icon: mail; ratio: 2"></span>
                             </div>
                             <div>
-                                <p class="uk-margin-remove date_notify" style="color: #888;">${fecha(e.fecha)}</p>
                                 <p class="uk-margin-remove" style="color: #888;"><b>${e.mensaje}</b></p>
+                                <p class="uk-margin-remove date_notify" style="color: #888;">${fecha(e.fecha)}</p>
                             </div>
                         </a>
                     </li>`
@@ -69,3 +70,4 @@ const cargarNotify = () =>{
 }
 
 setInterval(cargarNotify, 1000)
+// cargarNotify()

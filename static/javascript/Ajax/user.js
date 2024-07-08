@@ -29,12 +29,11 @@ function generar_bitacora_general(page) {
         type: "GET",
         data: { randomnautica: "bitacora", subFunction: "bitacora", limite: 10, n:page},
         success: function (response) {
-           /*  console.log(response) */
             let json = JSON.parse(response)
             json.lista.forEach(element => {
                 template += `
                                 <tr>
-                                    <td>${element.id_usuario}</td>
+                                    <td>${element.nombre}</td>
                                     <td>${element.detalles}</td>
                                     <td>${fecha(element.fecha)}</td>
                                     <td>${hora(element.fecha)}</td>
@@ -104,18 +103,6 @@ $(".pag-btn-bitacora-personal").click((ele) => {
 generar_bitacora_general(page_general)
 generar_bitacora_personal(page_personal)
 
-
-let btnGenerate = document.querySelector(".btn-generate")
-
-// btnGenerate.addEventListener("click", () => {
-//     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-//     let result = '';
-//     for (let i = 0; i < 20; i++) {
-//       result += characters.charAt(Math.floor(Math.random() * characters.length));
-//     }
-//     document.querySelector(".input-seed").value = result
-
-// })
 
 $.ajax({
     url: "api_caja",

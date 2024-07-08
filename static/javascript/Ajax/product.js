@@ -1,3 +1,7 @@
+window.addEventListener("load", () => {
+  document.querySelector(".preloader_container").classList.toggle("invisible")
+})
+
 if (screen < 1023) {
   document.querySelector(
     ".itemSwitcher1"
@@ -39,10 +43,10 @@ let selectMetodoGanancia = document.querySelector(".select_metodo_ganancia");
 selectMetodoGanancia.addEventListener("change", ()=>{
   if (selectMetodoGanancia.value != 0) {
     document.querySelector(".PVUpdateProduct").setAttribute("disabled","")
-    document.querySelector(".PVUpdateProduct").value = ""
+    // document.querySelector(".PVUpdateProduct").value = ""
   } else {
     document.querySelector(".PVUpdateProduct").removeAttribute("disabled")
-    document.querySelector(".PVUpdateProduct").value = 0
+    // document.querySelector(".PVUpdateProduct").value = 0
   }
 })
 
@@ -479,7 +483,6 @@ const tarjetas = (response, cont) => {
     </div>
 </div>
           `;
-
     //seleccionamos el contenedor de las tarjetas, y las insertamos
     $(cont).html(tarjeta);
 
@@ -515,6 +518,8 @@ const tarjetas = (response, cont) => {
   modalEntradas();
   modalEliminar();
   modalModificar();
+  colorDefault()
+
 };
 const tarjetasProductosDesactive = (response, cont) => {
   console.log(response)
@@ -727,6 +732,7 @@ document.querySelector(".btn-modal-register").addEventListener("click", () => {
 let formAggProduct = document.getElementById("formAggProduct");
 //captamos su evento submit, primero para evitar que la pagina se refresque, y segundo para insertar esos datos en un objeto FormData
 formAggProduct.addEventListener("submit", (e) => {
+  e.preventDefault();
   let url;
   if (val == false) {
     url = "Controller/funcs/agregar_cosas.php";
@@ -735,7 +741,8 @@ formAggProduct.addEventListener("submit", (e) => {
   }
   //aqui instanciamos el objeto formData y como parametro, le pasamos el formulario
   //el formData es un objeto que actua con encapsulamiento de datos de los form
-  let formDataProduct = new FormData(formAggProduct);
+  let formDataProduct = new FormData(formAggProduct)
+  // formDataProduct.set("precio_venta",document.querySelector(".PVUpdateProduct").value)
   //hacemos la peticion ajax
   $.ajax({
     url: url,
@@ -771,7 +778,6 @@ formAggProduct.addEventListener("submit", (e) => {
       cargarTargetProduct();
     },
   });
-  e.preventDefault();
 });
 
 //esta consulta sirve para cargar los datos de las categorias en el filtro

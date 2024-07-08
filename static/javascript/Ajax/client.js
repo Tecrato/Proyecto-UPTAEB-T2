@@ -130,6 +130,7 @@ const cardClient = () => {
             marcaAgua()
             ModalEdit()
             DeleteClientProv(".delete_client", "#formDeleteClient", "#IdDelete_client", cardClient, "Eliminado")
+            colorDefault()
         },
     });
 }

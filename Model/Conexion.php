@@ -19,7 +19,15 @@
             $query->execute();
         }
         function search_bitacora($id=null, $limite=9, $n=0, $order=" id DESC") {
-            $query = "SELECT * FROM bitacora";
+            $query = "SELECT
+                    b.id,
+                    (SELECT nombre FROM usuarios WHERE usuarios.id = b.id_usuario) as nombre,
+                    b.tabla,
+                    b.accion,
+                    b.fecha,
+                    b.detalles
+                    FROM bitacora b
+                    INNER JOIN usuarios u ON b.id_usuario = u.id";
             if ($id != null){
                 $query .= " WHERE id_usuario=:id";
             }
