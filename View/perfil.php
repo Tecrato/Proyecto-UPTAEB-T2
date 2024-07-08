@@ -394,18 +394,18 @@
                                             <div class="uk-margin">
                                                 <label class="uk-form-label" for="form-stacked-text">Monto</label>
                                                 <div class="uk-form-controls">
-                                                    <input class="uk-input uk-border-rounded" id="form-stacked-text" type="text" placeholder="0.00">
+                                                    <input class="uk-input uk-border-rounded" id="form-stacked-text" type="number" step="0.01" name="monto" placeholder="0.00">
                                                 </div>
                                             </div>
                                             <div class="uk-margin">
                                                 <label class="uk-form-label" for="form-stacked-text">Descripcion</label>
                                                 <div class="uk-form-controls">
-                                                    <textarea class="uk-textarea uk-border-rounded" rows="5" column="10" name="" id=""></textarea>
+                                                    <textarea class="uk-textarea uk-border-rounded" rows="5" column="10" name="descripcion" id=""></textarea>
                                                 </div>
                                             </div>
                                             <div class="uk-margin uk-flex uk-flex-around">
-                                                <button class="uk-button uk-button-default uk-border-rounded">GUARDAR INGRESO</button>
-                                                <button class="uk-button uk-button-danger uk-border-rounded">GUARDAR GASTO</button>
+                                                <button class="uk-button uk-button-default uk-border-rounded" type="submit" name="action" value="ingreso">GUARDAR INGRESO</button>
+                                                <button class="uk-button uk-button-danger uk-border-rounded" type="submit" name="action" value="gasto">GUARDAR GASTO</button>
                                             </div>
                                         </form>
                                     </div>
@@ -448,13 +448,7 @@
                                             <th>FECHA</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Table Data</td>
-                                            <td>Table Data</td>
-                                            <td>Table Data</td>
-                                            <td>Table Data</td>
-                                        </tr>
+                                    <tbody id="tableCapital">
                                     </tbody>
                                 </table>
                             </section>
@@ -680,6 +674,7 @@
 <script src="static/javaScript/Ajax/metodo_pago.js" defer></script>
 <script src="static/javaScript/Roles.js" defer></script>
 <script src="static/javaScript/Ajax/notification.js"></script>
+<script src="static/javaScript/Ajax/capital.js" defer></script>
 
 
 

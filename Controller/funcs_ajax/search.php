@@ -107,10 +107,6 @@
             status:(isset($_GET['status']) ? $_GET['status'] : null),
     );
     }
-
-
-
-
     if (isset($_GET['subFunction'])) {
         if ($_GET['subFunction'] == 'bitacora') {
             $result = $clase->search_bitacora(id:(isset($_GET['ID']) ? $_GET['ID'] : null),n:$n,limite:$limite);
