@@ -88,6 +88,12 @@
         require('../../Model/Credito.php');
         $clase = new Credito(null,$_POST["ID"],$_POST["ID_rv"],$_POST["fecha_limite"],$_POST["monto_final"]);
     }
+    elseif ($_POST['tipo'] == 'capital') {
+        require('../../Model/Capital.php');
+        $clase = new Capital(null, $_POST["descripcion"], $_POST["monto"]);
+        header("Location: ../../Administrar_perfil");
+    }
+    
     elseif ($tipo === 'permiso'){
         $clase = new Permiso(null,$_POST["id_usuario"],$_POST["tabla"],$_POST["permiso"]);
     }

@@ -3,26 +3,25 @@
 
 		private $id;
 		private $monto;
-		private $descripcion;
+        private $descripcion;
 
-		function __construct($id=null, $nombre=null, $monto=null, ){
+		function __construct($id=null, $descripcion=null, $monto=null){
 			DB::__construct();
 			$this->id = $id;
 			$this->monto = $monto;
-			$this->descripcion = $descripcion;
+            $this->descripcion = $descripcion;
 		}
 
-        function agregar($usuario){
-            $query = $this->conn->prepare("INSERT INTO capital(monto,descripcion) VALUES(null, :monto, :descripcion)");
-            $query->bindParam(':monto',$this->monto);
-            $query->bindParam(':descripcion',$this->descripcion);
+        function agregar($usuario) {
+            $query = $this->conn->prepare("INSERT INTO movimientos_capital (monto, descripcion) VALUES(:monto, :descripcion)");
+            $query->bindParam(':monto', $this->monto);
+            $query->bindParam(':descripcion', $this->descripcion);
             $query->execute();
-			$this->add_bitacora($usuario,"Capital","Registrar","Capital Cambiado");
+            $this->add_bitacora($usuario,"movimientos_capital","Registrar","Capital Cambiado");
         }
-
         function search($n=0,$limite=100){
             // Al igual que la clase anterior, puede buscar segun muchos valores o solo algunos
-            $query = "SELECT * FROM capital WHERE 1";
+            $query = "SELECT * FROM movimientos_capital WHERE 1";
 
 			$lista = [];
 
@@ -48,6 +47,20 @@
             $consulta->execute();
             return $consulta->fetchAll();
         }
-
+        function gastos(){
+            $query = $this->conn->prepare('SELECT * FROM gastos;');
+            $query->execute();
+            return $query->fetchAll();
+        }
+        function ingresos(){
+            $query = $this->conn->prepare('SELECT * FROM ingresos;');
+            $query->execute();
+            return $query->fetchAll();
+        }
+        function ventas(){
+            $query = $this->conn->prepare('SELECT * FROM ventas;');
+            $query->execute();
+            return $query->fetchAll();
+        }
 	}
 ?>

@@ -46,6 +46,16 @@
             $query->execute();
             return $query->fetchAll();
         }
+        function costo_entradas_mensuales(){
+            $query = $this->conn->prepare('SELECT * FROM costo_entradas_mensuales;');
+            $query->execute();
+            return $query->fetchAll();
+        }
+        function ingresos_mensuales(){
+            $query = $this->conn->prepare('SELECT * FROM ingresos_mensuales;');
+            $query->execute();
+            return $query->fetchAll();
+        }
     }
 ?>
 
