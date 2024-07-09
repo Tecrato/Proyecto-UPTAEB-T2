@@ -3,6 +3,8 @@
     require("./verificar_admin_funcs.php");
     require 'subir_imagen.php';
     $tipo = $_POST['tipo']; // Depende de que es lo que queramos insertar
+
+    print_r($_POST);
     
     require('../../Model/Conexion.php');
     require('../../Model/Permisos.php');
@@ -91,7 +93,7 @@
     elseif ($_POST['tipo'] == 'capital') {
         require('../../Model/Capital.php');
         $clase = new Capital(null, $_POST["descripcion"], $_POST["monto"]);
-        header("Location: ../../Administrar_perfil");
+        // header("Location: ../../Administrar_perfil");
     }
     
     elseif ($tipo === 'permiso'){

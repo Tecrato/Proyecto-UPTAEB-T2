@@ -389,8 +389,8 @@
                             <section class="uk-flex uk-flex-around uk-flex-wrap uk-padding-small uk-border-rounded" style="border: 1px solid #555;">
                                 <article>
                                     <div>
-                                        <form class="uk-form-stacked">
-
+                                        <form id="FormCapital" class="uk-form-stacked">
+                                            <input type="hidden" name="tipo" value="capital">
                                             <div class="uk-margin">
                                                 <label class="uk-form-label" for="form-stacked-text">Monto</label>
                                                 <div class="uk-form-controls">
@@ -437,8 +437,24 @@
                                     </div>
                                 </article>
                             </section>
-                            <section class="uk-margin-medium-top uk-padding-small uk-border-rounded" style="border: 1px solid #555;">
-                                <h2>MOVIMIENTOS DE CAPITAL</h2>
+                            <section class="uk-margin-medium-top uk-padding-small uk-border-rounded" uk-filter="target: .js-filter; animation: fade" style="border: 1px solid #555;">
+                                <div class="uk-flex uk-flex-middle">
+                                    <h2 class="uk-margin-medium-right">MOVIMIENTOS DE CAPITAL</h2>
+                                    <nav uk-dropnav>
+                                        <ul class="uk-subnav">
+                                            <li>
+                                                <a href>Tipo de movimiento <span uk-drop-parent-icon></span></a>
+                                                <div class="uk-dropdown">
+                                                    <ul class="uk-nav uk-dropdown-nav">
+                                                        <li uk-filter-control ><a href="#">Todo</a></li>
+                                                        <li uk-filter-control="[data-tm='Ingresos']"><a href="#">Ingresos</a></li>
+                                                        <li uk-filter-control="[data-tm='Egresos']"><a href="#">Egresos</a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
                                 <table class="uk-table uk-table-hover uk-table-divider">
                                     <thead class="uk-background-secondary">
                                         <tr>
@@ -448,7 +464,7 @@
                                             <th>FECHA</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="tableCapital">
+                                    <tbody class="js-filter" id="tableCapital">
                                     </tbody>
                                 </table>
                             </section>

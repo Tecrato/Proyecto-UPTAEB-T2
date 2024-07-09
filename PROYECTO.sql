@@ -1037,7 +1037,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `gastos`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `gastos`  AS SELECT round(sum(case when `m`.`monto` like '-%' then `m`.`monto` else 0 end),2) AS `Gastos` FROM `movimientos_capital` AS `m``m`  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `gastos`  AS SELECT round(sum(case when `m`.`monto` like '-%' then `m`.`monto` else 0 end),2) AS `Gastos` FROM `movimientos_capital` AS `m`;
 
 -- --------------------------------------------------------
 
@@ -1046,7 +1046,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `ingresos`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ingresos`  AS SELECT round(sum(case when `m`.`monto`  not like '-%' then `m`.`monto` else 0 end),2) AS `Ingresos` FROM `movimientos_capital` AS `m``m`  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ingresos`  AS SELECT round(sum(case when `m`.`monto`  not like '-%' then `m`.`monto` else 0 end),2) AS `Ingresos` FROM `movimientos_capital` AS `m` ;
 
 -- --------------------------------------------------------
 
@@ -1118,7 +1118,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `ventas`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ventas`  AS SELECT coalesce(round(sum(`p`.`monto`),2),0) AS `Ventas` FROM `pagos` AS `p``p`  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ventas`  AS SELECT coalesce(round(sum(`p`.`monto`),2),0) AS `Ventas` FROM `pagos` AS `p`  ;
 
 --
 -- Índices para tablas volcadas
