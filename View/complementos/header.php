@@ -160,7 +160,7 @@ echo "
                 <div class="uk-flex uk-flex-middle">
                     <div class="uk-flex uk-flex-middle uk-margin-medium-right">
                         <span class="uk-light uk-margin-small-right" uk-icon="icon: bag; ratio: 1.3"></span>
-                        <h5 class="uk-text-bolder uk-margin-remove" style="color: #fff;">CAJA: <span id="check_box">mmgvo</span></h5>
+                        <h5 class="uk-text-bolder uk-margin-remove" style="color: #fff;">CAJA: <span id="check_box">ABIERTA</span></h5>
                     </div>
                     <div class="uk-margin-medium-right uk-flex uk-flex-middle">
                         <img class="uk-margin-small-right" src="static/images/bcv.png" alt="" width="28px" height="25px">

@@ -9,7 +9,7 @@ const cargarPermisos = () => {
             console.log(json);
             json.lista.forEach((e) => {
                 template += `
-                                <tr data-tp="${e.permiso}">
+                                <tr>
                                     <td>${e.id}</td>
                                     <td>${e.nombre}</td>
                                     <td>${e.tabla}</td>

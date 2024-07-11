@@ -112,11 +112,9 @@
                                                                         ?>
                                                                         <div id="seedGenerator" class="uk-flex uk-margin-top">
                                                                             <p class="item-profile">Semilla</p>
-                                                                            <span  id="inpSeed" class="uk-article-meta uk-flex">
+                                                                            <span class="uk-article-meta uk-flex">
                                                                                 <input class="uk-input uk-form-small uk-form-width-medium uk-border-rounded input-seed" value="<?= $tu['semilla'] ?>" type="text">
-                                                                                <a>
-                                                                                <span id="seedInfo" class="uk-margin-small-left" uk-icon="icon: info; ratio: 1.2"></span>
-                                                                                </a>
+                                                                                <span class="uk-margin-small-left" uk-icon="icon: info; ratio: 1.2"></span>
                                                                             </span>
                                                                         </div>
                                                                     </div>
@@ -184,42 +182,24 @@
 
 
                                                 <li>
-                                                    <section uk-filter="target: .js-filter; animation: fade">
-                                                        <h3>PERMISOS DE MODULOS</h3>
-                                                        <div class="uk-flex uk-flex-middle">
-                                                            <a href="#modal_asignar_rol" uk-toggle class="uk-button uk-button-default uk-margin-medium-right">ASIGNAR MODULO</a>
-                                                            <nav uk-dropnav="mode: click" class="uk-flex-middle">
-                                                                <ul class="uk-subnav">
-                                                                    <li>
-                                                                        <a href>Tipo de permiso <span uk-drop-parent-icon></span></a>
-                                                                        <div class="uk-dropdown">
-                                                                            <ul class="uk-nav uk-dropdown-nav">
-                                                                                <li uk-filter-control ><a href="#">Todo</a></li>
-                                                                                <li uk-filter-control="[data-tp='agregar']"><a href="#">Registrar</a></li>
-                                                                                <li uk-filter-control="[data-tp='modificar']"><a href="#">Modificar</a></li>
-                                                                                <li uk-filter-control="[data-tp='eliminar']"><a href="#">Eliminar</a></li>
-                                                                                <li uk-filter-control="[data-tp='imprimir']"><a href="#">Imprimir</a></li>
-                                                                            </ul>
-                                                                        </div>
-                                                                    </li>
-                                                                </ul>
-                                                            </nav>
-                                                        </div>
-                                                        <table class="uk-table uk-table-hover uk-table-divider uk-light uk-table-responsive">
-                                                            <thead class="uk-background-secondary">
-                                                                <tr>
-                                                                    <th>#</th>
-                                                                    <th>USUARIO</th>
-                                                                    <th>MODULO</th>
-                                                                    <th>PERMISO</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody class="js-filter" id="table-rol">
+
+                                                    <h3>PERMISOS DE MODULOS</h3>
+                                                    <a href="#modal_asignar_rol" uk-toggle class="uk-button uk-button-default">ASIGNAR MODULO</a>
+
+                                                    <table class="uk-table uk-table-hover uk-table-divider uk-light uk-table-responsive">
+                                                        <thead class="uk-background-secondary">
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>USUARIO</th>
+                                                                <th>MODULO</th>
+                                                                <th>PERMISO</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="table-rol">
 
 
-                                                            </tbody>
-                                                        </table>
-                                                    </section>
+                                                        </tbody>
+                                                    </table>
 
 
 
@@ -430,7 +410,7 @@
                                         </form>
                                     </div>
                                 </article>
-                                <article id="detallesCapital" class="uk-flex uk-flex-middle cont_item-CAPITAL uk-flex-around uk-width-2xlarge uk-flex-wrap">
+                                <article class="uk-flex uk-flex-middle cont_item-CAPITAL uk-flex-around uk-width-2xlarge uk-flex-wrap">
                                     <div class="uk-flex uk-flex-column uk-flex-middle">
                                         <h5>INGRESOS</h5>
                                         <div class="item_capital" style="background-color: #007D35">
@@ -460,7 +440,7 @@
                             <section class="uk-margin-medium-top uk-padding-small uk-border-rounded" uk-filter="target: .js-filter; animation: fade" style="border: 1px solid #555;">
                                 <div class="uk-flex uk-flex-middle">
                                     <h2 class="uk-margin-medium-right">MOVIMIENTOS DE CAPITAL</h2>
-                                    <nav uk-dropnav="mode: click">
+                                    <nav uk-dropnav>
                                         <ul class="uk-subnav">
                                             <li>
                                                 <a href>Tipo de movimiento <span uk-drop-parent-icon></span></a>
@@ -707,7 +687,6 @@
 <script src="static/javaScript/Ajax/metodo_pago.js" defer></script>
 <script src="static/javaScript/Roles.js" defer></script>
 <script src="static/javaScript/Ajax/capital.js" defer></script>
-<script src="static/javaScript/Ajax/RegisterUser.js" defer></script>
 
 
 

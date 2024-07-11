@@ -1,5 +1,5 @@
-<?php require("../View/complementos/loader.php"); ?>
 <?php require("../View/complementos/header.php"); ?>
+
 <main class="Bg-Main-home2 uk-padding">
 
     <section class="uk-background-secondary uk-padding uk-border-rounded uk-light" uk-filter="target: .js-filter">

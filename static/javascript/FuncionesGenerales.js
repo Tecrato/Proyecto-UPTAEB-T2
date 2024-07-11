@@ -104,7 +104,7 @@ async function asyncfunc() {
   $.ajax({
     url: "https://exchangemonitor.net/ajax/widget-unique",
     data: { "country": "ve", "type": "bcv" },
-    success: function(response) {
+    success: response => {
       document.getElementById('BCV').textContent = JSON.parse(response).price
     }
   })

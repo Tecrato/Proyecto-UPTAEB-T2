@@ -114,9 +114,6 @@
         else if ($_GET['subFunction'] == 'count') {
             $result = $clase->COUNT();
         }
-        else if ($_GET['subFunction'] == 'detallesCapital') {
-            $result = $clase->detallesCapital();
-        }
     }
     else {
         $result = $clase->search(n:$n,limite:$limite);

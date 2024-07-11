@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 document.querySelector('#iconReportInv').addEventListener('click', () => {
   window.location.href = 'PDFInventario'
+=======
+window.addEventListener("load", () => {
+  document.querySelector(".preloader_container").classList.toggle("invisible")
+>>>>>>> parent of 3fab4d2 (capital funcionando)
 })
 
 if (screen < 1023) {

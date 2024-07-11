@@ -145,20 +145,30 @@ valid_pass.addEventListener("change", (e) => {
                         contentType: false,
                         processData: false,
                         success: (response) => {
-                            console.log(response);
                             if (response == "1") {
                                 window.location = "http://localhost/Proyecto-UPTAEB-T2/Administrar_perfil"
-                                localStorage.setItem("intro", "true")
+
+
+
                             } else {
                                 window.location = "http://localhost/Proyecto-UPTAEB-T2/login"
                             }
                         }
                     })
+
                 }
             })
+
+
+
+
         })
+
     } else {
         document.querySelector("#msj").textContent = resultado;
     }
+
+
+
 })
 

@@ -11,7 +11,7 @@ const fetchCapital = () => {
                         <tr data-tm="${(element.monto).toString().slice(0, 1) == '-' ? 'Egresos' : 'Ingresos'}">
                             <td>${element.id}</td>
                             <td>${element.descripcion}</td>
-                            <td>${element.monto} Bs</td>
+                            <td>${element.monto}</td>
                             <td>${element.fecha}</td>
                         </tr>
                     `;
@@ -23,49 +23,10 @@ const fetchCapital = () => {
     });
 }
 fetchCapital()
-const detailsCapital = () => {
-    $.ajax({
-        url: "Controller/funcs_ajax/search.php",
-        type: "GET",
-        data: {randomnautica: "capital", subFunction: "detallesCapital"},
-        success: function (response) {
-            let template = '';
-            let json = JSON.parse(response);
-            json.lista.forEach(element => {
-                const Gastos = element.Gastos.startsWith('-') ? element.Gastos.slice(1) : element.Gastos;
-                template += `
-                    <div class="uk-flex uk-flex-column uk-flex-middle">
-                                        <h5>INGRESOS</h5>
-                                        <div class="item_capital" style="background-color: #007D35">
-                                            ${element.Ingresos} Bs
-                                        </div>
-                                    </div>
-                                    <div class="uk-flex uk-flex-column uk-flex-middle">
-                                        <h5>VENTAS</h5>
-                                        <div class="item_capital" style="background-color: #aaa;">
-                                            ${element.Ventas} Bs
-                                        </div>
-                                    </div>
-                                    <div class="uk-flex uk-flex-column uk-flex-middle">
-                                        <h5>GASTOS</h5>
-                                        <div class="item_capital" style="background-color: #f0506e;">
-                                            ${Gastos} Bs
-                                        </div>
-                                    </div>
-                                    <div class="uk-flex uk-flex-column uk-flex-middle">
-                                        <h5>UTILIDAD NETA</h5>
-                                        <div class="item_capital uk-font-bold" style="background-color: #9800b3;">
-                                            ${element.capital} Bs
-                                        </div>
-                                    </div>
-                `;
-            });
-            $("#detallesCapital").html(template);
-        }
-    });
-}
-detailsCapital()
+
 let FormCapital = document.getElementById('FormCapital');
+
+
 let button = document.querySelectorAll('button[name="action"]')
 button.forEach(b => {
     b.addEventListener('click', () => {
