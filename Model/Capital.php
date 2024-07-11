@@ -5,7 +5,7 @@
 		private $monto;
         private $descripcion;
 
-		function __construct($id=null, $descripcion=null, $monto=null, ){
+		function __construct($id=null, $descripcion=null, $monto=null){
 			DB::__construct();
 			$this->id = $id;
 			$this->monto = $monto;
@@ -47,5 +47,11 @@
             $consulta->execute();
             return $consulta->fetchAll();
         }
+        function detallesCapital(){
+            $query = $this->conn->prepare('SELECT * FROM detalles_capital;');
+            $query->execute();
+            return $query->fetchAll();
+
 	}
+}
 ?>
