@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 document.querySelector('#iconReportInv').addEventListener('click', () => {
   window.location.href = 'PDFInventario'
 =======
@@ -14,6 +15,10 @@ window.addEventListener("load", () => {
   // document.querySelector(".preloader_container").classList.toggle("invisible")
   document.querySelector(".preloader_container").remove()
 >>>>>>> parent of c13cf31 (Loader estandarizado y funciones generales es un archivo para todas las vistas)
+=======
+document.querySelector('#iconReportInv').addEventListener('click', () => {
+  window.location.href = 'PDFInventario'
+>>>>>>> parent of 680a1af (xasxa)
 })
 
 if (screen < 1023) {
