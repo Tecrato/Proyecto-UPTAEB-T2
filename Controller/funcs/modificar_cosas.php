@@ -6,6 +6,7 @@
     require 'subir_imagen.php';
     $tipo = $_POST['tipo']; // Depende de que es lo que queramos actualizar
 
+    print_r($_POST);
     $other_class = new Permiso(null,$_SESSION['user_id'],$tipo,'modificar');
     $result = $other_class->search();
 
@@ -94,5 +95,4 @@
         $clase->actualizar($_SESSION['user_id'], $_POST["ID"]);
     }
     
-    echo json_encode(['status' => 'active']);
 ?>

@@ -45,4 +45,15 @@
     }
     
     header('Location:../../'.ucfirst($type).'?p='.$page);
+    // if ($type == 'productos') {
+    //     header('Location:../../Productos?p='.$page);
+    // } elseif ($type == 'entradas') {
+    //     header('Location:../../Entradas?p='.$page);
+    // } elseif ($type == 'proveedores') {
+    //     header('Location:../../Proveedores?p='.$page);
+    // } elseif ($type == 'clientes') {
+    //     header('Location:../../Clientes?p='.$page);
+    // } elseif ($type == 'ventas') {
+    //     header('Location:../../Ventas?p='.$page);
+    // }
 ?>

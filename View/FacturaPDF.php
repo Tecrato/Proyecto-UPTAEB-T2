@@ -1,36 +1,6 @@
 <?php
-include("../funcs/verificar.php");
-require('../../Plugins/fpdf.php');
-require("../../Model/Conexion.php");
-require('../../Model/Facturas.php');
-require('../../Model/Registro de ventas.php');
-require('../../Model/Pagos.php');
-
-$clase = new Factura(id_registro_ventas:isset($_GET['id']) ? $_GET['id'] : null);
-$clase2 = new Registro_ventas(isset($_GET['id']) ? $_GET['id'] : null);
-$clase3 = new Pago(id_venta:isset($_GET['id']) ? $_GET['id'] : null);
-
-// print_r($_GET);
-
-$result = $clase->search()[0];
-$lista = array();
-$lista = [
-    'vendedor' => $result['vendedor'],
-    'nombre' => $result['cliente_nombre'],
-    'id' => $result['id'],
-    'fecha' => $result['fecha'],
-    'cedula' => $result['cliente_cedula'],
-    'apellido' => $result['cliente_apellido'],
-    'documento' => $result['cliente_documento'],
-];
-
-$amount = $clase2->search();
-$amount = $amount[count($amount)-1];
-
-
-$product = $clase->search_ProductFact();
-$pagos = $clase3->search();
-
+require('../Plugins/fpdf.php');
+require('../Controller/funcs_ajax/print_factura.php');
 
 
 $fecha = strtotime($lista['fecha']);
@@ -61,7 +31,7 @@ $pdf->SetFont('Arial', '', 10);
 
 // Cabecera de página_____________________________________________________________________________________________
 // Logo
-$pdf->Image('../../static/images/logo_m.png', 20, 15, 30);
+$pdf->Image('../static/images/logo_m.png', 20, 15, 30);
 // Arial bold 15
 $pdf->SetFont('Arial', '', 12);
 // Movernos a la derecha
@@ -167,7 +137,7 @@ $pdf->Cell(120);
 $pdf->Cell(15, 10, 'SUBTOTAL Bs', 0, 0, 'C', 0);
 
 $pdf->Cell(15);
-$pdf->Cell(15, 10, round($amount['monto_final']-$amount['IVA'], 2), 0, 0, 'C', 0);
+$pdf->Cell(15, 10, round($resultAmount['subtotal'], 2), 0, 0, 'C', 0);
 
 $pdf->Ln(7);
 
@@ -175,7 +145,7 @@ $pdf->Cell(124.5);
 $pdf->Cell(15, 10, 'IVA Bs', 0, 0, 'R', 0);
 
 $pdf->Cell(11);
-$pdf->Cell(15, 10, $amount['IVA'], 0, 0, 'C', 0);
+$pdf->Cell(15, 10, $resultAmount['IVA'], 0, 0, 'C', 0);
 
 $pdf->Ln(9);
 
@@ -185,7 +155,7 @@ $pdf->SetFillColor(225, 225, 225);
 $pdf->Cell(117);
 $pdf->SetX(120);
 $pdf->Cell(30, 10, 'TOTAL Bs', 0, 0, 'R', 1);
-$pdf->Cell(35.5, 10, $amount['monto_final'], 0, 0, 'C', 1);
+$pdf->Cell(35.5, 10, $resultAmount['monto_final'], 0, 0, 'C', 1);
 
 $pdf->Ln(12);
 
@@ -207,7 +177,7 @@ $pdf->Ln(10);
 foreach ($pagos as $pago) {
     $pdf->SetFont('Arial', 'B', 10);
     $pdf->Cell(13);
-    $pdf->Cell(15, 10, strtoupper($pago['metodo']), 0, 0, 'C', 0);
+    $pdf->Cell(15, 10, strtoupper($pago['nombre']), 0, 0, 'C', 0);
     $pdf->Cell(30, 10, utf8_decode($pago['monto']), 0, 1, 'C', 0);
     // $pdf->Cell(25, 10, $p['valor_unit'], 0, 0, 'C', 1);
     // $pdf->Cell(30, 10, $p['Total'], 0, 1, 'C', 1);

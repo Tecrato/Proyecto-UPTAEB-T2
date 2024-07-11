@@ -1,21 +1,7 @@
 <?php
 
-include("../funcs/verificar.php");
-require('../../Plugins/fpdf.php');
-
-require('../../Model/Conexion.php');
-require('../../Model/Estadisticas.php');
-
-
-$clase = new Estadisticas();
-
-
-if ($_POST['select'] == 'max_ventas') {
-    $result = $clase->max_ventas();
-}
-else if ($_POST['select'] == 'min_ventas') {
-    $result = $clase->min_ventas();
-}
+require('../Plugins/fpdf.php');
+require('../Controller/funcs_ajax/print_MaxMin.php');
 
 date_default_timezone_set('America/Caracas');
 $fecha = new DateTime();
@@ -27,6 +13,16 @@ $graphic = $_POST['img'];
 $tempFilePath = 'temp_chart.png';
 file_put_contents($tempFilePath, base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $graphic)));
 
+// class PDF extends FPDF {
+//     // Cabecera de página
+//     function Header(){
+//         // bordes de página
+//         $this->SetFillColor(0, 130, 38);
+//         $this->Rect(0, 0, 3, 300, 'F');
+//         $this->Rect(294, 0, 3, 300, 'F');
+//     }
+// }
+
 $pdf = new FPDF();
 $pdf->AddPage("L");
 $pdf->SetFont('Arial', 'B', 30);
@@ -35,7 +31,7 @@ $pdf->SetTextColor(0, 130, 38);
 $pdf->Cell(30, 30,$_POST['select'] == "min_ventas" ? 'PRODUCTOS MENOS VENDIDOS' : 'PRODUCTOS MAS VENDIDOS', 0, 0, 'C', 0);
 $pdf->SetFont('Arial', '', 10);
 $pdf->Cell(200, 30, 'FECHA: ' . $fecha2['mday'] . '/' . $fecha2['mon'] . '/' . $fecha2['year'], 0, 0, 'C');
-$pdf->Image('../../static/images/logo_m.png', 10, 10, 35);
+$pdf->Image('../static/images/logo_m.png', 10, 10, 35);
 $pdf->Ln(50);
 $pdf->SetTextColor(255, 255, 255);
 $pdf->SetFont('Arial', 'B', 15);

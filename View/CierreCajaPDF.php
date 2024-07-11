@@ -1,26 +1,21 @@
 <?php
-include("../funcs/verificar.php");
-require('../../Plugins/fpdf.php');
-require("../../Model/Conexion.php");
-require('../../Model/Cajas.php');
 
+require('../Plugins/fpdf.php');
+require('../Controller/funcs_ajax/print_caja.php');
 
-
-$clase = new Caja($_GET['id_caja']);
-
-$metodos = $clase->totalMetodosPago();
-$detalles = $clase->search();
 
 //CABECERA DEL INVENTARIO__________________________________________________________________________________
 
-class PDF extends FPDF{
+class PDF extends FPDF
+{
     // Cabecera de página
-    function Header(){
+    function Header()
+    {
         // Logo
         // $this->Image('./Image/LogoM.png', 15, 8, 33);
 
         // $this->SetX(50);
-        $this->Image('../../static/images/inventario2-1-1.png', 0, 0, 210);
+        $this->Image('../static/images/inventario2-1-1.png', 0, 0, 210);
         // Arial bold 15
 
     }
@@ -48,7 +43,7 @@ $pdf->SetTextColor(25, 150, 40);
 $pdf->Cell(30, 30, 'CIERRE DE CAJA Nro.' . $detalles[0]["id"], 0, 0, 'C');
 $pdf->SetFont('Arial', '', 10);
 $pdf->SetTextColor(0, 0, 0);
-$pdf->Cell(155, 10, 'USUARIO: ' . $detalles[0]["nombre"], 0, 0, 'C');
+$pdf->Cell(155, 10, 'USUARIO: ' . $detalles[0]["usuario"], 0, 0, 'C');
 $pdf->Ln(5);
 $pdf->Cell(300, 10, 'FECHA DE IMPRESION: ' . $fecha2['mday'] . '/' . $fecha2['mon'] . '/' . $fecha2['year'], 0, 0, 'C');
 $pdf->Ln(5);
@@ -64,7 +59,7 @@ $pdf->Cell(30, 10, utf8_decode('------------------------------------------------
 
 $pdf->Ln(7);
 $pdf->Cell(35, 12, 'USUARIO: ', 0, 0, 'C');
-$pdf->Cell(2, 12, $detalles[0]["nombre"], 0, 0, 'C');
+$pdf->Cell(2, 12, $detalles[0]["usuario"], 0, 0, 'C');
 $pdf->Cell(40);
 $pdf->Cell(25, 12, 'FECHA:  ', 0, 0, 'C');
 $pdf->Cell(30, 12, $detalles[0]["fecha"], 0, 0, 'C');
@@ -96,7 +91,7 @@ $pdf->Ln(8);
 $pdf->SetFont('Arial', '', 8);
 $pdf->Cell(60);
 foreach ($metodos as $variable) {
-    $pdf->Cell(25, 12, strtoupper($variable['nombre']), 0, 0, 'C');
+    $pdf->Cell(25, 12, strtoupper($variable['metodo_pago']), 0, 0, 'C');
 }
 // $pdf->Cell(20, 12, 'EFECTIVO', 0, 0, 'C');
 // $pdf->Cell(20, 12, 'DIVISA', 0, 0, 'C');
@@ -111,7 +106,7 @@ $pdf->Cell(30, 12, 'INGRESOS', 0, 0, 'C');
 $pdf->Cell(30);
 $pdf->SetFont('Arial', '', 8);
 foreach ($metodos as $variable) {
-    $pdf->Cell(25, 12, $variable['nombre'] == "Divisa" ? number_format(strtoupper($variable['monto']), 2, '.', '') . " $" : number_format(strtoupper($variable['monto']), 2, '.', '') . " Bs", 0, 0, 'C');
+    $pdf->Cell(25, 12, $variable['metodo_pago'] == "Divisa" ? number_format(strtoupper($variable['monto_total']), 2, '.', '') . " $" : number_format(strtoupper($variable['monto_total']), 2, '.', '') . " Bs", 0, 0, 'C');
 }
 // $pdf->Cell(20, 12, '0.00', 0, 0, 'C');
 // $pdf->Cell(20, 12, '0.00', 0, 0, 'C');
@@ -123,11 +118,11 @@ $pdf->Ln(8);
 
 $pdf->SetFont('Arial', 'B', 10);
 $pdf->Cell(24, 12, 'TOTAL', 0, 0, 'C');
-$pdf->Cell(10, 12, number_format($detalles[0]['total_cierre'], 2, '.', '') . " Bs", 0, 0, 'C');
+$pdf->Cell(10, 12, number_format($totalCierre[0]['total_cierre'], 2, '.', '') . " Bs", 0, 0, 'C');
 
 $pdf->Ln(8);
 $pdf->Cell(55, 12, 'TOTAL CIERRE DE CAJA', 0, 0, 'C');
-$pdf->Cell(10, 12, number_format($detalles[0]['total_cierre'], 2, '.', '') + $detalles[0]["monto_inicial"] . " Bs", 0, 0, 'C');
+$pdf->Cell(10, 12, number_format($totalCierre[0]['total_cierre'], 2, '.', '') + $detalles[0]["monto_inicial"] . " Bs", 0, 0, 'C');
 
 // $pdf->Ln(10);
 // $pdf->Cell(78);

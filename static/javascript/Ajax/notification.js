@@ -1,5 +1,5 @@
 
-function newNotification() {
+setInterval(() => {
     $.ajax({
         url: "Controller/funcs_ajax/search.php",
         type: "GET",
@@ -10,11 +10,7 @@ function newNotification() {
             badge.textContent = json.lista;
         }
     })
-}
-setInterval(() => {
-    newNotification()
-}, 10000)
-newNotification()
+}, 1000)
 
 const cargarNotify = () =>{
     $.ajax({
@@ -73,4 +69,5 @@ const cargarNotify = () =>{
     })
 }
 
-document.querySelector('#iconNotification').addEventListener('click', () => cargarNotify)
+setInterval(cargarNotify, 1000)
+// cargarNotify()

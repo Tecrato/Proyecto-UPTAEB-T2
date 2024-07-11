@@ -30,40 +30,32 @@
             FROM registro_ventas a 
             INNER JOIN clientes b ON b.id = a.id_cliente
             INNER JOIN caja c ON c.id = a.id_caja
-            INNER JOIN usuarios d ON d.id = c.id_usuario
-            WHERE 1";
-
-            $lista = [];
-            
-			if ($this->id != null){
-				array_push($lista,'id');
-			}
-			if ($this->active != null){
-				array_push($lista, 'active');
-			}
-			if ($lista) {
-				foreach ($lista as $e){
-					$query .= ' AND a.'.$e.'=:'.$e;
-				}
-			}
-
-			$query .= " ORDER BY $order  LIMIT :l OFFSET :n";
-            $query = $this->conn->prepare($query);
-
-            $n = $n*$limite;
-            $query->bindParam(':active',$this->active, PDO::PARAM_BOOL);
-            $query->bindParam(':l',$limite, PDO::PARAM_INT);
-            $query->bindParam(':n',$n, PDO::PARAM_INT);
+            INNER JOIN usuarios d ON d.id = c.id_usuario";
 
             if ($this->id != null){
-                $query->bindParam(':id',$this->id, PDO::PARAM_INT);
-            }
-            if ($this->active != null){
-                $query->bindParam(':active',$this->active, PDO::PARAM_INT);
+                $query = $query." WHERE a.id=:id";
             }
 
-            $query->execute();
-            return $query->fetchAll();
+            $n = $n*$limite;
+
+			$query = $query . " WHERE a.active=:active";
+
+			$query = $query . " ORDER BY $order";
+            $query = $query . " LIMIT :l OFFSET :n";
+
+
+            $consulta = $this->conn->prepare($query);
+
+            $consulta->bindParam(':active',$this->active, PDO::PARAM_BOOL);
+            $consulta->bindParam(':l',$limite, PDO::PARAM_INT);
+            $consulta->bindParam(':n',$n, PDO::PARAM_INT);
+
+            if ($this->id != null){
+                $consulta->bindParam(':id',$this->id, PDO::PARAM_INT);
+            }
+
+            $consulta->execute();
+            return $consulta->fetchAll();
 		}
         function agregar($usuario, $datos, $pagos, $credito, $fecha_inicio, $fecha_vencimiento) {
             try {

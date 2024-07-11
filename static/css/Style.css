@@ -131,6 +131,9 @@
     background-color: #8a8a8a;
     transition: 300ms ease;
 }
+.iconMoon, .iconSun{
+    /* filter: invert(1); */
+}
 .activeEmpty{
     background-color: #fff;
     color: #111 !important;
@@ -650,7 +653,7 @@
     .Container-fact-price{
         width: 50%;
     }
-    
+    .
     
 }
 

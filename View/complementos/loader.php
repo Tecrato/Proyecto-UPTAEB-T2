@@ -22,7 +22,7 @@
             </svg>
             <div class="preloader__text">
                 <p class="preloader__msg">Cargando…</p>
-                <p class="preloader__msg preloader__msg--last">El servidor no responde.</p>
+                <p class="preloader__msg preloader__msg--last">This is taking long. Something’s wrong.</p>
             </div>
         </div>
     </article>

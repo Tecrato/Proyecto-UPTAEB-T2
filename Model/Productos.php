@@ -95,6 +95,7 @@
             $query->bindParam(':id_marca',$this->id_marca);
             $query->bindParam(':valor_unidad',$this->valor_unidad);
             $query->bindParam(':nombre',$this->nombre);
+            // $query->bindParam(':marca',$this->marca);
             $query->bindParam(':stock_min',$this->stock_min);
             $query->bindParam(':stock_max',$this->stock_max);
             $query->bindParam(':precio_venta',$this->precio_venta);
@@ -109,7 +110,7 @@
         }
 
         // Con esta otra funcion se busca entre los productos en la base de datos
-        function search($n=0,$limite=9, $order=' nombre ASC '){
+        function search($n=0,$limite=9, $order=' id ASC '){
             // Al igual que la clase anterior, puede buscar segun muchos valores o solo algunos
             $query = "SELECT 
                     a.id,
@@ -172,12 +173,34 @@
             return $consulta->fetchAll();
         }
 
+        function search_marca() {
+            $query = $this->conn->prepare("SELECT marca FROM productos GROUP BY marca");
+            $query->execute();
+            return $query->fetchAll();
+            
+        }
 
         function search_inventario(){
             $query = "SELECT id,nombre,(SELECT SUM(cantidad) FROM entradas WHERE productos.id = id_producto) AS entradas,(SELECT SUM(cantidad) - (SELECT SUM(existencia) FROM entradas WHERE productos.id = id_producto) FROM entradas WHERE productos.id = id_producto) AS salidas, (SELECT SUM(existencia) FROM entradas WHERE productos.id = id_producto) AS existencia, precio_venta,(SELECT SUM(existencia) FROM entradas WHERE productos.id = id_producto) * precio_venta AS Total FROM productos WHERE active = 1";
             return $this->conn->query($query)->fetchAll();
         }
 
+        function search_ValorInventario(){
+            $query = "SELECT SUM((SELECT SUM(existencia) FROM entradas WHERE productos.id = id_producto) * precio_venta) AS Total FROM productos";
+
+            return $this->conn->query($query)->fetchAll();
+        }
+
+        function stock_segun_categorias()  {
+            $query = "SELECT c.nombre, SUM(e.existencia) AS 'maximo_stock'
+                FROM categoria c
+                JOIN productos p ON c.id = p.id_categoria
+                JOIN entradas e ON p.id = e.id_producto
+                GROUP BY c.id";
+            $query = $this->conn->prepare($query);
+            $query->execute();
+            return $query->fetchAll();
+        }
 
         function search_RecienAgregado() {
             $query = $this->conn->prepare("SELECT * FROM productos WHERE active = 1 ORDER BY id DESC LIMIT 5");

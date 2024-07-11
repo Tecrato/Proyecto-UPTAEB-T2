@@ -2,7 +2,7 @@
 $.ajax({
   url: "Controller/funcs_ajax/search.php",
   type: "GET",
-  data: { randomnautica: "ventas" , limite:20},
+  data: { randomnautica: "ventas" , limite:500},
   success: function (response) {
     console.log(response);
     let json = JSON.parse(response);
@@ -48,13 +48,13 @@ $.ajax({
 
         //cada vez que pulsemos sobre una ficha, el iframe se recarga con la misma ruta, solo que se le ira cambiando el id de la factura
         let iframe = document.querySelector(".iframe");
-        iframe.src = `PDFFactura?id=${tj.getAttribute("id")}`;
+        iframe.src = `FacturaPDF?d=${tj.getAttribute("id")}`;
 
         let id = tj.getAttribute("id");
         document.querySelector(".n_factura").textContent = "N_FACTURA " + id;
         //hacemos la peticion,mandando el id al controlador como una variable por url
         $.ajax({
-          url: `PDFFactura?id=${id}`,
+          url: `Controller/funcs_ajax/print_factura.php?d=${id}`,
           type: "GET",
           success: function (response) {
             let json = JSON.parse(response);
