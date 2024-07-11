@@ -73,4 +73,4 @@ const cargarNotify = () =>{
     })
 }
 
-document.querySelector('#iconNotification').addEventListener('click', () => cargarNotify)
+document.querySelector('#iconNotification').addEventListener('click', () => cargarNotify())

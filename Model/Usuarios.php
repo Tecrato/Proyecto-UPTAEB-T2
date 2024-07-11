@@ -43,14 +43,14 @@
         }
         function search($n=0,$limite=9){
             // Al igual que la clase anterior, puede buscar segun muchos valores o solo algunos
-            $query = "SELECT * FROM usuarios WHERE active=1";
+            $query = "SELECT * FROM usuarios WHERE 1";
    
 			$lista = [];
 
             if ($this->id){
             	array_push($lista,'id');
             }
-            if ($this->correo){
+            if ($this->correo != null){
                 array_push($lista, 'correo');
             }
             if ($lista) {
@@ -105,6 +105,11 @@
             $consulta->bindParam(':hash',$this->hash, PDO::PARAM_STR);
             $consulta->execute();
             return $consulta->fetchAll();
+        }
+        function logout() {
+            $query = $this->conn->prepare('UPDATE usuarios SET active=0 WHERE id=:id');
+            $query->bindParam(':id',$this->id);
+            $query->execute(); 
         }
         function COUNT(){
             return $this->conn->query("SELECT COUNT(*) 'total' FROM usuarios")->fetchAll()['total'];

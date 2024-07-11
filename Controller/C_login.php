@@ -21,5 +21,15 @@
                         });
                 </script>';
         }
+        else if ($_GET['err'] == '2') {
+            echo '<script>
+                        UIkit.notification({
+                            message:
+                            "<span uk-icon=\'icon: close\'></span>Session ya iniciada.",
+                            status: "danger",
+                            pos: "bottom-right",
+                        });
+                </script>';
+        }
     }
 ?>
