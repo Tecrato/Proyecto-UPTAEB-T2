@@ -157,8 +157,8 @@
 
 
 
-<script src="Plugins/build/js/intlTelInput.js"></script>
-<script src="static/javascript/Ajax/supplier.js"></script>
+<script src="Plugins/build/js/intlTelInput.js" defer></script>
+<script src="static/javascript/Ajax/supplier.js" defer></script>
 
 
 <script>
