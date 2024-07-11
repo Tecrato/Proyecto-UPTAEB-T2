@@ -68,7 +68,7 @@ $dia =  date('d/m/Y', $fecha);
 
                         <hr class="uk-margin-remove divider-2">
 
-                        <p class="uk-text-meta uk-margin-remove">CLIENTE: <b class="uk-text-success"><?php echo $row['nom_cliente']; ?> <?php echo $row['apell_cliente']; ?></b></p>
+                        <p class="uk-text-meta uk-margin-remove">CLIENTE: <b class="uk-text-success"><?php echo $row['cliente_nombre']; ?> <?php echo $row['cliente_apellido']; ?></b></p>
 
                         <hr class="uk-margin-remove divider-2">
 
