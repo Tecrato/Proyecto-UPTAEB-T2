@@ -29,6 +29,18 @@
     else if ($_GET['select'] == 'valor_total_inventario') {
         $result = $clase->ValorTotalInventario();
     }
+    else if ($_GET['select'] == 'ganancia_mensuales') {
+        $result = $clase->ganancias_mensuales();
+    }
+    else if ($_GET['select'] == 'valor_inventario_mes') {
+        $result = $clase->valor_inventario_mes();
+    }
+    else if ($_GET['select'] == 'coste_productos_vendidos') {
+        $result = $clase->coste_productos_vendidos();
+    }
+    else if ($_GET['select'] == 'rotacion_inventario') {
+        $result = $clase->rotacion_inventario();
+    }
 
     $json = ['lista'=> $result];
     $json = json_encode($json);

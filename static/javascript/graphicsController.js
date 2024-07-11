@@ -71,55 +71,144 @@ const renderModelsChart1 = () => {
 };
 
 const renderModelsChart2 = () => {
-  let gananciasMensuales = [5000, 6000, 4500, 7000, 5500, 8000];
 
-  const data = {
-    labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio"],
-    datasets: [
-      {
-        label: "Ganacias mensuales",
-        data: gananciasMensuales,
-        backgroundColor: getDataColors(),
-        fill: true,
-        borderColor: getDataColors(),
-        pointBorderWidth: 0,
-        borderWidth: 0,
+  $.ajax({
+    url: "api_estadisticas",
+    type: "GET",
+    data: { select: "ganancia_mensuales" },
+    success: function (response) {
+      let json = JSON.parse(response);
 
-      },
-    ],
-  };
+      let label = []
+      let values = []
 
-  const options = {
-    plugins: {
-      legend: { display: false },
-    },
-  };
-  new Chart("gananciasChart", { type: "line", data, options });
+      // Iterar sobre las claves del objeto y extraer los nombres de los meses
+      for (let key in json.lista[0]) {
+        // Comprobar si la clave no es un número
+        if (isNaN(key)) {
+          label.push(key);
+        }
+      }
+      for (const value of label) {
+        values.push(json.lista[0][value])
+      }
+
+
+      const data = {
+        labels: label,
+        datasets: [
+          {
+            label: "Ganacias mensuales",
+            data: values,
+            backgroundColor: getDataColors(),
+            fill: true,
+            borderColor: getDataColors(),
+            pointBorderWidth: 0,
+            borderWidth: 0,
+
+          },
+        ],
+      };
+
+      const options = {
+        plugins: {
+          legend: { display: false },
+        },
+      };
+      new Chart("gananciasChart", { type: "line", data, options });
+
+    }
+  })
 };
 
 const renderModelsChart3 = () => {
-  let gananciasMensuales = [1000, 1500, 1200, 1800, 2000, 1700];
 
-  const data = {
-    labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio"],
-    datasets: [
-      {
-        label: "Costo de productos vendidos",
-        data: gananciasMensuales,
-        borderColor: "#fff",
-        fill: false,
-        pointBorderWidth: 5,
-      },
-      {
-        label: "Valor promedio del inventario",
-        data: [500, 600, 550, 700, 800, 750],
-        borderColor: "rgb(1, 166, 203)",
-        fill: false,
-        pointBorderWidth: 5,
-      },
-    ],
-  };
-  new Chart("inventoryRotationChart", { type: "line", data });
+  $.ajax({
+    url: "api_estadisticas",
+    type: "GET",
+    data: { select: "valor_inventario_mes" },
+    success: function (response) {
+
+      let label = []
+      let value1 = []
+      let value2 = []
+      let value3 = []
+
+      let json = JSON.parse(response);
+
+      for (let key in json.lista[0]) {
+        // Comprobar si la clave no es un número
+        if (isNaN(key)) {
+          label.push(key);
+        }
+      }
+      for (const value of label) {
+        value1.push(json.lista[0][value])
+      }
+
+      $.ajax({
+        url: "api_estadisticas",
+        type: "GET",
+        data: { select: "coste_productos_vendidos" },
+        success: function (response) {
+
+          let json = JSON.parse(response);
+          for (const value of label) {
+            value2.push(json.lista[0][value])
+          }
+           
+
+          $.ajax({
+            url: "api_estadisticas",
+            type: "GET",
+            data: { select: "rotacion_inventario" },
+            success: function (response) {
+    
+              let json = JSON.parse(response);
+              for (const value of label) {
+                value3.push(json.lista[0][value])
+              }
+               
+              const data = {
+                labels: label,
+                datasets: [
+                  {
+                    label: "Costo de productos vendidos (Bs)",
+                    data: value2,
+                    borderColor: "#fff",
+                    fill: false,
+                    pointBorderWidth: 5,
+                  },
+                  {
+                    label: "Valor promedio del inventario (Bs)",
+                    data: value1,
+                    borderColor: "rgb(1, 166, 203)",
+                    fill: false,
+                    pointBorderWidth: 5,
+                  },
+                  {
+                    label: "Rotacion de inventario",
+                    data: value3,
+                    borderColor: "rgb(1, 166, 103)",
+                    fill: false,
+                    pointBorderWidth: 5,
+                  }
+                ],
+              };
+              new Chart("inventoryRotationChart", { type: "line", data });
+
+            }
+          })
+
+
+
+        }
+      })
+    }
+  })
+
+
+
 };
 
 const renderModelsChart4 = () => {
@@ -168,7 +257,7 @@ const renderModelsChart4 = () => {
 
       // Capturar el gráfico cuando se envía el formulario
       document.getElementById('formPDF4').addEventListener('submit', function () {
-        
+
         captureChart();
         Chart.defaults.color = "#000";
       });
@@ -231,7 +320,7 @@ const renderModelsChart5 = () => {
 
       // Capturar el gráfico cuando se envía el formulario
       document.getElementById('formPDF5').addEventListener('submit', function () {
-        
+
         captureChart();
         Chart.defaults.color = "#000";
       });
@@ -248,21 +337,21 @@ $.ajax({
   type: "POST",
   data: { accion: "check" },
   success: function (response) {
-      console.log(response);
-      let json = JSON.parse(response);
-      if (json.estado == "no") {
-          document.getElementById("check_box").textContent = "CERRADA";
-      } else {
-          document.getElementById("check_box").textContent = "ABIERTA";
-      }
+    console.log(response);
+    let json = JSON.parse(response);
+    if (json.estado == "no") {
+      document.getElementById("check_box").textContent = "CERRADA";
+    } else {
+      document.getElementById("check_box").textContent = "ABIERTA";
+    }
   }
-}) 
+})
 
 const fecha = (f) => {
-    const fecha = new Date(f);
-    const dia = fecha.getDate();
-    const mes = fecha.getMonth() + 1;
-    const anio = fecha.getFullYear();
-    const fechaFormateada = `${dia}/${mes}/${anio}`;
-    return fechaFormateada
-  }
+  const fecha = new Date(f);
+  const dia = fecha.getDate();
+  const mes = fecha.getMonth() + 1;
+  const anio = fecha.getFullYear();
+  const fechaFormateada = `${dia}/${mes}/${anio}`;
+  return fechaFormateada
+}

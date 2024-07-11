@@ -562,6 +562,9 @@
     .container-view-order{
         width: 300px;
     }
+    .img_product{
+        width: 260px;
+    }
     
 }
 @media (min-width: 375px) and (max-width: 565px){
@@ -692,8 +695,14 @@
         width: 130px !important;
     }
     .cont_btns_fact{
-        width: 80px;
+        /* width: 80px; */
         margin-left: 15px !important;
+    }
+}
+@media (min-width: 350px) and (max-width: 376px){
+    .cont_btns_fact{
+        width: 85px;
+        /* margin-left: 15px !important; */
     }
 }
 

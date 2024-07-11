@@ -46,13 +46,23 @@
             $query->execute();
             return $query->fetchAll();
         }
-        function costo_entradas_mensuales(){
-            $query = $this->conn->prepare('SELECT * FROM costo_entradas_mensuales;');
+        function ganancias_mensuales(){
+            $query = $this->conn->prepare('SELECT * FROM ganacias_mensuales;');
             $query->execute();
             return $query->fetchAll();
         }
-        function ingresos_mensuales(){
-            $query = $this->conn->prepare('SELECT * FROM ingresos_mensuales;');
+        function valor_inventario_mes(){
+            $query = $this->conn->prepare('SELECT * FROM valor_promedio_inventario_mensual;');
+            $query->execute();
+            return $query->fetchAll();
+        }
+        function coste_productos_vendidos(){
+            $query = $this->conn->prepare('SELECT * FROM coste_productos_vendidos;');
+            $query->execute();
+            return $query->fetchAll();
+        }
+        function rotacion_inventario(){
+            $query = $this->conn->prepare('SELECT * FROM `rotacion_inventario`;');
             $query->execute();
             return $query->fetchAll();
         }
