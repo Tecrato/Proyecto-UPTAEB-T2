@@ -26,14 +26,17 @@
     $result = $c->search();
     
     if (count($result) != 1) {
-        print_r($result);
-        // header('Location: ../../login?err=4');
+        header('Location: ../../login?err=4');
     }
     else if ($result[0]['active'] == 1){
         header('Location: ../../login?err=3');
     }
     else if ($_POST["correo"] and $_POST["contraseña"] and password_verify($password,$result[0]['hash'])) { // si hay un resultado entonces lo deja pasar
         $row = $result[0];
+
+        $c2 = new Usuario($row['id']);
+        $c2->login();
+
         $_SESSION['user_name'] = $row['nombre']; // Y tambien guarda el nombre para despues
         $_SESSION['user_id'] = $row['id']; // Y el id
         $_SESSION['rol_num'] = $row['rol'];

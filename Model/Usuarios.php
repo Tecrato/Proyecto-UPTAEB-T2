@@ -97,14 +97,9 @@
             $this->add_bitacora($usuario,"Usuario","Modificar","Usuario "."$id"." Modificado");
         }
         public function login(){
-
-            $query = "SELECT * FROM usuarios WHERE correo=:correo AND hash=:hash";
-
-            $consulta = $this->conn->prepare($query);
-            $consulta->bindParam(':correo',$this->correo, PDO::PARAM_STR);
-            $consulta->bindParam(':hash',$this->hash, PDO::PARAM_STR);
-            $consulta->execute();
-            return $consulta->fetchAll();
+            $query = $this->conn->prepare('UPDATE usuarios SET active=1 WHERE id=:id');
+            $query->bindParam(':id',$this->id);
+            $query->execute();
         }
         function logout() {
             $query = $this->conn->prepare('UPDATE usuarios SET active=0 WHERE id=:id');
