@@ -135,10 +135,7 @@
 
 </main>
 <script src="static/javaScript/librerias/chart.umd.js"></script>
-<script src="static/javaScript/librerias/jquery.js"></script>
 <script src="static/javaScript/graphicsController.js"></script>
-<script src="static/javascript/Color.js"></script>
-<script src="static/javaScript/Ajax/notification.js"></script>
 
 
 </body>

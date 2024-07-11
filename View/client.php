@@ -155,12 +155,8 @@
 
 
 
-<script src="static/javaScript/librerias/jquery.js"></script>
-<script src="static/javascript/FuncionesGenerales.js"></script>
 <script src="Plugins/build/js/intlTelInput.js"></script>
 <script src="static/javascript/Ajax/client.js"></script>
-<script src="static/javascript/Color.js"></script>
-<script src="static/javaScript/Ajax/notification.js"></script>
 
 <script>
     $('.pag-btn-clientes').click(ele => {
