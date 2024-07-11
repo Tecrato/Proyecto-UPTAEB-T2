@@ -68,7 +68,6 @@ const marcaAgua = () => {
   }
 
 };
-marcaAgua()
 
 
 //funcion para asignar clase de boton activo dependiendo de la pantall en donde este
@@ -143,3 +142,4 @@ function fecha(f) {
   const fechaFormateada = `${dia}/${mes}/${anio}`;
   return fechaFormateada
 }
+marcaAgua()

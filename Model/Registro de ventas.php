@@ -22,8 +22,10 @@
             a.id,
             a.monto_final,
             a.fecha,
-            b.nombre nom_cliente,
-            b.apellido apell_cliente,
+            b.nombre cliente_nombre,
+            b.apellido cliente_apellido,
+            b.documento cliente_documento,
+            b.cedula cliente_cedula,
             d.nombre vendedor,
             a.IVA,
             c.id id_caja

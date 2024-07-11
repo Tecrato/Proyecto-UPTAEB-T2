@@ -6,34 +6,18 @@ require('../../Model/Facturas.php');
 require('../../Model/Registro de ventas.php');
 require('../../Model/Pagos.php');
 
-$clase = new Factura(id_registro_ventas:isset($_GET['id']) ? $_GET['id'] : null);
 $clase2 = new Registro_ventas(isset($_GET['id']) ? $_GET['id'] : null);
-$clase3 = new Pago(id_venta:isset($_GET['id']) ? $_GET['id'] : null);
+$result = $clase2->search()[0];
 
-// print_r($_GET);
-
-$result = $clase->search()[0];
-$lista = array();
-$lista = [
-    'vendedor' => $result['vendedor'],
-    'nombre' => $result['cliente_nombre'],
-    'id' => $result['id'],
-    'fecha' => $result['fecha'],
-    'cedula' => $result['cliente_cedula'],
-    'apellido' => $result['cliente_apellido'],
-    'documento' => $result['cliente_documento'],
-];
-
-$amount = $clase2->search();
-$amount = $amount[count($amount)-1];
-
-
+$clase = new Factura(id_registro_ventas:isset($_GET['id']) ? $_GET['id'] : null);
 $product = $clase->search_ProductFact();
+
+$clase3 = new Pago(id_venta:isset($_GET['id']) ? $_GET['id'] : null);
 $pagos = $clase3->search();
 
 
 
-$fecha = strtotime($lista['fecha']);
+$fecha = strtotime($result['fecha']);
 $hora = strtoupper(date('h:i a', $fecha));
 $dia =  date('d/m/Y', $fecha);
 
@@ -66,7 +50,7 @@ $pdf->Image('../../static/images/logo_m.png', 20, 15, 30);
 $pdf->SetFont('Arial', '', 12);
 // Movernos a la derecha
 $pdf->Cell(145);
-$pdf->Cell(30, 10, 'Nro - ' . $lista['id'], 0, 0, 'C');
+$pdf->Cell(30, 10, 'Nro - ' . $result['id'], 0, 0, 'C');
 $pdf->Ln(10);
 $pdf->Cell(80);
 //COLOR TEXTO
@@ -114,10 +98,10 @@ $pdf->Ln(10);
 $pdf->SetTextColor(50, 50, 50);
 $pdf->SetFont('Arial', '', 10);
 $pdf->Cell(7.5);
-$pdf->Cell(80, 10, utf8_decode('CLIENTE: ' . strtoupper($lista['nombre'] . " " . $lista['apellido'])), 0, 0, 'L');
+$pdf->Cell(80, 10, utf8_decode('CLIENTE: ' . strtoupper($result['cliente_nombre'] . " " . $result['cliente_apellido'])), 0, 0, 'L');
 $pdf->Ln(6);
 $pdf->Cell(7.5);
-$pdf->Cell(50, 10, utf8_decode('RIF: ' .$lista['documento']. $lista['cedula']), 0, 0, 'L');
+$pdf->Cell(50, 10, utf8_decode('RIF: ' .$result['cliente_documento']. $result['cliente_cedula']), 0, 0, 'L');
 $pdf->Ln(7);
 $pdf->Cell(78);
 $pdf->Cell(30, 10, utf8_decode('----------------------------------------------------------------------------------------------------------------------------------------------------'), 0, 0, 'C');
@@ -167,7 +151,7 @@ $pdf->Cell(120);
 $pdf->Cell(15, 10, 'SUBTOTAL Bs', 0, 0, 'C', 0);
 
 $pdf->Cell(15);
-$pdf->Cell(15, 10, round($amount['monto_final']-$amount['IVA'], 2), 0, 0, 'C', 0);
+$pdf->Cell(15, 10, round($result['monto_final']-$result['IVA'], 2), 0, 0, 'C', 0);
 
 $pdf->Ln(7);
 
@@ -175,7 +159,7 @@ $pdf->Cell(124.5);
 $pdf->Cell(15, 10, 'IVA Bs', 0, 0, 'R', 0);
 
 $pdf->Cell(11);
-$pdf->Cell(15, 10, $amount['IVA'], 0, 0, 'C', 0);
+$pdf->Cell(15, 10, $result['IVA'], 0, 0, 'C', 0);
 
 $pdf->Ln(9);
 
@@ -185,7 +169,7 @@ $pdf->SetFillColor(225, 225, 225);
 $pdf->Cell(117);
 $pdf->SetX(120);
 $pdf->Cell(30, 10, 'TOTAL Bs', 0, 0, 'R', 1);
-$pdf->Cell(35.5, 10, $amount['monto_final'], 0, 0, 'C', 1);
+$pdf->Cell(35.5, 10, $result['monto_final'], 0, 0, 'C', 1);
 
 $pdf->Ln(12);
 
@@ -202,7 +186,7 @@ $pdf->SetTextColor(0, 0, 0);
 $pdf->Cell(10);
 $pdf->Cell(30, 10, utf8_decode('FORMAS DE PAGO:'), 0, 0, 'C');
 $pdf->Cell(30);
-$pdf->Cell(30, 10, utf8_decode('VENDEDOR: ' . strtoupper($lista['vendedor'])), 0, 0, 'C');
+$pdf->Cell(30, 10, utf8_decode('VENDEDOR: ' . strtoupper($result['vendedor'])), 0, 0, 'C');
 $pdf->Ln(10);
 foreach ($pagos as $pago) {
     $pdf->SetFont('Arial', 'B', 10);

@@ -110,8 +110,8 @@ class Factura extends DB {
                     (SELECT nombre FROM productos WHERE factura.id_productos = id) AS descripcion, 
                     (coste_producto_total / cantidad) AS valor_unit, 
                     cantidad * (SELECT precio_venta FROM productos WHERE factura.id_productos = id) AS Total 
-                    FROM factura WHERE id_registro_ventas = :id");
-        $query->bindParam(':id', $this->id);
+                    FROM factura WHERE id_registro_ventas = :id_registro_ventas");
+        $query->bindParam(':id_registro_ventas', $this->id_registro_ventas);
         $query->execute();
         return $query->fetchAll();
     }
