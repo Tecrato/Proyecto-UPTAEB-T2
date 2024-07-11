@@ -47,20 +47,5 @@
             $consulta->execute();
             return $consulta->fetchAll();
         }
-        function gastos(){
-            $query = $this->conn->prepare('SELECT * FROM gastos;');
-            $query->execute();
-            return $query->fetchAll();
-        }
-        function ingresos(){
-            $query = $this->conn->prepare('SELECT * FROM ingresos;');
-            $query->execute();
-            return $query->fetchAll();
-        }
-        function ventas(){
-            $query = $this->conn->prepare('SELECT * FROM ventas;');
-            $query->execute();
-            return $query->fetchAll();
-        }
 	}
 ?>

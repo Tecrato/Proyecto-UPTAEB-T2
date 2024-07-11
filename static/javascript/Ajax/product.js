@@ -1,5 +1,6 @@
 window.addEventListener("load", () => {
-  document.querySelector(".preloader_container").classList.toggle("invisible")
+  // document.querySelector(".preloader_container").classList.toggle("invisible")
+  document.querySelector(".preloader_container").remove()
 })
 
 if (screen < 1023) {
@@ -610,7 +611,7 @@ const cargarTargetProduct = () => {
     data: {
       randomnautica: "productos",
       n: page, // Aca va el numero de la pagina actual
-      limite: 18, // Aca va el numero maximo de tarjetas que se pueden imprimir
+      limite: 10, // Aca va el numero maximo de tarjetas que se pueden imprimir
       like: "",
     },
     success: function (response) {
@@ -630,7 +631,7 @@ const cargarTargetProductDesactive = () => {
     data: {
       randomnautica: "productos",
       n: page, // Aca va el numero de la pagina actual
-      limite: 18, // Aca va el numero maximo de tarjetas que se pueden imprimir
+      limite: 10, // Aca va el numero maximo de tarjetas que se pueden imprimir
       like: "",
       active: 0,
     },

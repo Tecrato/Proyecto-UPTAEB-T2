@@ -4,8 +4,6 @@
     require 'subir_imagen.php';
     $tipo = $_POST['tipo']; // Depende de que es lo que queramos insertar
 
-    print_r($_POST);
-    
     require('../../Model/Conexion.php');
     require('../../Model/Permisos.php');
 
@@ -66,7 +64,6 @@
         $hash = password_hash($_POST["password"],PASSWORD_DEFAULT);
         $clase = new Usuario(null,$_POST["nombre"],$_POST["correo"],$hash,$_POST["rol"],substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, 20)); 
         $clase->agregar($_SESSION['user_id']);
-        // header('Location:../../Administrar_perfil');
         exit(0);
         die();
     }
@@ -95,10 +92,10 @@
         $clase = new Capital(null, $_POST["descripcion"], $_POST["monto"]);
         // header("Location: ../../Administrar_perfil");
     }
-    
     elseif ($tipo === 'permiso'){
         $clase = new Permiso(null,$_POST["id_usuario"],$_POST["tabla"],$_POST["permiso"]);
     }
+
     if ($tipo != 'producto') {
         $clase->agregar($_SESSION['user_id']);
     }
