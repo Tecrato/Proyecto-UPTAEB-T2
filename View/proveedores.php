@@ -158,15 +158,21 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <script src="Plugins/build/js/intlTelInput.js" defer></script>
 <script src="static/javascript/Ajax/supplier.js" defer></script>
 =======
+=======
+>>>>>>> parent of c13cf31 (Loader estandarizado y funciones generales es un archivo para todas las vistas)
 <script src="static/javaScript/librerias/jquery.js"></script>
 <script src="static/javascript/FuncionesGenerales.js"></script>
 <script src="static/javascript/Color.js"></script>
 <script src="Plugins/build/js/intlTelInput.js"></script>
 <script src="static/javascript/Ajax/supplier.js"></script>
 <script src="static/javaScript/Ajax/notification.js"></script>
+<<<<<<< HEAD
+>>>>>>> parent of c13cf31 (Loader estandarizado y funciones generales es un archivo para todas las vistas)
+=======
 >>>>>>> parent of c13cf31 (Loader estandarizado y funciones generales es un archivo para todas las vistas)
 
 

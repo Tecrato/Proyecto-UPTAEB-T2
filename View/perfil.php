@@ -711,7 +711,10 @@
 <script src="static/javaScript/Roles.js" defer></script>
 <script src="static/javaScript/Ajax/notification.js"></script>
 <script src="static/javaScript/Ajax/capital.js" defer></script>
+<<<<<<< HEAD
 <script src="static/javaScript/Ajax/RegisterUser.js" defer></script>
+=======
+>>>>>>> parent of c13cf31 (Loader estandarizado y funciones generales es un archivo para todas las vistas)
 
 
 
