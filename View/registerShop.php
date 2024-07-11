@@ -470,10 +470,14 @@
 
 </main>
 
+<script src="static/javaScript/librerias/jquery.js"></script>
 <script src="static/javaScript/librerias/hammer.min.js"></script>
+<script src="static/javascript/FuncionesGenerales.js"></script>
+<script src="static/javascript/Color.js"></script>
 <script src="static/javascript/Ajax/registerShop.js"></script>
 <script src="static/javascript/Ajax/caja.js"></script>
 <script src="static/javascript/Ajax/credito.js"></script>
+<script src="static/javaScript/Ajax/notification.js"></script>
 
 
 <script>

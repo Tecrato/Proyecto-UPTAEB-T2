@@ -21,9 +21,6 @@
     <script src="static/javaScript/Tooltip-help.js" defer></script>
     <script src="static/javaScript/librerias/uikit.js"></script>
     <script src="static/javaScript/librerias/uikit-icons.js"></script>
-    <script src="static/javascript/FuncionesGenerales.js" defer></script>
-    <script src="static/javaScript/Ajax/notification.js"defer></script>
-    <script src="static/javaScript/Color.js" defer></script>
     <link rel="shortcut icon" href="static/images/logo_m.png" type="image/x-icon">
     <title id="title">Inventario-Inicio</title>
 </head>
@@ -33,9 +30,10 @@ echo "
 <script>const session_user_id = " . $_SESSION['user_id'] . "</script>
 <script>const session_user_rol = '" . $_SESSION['rol'] . "'</script>
 <script>const session_user_rol_num = '" . $_SESSION['rol_num'] . "'</script>
+
 "
 ?>
-<?php require("../View/complementos/loader.php"); ?>
+
 <body class="Bg-Main-home controller-modal">
 
     <!-- **********************************  Menu de PC (1024 en adelante)  ********************************** -->

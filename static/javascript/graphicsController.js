@@ -346,3 +346,12 @@ $.ajax({
     }
   }
 })
+
+const fecha = (f) => {
+  const fecha = new Date(f);
+  const dia = fecha.getDate();
+  const mes = fecha.getMonth() + 1;
+  const anio = fecha.getFullYear();
+  const fechaFormateada = `${dia}/${mes}/${anio}`;
+  return fechaFormateada
+}

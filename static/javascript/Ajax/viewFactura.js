@@ -10,10 +10,10 @@ $.ajax({
     let template = "";
     json.lista.forEach((t) => {
 
-      let fecha2 = new Date(t.fecha)
-      let dia = fecha2.getDate()
-      let mes = fecha2.getMonth() + 1
-      let year = fecha2.getFullYear()
+      let fecha = new Date(t.fecha)
+      let dia = fecha.getDate()
+      let mes = fecha.getMonth() + 1
+      let year = fecha.getFullYear()
 
       template += ` <article id=${t.id}>
                       <div class="uk-flex uk-flex-between uk-flex-middle uk-background-secondary Target_factura" id=${t.id}>

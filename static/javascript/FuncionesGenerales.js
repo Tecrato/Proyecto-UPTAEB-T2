@@ -1,12 +1,6 @@
 var page = 0;
 var dolar = 37
 
-
-window.addEventListener("load", () => {
-  // document.querySelector(".preloader_container").classList.toggle("invisible")
-  document.querySelector(".preloader_container").remove()
-})
-
 function cambiar_pagina_ajax(dir, type, func, limit = 9, pagina=null) {
   limit = limit ? limit : 9
   if (pagina == null) {
@@ -126,7 +120,7 @@ $.ajax({
   }
 })
 
-function hora(f) {
+const hora = (f) => {
   const fecha = new Date(f);
   const horas = fecha.getHours();
   const minutos = fecha.getMinutes();
@@ -135,7 +129,7 @@ function hora(f) {
   const horaFormateada = `${horas12}:${minutos < 10 ? `0${minutos}` : minutos} ${periodo}`;
   return horaFormateada
 }
-function fecha(f) {
+const fecha = (f) => {
   const fecha = new Date(f);
   const dia = fecha.getDate();
   const mes = fecha.getMonth() + 1;

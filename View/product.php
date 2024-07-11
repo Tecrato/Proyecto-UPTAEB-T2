@@ -1,4 +1,4 @@
-
+<?php require("../View/complementos/loader.php"); ?>
 <?php require("../View/complementos/header.php"); ?>
 
 
@@ -712,14 +712,17 @@
 
 
 </main>
+<script src="static/javaScript/librerias/jquery.js"></script>
 <script src="static/javaScript/librerias/JsBardcode.js"></script>
+<script src="static/javascript/FuncionesGenerales.js"></script>
+<script src="static/javascript/Color.js"></script>
+<script src="static/javascript/Ajax/product.js"></script>
 <script src="static/javascript/Ajax/entry.js"></script>
+<script src="static/javascript/Ajax/unidades.js"></script>
+<script src="static/javascript/Ajax/categorias.js"></script>
+<script src="static/javascript/Ajax/marcas.js"></script>
 <script src="static/javascript/funcionDataTable.js"></script>
-
-<script src="static/javascript/Ajax/product.js" defer></script>
-<script src="static/javascript/Ajax/unidades.js" defer></script>
-<script src="static/javascript/Ajax/categorias.js" defer></script>
-<script src="static/javascript/Ajax/marcas.js" defer></script>
+<script src="static/javaScript/Ajax/notification.js"></script>
 
 
 
