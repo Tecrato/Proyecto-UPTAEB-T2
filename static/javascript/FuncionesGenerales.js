@@ -1,3 +1,9 @@
+window.addEventListener("load", () => {
+  document.querySelector(".preloader_container").classList.toggle("invisible")
+})
+
+
+
 var page = 0;
 var dolar = 37
 
@@ -98,7 +104,7 @@ async function asyncfunc() {
   $.ajax({
     url: "https://exchangemonitor.net/ajax/widget-unique",
     data: { "country": "ve", "type": "bcv" },
-    success: response => {
+    success: function(response) {
       document.getElementById('BCV').textContent = JSON.parse(response).price
     }
   })

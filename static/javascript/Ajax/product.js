@@ -1,6 +1,3 @@
-window.addEventListener("load", () => {
-  document.querySelector(".preloader_container").classList.toggle("invisible")
-})
 
 if (screen < 1023) {
   document.querySelector(
