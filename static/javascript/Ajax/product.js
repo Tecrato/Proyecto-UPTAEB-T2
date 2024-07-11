@@ -1,3 +1,6 @@
+document.querySelector('#iconReportInv').addEventListener('click', () => {
+  window.location.href = 'PDFInventario'
+})
 
 if (screen < 1023) {
   document.querySelector(
