@@ -2,23 +2,6 @@ Chart.defaults.color = "#888";
 Chart.defaults.borderColor = "#444";
 
 
-const hora = (f) => {
-    const fecha = new Date(f);
-    const horas = fecha.getHours();
-    const minutos = fecha.getMinutes();
-    const periodo = horas >= 12 ? "PM" : "AM";
-    const horas12 = horas % 12 || 12;
-    const horaFormateada = `${horas12}:${minutos < 10 ? `0${minutos}` : minutos} ${periodo}`;
-    return horaFormateada
-}
-const fecha = (f) => {
-    const fecha = new Date(f);
-    const dia = fecha.getDate();
-    const mes = fecha.getMonth() + 1;
-    const anio = fecha.getFullYear();
-    const fechaFormateada = `${dia}/${mes}/${anio}`;
-    return fechaFormateada
-}
 
 $.ajax({
     url: "api_estadisticas",
