@@ -708,6 +708,7 @@
 <script src="static/javaScript/Roles.js" defer></script>
 <script src="static/javaScript/Ajax/capital.js" defer></script>
 <script src="static/javaScript/Ajax/RegisterUser.js" defer></script>
+<script src="static/javaScript/Ajax/user.js" defer></script>
 
 
 

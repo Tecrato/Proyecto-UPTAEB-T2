@@ -63,6 +63,10 @@ function cambiar_pagina_ajax(dir, type, func, limit = 9, page=0) {
     });
 }
 
+
+generar_bitacora_general(page_general)
+generar_bitacora_personal(page_personal)
+
 $(".pag-btn-bitacora-general").click((ele) => {
     cambiar_pagina_ajax(
       ele.target.dataset["direccion"],
@@ -81,10 +85,6 @@ $(".pag-btn-bitacora-personal").click((ele) => {
       page_personal
     );
 });
-
-generar_bitacora_general(page_general)
-generar_bitacora_personal(page_personal)
-
 
 $.ajax({
     url: "api_caja",

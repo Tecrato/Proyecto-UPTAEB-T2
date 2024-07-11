@@ -142,4 +142,8 @@ function fecha(f) {
   const fechaFormateada = `${dia}/${mes}/${anio}`;
   return fechaFormateada
 }
-marcaAgua()
+try {
+  marcaAgua()
+} catch (error) {
+  null
+}

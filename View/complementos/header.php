@@ -16,14 +16,14 @@
     <link rel="stylesheet" href="static/css/responsive.dataTables.css">
     <link rel="stylesheet" href="static/css/introjs.min.css">
     <link rel="stylesheet" href="static/css/introjs-modern.css">
-    <script src="static/javaScript/librerias/jquery.js"></script>
-    <script src="static/javaScript/librerias/intro.min.js"></script>
-    <script src="static/javaScript/Tooltip-help.js" defer></script>
-    <script src="static/javaScript/librerias/uikit.js"></script>
-    <script src="static/javaScript/librerias/uikit-icons.js"></script>
+    <script src="static/javascript/librerias/jquery.js"></script>
+    <script src="static/javascript/librerias/intro.min.js"></script>
+    <script src="static/javascript/Tooltip-help.js" defer></script>
+    <script src="static/javascript/librerias/uikit.js"></script>
+    <script src="static/javascript/librerias/uikit-icons.js"></script>
     <script src="static/javascript/FuncionesGenerales.js" defer></script>
-    <script src="static/javaScript/Ajax/notification.js"defer></script>
-    <script src="static/javaScript/Color.js" defer></script>
+    <script src="static/javascript/Ajax/notification.js"defer></script>
+    <script src="static/javascript/Color.js" defer></script>
     <link rel="shortcut icon" href="static/images/logo_m.png" type="image/x-icon">
     <title id="title">Inventario-Inicio</title>
 </head>
