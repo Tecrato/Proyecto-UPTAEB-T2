@@ -1,24 +1,6 @@
 var template = ""
 var template2 = ""
 
-const hora = (f) => {
-        const fecha = new Date(f);
-        const horas = fecha.getHours();
-        const minutos = fecha.getMinutes();
-        const periodo = horas >= 12 ? "PM" : "AM";
-        const horas12 = horas % 12 || 12;
-        const horaFormateada = `${horas12}:${minutos < 10 ? `0${minutos}` : minutos} ${periodo}`;
-    return horaFormateada
-}
-const fecha = (f) => {
-    const fecha = new Date(f);
-    const dia = fecha.getDate();
-    const mes = fecha.getMonth() + 1;
-    const anio = fecha.getFullYear();
-    const fechaFormateada = `${dia}/${mes}/${anio}`;
-    return fechaFormateada
-}
-
 var page_general = 0
 var page_personal = 0
 

@@ -1,17 +1,21 @@
 <?php
 
-require('../Plugins/fpdf.php');
-require('../Controller/funcs/searchInventario.php');
+include("../funcs/verificar.php");
+require('../../Plugins/fpdf.php');
+require("../../Model/Conexion.php");
+require("../../Model/Productos.php");
+
+$clase = new Producto();
+$result = $clase->search_inventario();
+$result2 = $clase->search()[0];
 
 
 //CABECERA DEL INVENTARIO__________________________________________________________________________________
 
-class PDF extends FPDF
-{
-    function Header()
-    {
+class PDF extends FPDF {
+    function Header() {
         // $this->Image('../static/images/inventario2.png',0,0,210);
-        $this->Image('../static/images/inventario2-1-1.png',0,0,210);
+        $this->Image('../../static/images/inventario2-1-1.png',0,0,210);
     }
 }
 
@@ -51,7 +55,7 @@ $pdf->SetY(35);
 $pdf->SetX(112);
 $pdf->SetFillColor(16, 103, 51);
 $pdf->SetFont('Arial','B',10);
-$pdf->Cell(84,10,bcdiv($result2[0]['Total'],"1","2").' Bs',1,0,'C',1);
+$pdf->Cell(84,10,bcdiv($result2['stock']*$result2['precio_venta'],"1","2").' Bs',1,0,'C',1);
 
 //CABECERA DE LOS NOMBRES DE LAS COLUMNAS__________________________________________________________________________________
 

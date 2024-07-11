@@ -88,7 +88,7 @@
                                 <div class="uk-dropdown">
                                     <ul class="uk-nav uk-dropdown-nav">
                                         <li>
-                                            <form id="formPDF4" action="MaxMinPDF" method="POST" enctype="multipart/form-data">
+                                            <form id="formPDF4" action="PDFMaxMin" method="POST" enctype="multipart/form-data">
                                                 <input type="hidden" name="img" id="imgMax_png">
                                                 <input type="hidden" name="select" value="max_ventas">
                                                 <input type="submit" id="GenReport" value="Imprimir" style="display: none;">
@@ -116,7 +116,7 @@
                                 <div class="uk-dropdown">
                                     <ul class="uk-nav uk-dropdown-nav">
                                         <li>
-                                            <form id="formPDF5" action="MaxMinPDF" method="POST" enctype="multipart/form-data">
+                                            <form id="formPDF5" action="PDFMaxMin" method="POST" enctype="multipart/form-data">
                                                 <input type="hidden" name="img" id="imgMin_png">
                                                 <input type="hidden" name="select" value="min_ventas">
                                                 <button uk-icon="icon: file-pdf" type="submit">Generar reporte</button>
@@ -135,10 +135,7 @@
 
 </main>
 <script src="static/javaScript/librerias/chart.umd.js"></script>
-<script src="static/javaScript/librerias/jquery.js"></script>
 <script src="static/javaScript/graphicsController.js"></script>
-<script src="static/javascript/Color.js"></script>
-<script src="static/javaScript/Ajax/notification.js"></script>
 
 
 </body>

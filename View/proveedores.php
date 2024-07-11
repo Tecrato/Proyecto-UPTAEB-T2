@@ -157,12 +157,8 @@
 
 
 
-<script src="static/javaScript/librerias/jquery.js"></script>
-<script src="static/javascript/FuncionesGenerales.js"></script>
-<script src="static/javascript/Color.js"></script>
 <script src="Plugins/build/js/intlTelInput.js"></script>
 <script src="static/javascript/Ajax/supplier.js"></script>
-<script src="static/javaScript/Ajax/notification.js"></script>
 
 
 <script>

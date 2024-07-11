@@ -2,7 +2,7 @@
 $.ajax({
   url: "Controller/funcs_ajax/search.php",
   type: "GET",
-  data: { randomnautica: "ventas" , limite:500},
+  data: { randomnautica: "ventas" , limite:20},
   success: function (response) {
     console.log(response);
     let json = JSON.parse(response);
@@ -10,10 +10,10 @@ $.ajax({
     let template = "";
     json.lista.forEach((t) => {
 
-      let fecha = new Date(t.fecha)
-      let dia = fecha.getDate()
-      let mes = fecha.getMonth() + 1
-      let year = fecha.getFullYear()
+      let fecha2 = new Date(t.fecha)
+      let dia = fecha2.getDate()
+      let mes = fecha2.getMonth() + 1
+      let year = fecha2.getFullYear()
 
       template += ` <article id=${t.id}>
                       <div class="uk-flex uk-flex-between uk-flex-middle uk-background-secondary Target_factura" id=${t.id}>
@@ -48,13 +48,13 @@ $.ajax({
 
         //cada vez que pulsemos sobre una ficha, el iframe se recarga con la misma ruta, solo que se le ira cambiando el id de la factura
         let iframe = document.querySelector(".iframe");
-        iframe.src = `FacturaPDF?d=${tj.getAttribute("id")}`;
+        iframe.src = `PDFFactura?id=${tj.getAttribute("id")}`;
 
         let id = tj.getAttribute("id");
         document.querySelector(".n_factura").textContent = "N_FACTURA " + id;
         //hacemos la peticion,mandando el id al controlador como una variable por url
         $.ajax({
-          url: `Controller/funcs_ajax/print_factura.php?d=${id}`,
+          url: `PDFFactura?id=${id}`,
           type: "GET",
           success: function (response) {
             let json = JSON.parse(response);

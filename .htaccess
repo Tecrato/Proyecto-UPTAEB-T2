@@ -3,17 +3,18 @@ RewriteRule ^Administrar_perfil$ Controller/C_perfil.php
 RewriteRule ^Clientes$ Controller/C_clientes.php
 RewriteRule ^Detalles_factura$ Controller/C_viewFactura.php
 RewriteRule ^Estadisticas$ Controller/C_statistics.php
-RewriteRule ^FacturaPDF$ Controller/C_FacturaPDF.php
 RewriteRule ^Ventas$ Controller/C_Ventas.php
 RewriteRule ^Inicio$ Controller/C_index.php
-RewriteRule ^InventarioPDF$ Controller/C_InventarioPDF.php
-RewriteRule ^CierreCajaPDF$ Controller/C_CierreCaja.php
-RewriteRule ^MaxMinPDF$ Controller/C_MaxMinPDF.php
 RewriteRule ^login$ Controller/C_login.php
 RewriteRule ^Productos$ Controller/C_product.php
 RewriteRule ^Proveedores$ Controller/C_proveedores.php
 RewriteRule ^Salir$ Controller/funcs/logout.php
 
+
+RewriteRule ^PDFMaxMin$ Controller/pdfs/PDF_min_max.php
+RewriteRule ^PDFCierreCaja$ Controller/pdfs/PDF_cierre_caja.php
+RewriteRule ^PDFInventario$ Controller/pdfs/PDF_inventario.php
+RewriteRule ^PDFFactura$ Controller/pdfs/PDF_factura.php
 
 RewriteRule ^api_estadisticas$ Controller/funcs_ajax/estadisticas.php
 RewriteRule ^api_caja$ Controller/funcs_ajax/acciones_caja.php
