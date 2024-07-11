@@ -112,18 +112,14 @@ class Caja extends DB
 
     function totalMetodosPago(){
         $consulta = $this->conn->prepare('SELECT 
-            m.nombre,
-            SUM(p.monto) as monto
-
-            from pagos as p
-            JOIN metodo_pago as m ON p.id_metodo_pago=m.id
-
-            JOIN caja as c ON c.id=:id
-            JOIN registro_ventas as rv ON rv.id_caja=c.id
-
-            WHERE p.id_venta = rv.id
-            GROUP BY p.id_metodo_pago'
-        );
+                                        mp.nombre AS nombre,
+                                        COALESCE(SUM(sub.monto), 0) AS monto
+                                        FROM metodo_pago mp
+                                        LEFT JOIN (SELECT p.id_metodo_pago,p.monto
+                                        FROM pagos p
+                                        JOIN registro_ventas rv ON p.id_venta = rv.id
+                                        WHERE rv.id_caja = :id) sub ON mp.id = sub.id_metodo_pago
+                                        GROUP BY mp.nombre');
         $consulta->bindParam(':id', $this->id, PDO::PARAM_INT);
         $consulta->execute();
         return $consulta->fetchAll();
