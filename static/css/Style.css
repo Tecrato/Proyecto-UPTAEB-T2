@@ -140,7 +140,7 @@
     transition: 300ms ease;
 }
 .activeEmpty{
-    background-color: #fff;
+    background-color: #fff !important;
     color: #111 !important;
 }
 .activeExpire{
