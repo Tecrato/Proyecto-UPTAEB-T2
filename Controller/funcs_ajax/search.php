@@ -2,8 +2,9 @@
     // Con este archivo se buscan datos de ciertas maneras, dependiendo de lo que pase como "randomnautica"
     
     require('../../Model/Conexion.php');
-    require('../../Model/Permisos.php');
+    require('../../Model/Usuarios.php');
     include("../funcs/verificar.php");
+    require('../../Model/Permisos.php');
 
     if (isset($_GET['limite'])) {
         $limite = intval($_GET['limite']);

@@ -1,7 +1,7 @@
 <?php
-    include("./funcs/verificar.php");
     require('../Model/Conexion.php');
-    require("../Model/Usuarios.php");
+    require('../Model/Usuarios.php');
+    include("./funcs/verificar.php");
 
 
     echo '<script>var sesion_user_id = '.$_SESSION['user_id'].';</script>';

@@ -7,15 +7,17 @@
         private $hash;
         private $rol;
         private $semilla;
+        private $sesion_id;
 
 
-        function __construct($id=null, $nombre=null,$correo=null,$hash=null,$rol=null,$semilla=null){           
+        function __construct($id=null, $nombre=null,$correo=null,$hash=null,$rol=null,$semilla=null,$sesion_id=null){           
             $this->id = $id;
             $this->nombre = $nombre;
             $this->correo = $correo;
             $this->hash = $hash;
             $this->rol = $rol;
             $this->semilla = $semilla;
+            $this->sesion_id = $sesion_id;
             DB::__construct();
 
         }
@@ -94,11 +96,12 @@
             }
 
             $query->execute(); 
-            $this->add_bitacora($usuario,"Usuario","Modificar","Usuario "."$id"." Modificado");
+     /*        $this->add_bitacora($usuario,"Usuario","Modificar","Usuario "."$id"." Modificado"); */
         }
         public function login(){
-            $query = $this->conn->prepare('UPDATE usuarios SET active=1 WHERE id=:id');
+            $query = $this->conn->prepare('UPDATE usuarios SET active=1 , sesion_id=:sesion_id WHERE id=:id');
             $query->bindParam(':id',$this->id);
+            $query->bindParam(':sesion_id', $this->sesion_id);
             $query->execute();
         }
         function logout() {
