@@ -1,25 +1,44 @@
 <?php
 	class Configuracion extends DB {
-		function __construct(){
+        private $value;
+        private $key;
+		function __construct($key=null,$value=null) {
 			DB::__construct();
+
+            $this->value = $value;
+            $this->key = $key;
 		}
 
-        function setDolar($dolar) {
+        function actualizar($usuario) {
             
-            $query = "UPDATE configuracion SET dolar=:dolar";
-            $consulta = $this->conn->prepare($query);
-            $consulta->bindParam(':dolar',$dolar, PDO::PARAM_INT);
-            return 1;
+            $query = "UPDATE configuraciones SET valor=:valor WHERE llave=:llave";
+            $query = $this->conn->prepare($query);
+            $query->bindParam(':valor',$this->value, PDO::PARAM_STR);
+            $query->bindParam(':llave',$this->key, PDO::PARAM_STR);
+            $query->execute();
+			$this->add_bitacora($usuario,"Configuraciones","Modificar","Configuracion $this->key Modificada");
+
         }
-        function getDolar() {
+        function search($n=0, $limite=9) {
             
-            $query = "SELECT * FROM configuracion WHERE llave='dolar'";
-            $consulta = $this->conn->prepare($query);
-            $consulta->execute();
-            if ($consulta) {
-                return intval($consulta->fetch()['valor']);
+            $query = "SELECT * FROM configuraciones ";
+            if ($this->key != null) {
+                $query = $query." WHERE llave=:llave";
             }
-            return 0;
+            
+			$query .= " LIMIT :l OFFSET :n";
+            $query = $this->conn->prepare($query);
+
+            
+            $n = $n*$limite;
+			$query->bindParam(':l', $limite, PDO::PARAM_INT);
+			$query->bindParam(':n', $n, PDO::PARAM_INT);
+            if ($this->key != null) {
+                $query->bindParam(':llave',$this->key, PDO::PARAM_INT);
+            }
+            $query->execute();
+            $result = $query->fetchAll();
+            return $result;
         }
 	}
 ?>

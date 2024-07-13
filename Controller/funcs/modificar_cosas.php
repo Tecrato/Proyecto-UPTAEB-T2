@@ -62,7 +62,7 @@
     elseif ($tipo === 'usuario'){
         require('../../Model/Usuarios.php');
         $pass = isset($_POST["password"]) ? password_hash($_POST["password"],PASSWORD_DEFAULT) : null;
-        $clase = new Usuario($_POST["ID"],$_POST["nombre"],$_POST["correo"],$pass,isset($_POST["rol"]) ? $_POST["rol"] : null, substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, 20)); 
+        $clase = new Usuario($_POST["ID"],$_POST["nombre"],$_POST["correo"],$pass,isset($_POST["rol"]) ? $_POST["rol"] : null, $_POST["semilla"]); 
         $clase->actualizar($_SESSION['user_id']);
 
         if (isset($_POST['self'])) {
@@ -92,6 +92,11 @@
         require('../../Model/Metodos_pagos.php');
         $clase = new Metodo_pago($_POST["ID"],$_POST["nombre"]);
         $clase->actualizar($_SESSION['user_id'], $_POST["ID"]);
+    }
+    elseif ($tipo === 'configuraciones'){
+        require('../../Model/Configuraciones.php');
+        $clase = new Configuracion($_POST["llave"],$_POST["valor"]);
+        $clase->actualizar($_SESSION['user_id']);
     }
     
     echo json_encode(['status' => 'active']);

@@ -285,7 +285,7 @@
                                                     <div class="uk-flex uk-flex-between uk-margin-small-top">
                                                         <div class="uk-margin-large-right uk-text-bolder">TASA $ </div>
                                                         <div class="uk-flex uk-flex-middle">
-                                                            <p id="" class="Fact-price uk-text-success uk-margin-remove-bottom uk-text-bolder">36.02 Bs</p>
+                                                            <p id="Tasa_dolar_fact" class="Fact-price uk-text-success uk-margin-remove-bottom uk-text-bolder">36.02 Bs</p>
                                                         </div>
                                                     </div>
                                                 </div>

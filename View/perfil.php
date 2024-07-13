@@ -112,10 +112,10 @@
                                                                         ?>
                                                                         <div id="seedGenerator" class="uk-flex uk-margin-top">
                                                                             <p class="item-profile">Semilla</p>
-                                                                            <span  id="inpSeed" class="uk-article-meta uk-flex">
+                                                                            <span id="inpSeed" class="uk-article-meta uk-flex">
                                                                                 <input class="uk-input uk-form-small uk-form-width-medium uk-border-rounded input-seed" value="<?= $tu['semilla'] ?>" type="text">
                                                                                 <a>
-                                                                                <span id="seedInfo" class="uk-margin-small-left" uk-icon="icon: info; ratio: 1.2"></span>
+                                                                                    <span id="seedInfo" class="uk-margin-small-left" uk-icon="icon: info; ratio: 1.2"></span>
                                                                                 </a>
                                                                             </span>
                                                                         </div>
@@ -194,7 +194,7 @@
                                                                         <a href>Tipo de permiso <span uk-drop-parent-icon></span></a>
                                                                         <div class="uk-dropdown">
                                                                             <ul class="uk-nav uk-dropdown-nav">
-                                                                                <li uk-filter-control ><a href="#">Todo</a></li>
+                                                                                <li uk-filter-control><a href="#">Todo</a></li>
                                                                                 <li uk-filter-control="[data-tp='agregar']"><a href="#">Registrar</a></li>
                                                                                 <li uk-filter-control="[data-tp='modificar']"><a href="#">Modificar</a></li>
                                                                                 <li uk-filter-control="[data-tp='eliminar']"><a href="#">Eliminar</a></li>
@@ -466,7 +466,7 @@
                                                 <a href>Tipo de movimiento <span uk-drop-parent-icon></span></a>
                                                 <div class="uk-dropdown">
                                                     <ul class="uk-nav uk-dropdown-nav">
-                                                        <li uk-filter-control ><a href="#">Todo</a></li>
+                                                        <li uk-filter-control><a href="#">Todo</a></li>
                                                         <li uk-filter-control="[data-tm='Ingresos']"><a href="#">Ingresos</a></li>
                                                         <li uk-filter-control="[data-tm='Egresos']"><a href="#">Egresos</a></li>
                                                     </ul>
@@ -508,20 +508,24 @@
                                                     <div class="uk-flex uk-flex-between uk-flex-bottom">
                                                         <div>
                                                             <h3>PRECIO DEL DOLAR</h3>
-                                                            <section class="uk-flex uk-flex-middle uk-flex-wrap">
-                                                                <article class="uk-margin-right">
-                                                                    <label for="">DOLAR</label>
-                                                                </article>
-                                                                <article>
-                                                                    <input class="uk-input" type="number" name="" id="">
-                                                                </article>
-                                                                <article class="uk-margin-left">
-                                                                    <button class="uk-button uk-button-default">GUARDAR</button>
-                                                                </article>
-                                                            </section>
+                                                            <form id="form_dolar">
+                                                                <section class="uk-flex uk-flex-middle uk-flex-wrap">
+                                                                    <article class="uk-margin-right">
+                                                                        <label for="">DOLAR</label>
+                                                                    </article>
+                                                                    <article>
+                                                                        <input class="uk-input" type="number" name="valor">
+                                                                        <input type="hidden" name="llave" value="dolar">
+                                                                        <input type="hidden" name="tipo" value="configuraciones">
+                                                                    </article>
+                                                                    <article class="uk-margin-left">
+                                                                        <button class="uk-button uk-button-default" type="submit">GUARDAR</button>
+                                                                    </article>
+                                                                </section>
+                                                            </form>
                                                         </div>
                                                         <div>
-                                                            <button class="uk-button uk-button-default">ACTUALIZAR</button>
+                                                            <button class="uk-button uk-button-default btn-update-dolar">ACTUALIZAR</button>
                                                         </div>
                                                     </div>
 
@@ -529,22 +533,15 @@
                                                         <article class="uk-padding uk-margin-small uk-border-rounded" style="background-color: #333; width: 20%;">
                                                             <div>
                                                                 <h4 class="uk-text-center">TASA ACTUAL</h4>
-                                                                <h4 class="uk-text-center">37.00 BS</h4>
+                                                                <h4 id="DOLAR_DB" class="uk-text-center">38.00 BS</h4>
                                                                 <img src="./static/images/logo_letras-minimarket.png" alt="" style="width: 100%; min-width: 50%;">
                                                             </div>
                                                         </article>
                                                         <article class="uk-padding uk-margin-small uk-border-rounded" style="background-color: #333; width: 20%;">
                                                             <div>
                                                                 <h4 class="uk-text-center">TASA BCV</h4>
-                                                                <h4 class="uk-text-center">37.00 BS</h4>
+                                                                <h4 id="BCV_actual" class="uk-text-center">37.00 BS</h4>
                                                                 <img src="./static/images/bcv2.png" alt="" style="width: 100%; min-width: 50%;">
-                                                            </div>
-                                                        </article>
-                                                        <article class="uk-padding uk-margin-small uk-border-rounded" style="background-color: #333; width: 20%;">
-                                                            <div>
-                                                                <h4 class="uk-text-center">TASA PARALELO</h4>
-                                                                <h4 class="uk-text-center">37.00 BS</h4>
-                                                                <img src="./static/images/paralelo2.png" alt="" style="width: 100%; min-width: 50%;">
                                                             </div>
                                                         </article>
                                                     </section>

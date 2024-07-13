@@ -49,7 +49,14 @@
     }
 
     function search($n=0,$limite=9){
-        $query = "SELECT * FROM credito";
+        $query = "SELECT 
+        
+        FROM credito
+        INNER JOIN registro_ventas rv ON credito.id_rv = rv.id
+        INNER JOIN caja j ON rv.id_caja = j.id
+        INNER JOIN usuarios u ON j.id_usuario = u.id
+        INNER JOIN clientes c ON rv.id_cliente = c.id
+        ";
 
         if ($this->id != null){
             $query = $query." WHERE id=:id";

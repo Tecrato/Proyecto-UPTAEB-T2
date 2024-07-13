@@ -164,7 +164,7 @@ echo "
                     </div>
                     <div class="uk-margin-medium-right uk-flex uk-flex-middle">
                         <img class="uk-margin-small-right" src="static/images/bcv.png" alt="" width="28px" height="25px">
-                        <h5 class="uk-text-bolder uk-margin-remove" style="color: #fff;">BCV: <span id="BCV">35.85</span> BS</h5>
+                        <h5 class="uk-text-bolder uk-margin-remove" style="color: #fff;">BCV: <span id="BCV">0.00</span></h5>
                     </div>
                 </div>
             </marquee>

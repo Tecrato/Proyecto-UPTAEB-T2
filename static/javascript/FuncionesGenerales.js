@@ -1,5 +1,5 @@
 var page = 0;
-var dolar = 37
+var dolar
 
 
 window.addEventListener("load", () => {
@@ -99,6 +99,7 @@ let modal = "";
 //   // let btnImpr = (document.querySelector(".ImprBtn").href = "fd");
 // }
 
+<<<<<<< Updated upstream
 async function asyncfunc() {
   $.ajax({
     url: "https://ve.dolarapi.com/v1/dolares",
@@ -110,6 +111,108 @@ async function asyncfunc() {
 }
 asyncfunc()
 
+//funciones para modicar, insertar y eliminar clientes, proveedores
+
+const insertANDupdateCLient_proveedor = (FORM, NUMBER, TABLE, TYPE) => {
+
+  let inp = document.querySelector(NUMBER);
+  let iti = window.intlTelInput(inp, {
+    utilsScript: "Plugins/build/js/utils.js",
+  });
+  iti.setCountry("VE");
+
+  let form = document.querySelector(FORM);
+  let url = ""
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    if (insertOrUpdate == false) {
+      url = "Controller/funcs/agregar_cosas.php"
+    } else {
+      url = "Controller/funcs/modificar_cosas.php"
+    }
+
+    let countryData = iti.getSelectedCountryData();
+    let fullNumber = iti.getNumber();
+    let data = new FormData(form);
+    data.append("TLFNO", fullNumber);
+    $.ajax({
+      url: url,
+      type: "POST",
+      processData: false,
+      contentType: false,
+      data: data,
+      success: (response) => {
+        console.log(response);
+        let result = TABLE();
+        if (insertOrUpdate == false) {
+          UIkit.notification.closeAll();
+          UIkit.notification({
+            message: `<span uk-icon='icon: check'>${TYPE} Registrado correctamente</span>`,
+            status: "success",
+            pos: "bottom-right",
+          });
+        } else {
+          UIkit.notification.closeAll();
+          UIkit.notification({
+            message: `<span uk-icon='icon: check'>${TYPE} Modificado correctamente</span>`,
+            status: "success",
+            pos: "bottom-right",
+          });
+        }
+
+        setTimeout(() => {
+          UIkit.modal("#register_supplier").hide();
+        }, 400);
+
+        setTimeout(() => {
+          UIkit.modal("#agregar_client").hide();
+        }, 400);
+
+      },
+    });
+  });
+}
+
+const DeleteClientProv = (BTN, FORM, IDSETTER, TR, notification) => {
+  let btnDelete = document.querySelectorAll(BTN);
+  btnDelete.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      let id = btn.getAttribute("id");
+      document.querySelector(IDSETTER).setAttribute('value', id)
+      let form = document.querySelector(FORM);
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        let data = new FormData(form); 
+        $.ajax({
+          url: "Controller/funcs/borrar_cosas.php",
+          type: "POST",
+          processData: false,
+          contentType: false,
+          data: data,
+          success: (response) => {
+            let tr = TR()
+            UIkit.notification.closeAll();
+            UIkit.notification({
+              message: `<span uk-icon='icon: check'>${notification} Eliminado correctamente</span>`,
+              status: "success",
+              pos: "bottom-right",
+            });
+            setTimeout(() => {
+              UIkit.modal("#eliminar_supplier").hide();
+            },400)
+
+            setTimeout(() => {
+              UIkit.modal("#eliminar_cliente").hide();
+            },400)
+          }
+        })
+      })
+
+    })
+  })
+}
 
 $.ajax({
   url: "api_caja",
@@ -141,9 +244,4 @@ function fecha(f) {
   const anio = fecha.getFullYear();
   const fechaFormateada = `${dia}/${mes}/${anio}`;
   return fechaFormateada
-}
-try {
-  marcaAgua()
-} catch (error) {
-  null
 }

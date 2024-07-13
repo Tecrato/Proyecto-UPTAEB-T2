@@ -1,162 +1,8 @@
+DOLAR_DB("Tasa_dolar_fact")
 var pag_facturas = 0
-const targetFact = (num)=>{
-  pag_facturas = num
+
+function func(dolar) {
   $.ajax({
-    url: "Controller/funcs_ajax/search.php",
-    type: "GET",
-    data: { randomnautica: "ventas", n: pag_facturas, limite: 10 },
-    success: function (response) {
-      let json = JSON.parse(response)
-      let template = ""
-      json.lista.forEach((t)=>{
-        template += `
-        <div>
-      <div class="target-detail-fact uk-card uk-card-default uk-padding-small uk-background-secondary uk-light uk-border-rounded" style="width: 280px; background-color: #333;">
-          <div class="cont1_tar_fact" style="background-color: #333;">
-              <div class="uk-flex uk-flex-middle uk-flex-between">
-                  <div class="uk-flex uk-flex-middle">
-                      <img class="uk-margin-small-right" src="static/images/logo_m.png" alt="" width="50PX">
-                      <h3 class="uk-margin-remove uk-text-bolder">#${t.id}</h3>
-                  </div>
-              </div>
-  
-              <hr class="uk-margin-remove divider">
-  
-              <section>
-                  <div>
-                      <div>
-                          <div>
-                              <p class="uk-text-meta uk-margin-remove">N∘_OPERACIÓN: <b class="uk-text-success">${t.id}</b></p>
-                              <hr class="uk-margin-remove divider-2">
-  
-                              <p class="uk-text-meta uk-margin-remove">FECHA: <b class="uk-text-success">${fecha(t.fecha)}</b></p>
-  
-                              <hr class="uk-margin-remove divider-2">
-  
-                              <p class="uk-text-meta uk-margin-remove">CLIENTE: <b class="uk-text-success">${t.cliente_nombre + " " + t.cliente_apellido}</b></p>
-  
-                              <hr class="uk-margin-remove divider-2">
-  
-                              <p class="uk-text-meta uk-margin-remove">VENDEDOR: <b class="uk-text-success">${t.vendedor}</b></p>
-  
-                              <hr class="uk-margin-remove divider-2">
-  
-                              <p class="uk-text-meta uk-margin-remove">
-                                  ESTADO FACTURA: <b class="state-fact ${t.active == 0 ? "activeEmpty": "uk-text-emphasis"}">${t.active == 1 ? "PAGADO" : "CREDITO"}</b>
-                              </p>
-  
-                              <hr class="uk-margin-remove divider-2">
-  
-                              <p class="uk-text-meta uk-margin-remove">TOTAL FACTURA: <b class="uk-text-success">${t.monto_final} BS</b></p>
-                          </div>
-                      </div>
-                  </div>
-              </section>
-          </div>
-      </div>
-  </div>
-        `
-      })
-      $(".cont_ventas_target").html(template)
-      marcaAgua()
-    }
-  
-  })
-}
-targetFact()
-
-$(".pag-btn-facturas").click((ele) => {
-  cambiar_pagina_ajax(
-    ele.target.dataset["direccion"],
-    "ventas",
-    targetFact,
-    10,
-    pag_facturas
-  );
-});
-
-//aqui empieza la funcion para buscar los clientes
-//captamos el evento keyup del buscador
-document.getElementById("input-search-fact").addEventListener("keyup", (e) => {
-  //obtenemos el valor de lo que el usuario teclea
-  let val = e.target.value;
-  //si no esta vacio, entonces enviamos una solicitud ajax para buscar los clientes
-  if (val != "") {
-    $.ajax({
-      url: "Controller/funcs_ajax/search.php",
-      type: "GET",
-      data: { randomnautica: "clientes", like_cedula: val },
-      success: function (response) {
-        console.log(response);
-        let json = JSON.parse(response);
-        let LI = "";
-        //recorremos la respuesta del server y creamos el template de los li
-        json.lista.forEach((dato) => {
-          LI += `   <li class="Client_register" name="${dato.nombre + " " + dato.apellido
-            }" ci="${dato.cedula}" id="${dato.id}">
-                      <div class="uk-padding-remove-vertical uk-flex uk-flex-middle">
-                          <span class="uk-margin-small-right" uk-icon="user"></span>
-                          <p class="uk-margin-small">${dato.nombre + " " + dato.apellido
-            }</p>
-                      </div>
-                    </li>`;
-        });
-        document.getElementById("Client").innerHTML = LI;
-
-        let ClienteDetails = "";
-        //ahora que los resultados se imprimieron, procedemos a captar el evento click sobre las opciones que se imprimieron
-        const Clientes = document.querySelectorAll(".Client_register");
-
-        // Con esto recorremos todos los clientes cargados, y dependiendo de cual pulse, nos trae el nombre del cliente
-        // luego recorremos los datos del los clientes y el nombre lo comparamos con el extraido anteriormente
-        //si es igual, entonces remplaza el contenido de cliente-details por el nombre del usuario y la cedula
-
-        Clientes.forEach((date) => {
-          date.addEventListener("click", () => {
-            let name = date.getAttribute("name");
-            let CI = date.getAttribute("ci");
-            let ID = date.getAttribute("id");
-
-            ClienteDetails = ` 
-                              <div class="uk-flex uk-flex-column uk-flex-middle pointer" value="${ID}" >
-                                <a class="Bg-user" uk-icon="icon: user; ratio: 1"></a>
-                                <p class="uk-margin-remove uk-margin-small-bottom uk-text-meta">Cliente: <b>${name}</b></p>
-                                <p class="uk-margin-remove uk-text-meta">Cedula: <b>${CI}</b></p>
-                              </div>
-                            `;
-
-            document.getElementById("Client-datails").innerHTML =
-              ClienteDetails;
-          });
-        });
-
-        //esta validacion sirve para que cuando la respuesta del server sea vacia, cree un template para ese caso
-        if (json.lista.length == 0) {
-          document.getElementById("Client").innerHTML = `
-          <li>
-              <div class="uk-padding-remove-vertical uk-flex uk-flex-middle">
-                  <span class="uk-margin-small-right" uk-icon="history"></span>
-                  <p class="uk-margin-small">no se encontro resultado</p>
-              </div>
-              <div class="uk-padding-remove-vertical uk-flex uk-flex-middle">
-                <div class="uk-flex uk-flex-center uk-margin-small-top" style="width: 100%;">
-                    <a href="Clientes" class="uk-button uk-button-default">Registrar Cliente</a>
-                </div>
-              </div>
-          </li>`;
-        }
-      },
-    });
-  } else {
-    //si el usuario no teclea nada, osea el input se encuentra vacio, el container sera vacio
-    document.getElementById("Client").innerHTML = "";
-  }
-});
-
-document.getElementById("nameVendedor").textContent = session_user_name
-
-//ajax
-$.ajax({
   url: "Controller/funcs_ajax/search.php",
   type: "GET",
   data: { randomnautica: "productos" },
@@ -174,6 +20,8 @@ $.ajax({
     const InsertarProductos = () => {
       productos.forEach((producto) => {
         //esta condicion es para que agg el tr, pero modificando el tamaño del input de cantidad, para que se vea bien en versiones mobiles
+        
+        console.log(dolar);
         if (screen >= 1100) {
           tr += `
           <tr value="${producto.id}" class="TR-Product uk-light">
@@ -195,7 +43,7 @@ $.ajax({
                   <button class="uk-icon-button ButtonPlus" uk-icon="plus"></button>
               </td>
               <td style="display: none">
-                  <input type="hidden" value="${(producto.precio_venta / dolar).toFixed(2)}">
+                  <input type="hidden" value="${(producto.precio_venta / parseFloat(dolar)).toFixed(2)}">
               </td>
           </tr>
       `;
@@ -268,6 +116,7 @@ $.ajax({
         let IvaStatus = algo.getAttribute("iva");
         let cantidadProduct = parseFloat(algo.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent)
         let valor$ = parseFloat(algo.parentElement.nextElementSibling.getAttribute('value') * cantidadProduct)
+        console.log(algo.parentElement.nextElementSibling);
         priceDolar += valor$
         if (IvaStatus == 0) {
           let precioUndTotal = parseFloat(algo.parentElement.previousElementSibling.textContent);
@@ -299,8 +148,8 @@ $.ajax({
       let totalAPagar = totalAPagarParcial + iva;
 
       //obtenemos el contenedor del total
-      let total = (document.getElementById("totalFact").textContent = totalAPagar.toFixed(2) + " BS");
-      let total$ = (document.getElementById("totalFact$").textContent = (priceDolar).toFixed(2) + " $");
+      (document.getElementById("totalFact").textContent = totalAPagar.toFixed(2) + " BS");
+      (document.getElementById("totalFact$").textContent = (priceDolar).toFixed(2) + " $");
       document.querySelector(".amount_MP").textContent = totalAPagar.toFixed(2) + " BS"
 
 
@@ -557,6 +406,8 @@ $.ajax({
           //seleccionamos todos los select
           let amount = []
           let INP = document.querySelectorAll(".AMOUNT-MP")
+          let totalDebito = document.querySelector(".amount_MP")
+
           INP.forEach((B) => {
 
             // captamos el evento de keyup, osea si el usuario teclea sobre el input
@@ -567,17 +418,20 @@ $.ajax({
                 bool = true
               }
 
-              //obtenemos el id del pago
-              let valor = B.value == "" ? 0 : parseFloat(B.value)
-              console.log(valor);
-              // ActualizarTotal()
-              let valor2 = parseFloat(B.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.textContent)
-              // if (B.previousElementSibling.value == "Divisa" && valor2 != 0) {
-              //   B.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.textContent = (valor2 -(valor * dolar)).toFixed(2)
-              // } else
-              if (valor2 != 0 && B.value != "") {
-                B.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.textContent = (valor2 - valor).toFixed(2)
-              }
+              let amount = []
+
+              INP.forEach((B) => {
+                amount.push(B.value)
+              })
+              console.log(totalDebito);
+              console.log(amount);
+              let result = 0
+              amount.forEach((a) => {
+                let number = a == "" ? 0 : parseFloat(a)
+                result += number
+              })
+              let valor = totalDebito - result
+              totalDebito.textContent =  valor
             })
           })
 
@@ -596,15 +450,15 @@ $.ajax({
               // amount.pop()
               let result = 0
 
-              // console.log(amount);
-              // amount.forEach((a) => {
-              //   let number = a == "" ? 0 : parseFloat(a)
-              //   result += number
-              // })
+              console.log(amount);
+              amount.forEach((a) => {
+                let number = a == "" ? 0 : parseFloat(a)
+                result += number
+              })
 
-              // console.log(result);
+              console.log(result);
 
-              // console.log(btn.parentElement.parentElement.parentElement);
+              console.log(btn.parentElement.parentElement.parentElement);
 
             })
           })
@@ -649,8 +503,6 @@ $.ajax({
     let btnCreateFact = document.querySelector(".btnCreateFact");
 
     btnCreateFact.addEventListener("click", () => {
-    console.log(credito);
-
       let tipoPago = document.querySelector(".cont_metodos_pagos").childElementCount
       let TotalRestar = parseFloat(document.querySelector(".amount_MP").textContent)
 
@@ -805,3 +657,164 @@ $.ajax({
       });
   },
 });
+}
+
+const targetFact = (num) => {
+  pag_facturas = num
+  $.ajax({
+    url: "Controller/funcs_ajax/search.php",
+    type: "GET",
+    data: { randomnautica: "ventas", n: pag_facturas, limite: 10 },
+    success: function (response) {
+      let json = JSON.parse(response)
+      let template = ""
+      json.lista.forEach((t) => {
+        template += `
+        <div>
+      <div class="target-detail-fact uk-card uk-card-default uk-padding-small uk-background-secondary uk-light uk-border-rounded" style="width: 280px; background-color: #333;">
+          <div class="cont1_tar_fact" style="background-color: #333;">
+              <div class="uk-flex uk-flex-middle uk-flex-between">
+                  <div class="uk-flex uk-flex-middle">
+                      <img class="uk-margin-small-right" src="static/images/logo_m.png" alt="" width="50PX">
+                      <h3 class="uk-margin-remove uk-text-bolder">#${t.id}</h3>
+                  </div>
+              </div>
+  
+              <hr class="uk-margin-remove divider">
+  
+              <section>
+                  <div>
+                      <div>
+                          <div>
+                              <p class="uk-text-meta uk-margin-remove">N∘_OPERACIÓN: <b class="uk-text-success">${t.id}</b></p>
+                              <hr class="uk-margin-remove divider-2">
+  
+                              <p class="uk-text-meta uk-margin-remove">FECHA: <b class="uk-text-success">${fecha(t.fecha)}</b></p>
+  
+                              <hr class="uk-margin-remove divider-2">
+  
+                              <p class="uk-text-meta uk-margin-remove">CLIENTE: <b class="uk-text-success">${t.cliente_nombre + " " + t.cliente_apellido}</b></p>
+  
+                              <hr class="uk-margin-remove divider-2">
+  
+                              <p class="uk-text-meta uk-margin-remove">VENDEDOR: <b class="uk-text-success">${t.vendedor}</b></p>
+  
+                              <hr class="uk-margin-remove divider-2">
+  
+                              <p class="uk-text-meta uk-margin-remove">
+                                  ESTADO FACTURA: <b class="state-fact ${t.active == 0 ? "activeEmpty" : "uk-text-emphasis"}">${t.active == 1 ? "PAGADO" : "CREDITO"}</b>
+                              </p>
+  
+                              <hr class="uk-margin-remove divider-2">
+  
+                              <p class="uk-text-meta uk-margin-remove">TOTAL FACTURA: <b class="uk-text-success">${t.monto_final} BS</b></p>
+                          </div>
+                      </div>
+                  </div>
+              </section>
+          </div>
+      </div>
+  </div>
+        `
+      })
+      $(".cont_ventas_target").html(template)
+      marcaAgua()
+    }
+
+  })
+}
+targetFact()
+
+$(".pag-btn-facturas").click((ele) => {
+  cambiar_pagina_ajax(
+    ele.target.dataset["direccion"],
+    "ventas",
+    targetFact,
+    10,
+    pag_facturas
+  );
+});
+
+//aqui empieza la funcion para buscar los clientes
+//captamos el evento keyup del buscador
+document.getElementById("input-search-fact").addEventListener("keyup", (e) => {
+  //obtenemos el valor de lo que el usuario teclea
+  let val = e.target.value;
+  //si no esta vacio, entonces enviamos una solicitud ajax para buscar los clientes
+  if (val != "") {
+    $.ajax({
+      url: "Controller/funcs_ajax/search.php",
+      type: "GET",
+      data: { randomnautica: "clientes", like_cedula: val },
+      success: function (response) {
+        console.log(response);
+        let json = JSON.parse(response);
+        let LI = "";
+        //recorremos la respuesta del server y creamos el template de los li
+        json.lista.forEach((dato) => {
+          LI += `   <li class="Client_register" name="${dato.nombre + " " + dato.apellido
+            }" ci="${dato.cedula}" id="${dato.id}">
+                      <div class="uk-padding-remove-vertical uk-flex uk-flex-middle">
+                          <span class="uk-margin-small-right" uk-icon="user"></span>
+                          <p class="uk-margin-small">${dato.nombre + " " + dato.apellido
+            }</p>
+                      </div>
+                    </li>`;
+        });
+        document.getElementById("Client").innerHTML = LI;
+
+        let ClienteDetails = "";
+        //ahora que los resultados se imprimieron, procedemos a captar el evento click sobre las opciones que se imprimieron
+        const Clientes = document.querySelectorAll(".Client_register");
+
+        // Con esto recorremos todos los clientes cargados, y dependiendo de cual pulse, nos trae el nombre del cliente
+        // luego recorremos los datos del los clientes y el nombre lo comparamos con el extraido anteriormente
+        //si es igual, entonces remplaza el contenido de cliente-details por el nombre del usuario y la cedula
+
+        Clientes.forEach((date) => {
+          date.addEventListener("click", () => {
+            let name = date.getAttribute("name");
+            let CI = date.getAttribute("ci");
+            let ID = date.getAttribute("id");
+
+            ClienteDetails = ` 
+                              <div class="uk-flex uk-flex-column uk-flex-middle pointer" value="${ID}" >
+                                <a class="Bg-user" uk-icon="icon: user; ratio: 1"></a>
+                                <p class="uk-margin-remove uk-margin-small-bottom uk-text-meta">Cliente: <b>${name}</b></p>
+                                <p class="uk-margin-remove uk-text-meta">Cedula: <b>${CI}</b></p>
+                              </div>
+                            `;
+
+            document.getElementById("Client-datails").innerHTML =
+              ClienteDetails;
+          });
+        });
+
+        //esta validacion sirve para que cuando la respuesta del server sea vacia, cree un template para ese caso
+        if (json.lista.length == 0) {
+          document.getElementById("Client").innerHTML = `
+          <li>
+              <div class="uk-padding-remove-vertical uk-flex uk-flex-middle">
+                  <span class="uk-margin-small-right" uk-icon="history"></span>
+                  <p class="uk-margin-small">no se encontro resultado</p>
+              </div>
+              <div class="uk-padding-remove-vertical uk-flex uk-flex-middle">
+                <div class="uk-flex uk-flex-center uk-margin-small-top" style="width: 100%;">
+                    <a href="Clientes" class="uk-button uk-button-default">Registrar Cliente</a>
+                </div>
+              </div>
+          </li>`;
+        }
+      },
+    });
+  } else {
+    //si el usuario no teclea nada, osea el input se encuentra vacio, el container sera vacio
+    document.getElementById("Client").innerHTML = "";
+  }
+});
+
+document.getElementById("nameVendedor").textContent = session_user_name
+
+//ajax
+
+DOLAR_RV(func)

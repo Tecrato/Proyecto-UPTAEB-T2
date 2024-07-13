@@ -105,7 +105,12 @@ btnAggMetodoPago.addEventListener('click', () => {
                     //seleccionamos el contenedor de los tipos de pago en la izquierda, y removemos al hijo
                     cont.removeChild(btn.parentElement.parentElement)
                     let valor2 = btn.previousElementSibling.value
-                    let valor = parseFloat(totalCredito.textContent) + parseFloat(valor2)
+                    if (valor2 == "") {
+                        valor2 = 0
+                    } else {
+                        valor2 = parseFloat(valor2)
+                    }
+                    let valor = parseFloat(totalCredito.textContent) + valor2
                     totalCredito.textContent = valor
                 })
             })

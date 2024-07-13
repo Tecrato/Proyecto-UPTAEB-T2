@@ -1,6 +1,8 @@
 <?php
     // Con este archivo se buscan datos de ciertas maneras, dependiendo de lo que pase como "randomnautica"
-    
+
+use PSpell\Config;
+
     require('../../Model/Conexion.php');
     require('../../Model/Usuarios.php');
     include("../funcs/verificar.php");
@@ -99,6 +101,12 @@
     }
     elseif ($_GET['randomnautica'] == "usuario") {
         $clase = new Usuario();
+    }
+    elseif ($_GET['randomnautica'] == "configuraciones") {
+        require('../../Model/Configuraciones.php');
+        $clase = new Configuracion(
+            key:(isset($_GET['llave']) ? $_GET['llave'] : null)
+        );
     }
     elseif ($_GET['randomnautica'] === 'notificaciones'){
         require('../../Model/Notificaciones.php');
