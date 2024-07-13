@@ -21,7 +21,7 @@
         die();
 	}
 	$clase2 = new Registro_ventas(null,$var->monto_final,$var->id_cliente, $ultima_caja['0'],$var->IVA,$var->active);
-	$result = $clase2->agregar($_SESSION['user_id'], $var->detalles, $var->pagos, $var->credito, $var->fecha_inicio_credito, $var->fecha_cierre_credito);
+	$result = $clase2->agregar($_SESSION['user_id'], $var->detalles, $var->pagos, $var->credito, $var->fecha_inicio_credito, $var->fecha_cierre_credito,$var->monto_dolar);
 	
 	if ($result == 1) {
 		echo json_encode(['status' => 'active']);

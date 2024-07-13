@@ -48,18 +48,39 @@
         return $this->conn->query("SELECT COUNT(*) as 'total' FROM credito")->fetch()['total'];
     }
 
+    function pagar($usuario,$pagos){
+        $query = $this->conn->prepare("UPDATE credito SET active=0 WHERE id=:id");
+        $query->bindParam(':id',$this->id);
+        $query->execute();
+        
+        for ($i = 0; $i < count($pagos); $i++) {
+            $lista = $pagos[$i];
+            $clase_f = new Pago(null, $this->id_rv, $lista->metodo, $lista->monto);
+            $clase_f->agregar($usuario);
+        }
+        $this->add_bitacora($usuario,"Credito","Pagar","Credito".$this->id." Pagado");
+    }
+
     function search($n=0,$limite=9){
         $query = "SELECT 
-        
-        FROM credito
-        INNER JOIN registro_ventas rv ON credito.id_rv = rv.id
+        cr.id,
+        rv.id id_rv,
+        rv.fecha fecha_inicio,
+        cr.fecha_limite,
+        cr.monto_final,
+        c.nombre,
+        c.apellido,
+        rv.active status
+        FROM credito cr
+        INNER JOIN registro_ventas rv ON cr.id_rv = rv.id
         INNER JOIN caja j ON rv.id_caja = j.id
         INNER JOIN usuarios u ON j.id_usuario = u.id
         INNER JOIN clientes c ON rv.id_cliente = c.id
+        WHERE 1
         ";
 
         if ($this->id != null){
-            $query = $query." WHERE id=:id";
+            $query = $query." and cr.id=:id";
         }
         $n = $n*$limite;
         

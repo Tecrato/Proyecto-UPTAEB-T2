@@ -67,7 +67,7 @@
             $query->execute();
             return $query->fetchAll();
 		}
-        function agregar($usuario, $datos, $pagos, $credito, $fecha_inicio, $fecha_vencimiento) {
+        function agregar($usuario, $datos, $pagos, $credito, $fecha_inicio, $fecha_vencimiento,$monto_dolar) {
             try {
 
                 $this->conn->beginTransaction();
@@ -85,7 +85,7 @@
                 $query->bindParam(':id1', $this->id_cliente, PDO::PARAM_INT);
                 $query->bindParam(':id2', $this->id_caja, PDO::PARAM_INT);
                 $query->bindParam(':iva', $this->IVA, PDO::PARAM_STR);
-                $query->bindParam(':active', $this->IVA, PDO::PARAM_STR);
+                $query->bindParam(':active', $this->active, PDO::PARAM_STR);
                 $query->execute();
 
 
@@ -98,7 +98,7 @@
                 }
 
                 if ($credito == true) {
-                    $clase5 = new Credito(null, $registro['id'], $fecha_vencimiento, 0);
+                    $clase5 = new Credito(null, $registro['id'], $fecha_vencimiento, $monto_dolar);
                     $clase5->agregar($usuario);
                 }
                 else {

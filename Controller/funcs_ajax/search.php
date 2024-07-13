@@ -90,7 +90,9 @@ use PSpell\Config;
     }
     elseif ($_GET['randomnautica'] == "credito") {
         require('../../Model/Credito.php');
-        $clase = new Credito();
+        $clase = new Credito(
+            id:(isset($_GET['ID']) ? $_GET['ID'] : null),
+        );
     }
     elseif ($_GET['randomnautica'] == "permiso") {  
         $clase = new Permiso(id_usuario:(isset($_GET['ID']) ? $_GET['ID'] : null));

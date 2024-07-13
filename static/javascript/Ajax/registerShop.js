@@ -418,20 +418,31 @@ function func(dolar) {
                 bool = true
               }
 
-              let amount = []
+              // let amount = []
 
-              INP.forEach((B) => {
-                amount.push(B.value)
-              })
-              console.log(totalDebito);
-              console.log(amount);
-              let result = 0
-              amount.forEach((a) => {
-                let number = a == "" ? 0 : parseFloat(a)
-                result += number
-              })
-              let valor = totalDebito - result
-              totalDebito.textContent =  valor
+              // INP.forEach((B) => {
+              //   amount.push(B.value)
+              // })
+              // console.log(totalDebito);
+              // console.log(amount);
+              // let result = 0
+              // amount.forEach((a) => {
+              //   let number = a == "" ? 0 : parseFloat(a)
+              //   result += number
+              // })
+              // let valor = totalDebito - result
+              // totalDebito.textContent =  valor
+
+              let valor = B.value == "" ? 0 : parseFloat(B.value)
+              console.log(valor);
+              // ActualizarTotal()
+              let valor2 = parseFloat(B.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.textContent)
+              // if (B.previousElementSibling.value == "Divisa" && valor2 != 0) {
+              //   B.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.textContent = (valor2 -(valor * dolar)).toFixed(2)
+              // } else
+              if (valor2 != 0 && B.value != "") {
+                B.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.textContent = (valor2 - valor).toFixed(2)
+              }
             })
           })
 
@@ -518,6 +529,7 @@ function func(dolar) {
         IVA: parseFloat(document.getElementById("iva").textContent).toFixed(2),
         IGTF: parseFloat(document.getElementById("IGTF").textContent).toFixed(2),
         monto_final: parseFloat(document.getElementById("totalFact").textContent).toFixed(2),
+        monto_dolar: parseFloat(document.getElementById("totalFact$").textContent),
         credito: checkCredito.checked,
         fecha_inicio_credito: document.querySelector('.fecha_inicio_credito').value,
         fecha_cierre_credito: document.querySelector('.fecha_cierre_credito').value,

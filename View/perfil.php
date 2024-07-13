@@ -514,7 +514,7 @@
                                                                         <label for="">DOLAR</label>
                                                                     </article>
                                                                     <article>
-                                                                        <input class="uk-input" type="number" name="valor">
+                                                                        <input class="uk-input" type="number" step="0.1" name="valor">
                                                                         <input type="hidden" name="llave" value="dolar">
                                                                         <input type="hidden" name="tipo" value="configuraciones">
                                                                     </article>

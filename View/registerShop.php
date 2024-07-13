@@ -327,19 +327,8 @@
                             <th>Accion</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Jose</td>
-                            <td>10/06/2024</td>
-                            <td>18/06/2024</td>
-                            <td>
-                                <div class="activeEmpty uk-border-rounded" style="padding: 5px; width: 50%">PENDIENTE</div>
-                            </td>
-                            <td>
-                                <a uk-toggle href="#credito_page" class="uk-button uk-button-default">PAGAR</a>
-                            </td>
-                        </tr>
+                    <tbody id="Tbody_credito">
+                        
 
                     </tbody>
                 </table>
@@ -352,6 +341,7 @@
                     <div class="uk-modal-header uk-flex">
                         <h2 class="uk-modal-title">PAGAR CREDITO: </h2>
                         <h2 class="uk-margin-remove-top total_credito">2000.00 Bs</h2>
+                        <h5 class="uk-margin-remove-top total_credito_bs uk-text-meta">0.00 Bs</h5>
                     </div>
                     <div class="uk-modal-body">
                         <section>
