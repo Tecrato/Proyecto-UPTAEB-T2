@@ -101,10 +101,10 @@ let modal = "";
 
 async function asyncfunc() {
   $.ajax({
-    url: "https://exchangemonitor.net/ajax/widget-unique",
-    data: { "country": "ve", "type": "bcv" },
+    url: "https://ve.dolarapi.com/v1/dolares",
     success: function(response) {
-      document.getElementById('BCV').textContent = JSON.parse(response).price
+      console.log(response);
+      document.getElementById('BCV').textContent = response[0].promedio
     }
   })
 }
