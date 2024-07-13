@@ -4,11 +4,10 @@ const targetFact = (num)=>{
   $.ajax({
     url: "Controller/funcs_ajax/search.php",
     type: "GET",
-    data: { randomnautica: "ventas", p: pag_facturas, limite: 10 },
+    data: { randomnautica: "ventas", n: pag_facturas, limite: 10 },
     success: function (response) {
       let json = JSON.parse(response)
       let template = ""
-      console.log(num);
       json.lista.forEach((t)=>{
         template += `
         <div>
@@ -43,7 +42,7 @@ const targetFact = (num)=>{
                               <hr class="uk-margin-remove divider-2">
   
                               <p class="uk-text-meta uk-margin-remove">
-                                  ESTADO FACTURA: <b class="state-fact uk-text-emphasis">${t.active == 1 ? "PAGADO" : "CREDITO"}</b>
+                                  ESTADO FACTURA: <b class="state-fact ${t.active == 0 ? "activeEmpty": "uk-text-emphasis"}">${t.active == 1 ? "PAGADO" : "CREDITO"}</b>
                               </p>
   
                               <hr class="uk-margin-remove divider-2">

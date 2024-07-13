@@ -11,7 +11,6 @@
     </link>
     <link rel="stylesheet" href="static/css/loader.css">
     <link rel="stylesheet" href="static/css/uikit.css">
-    <link rel="stylesheet" href="static/css/Style.css">
     <link rel="stylesheet" href="static/css/dataTables.css">
     <link rel="stylesheet" href="static/css/responsive.dataTables.css">
     <link rel="stylesheet" href="static/css/introjs.min.css">
@@ -20,6 +19,7 @@
     <script src="static/javascript/librerias/intro.min.js"></script>
     <script src="static/javascript/Tooltip-help.js" defer></script>
     <script src="static/javascript/librerias/uikit.js"></script>
+    <link rel="stylesheet" href="static/css/Style.css">
     <script src="static/javascript/librerias/uikit-icons.js"></script>
     <script src="static/javascript/FuncionesGenerales.js" defer></script>
     <script src="static/javascript/Ajax/notification.js"defer></script>
