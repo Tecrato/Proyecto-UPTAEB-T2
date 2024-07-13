@@ -23,7 +23,7 @@
     $result = $c->search();
     
     if (count($result) != 1) {
-        header('Location: ../../login?err=4');
+        header('Location: ../../login?err=3');
     }
     /* else if ($result[0]['active'] == 1){
         header('Location: ../../login?err=3');

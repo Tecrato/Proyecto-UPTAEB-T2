@@ -97,8 +97,7 @@
         require('../../Model/Capital.php');
         $clase = new Capital();
     }
-    elseif ($_GET['randomnautica'] == "usuario") {  
-        require('../../Model/Usuarios.php');
+    elseif ($_GET['randomnautica'] == "usuario") {
         $clase = new Usuario();
     }
     elseif ($_GET['randomnautica'] === 'notificaciones'){

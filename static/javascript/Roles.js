@@ -6,7 +6,6 @@ const cargarPermisos = () => {
         success: function (response) {
             let template = ""
             let json = JSON.parse(response);
-            console.log(json);
             json.lista.forEach((e) => {
                 template += `
                                 <tr data-tp="${e.permiso}">
