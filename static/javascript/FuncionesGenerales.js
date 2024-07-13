@@ -18,7 +18,7 @@ function cambiar_pagina_ajax(dir, type, func, limit = 9, pagina=null) {
     type: "GET",
     success: (response) => {
       page = parseInt(response);
-      func();
+      func(page);
     },
   });
 }

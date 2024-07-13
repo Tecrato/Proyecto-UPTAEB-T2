@@ -31,7 +31,7 @@
     elseif ($type == 'ventas') {
         require('../../Model/Registro de ventas.php');
         $vart = new Registro_ventas();
-        $todos = $vart->COUNT($active);
+        $todos = $vart->COUNT();
     }
 
     if ($dir == 'next' && $page < ceil($todos / $pagination)-1){

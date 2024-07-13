@@ -3,7 +3,15 @@
     overflow-y: auto;
     width: 280px;
 }
-
+.btn_pdf{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #999;
+}
+.btn_pdf:hover{
+    color: #666;
+}
 .holz{
     left: -50px !important;
 }

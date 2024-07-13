@@ -20,7 +20,7 @@
         exit(0);
         die();
 	}
-	$clase2 = new Registro_ventas(null,$var->monto_final,$var->id_cliente, $ultima_caja['0'],$var->IVA);
+	$clase2 = new Registro_ventas(null,$var->monto_final,$var->id_cliente, $ultima_caja['0'],$var->IVA,$var->active);
 	$result = $clase2->agregar($_SESSION['user_id'], $var->detalles, $var->pagos, $var->credito, $var->fecha_inicio_credito, $var->fecha_cierre_credito);
 	
 	if ($result == 1) {

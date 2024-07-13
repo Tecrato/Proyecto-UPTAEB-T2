@@ -7,7 +7,7 @@
         private $IVA;
         private $active;
 
-        function __construct($id=null, $monto_final=null,$id_cliente=null,$id_caja=null,$IVA=null,$active=1){
+        function __construct($id=null, $monto_final=null,$id_cliente=null,$id_caja=null,$IVA=null,$active=null){
             $this->id = $id;
             $this->monto_final = $monto_final;
             $this->id_cliente = $id_cliente;
@@ -28,7 +28,8 @@
             b.cedula cliente_cedula,
             d.nombre vendedor,
             a.IVA,
-            c.id id_caja
+            c.id id_caja,
+            a.active
             FROM registro_ventas a 
             INNER JOIN clientes b ON b.id = a.id_cliente
             INNER JOIN caja c ON c.id = a.id_caja
@@ -53,7 +54,6 @@
             $query = $this->conn->prepare($query);
 
             $n = $n*$limite;
-            $query->bindParam(':active',$this->active, PDO::PARAM_BOOL);
             $query->bindParam(':l',$limite, PDO::PARAM_INT);
             $query->bindParam(':n',$n, PDO::PARAM_INT);
 
@@ -80,11 +80,12 @@
                 }
                 $this->conn->commit();
 
-                $query = $this->conn->prepare("INSERT INTO registro_ventas (monto_final, id_cliente, id_caja, IVA, active) VALUES(:monto, :id1, :id2, :iva,1)");
+                $query = $this->conn->prepare("INSERT INTO registro_ventas (monto_final, id_cliente, id_caja, IVA, active) VALUES(:monto, :id1, :id2, :iva,:active)");
                 $query->bindParam(':monto', $this->monto_final);
                 $query->bindParam(':id1', $this->id_cliente, PDO::PARAM_INT);
                 $query->bindParam(':id2', $this->id_caja, PDO::PARAM_INT);
                 $query->bindParam(':iva', $this->IVA, PDO::PARAM_STR);
+                $query->bindParam(':active', $this->IVA, PDO::PARAM_STR);
                 $query->execute();
 
 
@@ -125,7 +126,7 @@
 
 
         function COUNT(){
-            $query = $this->conn->prepare("SELECT COUNT(*) as 'total' FROM registro_ventas WHERE active=1");
+            $query = $this->conn->prepare("SELECT COUNT(*) as 'total' FROM registro_ventas");
             $query->execute();
             return $query->fetch()['total'];
         }

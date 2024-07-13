@@ -24,6 +24,12 @@ const getDataColors = () => {
   return `rgb(${numer1},${numer2},${numer3})`
 }
 
+const captureChart = (ChartId, InputId) => {
+  var canvas = document.getElementById(ChartId);
+  var imgData = canvas.toDataURL('image/png');
+  document.getElementById(InputId).value = imgData;
+}
+
 
 const printChart = () => {
   renderModelsChart1();
@@ -66,6 +72,10 @@ const renderModelsChart1 = () => {
 
 
       let chart = new Chart("ratioChart", { type: "bar", data });
+      document.getElementById('formPDF1').addEventListener('submit', function () {
+        captureChart('ratioChart', 'imgRatio_png');
+      });
+
     }
   })
 };
@@ -116,7 +126,9 @@ const renderModelsChart2 = () => {
         },
       };
       new Chart("gananciasChart", { type: "line", data, options });
-
+      document.getElementById('formPDF2').addEventListener('submit', function () {
+        captureChart('gananciasChart', 'imgGanancia_png');
+      });
     }
   })
 };
@@ -156,19 +168,19 @@ const renderModelsChart3 = () => {
           for (const value of label) {
             value2.push(json.lista[0][value])
           }
-           
+
 
           $.ajax({
             url: "api_estadisticas",
             type: "GET",
             data: { select: "rotacion_inventario" },
             success: function (response) {
-    
+
               let json = JSON.parse(response);
               for (const value of label) {
                 value3.push(json.lista[0][value])
               }
-               
+
               const data = {
                 labels: label,
                 datasets: [
@@ -196,19 +208,15 @@ const renderModelsChart3 = () => {
                 ],
               };
               new Chart("inventoryRotationChart", { type: "line", data });
-
+              document.getElementById('formPDF2').addEventListener('submit', function () {
+                captureChart('inventoryRotationChart', 'imgRotacion_png');
+              });
             }
           })
-
-
-
         }
       })
     }
   })
-
-
-
 };
 
 const renderModelsChart4 = () => {
@@ -249,27 +257,14 @@ const renderModelsChart4 = () => {
       };
 
       let chart = new Chart("masVendidosChart", { type: "pie", data, options });
-      function captureChart() {
-        var canvas = document.getElementById('masVendidosChart');
-        var imgData = canvas.toDataURL('image/png');
-        document.getElementById('imgMax_png').value = imgData;
-      }
+
 
       // Capturar el gráfico cuando se envía el formulario
       document.getElementById('formPDF4').addEventListener('submit', function () {
-
-        captureChart();
-        Chart.defaults.color = "#000";
+        captureChart('masVendidosChart', 'imgMax_png');
       });
     }
   })
-
-
-
-
-
-
-
 };
 
 const renderModelsChart5 = () => {
@@ -312,17 +307,9 @@ const renderModelsChart5 = () => {
 
       new Chart("menosVendidosChart", { type: "pie", data, options });
 
-      function captureChart() {
-        var canvas = document.getElementById('menosVendidosChart');
-        var imgData = canvas.toDataURL('image/png');
-        document.getElementById('imgMin_png').value = imgData;
-      }
-
       // Capturar el gráfico cuando se envía el formulario
       document.getElementById('formPDF5').addEventListener('submit', function () {
-
-        captureChart();
-        Chart.defaults.color = "#000";
+        captureChart('menosVendidosChart', 'imgMin_png');
       });
     }
   })

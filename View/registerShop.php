@@ -86,15 +86,11 @@
                             <div class="container_marca_agua">
                                 <img class="marca_agua" src="static/images/logo_letras-minimarket.png" alt="">
                             </div>
-                            <div class="[email protected] uk-grid-medium uk-flex-center dataTable2 height_controller" uk-grid uk-height-match="target: > div > .uk-card">
+                            <div class="[email protected] cont_ventas_target uk-grid-medium uk-flex-center dataTable2 height_controller" uk-grid uk-height-match="target: > div > .uk-card">
                                 <!-- ****************** Ficha de la factura ****************** -->
-                                <?php
-                                for ($i = 0; $i < count($result); $i++) {
-                                    $row = $result[$i];
-                                    require 'complementos/tarjeta_venta.php';
-                                }
-                                ?>
+                              
                             </div>
+                            
                         </section>
 
 
@@ -305,11 +301,11 @@
 
 
                         <div class="uk-flex uk-flex-center">
-                            <ul class="uk-pagination uk-margin-large-top" style="align-items: baseline;">
-                                <li><a class="pag-btn-facturas uk-text-decoration-none" data-direccion="start"><span class="uk-margin-small-right" uk-pagination-previous></span><span class="uk-margin-small-right" uk-pagination-previous></span></a></li>
-                                <li><a class="pag-btn-facturas uk-text-decoration-none" data-direccion="back">Previous</a></li>
-                                <li><a class="pag-btn-facturas uk-text-decoration-none" data-direccion="next">Next</a></li>
-                                <li><a class="pag-btn-facturas uk-text-decoration-none" data-direccion="end"><span class="uk-margin-small-left" uk-pagination-next></span><span class="uk-margin-small-left" uk-pagination-next></span></a></li>
+                            <ul class="uk-pagination uk-margin-large-top">
+                                <li><a class="pag-btn-facturas" data-direccion="start"><span class="uk-margin-small-right" uk-pagination-previous></span><span class="uk-margin-small-right" uk-pagination-previous></span></a></li>
+                                <li><a class="pag-btn-facturas" data-direccion="back">Previous</a></li>
+                                <li><a class="pag-btn-facturas" data-direccion="next">Next</a></li>
+                                <li><a class="pag-btn-facturas" data-direccion="end"><span class="uk-margin-small-left" uk-pagination-next></span><span class="uk-margin-small-left" uk-pagination-next></span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -471,16 +467,9 @@
 </main>
 
 <script src="static/javaScript/librerias/hammer.min.js"></script>
-<script src="static/javascript/Ajax/registerShop.js"></script>
-<script src="static/javascript/Ajax/caja.js"></script>
-<script src="static/javascript/Ajax/credito.js"></script>
-
-
-<script>
-    $('.pag-btn-facturas').click(ele => {
-        cambiar_pagina_php(ele.target.dataset['direccion'], 'ventas', 9)
-    })
-</script>
+<script src="static/javascript/Ajax/registerShop.js" defer></script>
+<script src="static/javascript/Ajax/caja.js"  defer></script>
+<script src="static/javascript/Ajax/credito.js" defer></script>
 
 
 </body>

@@ -1,9 +1,80 @@
-//aqui creamos los modales donde se hara la factura, cada modal dependiendo de la resolucion
-//este es el de version de ordenador
+var pag_facturas = 0
+const targetFact = (num)=>{
+  pag_facturas = num
+  $.ajax({
+    url: "Controller/funcs_ajax/search.php",
+    type: "GET",
+    data: { randomnautica: "ventas", p: pag_facturas, limite: 10 },
+    success: function (response) {
+      let json = JSON.parse(response)
+      let template = ""
+      console.log(num);
+      json.lista.forEach((t)=>{
+        template += `
+        <div>
+      <div class="target-detail-fact uk-card uk-card-default uk-padding-small uk-background-secondary uk-light uk-border-rounded" style="width: 280px; background-color: #333;">
+          <div class="cont1_tar_fact" style="background-color: #333;">
+              <div class="uk-flex uk-flex-middle uk-flex-between">
+                  <div class="uk-flex uk-flex-middle">
+                      <img class="uk-margin-small-right" src="static/images/logo_m.png" alt="" width="50PX">
+                      <h3 class="uk-margin-remove uk-text-bolder">#${t.id}</h3>
+                  </div>
+              </div>
+  
+              <hr class="uk-margin-remove divider">
+  
+              <section>
+                  <div>
+                      <div>
+                          <div>
+                              <p class="uk-text-meta uk-margin-remove">N∘_OPERACIÓN: <b class="uk-text-success">${t.id}</b></p>
+                              <hr class="uk-margin-remove divider-2">
+  
+                              <p class="uk-text-meta uk-margin-remove">FECHA: <b class="uk-text-success">${fecha(t.fecha)}</b></p>
+  
+                              <hr class="uk-margin-remove divider-2">
+  
+                              <p class="uk-text-meta uk-margin-remove">CLIENTE: <b class="uk-text-success">${t.cliente_nombre + " " + t.cliente_apellido}</b></p>
+  
+                              <hr class="uk-margin-remove divider-2">
+  
+                              <p class="uk-text-meta uk-margin-remove">VENDEDOR: <b class="uk-text-success">${t.vendedor}</b></p>
+  
+                              <hr class="uk-margin-remove divider-2">
+  
+                              <p class="uk-text-meta uk-margin-remove">
+                                  ESTADO FACTURA: <b class="state-fact uk-text-emphasis">${t.active == 1 ? "PAGADO" : "CREDITO"}</b>
+                              </p>
+  
+                              <hr class="uk-margin-remove divider-2">
+  
+                              <p class="uk-text-meta uk-margin-remove">TOTAL FACTURA: <b class="uk-text-success">${t.monto_final} BS</b></p>
+                          </div>
+                      </div>
+                  </div>
+              </section>
+          </div>
+      </div>
+  </div>
+        `
+      })
+      $(".cont_ventas_target").html(template)
+      marcaAgua()
+    }
+  
+  })
+}
+targetFact()
 
-//luego lo insertamos con el resto del codigo HTML que tiene el contenedor
-// let contenedor = document.querySelector("#Container-modal-full");
-// contenedor.innerHTML += modal;
+$(".pag-btn-facturas").click((ele) => {
+  cambiar_pagina_ajax(
+    ele.target.dataset["direccion"],
+    "ventas",
+    targetFact,
+    10,
+    pag_facturas
+  );
+});
 
 //aqui empieza la funcion para buscar los clientes
 //captamos el evento keyup del buscador
@@ -547,10 +618,11 @@ $.ajax({
     let checkCredito = document.querySelector(".credito_check")
     $('.formCredito').hide()
 
-
+    let credito = 1
     checkCredito.addEventListener("change", () => {
 
       if (checkCredito.checked == true) {
+        credito = 0
         $('.cont_metodos_pagos').hide()
         $('.btn_agg_metodoPago').hide()
         $('.amount_MP').hide()
@@ -562,6 +634,7 @@ $.ajax({
 
 
       } else {
+        credito = 1
         $('.cont_metodos_pagos').show()
         $('.btn_agg_metodoPago').show()
         $('.amount_MP').show()
@@ -577,6 +650,8 @@ $.ajax({
     let btnCreateFact = document.querySelector(".btnCreateFact");
 
     btnCreateFact.addEventListener("click", () => {
+    console.log(credito);
+
       let tipoPago = document.querySelector(".cont_metodos_pagos").childElementCount
       let TotalRestar = parseFloat(document.querySelector(".amount_MP").textContent)
 
@@ -595,6 +670,7 @@ $.ajax({
         credito: checkCredito.checked,
         fecha_inicio_credito: document.querySelector('.fecha_inicio_credito').value,
         fecha_cierre_credito: document.querySelector('.fecha_cierre_credito').value,
+        active: credito,
         detalles: [],
         pagos: []
       };
@@ -664,9 +740,7 @@ $.ajax({
           data: { jsonString },
           success: function (response) {
             console.log(response);
-            // setTimeout(()=> {
-            //   window.location = 'http://localhost/Proyecto-UPTAEB-T2/Ventas'
-            // },2000)
+            targetFact()
             let json = JSON.parse('{' + response.split('{')[1]);
             if (json.error == "Caja Error") {
               UIkit.notification.closeAll();
