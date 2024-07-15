@@ -1,5 +1,7 @@
 <?php
-    require_once("../../Model/conexion.php");
+    require('../../Model/Conexion.php');
+    require('../../Model/Usuarios.php');
+    include("../funcs/verificar.php");
     require_once("../../Model/Credito.php");
     require_once("../../Model/Pagos.php");
 
