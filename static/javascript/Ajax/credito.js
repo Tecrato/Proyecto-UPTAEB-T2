@@ -37,16 +37,17 @@ const metodoPago = () => {
 
                 // Crear la plantilla HTML para el nuevo método de pago
                 let template = `<div>
-                              <div class="uk-flex uk-flex-around">
-                                  <select class="uk-select selectMetodoPago2 uk-form-small" name="" id="" style="background-color: transparent; border: transparent; width: 150px;">
-                                      <option disabled>TIPO DE PAGO</option>
-                                      ${availableOptions.map(option => `<option value="${option.id}">${option.nombre}</option>`).join('')}
-                                  </select>
-                                  <input class="uk-input uk-form-small uk-form-width-small AMOUNT-MP2" placeholder="Monto" type="text" style="background-color: transparent; border: transparent;">
-                                   <button class="btn-deleteMP2" uk-icon="trash"></button> 
-                              </div>
-                              <hr class="uk-margin-remove">
-                          </div>`
+                                    <div class="uk-flex uk-flex-around">
+                                        <select class="uk-select selectMetodoPago2 uk-form-small" name="" id="" style="background-color: transparent; border: transparent; width: 150px;">
+                                            <option disabled>TIPO DE PAGO</option>
+                                            ${availableOptions.map(option => `<option name="${option.nombre}" value="${option.id}">${option.nombre}</option>`).join('')}
+                                        </select>
+                                        <input class="uk-input uk-form-small uk-form-width-small AMOUNT-MP2" placeholder="Monto" type="text" style="background-color: transparent; border: transparent;">
+                                        <button class="btn-deleteMP2" uk-icon="trash"></button> 
+                                        <button uk-icon="check" type="button"></button> 
+                                    </div>
+                                    <hr class="uk-margin">
+                                </div>`
 
 
                 let contMetodos = document.querySelector(".inputPago")
@@ -80,27 +81,39 @@ const metodoPago = () => {
                             let amount = []
 
                             INP.forEach((B) => {
-                                amount.push(B.value)
-                            })
+                                if (B.previousElementSibling.children.namedItem("Divisa")) {
+                                    let Divisa = B.previousElementSibling.children.namedItem("Divisa").value
+                                    if (B.previousElementSibling.value == Divisa) {
+                                        let dola = parseFloat(parseFloat(B.value) * parseFloat(document.getElementById("BCV").textContent))
+                                        amount.push(dola)
+                                    } else {
+                                        amount.push(B.value)
+                                    }
+                                } else {
+                                    amount.push(B.value)
+                                }
 
+
+                            })
                             let result = 0
                             amount.forEach((a) => {
                                 let number = a == "" ? 0 : parseFloat(a)
                                 result += number
                             })
-                            let valor = parseFloat(totalCredito.textContent) - result
-                            totalCredito.textContent = valor.toFixed(2)
+                            document.querySelector(".total_pago_credito").textContent = result + ' Bs'
+                            if (parseFloat(document.querySelector(".total_credito_bs").textContent.slice(13, Infinity)) != result) {
+                                document.querySelector(".total_pago_credito").classList.remove("succesc")
+                                document.querySelector(".total_pago_credito").classList.add("danger")
+                            } else if (parseFloat(document.querySelector(".total_credito_bs").textContent.slice(13, Infinity)) == result) {
+                                document.querySelector(".total_pago_credito").classList.remove("danger")
+                                document.querySelector(".total_pago_credito").classList.add("succesc")
+                            }
 
-                            let dolar = document.getElementById("BCV").textContent
 
-                            document.querySelector(".total_credito_bs").textContent = parseFloat(dolar) * parseFloat(totalCredito.textContent)
                         })
                     })
                 }
                 calcularTotal()
-
-
-
 
 
                 //esta parte es para eliminar un registro en los tipos de pago
@@ -110,20 +123,34 @@ const metodoPago = () => {
                     btn.addEventListener('click', () => {
                         //seleccionamos el contenedor de los tipos de pago en la izquierda, y removemos al hijo
                         cont.removeChild(btn.parentElement.parentElement)
-                        let valor2 = btn.previousElementSibling.value
-                        if (valor2 == "") {
-                            valor2 = 0
+                        if (btn.previousElementSibling.previousElementSibling.children.namedItem("Divisa")) {
+                            let divisa = btn.previousElementSibling.previousElementSibling.children.namedItem("Divisa").value
+                            if (btn.previousElementSibling.previousElementSibling.value == divisa) {
+                                let desc = parseFloat(document.querySelector(".total_pago_credito").textContent)
+                                let dola = btn.previousElementSibling.value == "" ? 0 : parseFloat(btn.previousElementSibling.value) * parseFloat(document.getElementById("BCV").textContent)
+                                document.querySelector(".total_pago_credito").textContent = (desc - dola).toFixed(2) + ' Bs'
+                                calcularTotal()
+                            } else {
+                                let result = btn.previousElementSibling.value == "" ? 0 : parseFloat(btn.previousElementSibling.value)
+                                let desc = parseFloat(document.querySelector(".total_pago_credito").textContent)
+                                document.querySelector(".total_pago_credito").textContent = (desc - result).toFixed(2) + ' Bs'
+                                if (parseFloat(document.querySelector(".total_pago_credito").textContent) == 0) {
+                                    document.querySelector(".total_pago_credito").classList.remove("succesc")
+                                    document.querySelector(".total_pago_credito").classList.remove("danger")
+                                }
+                            }
                         } else {
-                            valor2 = parseFloat(valor2)
+                            let result = btn.previousElementSibling.value == "" ? 0 : parseFloat(btn.previousElementSibling.value)
+                            let desc = parseFloat(document.querySelector(".total_pago_credito").textContent)
+                            document.querySelector(".total_pago_credito").textContent = (desc - result).toFixed(2) + ' Bs'
+                            calcularTotal()
                         }
-                        let valor = (parseFloat(totalCredito.textContent) + valor2).toFixed(2)
-                        totalCredito.textContent = valor
+                        if (parseFloat(document.querySelector(".total_pago_credito").textContent) == 0) {
+                            document.querySelector(".total_pago_credito").classList.remove("succesc")
+                            document.querySelector(".total_pago_credito").classList.remove("danger")
+                        }
                     })
                 })
-
-
-
-
             }
         })
     })
@@ -138,11 +165,10 @@ $.ajax({
         let json = JSON.parse(response);
         let template = ""
         console.log(json);
-
         json.lista.forEach((f) => {
             template += `
             
-            <tr id="${f.id}">
+            <tr id_rv="${f.id_rv}" id="${f.id}">
                 <td>${f.id}</td>
                 <td>${f.nombre + " " + f.apellido}</td>
                 <td>${fecha(f.fecha_inicio)}</td>
@@ -163,28 +189,34 @@ $.ajax({
         btn.forEach((btn) => {
             btn.addEventListener("click", (e) => {
                 let id = btn.parentElement.parentElement.getAttribute("id")
-                console.log(id);
                 $.ajax({
                     url: "Controller/funcs_ajax/search.php",
                     type: "GET",
                     data: { randomnautica: "credito", ID: id },
                     success: function (response) {
                         let json = JSON.parse(response);
-                        totalCredito.textContent = json.lista[0].monto_final
-                        document.querySelector(".total_credito_bs").textContent = parseFloat(document.getElementById("BCV").textContent) * parseFloat(totalCredito.textContent)
+                        totalCredito.textContent = "Total en $: " + json.lista[0].monto_final
+                        document.querySelector(".total_credito_bs").textContent = "Total en Bs: " + parseFloat(document.getElementById("BCV").textContent) * parseFloat(json.lista[0].monto_final)
                         metodoPago()
 
-                        let jf = []
+                        let btn_credito_pago = document.querySelector(".btn_pagar_credito")
+                        btn_credito_pago.addEventListener("click", () => {
+                            let jf = []
+                            let n = document.querySelectorAll(".AMOUNT-MP2")
+                            n.forEach((B) => {
+                                let value_input = B.value == "" ? 0 : B.value
+                                let value_Tpago = B.previousElementSibling.value
 
-                        let n = document.querySelectorAll(".AMOUNT-MP2")
-                        n.forEach((B) => {
-                            console.log(B);
+                                jf.push({
+                                    pago: value_Tpago,
+                                    monto: value_input
+                                })
+                            })
+                            console.log(jf);
                         })
                     }
                 })
             })
         })
-
-
     }
 })
