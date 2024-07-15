@@ -1,19 +1,21 @@
 <?php
     session_start();
-    require("./verificar_admin_funcs.php");
+    // require("./verificar_admin_funcs.php");
     require 'subir_imagen.php';
     $tipo = $_POST['tipo']; // Depende de que es lo que queramos insertar
 
     require('../../Model/Conexion.php');
     require('../../Model/Permisos.php');
 
-    
-    $other_class = new Permiso(null,$_SESSION['user_id'],$_POST['tipo'],'agregar');
-    $result = $other_class->search();
+    print_r($_POST);
+    // $other_class = new Permiso(null,$_SESSION['user_id'],$_POST['tipo'],'agregar');
+    // $result = $other_class->search();
 
-    if ($_SESSION['rol_num'] > 1 and count($result) <= 0) {
-        echo json_encode(['status' => 'error','error'=>'Permiso Error (bueno ps)']);
-    }
+    // if ($_SESSION['rol_num'] > 1 and count($result) <= 0) {
+    //     echo json_encode(['status' => 'error','error'=>'Permiso Error (bueno ps)']);
+    //     exit(0);
+    //     die();
+    // }
 
     if ($tipo === 'producto'){
         if ($_FILES['imagen1']['name'] != "") {
@@ -61,9 +63,8 @@
         require('../../Model/Usuarios.php');
         $hash = password_hash($_POST["password"],PASSWORD_DEFAULT);
         $clase = new Usuario(null,$_POST["nombre"],$_POST["correo"],$hash,$_POST["rol"],substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, 20)); 
-        $clase->agregar($_SESSION['user_id']);
-        exit(0);
-        die();
+        $clase->agregar(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : -1);
+        
     }
     elseif ($tipo === 'unidad'){
         require('../../Model/Unidades.php');

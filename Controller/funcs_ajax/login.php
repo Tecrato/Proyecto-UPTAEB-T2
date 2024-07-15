@@ -8,7 +8,7 @@
     $correo = $_POST["correo"];
     $password = $_POST["password"];
     
-    $c = new Usuario(null,null,$correo,$password);
+    $c = new Usuario(null,null,$correo);
     $result = $c->search();
 
     if (count($result) != 1) {
