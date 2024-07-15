@@ -10,6 +10,8 @@ const SetRegister = document.querySelector(".SetRegister");
 const recuperarPass = document.querySelector(".recuperarPass");
 const registerSystem = document.querySelector(".registerSystem");
 
+var val = ""
+
 recuperarPass.addEventListener("click", () => {
     login.classList.toggle('display-none')
     SetPassword.classList.toggle('display-none')
@@ -62,19 +64,6 @@ document.getElementById("forget-pass").addEventListener("click", () => {
 });
 
 
-//semilla
-
-// let btnGenerate = document.querySelector(".btn-generate")
-
-// btnGenerate.addEventListener("click", () => {
-//     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-//     let result = '';
-//     for (let i = 0; i < 20; i++) {
-//       result += characters.charAt(Math.floor(Math.random() * characters.length));
-//     }
-//     document.querySelector(".input-seed").value = result
-
-// })
 let valid_pass = document.querySelector(".valid-pass");
 
 let icon_eye = document.querySelector(".controller_icon_eye");
@@ -115,50 +104,48 @@ function validarContrasena(contrasena) {
         return "La contraseña debe cumplir con los siguientes requisitos:\n" + mensajes.join("\n");
     }
 }
+const formRegisterUser = document.getElementById("formRegisterUser")
 
-valid_pass.addEventListener("keyup", (e) => {
-    let val = e.target.value;
-    const resultado = validarContrasena(val);
-    document.querySelector("#msj").textContent = resultado;
+formRegisterUser.addEventListener("submit", (e) => {
+    e.preventDefault();
+    let data = new FormData(formRegisterUser);
+    data.append("tipo", "usuarios")
 
-    if (validarContrasena(val) == "La contraseña es válida.") {
-
-        let formRegisterUser = document.getElementById("formRegisterUser")
-
-        formRegisterUser.addEventListener("submit", (e) => {
-            e.preventDefault();
-            let data = new FormData(formRegisterUser);
-            data.append("tipo", "usuarios")
-
-            //peticion para registrar el usuario
+    if (validarContrasena(val) != "La contraseña es válida.") {
+        document.querySelector("#msj").textContent = resultado;
+        return
+    }
+    //peticion para registrar el usuario
+    $.ajax({
+        url: "Controller/funcs/agregar_cosas.php",
+        type: "POST",
+        data: data,
+        contentType: false,
+        processData: false,
+        success: (response) => {
             $.ajax({
-                url: "Controller/funcs/agregar_cosas.php",
+                url: "Controller/funcs_ajax/login.php",
                 type: "POST",
                 data: data,
                 contentType: false,
                 processData: false,
                 success: (response) => {
-                    $.ajax({
-                        url: "Controller/funcs_ajax/login.php",
-                        type: "POST",
-                        data: data,
-                        contentType: false,
-                        processData: false,
-                        success: (response) => {
-                            (response);
-                            if (response == "1") {
-                                window.location = "http://localhost/Proyecto-UPTAEB-T2/Administrar_perfil"
-                                localStorage.setItem("intro", "true")
-                            } else {
-                                window.location = "http://localhost/Proyecto-UPTAEB-T2/login"
-                            }
-                        }
-                    })
+                    (response);
+                    if (response == "1") {
+                        window.location = "http://localhost/Proyecto-UPTAEB-T2/Administrar_perfil"
+                        localStorage.setItem("intro", "true")
+                    } else {
+                        window.location = "http://localhost/Proyecto-UPTAEB-T2/login"
+                    }
                 }
             })
-        })
-    } else {
-        document.querySelector("#msj").textContent = resultado;
-    }
+        }
+    })
+})
+valid_pass.addEventListener("keyup", (e) => {
+    val = e.target.value;
+    const resultado = validarContrasena(val);
+    document.querySelector("#msj").textContent = resultado;
+
 })
 

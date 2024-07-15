@@ -13,8 +13,6 @@
 
     if ($_SESSION['rol_num'] > 1 and count($result) <= 0) {
         echo json_encode(['status' => 'error','error'=>'Permiso Error (bueno ps)']);
-        exit(0);
-        die();
     }
 
     if ($tipo === 'producto'){
