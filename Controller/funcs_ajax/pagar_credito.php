@@ -5,7 +5,9 @@
     require_once("../../Model/Credito.php");
     require_once("../../Model/Pagos.php");
 
-    $clase = new Credito(null,$_POST["id_rv"]);
+
+    print_r($_POST);
+    $clase = new Credito(null,id_rv:$_POST["id_rv"]);
 
     $clase->pagar($_SESSION['user_id'],$_POST["pagos"]);
 
