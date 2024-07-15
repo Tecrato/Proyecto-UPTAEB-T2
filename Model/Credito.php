@@ -49,13 +49,13 @@
     }
 
     function pagar($usuario,$pagos){
-        $query = $this->conn->prepare("UPDATE credito SET active=0 WHERE id=:id");
-        $query->bindParam(':id',$this->id);
+        $query = $this->conn->prepare("UPDATE credito SET status=0 WHERE id_rv=:id");
+        $query->bindParam(':id',$this->id_rv);
         $query->execute();
         
         for ($i = 0; $i < count($pagos); $i++) {
             $lista = $pagos[$i];
-            $clase_f = new Pago(null, $this->id_rv, $lista->metodo, $lista->monto);
+            $clase_f = new Pago(null, $this->id_rv, $lista["metodo"], $lista['monto']);
             $clase_f->agregar($usuario);
         }
         $this->add_bitacora($usuario,"Credito","Pagar","Credito".$this->id." Pagado");
@@ -70,7 +70,7 @@
         cr.monto_final,
         c.nombre,
         c.apellido,
-        rv.active status
+        cr.status
         FROM credito cr
         INNER JOIN registro_ventas rv ON cr.id_rv = rv.id
         INNER JOIN caja j ON rv.id_caja = j.id

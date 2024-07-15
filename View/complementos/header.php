@@ -37,6 +37,14 @@ echo "
     <link rel="shortcut icon" href="static/images/logo_m.png" type="image/x-icon">
     <title id="title">Inventario-Inicio</title>
 </head>
+<?php
+echo "
+<script>var session_user_id = " . $_SESSION['user_id'] . "</script>
+<script>var session_user_name = '" . $_SESSION['user_name'] . "'</script>
+<script>var session_user_rol = '" . $_SESSION['rol'] . "'</script>
+<script>var session_user_rol_num = '" . $_SESSION['rol_num'] . "'</script>
+"
+?>
 <?php require("../View/complementos/loader.php"); ?>
 <body class="Bg-Main-home controller-modal">
 
