@@ -1,11 +1,27 @@
-const fetchCapital = () => {
+var page_mov_capital = 0
+var total_mov_capital = 0
+
+
+$(".pag-btn-movimiento-capital").click((ele) => {
+    cambiar_pagina_ajax(
+        ele.target.dataset["direccion"],
+        fetchCapital,
+        10,
+        page_mov_capital,
+        total_mov_capital
+    );
+});
+
+function fetchCapital(page){
+    page_mov_capital = page
     $.ajax({
         url: "Controller/funcs_ajax/search.php",
         type: "GET",
-        data: { randomnautica: "capital" },
+        data: { randomnautica: "capital", n: page_mov_capital, limite: 10},
         success: function (response) {
             let template = '';
             let json = JSON.parse(response);
+            total_mov_capital = json['total']
             json.lista.forEach(element => {
                 template += `
                         <tr data-tm="${(element.monto).toString().slice(0, 1) == '-' ? 'Egresos' : 'Ingresos'}">
@@ -15,15 +31,16 @@ const fetchCapital = () => {
                             <td>${element.fecha}</td>
                         </tr>
                     `;
-                // element.monto.slice(0,1)
             });
             $("#tableCapital").html(template);
 
         }
     });
 }
-fetchCapital()
-const detailsCapital = () => {
+
+fetchCapital(0)
+
+function detailsCapital(){
     $.ajax({
         url: "Controller/funcs_ajax/search.php",
         type: "GET",

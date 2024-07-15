@@ -1,5 +1,7 @@
-DOLAR_DB("Tasa_dolar_fact")
 var pag_facturas = 0
+var total_facturas = 0
+
+DOLAR_DB("Tasa_dolar_fact")
 
 function func(dolar) {
   $.ajax({
@@ -7,8 +9,7 @@ function func(dolar) {
   type: "GET",
   data: { randomnautica: "productos" },
   success: function (response) {
-    let producto = JSON.parse(response);
-    let productos = producto.lista;
+    let productos = JSON.parse(response).lista;
 
     // aqui seleccionamos el contenedor de la tabla de la izquierda, es decir el tbody donde luego insertaremos los tr
     const ContainerTr = document.getElementById("Product-detail-1");
@@ -676,9 +677,10 @@ const targetFact = (num) => {
   $.ajax({
     url: "Controller/funcs_ajax/search.php",
     type: "GET",
-    data: { randomnautica: "ventas", n: pag_facturas, limite: 10 },
+    data: { randomnautica: "ventas", n: pag_facturas, limite: 9 },
     success: function (response) {
       let json = JSON.parse(response)
+      total_facturas = json.total
       let template = ""
       json.lista.forEach((t) => {
         template += `
@@ -735,15 +737,15 @@ const targetFact = (num) => {
 
   })
 }
-targetFact()
+targetFact(0)
 
 $(".pag-btn-facturas").click((ele) => {
   cambiar_pagina_ajax(
     ele.target.dataset["direccion"],
-    "ventas",
     targetFact,
-    10,
-    pag_facturas
+    9,
+    pag_facturas,
+    total_facturas
   );
 });
 

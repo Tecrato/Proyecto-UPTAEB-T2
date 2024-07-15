@@ -13,7 +13,7 @@
         private $like;
 
 
-        function __construct($id=null, $nombre=null,$razon_social=null,$rif=null,$telefono=null,$correo=null,$direccion=null,$active=1,$like=''){
+        function __construct($id=null, $nombre=null,$razon_social=null,$rif=null,$telefono=null,$correo=null,$direccion=null,$active=null,$like=''){
             $this->id = $id;
             $this->nombre = $nombre;
             $this->razon_social = $razon_social;
@@ -69,10 +69,13 @@
 
         // Con esta otra funcion se busca entre los productos en la base de datos
         function search($n=0,$limite=9){
-            $query = "SELECT * FROM proveedores WHERE active=:active AND razon_social LIKE :como";
+            $query = "SELECT * FROM proveedores WHERE razon_social LIKE :como";
 
             if ($this->id != null){
                 $query = $query." AND id=:id";
+            }
+            if ($this->active != null){
+                $query = $query." AND active=:active ";
             }
             $n = $n*$limite;
 
@@ -80,14 +83,17 @@
 
             $consulta = $this->conn->prepare($query);
 
-            $consulta->bindParam(':active',$this->active, PDO::PARAM_INT);
             $consulta->bindParam(':l',$limite, PDO::PARAM_INT);
             $consulta->bindParam(':n',$n, PDO::PARAM_INT);
+            $this->like = '%'.$this->like.'%';
+            $consulta->bindParam(':como',$this->like, PDO::PARAM_STR);
+
             if ($this->id != null){
                 $consulta->bindParam(':id',$this->id, PDO::PARAM_INT);
             }
-            $this->like = '%'.$this->like.'%';
-            $consulta->bindParam(':como',$this->like, PDO::PARAM_STR);
+            if ($this->active != null){
+                $consulta->bindParam(':active',$this->active, PDO::PARAM_STR);
+            }
 
         
             $consulta->execute();
@@ -95,8 +101,7 @@
         }
         
         function COUNT(){
-            $query = $this->conn->prepare("SELECT COUNT(*) as 'total' FROM proveedores WHERE active=:active");
-			$query->bindParam(':active',$this->active, PDO::PARAM_INT);
+            $query = $this->conn->prepare("SELECT COUNT(*) as 'total' FROM proveedores");
             $query->execute();
             return $query->fetch()['total'];
         }

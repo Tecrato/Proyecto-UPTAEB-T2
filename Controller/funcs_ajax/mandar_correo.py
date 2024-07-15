@@ -1,8 +1,9 @@
-import sys, ssl, smtplib, decouple
+import sys, ssl, smtplib, dotenv, os
 from email.message import EmailMessage
 
 def main(args):
-	email_sender = decouple.config('MAIL')
+	dotenv.load_dotenv()
+	email_sender = os.environ['MAIL']
 	email_reciver = args[1]
 	texto = args[2]
 
@@ -16,7 +17,7 @@ def main(args):
 	contexto = ssl.create_default_context()
 	try:
 		with smtplib.SMTP_SSL("smtp.gmail.com",465, context = contexto) as smtp:
-			smtp.login(email_sender, decouple.config('MAIL_KEY'))
+			smtp.login(email_sender, os.environ['MAIL_KEY'])
 			smtp.sendmail(email_sender,email_reciver,em.as_string())
 		return 'listo'
 	except Exception as e:

@@ -55,5 +55,8 @@
 			$this->add_bitacora($usuario,"Categorias","Modificar","Categoria ".$this->id." Modificada");
         }
 
+        function COUNT(){
+            return $this->conn->query("SELECT COUNT(*) 'total' FROM usuarios")->fetch()['total'];
+        }
 	}
 ?>

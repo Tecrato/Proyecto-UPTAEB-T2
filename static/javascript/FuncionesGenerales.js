@@ -1,38 +1,31 @@
-var page = 0;
-var dolar = 37
-
-
 window.addEventListener("load", () => {
   // document.querySelector(".preloader_container").classList.toggle("invisible")
   document.querySelector(".preloader_container").remove()
 })
 
-function cambiar_pagina_ajax(dir, type, func, limit = 9, pagina=null) {
-  limit = limit ? limit : 9
-  if (pagina == null) {
-    pagina = page
+function cambiar_pagina_ajax(dir, func, limite = 9, page=null, total=0) {
+  limite = limite
+  if (dir == 'next' && page < Math.ceil(total / limite)-1){
+      page += 1;
+  } else if (dir == 'back' && page > 0) {
+      page -= 1;
+  } else if (dir == 'start') {
+      page = 0;
+  } else if (dir == 'end') {
+      page = Math.ceil(total/limite)-1;
   }
-  $.ajax({
-    url:
-      `Controller/funcs_ajax/cambiar_pagina.php?dir=` + dir + "&p=" + page + "&type=" + type + "&n_p=" + limit,
-    type: "GET",
-    success: (response) => {
-      page = parseInt(response);
-      func(page);
-    },
-  });
+  console.log(page,dir,limite,total)
+  func(page)
 }
 
 function cambiar_pagina_php(dir, type, limit = 9) {
-  limit = limit ? limit : 9
+  limit = limit
   window.location.href = 'Controller/funcs/cambiar_pagina.php?dir=' + dir + '&p=' + page + '&type=' + type + '&n_p=' + limit
 }
 // funcion para colocar la marca de agua en el fondo de los modulos
-const marcaAgua = () => {
+function marcaAgua(){
   //esto hace que el fondo de pantalla y altura se modifiquen si hay tarjetas en los modulos
   let containerMarca_agua = document.querySelector(".container_marca_agua");
-  let containerMarca_agua2 = document.querySelector(".container_marca_agua2");
-  let containerBody = document.querySelector(".Bg-Main-home");
   let containerHeight = document.querySelector(".height_controller").childElementCount;
 
   let pagination = document.querySelector(".uk-pagination");
@@ -153,12 +146,13 @@ function DOLAR_RV(func) {
 }
 
 
-async function DOLAR_DB(id) {
+function DOLAR_DB(id) {
   $.ajax({
     url: "Controller/funcs_ajax/search.php",
     type: "GET",
     data: { randomnautica: "configuraciones", llave: "dolar" },
     success: function(response) {
+      console.log(response);
       json = JSON.parse(response)
       document.getElementById(id).textContent = json.lista[0].valor + " Bs"
     }

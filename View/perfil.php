@@ -487,6 +487,15 @@
                                     <tbody class="js-filter" id="tableCapital">
                                     </tbody>
                                 </table>
+                                
+                                <div class="uk-flex uk-flex-center">
+                                    <ul class="uk-pagination uk-pagination2 uk-margin-large-top">
+                                        <li><a class="pag-btn-movimiento-capital" data-direccion="start"><span class="uk-margin-small-right" uk-pagination-previous></span><span class="uk-margin-small-right" uk-pagination-previous></span></a></li>
+                                        <li><a class="pag-btn-movimiento-capital" data-direccion="back">Previous</a></li>
+                                        <li><a class="pag-btn-movimiento-capital" data-direccion="next">Next</a></li>
+                                        <li><a class="pag-btn-movimiento-capital" data-direccion="end"><span class="uk-margin-small-left" uk-pagination-next></span><span class="uk-margin-small-left" uk-pagination-next></span></a></li>
+                                    </ul>
+                                </div>
                             </section>
                         </div>
 
@@ -514,7 +523,7 @@
                                                                         <label for="">DOLAR</label>
                                                                     </article>
                                                                     <article>
-                                                                        <input class="uk-input" type="number" step="0.1" name="valor">
+                                                                        <input class="uk-input" type="number" step="0.01" name="valor">
                                                                         <input type="hidden" name="llave" value="dolar">
                                                                         <input type="hidden" name="tipo" value="configuraciones">
                                                                     </article>

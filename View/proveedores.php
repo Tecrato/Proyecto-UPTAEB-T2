@@ -54,7 +54,7 @@
                     </ul>
                 </div>
             </div>
-
+            
         </div>
 
         <!-- ****************** Modal de registro ****************** -->
@@ -159,13 +159,6 @@
 
 <script src="Plugins/build/js/intlTelInput.js" defer></script>
 <script src="static/javascript/Ajax/supplier.js" defer></script>
-
-
-<script>
-    $('.pag-btn-proveedores').click(ele => {
-        cambiar_pagina_php(ele.target.dataset['direccion'], 'proveedores', 9)
-    })
-</script>
 
 </body>
 

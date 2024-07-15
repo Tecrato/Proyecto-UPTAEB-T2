@@ -13,7 +13,7 @@
 
     if ($type == 'productos') {
         require('../../Model/Productos.php');
-        $vart = new Producto;
+        $vart = new Producto();
         $todos = $vart->COUNT();
     } elseif ($type == 'proveedores') {
         require('../../Model/Proveedores.php');

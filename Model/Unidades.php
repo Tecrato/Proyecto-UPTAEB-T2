@@ -35,5 +35,8 @@
             $query->execute(); 
 			$this->add_bitacora($usuario,"Unidades","Modificar","Unidad ".$this->id." Modificada");
         }
+        function COUNT(){
+            return $this->conn->query("SELECT COUNT(*) 'total' FROM usuarios")->fetch()['total'];
+        }
 	}
 ?>

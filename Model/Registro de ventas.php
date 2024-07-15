@@ -17,7 +17,7 @@
             DB::__construct();
 
         }
-		function search($n=0,$limite=9,$order='id ASC'){
+		function search($n=0,$limite=9,$order='id DESC'){
 			$query = "SELECT 
             a.id,
             a.monto_final,
@@ -50,7 +50,7 @@
 				}
 			}
 
-			$query .= " ORDER BY $order  LIMIT :l OFFSET :n";
+			$query .= " ORDER BY a.$order  LIMIT :l OFFSET :n";
             $query = $this->conn->prepare($query);
 
             $n = $n*$limite;

@@ -24,17 +24,14 @@
                 </div>
 
                 <div class="uk-flex uk-margin-left container-view-order">
-                    <!-- <div class="uk-margin-right">
-                        <span class="uk-icon-link" id="list" uk-icon="icon: list; ratio: 1.3" style="cursor: pointer;"></span>
-                    </div> -->
                     <div class="uk-width-auto uk-text-nowrap flechas">
                         <span class="uk-active" uk-filter-control="sort: data-name"><a class="uk-icon-link" href="#" uk-icon="icon: arrow-down" aria-label="Sort ascending"></a></span>
                         <span uk-filter-control="sort: data-name; order: desc"><a class="uk-icon-link" href="#" uk-icon="icon: arrow-up" aria-label="Sort descending"></a></span>
                     </div>
                 </div>
             </div>
+            
             <hr class="uk-margin-remove">
-
 
             <div>
                 <section class="uk-light uk-padding uk-padding-remove-left uk-padding-remove-right uk-grid-small dataTable cont_target_client_controller" uk-grid>
@@ -158,11 +155,6 @@
 <script src="Plugins/build/js/intlTelInput.js"></script>
 <script src="static/javascript/Ajax/client.js"></script>
 
-<script>
-    $('.pag-btn-clientes').click(ele => {
-        cambiar_pagina_php(ele.target.dataset['direccion'], 'clientes', 9)
-    })
-</script>
 
 </body>
 

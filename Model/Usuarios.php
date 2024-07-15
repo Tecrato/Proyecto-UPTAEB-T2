@@ -112,7 +112,7 @@
             $this->add_bitacora($usuario,"Usuarios","Logout","Usuario ".$this->nombre." des-logueado");
         }
         function COUNT(){
-            return $this->conn->query("SELECT COUNT(*) 'total' FROM usuarios")->fetchAll()['total'];
+            return $this->conn->query("SELECT COUNT(*) 'total' FROM usuarios")->fetch()['total'];
         }
         function verificar($contraseña){
             $query = "SELECT * FROM usuarios WHERE correo=:correo";

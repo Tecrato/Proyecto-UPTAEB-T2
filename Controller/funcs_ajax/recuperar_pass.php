@@ -8,7 +8,7 @@
         $clase = new Usuario(correo:$correo);
         $clave = $clase->search()[0]['semilla'];
         // print_r($clave);
-        $var = exec('mandar_correo.py "'.$correo.'" "Tu contraseña para el sistema Minimarket es es: '.$clave.'"');
+        $var = exec('mandar_correo.py "'.$correo.'" "Tu semilla para el sistema Minimarket es es: '.$clave.'"');
         // var_dump($var);
         echo json_encode(['status' => 'active']);
     } elseif ($_POST['metodo'] == 'semilla') {

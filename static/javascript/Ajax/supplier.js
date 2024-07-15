@@ -1,4 +1,16 @@
+var page_proveedores = 0
+var total_proveedores = 0
 
+$(".pag-btn-proveedores").click((ele) => {
+  
+  cambiar_pagina_ajax(
+    ele.target.dataset["direccion"],
+    cardProv,
+    6,
+    page_proveedores,
+    total_proveedores
+  );
+});
 //funciones para modicar, insertar y eliminar clientes, proveedores
 
 function insertANDupdateCLient_proveedor (FORM, NUMBER, TABLE, TYPE) {
@@ -164,14 +176,17 @@ const ModalEdit = () => {
   })
 }
 
-const cardProv = () => {
+function cardProv(page){
+  page_proveedores = page
   $.ajax({
     url: "Controller/funcs_ajax/search.php",
     type: "GET",
-    data: { randomnautica: "proveedores", active: 0 },
+    data: { randomnautica: "proveedores", n:page_proveedores, limite: 6, active: 1 },
     success: function (response) {
       let template = "";
       let json = JSON.parse(response);
+      console.log(json)
+      total_proveedores = json['total']
       json.lista.forEach((element) => {
         template += `<div>
                           <div class="target_supplier uk-card uk-card-default uk-flex uk-padding-small uk-light uk-border-rounded" style=" background-color: #333;">
@@ -279,6 +294,5 @@ const cardProv = () => {
 }
 
 document.querySelector(".preloader_container").remove()
-cardProv()
+cardProv(0)
 insertANDupdateCLient_proveedor('.form_prov', "#tlfn_pais", cardProv, "proveedor")
-

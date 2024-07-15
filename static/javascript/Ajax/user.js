@@ -2,9 +2,38 @@ var template = ""
 var template2 = ""
 
 var page_general = 0
+var total_general = 0
 var page_personal = 0
+var total_personal = 0
+
+
+document.querySelector('.btn-update-dolar').addEventListener('click', () => {
+    asyncfunc()
+    DOLAR_DB("DOLAR_DB")
+    DOLAR_DB("BCV")
+
+})
+$(".pag-btn-bitacora-general").click((ele) => {
+    cambiar_pagina_ajax(
+        ele.target.dataset["direccion"],
+        generar_bitacora_general,
+        10,
+        page_general,
+        total_general
+    );
+});
+$(".pag-btn-bitacora-personal").click((ele) => {
+    cambiar_pagina_ajax(
+        ele.target.dataset["direccion"],
+        generar_bitacora_personal,
+        10,
+        page_personal,
+        total_personal
+    );
+});
 
 function generar_bitacora_general(page) {
+    page_general = page
     template = ""
     $.ajax({
         url: "Controller/funcs_ajax/search.php",
@@ -12,6 +41,7 @@ function generar_bitacora_general(page) {
         data: { randomnautica: "bitacora", subFunction: "bitacora", limite: 10, n: page },
         success: function (response) {
             let json = JSON.parse(response)
+            total_general = json['total']
             json.lista.forEach(element => {
                 template += `
                                 <tr>
@@ -26,10 +56,10 @@ function generar_bitacora_general(page) {
             $("#registerSystem").html(template)
         },
     });
-    page_general = page
 }
 
 function generar_bitacora_personal(page) {
+    page_personal = page
     template2 = ""
     $.ajax({
         url: "Controller/funcs_ajax/search.php",
@@ -37,6 +67,7 @@ function generar_bitacora_personal(page) {
         data: { randomnautica: "bitacora", subFunction: "bitacora", limite: 10, n: page, ID: sesion_user_id },
         success: function (response) {
             let json = JSON.parse(response)
+            total_personal = json['total']
             json.lista.forEach(element => {
                 template2 += `<tr>
                                 <td>${element.detalles}</td>
@@ -48,43 +79,12 @@ function generar_bitacora_personal(page) {
             $("#registerActv").html(template2)
         },
     });
-    page_personal = page
-}
-function cambiar_pagina_ajax(dir, type, func, limit = 9, page = 0) {
-    limit = limit
-    $.ajax({
-        url:
-            `Controller/funcs_ajax/cambiar_pagina.php?dir=` + dir + "&p=" + page + "&type=" + type + "&n_p=" + limit,
-        type: "GET",
-        success: (response) => {
-            console.log(response);
-            func(parseInt(response));
-        },
-    });
 }
 
 
 generar_bitacora_general(page_general)
 generar_bitacora_personal(page_personal)
 
-$(".pag-btn-bitacora-general").click((ele) => {
-    cambiar_pagina_ajax(
-        ele.target.dataset["direccion"],
-        "bitacora",
-        generar_bitacora_general,
-        10,
-        page_general
-    );
-});
-$(".pag-btn-bitacora-personal").click((ele) => {
-    cambiar_pagina_ajax(
-        ele.target.dataset["direccion"],
-        "bitacora",
-        generar_bitacora_personal,
-        10,
-        page_personal
-    );
-});
 
 $.ajax({
     url: "api_caja",
@@ -131,14 +131,8 @@ async function asyncfunc() {
         }
     })
 }
+asyncfunc()
 
 
-document.querySelector('.btn-update-dolar').addEventListener('click', () => {
-    asyncfunc()
-    DOLAR_DB("DOLAR_DB")
-
-})
 DOLAR_DB("DOLAR_DB")
 
-
-asyncfunc()
