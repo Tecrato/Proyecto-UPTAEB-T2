@@ -1,0 +1,39 @@
+## errores para el login:
+
+"0" -> Usuario (correo) no encontrado.
+"1" -> Logueo Exitoso.
+"2" -> Codigo de catcha no valido.
+"3" -> Datos ingresados invalidos.
+"4" -> No hay session.
+"5" -> Session reemplazada o iniciada en otro lado.
+
+----------------------------##############################-----------------------------
+
+## Search
+
+parametros obligatorios
+ - randomnautica: str = [nombre de la tabla a la que se desea consultar]
+
+parametros opcionales:
+ - limite: int = [numero de resultados deseados]
+ - n: int = [numero de pagina]
+
+ - [nombre de columna segun la tabla]: str = [valor que tendra la columna]
+ - [nombre de columna segun la tabla]: str = [valor que tendra la columna]
+ - [nombre de columna segun la tabla]: str = [valor que tendra la columna]
+
+ - subFuncion: str = "bitacora" o "count" o "detallesCapital"
+
+----------------------------##############################-----------------------------
+
+## Modificar
+parametros obligatorios:
+ - ID: int = [id de la fila]
+ - Ps todas las columnas que tiene la tabla (Proximamente metodo UPDATE)
+
+----------------------------##############################-----------------------------
+
+## Borrar
+
+parametros obligatorios:
+ - ID: int = [id de la fila]

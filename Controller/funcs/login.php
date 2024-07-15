@@ -12,27 +12,23 @@
     
 
     if (!($_SESSION['codigo_verificacion'] == sha1($codigo))) {
-        header('Location: ../../login?err=2');
+        header('Location: ../../login?error=2');
         exit(0);
         die();
     }
     
-    $d = new DB();
     
     $c = new Usuario(correo:$correo); // Llamamos al modelos y se busca el usuario
     $result = $c->search();
     
     if (count($result) != 1) {
-        header('Location: ../../login?err=3');
+        header('Location: ../../login?error=3');
     }
-    /* else if ($result[0]['active'] == 1){
-        header('Location: ../../login?err=3');
-    } */
     else if ($_POST["correo"] and $_POST["contraseña"] and password_verify($password,$result[0]['hash'])) { // si hay un resultado entonces lo deja pasar
         $row = $result[0];
 
         $c2 = new Usuario($row['id'],sesion_id:$sesion_id);
-        $c2->login();
+        $c2->login($row['id']);
         
         $_SESSION['user_name'] = $row['nombre']; // Y tambien guarda el nombre para despues
         $_SESSION['user_id'] = $row['id']; // Y el id
@@ -48,10 +44,9 @@
         else if ($rol == 3){
             $_SESSION['rol'] = "Usuario"; // Y tambien guarda el nombre para despues   
         }
-        $d->add_bitacora($row['id'],"Login","logueado","El usuario ".$row['nombre']." inicio sesion");
         header('Location: ../../Inicio'); // y pa' la pagina que se va
     } else {
-        header('Location: ../../login?err=1'); // Sino, lo devuelve al login
+        header('Location: ../../login?error=0'); // Sino, lo devuelve al login
     }
 
 ?>

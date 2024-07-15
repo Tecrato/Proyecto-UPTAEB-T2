@@ -96,23 +96,24 @@
             }
 
             $query->execute(); 
-     /*        $this->add_bitacora($usuario,"Usuario","Modificar","Usuario "."$id"." Modificado"); */
+            $this->add_bitacora($usuario,"Usuario","Modificar","Usuario "."$id"." Modificado");
         }
-        public function login(){
+        public function login($usuario){
             $query = $this->conn->prepare('UPDATE usuarios SET active=1 , sesion_id=:sesion_id WHERE id=:id');
             $query->bindParam(':id',$this->id);
             $query->bindParam(':sesion_id', $this->sesion_id);
             $query->execute();
+            $this->add_bitacora($usuario,"Usuarios","Login","Usuario ".$this->nombre." logueado");
         }
-        function logout() {
+        function logout($usuario) {
             $query = $this->conn->prepare('UPDATE usuarios SET active=0 WHERE id=:id');
             $query->bindParam(':id',$this->id);
             $query->execute(); 
+            $this->add_bitacora($usuario,"Usuarios","Logout","Usuario ".$this->nombre." des-logueado");
         }
         function COUNT(){
             return $this->conn->query("SELECT COUNT(*) 'total' FROM usuarios")->fetchAll()['total'];
         }
-        # metodo para verificar la contraseña
         function verificar($contraseña){
             $query = "SELECT * FROM usuarios WHERE correo=:correo";
             $consulta = $this->conn->prepare($query);

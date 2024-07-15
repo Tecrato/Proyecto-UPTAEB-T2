@@ -1,25 +1,16 @@
 <?php
     // Con este archivo se buscan datos de ciertas maneras, dependiendo de lo que pase como "randomnautica"
 
-use PSpell\Config;
+// use PSpell\Config;
 
     require('../../Model/Conexion.php');
     require('../../Model/Usuarios.php');
     include("../funcs/verificar.php");
     require('../../Model/Permisos.php');
 
-    if (isset($_GET['limite'])) {
-        $limite = intval($_GET['limite']);
-    }
-    else {
-        $limite = 90;
-    }
-    if (isset($_GET['n']) and $_GET['n'] != "") {
-        $n = intval($_GET['n']);
-    }
-    else {
-        $n = 0;
-    }
+    $limite = isset($_GET['limite']) ? intval($_GET['limite']) : 50;
+
+    $n = (isset($_GET['n']) and $_GET['n'] != "") ? intval($_GET['n']) : 0;
 
     // $other_class = new Permiso(null,$_SESSION['user_id'],$_GET['randomnautica'],'buscar');
     // $result = $other_class->search();
