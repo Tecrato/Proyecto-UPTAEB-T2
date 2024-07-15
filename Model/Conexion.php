@@ -3,7 +3,7 @@
 
         public $conn;
         function __construct() {
-            $this->conn = new PDO("mysql:host=localhost;dbname=proyecto_4","root","12345");
+            $this->conn = new PDO("mysql:host=localhost;dbname=proyecto_4","root");
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
         function __destruct() {
@@ -47,8 +47,15 @@
             $consulta->execute();
             return $consulta->fetchAll();
         }
-        function COUNT_bitacora() {
+        function COUNT() {
             $query = $this->conn->prepare("SELECT COUNT(*) as 'total' FROM bitacora");
+            $query->execute();
+            return $query->fetch()['total'];
+            
+        }
+        function COUNT_user($user) {
+            $query = $this->conn->prepare("SELECT COUNT(*) as 'total' FROM bitacora WHERE id_usuario=:id");
+            $query->bindParam(":id",$user, PDO::PARAM_INT);
             $query->execute();
             return $query->fetch()['total'];
             

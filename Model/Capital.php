@@ -53,5 +53,8 @@
             return $query->fetchAll();
 
 	}
+    function COUNT(){
+        return $this->conn->query("SELECT COUNT(*) 'total' FROM movimientos_capital")->fetch()['total'];
+    }
 }
 ?>

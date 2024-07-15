@@ -55,7 +55,7 @@
         }
 
         function COUNT(){
-            return $this->conn->query("SELECT COUNT(*) 'total' FROM marcas")->fetchAll()['total'];
+            return $this->conn->query("SELECT COUNT(*) 'total' FROM marcas")->fetch()['total'];
         }
 }
 

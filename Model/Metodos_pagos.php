@@ -62,7 +62,7 @@
         }
 
         function COUNT(){
-            return $this->conn->query("SELECT COUNT(*) 'total' FROM metodo_pago")->fetchAll()['total'];
+            return $this->conn->query("SELECT COUNT(*) 'total' FROM metodo_pago")->fetch()['total'];
         }
 }
 

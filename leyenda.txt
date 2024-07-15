@@ -24,6 +24,24 @@ parametros opcionales:
 
  - subFuncion: str = "bitacora" o "count" o "detallesCapital"
 
+retorno:
+{
+    'total': int,
+    'lista': list = [
+        {
+            id: int,
+            nombre: str,
+            ...
+        },
+        {
+            id: int,
+            nombre: str,
+            ...
+        },
+        ...
+    ]
+}
+
 ----------------------------##############################-----------------------------
 
 ## Modificar
@@ -34,6 +52,5 @@ parametros obligatorios:
 ----------------------------##############################-----------------------------
 
 ## Borrar
-
 parametros obligatorios:
  - ID: int = [id de la fila]

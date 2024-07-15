@@ -1,6 +1,17 @@
+var page_clientes = 0
+var total_clientes = 0
+
+$(".pag-btn-clientes").click((ele) => {
+  cambiar_pagina_ajax(
+    ele.target.dataset["direccion"],
+    cardClient,
+    6,
+    page_clientes,
+    total_clientes
+  );
+});
 
 //funciones para modicar, insertar y eliminar clientes, proveedores
-
 function insertANDupdateCLient_proveedor (FORM, NUMBER, TABLE, TYPE) {
 
     let inp = document.querySelector(NUMBER);
@@ -161,14 +172,16 @@ const ModalEdit = () => {
     })
 }
 
-const cardClient = () => {
+function cardClient(page){
+  page_clientes = page
     $.ajax({
         url: "Controller/funcs_ajax/search.php",
         type: "GET",
-        data: { randomnautica: "clientes" },
+        data: { randomnautica: "clientes", n: page_clientes, limite: 6},
         success: function (response) {
             let template = "";
             let json = JSON.parse(response);
+            total_clientes = json['total']
             json.lista.forEach((element) => {
                 template += `   <div>
                                     <div class="target_supplier uk-card uk-card-default uk-flex uk-padding-small uk-background-secondary uk-light uk-border-rounded"
@@ -239,5 +252,5 @@ const cardClient = () => {
     });
 }
 
-cardClient()
+cardClient(0)
 insertANDupdateCLient_proveedor('.form_client', "#tlfno_client", cardClient, "cliente")

@@ -9,8 +9,9 @@
     require('../../Model/Permisos.php');
 
     $limite = isset($_GET['limite']) ? intval($_GET['limite']) : 50;
-
     $n = (isset($_GET['n']) and $_GET['n'] != "") ? intval($_GET['n']) : 0;
+
+
 
     // $other_class = new Permiso(null,$_SESSION['user_id'],$_GET['randomnautica'],'buscar');
     // $result = $other_class->search();
@@ -26,7 +27,7 @@
         $clase = new Producto(
             id:(isset($_GET['ID']) ? $_GET['ID'] : null),
             nombre:(isset($_GET['nombre']) ? $_GET['nombre'] : null),
-            active:(isset($_GET['active']) ? $_GET['active'] : 1),
+            active:(isset($_GET['active']) ? $_GET['active'] : null),
             like:(isset($_GET['like']) ? $_GET['like'] : '')
         );
     }
@@ -108,8 +109,15 @@
             status:(isset($_GET['status']) ? $_GET['status'] : null),
     );
     }
+
+    
+    $count = $clase->COUNT();
+
     if (isset($_GET['subFunction'])) {
         if ($_GET['subFunction'] == 'bitacora') {
+            if (isset($_GET['ID'])){
+                $count = $clase->COUNT_user($_GET['ID']);
+            }
             $result = $clase->search_bitacora(id:(isset($_GET['ID']) ? $_GET['ID'] : null),n:$n,limite:$limite);
         }
         else if ($_GET['subFunction'] == 'count') {
@@ -124,6 +132,7 @@
     }
 
     $json = [
+        'total' => $count,
         'lista'=> $result
     ];
     $json = json_encode($json);

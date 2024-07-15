@@ -40,5 +40,10 @@
             $result = $query->fetchAll();
             return $result;
         }
+        function COUNT() {
+            $query = $this->conn->prepare("SELECT COUNT(*) as 'total' FROM configuraciones ");
+            $query->execute();
+            return $query->fetch()['total'];
+        }
 	}
 ?>

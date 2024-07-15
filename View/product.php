@@ -697,10 +697,10 @@
                             </section>
                             <div class="uk-flex uk-flex-center">
                                 <ul class="uk-pagination uk-pagination2 uk-margin-large-top">
-                                    <li><a class="pag-btn-productos" data-direccion="start"><span class="uk-margin-small-right" uk-pagination-previous></span><span class="uk-margin-small-right" uk-pagination-previous></span></a></li>
-                                    <li><a class="pag-btn-productos" data-direccion="back">Previous</a></li>
-                                    <li><a class="pag-btn-productos" data-direccion="next">Next</a></li>
-                                    <li><a class="pag-btn-productos" data-direccion="end"><span class="uk-margin-small-left" uk-pagination-next></span><span class="uk-margin-small-left" uk-pagination-next></span></a></li>
+                                    <li><a class="pag-btn-productos_2" data-direccion="start"><span class="uk-margin-small-right" uk-pagination-previous></span><span class="uk-margin-small-right" uk-pagination-previous></span></a></li>
+                                    <li><a class="pag-btn-productos_2" data-direccion="back">Previous</a></li>
+                                    <li><a class="pag-btn-productos_2" data-direccion="next">Next</a></li>
+                                    <li><a class="pag-btn-productos_2" data-direccion="end"><span class="uk-margin-small-left" uk-pagination-next></span><span class="uk-margin-small-left" uk-pagination-next></span></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -712,9 +712,9 @@
 
 
 </main>
-<script src="static/javaScript/librerias/JsBardcode.js"></script>
-<script src="static/javascript/Ajax/entry.js"></script>
-<script src="static/javascript/funcionDataTable.js"></script>
+<script src="static/javaScript/librerias/JsBardcode.js" defer></script>
+<script src="static/javascript/Ajax/entry.js" defer></script>
+<!-- <script src="static/javascript/funcionDataTable.js" defer></script> -->
 
 <script src="static/javascript/Ajax/product.js" defer></script>
 <script src="static/javascript/Ajax/unidades.js" defer></script>

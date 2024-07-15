@@ -18,7 +18,7 @@
         private $like;
 
         function __construct($id=null, $id_categoria=null,$id_unidad=null,$id_marca=null,$valor_unidad=null,$nombre=null,
-            $imagen=null,$stock_min=null,$stock_max=null,$precio_venta=null,$IVA=null,$codigo=null,$active=1,$algoritmo=1,$like=''){
+            $imagen=null,$stock_min=null,$stock_max=null,$precio_venta=null,$IVA=null,$codigo=null,$active=null,$algoritmo=1,$like=''){
 
             $this->id = $id;
             $this->id_categoria = $id_categoria;
@@ -132,8 +132,7 @@
                     INNER JOIN categoria b ON b.id = a.id_categoria 
                     INNER JOIN unidades c ON c.id = a.id_unidad
                     INNER JOIN marcas m ON m.id = a.id_marca
-                    WHERE a.nombre LIKE :como AND
-                    active=:active ";
+                    WHERE a.nombre LIKE :como ";
 
                     
 			$lista = [];
@@ -142,7 +141,10 @@
             	array_push($lista,'id');
             }
             if ($this->id_marca){
-                array_push($lista, 'marca');
+                array_push($lista, 'id_marca');
+            }
+            if ($this->active){
+                array_push($lista, 'active');
             }
             if ($lista) {
             	foreach ($lista as $e){
@@ -156,16 +158,19 @@
 
             $consulta = $this->conn->prepare($query);
 
-            $consulta->bindParam(':active',$this->active, PDO::PARAM_INT);
             $consulta->bindParam(':l',$limite, PDO::PARAM_INT);
             $consulta->bindParam(':n',$n, PDO::PARAM_INT);
+
+            $consulta->bindValue(':como','%'.$this->like.'%');
+
             if ($this->id){
                 $consulta->bindParam(':id',$this->id, PDO::PARAM_INT);
             }
-            $this->like = '%'.$this->like.'%';
-            $consulta->bindParam(':como',$this->like, PDO::PARAM_STR);
 			if ($this->id_marca) {
-                $consulta->bindParam(':marca',$this->id_marca, PDO::PARAM_INT);
+                $consulta->bindParam(':marca',$this->id_marca, PDO::PARAM_STR);
+			}
+			if ($this->active) {
+                $consulta->bindParam(':active',$this->active, PDO::PARAM_INT);
 			}
 
             $consulta->execute();
@@ -178,16 +183,35 @@
             return $this->conn->query($query)->fetchAll();
         }
 
-
-        function search_RecienAgregado() {
-            $query = $this->conn->prepare("SELECT * FROM productos WHERE active = 1 ORDER BY id DESC LIMIT 5");
-            $query->execute();
-            return $query->fetchAll();
-            
-        }
         function COUNT(){
-            $query = $this->conn->prepare("SELECT COUNT(*) as 'total' FROM productos WHERE active=:active");
-			$query->bindParam(':active',$this->active, PDO::PARAM_INT);
+            $query = "SELECT COUNT(*) as 'total' FROM productos a WHERE 1 ";
+
+			$lista = [];
+
+            if ($this->id){
+            	array_push($lista,'id');
+            }
+            if ($this->id_marca){
+                array_push($lista, 'marca');
+            }
+            if ($this->active){
+                array_push($lista, 'active');
+            }
+            if ($lista) {
+            	foreach ($lista as $e){
+            		$query .= ' AND a.'.$e.'=:'.$e;
+            	}
+            }
+            $query = $this->conn->prepare($query);
+            if ($this->id){
+                $query->bindParam(':id',$this->id, PDO::PARAM_INT);
+            }
+			if ($this->id_marca) {
+                $query->bindParam(':marca',$this->id_marca, PDO::PARAM_STR);
+			}
+			if ($this->active) {
+                $query->bindParam(':active',$this->active, PDO::PARAM_INT);
+			}
             $query->execute();
             return $query->fetch()['total'];
         }

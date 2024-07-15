@@ -82,7 +82,7 @@
         }
 
         function COUNT(){
-            return $this->conn->query("SELECT COUNT(*) 'total' FROM permisos")->fetchAll()['total'];
+            return $this->conn->query("SELECT COUNT(*) 'total' FROM permisos")->fetch()['total'];
         }
 }
 

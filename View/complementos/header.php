@@ -15,15 +15,17 @@
     <link rel="stylesheet" href="static/css/responsive.dataTables.css">
     <link rel="stylesheet" href="static/css/introjs.min.css">
     <link rel="stylesheet" href="static/css/introjs-modern.css">
+    <link rel="stylesheet" href="static/css/Style.css">
+    
     <script src="static/javascript/librerias/jquery.js"></script>
     <script src="static/javascript/librerias/intro.min.js"></script>
-    <script src="static/javascript/Tooltip-help.js" defer></script>
     <script src="static/javascript/librerias/uikit.js"></script>
-    <link rel="stylesheet" href="static/css/Style.css">
     <script src="static/javascript/librerias/uikit-icons.js"></script>
     <script src="static/javascript/FuncionesGenerales.js" defer></script>
+    <script src="static/javascript/Tooltip-help.js" defer></script>
     <script src="static/javascript/Ajax/notification.js"defer></script>
     <script src="static/javascript/Color.js" defer></script>
+
     <link rel="shortcut icon" href="static/images/logo_m.png" type="image/x-icon">
     <title id="title">Inventario-Inicio</title>
 </head>

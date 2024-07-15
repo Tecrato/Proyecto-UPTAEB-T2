@@ -1,3 +1,17 @@
+var page_productos = 0
+var total_productos = 0
+var like_product = ''
+
+var page_productos_2 = 0
+var total_productos_2 = 0
+var like_product_2 = ''
+
+let val = false;
+
+let selectMetodoGanancia = document.querySelector(".select_metodo_ganancia");
+
+
+
 document.querySelector('#iconReportInv').addEventListener('click', () => {
   window.location.href = 'PDFInventario'
 })
@@ -25,20 +39,28 @@ if (screen < 1357) {
 }
 
 //creamos una funcion que nos cargue todas las tarjetas y sus modales, dependiendo de que modal desea abrir
-var page = 0;
+
 //la varible val funcionara para usar el modal de registrar para editar, dependiendo del valor de val, la url de la peticion cambiara
-let val = false;
 
 $(".pag-btn-productos").click((ele) => {
   cambiar_pagina_ajax(
     ele.target.dataset["direccion"],
-    "productos",
     cargarTargetProduct,
-    18
+    10,
+    page_productos,
+    total_productos
+  );
+});
+$(".pag-btn-productos_2").click((ele) => {
+  cambiar_pagina_ajax(
+    ele.target.dataset["direccion"],
+    cargarTargetProductDesactive,
+    10,
+    page_productos_2,
+    total_productos_2
   );
 });
 
-let selectMetodoGanancia = document.querySelector(".select_metodo_ganancia");
 
 selectMetodoGanancia.addEventListener("change", ()=>{
   if (selectMetodoGanancia.value != 0) {
@@ -54,7 +76,6 @@ const modalDetalles = (n) => {
   document.querySelectorAll(".btnDetails").forEach((info) => {
     //usamos el evento click para saber en cual pulsamos
     info.addEventListener("click", () => {
-      let templateDetails = "";
       //obtenemos el id del producto para hacer la consulta
       let idProduct = info.dataset["id"];
 
@@ -84,13 +105,6 @@ const modalDetalles = (n) => {
               item.stock ? item.stock : 0;
             document.querySelector(".productDetailPV").textContent =
               parseFloat(item.precio_venta).toFixed(2);
-            // JsBarcode("#Bard","001000000001", {
-            //   format: "CODE128",
-            //   textMargin: 0,
-            //   fontOptions: "bold",
-            //   width: 1,
-            //   height: 50
-            // })
             JsBarcode("#Bard",item.codigo,{
               width: 1.3
             })
@@ -246,12 +260,8 @@ const modalEntradas = () => {
                   "<span uk-icon='icon: check'></span> Entrada agregada correctamente ",
                 status: "success",
                 pos: "bottom-right",
+                timeout: 2000
               });
-              // y ocultamos el modal
-              setTimeout(() => {
-                UIkit.modal("#product-entry").hide();
-                cargarEntrys();
-              }, 300);
               cargarTargetProduct();
 
               $("#formLotes").trigger("reset");
@@ -436,6 +446,7 @@ const tarjetas = (response, cont) => {
   //convertimos la respuesta en un objeto
   let json = JSON.parse(response);
   //tarjeta sera el template de las tarjetas
+  total_productos = json['total']
   let tarjeta = "";
   //recorremos el json para crear las tarjetas
   json.lista.forEach((item) => {
@@ -525,6 +536,7 @@ const tarjetasProductosDesactive = (response, cont) => {
   console.log(response)
   //convertimos la respuesta en un objeto
   let json = JSON.parse(response);
+  total_productos_2 = json['total']
   //tarjeta sera el template de las tarjetas
   let tarjeta = "";
   //recorremos el json para crear las tarjetas
@@ -602,34 +614,37 @@ const tarjetasProductosDesactive = (response, cont) => {
   modalEliminarProductDesactive();
   modalModificar();
 };
-const cargarTargetProduct = () => {
+const cargarTargetProduct = (page) => {
   //hacemos la petion ajax
+  page_productos = page
   $.ajax({
     url: "Controller/funcs_ajax/search.php",
     type: "GET",
     data: {
       randomnautica: "productos",
-      n: page, // Aca va el numero de la pagina actual
+      n: page_productos, // Aca va el numero de la pagina actual
       limite: 10, // Aca va el numero maximo de tarjetas que se pueden imprimir
-      like: "",
+      like: like_product,
     },
     success: function (response) {
       marcaAgua();
       tarjetas(response, ".container-target-product");
+      console.log(page_productos,total_productos,'\n',response)
       modalDetalles(1);
     },
   });
 };
 
-cargarTargetProduct()
-const cargarTargetProductDesactive = () => {
+cargarTargetProduct(0)
+const cargarTargetProductDesactive = (page) => {
   //hacemos la petion ajax
+  page_productos_2 = page
   $.ajax({
     url: "Controller/funcs_ajax/search.php",
     type: "GET",
     data: {
       randomnautica: "productos",
-      n: page, // Aca va el numero de la pagina actual
+      n: page_productos_2, // Aca va el numero de la pagina actual
       limite: 10, // Aca va el numero maximo de tarjetas que se pueden imprimir
       like: "",
       active: 0,
@@ -767,15 +782,12 @@ formAggProduct.addEventListener("submit", (e) => {
             "<span uk-icon='icon: check'></span> Producto Modificado correctamente ",
           status: "success",
           pos: "bottom-right",
+          timeout: 2000
         });
       }
-      // y ocultamos el modal
-      setTimeout(() => {
-        UIkit.modal("#modal-register-product").hide();
-      }, 400);
       //en la respuesta le mostramos un mensaje de producto creado correctamente
 
-      cargarTargetProduct();
+      cargarTargetProduct(page_productos);
     },
   });
 });
@@ -809,40 +821,14 @@ $.ajax({
   },
 });
 //esta funcion tiene el objetivo de mostrar los productos por nombre
-document
-  .querySelector(".searchProductActive")
-  .addEventListener("keyup", (e) => {
-    let val = e.target.value;
-    if (val != "") {
-      $.ajax({
-        url: "Controller/funcs_ajax/search.php",
-        type: "GET",
-        data: { randomnautica: "productos", like: val },
-        success: function (response) {
-          tarjetas(response, ".container-target-product");
-        },
-      });
-    } else {
-      cargarTargetProduct();
-    }
+document.querySelector(".searchProductActive").addEventListener("keyup", (e) => {
+    like_product = e.target.value;
+    cargarTargetProduct(0);
   });
 
-document
-  .querySelector(".searchProductNotActive")
-  .addEventListener("keyup", (e) => {
-    let val = e.target.value;
-    if (val != "") {
-      $.ajax({
-        url: "Controller/funcs_ajax/search.php",
-        type: "GET",
-        data: { randomnautica: "productos", like: val, active: 0 },
-        success: function (response) {
-          tarjetasProductosDesactive(response, ".cont_product_desactive");
-        },
-      });
-    } else {
-      cargarTargetProductDesactive();
-    }
+document.querySelector(".searchProductNotActive").addEventListener("keyup", (e) => {
+    like_product_2 = e.target.value;
+    cargarTargetProductDesactive(0);
   });
 
 let inpNameProduct = document.querySelector(".NameUpdateProduct");
@@ -910,13 +896,14 @@ const Registrar_U_M_C = (form, tr, item_reset, notification) => {
       processData: false,
       contentType: false,
       success: function (response) {
-        let result = tr();
+        tr();
         document.querySelector(item_reset).value = "";
         UIkit.notification.closeAll();
         UIkit.notification({
           message: `<span uk-icon='icon: check'>${notification}</span>`,
           status: "success",
           pos: "bottom-right",
+          timeout: 2000
         });
       },
     });
@@ -977,10 +964,8 @@ const Edit_U_M_C = (tr) => {
               message: `<span uk-icon='icon: check'>${msj}</span>`,
               status: "success",
               pos: "bottom-right",
+              timeout: 2000
             });
-            setTimeout(() => {
-              UIkit.modal("#edit-U_M_C").hide();
-            }, 400);
           },
         });
 
@@ -992,8 +977,7 @@ const Edit_U_M_C = (tr) => {
 };
 const DELETE_U_M_C = (TR, BTN) => {
   //seleccionamos todos los btn de eliminar de el modulo correspondiente
-  let btnDeletes = document.querySelectorAll(BTN);
-  btnDeletes.forEach((b) => {
+  document.querySelectorAll(BTN).forEach((b) => {
     b.addEventListener("click", () => {
 
       //obtenemos el tipo del registro ya sea unidad, marca o categoria
@@ -1021,7 +1005,6 @@ const DELETE_U_M_C = (TR, BTN) => {
           processData: false,
           contentType: false,
           success: function (response) {
-            console.log(response);
             if (tipo == "unidad") {
               msj = "Unidad Eliminada correctamente";
             } else if (tipo == "categoria") {
@@ -1029,16 +1012,14 @@ const DELETE_U_M_C = (TR, BTN) => {
             } else {
               msj = "Marca Eliminada correctamente";
             }
-            let result = TR();
+            TR();
             UIkit.notification.closeAll();
             UIkit.notification({
               message: `<span uk-icon='icon: check'>${msj}</span>`,
               status: "success",
               pos: "bottom-right",
+              timeout: 2000
             });
-            setTimeout(() => {
-              UIkit.modal("#eliminar-U_M_C").hide();
-            }, 400);
           },
         });
         idInput.removeAttribute('value')
