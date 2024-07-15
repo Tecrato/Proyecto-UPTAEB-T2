@@ -8,6 +8,7 @@
     include("../funcs/verificar.php");
     require('../../Model/Permisos.php');
 
+
     $limite = isset($_GET['limite']) ? intval($_GET['limite']) : 50;
     $n = (isset($_GET['n']) and $_GET['n'] != "") ? intval($_GET['n']) : 0;
 
