@@ -174,7 +174,7 @@ $.ajax({
                 <td>${fecha(f.fecha_inicio)}</td>
                 <td>${fecha(f.fecha_limite)}</td>
                 <td>
-                    <div class="activeEmpty uk-border-rounded" style="padding: 5px; width: 50%">${parseInt(f.status) == 1 ? "PENDIENTE" : "PAGADO"}</div>
+                    <div class="${parseInt(f.status) == 0 ? "activeGood" : "activeEmpty"} uk-border-rounded" style="padding: 5px; width: 50%">${parseInt(f.status) == 1 ? "PENDIENTE" : "PAGADO"}</div>
                 </td>
                 <td>
                     <a uk-toggle href="#credito_page" class="uk-button uk-button-default pagar_credito ${parseInt(f.status) == 0 ? "invisible" : ""}">PAGAR</a>
