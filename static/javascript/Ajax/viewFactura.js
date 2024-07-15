@@ -4,8 +4,8 @@ $.ajax({
   type: "GET",
   data: { randomnautica: "ventas" , limite:20},
   success: function (response) {
-    console.log(response);
     let json = JSON.parse(response);
+    console.log(json);
     let ContainerTarget = document.querySelector(".Contanier_fact_item");
     let template = "";
     json.lista.forEach((t) => {
@@ -22,7 +22,7 @@ $.ajax({
                                   <img src="static/images/logo_m.png" alt="" width="50px">
                               </div>
                               <div class="uk-flex uk-flex-column uk-flex-center">
-                                  <h6 class="uk-margin-remove text_fact_info">Cliente: ${t.nom_cliente +' '+ t.apell_cliente}</h6>
+                                  <h6 class="uk-margin-remove text_fact_info">Cliente: ${t.cliente_nombre +' '+ t.cliente_apellido}</h6>
                                   <h6 class="uk-margin-remove text_fact_info">N_FACT: ${t.id}</h6>
                                   <h6 class="uk-margin-remove text_fact_info status_fact">Pagada</h6>
                               </div>

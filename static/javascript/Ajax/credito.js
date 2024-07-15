@@ -198,7 +198,7 @@ $.ajax({
                         totalCredito.textContent = "Total en $: " + json.lista[0].monto_final
                         document.querySelector(".total_credito_bs").textContent = "Total en Bs: " + parseFloat(document.getElementById("BCV").textContent) * parseFloat(json.lista[0].monto_final)
                         metodoPago()
-
+                        let id_rv = btn.parentElement.parentElement.getAttribute("id__rv")
                         let btn_credito_pago = document.querySelector(".btn_pagar_credito")
                         btn_credito_pago.addEventListener("click", () => {
                             let jf = []
@@ -212,7 +212,14 @@ $.ajax({
                                     monto: value_input
                                 })
                             })
-                            console.log(jf);
+                            $.ajax({
+                                url: "Controller/funcs_ajax/pagar_credito.php",
+                                type: "POST",
+                                data: { id_rv, pagos: jf },
+                                success: function (response) {
+                                    console.log(response);
+                                }
+                            })
                         })
                     }
                 })

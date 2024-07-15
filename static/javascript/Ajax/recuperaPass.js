@@ -116,7 +116,7 @@ function validarContrasena(contrasena) {
     }
 }
 
-valid_pass.addEventListener("change", (e) => {
+valid_pass.addEventListener("keyup", (e) => {
     let val = e.target.value;
     const resultado = validarContrasena(val);
     document.querySelector("#msj").textContent = resultado;

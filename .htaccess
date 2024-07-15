@@ -11,7 +11,7 @@ RewriteRule ^Proveedores$ Controller/C_proveedores.php
 RewriteRule ^Salir$ Controller/funcs/logout.php
 
 
-RewriteRule ^PDFMaxMin$ Controller/pdfs/PDF_min_max.php
+RewriteRule ^Estadisticas_PDF$ Controller/pdfs/PDF_estadisticas.php
 RewriteRule ^PDFCierreCaja$ Controller/pdfs/PDF_cierre_caja.php
 RewriteRule ^PDFInventario$ Controller/pdfs/PDF_inventario.php
 RewriteRule ^PDFFactura$ Controller/pdfs/PDF_factura.php

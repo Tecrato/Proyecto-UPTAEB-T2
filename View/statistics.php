@@ -15,7 +15,7 @@
                                 <div class="uk-dropdown">
                                     <ul class="uk-nav uk-dropdown-nav">
                                         <li>
-                                            <form id="formPDF1" action="PDFMaxMin" method="POST" enctype="multipart/form-data">
+                                            <form id="formPDF1" action="Estadisticas_PDF" method="POST" enctype="multipart/form-data">
                                                 <input type="hidden" name="img" id="imgRatio_png">
                                                 <input type="hidden" name="select" value="ratio_ventas">
                                                 <button class="btn_pdf" uk-icon="icon: file-pdf" type="submit">Generar reporte</button>
@@ -43,7 +43,7 @@
                                 <div class="uk-dropdown">
                                     <ul class="uk-nav uk-dropdown-nav">
                                         <li>
-                                            <form id="formPDF2" action="PDFMaxMin" method="POST" enctype="multipart/form-data">
+                                            <form id="formPDF2" action="Estadisticas_PDF" method="POST" enctype="multipart/form-data">
                                                 <input type="hidden" name="img" id="imgGanancia_png">
                                                 <input type="hidden" name="select" value="ganancia">
                                                 <input type="submit" value="Imprimir" style="display: none;">
@@ -74,7 +74,7 @@
                                 <div class="uk-dropdown">
                                     <ul class="uk-nav uk-dropdown-nav">
                                         <li>
-                                            <form id="formPDF3" action="PDFMaxMin" method="POST" enctype="multipart/form-data">
+                                            <form id="formPDF3" action="Estadisticas_PDF" method="POST" enctype="multipart/form-data">
                                                 <input type="hidden" name="img" id="imgRotacion_png">
                                                 <input type="hidden" name="select" value="rotacion">
                                                 <input type="submit" value="Imprimir" style="display: none;">
@@ -105,7 +105,7 @@
                                 <div class="uk-dropdown">
                                     <ul class="uk-nav uk-dropdown-nav">
                                         <li>
-                                            <form id="formPDF4" action="PDFMaxMin" method="POST" enctype="multipart/form-data">
+                                            <form id="formPDF4" action="Estadisticas_PDF" method="POST" enctype="multipart/form-data">
                                                 <input type="hidden" name="img" id="imgMax_png">
                                                 <input type="hidden" name="select" value="max_ventas">
                                                 <input type="submit" id="GenReport" value="Imprimir" style="display: none;">
@@ -133,7 +133,7 @@
                                 <div class="uk-dropdown">
                                     <ul class="uk-nav uk-dropdown-nav">
                                         <li>
-                                            <form id="formPDF5" action="PDFMaxMin" method="POST" enctype="multipart/form-data">
+                                            <form id="formPDF5" action="Estadisticas_PDF" method="POST" enctype="multipart/form-data">
                                                 <input type="hidden" name="img" id="imgMin_png">
                                                 <input type="hidden" name="select" value="min_ventas">
                                                 <button class="btn_pdf" uk-icon="icon: file-pdf" type="submit">Generar reporte</button>

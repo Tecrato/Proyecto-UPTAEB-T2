@@ -487,9 +487,9 @@
                                     <tbody class="js-filter" id="tableCapital">
                                     </tbody>
                                 </table>
-                                
+                                <hr>
                                 <div class="uk-flex uk-flex-center">
-                                    <ul class="uk-pagination uk-pagination2 uk-margin-large-top">
+                                    <ul class="uk-pagination uk-pagination2">
                                         <li><a class="pag-btn-movimiento-capital" data-direccion="start"><span class="uk-margin-small-right" uk-pagination-previous></span><span class="uk-margin-small-right" uk-pagination-previous></span></a></li>
                                         <li><a class="pag-btn-movimiento-capital" data-direccion="back">Previous</a></li>
                                         <li><a class="pag-btn-movimiento-capital" data-direccion="next">Next</a></li>
