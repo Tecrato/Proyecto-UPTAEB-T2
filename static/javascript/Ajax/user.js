@@ -64,7 +64,7 @@ function generar_bitacora_personal(page) {
     $.ajax({
         url: "Controller/funcs_ajax/search.php",
         type: "GET",
-        data: { randomnautica: "bitacora", subFunction: "bitacora", limite: 10, n: page, ID: sesion_user_id },
+        data: { randomnautica: "bitacora", subFunction: "bitacora", limite: 10, n: page, ID: session_user_id },
         success: function (response) {
             let json = JSON.parse(response)
             total_personal = json['total']
