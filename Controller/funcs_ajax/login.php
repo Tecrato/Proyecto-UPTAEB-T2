@@ -8,7 +8,7 @@
     $correo = $_POST["correo"];
     $password = $_POST["password"];
     
-    $c = new Usuario(null,null,$correo,$password);
+    $c = new Usuario(null,null,$correo);
     $result = $c->search();
 
     if (count($result) != 1) {
@@ -33,9 +33,9 @@
         else if ($rol == 3){
             $_SESSION['rol'] = "Usuario"; // Y tambien guarda el nombre para despues   
         }
-        echo json_encode([['status' => 'active', 'error_code' => 1]]);
+        echo 1;
     } else {
-        echo json_encode([['status' => 'error', 'error_code' => 0]]);
+        echo 0;
     }
 
 ?>

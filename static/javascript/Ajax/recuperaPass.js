@@ -138,6 +138,7 @@ valid_pass.addEventListener("keyup", (e) => {
                 contentType: false,
                 processData: false,
                 success: (response) => {
+                    console.log(response);
                     $.ajax({
                         url: "Controller/funcs_ajax/login.php",
                         type: "POST",
@@ -150,7 +151,7 @@ valid_pass.addEventListener("keyup", (e) => {
                                 window.location = "http://localhost/Proyecto-UPTAEB-T2/Administrar_perfil"
                                 localStorage.setItem("intro", "true")
                             } else {
-                                window.location = "http://localhost/Proyecto-UPTAEB-T2/login"
+                                // window.location = "http://localhost/Proyecto-UPTAEB-T2/login"
                             }
                         }
                     })
