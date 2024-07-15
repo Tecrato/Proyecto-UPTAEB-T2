@@ -48,7 +48,6 @@ const renderModelsChart1 = () => {
     data: { select: "ratio_ventas" },
     success: function (response) {
       let json = JSON.parse(response);
-      // console.log(json);
       let array = []
 
       json.lista.forEach(element => {
@@ -279,7 +278,6 @@ const renderModelsChart5 = () => {
     data: { select: "min_ventas" },
     success: function (response) {
       let json = JSON.parse(response);
-      console.log(json);
       for (const i of json.lista) {
         let nombre = i.nombre + " " + i.marca + " " + i.unidad_valor + " " + i.unidad
         let cantidad = i.cantidad == null ? 0 : i.cantidad
@@ -324,7 +322,6 @@ $.ajax({
   type: "POST",
   data: { accion: "check" },
   success: function (response) {
-    console.log(response);
     let json = JSON.parse(response);
     if (json.estado == "no") {
       document.getElementById("check_box").textContent = "CERRADA";

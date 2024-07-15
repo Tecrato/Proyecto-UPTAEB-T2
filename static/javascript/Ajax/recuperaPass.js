@@ -39,7 +39,7 @@ document.getElementById("forget-pass").addEventListener("click", () => {
         type: "POST",
         data: { email: input_correo.value, semilla: input_pass.value, metodo: 'semilla', password: input_passNew.value },
         success: (response) => {
-            console.log(response)
+            (response)
             let json = JSON.parse(response)
             if (json.status == "error") {
                 UIkit.notification.closeAll();
@@ -145,7 +145,7 @@ valid_pass.addEventListener("change", (e) => {
                         contentType: false,
                         processData: false,
                         success: (response) => {
-                            console.log(response);
+                            (response);
                             if (response == "1") {
                                 window.location = "http://localhost/Proyecto-UPTAEB-T2/Administrar_perfil"
                                 localStorage.setItem("intro", "true")

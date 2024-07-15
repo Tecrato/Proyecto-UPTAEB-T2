@@ -54,7 +54,7 @@ $.ajax({
     data: { select: "total_productos_categoria" },
     success: function (response) {
         let json = JSON.parse(response);
-        console.log(json);
+        (json);
         let template = ""
         json.lista.forEach(element => {
             template += `
@@ -105,15 +105,15 @@ const getDataColors = (opacity) => {
 
 const renderModelsChart6 = () => {
 
-    console.log("object");
+    ("object");
     $.ajax({
         url: "api_estadisticas",
         type: "GET",
         data: { select: "valor_total_inventario" },
         success: function (response) {
-            console.log(response);
+            (response);
             let json = JSON.parse(response);
-            console.log(json);
+            (json);
             let array = []
             json.lista.forEach(element => {
                 if ((element.valor == null ? 0 : parseFloat(element.valor) * 100) > 0) {

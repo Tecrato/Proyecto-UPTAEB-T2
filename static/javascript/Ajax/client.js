@@ -43,7 +43,7 @@ function insertANDupdateCLient_proveedor (FORM, NUMBER, TABLE, TYPE) {
         contentType: false,
         data: data,
         success: (response) => {
-          console.log(response);
+          (response);
           let result = TABLE();
           if (insertOrUpdate == false) {
             UIkit.notification.closeAll();

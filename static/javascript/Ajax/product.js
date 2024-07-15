@@ -252,7 +252,7 @@ const modalEntradas = () => {
             processData: false,
             contentType: false,
             success: function (response) {
-              console.log(response);
+              (response);
               //en la respuesta le mostramos un mensaje de producto creado correctamente
               UIkit.notification.closeAll();
               UIkit.notification({
@@ -295,7 +295,7 @@ const modalModificar = () => {
         data: { randomnautica: "productos", ID: idProduct },
         success: function (response) {
           let json = JSON.parse(response);
-          console.log(json);
+          (json);
           json.lista.forEach((i) => {
             document.querySelector(".NameUpdateProduct").value = i.nombre;
             document.querySelector(".MarcaUpdateProduct").value = i.marca;
@@ -533,7 +533,7 @@ const tarjetas = (response, cont) => {
 
 };
 const tarjetasProductosDesactive = (response, cont) => {
-  console.log(response)
+  (response)
   //convertimos la respuesta en un objeto
   let json = JSON.parse(response);
   total_productos_2 = json['total']
@@ -629,7 +629,7 @@ const cargarTargetProduct = (page) => {
     success: function (response) {
       marcaAgua();
       tarjetas(response, ".container-target-product");
-      console.log(page_productos,total_productos,'\n',response)
+      (page_productos,total_productos,'\n',response)
       modalDetalles(1);
     },
   });
@@ -766,7 +766,7 @@ formAggProduct.addEventListener("submit", (e) => {
     processData: false,
     contentType: false,
     success: function (response) {
-      console.log(response);
+      (response);
       if (val == false) {
         UIkit.notification.closeAll();
         UIkit.notification({

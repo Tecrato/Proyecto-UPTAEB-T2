@@ -6,7 +6,7 @@ let btnAggMetodoPago = document.querySelector(".btn_agg_metodoPago2")
 // Agregar metodo de pago
 const metodoPago = () => {
     btnAggMetodoPago.addEventListener('click', () => {
-        console.log("click");
+        ("click");
         // Incrementar el contador para obtener el id único de cada pago
         // Obtener el contenedor de los métodos de pago
         let cont = document.querySelector(".inputPago")
@@ -164,7 +164,7 @@ $.ajax({
     success: function (response) {
         let json = JSON.parse(response);
         let template = ""
-        console.log(json);
+        (json);
         json.lista.forEach((f) => {
             template += `
             
@@ -212,7 +212,7 @@ $.ajax({
                                     monto: value_input
                                 })
                             })
-                            console.log(jf);
+                            (jf);
                         })
                     }
                 })

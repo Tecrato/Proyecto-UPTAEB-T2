@@ -14,7 +14,6 @@ function cambiar_pagina_ajax(dir, func, limite = 9, page=null, total=0) {
   } else if (dir == 'end') {
       page = Math.ceil(total/limite)-1;
   }
-  console.log(page,dir,limite,total)
   func(page)
 }
 
@@ -139,7 +138,6 @@ function DOLAR_RV(func) {
     data: { randomnautica: "configuraciones", llave: "dolar" },
     success: function(response) {
       json = JSON.parse(response)
-    // console.log(parseFloat(json.lista[0].valor))
       func(parseFloat(json.lista[0].valor))
     }
   })
@@ -152,7 +150,6 @@ function DOLAR_DB(id) {
     type: "GET",
     data: { randomnautica: "configuraciones", llave: "dolar" },
     success: function(response) {
-      console.log(response);
       json = JSON.parse(response)
       document.getElementById(id).textContent = json.lista[0].valor + " Bs"
     }

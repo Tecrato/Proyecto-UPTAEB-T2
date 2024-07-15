@@ -4,7 +4,7 @@ const checkCaja = () => {
         type: "POST",
         data: { accion: "check" },
         success: function (response) {
-            console.log(response);
+            (response);
             let json = JSON.parse(response);
             if (json.estado == "no") {
                 document.getElementById("check_box").textContent = "CERRADA";
@@ -22,7 +22,7 @@ const cargarCajas = () => {
         data: { randomnautica: "caja" },
         success: function (response) {
             let json = JSON.parse(response);
-            console.log(json);
+            (json);
             let template = ""
             json.lista.forEach(element => {
                 template += `<tr>
@@ -67,7 +67,7 @@ const cargarCajas = () => {
                             processData: false,
                             contentType: false,
                             success: function (response) {
-                                console.log(response);
+                                (response);
                                 cargarCajas()
                                 checkCaja()
                                 UIkit.notification.closeAll();
@@ -96,7 +96,7 @@ checkCaja()
 
 
 let formCaja = document.getElementById("FormCaja");
-// console.log(formCaja);
+// (formCaja);
 formCaja.addEventListener("submit", (e) => {
     e.preventDefault();
     let data = new FormData(formCaja);
@@ -111,7 +111,7 @@ formCaja.addEventListener("submit", (e) => {
         success: function (response) {
             cargarCajas()
             checkCaja()
-            console.log(response);
+            (response);
             UIkit.notification.closeAll();
             UIkit.notification({
                 message: `<span uk-icon='icon: check'>Caja Abieta</span>`,

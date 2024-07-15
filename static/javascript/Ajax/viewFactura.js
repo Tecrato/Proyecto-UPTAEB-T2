@@ -4,7 +4,7 @@ $.ajax({
   type: "GET",
   data: { randomnautica: "ventas" , limite:20},
   success: function (response) {
-    console.log(response);
+    (response);
     let json = JSON.parse(response);
     let ContainerTarget = document.querySelector(".Contanier_fact_item");
     let template = "";
@@ -58,7 +58,7 @@ $.ajax({
           type: "GET",
           success: function (response) {
             let json = JSON.parse(response);
-            console.log(response);
+            (response);
           },
         });
       });

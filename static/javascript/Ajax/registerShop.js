@@ -22,7 +22,7 @@ function func(dolar) {
       productos.forEach((producto) => {
         //esta condicion es para que agg el tr, pero modificando el tamaño del input de cantidad, para que se vea bien en versiones mobiles
         
-        console.log(dolar);
+        (dolar);
         if (screen >= 1100) {
           tr += `
           <tr value="${producto.id}" class="TR-Product uk-light">
@@ -117,7 +117,7 @@ function func(dolar) {
         let IvaStatus = algo.getAttribute("iva");
         let cantidadProduct = parseFloat(algo.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent)
         let valor$ = parseFloat(algo.parentElement.nextElementSibling.getAttribute('value') * cantidadProduct)
-        console.log(algo.parentElement.nextElementSibling);
+        (algo.parentElement.nextElementSibling);
         priceDolar += valor$
         if (IvaStatus == 0) {
           let precioUndTotal = parseFloat(algo.parentElement.previousElementSibling.textContent);
@@ -342,7 +342,7 @@ function func(dolar) {
     let btnAggMetodoPago = document.querySelector(".btn_agg_metodoPago")
     // Agregar metodo de pago
     btnAggMetodoPago.addEventListener('click', () => {
-      console.log("click");
+      ("click");
       // Incrementar el contador para obtener el id único de cada pago
       // Obtener el contenedor de los métodos de pago
       let cont = document.querySelector(".cont_metodos_pagos")
@@ -424,8 +424,8 @@ function func(dolar) {
               // INP.forEach((B) => {
               //   amount.push(B.value)
               // })
-              // console.log(totalDebito);
-              // console.log(amount);
+              // (totalDebito);
+              // (amount);
               // let result = 0
               // amount.forEach((a) => {
               //   let number = a == "" ? 0 : parseFloat(a)
@@ -435,7 +435,7 @@ function func(dolar) {
               // totalDebito.textContent =  valor
 
               let valor = B.value == "" ? 0 : parseFloat(B.value)
-              console.log(valor);
+              (valor);
               // ActualizarTotal()
               let valor2 = parseFloat(B.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.textContent)
               // if (B.previousElementSibling.value == "Divisa" && valor2 != 0) {
@@ -457,20 +457,20 @@ function func(dolar) {
               cont.removeChild(btn.parentElement.parentElement)
 
               for (const f of INP) {
-                console.log(f.value);
+                (f.value);
               }
               // amount.pop()
               let result = 0
 
-              console.log(amount);
+              (amount);
               amount.forEach((a) => {
                 let number = a == "" ? 0 : parseFloat(a)
                 result += number
               })
 
-              console.log(result);
+              (result);
 
-              console.log(btn.parentElement.parentElement.parentElement);
+              (btn.parentElement.parentElement.parentElement);
 
             })
           })
@@ -577,7 +577,7 @@ function func(dolar) {
         let select = document.querySelectorAll(".selectMetodoPago")
         select.forEach((e) => {
 
-          console.log(e.value);
+          (e.value);
           let valor = e.value
           let monto = e.nextElementSibling.value
 
@@ -588,22 +588,22 @@ function func(dolar) {
 
         })
 
-        console.log();
-        console.log(json);
+        ();
+        (json);
 
 
         //envio de datos con ajax
         //preparamos el json
         let jsonString = JSON.stringify(json);
 
-        console.log(jsonString);
+        (jsonString);
 
         $.ajax({
           url: "Controller/funcs_ajax/hacer_factura.php",
           type: "POST",
           data: { jsonString },
           success: function (response) {
-            console.log(response);
+            (response);
             targetFact()
             let json = JSON.parse('{' + response.split('{')[1]);
             if (json.error == "Caja Error") {
@@ -761,7 +761,7 @@ document.getElementById("input-search-fact").addEventListener("keyup", (e) => {
       type: "GET",
       data: { randomnautica: "clientes", like_cedula: val },
       success: function (response) {
-        console.log(response);
+        (response);
         let json = JSON.parse(response);
         let LI = "";
         //recorremos la respuesta del server y creamos el template de los li

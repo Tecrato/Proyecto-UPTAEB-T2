@@ -81,7 +81,7 @@ const cargarMetodosPago = () => {
                             contentType: false,
                             data: data,
                             success: (response) => {
-                                console.log(response);
+                                (response);
                                 UIkit.notification.closeAll();
                                 UIkit.notification({
                                     message: `<span uk-icon='icon: check'>Metodo Eliminado</span>`,
@@ -116,7 +116,7 @@ formMetodoPago.addEventListener("submit", (e) => {
         contentType: false,
         processData: false,
         success: function (response) {
-            console.log(response);
+            (response);
             setTimeout(() => {
                 UIkit.modal("#modal-metodo_pago").hide();
             }, 400)

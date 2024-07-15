@@ -44,7 +44,7 @@ function insertANDupdateCLient_proveedor (FORM, NUMBER, TABLE, TYPE) {
       contentType: false,
       data: data,
       success: (response) => {
-        console.log(response);
+        (response);
         let result = TABLE();
         if (insertOrUpdate == false) {
           UIkit.notification.closeAll();
@@ -185,7 +185,7 @@ function cardProv(page){
     success: function (response) {
       let template = "";
       let json = JSON.parse(response);
-      console.log(json)
+      (json)
       total_proveedores = json['total']
       json.lista.forEach((element) => {
         template += `<div>
