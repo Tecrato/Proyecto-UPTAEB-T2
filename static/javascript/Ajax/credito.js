@@ -1,5 +1,26 @@
 let totalCredito = document.querySelector(".total_credito")
 
+var page_creditos = 0
+var total_creditos = 0
+
+
+$(".pag-btn-creditos").click((ele) => {
+    cambiar_pagina_ajax(
+        ele.target.dataset["direccion"],
+        cargarCajas,
+        10,
+        page_cajas,
+        total_cajas
+    );
+});
+// Array.find((boleano) => {
+//     if (!boleano){
+//         $('.borrar').invisible()
+//     }
+// },
+// ('productos','borrar'))
+
+
 
 let bool = true
 let btnAggMetodoPago = document.querySelector(".btn_agg_metodoPago2")
@@ -156,6 +177,31 @@ const metodoPago = () => {
     })
 }
 
+function generar_creditos(page){
+    $.ajax({
+        url: "Controller/funcs_ajax/search.php",
+        type: "GET",
+        data: { randomnautica: "credito" },
+        success: function (response) {
+            let json = JSON.parse(response);
+            let template = ""
+            json.lista.forEach((f) => {
+                template += `
+                
+                <tr id_rv="${f.id_rv}" id="${f.id}">
+                    <td>${f.id}</td>
+                    <td>${f.nombre + " " + f.apellido}</td>
+                    <td>${fecha(f.fecha_inicio)}</td>
+                    <td>${fecha(f.fecha_limite)}</td>
+                    <td>
+                        <div class="${parseInt(f.status) == 0 ? "activeGood" : "activeEmpty"} uk-border-rounded" style="padding: 5px; width: 50%">${parseInt(f.status) == 1 ? "PENDIENTE" : "PAGADO"}</div>
+                    </td>
+                    <td>
+                        <a uk-toggle href="#credito_page" class="uk-button uk-button-default pagar_credito ${parseInt(f.status) == 0 ? "invisible" : ""}">PAGAR</a>
+                    </td>
+                </tr>
+                `
+            })
 
 $.ajax({
     url: "Controller/funcs_ajax/search.php",
@@ -182,47 +228,45 @@ $.ajax({
             `
         })
 
-        $("#Tbody_credito").html(template)
-        let btn = document.querySelectorAll(".pagar_credito")
+            btn.forEach((btn) => {
+                btn.addEventListener("click", (e) => {
+                    let id = btn.parentElement.parentElement.getAttribute("id")
+                    $.ajax({
+                        url: "Controller/funcs_ajax/search.php",
+                        type: "GET",
+                        data: { randomnautica: "credito", ID: id },
+                        success: function (response) {
+                            let json = JSON.parse(response);
+                            totalCredito.textContent = "Total en $: " + json.lista[0].monto_final
+                            document.querySelector(".total_credito_bs").textContent = "Total en Bs: " + parseFloat(document.getElementById("BCV").textContent) * parseFloat(json.lista[0].monto_final)
+                            metodoPago()
+                            let id_rv = btn.parentElement.parentElement.getAttribute("id_rv")
+                            let btn_credito_pago = document.querySelector(".btn_pagar_credito")
+                            btn_credito_pago.addEventListener("click", () => {
+                                let jf = []
+                                let n = document.querySelectorAll(".AMOUNT-MP2")
+                                n.forEach((B) => {
+                                    let value_input = B.value == "" ? 0 : B.value
+                                    let value_Tpago = B.previousElementSibling.value
 
-        btn.forEach((btn) => {
-            btn.addEventListener("click", (e) => {
-                let id = btn.parentElement.parentElement.getAttribute("id")
-                $.ajax({
-                    url: "Controller/funcs_ajax/search.php",
-                    type: "GET",
-                    data: { randomnautica: "credito", ID: id },
-                    success: function (response) {
-                        let json = JSON.parse(response);
-                        totalCredito.textContent = "Total en $: " + json.lista[0].monto_final
-                        document.querySelector(".total_credito_bs").textContent = "Total en Bs: " + parseFloat(document.getElementById("BCV").textContent) * parseFloat(json.lista[0].monto_final)
-                        metodoPago()
-                        let id_rv = btn.parentElement.parentElement.getAttribute("id_rv")
-                        let btn_credito_pago = document.querySelector(".btn_pagar_credito")
-                        btn_credito_pago.addEventListener("click", () => {
-                            let jf = []
-                            let n = document.querySelectorAll(".AMOUNT-MP2")
-                            n.forEach((B) => {
-                                let value_input = B.value == "" ? 0 : B.value
-                                let value_Tpago = B.previousElementSibling.value
-
-                                jf.push({
-                                    metodo: value_Tpago,
-                                    monto: value_input
+                                    jf.push({
+                                        metodo: value_Tpago,
+                                        monto: value_input
+                                    })
+                                })
+                                $.ajax({
+                                    url: "Controller/funcs_ajax/pagar_credito.php",
+                                    type: "POST",
+                                    data: { id_rv, pagos: jf },
+                                    success: function (response) {
+                                        console.log(response);
+                                    }
                                 })
                             })
-                            $.ajax({
-                                url: "Controller/funcs_ajax/pagar_credito.php",
-                                type: "POST",
-                                data: { id_rv, pagos: jf },
-                                success: function (response) {
-                                    console.log(response);
-                                }
-                            })
-                        })
-                    }
+                        }
+                    })
                 })
             })
-        })
-    }
-})
+        }
+    })
+}

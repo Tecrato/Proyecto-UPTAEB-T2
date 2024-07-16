@@ -125,5 +125,8 @@ class Caja extends DB
         return $consulta->fetchAll();
     }
 
+    function COUNT(){
+        return $this->conn->query("SELECT COUNT(*) 'total' FROM caja")->fetch()['total'];
+    }
 
 }

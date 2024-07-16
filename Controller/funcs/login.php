@@ -33,7 +33,7 @@
         $_SESSION['user_name'] = $row['nombre']; // Y tambien guarda el nombre para despues
         $_SESSION['user_id'] = $row['id']; // Y el id
         $_SESSION['rol_num'] = $row['rol'];
-        $_SESSION['sesion_id'] = $sesion_id; // aki guardamos el sesion id en la session pa despue
+        $_SESSION['sesion_id'] = $sesion_id;
         $rol = $row['rol'];
         if ($rol == 1){
             $_SESSION['rol'] = "Super-Administrador"; // Y tambien guarda el nombre para despues   

@@ -16,18 +16,19 @@
                                 <span class="uk-margin-small-right" uk-icon="history"></span> BITACORA
                             </a>
                         </li>
-                        <?php if ($_SESSION['rol_num'] <= 2) { ?>
+                        <?php if ($_SESSION['rol_num'] <= 1) { ?>
                             <li style="padding-bottom: 20px;">
                                 <a id="aCapital" href="#">
                                     <span class="uk-margin-small-right" uk-icon="credit-card"></span>CAPITAL
                                 </a>
                             </li>
+                            <script src="static/javaScript/Ajax/capital.js" defer></script>
+                        <?php }; ?>
                             <li>
                                 <a id="aSets" href="#">
                                     <span class="uk-margin-small-right" uk-icon="cog"></span>AJUSTES
                                 </a>
                             </li>
-                        <?php }; ?>
 
                     </ul>
                 </div>
@@ -46,11 +47,13 @@
                                                         <span class="uk-margin-small-right" uk-icon="users"></span>USUARIO
                                                     </a>
                                                 </li>
+                                                <?php if ($_SESSION['rol_num'] <= 1) { ?>
                                                 <li>
                                                     <a href="#">
                                                         <span class="uk-margin-small-right" uk-icon="settings"></span>ROLES Y FUNCIONES
                                                     </a>
                                                 </li>
+                                                <?php }; ?>
                                             </ul>
                                         </div>
                                         <div class="uk-width-expand@m">
@@ -160,7 +163,7 @@
                                                         </div>
 
                                                     </section>
-                                                    <?php if ($_SESSION['rol_num'] <= 2) { ?>
+                                                    <?php if ($_SESSION['rol_num'] <= 1) { ?>
                                                         <section id="tableUsers">
                                                             <div class="uk-flex uk-flex-center uk-margin-medium-top">
                                                                 <h2>USUARIOS REGISTRADOS</h2>
@@ -188,24 +191,26 @@
                                                                 </table>
                                                             </div>
                                                         </section>
-                                                    <?php }; ?>
-                                                </li>
+                                                        <?php }; ?>
+                                                    </li>
+                                                    <?php if ($_SESSION['rol_num'] <= 1) { ?>
 
 
-                                                <li>
-                                                    <section uk-filter="target: .js-filter; animation: fade">
-                                                        <h3>PERMISOS DE MODULOS</h3>
-                                                        <div class="uk-flex uk-flex-middle">
-                                                            <a href="#modal_asignar_rol" uk-toggle class="uk-button uk-button-default uk-margin-medium-right">ASIGNAR MODULO</a>
-                                                            <nav uk-dropnav="mode: click" class="uk-flex-middle">
-                                                                <ul class="uk-subnav">
-                                                                    <li>
-                                                                        <a href>Tipo de permiso <span uk-drop-parent-icon></span></a>
-                                                                        <div class="uk-dropdown">
-                                                                            <ul class="uk-nav uk-dropdown-nav">
-                                                                                <li uk-filter-control><a href="#">Todo</a></li>
-                                                                                <li uk-filter-control="[data-tp='agregar']"><a href="#">Registrar</a></li>
-                                                                                <li uk-filter-control="[data-tp='modificar']"><a href="#">Modificar</a></li>
+                                                    
+                                                    <li>
+                                                        <section uk-filter="target: .js-filter; animation: fade">
+                                                            <h3>PERMISOS DE MODULOS</h3>
+                                                            <div class="uk-flex uk-flex-middle">
+                                                                <a href="#modal_asignar_rol" uk-toggle class="uk-button uk-button-default uk-margin-medium-right">ASIGNAR MODULO</a>
+                                                                <nav uk-dropnav="mode: click" class="uk-flex-middle">
+                                                                    <ul class="uk-subnav">
+                                                                        <li>
+                                                                            <a href>Tipo de permiso <span uk-drop-parent-icon></span></a>
+                                                                            <div class="uk-dropdown">
+                                                                                <ul class="uk-nav uk-dropdown-nav">
+                                                                                    <li uk-filter-control><a href="#">Todo</a></li>
+                                                                                    <li uk-filter-control="[data-tp='agregar']"><a href="#">Registrar</a></li>
+                                                                                    <li uk-filter-control="[data-tp='modificar']"><a href="#">Modificar</a></li>
                                                                                 <li uk-filter-control="[data-tp='eliminar']"><a href="#">Eliminar</a></li>
                                                                                 <li uk-filter-control="[data-tp='imprimir']"><a href="#">Imprimir</a></li>
                                                                             </ul>
@@ -224,13 +229,15 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody class="js-filter" id="table-rol">
-
-
-                                                            </tbody>
-                                                        </table>
+                                                                
+                                                                
+                                                                </tbody>
+                                                            </table>
                                                     </section>
 
 
+
+                                                    <?php }; ?>
 
                                                     <!--******************* MODAL DE ASIGNAR ROL *******************-->
 
@@ -514,6 +521,7 @@
                         </div>
 
 
+                        <?php if ($_SESSION['rol_num'] <= 1) { ?>
 
                         <div>
                             <section class="uk-flex uk-flex-around uk-flex-wrap uk-padding-small uk-border-rounded" style="border: 1px solid #555;">
@@ -609,6 +617,7 @@
                             </section>
                         </div>
 
+                        <?php }; ?>
 
 
                         <div>
@@ -618,7 +627,11 @@
                                         <div class="uk-width-auto@m">
                                             <ul class="uk-tab-left" uk-tab="connect: #component-tab-leftt; animation: uk-animation-fade">
                                                 <li><a href="#">MONEDA</a></li>
+                                                <?php if ($_SESSION['rol_num'] <= 1) { ?>
                                                 <li><a href="#">METODOS DE PAGO</a></li>
+                                                
+                                                <script src="static/javaScript/Ajax/metodo_pago.js" defer></script>
+                                                <?php }; ?>
                                             </ul>
                                         </div>
                                         <div class="uk-width-expand@m">
@@ -667,6 +680,7 @@
                                                 </li>
 
 
+                                                <?php if ($_SESSION['rol_num'] <= 1) { ?>
                                                 <li>
                                                     <div class="uk-flex uk-flex-between uk-flex-middle">
                                                         <div>
@@ -744,6 +758,8 @@
                                                         </tbody>
                                                     </table>
                                                 </li>
+                                                
+                                                <?php }; ?>
                                             </div>
                                         </div>
                                     </div>
@@ -820,9 +836,8 @@
 
 
 
-<script src="static/javaScript/Ajax/metodo_pago.js" defer></script>
 <script src="static/javaScript/Roles.js" defer></script>
-<script src="static/javaScript/Ajax/capital.js" defer></script>
+
 <script src="static/javaScript/Ajax/RegisterUser.js" defer></script>
 <script src="static/javaScript/Ajax/user.js" defer></script>
 
