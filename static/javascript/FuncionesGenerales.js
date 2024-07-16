@@ -3,16 +3,16 @@ window.addEventListener("load", () => {
   document.querySelector(".preloader_container").remove()
 })
 
-function cambiar_pagina_ajax(dir, func, limite = 9, page=null, total=0) {
+function cambiar_pagina_ajax(dir, func, limite = 9, page = null, total = 0) {
   limite = limite
-  if (dir == 'next' && page < Math.ceil(total / limite)-1){
-      page += 1;
+  if (dir == 'next' && page < Math.ceil(total / limite) - 1) {
+    page += 1;
   } else if (dir == 'back' && page > 0) {
-      page -= 1;
+    page -= 1;
   } else if (dir == 'start') {
-      page = 0;
+    page = 0;
   } else if (dir == 'end') {
-      page = Math.ceil(total/limite)-1;
+    page = Math.ceil(total / limite) - 1;
   }
   func(page)
 }
@@ -22,7 +22,7 @@ function cambiar_pagina_php(dir, type, limit = 9) {
   window.location.href = 'Controller/funcs/cambiar_pagina.php?dir=' + dir + '&p=' + page + '&type=' + type + '&n_p=' + limit
 }
 // funcion para colocar la marca de agua en el fondo de los modulos
-function marcaAgua(){
+function marcaAgua() {
   //esto hace que el fondo de pantalla y altura se modifiquen si hay tarjetas en los modulos
   let containerMarca_agua = document.querySelector(".container_marca_agua");
   let containerHeight = document.querySelector(".height_controller").childElementCount;
@@ -98,12 +98,12 @@ $.ajax({
   type: "POST",
   data: { accion: "check" },
   success: function (response) {
-      let json = JSON.parse(response);
-      if (json.estado == "no") {
-          document.getElementById("check_box").textContent = "CERRADA";
-      } else {
-          document.getElementById("check_box").textContent = "ABIERTA";
-      }
+    let json = JSON.parse(response);
+    if (json.estado == "no") {
+      document.getElementById("check_box").textContent = "CERRADA";
+    } else {
+      document.getElementById("check_box").textContent = "ABIERTA";
+    }
   }
 })
 
@@ -136,7 +136,7 @@ function DOLAR_RV(func) {
     url: "Controller/funcs_ajax/search.php",
     type: "GET",
     data: { randomnautica: "configuraciones", llave: "dolar" },
-    success: function(response) {
+    success: function (response) {
       json = JSON.parse(response)
       func(parseFloat(json.lista[0].valor))
     }
@@ -149,10 +149,55 @@ function DOLAR_DB(id) {
     url: "Controller/funcs_ajax/search.php",
     type: "GET",
     data: { randomnautica: "configuraciones", llave: "dolar" },
-    success: function(response) {
+    success: function (response) {
       json = JSON.parse(response)
       document.getElementById(id).textContent = json.lista[0].valor + " Bs"
     }
   })
 }
 DOLAR_DB("BCV")
+
+
+function PermisosG(btnEdit, btnDelete, tabla, btnAgg, T) {
+  if (T == "G") {
+    let j = document.querySelectorAll(btnEdit)
+    j.forEach((g) => {
+      g.classList.add("invisible")
+    })
+    let n = document.querySelectorAll(btnDelete)
+    n.forEach((g) => {
+      g.classList.add("invisible")
+    })
+  }
+
+
+
+  $.ajax({
+    url: "Controller/funcs_ajax/search.php",
+    type: "GET",
+    data: { randomnautica: "permiso", ID: session_user_id },
+    success: function (response) {
+      let json = JSON.parse(response);
+
+      json.lista.forEach((r) => {
+        if (T == "G") {
+          if (r.permiso == "modificar" && r.tabla == tabla) {
+            j.forEach((g) => {
+              g.classList.remove("invisible")
+            })
+          } else if (r.permiso == "eliminar" && r.tabla == tabla) {
+            n.forEach((g) => {
+              g.classList.remove("invisible")
+            })
+          } else if (r.permiso == "agregar" && r.tabla == tabla) {
+            document.querySelector(btnAgg).classList.remove("invisible")
+          }
+        } else if (T == "R") {
+          if (r.permiso == "agregar" && r.tabla == tabla) {
+            document.querySelector(btnAgg).classList.remove("invisible")
+          }
+        }
+      })
+    }
+  })
+}

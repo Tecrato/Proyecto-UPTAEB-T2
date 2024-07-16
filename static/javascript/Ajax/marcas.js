@@ -3,7 +3,7 @@ const MarcasTable = () => {
         url: "Controller/funcs_ajax/search.php",
         type: "GET",
         data: { randomnautica: "marcas" },
-        success: function(response) {
+        success: function (response) {
             let template = "";
             let json = JSON.parse(response);
             json.lista.forEach((U) => {
@@ -29,6 +29,12 @@ const MarcasTable = () => {
 
             Edit_U_M_C(MarcasTable)
             DELETE_U_M_C(MarcasTable, ".delete-M")
+            if (session_user_rol_num == "1") {
+                $(".li_cont_m").removeClass("invisible")
+                return
+            } else {
+                PermisosG(".Edit-U_M_C", ".delete-M", "marcas", ".li_cont_m", "G")
+            }
 
         },
     });

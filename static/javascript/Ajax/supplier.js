@@ -2,7 +2,7 @@ var page_proveedores = 0
 var total_proveedores = 0
 
 $(".pag-btn-proveedores").click((ele) => {
-  
+
   cambiar_pagina_ajax(
     ele.target.dataset["direccion"],
     cardProv,
@@ -13,7 +13,7 @@ $(".pag-btn-proveedores").click((ele) => {
 });
 //funciones para modicar, insertar y eliminar clientes, proveedores
 
-function insertANDupdateCLient_proveedor (FORM, NUMBER, TABLE, TYPE) {
+function insertANDupdateCLient_proveedor(FORM, NUMBER, TABLE, TYPE) {
 
   let inp = document.querySelector(NUMBER);
   let iti = window.intlTelInput(inp, {
@@ -75,7 +75,7 @@ function insertANDupdateCLient_proveedor (FORM, NUMBER, TABLE, TYPE) {
   });
 }
 
-function DeleteClientProv (BTN, FORM, IDSETTER, TR, notification){
+function DeleteClientProv(BTN, FORM, IDSETTER, TR, notification) {
   let btnDelete = document.querySelectorAll(BTN);
   btnDelete.forEach((btn) => {
     btn.addEventListener("click", (e) => {
@@ -84,7 +84,7 @@ function DeleteClientProv (BTN, FORM, IDSETTER, TR, notification){
       let form = document.querySelector(FORM);
       form.addEventListener("submit", (e) => {
         e.preventDefault();
-        let data = new FormData(form); 
+        let data = new FormData(form);
         $.ajax({
           url: "Controller/funcs/borrar_cosas.php",
           type: "POST",
@@ -101,11 +101,11 @@ function DeleteClientProv (BTN, FORM, IDSETTER, TR, notification){
             });
             setTimeout(() => {
               UIkit.modal("#eliminar_supplier").hide();
-            },400)
+            }, 400)
 
             setTimeout(() => {
               UIkit.modal("#eliminar_cliente").hide();
-            },400)
+            }, 400)
           }
         })
       })
@@ -176,12 +176,12 @@ const ModalEdit = () => {
   })
 }
 
-function cardProv(page){
+function cardProv(page) {
   page_proveedores = page
   $.ajax({
     url: "Controller/funcs_ajax/search.php",
     type: "GET",
-    data: { randomnautica: "proveedores", n:page_proveedores, limite: 6, active: 1 },
+    data: { randomnautica: "proveedores", n: page_proveedores, limite: 6, active: 1 },
     success: function (response) {
       let template = "";
       let json = JSON.parse(response);
@@ -251,40 +251,9 @@ function cardProv(page){
       $(".cont_prov_cards").html(template)
 
 
-      let j = document.querySelectorAll(".edit_prov")
-      j.forEach((g) => {
-        g.classList.add("invisible")
-      })
+      
 
-      let n = document.querySelectorAll(".delete_prov")
-      n.forEach((g) => {
-        g.classList.add("invisible")
-      })
-
-
-      $.ajax({
-        url: "Controller/funcs_ajax/search.php",
-        type: "GET",
-        data: { randomnautica: "permiso", ID: session_user_id },
-        success: function (response) {
-          let json = JSON.parse(response);
-
-          json.lista.forEach((r) => {
-
-            if (r.permiso == "modificar" && r.tabla == "proveedores") {
-              j.forEach((g) => {
-                g.classList.remove("invisible")
-              })
-            } else if (r.permiso == "eliminar" && r.tabla == "proveedores") {
-              n.forEach((g) => {
-                g.classList.remove("invisible")
-              })
-            } else if (r.permiso == "agregar" && r.tabla == "proveedores") {
-              document.querySelector(".btn-aggSupplier").classList.remove("invisible")
-            }
-          })
-        }
-      })
+      PermisosG(".edit_prov", ".delete_prov", "proveedores", ".btn-aggSupplier", "G")
       marcaAgua()
       ModalEdit()
       DeleteClientProv(".delete_prov", "#formDelete_supplier", "#IdDelete_supplier", cardProv, "Proveedoredor eliminado correctamente")

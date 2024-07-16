@@ -832,3 +832,4 @@ document.getElementById("nameVendedor").textContent = session_user_name
 //ajax
 
 DOLAR_RV(func)
+PermisosG(null, null, "ventas", ".btn_agg_factura", "R")

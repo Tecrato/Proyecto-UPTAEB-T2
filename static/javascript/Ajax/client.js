@@ -12,178 +12,178 @@ $(".pag-btn-clientes").click((ele) => {
 });
 
 //funciones para modicar, insertar y eliminar clientes, proveedores
-function insertANDupdateCLient_proveedor (FORM, NUMBER, TABLE, TYPE) {
+function insertANDupdateCLient_proveedor(FORM, NUMBER, TABLE, TYPE) {
 
-    let inp = document.querySelector(NUMBER);
-    let iti = window.intlTelInput(inp, {
-      utilsScript: "Plugins/build/js/utils.js",
+  let inp = document.querySelector(NUMBER);
+  let iti = window.intlTelInput(inp, {
+    utilsScript: "Plugins/build/js/utils.js",
+  });
+  iti.setCountry("VE");
+
+  let form = document.querySelector(FORM);
+  let url = ""
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    if (insertOrUpdate == false) {
+      url = "Controller/funcs/agregar_cosas.php"
+    } else {
+      url = "Controller/funcs/modificar_cosas.php"
+    }
+
+    let countryData = iti.getSelectedCountryData();
+    let fullNumber = iti.getNumber();
+    let data = new FormData(form);
+    data.append("TLFNO", fullNumber);
+    $.ajax({
+      url: url,
+      type: "POST",
+      processData: false,
+      contentType: false,
+      data: data,
+      success: (response) => {
+        (response);
+        let result = TABLE();
+        if (insertOrUpdate == false) {
+          UIkit.notification.closeAll();
+          UIkit.notification({
+            message: `<span uk-icon='icon: check'>${TYPE} Registrado correctamente</span>`,
+            status: "success",
+            pos: "bottom-right",
+          });
+        } else {
+          UIkit.notification.closeAll();
+          UIkit.notification({
+            message: `<span uk-icon='icon: check'>${TYPE} Modificado correctamente</span>`,
+            status: "success",
+            pos: "bottom-right",
+          });
+        }
+
+        setTimeout(() => {
+          UIkit.modal("#register_supplier").hide();
+        }, 400);
+
+        setTimeout(() => {
+          UIkit.modal("#agregar_client").hide();
+        }, 400);
+
+      },
     });
-    iti.setCountry("VE");
-  
-    let form = document.querySelector(FORM);
-    let url = ""
-  
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-  
-      if (insertOrUpdate == false) {
-        url = "Controller/funcs/agregar_cosas.php"
-      } else {
-        url = "Controller/funcs/modificar_cosas.php"
-      }
-  
-      let countryData = iti.getSelectedCountryData();
-      let fullNumber = iti.getNumber();
-      let data = new FormData(form);
-      data.append("TLFNO", fullNumber);
-      $.ajax({
-        url: url,
-        type: "POST",
-        processData: false,
-        contentType: false,
-        data: data,
-        success: (response) => {
-          (response);
-          let result = TABLE();
-          if (insertOrUpdate == false) {
+  });
+}
+
+function DeleteClientProv(BTN, FORM, IDSETTER, TR, notification) {
+  let btnDelete = document.querySelectorAll(BTN);
+  btnDelete.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      let id = btn.getAttribute("id");
+      document.querySelector(IDSETTER).setAttribute('value', id)
+      let form = document.querySelector(FORM);
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        let data = new FormData(form);
+        $.ajax({
+          url: "Controller/funcs/borrar_cosas.php",
+          type: "POST",
+          processData: false,
+          contentType: false,
+          data: data,
+          success: (response) => {
+            let tr = TR()
             UIkit.notification.closeAll();
             UIkit.notification({
-              message: `<span uk-icon='icon: check'>${TYPE} Registrado correctamente</span>`,
+              message: `<span uk-icon='icon: check'>${notification} Eliminado correctamente</span>`,
               status: "success",
               pos: "bottom-right",
             });
-          } else {
-            UIkit.notification.closeAll();
-            UIkit.notification({
-              message: `<span uk-icon='icon: check'>${TYPE} Modificado correctamente</span>`,
-              status: "success",
-              pos: "bottom-right",
-            });
+            setTimeout(() => {
+              UIkit.modal("#eliminar_supplier").hide();
+            }, 400)
+
+            setTimeout(() => {
+              UIkit.modal("#eliminar_cliente").hide();
+            }, 400)
           }
-  
-          setTimeout(() => {
-            UIkit.modal("#register_supplier").hide();
-          }, 400);
-  
-          setTimeout(() => {
-            UIkit.modal("#agregar_client").hide();
-          }, 400);
-  
-        },
-      });
-    });
-  }
-  
-  function DeleteClientProv (BTN, FORM, IDSETTER, TR, notification){
-    let btnDelete = document.querySelectorAll(BTN);
-    btnDelete.forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        let id = btn.getAttribute("id");
-        document.querySelector(IDSETTER).setAttribute('value', id)
-        let form = document.querySelector(FORM);
-        form.addEventListener("submit", (e) => {
-          e.preventDefault();
-          let data = new FormData(form); 
-          $.ajax({
-            url: "Controller/funcs/borrar_cosas.php",
-            type: "POST",
-            processData: false,
-            contentType: false,
-            data: data,
-            success: (response) => {
-              let tr = TR()
-              UIkit.notification.closeAll();
-              UIkit.notification({
-                message: `<span uk-icon='icon: check'>${notification} Eliminado correctamente</span>`,
-                status: "success",
-                pos: "bottom-right",
-              });
-              setTimeout(() => {
-                UIkit.modal("#eliminar_supplier").hide();
-              },400)
-  
-              setTimeout(() => {
-                UIkit.modal("#eliminar_cliente").hide();
-              },400)
-            }
-          })
         })
-  
       })
+
     })
-  }
+  })
+}
 
 document.querySelector("#title").textContent = "Gestión de Clientes";
 let insertOrUpdate = false;
 
 document.querySelector(".btn-agg_client").addEventListener("click", () => {
-    insertOrUpdate = false
-    document.querySelector(".ValueInpUpdateClient").removeAttribute("value");
-    $(".form_client").trigger("reset");
-    document.querySelector(".modal_title_client").textContent = "REGISTRAR CLIENTE"
+  insertOrUpdate = false
+  document.querySelector(".ValueInpUpdateClient").removeAttribute("value");
+  $(".form_client").trigger("reset");
+  document.querySelector(".modal_title_client").textContent = "REGISTRAR CLIENTE"
 })
 const ModalEdit = () => {
-    let btn = document.querySelectorAll(".edit_client")
-    btn.forEach((b) => {
-        b.addEventListener("click", () => {
-            insertOrUpdate = true;
-            let id = b.getAttribute("id")
-            document.querySelector(".ValueInpUpdateClient").setAttribute("value", id);
-            $.ajax({
-                url: "Controller/funcs_ajax/search.php",
-                type: "GET",
-                data: { randomnautica: "clientes", ID: id },
-                success: function (response) {
-                    let json = JSON.parse(response);
-                    json.lista.forEach((element) => {
-                        if (document.querySelector(".inputT_DUpdateClient").children[0].value == element.documentO) {
-                            document.querySelector(".inputT_DUpdateClient").children[0].setAttribute('selected', "")
-                            setTimeout(() => {
-                                document.querySelector(".inputT_DUpdateClient").children[0].removeAttribute('selected')
-                            }, 1000)
-
-                        } else if (document.querySelector(".inputT_DUpdateClient").children[1].value == element.documentO) {
-                            document.querySelector(".inputT_DUpdateClient").children[1].setAttribute('selected', "")
-
-                            setTimeout(() => {
-                                document.querySelector(".inputT_DUpdateClient").children[1].removeAttribute('selected')
-                            }, 1000)
-
-                        } else if (document.querySelector(".inputT_DUpdateClient").children[2].value == element.documentO) {
-                            document.querySelector(".inputT_DUpdateClient").children[2].setAttribute('selected', "")
-
-                            setTimeout(() => {
-                                document.querySelector(".inputT_DUpdateClient").children[2].removeAttribute('selected')
-                            }, 1000)
-                        }
-                        document.querySelector(".inputNameUpdateClient").value = element.nombre
-                        document.querySelector(".inputLastNameUpdateClient").value = element.apellido
-                        document.querySelector(".inputNroDcUpdateClient").value = element.cedula
-                        document.querySelector(".inputTLFNOUpdateClient").value = element.telefono.slice(3, Infinity)
-                        document.querySelector(".inputDirUpdateClient").value = element.direccion
-                    });
-                    document.querySelector(".modal_title_client").textContent = "MODIFICAR CLIENTE"
-                    UIkit.modal("#agregar_client").show();
-                }
-
-            })
-
-        })
-    })
-}
-
-function cardClient(page){
-  page_clientes = page
-    $.ajax({
+  let btn = document.querySelectorAll(".edit_client")
+  btn.forEach((b) => {
+    b.addEventListener("click", () => {
+      insertOrUpdate = true;
+      let id = b.getAttribute("id")
+      document.querySelector(".ValueInpUpdateClient").setAttribute("value", id);
+      $.ajax({
         url: "Controller/funcs_ajax/search.php",
         type: "GET",
-        data: { randomnautica: "clientes", n: page_clientes, limite: 6},
+        data: { randomnautica: "clientes", ID: id },
         success: function (response) {
-            let template = "";
-            let json = JSON.parse(response);
-            total_clientes = json['total']
-            json.lista.forEach((element) => {
-                template += `   <div>
+          let json = JSON.parse(response);
+          json.lista.forEach((element) => {
+            if (document.querySelector(".inputT_DUpdateClient").children[0].value == element.documentO) {
+              document.querySelector(".inputT_DUpdateClient").children[0].setAttribute('selected', "")
+              setTimeout(() => {
+                document.querySelector(".inputT_DUpdateClient").children[0].removeAttribute('selected')
+              }, 1000)
+
+            } else if (document.querySelector(".inputT_DUpdateClient").children[1].value == element.documentO) {
+              document.querySelector(".inputT_DUpdateClient").children[1].setAttribute('selected', "")
+
+              setTimeout(() => {
+                document.querySelector(".inputT_DUpdateClient").children[1].removeAttribute('selected')
+              }, 1000)
+
+            } else if (document.querySelector(".inputT_DUpdateClient").children[2].value == element.documentO) {
+              document.querySelector(".inputT_DUpdateClient").children[2].setAttribute('selected', "")
+
+              setTimeout(() => {
+                document.querySelector(".inputT_DUpdateClient").children[2].removeAttribute('selected')
+              }, 1000)
+            }
+            document.querySelector(".inputNameUpdateClient").value = element.nombre
+            document.querySelector(".inputLastNameUpdateClient").value = element.apellido
+            document.querySelector(".inputNroDcUpdateClient").value = element.cedula
+            document.querySelector(".inputTLFNOUpdateClient").value = element.telefono.slice(3, Infinity)
+            document.querySelector(".inputDirUpdateClient").value = element.direccion
+          });
+          document.querySelector(".modal_title_client").textContent = "MODIFICAR CLIENTE"
+          UIkit.modal("#agregar_client").show();
+        }
+
+      })
+
+    })
+  })
+}
+
+function cardClient(page) {
+  page_clientes = page
+  $.ajax({
+    url: "Controller/funcs_ajax/search.php",
+    type: "GET",
+    data: { randomnautica: "clientes", n: page_clientes, limite: 6 },
+    success: function (response) {
+      let template = "";
+      let json = JSON.parse(response);
+      total_clientes = json['total']
+      json.lista.forEach((element) => {
+        template += `   <div>
                                     <div class="target_supplier uk-card uk-card-default uk-flex uk-padding-small uk-background-secondary uk-light uk-border-rounded"
                                         style="width: 370px; background-color: #333;">
                                         <div>
@@ -242,15 +242,13 @@ function cardClient(page){
                                         </div>
                                     </div>
                                 </div>`
-            });
-            $(".cont_client_cards").html(template)
-            marcaAgua()
-            ModalEdit()
-            DeleteClientProv(".delete_client", "#formDeleteClient", "#IdDelete_client", cardClient, "Eliminado")
-            colorDefault()
-        },
-    });
+      });
+      $(".cont_client_cards").html(template)
+      marcaAgua()
+      ModalEdit()
+      DeleteClientProv(".delete_client", "#formDeleteClient", "#IdDelete_client", cardClient, "Eliminado")
+      colorDefault()
+      PermisosG(".edit_client", ".delete_client", "clientes", ".btn-agg_client", "G")
+    },
+  });
 }
-
-cardClient(0)
-insertANDupdateCLient_proveedor('.form_client', "#tlfno_client", cardClient, "cliente")

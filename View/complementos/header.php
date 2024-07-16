@@ -2,10 +2,10 @@
 <html lang="es" style="background-color: #111;" id="html">
 <?php
 echo "
-<script>const session_user_name = '" . $_SESSION['user_name'] . "'</script>
-<script>const session_user_id = " . $_SESSION['user_id'] . "</script>
-<script>const session_user_rol = '" . $_SESSION['rol'] . "'</script>
-<script>const session_user_rol_num = '" . $_SESSION['rol_num'] . "'</script>
+<script>var session_user_name = '" . $_SESSION['user_name'] . "'</script>
+<script>var session_user_id = " . $_SESSION['user_id'] . "</script>
+<script>var session_user_rol = '" . $_SESSION['rol'] . "'</script>
+<script>var session_user_rol_num = " . $_SESSION['rol_num'] . "</script>
 "
 ?>
 
@@ -205,6 +205,7 @@ echo "
                                 <p>Proveedores</p>
                             </a>
                         </li>
+
                     <?php }; ?>
                     <li class="uk-margin-small-right Link" href="/Proyecto-UPTAEB-T2/Clientes">
                         <a id="linkClientes" class="uk-button uk-button-text enlace_nav" href="Clientes">

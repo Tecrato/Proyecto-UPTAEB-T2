@@ -119,6 +119,15 @@
                                                                                 </a>
                                                                             </span>
                                                                         </div>
+                                                                        <div id="" class="uk-flex uk-margin-top">
+                                                                            <p class="item-profile">Semilla</p>
+                                                                            <span id="inpSeed" class="uk-article-meta uk-flex">
+                                                                                <input class="uk-input uk-form-small uk-form-width-medium uk-border-rounded input-seed" value="<?= $tu['semilla'] ?>" type="text">
+                                                                                <a>
+                                                                                    <span id="seedInfo" class="uk-margin-small-left" uk-icon="icon: refresh; ratio: 1.2"></span>
+                                                                                </a>
+                                                                            </span>
+                                                                        </div>
                                                                     </div>
                                                                 </li>
                                                                 <li>
@@ -282,6 +291,74 @@
                                                                                             </div>
                                                                                         </td>
                                                                                     </tr>
+
+                                                                                    <tr>
+                                                                                        <td>UNIDADES</td>
+                                                                                        <td>
+                                                                                            <div>
+                                                                                                <label for=""><input class="uk-radio" accion="agregar" name="unidades_agregar" value="Si" type="radio"> Si</label>
+                                                                                                <label for=""><input class="uk-radio radio_no" accion="agregar" name="unidades_agregar" value="No" type="radio"> No</label>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div>
+                                                                                                <label for=""><input class="uk-radio" accion="modificar" name="unidades_modificar" value="Si" type="radio"> Si</label>
+                                                                                                <label for=""><input class="uk-radio radio_no" accion="modificar" name="unidades_modificar" value="No" type="radio"> No</label>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div>
+                                                                                                <label for=""><input class="uk-radio" accion="eliminar" name="unidades_eliminar" value="Si" type="radio"> Si</label>
+                                                                                                <label for=""><input class="uk-radio radio_no" accion="eliminar" name="unidades_eliminar" value="No" type="radio"> No</label>
+                                                                                            </div>
+                                                                                        </td>
+
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>CATEGORIAS</td>
+                                                                                        <td>
+                                                                                            <div>
+                                                                                                <label for=""><input class="uk-radio" accion="agregar" name="categorias_agregar" value="Si" type="radio"> Si</label>
+                                                                                                <label for=""><input class="uk-radio radio_no" accion="agregar" name="categorias_agregar" value="No" type="radio"> No</label>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div>
+                                                                                                <label for=""><input class="uk-radio" accion="modificar" name="categorias_modificar" value="Si" type="radio"> Si</label>
+                                                                                                <label for=""><input class="uk-radio radio_no" accion="modificar" name="categorias_modificar" value="No" type="radio"> No</label>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div>
+                                                                                                <label for=""><input class="uk-radio" accion="eliminar" name="categorias_eliminar" value="Si" type="radio"> Si</label>
+                                                                                                <label for=""><input class="uk-radio radio_no" accion="eliminar" name="categorias_eliminar" value="No" type="radio"> No</label>
+                                                                                            </div>
+                                                                                        </td>
+
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>MARCAS</td>
+                                                                                        <td>
+                                                                                            <div>
+                                                                                                <label for=""><input class="uk-radio" accion="agregar" name="marcas_agregar" value="Si" type="radio"> Si</label>
+                                                                                                <label for=""><input class="uk-radio radio_no" accion="agregar" name="marcas_agregar" value="No" type="radio"> No</label>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div>
+                                                                                                <label for=""><input class="uk-radio" accion="modificar" name="marcas_modificar" value="Si" type="radio"> Si</label>
+                                                                                                <label for=""><input class="uk-radio radio_no" accion="modificar" name="marcas_modificar" value="No" type="radio"> No</label>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div>
+                                                                                                <label for=""><input class="uk-radio" accion="eliminar" name="marcas_eliminar" value="Si" type="radio"> Si</label>
+                                                                                                <label for=""><input class="uk-radio radio_no" accion="eliminar" name="marcas_eliminar" value="No" type="radio"> No</label>
+                                                                                            </div>
+                                                                                        </td>
+
+                                                                                    </tr>
+
                                                                                     <tr>
                                                                                         <td>PROVEEDORES</td>
                                                                                         <td>
@@ -302,10 +379,43 @@
                                                                                                 <label for=""><input class="uk-radio radio_no" accion="eliminar" name="proveedores_eliminar" value="No" type="radio"> No</label>
                                                                                             </div>
                                                                                         </td>
+
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>CLIENTES</td>
                                                                                         <td>
                                                                                             <div>
-                                                                                                <label for=""><input class="uk-radio" accion="imprimir" name="proveedores_imprimir" value="Si" type="radio"> Si</label>
-                                                                                                <label for=""><input class="uk-radio radio_no" accion="imprimir" name="proveedores_imprimir" value="No" type="radio"> No</label>
+                                                                                                <label for=""><input class="uk-radio" accion="agregar" name="clientes_agregar" value="Si" type="radio"> Si</label>
+                                                                                                <label for=""><input class="uk-radio radio_no" accion="agregar" name="clientes_agregar" value="No" type="radio"> No</label>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div>
+                                                                                                <label for=""><input class="uk-radio" accion="modificar" name="clientes_modificar" value="Si" type="radio"> Si</label>
+                                                                                                <label for=""><input class="uk-radio radio_no" accion="modificar" name="clientes_modificar" value="No" type="radio"> No</label>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div>
+                                                                                                <label for=""><input class="uk-radio" accion="eliminar" name="clientes_eliminar" value="Si" type="radio"> Si</label>
+                                                                                                <label for=""><input class="uk-radio radio_no" accion="eliminar" name="clientes_eliminar" value="No" type="radio"> No</label>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>VENTAS</td>
+                                                                                        <td>
+                                                                                            <div>
+                                                                                                <label for=""><input class="uk-radio" accion="agregar" name="registro_venta_agregar" value="Si" type="radio"> Si</label>
+                                                                                                <label for=""><input class="uk-radio radio_no" accion="agregar" name="registro_venta_agregar" value="No" type="radio"> No</label>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                        <td>
+                                                                                            <div>
+                                                                                                <label for=""><input class="uk-radio" accion="imprimir" name="ventas_imprimir" value="Si" type="radio"> Si</label>
+                                                                                                <label for=""><input class="uk-radio radio_no" accion="imprimir" name="ventas_imprimir" value="No" type="radio"> No</label>
                                                                                             </div>
                                                                                         </td>
                                                                                     </tr>

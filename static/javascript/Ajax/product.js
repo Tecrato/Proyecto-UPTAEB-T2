@@ -631,6 +631,7 @@ const cargarTargetProduct = (page) => {
       tarjetas(response, ".container-target-product");
       (page_productos,total_productos,'\n',response)
       modalDetalles(1);
+      PermisosG(".UpdateProduct", ".deleteID", "productos", ".btn-modal-register", "G");
     },
   });
 };

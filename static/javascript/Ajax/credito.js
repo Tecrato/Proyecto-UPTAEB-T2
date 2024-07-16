@@ -164,7 +164,6 @@ $.ajax({
     success: function (response) {
         let json = JSON.parse(response);
         let template = ""
-        (json);
         json.lista.forEach((f) => {
             template += `
             
