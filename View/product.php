@@ -6,11 +6,14 @@
     <section class="">
         <ul uk-tab>
             <li><a id="aProductos" class="itemSwitcher1" href="#"><img class="uk-preserve-width uk-margin-small-right img1ProductSwitcher" src="./static/images/cajas (2).png" width="30" height="30" alt="">PRODUCTOS</a></li>
+            
+            <?php if ($_SESSION['rol_num'] <= 2) { ?>
             <li><a id="aEntradas" class="itemSwitcher2" href="#"><img class="uk-preserve-width uk-margin-small-right img2ProductSwitcher" src="./static/images/suministros.png" width="32" height="32" alt="">ENTRADAS</a></li>
+            <?php }; ?>
             <li><a id="aOtros" class="itemSwitcher3" href="#"><img class="uk-preserve-width uk-margin-small-right img4ProductSwitcher" src="./static/images/menu.png" width="32" height="32" alt="">OTROS</a></li>
-            <li><a id="aProductsDesct" class="itemSwitcher4" href="#"><img class="uk-preserve-width uk-margin-small-right img5ProductSwitcher" src="./static/images/papelera-de-reciclaje.png" width="32" height="32" alt="">PRODUCTOS DESACTIVADOS</a></li>
         </ul>
-
+        <div class="height_controller">
+        </div>
         <ul class="uk-switcher uk-margin" data-uk-switcher="{swiping:false}">
             <li>
                 <section class="uk-background-secondary uk-padding uk-border-rounded" uk-filter="target: .js-filter">
@@ -358,9 +361,9 @@
                 </div>
             </li>
 
-
+            <?php if ($_SESSION['rol_num'] <= 2) { ?>
             <li>
-                <div class="height_controller">
+                
                     <main class="uk-background-secondary uk-padding uk-border-rounded" uk-filter="target: .js-filter; animation: fade">
                         <!-- container-filter sera el  que tenga todos los filtros de busqueda -->
                         <section class="container-filter">
@@ -428,11 +431,11 @@
                         </section>
                     </main>
 
-                </div>
+               
 
             </li>
-
-
+            <script src="static/javascript/Ajax/entry.js" defer></script>
+            <?php }; ?>
 
             <!-- este es el nuevo item, contiene las marcas, categorias y unidades -->
             <li>
@@ -634,86 +637,13 @@
 
             </li>
 
-
-            <li>
-                <section class="uk-background-secondary uk-padding uk-border-rounded" uk-filter="target: .js-filter">
-                    <div>
-                        <div class="uk-flex uk-flex-between container-filter" style="align-items: baseline;">
-                            <div class="uk-flex uk-flex-wrap" style="align-items: baseline;">
-                                <div class="uk-margin-right">
-                                    <div class="uk-flex uk-flex-wrap">
-                                        <div class="uk-margin formDelete">
-                                            <form class="uk-search uk-search-default search-responsive-product">
-                                                <span class="uk-search-icon-flip" uk-search-icon></span>
-                                                <input id="SearchProductsOff" class="uk-search-input searchProductNotActive" type="search" placeholder="Buscar" aria-label="Search">
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <nav uk-dropnav="mode: click">
-                                    <ul class="uk-subnav filter_product" uk-margin>
-                                        <li class="uk-active" uk-filter-control><a id="productOffFilterAll" href="#">TODO</a></li>
-                                        <li>
-                                            <a id="productOffFilterCategory" href="#">CATEGORIA <span uk-drop-parent-icon></span></a>
-                                            <div class="uk-dropdown">
-                                                <ul class="uk-nav uk-dropdown-nav filter_category">
-                                                    <!-- aqui se cargan las categorias con js -->
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <a id="productOffFilterMarca" href="#">MARCA <span uk-drop-parent-icon></span></a>
-                                            <div class="uk-dropdown">
-                                                <ul class="uk-nav uk-dropdown-nav filter_marca">
-
-                                                </ul>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-
-                            <div class="uk-flex uk-margin-left container-view-order">
-                                <div class="uk-margin-right">
-                                    <span class="uk-icon-link" id="list" uk-icon="icon: list; ratio: 1.3" style="cursor: pointer;"></span>
-                                </div>
-                                <div class="uk-width-auto uk-text-nowrap flechas">
-                                    <span class="uk-active" uk-filter-control="sort: data-name"><a class="uk-icon-link" href="#" uk-icon="icon: arrow-down" aria-label="Sort ascending"></a></span>
-                                    <span uk-filter-control="sort: data-name; order: desc"><a class="uk-icon-link" href="#" uk-icon="icon: arrow-up" aria-label="Sort descending"></a></span>
-                                </div>
-                            </div>
-                        </div>
-                        <hr class="uk-margin-remove">
-
-
-                        <div>
-                            <section class="uk-light uk-padding uk-padding-remove-left uk-padding-remove-right uk-grid-small viewP" uk-grid>
-                                <div class="container_marca_agua container_marca_agua2">
-                                    <img class="marca_agua" src="static/images/logo_letras-minimarket.png" alt="">
-                                </div>
-                                <div class="[email protected] uk-grid-large uk-flex-center cont_product_desactive height_controller2 js-filter" uk-grid uk-height-match="target: > div > .uk-card">
-                                    <!-- aqui se cargan las tarjetas de productos con js -->
-                                </div>
-                            </section>
-                            <div class="uk-flex uk-flex-center">
-                                <ul class="uk-pagination uk-pagination2 uk-margin-large-top">
-                                    <li><a class="pag-btn-productos_2" data-direccion="start"><span class="uk-margin-small-right" uk-pagination-previous></span><span class="uk-margin-small-right" uk-pagination-previous></span></a></li>
-                                    <li><a class="pag-btn-productos_2" data-direccion="back">Previous</a></li>
-                                    <li><a class="pag-btn-productos_2" data-direccion="next">Next</a></li>
-                                    <li><a class="pag-btn-productos_2" data-direccion="end"><span class="uk-margin-small-left" uk-pagination-next></span><span class="uk-margin-small-left" uk-pagination-next></span></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </li>
         </ul>
     </section>
 
 
 </main>
 <script src="static/javaScript/librerias/JsBardcode.js" defer></script>
-<script src="static/javascript/Ajax/entry.js" defer></script>
+
 <!-- <script src="static/javascript/funcionDataTable.js" defer></script> -->
 
 <script src="static/javascript/Ajax/product.js" defer></script>

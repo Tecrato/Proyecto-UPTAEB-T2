@@ -1,3 +1,18 @@
+
+var page_cajas = 0
+var total_cajas = 0
+
+
+$(".pag-btn-cajas").click((ele) => {
+    cambiar_pagina_ajax(
+        ele.target.dataset["direccion"],
+        cargarCajas,
+        10,
+        page_cajas,
+        total_cajas
+    );
+});
+
 const checkCaja = () => {
     $.ajax({
         url: "api_caja",
@@ -15,14 +30,16 @@ const checkCaja = () => {
     })
 }
 
-const cargarCajas = () => {
+function cargarCajas(page) {
+    page_cajas = page
     $.ajax({
         url: "Controller/funcs_ajax/search.php",
         type: "GET",
-        data: { randomnautica: "caja" },
+        data: { randomnautica: "caja", n: page_cajas, limite: 10},
         success: function (response) {
+            console.log(response)
             let json = JSON.parse(response);
-            (json);
+            total_cajas = json['total']
             let template = ""
             json.lista.forEach(element => {
                 template += `<tr>
@@ -68,7 +85,7 @@ const cargarCajas = () => {
                             contentType: false,
                             success: function (response) {
                                 (response);
-                                cargarCajas()
+                                cargarCajas(0)
                                 checkCaja()
                                 UIkit.notification.closeAll();
                                 UIkit.notification({
@@ -87,7 +104,7 @@ const cargarCajas = () => {
         }
     })
 }
-cargarCajas()
+cargarCajas(0)
 
 
 
@@ -109,9 +126,8 @@ formCaja.addEventListener("submit", (e) => {
         contentType: false,
         processData: false,
         success: function (response) {
-            cargarCajas()
+            cargarCajas(0)
             checkCaja()
-            (response);
             UIkit.notification.closeAll();
             UIkit.notification({
                 message: `<span uk-icon='icon: check'>Caja Abieta</span>`,

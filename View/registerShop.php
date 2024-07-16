@@ -312,8 +312,8 @@
                 </div>
             </section>
         </li>
-
-
+        
+        
         <li>
             <div class="uk-padding-small uk-overflow-auto">
                 <table class="uk-table uk-light">
@@ -374,7 +374,7 @@
             </div>
 
 
-
+            
 
         </li>
 
@@ -404,8 +404,16 @@
 
                     </tbody>
                 </table>
+                <div class="uk-flex uk-flex-center">
+                    <ul class="uk-pagination uk-margin-large-top">
+                        <li><a class="pag-btn-cajas" data-direccion="start"><span class="uk-margin-small-right" uk-pagination-previous></span><span class="uk-margin-small-right" uk-pagination-previous></span></a></li>
+                        <li><a class="pag-btn-cajas" data-direccion="back">Previous</a></li>
+                        <li><a class="pag-btn-cajas" data-direccion="next">Next</a></li>
+                        <li><a class="pag-btn-cajas" data-direccion="end"><span class="uk-margin-small-left" uk-pagination-next></span><span class="uk-margin-small-left" uk-pagination-next></span></a></li>
+                    </ul>
+                </div>
             </div>
-
+            
             <!--***************************** MODAL CAJA *****************************-->
             <div id="caja-modal" uk-modal>
                 <div class="uk-modal-dialog">

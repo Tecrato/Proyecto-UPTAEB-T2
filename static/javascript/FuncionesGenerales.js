@@ -3,7 +3,7 @@ window.addEventListener("load", () => {
   document.querySelector(".preloader_container").remove()
 })
 
-function cambiar_pagina_ajax(dir, func, limite = 9, page=null, total=0) {
+function cambiar_pagina_ajax(dir, func, limite = 9, page=0, total=0) {
   limite = limite
   if (dir == 'next' && page < Math.ceil(total / limite)-1){
       page += 1;
