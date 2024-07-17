@@ -135,6 +135,14 @@
             $consulta->bindParam(':hash',$this->hash, PDO::PARAM_STR);
             $consulta->execute();
         }
+        function cambiar_rol() {
+            $query = "UPDATE usuarios SET rol=:rol WHERE id=:id";
+            $consulta = $this->conn->prepare($query);
+            $consulta->bindParam(':id',$this->id, PDO::PARAM_STR);
+            $consulta->bindParam(':rol',$this->rol, PDO::PARAM_STR);
+            $consulta->execute();
+            $this->add_bitacora($this->id,"Usuarios","Modifcar","Usuario ".$this->nombre." Cambio de rol");
+        }
 }       
 
 ?>
