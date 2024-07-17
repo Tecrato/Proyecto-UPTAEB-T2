@@ -28,6 +28,14 @@ const CategoriasTable = () => {
       $("#TemplateCategoria").html(template);
       Edit_U_M_C(CategoriasTable)
       DELETE_U_M_C(CategoriasTable,".delete-C")
+
+      if (session_user_rol_num == "1") {
+        $(".li_cont_c").removeClass("invisible")
+        return
+      } else {
+        PermisosG(".Edit-U_M_C", ".delete-C", "categorias", ".li_cont_c", "G")
+      }
+
     },
   });
 }

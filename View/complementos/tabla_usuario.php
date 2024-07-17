@@ -26,28 +26,18 @@ echo '
             <h2 class="uk-modal-title">EDITAR USUARIO</h2>
         </div>
         <div class="uk-modal-body">
-            <form class="uk-grid-small" uk-grid method="POST" action="Controller/funcs/modificar_cosas.php">
+            <form class="uk-grid-small uk-grid" uk-grid method="POST" action="Controller/funcs/modificar_cosas.php">
                 <input type=number value="'.$row['id'].'" name="ID" style="display:none">
                 <input type=text value="usuario" name="tipo" style="display:none">
-                <div class="uk-width-1-2@s">
-                    <input class="uk-input" type="text" placeholder="Nombre" value="'.$row['nombre'].'" aria-label="100" name="nombre" pattern="^([A-Zñ+áéó]|[a-zñáéó]){3,}( ([A-Zñ+áéó]|[a-zñáéó]){3,})?$" required>
-                </div>
-                <div class="uk-width-1-2@s">
-                    <input class="uk-input" type="text" placeholder="Correo Electronico" value="'.$row['correo'].'"  aria-label="100" name="correo" pattern="^([A-Za-z0-9\.\_]+)@([\w]{3,8})\.([\w]{2,3})(\.[\w]{2,4})?(\.[\w]{2,3})?$" required>
-                </div>
-                <div class="uk-width-1-2@s">
+    
+                <div class="uk-width-1-1@s">
                     <select class="uk-select" name="rol" required>
                         <option value="'.$row['rol'].'" selected>Rol Actual</option>
-                        <option value="1">Administrador</option>
-                        <option value="2">Cajero</option>
+                        <option value="2">Administrador</option>
+                        <option value="3">Usuario</option>
                     </select>
                 </div>
-                <div class="uk-width-1-2@s">
-                    <input class="uk-input" type="text" placeholder="Contraseña" value="" aria-label="100" pattern="^[\w\S]{8,}$" name="password" minlength="8" maxlength="50" required>
-                </div>
                 <input type="submit" id="modificar'.$row['id'].'" style="display:none">
-                
-                
             </form>
         </div>
         <div class="uk-modal-footer uk-text-right">
