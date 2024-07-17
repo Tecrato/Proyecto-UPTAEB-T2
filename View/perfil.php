@@ -443,6 +443,23 @@
                                                                                         <td></td>
 
                                                                                     </tr>
+                                                                                    <tr>
+                                                                                        <td>CAJA</td>
+                                                                                        <td>
+                                                                                            <div>
+                                                                                                <label for=""><input class="uk-radio" accion="agregar" name="caja_agregar" value="Si" type="radio"> Si</label>
+                                                                                                <label for=""><input class="uk-radio radio_no" accion="agregar" name="caja_agregar" value="No" type="radio"> No</label>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div>
+                                                                                                <label for=""><input class="uk-radio" accion="modificar" name="caja_modificar" value="Si" type="radio"> Si</label>
+                                                                                                <label for=""><input class="uk-radio radio_no" accion="modificar" name="caja_modificar" value="No" type="radio"> No</label>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                        <td></td>
+
+                                                                                    </tr>
                                                                                 </tbody>
                                                                             </table>
                                                                         </div>
