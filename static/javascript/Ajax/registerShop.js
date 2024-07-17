@@ -128,7 +128,6 @@ function func(dolar) {
           let IvaStatus = algo.getAttribute("iva");
           let cantidadProduct = parseFloat(algo.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent)
           let valor$ = parseFloat(algo.parentElement.nextElementSibling.getAttribute('value') * cantidadProduct)
-            (algo.parentElement.nextElementSibling);
           priceDolar += valor$
           if (IvaStatus == 0) {
             let precioUndTotal = parseFloat(algo.parentElement.previousElementSibling.textContent);
