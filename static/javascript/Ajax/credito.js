@@ -237,7 +237,15 @@ function generar_creditos(page){
                                     type: "POST",
                                     data: { id_rv, pagos: jf },
                                     success: function (response) {
-                                        console.log(response);
+                                        UIkit.notification.closeAll();
+                                        UIkit.notification({
+                                          message: `<span uk-icon='icon: check'>Pago de credito correctamente</span>`,
+                                          status: "success",
+                                          pos: "bottom-right",
+                                        });
+                                        setTimeout(() => {
+                                          UIkit.modal("#credito_page").hide();
+                                        }, 400)
                                     }
                                 })
                             })
