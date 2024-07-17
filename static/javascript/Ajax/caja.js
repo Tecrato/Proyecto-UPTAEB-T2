@@ -84,8 +84,7 @@ function cargarCajas(page) {
 
             $("#tbody_caja").html(template)
             if (parseInt(session_user_rol_num) <= 2 ) {
-                $(".cerrarCaja").removeClass("invisible")
-                $(".btn_agg_caja").removeClass("invisible")
+                $(".date_caja").removeClass("invisible")
                 return
               } else {
                 PermisosG(null, null, "caja", ".date_caja", "R")
