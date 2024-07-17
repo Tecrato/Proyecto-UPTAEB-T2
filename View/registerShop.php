@@ -119,7 +119,7 @@
                                                                 <div id="nameVendedor">LUIS</div>
                                                             </div>
 
-                                                            <div class="uk-flex uk-flex-around uk-border-rounded uk-margin-bottom" style="width: 172px; border: 1px solid #fff; padding: 3px;">
+                                                            <div class="uk-flex uk-flex-around uk-border-rounded uk-margin-bottom invisible checkCredito" style="width: 172px; border: 1px solid #fff; padding: 3px;">
                                                                 <label><input class="uk-checkbox credito_check" type="checkbox"> CREDITO</label>
                                                             </div>
 
