@@ -29,11 +29,17 @@ const UnidadesTable = () => {
       $("#TemplateUnidad").html(template);
 
       Edit_U_M_C(UnidadesTable)
-      DELETE_U_M_C(UnidadesTable,".delete-U")
+      DELETE_U_M_C(UnidadesTable, ".delete-U")
+      if (session_user_rol_num == "1") {
+        $(".li_cont_u").removeClass("invisible")
+        return
+      } else {
+        PermisosG(".Edit-U_M_C", ".delete-U", "unidades", ".li_cont_u", "G")
+      }
 
     },
   });
 };
 UnidadesTable();
 
-Registrar_U_M_C("FORM_UNIDAD",UnidadesTable,".nombre_unidad","Unidad Creada correctamente");
+Registrar_U_M_C("FORM_UNIDAD", UnidadesTable, ".nombre_unidad", "Unidad Creada correctamente");
