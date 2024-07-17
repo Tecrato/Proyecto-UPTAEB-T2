@@ -186,7 +186,7 @@ const renderModelsChart3 = () => {
                   {
                     label: "Costo de productos vendidos (Bs)",
                     data: value2,
-                    borderColor: "#fff",
+                    borderColor: "#999",
                     fill: false,
                     pointBorderWidth: 5,
                   },
@@ -207,7 +207,7 @@ const renderModelsChart3 = () => {
                 ],
               };
               new Chart("inventoryRotationChart", { type: "line", data });
-              document.getElementById('formPDF2').addEventListener('submit', function () {
+              document.getElementById('formPDF3').addEventListener('submit', function () {
                 captureChart('inventoryRotationChart', 'imgRotacion_png');
               });
             }

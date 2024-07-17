@@ -94,9 +94,6 @@
 
                                                             <ul class="uk-switcher uk-margin">
                                                                 <li>
-                                                                    <h3>Acerca de</h3>
-                                                                    <p class="uk-article-meta uk-margin-small">Sistema de facturacion</p>
-
                                                                     <div>
                                                                         <h3>Detalles del perfil</h3>
                                                                         <div class="uk-flex">

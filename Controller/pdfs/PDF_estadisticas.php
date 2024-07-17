@@ -18,6 +18,10 @@ if ($_POST['select'] == 'max_ventas') {
     $result = $clase->ratio_ventas();
 } else if ($_POST['select'] == 'ganancia') {
     $result = $clase->ganancias_mensuales();
+} else if ($_POST['select'] == 'rotacion_inventario') {
+    $result = $clase->coste_productos_vendidos();
+    $result2 = $clase->valor_inventario_mes();
+    $result3 = $clase->rotacion_inventario();
 }
 date_default_timezone_set('America/Caracas');
 $fecha = new DateTime();
@@ -43,6 +47,8 @@ if ($_POST['select'] == "min_ventas") {
     $pdf->Cell(30, 30, 'RATIO DE VENTAS', 0, 0, 'C', 0);
 } else if ($_POST['select'] == "ganancia") {
     $pdf->Cell(30, 30, 'GANANCIAS MENSUALES', 0, 0, 'C', 0);
+} else if ($_POST['select'] == "rotacion_inventario") {
+    $pdf->Cell(30, 30, 'ROTACIÓN DEL INVENTARIO', 0, 0, 'C', 0);
 }
 
 $pdf->SetFont('Arial', '', 10);
@@ -84,6 +90,25 @@ if ($_POST['select'] == "min_ventas" || $_POST['select'] == "max_ventas") {
             $pdf->Cell(150);
             $pdf->Cell(120, 9.5, $key . "   ============>   " . $variable[$key] . " Bs", 0, 1, 'L', 0);
         }
+    }
+} else if ($_POST['select'] == "rotacion_inventario") {
+    $meses = array_keys($result[0]);
+    $numeros = array_keys($result[0]);
+    $meses = array_filter($meses, function ($key) {
+        return is_string($key) && !is_numeric($key);
+    });
+    $pdf->SetFont('Arial', '', 10);
+
+    foreach ($result2 as $variable) {
+        foreach ($result as $variable2) {
+            foreach ($result3 as $variable3) {
+                foreach ($meses as $key) {
+                    $pdf->Cell(140);
+                    $pdf->Cell(120, 9.5, $key. " ==> ". "   Coste P. Vendidos Bs " . $variable[$key] . "   V. Total Inventario Bs ".  $variable2[$key]. "   Rotacion ". $variable3[$key], 0, 1, 'L', 0);
+                }
+            }
+        }
+
     }
 }
 

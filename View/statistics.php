@@ -76,8 +76,7 @@
                                         <li>
                                             <form id="formPDF3" action="Estadisticas_PDF" method="POST" enctype="multipart/form-data">
                                                 <input type="hidden" name="img" id="imgRotacion_png">
-                                                <input type="hidden" name="select" value="rotacion">
-                                                <input type="submit" value="Imprimir" style="display: none;">
+                                                <input type="hidden" name="select" value="rotacion_inventario">
                                                 <button class="btn_pdf" uk-icon="icon: file-pdf" type="submit">Generar reporte</button>
                                             </form>
                                         </li>
