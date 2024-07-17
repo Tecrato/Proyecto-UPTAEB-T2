@@ -385,7 +385,10 @@
         <?php }; ?>
 
         <li>
+            <?php if ($_SESSION['rol_num'] <= 1) { ?>
+
             <a class="uk-button uk-button-default uk-margin-bottom uk-margin-top" uk-toggle href="#caja-modal">Apertura de Caja</a>
+            <?php }; ?>
 
             <div class="uk-light uk-padding-small uk-overflow-auto">
                 <table class="uk-table uk-light uk-table-divider">
