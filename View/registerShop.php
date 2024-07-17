@@ -6,7 +6,7 @@
     <ul uk-tab>
         <li><a id="FACTURA" href="#">FACTURA</a></li>
         <?php if ($_SESSION['rol_num'] <= 2) { ?>
-        <li><a id="CREDITO" href="#">CREDITO</a></li>
+            <li><a id="CREDITO" href="#">CREDITO</a></li>
         <?php }; ?>
         <li><a id="CAJA" href="#">CAJA</a></li>
     </ul>
@@ -314,73 +314,73 @@
                 </div>
             </section>
         </li>
-        
+
         <?php if ($_SESSION['rol_num'] <= 2) { ?>
-        
-        <li>
-            <div class="uk-padding-small uk-overflow-auto">
-                <table class="uk-table uk-light">
-                    <thead class="uk-background-secondary">
-                        <tr>
-                            <th>#</th>
-                            <th>Cliente</th>
-                            <th>Inicio de credito</th>
-                            <th>Final de credito</th>
-                            <th>Estado</th>
-                            <th>Accion</th>
-                        </tr>
-                    </thead>
-                    <tbody id="Tbody_credito">
+
+            <li>
+                <div class="uk-padding-small uk-overflow-auto">
+                    <table class="uk-table uk-light">
+                        <thead class="uk-background-secondary">
+                            <tr>
+                                <th>#</th>
+                                <th>Cliente</th>
+                                <th>Inicio de credito</th>
+                                <th>Final de credito</th>
+                                <th>Estado</th>
+                                <th>Accion</th>
+                            </tr>
+                        </thead>
+                        <tbody id="Tbody_credito">
 
 
-                    </tbody>
-                </table>
-            </div>
-
-
-            <div id="credito_page" class="uk-flex-top" uk-modal>
-                <div class="uk-modal-dialog uk-margin-auto-vertical">
-                    <form id="form_credito" action="">
-                        <button class="uk-modal-close-default" type="button" uk-close></button>
-                        <div class="uk-modal-header uk-flex">
-                            <h2 class="uk-modal-title">PAGAR CREDITO</h2>
-                        </div>
-                        <div class="uk-modal-body">
-                            <div class="uk-flex uk-flex-start">
-                                <div class="uk-flex">
-                                    <h2 class="uk-margin-remove-top total_credito uk-text-meta">2000.00 Bs</h2>
-                                    <h5 class="uk-margin-remove-top uk-margin-medium-left total_credito_bs uk-text-meta">0.00 Bs</h5>
-                                </div>
-                                <div>
-                                    <h2 class="total_pago_credito uk-margin-remove-top uk-margin-large-left uk-text-meta">0.00 Bs</h2>
-                                </div>
-                            </div>
-                            <hr class="uk-margin-remove-top">
-                            <section>
-                                <div class="inputPago">
-
-                                </div>
-                                <div>
-                                    <article class="uk-flex uk-flex-middle uk-flex-center uk-margin-small-top btn_agg_metodoPago2" style="cursor: pointer;">
-                                        <span class="uk-margin-small-right" uk-icon="plus-circle"></span>
-                                        <p class="uk-margin-remove" style="font-size: 13px;">AGREGAR TIPO DE PAGO</p>
-                                    </article>
-                                </div>
-                            </section>
-                        </div>
-                        <div class="uk-modal-footer uk-text-right">
-                            <button class="uk-button uk-button-default uk-modal-close" type="button">CANCELAR</button>
-                            <button class="uk-button uk-button-secondary btn_pagar_credito" type="button">PAGAR</button>
-                        </div>
-                    </form>
+                        </tbody>
+                    </table>
                 </div>
-            </div>
 
 
-            
+                <div id="credito_page" class="uk-flex-top" uk-modal>
+                    <div class="uk-modal-dialog uk-margin-auto-vertical">
+                        <form id="form_credito" action="">
+                            <button class="uk-modal-close-default" type="button" uk-close></button>
+                            <div class="uk-modal-header uk-flex">
+                                <h2 class="uk-modal-title">PAGAR CREDITO</h2>
+                            </div>
+                            <div class="uk-modal-body">
+                                <div class="uk-flex uk-flex-start">
+                                    <div class="uk-flex">
+                                        <h2 class="uk-margin-remove-top total_credito uk-text-meta">2000.00 Bs</h2>
+                                        <h5 class="uk-margin-remove-top uk-margin-medium-left total_credito_bs uk-text-meta">0.00 Bs</h5>
+                                    </div>
+                                    <div>
+                                        <h2 class="total_pago_credito uk-margin-remove-top uk-margin-large-left uk-text-meta">0.00 Bs</h2>
+                                    </div>
+                                </div>
+                                <hr class="uk-margin-remove-top">
+                                <section>
+                                    <div class="inputPago">
 
-            <script src="static/javascript/Ajax/credito.js" defer></script>
-        </li>
+                                    </div>
+                                    <div>
+                                        <article class="uk-flex uk-flex-middle uk-flex-center uk-margin-small-top btn_agg_metodoPago2" style="cursor: pointer;">
+                                            <span class="uk-margin-small-right" uk-icon="plus-circle"></span>
+                                            <p class="uk-margin-remove" style="font-size: 13px;">AGREGAR TIPO DE PAGO</p>
+                                        </article>
+                                    </div>
+                                </section>
+                            </div>
+                            <div class="uk-modal-footer uk-text-right">
+                                <button class="uk-button uk-button-default uk-modal-close" type="button">CANCELAR</button>
+                                <button class="uk-button uk-button-secondary btn_pagar_credito" type="button">PAGAR</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+
+
+                <script src="static/javascript/Ajax/credito.js" defer></script>
+            </li>
 
         <?php }; ?>
 
@@ -418,7 +418,7 @@
                     </ul>
                 </div>
             </div>
-            
+
             <!--***************************** MODAL CAJA *****************************-->
             <div id="caja-modal" uk-modal>
                 <div class="uk-modal-dialog">
@@ -430,14 +430,22 @@
                         <form id="FormCaja" class="uk-grid-small uk-form-stacked form_caja" uk-grid>
                             <!-- <input type="text" name="tipo" value='caja' style="display:none"> -->
                             <!-- <input class="" type="number" name="ID" style="display:none"> -->
+                            <div class="uk-width-1-1@s">
+                                <label class="uk-form-label">Usuario</label>
+                                <div class="uk-form-controls">
+                                    <select class="uk-select selectUserBox">
 
+                                    </select>
+                                </div>
+                                <input type="date" name="fecha" style="display: none;">
+                                <input type="number" name="id_usuario" style="display: none;">
+                            </div>
                             <div class="uk-width-1-1@s">
                                 <label class="uk-form-label">Monto Inicial</label>
                                 <div class="uk-form-controls">
                                     <input class="uk-input" type="text" placeholder="Monto Inicial" name="monto_inicial" aria-label="100" required>
                                 </div>
                                 <input type="date" name="fecha" style="display: none;">
-                                <input type="number" name="id_usuario" style="display: none;">
                             </div>
 
                             <input type="submit" id="subirCaja" style="display:none" required>
