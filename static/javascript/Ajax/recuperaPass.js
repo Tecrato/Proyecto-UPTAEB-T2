@@ -110,9 +110,9 @@ formRegisterUser.addEventListener("submit", (e) => {
     e.preventDefault();
     let data = new FormData(formRegisterUser);
     data.append("tipo", "usuarios")
-
-    if (validarContrasena(val) != "La contraseña es válida.") {
-        document.querySelector("#msj").textContent = resultado;
+    let a = validarContrasena(val)
+    if (a != "La contraseña es válida.") {
+        document.querySelector("#msj").textContent = a;
         return
     }
     //peticion para registrar el usuario
