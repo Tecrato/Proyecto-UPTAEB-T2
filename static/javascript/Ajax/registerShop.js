@@ -445,7 +445,6 @@ function func(dolar) {
                 // totalDebito.textContent =  valor
 
                 let valor = B.value == "" ? 0 : parseFloat(B.value)
-                  (valor);
                 // ActualizarTotal()
                 let valor2 = parseFloat(B.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.textContent)
                 // if (B.previousElementSibling.value == "Divisa" && valor2 != 0) {
