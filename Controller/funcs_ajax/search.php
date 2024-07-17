@@ -98,7 +98,10 @@
     }
     elseif ($_GET['randomnautica'] == "caja") {
         require('../../Model/Cajas.php');
-        $clase = new Caja();
+        $clase = new Caja(
+            id_usuario:(isset($_GET['id_usuario']) ? $_GET['id_usuario'] : null),
+            
+        );
     }
     elseif ($_GET['randomnautica'] == "credito") {
         require('../../Model/Credito.php');
