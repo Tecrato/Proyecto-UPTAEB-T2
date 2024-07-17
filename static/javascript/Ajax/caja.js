@@ -37,7 +37,6 @@ function cargarCajas(page) {
         type: "GET",
         data: { randomnautica: "caja", n: page_cajas, limite: 10},
         success: function (response) {
-            console.log(response)
             let json = JSON.parse(response);
             total_cajas = json['total']
             let template = ""

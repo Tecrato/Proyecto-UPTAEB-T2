@@ -51,13 +51,11 @@
         require('../../Model/Proveedores.php');
         $clase = new Proveedor($_POST["ID"],$_POST["nombre"],$_POST["razon_social"],$_POST["T-D"]."-".$_POST["rif"],$_POST["TLFNO"],$_POST["correo"],$_POST["direccion"]); // Llama al modelo y le manda la instruccion
         $clase->actualizar($_SESSION['user_id']);
-        // header('Location:../../Proveedores');
     }
     elseif ($tipo === 'cliente'){
         require('../../Model/Clientes.php');
         $clase = new Cliente($_POST["ID"],$_POST["nombre"],$_POST["cedula"],$_POST["apellido"],$_POST["documento"],$_POST["direccion"],$_POST["TLFNO"]);
         $clase->actualizar($_SESSION['user_id']);
-        // header('Location:../../Clientes');
     }
     elseif ($tipo === 'usuario'){
         require('../../Model/Usuarios.php');

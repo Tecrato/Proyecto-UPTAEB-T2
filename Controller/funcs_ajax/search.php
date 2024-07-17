@@ -52,7 +52,8 @@
     }
     elseif ($_GET['randomnautica'] == "usuario") {
         $clase = new Usuario(
-            id:(isset($_GET['ID']) ? $_GET['ID'] : null)
+            id:(isset($_GET['ID']) ? $_GET['ID'] : null),
+            rol:(isset($_GET['rol']) ? $_GET['rol'] : null),
         );
     }
     elseif ($_GET['randomnautica'] == "clientes") {
