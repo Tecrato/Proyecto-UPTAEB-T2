@@ -7,7 +7,7 @@
         <ul uk-tab>
             <li><a id="aProductos" class="itemSwitcher1" href="#"><img class="uk-preserve-width uk-margin-small-right img1ProductSwitcher" src="./static/images/cajas (2).png" width="30" height="30" alt="">PRODUCTOS</a></li>
             
-            <?php if ($_SESSION['rol_num'] <= 2) { ?>
+            <?php if ($_SESSION['rol_num'] <= 1) { ?>
             <li><a id="aEntradas" class="itemSwitcher2" href="#"><img class="uk-preserve-width uk-margin-small-right img2ProductSwitcher" src="./static/images/suministros.png" width="32" height="32" alt="">ENTRADAS</a></li>
             <?php }; ?>
             <li><a id="aOtros" class="itemSwitcher3" href="#"><img class="uk-preserve-width uk-margin-small-right img4ProductSwitcher" src="./static/images/menu.png" width="32" height="32" alt="">OTROS</a></li>
@@ -361,7 +361,7 @@
                 </div>
             </li>
 
-            <?php if ($_SESSION['rol_num'] <= 2) { ?>
+            <?php if ($_SESSION['rol_num'] <= 1) { ?>
             <li>
                 
                     <main class="uk-background-secondary uk-padding uk-border-rounded" uk-filter="target: .js-filter; animation: fade">
@@ -433,8 +433,8 @@
 
                
 
+                    <script src="static/javascript/Ajax/entry.js" defer></script>
             </li>
-            <script src="static/javascript/Ajax/entry.js" defer></script>
             <?php }; ?>
 
             <!-- este es el nuevo item, contiene las marcas, categorias y unidades -->

@@ -486,7 +486,6 @@ const cargarTargetProduct = (page) => {
       like: like_product,
     },
     success: function (response) {
-      console.log(response)
       marcaAgua();
       tarjetas(response, ".container-target-product");
       (page_productos,total_productos,'\n',response)
@@ -658,10 +657,6 @@ document.querySelector(".searchProductActive").addEventListener("keyup", (e) => 
     cargarTargetProduct(0);
   });
 
-document.querySelector(".searchProductNotActive").addEventListener("keyup", (e) => {
-    like_product_2 = e.target.value;
-    cargarTargetProductDesactive(0);
-  });
 
 let inpNameProduct = document.querySelector(".NameUpdateProduct");
 inpNameProduct.addEventListener("keyup", (e) => {
@@ -712,7 +707,7 @@ inpNameProduct.addEventListener("keyup", (e) => {
 });
 
 // estas funciones son para las marcas, unidades y categorias
-const Registrar_U_M_C = (form, tr, item_reset, notification) => {
+function Registrar_U_M_C(form, tr, item_reset, notification){
   // seleccionamos el formulario
   let Form_identificador = document.getElementById(form);
   // captamos su evento submit
@@ -741,7 +736,7 @@ const Registrar_U_M_C = (form, tr, item_reset, notification) => {
     });
   });
 };
-const Edit_U_M_C = (tr) => {
+function Edit_U_M_C(tr){
   // seleccionamos todos los btn de editar de las tablas
   let btnAction = document.querySelectorAll(".Edit-U_M_C");
   // los recorremos
@@ -807,7 +802,7 @@ const Edit_U_M_C = (tr) => {
     });
   });
 };
-const DELETE_U_M_C = (TR, BTN) => {
+function DELETE_U_M_C(TR, BTN){
   //seleccionamos todos los btn de eliminar de el modulo correspondiente
   document.querySelectorAll(BTN).forEach((b) => {
     b.addEventListener("click", () => {

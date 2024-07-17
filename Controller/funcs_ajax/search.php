@@ -51,7 +51,9 @@
         $clase = new Metodo_pago();
     }
     elseif ($_GET['randomnautica'] == "usuario") {
-        $clase = new Usuario();
+        $clase = new Usuario(
+            id:(isset($_GET['ID']) ? $_GET['ID'] : null)
+        );
     }
     elseif ($_GET['randomnautica'] == "clientes") {
         require('../../Model/Clientes.php');
@@ -61,7 +63,16 @@
             like_cedula:(isset($_GET['like_cedula']) ? $_GET['like_cedula'] : ''),
         );
     }
-
+    elseif ($_GET['randomnautica'] == "configuraciones") {
+        require('../../Model/Configuraciones.php');
+        $clase = new Configuracion(
+            key:(isset($_GET['llave']) ? $_GET['llave'] : null)
+        );
+    }
+    
+    elseif ($_GET['randomnautica'] == "permiso") {  
+        $clase = new Permiso(id_usuario:(isset($_GET['ID']) ? $_GET['ID'] : null));
+    }
 
     elseif ($_SESSION['rol_num'] > 1 and count($result) <= 0) {
         echo json_encode(['status' => 'error','error'=>'Permiso '.$_GET['randomnautica'].' Error (bueno ps)']);
@@ -94,18 +105,9 @@
             id:(isset($_GET['ID']) ? $_GET['ID'] : null),
         );
     }
-    elseif ($_GET['randomnautica'] == "permiso") {  
-        $clase = new Permiso(id_usuario:(isset($_GET['ID']) ? $_GET['ID'] : null));
-    }
     elseif ($_GET['randomnautica'] == "capital") {  
         require('../../Model/Capital.php');
         $clase = new Capital();
-    }
-    elseif ($_GET['randomnautica'] == "configuraciones") {
-        require('../../Model/Configuraciones.php');
-        $clase = new Configuracion(
-            key:(isset($_GET['llave']) ? $_GET['llave'] : null)
-        );
     }
     elseif ($_GET['randomnautica'] === 'notificaciones'){
         require('../../Model/Notificaciones.php');
