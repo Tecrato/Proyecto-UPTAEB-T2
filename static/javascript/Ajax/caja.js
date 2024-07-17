@@ -83,10 +83,11 @@ function cargarCajas(page) {
             })
 
             $("#tbody_caja").html(template)
-            if (parseInt(session_user_rol_num) <= 2) {
-                $(".date_caja").removeClass("invisible")
+            if (parseInt(session_user_rol_num) == 1) {
+                $(".cerrarCaja").removeClass("invisible")
+                $(".btn_agg_caja").removeClass("invisible")
               } else {
-                PermisosG(null, null, "caja", ".date_caja", "R")
+                PermisosG(".cerrarCaja", null, "caja", ".btn_agg_caja", "G")
               }
 
             let cerrarCaja = document.querySelectorAll(".cerrarCaja");
@@ -96,7 +97,6 @@ function cargarCajas(page) {
                     let formCloseBox = document.querySelector("#FORM-CLOSE-BOX")
                     formCloseBox.addEventListener('submit', (e) => {
                         e.preventDefault()
-                        console.log("object");
                         let data = new FormData(formCloseBox)
                         data.append('id_caja', id)
                         data.append('accion', "cerrar")
@@ -108,7 +108,6 @@ function cargarCajas(page) {
                             processData: false,
                             contentType: false,
                             success: function (response) {
-                                console.log(response);
                                 cargarCajas(0)
                                 checkCaja()
                                 UIkit.notification.closeAll();

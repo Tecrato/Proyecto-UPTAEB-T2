@@ -385,10 +385,8 @@
         <?php }; ?>
 
         <li>
-            <?php if ($_SESSION['rol_num'] <= 2) { ?>
 
             <a class="uk-button uk-button-default uk-margin-bottom uk-margin-top invisible btn_agg_caja date_caja" uk-toggle href="#caja-modal">Apertura de Caja</a>
-            <?php }; ?>
 
             <div class="uk-light uk-padding-small uk-overflow-auto">
                 <table class="uk-table uk-light uk-table-divider">
