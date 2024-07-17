@@ -1,13 +1,12 @@
 <?php
-class Caja extends DB
-{
+class Caja extends DB{
 
     private $id;
     private $id_usuario;
     private $monto_inicial;
     private $estado;
 
-    function __construct($id = null, $id_usuario = null, $monto_inicial = null, $estado = 0){
+    function __construct($id = null, $id_usuario = null, $monto_inicial = null, $estado = null){
         DB::__construct();
         $this->id = $id;
         $this->id_usuario = $id_usuario;
@@ -41,13 +40,13 @@ class Caja extends DB
 
         $lista = [];
 
-        if ($this->id) {
+        if ($this->id != null) {
             array_push($lista, 'id');
         }
-        if ($this->id_usuario) {
+        if ($this->id_usuario != null) {
             array_push($lista, 'id_usuario');
         }
-        if ($this->estado) {
+        if ($this->estado != null) {
             array_push($lista, 'estado');
         }
 
