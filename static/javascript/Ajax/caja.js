@@ -46,7 +46,7 @@ $.ajax({
 
 function cargarCajas(page) {
     let data = {}
-    if (session_user_rol_num == "1") {
+    if (parseInt(session_user_rol_num) <= 2 ) {
         data = {randomnautica: "caja", n: page_cajas, limite: 10}
     } else {
         data = {randomnautica: "caja", n: page_cajas, limite: 10, id_usuario: session_user_id}
@@ -83,12 +83,11 @@ function cargarCajas(page) {
             })
 
             $("#tbody_caja").html(template)
-            if (parseInt(session_user_rol_num) = 1 ) {
-                $(".cerrarCaja").removeClass("invisible")
-                $(".btn_agg_caja").removeClass("invisible")
+            if (parseInt(session_user_rol_num) <= 2 ) {
+                $(".date_caja").removeClass("invisible")
                 return
               } else {
-                PermisosG(".cerrarCaja", null, "caja", "", "G")
+                PermisosG(null, null, "caja", ".date_caja", "R")
               }
 
             let cerrarCaja = document.querySelectorAll(".cerrarCaja");
