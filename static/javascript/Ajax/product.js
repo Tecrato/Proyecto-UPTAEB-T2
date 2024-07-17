@@ -490,7 +490,13 @@ const cargarTargetProduct = (page) => {
       tarjetas(response, ".container-target-product");
       (page_productos,total_productos,'\n',response)
       modalDetalles(1);
-      PermisosG(".UpdateProduct", ".deleteID", "productos", ".btn-modal-register", "G");
+      if (session_user_rol_num == "1") {
+        $(".btn-modal-register").removeClass("invisible")
+        $(".deleteID").removeClass("invisible")
+        $(".UpdateProduct").removeClass("invisible")
+      } else {
+        PermisosG(".UpdateProduct", ".deleteID", "productos", ".btn-modal-register", "G");
+      }
     },
   });
 };

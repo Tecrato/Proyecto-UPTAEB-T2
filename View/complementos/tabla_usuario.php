@@ -46,6 +46,8 @@ echo '
                     <input class="uk-input" type="text" placeholder="Contraseña" value="" aria-label="100" pattern="^[\w\S]{8,}$" name="password" minlength="8" maxlength="50" required>
                 </div>
                 <input type="submit" id="modificar'.$row['id'].'" style="display:none">
+                
+                
             </form>
         </div>
         <div class="uk-modal-footer uk-text-right">
