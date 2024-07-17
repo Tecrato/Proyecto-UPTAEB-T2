@@ -251,9 +251,15 @@ function cardProv(page) {
       $(".cont_prov_cards").html(template)
 
 
-      
+      if (session_user_rol_num == "1") {
+        $(".btn-aggSupplier").removeClass("invisible")
+        $(".edit_prov").removeClass("invisible")
+        $(".delete_prov").removeClass("invisible")
+      } else {
+        PermisosG(".edit_prov", ".delete_prov", "proveedores", ".btn-aggSupplier", "G")
+      }
+  
 
-      PermisosG(".edit_prov", ".delete_prov", "proveedores", ".btn-aggSupplier", "G")
       marcaAgua()
       ModalEdit()
       DeleteClientProv(".delete_prov", "#formDelete_supplier", "#IdDelete_supplier", cardProv, "Proveedoredor eliminado correctamente")

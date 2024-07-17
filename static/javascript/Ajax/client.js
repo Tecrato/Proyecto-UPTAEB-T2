@@ -248,7 +248,15 @@ function cardClient(page) {
       ModalEdit()
       DeleteClientProv(".delete_client", "#formDeleteClient", "#IdDelete_client", cardClient, "Eliminado")
       colorDefault()
-      PermisosG(".edit_client", ".delete_client", "clientes", ".btn-agg_client", "G")
+      if (session_user_rol_num == "1") {
+        $(".btn-agg_client").removeClass("invisible")
+        $(".edit_client").removeClass("invisible")
+        $(".delete_client").removeClass("invisible")
+      } else {
+        PermisosG(".edit_client", ".delete_client", "clientes", ".btn-agg_client", "G")
+      }
     },
   });
 }
+cardClient(0)
+insertANDupdateCLient_proveedor('.form_client', "#tlfno_client", cardClient, "cliente")
