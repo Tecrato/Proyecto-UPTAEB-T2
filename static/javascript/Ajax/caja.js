@@ -45,11 +45,17 @@ $.ajax({
 });
 
 function cargarCajas(page) {
+    let data = {}
+    if (session_user_rol_num == "1") {
+        data = {randomnautica: "caja", n: page_cajas, limite: 10}
+    } else {
+        data = {randomnautica: "caja", n: page_cajas, limite: 10, id_usuario: session_user_id}
+    }
     page_cajas = page
     $.ajax({
         url: "Controller/funcs_ajax/search.php",
         type: "GET",
-        data: { randomnautica: "caja", n: page_cajas, limite: 10 },
+        data: data,
         success: function (response) {
             let json = JSON.parse(response);
             total_cajas = json['total']
