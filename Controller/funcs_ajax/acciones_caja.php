@@ -3,12 +3,31 @@ session_start();
 require("../funcs/verificar_admin_funcs.php");
 require('../../Model/Conexion.php');
 require('../../Model/Cajas.php');
+require('../../Model/Permisos.php');
+
 
 
 if ($_POST['accion'] == 'abrir') {
+
+    $other_class = new Permiso(null,$_SESSION['user_id'],'caja','agregar');
+    $result = $other_class->search();
+    if ($_SESSION['rol_num'] > 1 and count($result) <= 0) {
+        echo json_encode(['status' => 'error','error'=>'Permiso Error (bueno ps)']);
+        exit(0);
+        die();
+    }
+
     $clase = new Caja(null, $_POST['user_id'], $_POST['monto_inicial']);
     $clase->abrir();
 } else if ($_POST['accion'] == 'cerrar') {
+    $other_class = new Permiso(null,$_SESSION['user_id'],'caja','modificar');
+    $result = $other_class->search();
+    if ($_SESSION['rol_num'] > 1 and count($result) <= 0) {
+        echo json_encode(['status' => 'error','error'=>'Permiso Error (bueno ps)']);
+        exit(0);
+        die();
+    }
+
     $otra_clase_mas = new Caja(id: $_POST['id_caja'], estado: 0);
     $ultima_caja = $otra_clase_mas->search();
     print_r($ultima_caja);
