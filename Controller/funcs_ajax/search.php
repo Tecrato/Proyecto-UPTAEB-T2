@@ -77,14 +77,9 @@
 
     elseif ($_GET['randomnautica'] == "caja") {
         require('../../Model/Cajas.php');
-        $var = isset($_GET['id_usuario']) ? $_GET['id_usuario'] : null;
-
-        if ($_SESSION['rol_num'] > 2 and count($result) <= 0 and !isset($_GET['id_usuario'])) {
-            $var = $_SESSION['user_id'];
-        }
-        
         $clase = new Caja(
-            id_usuario: $var
+            id_usuario:(isset($_GET['id_usuario']) ? $_GET['id_usuario'] : null),
+            
         );
     }
     elseif ($_SESSION['rol_num'] > 1 and count($result) <= 0) {
