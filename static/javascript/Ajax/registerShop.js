@@ -471,13 +471,10 @@ function func(dolar) {
                 // amount.pop()
                 let result = 0
 
-                  (amount);
                 amount.forEach((a) => {
                   let number = a == "" ? 0 : parseFloat(a)
                   result += number
                 })
-
-                  (result);
 
                 (btn.parentElement.parentElement.parentElement);
 
@@ -597,22 +594,16 @@ function func(dolar) {
 
           })
 
-            ();
-          (json);
-
-
           //envio de datos con ajax
           //preparamos el json
           let jsonString = JSON.stringify(json);
 
-          (jsonString);
 
           $.ajax({
             url: "Controller/funcs_ajax/hacer_factura.php",
             type: "POST",
             data: { jsonString },
             success: function (response) {
-              (response);
               targetFact()
               let json = JSON.parse('{' + response.split('{')[1]);
               if (json.error == "Caja Error") {
