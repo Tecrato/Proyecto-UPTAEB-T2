@@ -77,12 +77,19 @@ function cargarCajas(page) {
                                     <div class="${element.estado == 0 ? "activeGood" : "activeExpire"} uk-border-rounded" style="padding: 5px;">${element.estado == 0 ? "ABIERTA" : "CERRADA"}</div>
                                 </td>
                                 <td class="${element.estado == 1 ? "invisible" : ""}">
-                                    <a  href="#cierre-caja" uk-toggle class="uk-button uk-button-default cerrarCaja">CERRAR CAJA</a>
+                                    <a  href="#cierre-caja" uk-toggle class="uk-button uk-button-default cerrarCaja date_caja invisible">CERRAR CAJA</a>
                                 </td>
                             </tr>`
             })
 
             $("#tbody_caja").html(template)
+            if (parseInt(session_user_rol_num) <= 2 ) {
+                $(".cerrarCaja").removeClass("invisible")
+                $(".btn_agg_caja").removeClass("invisible")
+                return
+              } else {
+                PermisosG(null, null, "caja", ".date_caja", "R")
+              }
 
             let cerrarCaja = document.querySelectorAll(".cerrarCaja");
             cerrarCaja.forEach((element) => {

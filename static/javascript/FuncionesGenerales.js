@@ -3,7 +3,7 @@ window.addEventListener("load", () => {
   document.querySelector(".preloader_container").remove()
 })
 
-function cambiar_pagina_ajax(dir, func, limite = 9, page=0, total=0) {
+function cambiar_pagina_ajax(dir, func, limite = 9, page = 0, total = 0) {
   limite = limite
   if (dir == 'next' && page < Math.ceil(total / limite) - 1) {
     page += 1;
@@ -195,7 +195,9 @@ function PermisosG(btnEdit, btnDelete, tabla, btnAgg, T) {
           }
         } else if (T == "R") {
           if (r.permiso == "agregar" && r.tabla == tabla) {
-            document.querySelector(btnAgg).classList.remove("invisible")
+            $(btnAgg).removeClass("invisible")
+          } else if (r.permiso == "modificar" && r.tabla == tabla) {
+            $(btnAgg).removeClass("invisible")
           }
         }
       })
