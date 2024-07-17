@@ -82,10 +82,23 @@
             
         );
     }
+    elseif ($_GET['randomnautica'] == "credito") {
+        require('../../Model/Credito.php');
+        $clase = new Credito(
+            id:(isset($_GET['ID']) ? $_GET['ID'] : null),
+        );
+    }
     elseif ($_SESSION['rol_num'] > 1 and count($result) <= 0) {
         echo json_encode(['status' => 'error','error'=>'Permiso '.$_GET['randomnautica'].' Error (bueno ps)']);
         exit(0);
         die();
+    }
+    elseif ($_GET['randomnautica'] === 'notificaciones'){
+        require('../../Model/Notificaciones.php');
+        $clase = new Notificacion(
+            id:(isset($_GET['ID']) ? $_GET['ID'] : null),
+            status:(isset($_GET['status']) ? $_GET['status'] : null),
+    );
     }
 
 
@@ -103,22 +116,9 @@
             like:(isset($_GET['like']) ? $_GET['like'] : '')
         );
     }
-    elseif ($_GET['randomnautica'] == "credito") {
-        require('../../Model/Credito.php');
-        $clase = new Credito(
-            id:(isset($_GET['ID']) ? $_GET['ID'] : null),
-        );
-    }
     elseif ($_GET['randomnautica'] == "capital") {  
         require('../../Model/Capital.php');
         $clase = new Capital();
-    }
-    elseif ($_GET['randomnautica'] === 'notificaciones'){
-        require('../../Model/Notificaciones.php');
-        $clase = new Notificacion(
-            id:(isset($_GET['ID']) ? $_GET['ID'] : null),
-            status:(isset($_GET['status']) ? $_GET['status'] : null),
-    );
     }
 
     
