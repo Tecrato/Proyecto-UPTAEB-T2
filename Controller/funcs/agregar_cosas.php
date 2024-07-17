@@ -12,13 +12,19 @@
     $other_class = new Permiso(null,$_SESSION['user_id'],$_POST['tipo'],'agregar');
     $result = $other_class->search();
 
-    if ($_SESSION['rol_num'] > 1 and count($result) <= 0) {
+    
+    if ($tipo === 'usuarios'){
+        require('../../Model/Usuarios.php');
+        $hash = password_hash($_POST["password"],PASSWORD_DEFAULT);
+        $clase = new Usuario(null,$_POST["nombre"],$_POST["correo"],$hash,3,substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, 20)); 
+        $clase->agregar(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : -1);
+    }
+    elseif ($_SESSION['rol_num'] > 1 and count($result) <= 0) {
         echo json_encode(['status' => 'error','error'=>'Permiso Error (bueno ps)']);
         exit(0);
         die();
     }
-
-    if ($tipo === 'producto'){
+    elseif ($tipo === 'producto'){
         if ($_FILES['imagen1']['name'] != "") {
             $imagen = $_FILES['imagen1'];
             $nick = "producto_".$_POST['nombre'] . "_" . $imagen['name'];
@@ -59,13 +65,6 @@
     elseif ($tipo === 'cliente'){
         require('../../Model/Clientes.php');
         $clase = new Cliente(null,$_POST["nombre"],$_POST["cedula"],$_POST["apellido"],$_POST["documento"],$_POST["direccion"],$_POST["TLFNO"]); 
-    }
-    elseif ($tipo === 'usuarios'){
-        require('../../Model/Usuarios.php');
-        $hash = password_hash($_POST["password"],PASSWORD_DEFAULT);
-        $clase = new Usuario(null,$_POST["nombre"],$_POST["correo"],$hash,$_POST["rol"],substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, 20)); 
-        $clase->agregar(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : -1);
-        
     }
     elseif ($tipo === 'unidad'){
         require('../../Model/Unidades.php');
