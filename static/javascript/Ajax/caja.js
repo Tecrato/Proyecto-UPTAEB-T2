@@ -30,12 +30,26 @@ const checkCaja = () => {
     })
 }
 
+$.ajax({
+    url: "Controller/funcs_ajax/search.php",
+    type: "GET",
+    data: { randomnautica: "usuario" },
+    success: function (response) {
+        let json = JSON.parse(response);
+        let options = ``;
+        json.lista.forEach((date) => {
+            options += `<option value="${date.id}">${date.nombre}</option>`;
+        });
+        document.querySelector(".selectUserBox").innerHTML = options;
+    }
+});
+
 function cargarCajas(page) {
     page_cajas = page
     $.ajax({
         url: "Controller/funcs_ajax/search.php",
         type: "GET",
-        data: { randomnautica: "caja", n: page_cajas, limite: 10},
+        data: { randomnautica: "caja", n: page_cajas, limite: 10 },
         success: function (response) {
             let json = JSON.parse(response);
             total_cajas = json['total']
