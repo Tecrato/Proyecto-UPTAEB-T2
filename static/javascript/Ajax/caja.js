@@ -46,7 +46,7 @@ $.ajax({
 
 function cargarCajas(page) {
     let data = {}
-    if (session_user_rol_num == "1") {
+    if (parseInt(session_user_rol_num) <= 2 ) {
         data = {randomnautica: "caja", n: page_cajas, limite: 10}
     } else {
         data = {randomnautica: "caja", n: page_cajas, limite: 10, id_usuario: session_user_id}
