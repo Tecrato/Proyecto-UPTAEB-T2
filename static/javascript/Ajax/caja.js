@@ -83,9 +83,8 @@ function cargarCajas(page) {
             })
 
             $("#tbody_caja").html(template)
-            if (parseInt(session_user_rol_num) <= 2 ) {
+            if (parseInt(session_user_rol_num) <= 2) {
                 $(".date_caja").removeClass("invisible")
-                return
               } else {
                 PermisosG(null, null, "caja", ".date_caja", "R")
               }
@@ -94,10 +93,10 @@ function cargarCajas(page) {
             cerrarCaja.forEach((element) => {
                 element.addEventListener("click", () => {
                     let id = element.parentElement.parentElement.firstElementChild.textContent
-
                     let formCloseBox = document.querySelector("#FORM-CLOSE-BOX")
                     formCloseBox.addEventListener('submit', (e) => {
                         e.preventDefault()
+                        console.log("object");
                         let data = new FormData(formCloseBox)
                         data.append('id_caja', id)
                         data.append('accion', "cerrar")
@@ -109,7 +108,7 @@ function cargarCajas(page) {
                             processData: false,
                             contentType: false,
                             success: function (response) {
-                                (response);
+                                console.log(response);
                                 cargarCajas(0)
                                 checkCaja()
                                 UIkit.notification.closeAll();

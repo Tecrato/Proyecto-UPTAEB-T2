@@ -472,7 +472,7 @@
                         <p class="modalDeleteBody">Deseas Cerrar esta caja? No podras abrirla mas adelante</p>
                     </div>
                     <div class="uk-modal-footer uk-text-right">
-                        <form id="FORM-CLOSE-BOX" action="post">
+                        <form id="FORM-CLOSE-BOX">
                             <button class="uk-button uk-button-default uk-modal-close cancelar" type="button">Cancelar</button>
                             <button class="uk-button uk-button-secondary" type="submit">Aceptar</button>
                         </form>
