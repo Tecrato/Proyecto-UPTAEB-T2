@@ -167,7 +167,7 @@
                 $consulta->bindParam(':id',$this->id, PDO::PARAM_INT);
             }
 			if ($this->id_marca) {
-                $consulta->bindParam(':marca',$this->id_marca, PDO::PARAM_STR);
+                $consulta->bindParam(':id_marca',$this->id_marca, PDO::PARAM_STR);
 			}
 			if ($this->active) {
                 $consulta->bindParam(':active',$this->active, PDO::PARAM_INT);

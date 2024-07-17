@@ -106,6 +106,7 @@
                                 <form id="formAggProduct" class="uk-grid-small uk-form-stacked" uk-grid method="POST" action="" enctype="multipart/form-data">
                                     <input class="ValueInpUpdate" type="number" name="ID" style="display:none">
                                     <input type="text" name="tipo" value='producto' id="" style="display:none">
+                                    <input type="text" name="old_img" value="" id="old_img" class="old_img" style="display:none">
                                     <div class="uk-width-1-2@s">
                                         <label class="uk-form-label">Nombre</label>
                                         <div class="uk-form-controls">

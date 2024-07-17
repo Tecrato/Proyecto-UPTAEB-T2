@@ -295,7 +295,7 @@ const modalModificar = () => {
         data: { randomnautica: "productos", ID: idProduct },
         success: function (response) {
           let json = JSON.parse(response);
-          (json);
+          console.log(json)
           json.lista.forEach((i) => {
             document.querySelector(".NameUpdateProduct").value = i.nombre;
             document.querySelector(".MarcaUpdateProduct").value = i.marca;
@@ -304,6 +304,7 @@ const modalModificar = () => {
             document.querySelector(".SMXUpdateProduct").value = i.stock_max;
             document.querySelector(".ValorUnidadUpdateProduct").value = i.valor_unidad;
             document.querySelector(".CodeUpdateProduct").value = i.codigo;
+            document.querySelector(".old_img").value = i.imagen;
             if (i.IVA == 0) {
               document
                 .querySelector(".IVA_EUpdateProduct")
@@ -603,7 +604,7 @@ formAggProduct.addEventListener("submit", (e) => {
     processData: false,
     contentType: false,
     success: function (response) {
-      (response);
+      console.log(response);
       if (val == false) {
         UIkit.notification.closeAll();
         UIkit.notification({

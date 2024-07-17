@@ -16,9 +16,21 @@
     }
 
     if ($tipo === 'producto'){
+        print_r(file_exists('../../Media/imagenes/'.$_POST['old_img']));
         if ($_FILES['imagen1']['name'] != "") {
+            if (file_exists('../../Media/imagenes/'.$_POST['old_img'])) {
+                unlink('../../Media/imagenes/'.$_POST['old_img']);
+            }
+            print_r('../../Media/imagenes/'.$_POST['old_img']);
             $imagen = $_FILES['imagen1'];
             $nick = "producto_".$_POST['nombre'] . "_" . $imagen['name'];
+            $img_err = subir_imagen($imagen,$nick);
+            if ($img_err != false){
+                if ($img_err != 3){
+                    unlink('../../Media/imagenes/'.$nick);
+                }
+                die();
+            }
         }
         else {
             $imagen = null;
@@ -34,18 +46,6 @@
             echo $e;
             die();
         }
-        if ($_FILES['imagen1']['name'] != "") {
-            $imagen = array_slice($clase->search(), 0)['imagen'];
-            unlink('../../Media/imagenes/'.$imagen);
-
-            $imagen = $_FILES['imagen1'];
-            $nick = "producto_".$_POST['nombre'] . "_" . $imagen['name'];
-            $img_err = subir_imagen($imagen, $nick, true);
-            if ($img_err != false){
-                header('Location:../../Productos?error='.$img_err);
-            }
-        }
-        // header('Location:../../Productos');
     }
     elseif ($tipo === 'proveedor'){
         require('../../Model/Proveedores.php');
