@@ -178,12 +178,15 @@ const metodoPago = () => {
 }
 
 function generar_creditos(page){
+    page_creditos = page
     $.ajax({
         url: "Controller/funcs_ajax/search.php",
         type: "GET",
-        data: { randomnautica: "credito" },
+        data: { randomnautica: "credito", n:page_creditos, limite: 10},
         success: function (response) {
             let json = JSON.parse(response);
+            console.log(response)
+            total_creditos = json['total']
             let template = ""
             json.lista.forEach((f) => {
                 template += `
@@ -202,35 +205,10 @@ function generar_creditos(page){
                 </tr>
                 `
             })
-
-$.ajax({
-    url: "Controller/funcs_ajax/search.php",
-    type: "GET",
-    data: { randomnautica: "credito" },
-    success: function (response) {
-        let json = JSON.parse(response);
-        let template = ""
-        json.lista.forEach((f) => {
-            template += `
+            $("#Tbody_credito").html(template)
             
-            <tr id_rv="${f.id_rv}" id="${f.id}">
-                <td>${f.id}</td>
-                <td>${f.nombre + " " + f.apellido}</td>
-                <td>${fecha(f.fecha_inicio)}</td>
-                <td>${fecha(f.fecha_limite)}</td>
-                <td>
-                    <div class="${parseInt(f.status) == 0 ? "activeGood" : "activeEmpty"} uk-border-rounded" style="padding: 5px; width: 50%">${parseInt(f.status) == 1 ? "PENDIENTE" : "PAGADO"}</div>
-                </td>
-                <td>
-                    <a uk-toggle href="#credito_page" class="uk-button uk-button-default pagar_credito ${parseInt(f.status) == 0 ? "invisible" : ""}">PAGAR</a>
-                </td>
-            </tr>
-            `
-        })
-
-            btn.forEach((btn) => {
-                btn.addEventListener("click", (e) => {
-                    let id = btn.parentElement.parentElement.getAttribute("id")
+            $(".pagar_credito").click((btn) => {
+                    let id = btn.target.parentElement.parentElement.getAttribute("id")
                     $.ajax({
                         url: "Controller/funcs_ajax/search.php",
                         type: "GET",
@@ -240,7 +218,7 @@ $.ajax({
                             totalCredito.textContent = "Total en $: " + json.lista[0].monto_final
                             document.querySelector(".total_credito_bs").textContent = "Total en Bs: " + parseFloat(document.getElementById("BCV").textContent) * parseFloat(json.lista[0].monto_final)
                             metodoPago()
-                            let id_rv = btn.parentElement.parentElement.getAttribute("id_rv")
+                            let id_rv = btn.target.parentElement.parentElement.getAttribute("id_rv")
                             let btn_credito_pago = document.querySelector(".btn_pagar_credito")
                             btn_credito_pago.addEventListener("click", () => {
                                 let jf = []
@@ -266,7 +244,6 @@ $.ajax({
                         }
                     })
                 })
-            })
-        }
-    })
-}
+            }
+        })}
+generar_creditos(0)

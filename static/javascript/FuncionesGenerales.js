@@ -14,6 +14,7 @@ function cambiar_pagina_ajax(dir, func, limite = 9, page=0, total=0) {
   } else if (dir == 'end') {
     page = Math.ceil(total / limite) - 1;
   }
+  console.log(dir, page, total, limite)
   func(page)
 }
 

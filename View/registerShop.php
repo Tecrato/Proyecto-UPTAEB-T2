@@ -5,7 +5,9 @@
 
     <ul uk-tab>
         <li><a id="FACTURA" href="#">FACTURA</a></li>
+        <?php if ($_SESSION['rol_num'] <= 2) { ?>
         <li><a id="CREDITO" href="#">CREDITO</a></li>
+        <?php }; ?>
         <li><a id="CAJA" href="#">CAJA</a></li>
     </ul>
 
@@ -313,6 +315,7 @@
             </section>
         </li>
         
+        <?php if ($_SESSION['rol_num'] <= 2) { ?>
         
         <li>
             <div class="uk-padding-small uk-overflow-auto">
@@ -376,8 +379,10 @@
 
             
 
+            <script src="static/javascript/Ajax/credito.js" defer></script>
         </li>
 
+        <?php }; ?>
 
         <li>
             <a class="uk-button uk-button-default uk-margin-bottom uk-margin-top" uk-toggle href="#caja-modal">Apertura de Caja</a>
@@ -477,7 +482,6 @@
 <script src="static/javaScript/librerias/hammer.min.js"></script>
 <script src="static/javascript/Ajax/registerShop.js" defer></script>
 <script src="static/javascript/Ajax/caja.js" defer></script>
-<script src="static/javascript/Ajax/credito.js" defer></script>
 
 
 </body>

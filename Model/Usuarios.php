@@ -55,6 +55,9 @@
             if ($this->correo != null){
                 array_push($lista, 'correo');
             }
+            if ($this->rol != null){
+                array_push($lista, 'rol');
+            }
             if ($lista) {
             	foreach ($lista as $e){
             		$query .= ' AND '.$e.'=:'.$e;
@@ -75,6 +78,9 @@
             }
             if ($this->correo != null){
                 $consulta->bindParam(':correo',$this->correo, PDO::PARAM_STR);
+            }
+            if ($this->rol != null){
+                $consulta->bindParam(':rol',$this->rol, PDO::PARAM_STR);
             }
             $consulta->execute();
             return $consulta->fetchAll();
