@@ -433,12 +433,10 @@
                             <div class="uk-width-1-1@s">
                                 <label class="uk-form-label">Usuario</label>
                                 <div class="uk-form-controls">
-                                    <select class="uk-select selectUserBox">
+                                    <select class="uk-select selectUserBox" name="user_id">
 
                                     </select>
                                 </div>
-                                <input type="date" name="fecha" style="display: none;">
-                                <input type="number" name="id_usuario" style="display: none;">
                             </div>
                             <div class="uk-width-1-1@s">
                                 <label class="uk-form-label">Monto Inicial</label>

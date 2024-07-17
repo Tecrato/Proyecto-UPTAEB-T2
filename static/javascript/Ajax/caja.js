@@ -139,6 +139,7 @@ formCaja.addEventListener("submit", (e) => {
         contentType: false,
         processData: false,
         success: function (response) {
+            console.log(response);
             cargarCajas(0)
             checkCaja()
             UIkit.notification.closeAll();
