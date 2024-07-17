@@ -6,7 +6,7 @@ require('../../Model/Cajas.php');
 
 
 if ($_POST['accion'] == 'abrir') {
-    $clase = new Caja(null, $_SESSION['user_id'], $_POST['monto_inicial']);
+    $clase = new Caja(null, $_POST['user_id'], $_POST['monto_inicial']);
     $clase->abrir();
 } else if ($_POST['accion'] == 'cerrar') {
     $otra_clase_mas = new Caja(id: $_POST['id_caja'], estado: 0);
