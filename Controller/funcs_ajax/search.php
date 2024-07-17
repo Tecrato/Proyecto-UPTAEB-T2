@@ -75,6 +75,13 @@
         $clase = new Permiso(id_usuario:(isset($_GET['ID']) ? $_GET['ID'] : null));
     }
 
+    elseif ($_GET['randomnautica'] == "caja") {
+        require('../../Model/Cajas.php');
+        $clase = new Caja(
+            id_usuario:($_SESSION['rol_num'] > 2 and count($result) <= 0) ? $_GET['id_usuario'] : (isset($_GET['id_usuario']) ? $_GET['id_usuario'] : null) ,
+            
+        );
+    }
     elseif ($_SESSION['rol_num'] > 1 and count($result) <= 0) {
         echo json_encode(['status' => 'error','error'=>'Permiso '.$_GET['randomnautica'].' Error (bueno ps)']);
         exit(0);
@@ -94,13 +101,6 @@
         $clase = new Proveedor(
             id:(isset($_GET['ID']) ? $_GET['ID'] : null),
             like:(isset($_GET['like']) ? $_GET['like'] : '')
-        );
-    }
-    elseif ($_GET['randomnautica'] == "caja") {
-        require('../../Model/Cajas.php');
-        $clase = new Caja(
-            id_usuario:(isset($_GET['id_usuario']) ? $_GET['id_usuario'] : null),
-            
         );
     }
     elseif ($_GET['randomnautica'] == "credito") {
