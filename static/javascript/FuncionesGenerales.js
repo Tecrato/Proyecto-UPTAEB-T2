@@ -192,6 +192,8 @@ function PermisosG(btnEdit, btnDelete, tabla, btnAgg, T) {
             })
           } else if (r.permiso == "agregar" && r.tabla == tabla) {
             document.querySelector(btnAgg).classList.remove("invisible")
+          } else if (r.permiso == "imprimir" && r.tabla == tabla) {
+            document.querySelector(btnAgg).classList.remove("invisible")
           }
         } else if (T == "R") {
           if (r.permiso == "agregar" && r.tabla == tabla) {
