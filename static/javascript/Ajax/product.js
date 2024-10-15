@@ -347,6 +347,7 @@ const modalEliminar = () => {
 
       //seleccionamos el form que esta en el modal de delete
       let formDelete = document.querySelector("#formDelete");
+      if (!formDelete.dataset.listenerAdded) {
 
       //captamos su evento submit
       formDelete.addEventListener("submit", (e) => {
@@ -361,7 +362,7 @@ const modalEliminar = () => {
           processData: false,
           contentType: false,
           success: function (response) {
-            cargarTargetProductDesactive();
+            console.log(response);
             //ocultamos el modal
             UIkit.modal("#eliminar_product").hide();
             //mostramos el mensaje de eliminacion exitosa
@@ -381,6 +382,7 @@ const modalEliminar = () => {
           },
         });
       });
+    }
     });
   });
 };
@@ -485,6 +487,7 @@ const cargarTargetProduct = (page) => {
       n: page_productos, // Aca va el numero de la pagina actual
       limite: 10, // Aca va el numero maximo de tarjetas que se pueden imprimir
       like: like_product,
+      active: 1,
     },
     success: function (response) {
       marcaAgua();

@@ -69,7 +69,7 @@ function cargarCajas(page) {
                                 <td>${hora(element.fecha)}</td>
                                 <td>${element.fecha_cierre == null ? "00:00" : hora(element.fecha_cierre)}</td>
                                 <td>${element.total_ventas}</td>
-                                <td>${parseFloat(element.monto_credito).toFixed(2)}</td>
+                                <td>${parseFloat(element.monto_credito).toFixed(2)} $</td>
                                 <td>
                                     <a uk-tooltip="Imprimir Cierre" href="PDFCierreCaja?id_caja=${element.id}" class="btn_print_closeBox">${element.monto_final == null ? element.monto_inicial : parseFloat(element.monto_final).toFixed(2)}</a>
                                 </td>

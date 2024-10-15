@@ -6,18 +6,19 @@ include("../funcs/verificar.php");
 require('../../Plugins/fpdf.php');
 
 require('../../Model/Estadisticas.php');
-
 $clase = new Estadisticas();
+// print_r($_POST);
 
-
-if ($_POST['select'] == 'max_ventas') {
-    $result = $clase->max_ventas();
+if ($_POST['max'] == 'Año') {
+    $result = $clase->filter_max_anio(substr($_POST['date'], 0, 4));
 } else if ($_POST['select'] == 'min_ventas') {
     $result = $clase->min_ventas();
 } else if ($_POST['select'] == 'ratio_ventas') {
     $result = $clase->ratio_ventas();
-} else if ($_POST['select'] == 'ganancia') {
-    $result = $clase->ganancias_mensuales();
+} else if ($_POST['select'] == 'filter_year') {
+    $result = $clase->filter_year_ganancias($_POST['year']);
+} else if ($_POST['select'] == 'filter_week_ganancias') {
+    $result = $clase->filter_week_ganancias($_POST['weekStart'], $_POST['weekEnd']);
 } else if ($_POST['select'] == 'rotacion_inventario') {
     $result = $clase->coste_productos_vendidos();
     $result2 = $clase->valor_inventario_mes();
@@ -36,61 +37,96 @@ file_put_contents($tempFilePath, base64_decode(preg_replace('#^data:image/\w+;ba
 $pdf = new FPDF();
 $pdf->AddPage("L");
 $pdf->SetFont('Arial', 'B', 30);
-$pdf->Cell(120);
+$pdf->Cell(90);
 $pdf->SetTextColor(0, 130, 38);
 
-if ($_POST['select'] == "min_ventas") {
-    $pdf->Cell(30, 30, 'PRODUCTOS MENOS VENDIDOS', 0, 0, 'C', 0);
-} else if ($_POST['select'] == "max_ventas") {
-    $pdf->Cell(30, 30, utf8_decode('PRODUCTOS MÁS VENDIDOS'), 0, 0, 'C', 0);
+if ($_POST['max'] == 'Año') {
+
+    $pdf->SetFont('Arial', 'B', 22);
+    $pdf->Cell(20, 30, utf8_decode('PRODUCTOS MÁS VENDIDOS'), 0, 0, 'C', 0);
+    $pdf->SetX(90);
+    $pdf->Cell(30, 50, 'Periodo: (' . substr($_POST['date'], 0, 4) . ')', 0, 0, 'C', 0);
 } else if ($_POST['select'] == "ratio_ventas") {
     $pdf->Cell(30, 30, 'RATIO DE VENTAS', 0, 0, 'C', 0);
-} else if ($_POST['select'] == "ganancia") {
-    $pdf->Cell(30, 30, 'GANANCIAS MENSUALES', 0, 0, 'C', 0);
+} else if ($_POST['select'] == "filter_year") {
+    $pdf->SetFont('Arial', 'B', 22);
+    $pdf->Cell(30, 30, 'GANANCIAS/PERDIDAS ANUALES', 0, 0, 'C', 0);
+    $pdf->SetX(90);
+    $pdf->Cell(30, 50, 'Periodo: (' . $_POST['year'] . ')', 0, 0, 'C', 0);
+} else if ($_POST['select'] == "filter_week_ganancias") {
+    $pdf->SetFont('Arial', 'B', 25);
+    $pdf->Cell(55, 30, 'GANANCIAS/PERDIDAS SEMANALES', 0, 0, 'C', 0);
+    $pdf->SetFont('Arial', 'B', 16);
+    $pdf->SetX(90);
+    $pdf->Cell(30, 50, 'Periodo: (' . $_POST['weekStart'] . ' - ' . $_POST['weekEnd'] . ')', 0, 0, 'C', 0);
 } else if ($_POST['select'] == "rotacion_inventario") {
     $pdf->Cell(30, 30, 'ROTACIÓN DEL INVENTARIO', 0, 0, 'C', 0);
 }
 
+$pdf->SetFont('Arial', 'B', 12);
+$pdf->Cell(260, 10, 'FECHA DEL REPORTE: ' . $fecha2['mday'] . '/' . $fecha2['mon'] . '/' . $fecha2['year'], 0, 0, 'C');
 $pdf->SetFont('Arial', '', 10);
-$pdf->Cell(200, 30, 'FECHA: ' . $fecha2['mday'] . '/' . $fecha2['mon'] . '/' . $fecha2['year'], 0, 0, 'C');
 $pdf->Image('../../static/images/logo_m.png', 10, 10, 35);
-$pdf->Ln(50);
+$pdf->Ln(40);
 $pdf->SetTextColor(255, 255, 255);
-$pdf->SetFont('Arial', 'B', 15);
+$pdf->SetFont('Arial', 'B', 18);
 $pdf->SetFillColor(0, 130, 38);
-$pdf->Cell(138, 10, "GRAFICA", 0, 0, 'C', 1);
-$pdf->Rect(147.5, 60, 1, 140, 'F');
-$pdf->Cell(138, 10, "DETALLES", 0, 0, 'C', 1);
-$pdf->Cell(150, 120, "", 0, 0, 'C', 0);
-$pdf->Image($tempFilePath, 13, 80, 120, 120);
+$pdf->Cell(275, 10, "GRAFICA", 0, 0, 'C', 1);
 
-$pdf->Ln(15);
+$pdf->Image($tempFilePath, 13, 65, 270, 140);
+
+$pdf->Ln(160);
 $pdf->SetFont('Arial', '', 12);
 $pdf->SetTextColor(0, 0, 0);
 
-if ($_POST['select'] == "min_ventas" || $_POST['select'] == "max_ventas") {
-    foreach ($result as $variable) {
-        $pdf->Cell(160);
-        $pdf->Cell(120, 15, strtoupper($variable['nombre'] . " " . $variable['marca']) . " DE " . $variable['unidad_valor'] . " " . $variable['unidad'] . "   ===>   " . $variable['cantidad'] . " VENTAS", 0, 1, 'L', 0);
-    }
-} else if ($_POST['select'] == "ratio_ventas") {
+$pdf->SetTextColor(255, 255, 255);
+$pdf->Ln(40);
+$pdf->SetFont('Arial', 'B', 12);
+$pdf->Cell(275, 10, "DESCRIPCION", 0, 0, 'C', 1);
+$pdf->Ln(20);
+$pdf->SetTextColor(0, 0, 0);
+$pdf->SetFont('Arial', 'B', 30);
+$pdf->SetFont('Arial', '', 10);
+
+
+
+if ($_POST['select'] == "ratio_ventas") {
     foreach ($result as $variable) {
         $pdf->Cell(150);
         $pdf->Cell(120, 15, strtoupper($variable['nombre'] . " " . $variable['marca']) . " DE " . $variable['unidad_valor'] . " " . $variable['unidad'] . "   ===>   SE VENDIO EL " . floatval($variable['ratio_ventas']) * 100 . " % ", 0, 1, 'L', 0);
     }
-} else if ($_POST['select'] == "ganancia") {
-    $meses = array_keys($result[0]);
-    $numeros = array_keys($result[0]);
-    $meses = array_filter($meses, function ($key) {
-        return is_string($key) && !is_numeric($key);
-    });
+} else if ($_POST['select'] == "filter_year") {
 
-    foreach ($result as $variable) {
-        foreach ($meses as $key) {
-            $pdf->Cell(150);
-            $pdf->Cell(120, 9.5, $key . "   ============>   " . $variable[$key] . " Bs", 0, 1, 'L', 0);
-        }
-    }
+    $pdf->SetTextColor(255, 255, 255);
+    $pdf->SetDrawColor(255, 255, 255);
+
+    $pdf->Cell(23, 9.5, "Enero", 1, 0, 'C', 1);
+    $pdf->Cell(23, 9.5, "Febrero", 1, 0, 'C', 1);
+    $pdf->Cell(23, 9.5, "Marzo", 1, 0, 'C', 1);
+    $pdf->Cell(23, 9.5, "Abril", 1, 0, 'C', 1);
+    $pdf->Cell(23, 9.5, "Mayo", 1, 0, 'C', 1);
+    $pdf->Cell(23, 9.5, "Junio", 1, 0, 'C', 1);
+    $pdf->Cell(23, 9.5, "Julio", 1, 0, 'C', 1);
+    $pdf->Cell(23, 9.5, "Agosto", 1, 0, 'C', 1);
+    $pdf->Cell(23, 9.5, "Septiembre", 1, 0, 'C', 1);
+    $pdf->Cell(23, 9.5, "Octubre", 1, 0, 'C', 1);
+    $pdf->Cell(23, 9.5, "Noviembre", 1, 0, 'C', 1);
+    $pdf->Cell(23, 9.5, "Diciembre", 1, 1, 'C', 1);
+
+    $pdf->SetTextColor(0, 0, 0);
+
+    $pdf->Cell(23, 9.5, $result[0][0] . " Bs", 1, 0, 'C', 0);
+    $pdf->Cell(23, 9.5, $result[0][1] . " Bs", 1, 0, 'C', 0);
+    $pdf->Cell(23, 9.5, $result[0][2] . " Bs", 1, 0, 'C', 0);
+    $pdf->Cell(23, 9.5, $result[0][3] . " Bs", 1, 0, 'C', 0);
+    $pdf->Cell(23, 9.5, $result[0][4] . " Bs", 1, 0, 'C', 0);
+    $pdf->Cell(23, 9.5, $result[0][5] . " Bs", 1, 0, 'C', 0);
+    $pdf->Cell(23, 9.5, $result[0][6] . " Bs", 1, 0, 'C', 0);
+    $pdf->Cell(23, 9.5, $result[0][7] . " Bs", 1, 0, 'C', 0);
+    $pdf->Cell(23, 9.5, $result[0][8] . " Bs", 1, 0, 'C', 0);
+    $pdf->Cell(23, 9.5, $result[0][9] . " Bs", 1, 0, 'C', 0);
+    $pdf->Cell(23, 9.5, $result[0][10] . " Bs", 1, 0, 'C', 0);
+    $pdf->Cell(23, 9.5, $result[0][11] . " Bs", 1, 1, 'C', 0);
 } else if ($_POST['select'] == "rotacion_inventario") {
     $meses = array_keys($result[0]);
     $numeros = array_keys($result[0]);
@@ -104,11 +140,32 @@ if ($_POST['select'] == "min_ventas" || $_POST['select'] == "max_ventas") {
             foreach ($result3 as $variable3) {
                 foreach ($meses as $key) {
                     $pdf->Cell(140);
-                    $pdf->Cell(120, 9.5, $key. " ==> ". "   Coste P. Vendidos Bs " . $variable[$key] . "   V. Total Inventario Bs ".  $variable2[$key]. "   Rotacion ". $variable3[$key], 0, 1, 'L', 0);
+                    $pdf->Cell(120, 9.5, $key . " ==> " . "   Coste P. Vendidos Bs " . $variable[$key] . "   V. Total Inventario Bs " .  $variable2[$key] . "   Rotacion " . $variable3[$key], 0, 1, 'L', 0);
                 }
             }
         }
+    }
+} else if ($_POST['select'] == "filter_week_ganancias") {
+    foreach ($result as $variable) {
+        $pdf->SetFont('Arial', 'B', 15);
 
+        $pdf->Cell(40, 15, "SEMANA " . $variable[0], 0, 0, 'L', 0);
+        $pdf->SetFont('Arial', '', 15);
+
+        $pdf->Cell(205, 15, ".........................................................................................................................................", 0, 0, 'L', 0);
+        $pdf->SetFont('Arial', 'B', 15);
+
+        $pdf->Cell(120, 15, $variable[1] . " Bs", 0, 1, 'L', 0);
+    }
+} else if ($_POST['max'] == "Año") {
+
+    foreach ($result as $variable) {
+        $pdf->SetFont('Arial', 'B', 13);
+        $pdf->Cell(40, 15, $variable[1] . " " . $variable[4] . " " . $variable[2] . " " . $variable[3], 0, 0, 'L', 0);
+        $pdf->SetFont('Arial', '', 15);
+        $pdf->Cell(205, 15, ".........................................................................................................................................", 0, 0, 'L', 0);
+        $pdf->SetFont('Arial', 'B', 13);
+        $pdf->Cell(120, 15, $variable[5] . " Unidades", 0, 1, 'L', 0);
     }
 }
 

@@ -127,9 +127,13 @@ $pdf->Cell(24, 12, 'TOTAL', 0, 0, 'C');
 $pdf->Cell(10, 12, number_format($detalles[0]['total_cierre'], 2, '.', '') . " Bs", 0, 0, 'C');
 
 $pdf->Ln(8);
+
+
+$pdf->Cell(40, 12, 'TOTAL CREDITO', 0, 0, 'C');
+$pdf->Cell(10, 12, number_format($detalles[0]['monto_credito'], 2, '.', ''). " $", 0, 0, 'C');
+$pdf->Ln(8);
 $pdf->Cell(55, 12, 'TOTAL CIERRE DE CAJA', 0, 0, 'C');
 $pdf->Cell(10, 12, number_format($detalles[0]['total_cierre'], 2, '.', '') + $detalles[0]["monto_inicial"] . " Bs", 0, 0, 'C');
-
 // $pdf->Ln(10);
 // $pdf->Cell(78);
 // $pdf->SetFont('Arial', 'B', 12);

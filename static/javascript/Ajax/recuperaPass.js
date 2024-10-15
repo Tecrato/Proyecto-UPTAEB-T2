@@ -146,6 +146,5 @@ valid_pass.addEventListener("keyup", (e) => {
     val = e.target.value;
     const resultado = validarContrasena(val);
     document.querySelector("#msj").textContent = resultado;
-
 })
 

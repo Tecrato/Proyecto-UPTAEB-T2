@@ -42,6 +42,24 @@
     else if ($_GET['select'] == 'rotacion_inventario') {
         $result = $clase->rotacion_inventario();
     }
+    else if ($_GET['select'] == 'filter_year') {
+        $result = $clase->filter_year_ganancias($_GET['year']);
+    }
+    else if ($_GET['select'] == 'filter_week') {
+        $result = $clase->filter_week_ganancias($_GET['init'], $_GET['finish']);
+    }
+    else if ($_GET['select'] == 'filter_max_anio') {
+        $result = $clase->filter_max_anio($_GET['year']);
+    }
+    else if ($_GET['select'] == 'filter_max_mes-anio') {
+        $result = $clase->filter_max_anio_mes($_GET['year'], $_GET['month']);
+    }
+    // else if ($_GET['select'] == 'filter_min_anio') {
+    //     $result = $clase->;
+    // }
+    // else if ($_GET['select'] == 'filter_min_mes-anio') {
+    //     $result = $clase->;
+    // }
 
     $json = ['lista'=> $result];
     $json = json_encode($json);

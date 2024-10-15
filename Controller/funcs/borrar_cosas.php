@@ -16,6 +16,7 @@
     }
     
     if ($tipo == 'producto'){
+        echo'hola';
         require('../../Model/Productos.php');
         $clase = new Producto($_POST['ID']); // Llama al modelo y le manda la instruccion
         // $imagen = $clase->search()[0]['imagen'];
