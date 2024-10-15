@@ -445,7 +445,7 @@
                     <li><a id="liUnidades" href="#">Unidades</a></li>
                     <li><a id="liCategorias" href="#">Categorias</a></li>
                 </ul>
-                <div class="uk-flex uk-flex-around uk-flex-wrap">
+                <div class="uk-flex uk-flex-around uk-flex-wrap uk-aling-center">
                     <ul class="uk-switcher switcher-container uk-background-secondary uk-margin-medium-top uk-border-rounded" style="border: 1px solid #999;">
                         <li class="invisible li_cont_m">
                             <form id="FORM_MARCA" method="post" class="uk-form-horizontal uk-margin-large uk-padding">
