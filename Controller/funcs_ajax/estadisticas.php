@@ -54,12 +54,12 @@
     else if ($_GET['select'] == 'filter_max_mes-anio') {
         $result = $clase->filter_max_anio_mes($_GET['year'], $_GET['month']);
     }
-    // else if ($_GET['select'] == 'filter_min_anio') {
-    //     $result = $clase->;
-    // }
-    // else if ($_GET['select'] == 'filter_min_mes-anio') {
-    //     $result = $clase->;
-    // }
+    else if ($_GET['select'] == 'filter_min_anio') {
+        $result = $clase->filter_min_anio($_GET['year']);
+    }
+    else if ($_GET['select'] == 'filter_min_mes-anio') {
+        $result = $clase->filter_min_anio_mes($_GET['year'], $_GET['month']);
+    }
 
     $json = ['lista'=> $result];
     $json = json_encode($json);

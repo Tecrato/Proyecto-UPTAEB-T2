@@ -202,11 +202,35 @@
                                 <div class="uk-dropdown">
                                     <ul class="uk-nav uk-dropdown-nav">
                                         <li>
-                                            <form class="uk-flex uk-flex-center" id="formPDF5" action="Estadisticas_PDF" method="POST" enctype="multipart/form-data">
+
+                                            <form id="formPDF5" action="Estadisticas_PDF" method="POST" enctype="multipart/form-data">
+                                                <h5 style="color: #000 !important;">Filtrar: </h5>
+                                                <div class="uk-margin-bottom">
+                                                    <label for="filter"> Año</label>
+                                                    <input class="filter-min-type" type="radio" name="min" value="Año" checked>
+                                                    <label for="filter"> Mes/Año</label>
+                                                    <input class="filter-min-type" type="radio" name="min" value="mes_anio">
+                                                </div>
+
+                                                <div class="uk-flex uk-flex-middle">
+                                                    <h5 class="uk-margin-remove-bottom" style="color: #000 !important; width: 55px;">FECHA: </h5>
+                                                    <input class="uk-input uk-form-width-small" type="month" style="color: #000 !important; border-color: #999 !important;">
+                                                    <button type="button" class="uk-button uk-button-default uk-margin-small-left filter-min" style="color: #000 !important; border-color: #999 !important;">APLICAR</button>
+                                                </div>
+
+                                                <div class="uk-flex uk-flex-center uk-margin-top">
+                                                    <input type="hidden" name="img" id="imgMin_png">
+                                                    <input id="date_enviroment_min" type="hidden" name="date">
+                                                    <input type="submit" id="GenReport" value="Imprimir" style="display: none;">
+                                                    <button class="btn_pdf" uk-icon="icon: file-pdf" type="submit">Generar reporte</button>
+                                                </div>
+                                            </form>
+
+                                            <!-- <form class="uk-flex uk-flex-center" id="formPDF5" action="Estadisticas_PDF" method="POST" enctype="multipart/form-data">
                                                 <input type="hidden" name="img" id="imgMin_png">
                                                 <input type="hidden" name="select" value="min_ventas">
                                                 <button class="btn_pdf" uk-icon="icon: file-pdf" type="submit">Generar reporte</button>
-                                            </form>
+                                            </form> -->
                                         </li>
                                     </ul>
                                 </div>

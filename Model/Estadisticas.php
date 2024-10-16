@@ -108,4 +108,18 @@ class Estadisticas extends DB
         $query->execute();
         return $query->fetchAll();
     }
+
+    function filter_min_anio($anio)
+    {
+        $query = $this->conn->prepare("call ProductosMenosVendidosPorAno($anio);");
+        $query->execute();
+        return $query->fetchAll();
+    }
+
+    function filter_min_anio_mes($anio, $mes)
+    {
+        $query = $this->conn->prepare("call ProductosMenosVendidosPorMes($anio, $mes);");
+        $query->execute();
+        return $query->fetchAll();
+    }
 }

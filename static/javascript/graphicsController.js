@@ -505,18 +505,66 @@ const renderModelsChart4 = () => {
   })
 };
 
+// const renderModelsChart5 = () => {
+
+//   let productos = []
+//   let ventas = [];
+
+
+//   $.ajax({
+//     url: "api_estadisticas",
+//     type: "GET",
+//     data: { select: "min_ventas" },
+//     success: function (response) {
+//       let json = JSON.parse(response);
+//       for (const i of json.lista) {
+//         let nombre = i.nombre + " " + i.marca + " " + i.unidad_valor + " " + i.unidad
+//         let cantidad = i.cantidad == null ? 0 : i.cantidad
+//         productos.push(nombre)
+//         ventas.push(cantidad)
+//       }
+
+//       const data = {
+//         labels: productos,
+//         datasets: [
+//           {
+//             label: "Ventas",
+//             data: ventas,
+//             backgroundColor: getDataColors2(),
+//             borderColor: getDataColors2(),
+//           },
+//         ],
+//       };
+
+//       const options = {
+//         plugins: {
+//           legend: { position: "left" },
+//         },
+//       };
+
+//       new Chart("menosVendidosChart", { type: "pie", data, options });
+
+//       // Capturar el gráfico cuando se envía el formulario
+//       document.getElementById('formPDF5').addEventListener('submit', function () {
+//         captureChart('menosVendidosChart', 'imgMin_png');
+//       });
+//     }
+//   })
+// };
+
 const renderModelsChart5 = () => {
-
-  let productos = []
-  let ventas = [];
-
+  let minChart;
+  let DATE = document.getElementById("date_enviroment_min")
+  DATE.setAttribute("value", new Date().getFullYear() + '-' + (parseInt(new Date().getMonth()) + 1))
 
   $.ajax({
     url: "api_estadisticas",
     type: "GET",
-    data: { select: "min_ventas" },
+    data: { select: "filter_min_anio", year: new Date().getFullYear() },
     success: function (response) {
       let json = JSON.parse(response);
+      let productos = []
+      let ventas = [];
       for (const i of json.lista) {
         let nombre = i.nombre + " " + i.marca + " " + i.unidad_valor + " " + i.unidad
         let cantidad = i.cantidad == null ? 0 : i.cantidad
@@ -542,12 +590,79 @@ const renderModelsChart5 = () => {
         },
       };
 
-      new Chart("menosVendidosChart", { type: "pie", data, options });
+      if (!minChart) {
+        minChart = new Chart("menosVendidosChart", {
+          type: "pie",
+          data: data,
+          options: options,
+        });
+      } else {
+        // Actualizar el gráfico existente con nuevos datos
+        minChart.data.labels = label;
+        minChart.data.datasets[0].data = values;
+        minChart.update(); // Actualizar el gráfico
+      }
+
+      // let chart = new Chart("masVendidosChart", { type: "pie", data, options });
+
 
       // Capturar el gráfico cuando se envía el formulario
       document.getElementById('formPDF5').addEventListener('submit', function () {
         captureChart('menosVendidosChart', 'imgMin_png');
       });
+
+      let btn = document.querySelector(".filter-min")
+      btn.addEventListener('click', function () {
+        let value = btn.previousElementSibling.value
+        let filterValue;
+        let url = {};
+        let filter_min_type = document.querySelectorAll(".filter-min-type")
+        filter_min_type.forEach(element => {
+          if (element.checked) {
+            filterValue = element.value
+          }
+        })
+
+        if (filterValue == "Año") {
+          url = {
+            select: "filter_min_anio",
+            year: value.slice(0, 4),
+          }
+        } else {
+          url = {
+            select: "filter_min_mes-anio",
+            year: value.slice(0, 4),
+            month: value.slice(5, Infinity),
+          }
+        }
+
+        $.ajax({
+          url: "api_estadisticas",
+          type: "GET",
+          data: url,
+          success: function (response) {
+            let productos = []
+            let ventas = [];
+            let json = JSON.parse(response);
+            for (const i of json.lista) {
+              let nombre = i.nombre + " " + i.marca + " " + i.unidad_valor + " " + i.unidad
+              let cantidad = i.cantidad == null ? 0 : i.cantidad
+              productos.push(nombre)
+              ventas.push(cantidad)
+            }
+            minChart.data.labels = productos
+            minChart.data.datasets[0].data = ventas
+            minChart.update()
+          }
+        })
+
+        document.getElementById('formPDF5').addEventListener('submit', function () {
+          captureChart('menosVendidosChart', 'imgMin_png');
+          DATE.setAttribute("value", value)
+        });
+      })
+
+
     }
   })
 };
