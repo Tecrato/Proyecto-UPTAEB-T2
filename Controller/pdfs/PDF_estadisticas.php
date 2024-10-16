@@ -56,43 +56,34 @@ $pdf->SetFont('Arial', 'B', 30);
 $pdf->Cell(90);
 $pdf->SetTextColor(0, 130, 38);
 
-if ($max == 'Año') {
+if ($max == 'Año' || $max == "mes_anio") {
     $pdf->SetFont('Arial', 'B', 22);
     $pdf->Cell(20, 30, utf8_decode('PRODUCTOS MÁS VENDIDOS'), 0, 0, 'C', 0);
     $pdf->SetX(90);
-    $pdf->Cell(30, 50, 'Periodo: (' . substr($date, 0, 4) . ')', 0, 0, 'C', 0);
-} else if ($max == "mes_anio") {
-    $pdf->SetFont('Arial', 'B', 22);
-    $pdf->Cell(20, 30, utf8_decode('PRODUCTOS MÁS VENDIDOS'), 0, 0, 'C', 0);
-    $pdf->SetX(90);
-    $pdf->Cell(30, 50, 'Periodo: (' . substr($date, 0, 4) . '/' . substr($date, 5, 10) . ')', 0, 0, 'C', 0);
-
-} else if ($min == 'Año') {
+    $pdf->Cell(30, 50, $max == 'Año' ? 'Periodo: (' . substr($date, 0, 4) . ')' : 'Periodo: (' . substr($date, 0, 4) . '/' . substr($date, 5, 10) . ')', 0, 0, 'C', 0);
+} else if ($min == 'Año' || $min == "mes_anio") {
     $pdf->SetFont('Arial', 'B', 22);
     $pdf->Cell(20, 30, utf8_decode('PRODUCTOS MENOS VENDIDOS'), 0, 0, 'C', 0);
     $pdf->SetX(90);
-    $pdf->Cell(30, 50, 'Periodo: (' . substr($date, 0, 4) . ')', 0, 0, 'C', 0);
-} else if ($min == "mes_anio") {
-    $pdf->SetFont('Arial', 'B', 22);
-    $pdf->Cell(20, 30, utf8_decode('PRODUCTOS MENOS VENDIDOS'), 0, 0, 'C', 0);
-    $pdf->SetX(90);
-    $pdf->Cell(30, 50, 'Periodo: (' . substr($date, 0, 4) . '/' . substr($date, 5, 10) . ')', 0, 0, 'C', 0);
-
-} 
+    $pdf->Cell(30, 50, $min == 'Año' ? 'Periodo: (' . substr($date, 0, 4) . ')' : 'Periodo: (' . substr($date, 0, 4) . '/' . substr($date, 5, 10) . ')', 0, 0, 'C', 0);
+}
 else if ($select == "ratio_ventas") {
     $pdf->Cell(30, 30, 'RATIO DE VENTAS', 0, 0, 'C', 0);
-} else if ($select == "filter_year") {
+} 
+else if ($select == "filter_year") {
     $pdf->SetFont('Arial', 'B', 22);
     $pdf->Cell(30, 30, 'GANANCIAS/PERDIDAS ANUALES', 0, 0, 'C', 0);
     $pdf->SetX(90);
     $pdf->Cell(30, 50, 'Periodo: (' . $year . ')', 0, 0, 'C', 0);
-} else if ($select == "filter_week_ganancias") {
+} 
+else if ($select == "filter_week_ganancias") {
     $pdf->SetFont('Arial', 'B', 25);
     $pdf->Cell(55, 30, 'GANANCIAS/PERDIDAS SEMANALES', 0, 0, 'C', 0);
     $pdf->SetFont('Arial', 'B', 16);
     $pdf->SetX(90);
     $pdf->Cell(30, 50, 'Periodo: (' . $weekStart . ' - ' . $weekEnd . ')', 0, 0, 'C', 0);
-} else if ($select == "rotacion_inventario") {
+} 
+else if ($select == "rotacion_inventario") {
     $pdf->Cell(30, 30, 'ROTACIÓN DEL INVENTARIO', 0, 0, 'C', 0);
 }
 
