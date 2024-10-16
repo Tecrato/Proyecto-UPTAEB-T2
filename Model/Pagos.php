@@ -63,6 +63,7 @@
             $query->bindParam(':id_metodo_pago',$this->id_metodo_pago);
             $query->bindParam(':monto',$this->monto);
             $query->execute();
+            return $this->conn->lastInsertId();
         }
 		
 	}

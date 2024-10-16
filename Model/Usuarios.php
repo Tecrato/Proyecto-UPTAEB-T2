@@ -32,6 +32,7 @@
             $query->bindParam(':semilla',$this->semilla, PDO::PARAM_STR);
             $query->execute();
             $this->add_bitacora($usuario,"Usuarios","Registrar","Usuario Registrado");
+            return $this->conn->lastInsertId();
         }
 
 

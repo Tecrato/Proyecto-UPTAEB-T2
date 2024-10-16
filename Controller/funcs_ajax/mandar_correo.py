@@ -16,7 +16,7 @@ def main(args):
 
 	contexto = ssl.create_default_context()
 	try:
-		with smtplib.SMTP_SSL("smtp.gmail.com",465, context = contexto) as smtp:
+		with smtplib.SMTP_SSL(context = contexto) as smtp:
 			smtp.login(email_sender, os.environ['MAIL_KEY'])
 			smtp.sendmail(email_sender,email_reciver,em.as_string())
 		return 'listo'

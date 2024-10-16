@@ -33,6 +33,7 @@
 			$query->bindParam(':cantidad',$this->cantidad);
 
 			$query->execute();
+            return $this->conn->lastInsertId();
 		}
 
 		function descontar(){

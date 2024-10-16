@@ -16,6 +16,7 @@
             $query->bindParam(':nombre',$this->nombre);
             $query->execute();
 			$this->add_bitacora($usuario,"Metodos de Pago","Registrar","Metodo de Pago Registrado");
+            return $this->conn->lastInsertId();
         }
         function borrar($usuario) {
             $query = $this->conn->prepare("DELETE FROM metodo_pago WHERE ID=:id");

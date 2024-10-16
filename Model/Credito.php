@@ -25,6 +25,7 @@
             $query->bindParam(':monto_final',$this->monto_final, PDO::PARAM_STR);
             $query->execute();
             $this->add_bitacora($usuario,"Credito","Registrar","Credito Registrado");
+            return $this->conn->lastInsertId();
         }
 
         function desactivar($usuario){

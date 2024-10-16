@@ -16,6 +16,7 @@
             $query->bindParam(':nombre',$this->nombre);
             $query->execute();
 			$this->add_bitacora($usuario,"Marcas","Registrar","Marca Registrada");
+            return $this->conn->lastInsertId();
         }
         function borrar($usuario) {
             $query = $this->conn->prepare("DELETE FROM marcas WHERE ID=:id");

@@ -40,6 +40,7 @@
             $query->bindParam(':dir',$this->direccion);
             $query->execute();
             $this->add_bitacora($usuario,"Proveedores","Registrar","Proveedor Registrado");
+            return $this->conn->lastInsertId();
         }
 
         // con esta funcion se elimina un elemento dependiendo de su id

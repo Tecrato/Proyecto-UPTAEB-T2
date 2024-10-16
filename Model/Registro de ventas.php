@@ -110,7 +110,7 @@
                 }
 
                 $this->add_bitacora($usuario, "registrar_ventas", "agregar", "se agrego una venta");
-                return 1;
+                return $this->conn->lastInsertId();
             } catch (Exception $e) {
                 $this->conn->rollBack();
                 return 0;

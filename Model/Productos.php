@@ -58,8 +58,9 @@
             $query->bindParam(':algoritmo',$this->algoritmo);
             /* $query->bindParam(':algoritmo',$this->algoritmo); */
 
+            $query->execute();
+            return $this->conn->lastInsertId();
 
-            return $query->execute();
         }
 
 

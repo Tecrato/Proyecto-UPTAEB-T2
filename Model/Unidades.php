@@ -1,3 +1,4 @@
+
 <?php
 	class Unidad extends DB {
 		private $id;
@@ -18,6 +19,7 @@
             $query->bindParam(':nombre',$this->nombre);
             $query->execute();
 			$this->add_bitacora($usuario,"Unidades","Registrar","Unidad Registrada");
+            return $this->conn->lastInsertId();
         }
 		
 		function borrar($usuario){

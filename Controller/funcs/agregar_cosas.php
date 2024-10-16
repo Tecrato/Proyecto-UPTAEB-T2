@@ -96,7 +96,13 @@
     }
 
     if ($tipo != 'producto') {
-        $clase->agregar($_SESSION['user_id']);
+        $resultado = $clase->agregar($_SESSION['user_id']);
+        # Verificamos que el resultado sea un numero
+        if (!is_numeric($resultado)) {
+            echo json_encode(['status' => 'error', 'error' => 'Error interno']);
+            exit(0);
+            die();
+        }
     }
-    echo json_encode(['status' => 'active']);
+    echo json_encode(['status' => 'ok', 'message' => 'Entrada agregada correctamente', 'last_insert_id' => $resultado]);
 ?>

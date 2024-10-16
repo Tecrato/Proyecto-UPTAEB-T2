@@ -54,3 +54,16 @@ parametros obligatorios:
 ## Borrar
 parametros obligatorios:
  - ID: int = [id de la fila]
+
+
+----------------------------##############################-----------------------------
+
+## Agregar
+parametros obligatorios:
+ - Ps todas las columnas que tiene la tabla (Proximamente metodo INSERT)
+
+retorno:
+{
+    'status': str = "ok" o "error",
+    'message': str = "Mensaje de error o de exito"
+}

@@ -78,6 +78,7 @@ class Factura extends DB {
         $query->bindParam(':coste', $this->coste_producto_total);
 
         $query->execute();
+        return $this->conn->lastInsertId();
     }
 
     function borrar(){

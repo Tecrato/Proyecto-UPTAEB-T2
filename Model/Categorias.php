@@ -15,6 +15,7 @@
             $query->bindParam(':nombre',$this->nombre);
             $query->execute();
 			$this->add_bitacora($usuario,"Categorias","Registrar","Categoria Registrada");
+            return $this->conn->lastInsertId();
         }
 
         function search($n=0,$limite=100){

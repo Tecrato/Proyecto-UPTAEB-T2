@@ -22,6 +22,7 @@
             $query->bindParam(':permiso',$this->permiso);
             $query->execute();
 			$this->add_bitacora($usuario,"Permisos","Registrar","Permiso Registrado");
+            return $this->conn->lastInsertId();
         }
         function borrar($usuario) {
             $query = $this->conn->prepare("DELETE FROM permisos WHERE id_usuario=:id_usuario AND tabla=:tabla AND permiso=:permiso");

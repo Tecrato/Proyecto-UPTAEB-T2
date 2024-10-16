@@ -34,6 +34,7 @@
             $query->bindParam(':telefono',$this->telefono, PDO::PARAM_STR);
             $query->execute();
             $this->add_bitacora($usuario,"Cliente","Registrar","Cliente Registrado");
+            return $this->conn->lastInsertId();
         }
 
         function desactivar($usuario){
