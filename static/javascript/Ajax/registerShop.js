@@ -685,8 +685,8 @@ const targetFact = (num) => {
       json.lista.forEach((t) => {
         template += `
         <div>
-      <div class="target-detail-fact uk-card uk-card-default uk-padding-small uk-background-secondary uk-light uk-border-rounded" style="width: 280px; background-color: #333;">
-          <div class="cont1_tar_fact" style="background-color: #333;">
+      <div class="target-detail-fact uk-card uk-card-default uk-padding-small uk-background-secondary uk-light uk-border-rounded" style="width: 280px;">
+          <div class="cont1_tar_fact">
               <div class="uk-flex uk-flex-middle uk-flex-between">
                   <div class="uk-flex uk-flex-middle">
                       <img class="uk-margin-small-right" src="static/images/logo_m.png" alt="" width="50PX">
@@ -733,6 +733,7 @@ const targetFact = (num) => {
       })
       $(".cont_ventas_target").html(template)
       marcaAgua()
+      colorDefault()
     }
 
   })

@@ -141,18 +141,19 @@
 }
 .activeEmpty{
     background-color: #fff !important;
-    color: #111 !important;
+    color: #000 !important;
 }
 .activeExpire{
     background-color: #ff0000;
-    color: #111 !important;
+    color: #fff !important;
 }
 .activeGood{
-    background-color: #007D35
+    background-color: #007D35;
+    color: #fff !important;
 }
 .activeCloseToExpire{
     background-color: #ff0;
-    color: #111 !important;
+    color: #fff !important;
 }
 
 
@@ -892,6 +893,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    color: #fff;
 }
 @media (min-width: 350px) and (max-width: 425px){
     .item_profile-target-2{

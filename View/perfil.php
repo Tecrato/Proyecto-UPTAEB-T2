@@ -54,6 +54,11 @@
                                                         </a>
                                                     </li>
                                                 <?php }; ?>
+                                                <li>
+                                                    <a href="#">
+                                                        <span class="uk-margin-small-right" uk-icon="nut"></span>RESPALDO
+                                                    </a>
+                                                </li>
                                             </ul>
                                         </div>
                                         <div class="uk-width-expand@m">
@@ -473,6 +478,58 @@
 
                                                     </li>
 
+                                                    <li>
+                                                        <div class="uk-flex uk-flex-between uk-flex-middle">
+                                                            <div>
+                                                                <h2>Respaldo de datos</h2>
+                                                                <h4>Registro de Respaldos</h4>
+                                                            </div>
+                                                            <button type="button" class="uk-button uk-button-default btnAggBackup">
+                                                                <span uk-icon="icon: plus;"></span>RESPALDO</button>
+                                                        </div>
+
+
+
+                                                        <!-- **************************Modal de confirmacion de eliminacion************************** -->
+
+                                                        <div id="eliminar_backup" class="uk-flex-top" uk-modal>
+                                                            <div class="uk-modal-dialog uk-margin-auto-vertical">
+                                                                <div class="uk-modal-header uk-flex uk-flex-middle">
+                                                                    <span class="uk-margin-small-right" uk-icon="icon: warning ; ratio: 2"></span>
+                                                                    <h2 class="uk-modal-title uk-margin-remove-top">ELIMINAR</h2>
+                                                                </div>
+                                                                <div class="uk-modal-body">
+                                                                    <p>Deseas eliminar este registro para siempre? No podras recuperlo mas adelante</p>
+                                                                </div>
+                                                                <div class="uk-modal-footer uk-text-right">
+                                                                    <form id="formDeleteBackup" action="" method="POST">
+                                                                        <input type="hidden" name="name" id="valueBackup">
+                                                                        <input type="hidden" name="type" value="Delete">
+                                                                        <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
+                                                                        <button class="uk-button uk-button-secondary btnBackup" type="submit">Aceptar</button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <table class="uk-table uk-table-divider uk-table-middle">
+                                                            <thead class="uk-background-secondary">
+                                                                <tr>
+                                                                    <th></th>
+                                                                    <th>Archivo</th>
+                                                                    <th>Accion</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="table_backup">
+
+
+                                                            </tbody>
+                                                        </table>
+                                                        <script src="static/javaScript/Ajax/respaldo.js" defer></script>
+
+                                                    </li>
+
                                             </div>
                                         </div>
                                     </div>
@@ -868,7 +925,6 @@
 
 
 <script src="static/javaScript/Roles.js" defer></script>
-
 <script src="static/javaScript/Ajax/RegisterUser.js" defer></script>
 <script src="static/javaScript/Ajax/user.js" defer></script>
 

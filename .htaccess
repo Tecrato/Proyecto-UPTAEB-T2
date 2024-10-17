@@ -17,6 +17,7 @@ RewriteRule ^PDFInventario$ Controller/pdfs/PDF_inventario.php
 RewriteRule ^PDFFactura$ Controller/pdfs/PDF_factura.php
 
 RewriteRule ^api_estadisticas$ Controller/funcs_ajax/estadisticas.php
+RewriteRule ^backup$ Controller/funcs_ajax/backup.php
 RewriteRule ^api_caja$ Controller/funcs_ajax/acciones_caja.php
 RewriteRule ^api_dolar$ Controller/funcs_ajax/dolar.php
 RewriteRule ^api_search$ Controller/funcs_ajax/search.php

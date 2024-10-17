@@ -39,6 +39,32 @@ const colorLight = () => {
             k.style.backgroundColor = "rgb(242 241 241)"
         })
     }
+
+    if (document.querySelectorAll(".target-detail-fact")) {
+        document.querySelectorAll(".target-detail-fact").forEach((k)=>{
+            k.style.backgroundColor = "#fff"
+        })
+    }
+
+
+    if (document.querySelectorAll(".cont1_tar_fact")) {
+        document.querySelectorAll(".cont1_tar_fact").forEach((k)=>{
+            k.style.backgroundColor = "#fff"
+        })
+    }
+
+
+    if (document.querySelectorAll(".Container-fact-price")) {
+        document.querySelectorAll(".Container-fact-price").forEach((k)=>{
+            k.style.backgroundColor = "#fff"
+        })
+    }
+
+    if (document.querySelector(".generate-fact")) {
+        document.querySelector(".generate-fact").style.color = "#fff";
+    }
+    
+
     document.querySelector(".Nav-bg").classList.add("uk-light")
 }
 
@@ -57,6 +83,48 @@ const colorDark = () => {
         l.classList.add("uk-light");
     })
     document.querySelector(".Nav-bg").classList.add("uk-light")
+
+    if (document.querySelector(".target_supplier")) {
+        document.querySelectorAll(".target_supplier").forEach((l)=>{
+            l.style.backgroundColor = "#333";
+        })
+    }
+    document.querySelectorAll(".img_proveedor_container").forEach((el) => {
+        el.style.backgroundColor = "#383838";
+    });
+
+    if (document.querySelectorAll(".titleReport")) {
+        document.querySelectorAll(".titleReport").forEach((k)=>{
+            k.style.backgroundColor = "#1e1e1e"
+        })
+    }
+
+    if (document.querySelectorAll(".target-detail-fact")) {
+        document.querySelectorAll(".target-detail-fact").forEach((k)=>{
+            k.style.backgroundColor = "#333"
+        })
+    }
+
+    if (document.querySelectorAll(".cont1_tar_fact")) {
+        document.querySelectorAll(".cont1_tar_fact").forEach((k)=>{
+            k.style.backgroundColor = "#333"
+        })
+    }
+
+    if (document.querySelector(".item_profile-target") || document.querySelector(".item_profile-target-2")) {
+        document.querySelector(".item_profile-target").style.backgroundColor = "transparent";
+        document.querySelector(".item_profile-target-2").style.backgroundColor = "transparent";
+    }
+
+
+    if (document.querySelectorAll(".Container-fact-price")) {
+        document.querySelectorAll(".Container-fact-price").forEach((k)=>{
+            k.style.backgroundColor = "#33333349"
+        })
+    }
+
+    
+    
 }
 
 const colorDefault = () => {
