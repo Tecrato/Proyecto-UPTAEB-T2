@@ -18,7 +18,7 @@ let cargarBackup = () => {
                         <td></td>
                         <td></td>
                         <td class="uk-text-center">
-                            <img class="uk-margin-top" style="opacity: 0.3;" src="./static/images/logo_letras-minimarket.png" alt="">
+                            <img class="uk-margin-top" style="opacity: 0.3;" src="./static/images/logo_letras-minimarketNewColor.png" alt="">
                         </td>
                         <td></td>
                         <td></td>
@@ -28,7 +28,7 @@ let cargarBackup = () => {
                 json2.forEach((p) => {
                     template += `
                     <tr>
-                        <td><img src="./static/images/logo_letras-minimarket.png" alt="" width="50"></td>
+                        <td><img class="img_config_logo" src="./static/images/logo_letras-minimarket.png" alt="" width="50"></td>
                         <td>${p.archivo}</td>
                         <td>
                             <div>

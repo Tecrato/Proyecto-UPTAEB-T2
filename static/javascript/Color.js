@@ -13,10 +13,19 @@ const colorLight = () => {
         l.classList.add("uk-dark");
     })
 
-    if (document.querySelector(".img1ProductSwitcher") || document.querySelector(".img2ProductSwitcher")) {
+    if (document.querySelector(".img1ProductSwitcher") || document.querySelector(".img2ProductSwitcher") || document.querySelector(".img3ProductSwitcher")) {
         document.querySelector(".img1ProductSwitcher").src = "./static/images/cajas (2) newColor.png";
         document.querySelector(".img2ProductSwitcher").src = "./static/images/suministrosNewColor.png";
+        document.querySelector(".img4ProductSwitcher").src = "./static/images/menuNewColor.png";
     }
+
+    if (document.querySelectorAll(".img_config_logo")) {
+        document.querySelectorAll(".img_config_logo").forEach((k) => {
+            k.src = "./static/images/logo_letras-minimarketNewColor.png";
+        })
+    }
+
+
     document.querySelectorAll(".img_proveedor_container").forEach((el) => {
         el.style.backgroundColor = "#fff";
     });
@@ -29,33 +38,33 @@ const colorLight = () => {
     }
 
     if (document.querySelector(".target_supplier")) {
-        document.querySelectorAll(".target_supplier").forEach((l)=>{
+        document.querySelectorAll(".target_supplier").forEach((l) => {
             l.style.backgroundColor = "#fff";
         })
     }
 
     if (document.querySelectorAll(".titleReport")) {
-        document.querySelectorAll(".titleReport").forEach((k)=>{
+        document.querySelectorAll(".titleReport").forEach((k) => {
             k.style.backgroundColor = "rgb(242 241 241)"
         })
     }
 
     if (document.querySelectorAll(".target-detail-fact")) {
-        document.querySelectorAll(".target-detail-fact").forEach((k)=>{
+        document.querySelectorAll(".target-detail-fact").forEach((k) => {
             k.style.backgroundColor = "#fff"
         })
     }
 
 
     if (document.querySelectorAll(".cont1_tar_fact")) {
-        document.querySelectorAll(".cont1_tar_fact").forEach((k)=>{
+        document.querySelectorAll(".cont1_tar_fact").forEach((k) => {
             k.style.backgroundColor = "#fff"
         })
     }
 
 
     if (document.querySelectorAll(".Container-fact-price")) {
-        document.querySelectorAll(".Container-fact-price").forEach((k)=>{
+        document.querySelectorAll(".Container-fact-price").forEach((k) => {
             k.style.backgroundColor = "#fff"
         })
     }
@@ -63,7 +72,7 @@ const colorLight = () => {
     if (document.querySelector(".generate-fact")) {
         document.querySelector(".generate-fact").style.color = "#fff";
     }
-    
+
 
     document.querySelector(".Nav-bg").classList.add("uk-light")
 }
@@ -73,6 +82,13 @@ const colorDark = () => {
     let ukLight = document.querySelectorAll(".uk-dark");
     document.getElementById("html").style.backgroundColor = "#111";
     document.querySelector(".Bg-Main-home").style.backgroundColor = "#111";
+
+    if (document.querySelector(".img1ProductSwitcher") || document.querySelector(".img2ProductSwitcher") || document.querySelector(".img3ProductSwitcher")) {
+        document.querySelector(".img1ProductSwitcher").src = "./static/images/cajas (2).png";
+        document.querySelector(".img2ProductSwitcher").src = "./static/images/suministros.png";
+        document.querySelector(".img4ProductSwitcher").src = "./static/images/menu.png";
+    }
+
 
     BG.forEach((b) => {
         b.classList.remove("uk-background-muted");
@@ -85,7 +101,7 @@ const colorDark = () => {
     document.querySelector(".Nav-bg").classList.add("uk-light")
 
     if (document.querySelector(".target_supplier")) {
-        document.querySelectorAll(".target_supplier").forEach((l)=>{
+        document.querySelectorAll(".target_supplier").forEach((l) => {
             l.style.backgroundColor = "#333";
         })
     }
@@ -94,19 +110,19 @@ const colorDark = () => {
     });
 
     if (document.querySelectorAll(".titleReport")) {
-        document.querySelectorAll(".titleReport").forEach((k)=>{
+        document.querySelectorAll(".titleReport").forEach((k) => {
             k.style.backgroundColor = "#1e1e1e"
         })
     }
 
     if (document.querySelectorAll(".target-detail-fact")) {
-        document.querySelectorAll(".target-detail-fact").forEach((k)=>{
+        document.querySelectorAll(".target-detail-fact").forEach((k) => {
             k.style.backgroundColor = "#333"
         })
     }
 
     if (document.querySelectorAll(".cont1_tar_fact")) {
-        document.querySelectorAll(".cont1_tar_fact").forEach((k)=>{
+        document.querySelectorAll(".cont1_tar_fact").forEach((k) => {
             k.style.backgroundColor = "#333"
         })
     }
@@ -118,13 +134,19 @@ const colorDark = () => {
 
 
     if (document.querySelectorAll(".Container-fact-price")) {
-        document.querySelectorAll(".Container-fact-price").forEach((k)=>{
+        document.querySelectorAll(".Container-fact-price").forEach((k) => {
             k.style.backgroundColor = "#33333349"
         })
     }
 
+
     
-    
+    if (document.querySelectorAll(".img_config_logo")) {
+        document.querySelectorAll(".img_config_logo").forEach((k) => {
+            k.src = "./static/images/logo_letras-minimarket.png";
+        })
+    }
+
 }
 
 const colorDefault = () => {
