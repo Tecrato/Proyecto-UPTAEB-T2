@@ -12,6 +12,30 @@
             $this->descripcion = $descripcion;
 		}
 
+        function set_id($id){
+            $this->id = $id;
+        }
+
+        function set_monto($monto){
+            $this->monto = $monto;
+        }
+
+        function set_descripcion($descripcion){
+            $this->descripcion = $descripcion;
+        }
+
+        function get_id(){
+            return $this->id;
+        }
+
+        function get_monto(){
+            return $this->monto;
+        }
+
+        function get_descripcion(){
+            return $this->descripcion;
+        }
+
         function agregar($usuario) {
             $query = $this->conn->prepare("INSERT INTO movimientos_capital (monto, descripcion) VALUES(:monto, :descripcion)");
             $query->bindParam(':monto', $this->monto);

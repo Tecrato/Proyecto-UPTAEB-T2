@@ -4,13 +4,12 @@ class DB
 
     public $dbHost = 'localhost';
     public $dbUser = 'root';
-    public $dbPass = '12345';
-    public $dbName = 'proyecto_4';
+    public $dbName = 'proyecto';
 
     public $conn;
     function __construct()
     {
-        $this->conn = new PDO('mysql:host=' . $this->dbHost . ';dbname=' . $this->dbName, $this->dbUser, $this->dbPass);
+        $this->conn = new PDO('mysql:host=' . $this->dbHost . ';dbname=' . $this->dbName, $this->dbUser);
         $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
     function __destruct()
@@ -74,8 +73,9 @@ class DB
     function Backup($type)
     {
         if ($type == "Insert") {
-            $backupFile = "../../Backups/" . $this->dbName . '_' . date('Y-m-d') . '.sql';
-            $command = "mysqldump -h $this->dbHost -u $this->dbUser -p$this->dbPass $this->dbName > $backupFile";
+            date_default_timezone_set('America/Caracas');
+            $backupFile = "../../Backups/" . $this->dbName . '_' . date('Y-m-d_H-i') . '.sql';
+            $command = "mysqldump -h $this->dbHost -u $this->dbUser $this->dbName > $backupFile";
             $output = shell_exec($command . " 2>&1");
 
             if ($output === null) {
@@ -86,7 +86,6 @@ class DB
         } else if ($type == "Search") {
             $directorio = '../../Backups';
             return  $archivos = scandir($directorio);
-                        
         } else if ($type == "Delete") {
             $arc = array();
             $directorio = '../../Backups';
