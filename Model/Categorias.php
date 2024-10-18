@@ -10,6 +10,22 @@
 			$this->nombre = $nombre;
 		}
 
+        function set_id($id){
+            $this->id = $id;
+        }
+
+        function set_nombre($nombre){
+            $this->nombre = $nombre;
+        }
+
+        function get_id(){
+            return $this->id;
+        }
+
+        function get_nombre(){
+            return $this->nombre;
+        }
+
         function agregar($usuario){
             $query = $this->conn->prepare("INSERT INTO categoria VALUES(null, :nombre)");
             $query->bindParam(':nombre',$this->nombre);

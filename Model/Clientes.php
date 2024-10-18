@@ -24,6 +24,74 @@
             DB::__construct();
         }
 
+        function set_id($id){
+            $this->id = $id;
+        }
+
+        function set_nombre($nombre){
+            $this->nombre = $nombre;
+        }
+
+        function set_cedula($cedula){
+            $this->cedula = $cedula;
+        }
+
+        function set_documento($documento){
+            $this->documento = $documento;
+        }
+
+        function set_apellido($apellido){
+            $this->apellido = $apellido;
+        }
+
+        function set_telefono($telefono){
+            $this->telefono = $telefono;
+        }
+
+        function set_direccion($direccion){
+            $this->direccion = $direccion;
+        }
+
+        function set_like_nombre($like_nombre){
+            $this->like_nombre = $like_nombre;
+        }
+
+        function set_like_cedula($like_cedula){
+            $this->like_cedula = $like_cedula;
+        }
+
+        function get_id(){
+            return $this->id;
+        }
+
+        function get_nombre(){
+            return $this->nombre;
+        }
+
+        function get_cedula(){
+            return $this->cedula;
+        }
+
+        function get_documento(){
+            return $this->documento;
+        }
+
+        function get_apellido(){
+            return $this->apellido;
+        }
+
+        function get_telefono(){
+            return $this->telefono;
+        }
+
+        function get_direccion(){
+            return $this->direccion;
+        }
+
+        function get_active(){
+            return $this->active;
+        }
+
         function agregar($usuario){
             $query = $this->conn->prepare("INSERT INTO clientes (nombre, cedula, apellido, documento, direccion, telefono, active) VALUES(:nombre, :cedula, :apellido, :documento, :direccion, :telefono,1)");
             $query->bindParam(':nombre',$this->nombre, PDO::PARAM_STR);
