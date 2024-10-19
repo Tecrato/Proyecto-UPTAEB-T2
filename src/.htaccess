@@ -28,6 +28,19 @@ RewriteRule ^fd$ Controller/C_facturadirecta.php
 RewriteRule ^test$ Controller/funcs_ajax/prueba.php
 
 
+RewriteRule ^Model/ View/404.php
+RewriteRule ^View/ View/404.php
+RewriteRule ^Backups/ View/404.php
+RewriteRule ^Media/ View/404.php
+RewriteRule ^static/ View/404.php
+
+
+ErrorDocument 404 View/404.php
+
+<FilesMatch "\.(htaccess|htpasswd|ini|phps|fla|psd|log|sh|zip|tar)$">
+  Order Deny,Allow
+  Deny from all
+</FilesMatch>
 
 RemoveHandler .phtml .php3 .php .pl .py .jsp .asp .htm .shtml .sh .cgi .dat
 RemoveType .phtml .php3 .php .pl .py .jsp .asp .htm .shtml .sh .cgi .dat
