@@ -60,7 +60,9 @@
     else if ($_GET['select'] == 'filter_min_mes-anio') {
         $result = $clase->filter_min_anio_mes($_GET['year'], $_GET['month']);
     }
-
+    else if ($_GET['select'] == 'filter_ClientsTop') {
+        $result = $clase->filter_ClientsTop($_GET['init'], $_GET['finish']);
+    }
     $json = ['lista'=> $result];
     $json = json_encode($json);
     echo($json);

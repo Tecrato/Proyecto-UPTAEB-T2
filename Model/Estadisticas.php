@@ -122,4 +122,11 @@ class Estadisticas extends DB
         $query->execute();
         return $query->fetchAll();
     }
+    function filter_ClientsTop($i, $f)
+    {
+        $query = $this->conn->prepare("call ObtenerTopClientesPorFecha('$i','$f');");
+        
+        $query->execute();
+        return $query->fetchAll();
+    }
 }

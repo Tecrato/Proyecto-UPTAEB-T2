@@ -131,10 +131,36 @@
         <div class="uk-width-1-2 uk-margin-medium-top Card-items">
             <div class="uk-card uk-card-default uk-card-body uk-background-secondary uk-light">
                 <div>
-                    <h3 class="uk-text-center uk-text-bold">CLIENTES FRECUENTES</h3>
-                    <hr class="uk-margin-remove">
+                    <div class="titleReport">
+                        <h3 class="uk-text-center uk-text-bold">CLIENTES FRECUENTES DEL MES</h3>
+                        <div class="Item_generate-report">
+                            <nav uk-dropnav="mode: click">
+                                <ul class="uk-subnav">
+                                    <li>
+                                        <a href="#"><span uk-icon="icon: more; ratio: 1.5"></span></a>
+                                        <div class="uk-dropdown">
+                                            <ul class="uk-nav uk-dropdown-nav">
+                                                <li>
+                                                    <form action="">
+                                                        <div class="uk-flex uk-flex-middle" id="filter-clientsTop-controll">
+                                                            <h5 class="uk-margin-remove-bottom" style="color: #000 !important; width: 30px;">De: </h5>
+                                                            <input class="uk-input uk-form-width-small uk-margin-small-right" style="color: #000 !important; border-color: #999 !important;" type="date">
+                                                            <h5 class="uk-margin-remove-bottom uk-margin-remove-top" style="color: #000 !important; width: 50px;">Hasta: </h5>
+                                                            <input class="uk-input uk-form-width-small" style="color: #000 !important; border-color: #999 !important;" type="date">
+                                                            <button type="button" class="uk-button uk-button-default uk-margin-small-left btn-filter-clientsTop" style="color: #000 !important; border-color: #999 !important;">APLICAR</button>
+                                                        </div>
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <!-- <hr class="uk-margin-remove"> -->
                 </div>
-
+ 
                 <table class="uk-table uk-table-divider">
                     <thead>
                         <tr>

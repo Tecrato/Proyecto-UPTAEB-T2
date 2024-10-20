@@ -140,3 +140,31 @@ const renderModelsChart6 = () => {
 };
 
 renderModelsChart6()
+let btnFilterClientsTop = document.querySelector(".btn-filter-clientsTop");
+btnFilterClientsTop.addEventListener("click", () => {
+  // Obtén las fechas desde los campos de entrada
+  let dateInit = btnFilterClientsTop.previousElementSibling.previousElementSibling.previousElementSibling.value;
+  let dateEnd = btnFilterClientsTop.previousElementSibling.value;
+    $.ajax({
+        url: "api_estadisticas",
+        type: "GET",
+        data: { select: "filter_ClientsTop" ,init:dateInit, finish:dateEnd},
+        
+        success: function (response) {
+            let json = JSON.parse(response);
+            let template = ""
+            json.lista.forEach(element => {
+                template += `
+                            <tr>
+                                <td><span uk-icon="icon: user; ratio: 1.5"></span></td>
+                                <td>${element.idCliente}</td>
+                                <td>${element.Cliente}</td>
+                                <td>${element.Compras}</td>
+                            </tr>
+                `
+            });
+    
+            $("#tbody_clientes_frecuentes").html(template)
+        }
+    })
+})

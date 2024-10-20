@@ -4,12 +4,13 @@ class DB
 
     public $dbHost = 'localhost';
     public $dbUser = 'root';
-    public $dbName = 'proyecto';
+    public $dbName = 'proyecto_4';
+    public $dbPass = '12345';
 
     public $conn;
     function __construct()
     {
-        $this->conn = new PDO('mysql:host=' . $this->dbHost . ';dbname=' . $this->dbName, $this->dbUser);
+        $this->conn = new PDO('mysql:host=' . $this->dbHost . ';dbname=' . $this->dbName, $this->dbUser, $this->dbPass);
         $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
     function __destruct()
@@ -75,7 +76,7 @@ class DB
         if ($type == "Insert") {
             date_default_timezone_set('America/Caracas');
             $backupFile = "../../Backups/" . $this->dbName . '_' . date('Y-m-d_H-i') . '.sql';
-            $command = "mysqldump -h $this->dbHost -u $this->dbUser $this->dbName > $backupFile";
+            $command = "mysqldump --opt -h " . $this->dbHost . " -u " . $this->dbUser . " -p" . $this->dbPass . " " . $this->dbName . " > " . $backupFile;
             $output = shell_exec($command . " 2>&1");
 
             if ($output === null) {

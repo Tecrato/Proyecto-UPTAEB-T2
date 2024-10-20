@@ -1,7 +1,7 @@
 <?php
     session_start();
     // require("./verificar_admin_funcs.php");
-    require 'subir_imagen.php';
+    require './subir_imagen.php';
     $tipo = $_POST['tipo']; // Depende de que es lo que queramos insertar
 
     require('../../Model/Conexion.php');

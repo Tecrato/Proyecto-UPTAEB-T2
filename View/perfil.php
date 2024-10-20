@@ -186,6 +186,9 @@
 
                                                                         for ($i = 0; $i < count($result); $i++) {
                                                                             $row = $result[$i];
+                                                                            if ($_SESSION['user_id'] == $row['id']) {
+                                                                                continue;
+                                                                            }
                                                                             require('complementos/tabla_usuario.php');
                                                                         }
                                                                         ?>
