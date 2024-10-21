@@ -329,6 +329,13 @@
     width: 175px;
     /* border-radius: 10px; */
 }
+.Plus-supplier{
+    border: 1px solid #ffffff84;
+    /* padding: 10px; */
+    height: 95px;
+    width: 175px;
+    /* border-radius: 10px; */
+}
 .container_config_fact{
     border: 1px solid #ffffff84;
     height: 215px;
@@ -1004,4 +1011,14 @@
     .cont_target_client_controller{
         justify-content: center;
     }
+}
+
+/*-----------------------Estilos de entrys-------------------------------*/
+
+.scroll_entrys::-webkit-scrollbar{
+    width: 5px;
+}
+.scroll_entrys::-webkit-scrollbar-thumb{
+    background: #ffffff;
+    border-radius: 15px;
 }

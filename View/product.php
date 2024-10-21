@@ -431,7 +431,7 @@
                                                                 <label><input class="uk-checkbox check_entrys" type="checkbox"> CREDITO</label>
                                                             </div>
 
-                                                            <div class="Plus-client uk-flex uk-flex-column uk-flex-center uk-flex-middle uk-border-rounded">
+                                                            <div class="Plus-supplier uk-flex uk-flex-column uk-flex-center uk-flex-middle uk-border-rounded">
                                                                 <div id="Client-datails" class="uk-flex uk-flex-column uk-flex-center uk-flex-middle">
                                                                     <div class="uk-flex uk-flex-column uk-flex-middle uk-flex-center pointer" value="default">
                                                                         <h5 class="uk-text-bold uk-margin-remove">AÑADIR PROVEEDOR</h5>
@@ -463,6 +463,18 @@
                                                     </ul>
                                                 </nav>
                                                 <!-- ******************************************************************************  -->
+
+                                                <div class="uk-flex uk-flex-column uk-flex-center uk-margin-medium-left" style="gap: 12px 0px;">
+                                                    <div>
+                                                        <label for="">Fecha de compra</label>
+                                                        <input class="uk-input date_compra_entrys" type="date">
+                                                    </div>
+                                                    <div>
+                                                        <label for="">Descripcion</label>
+                                                        <textarea class="uk-textarea detalles-compra_entry" name="" id="" rows="4"></textarea>
+                                                    </div>
+                                                </div>
+
                                                 <div class="uk-margin-medium-left cont_type_page">
                                                     <div class="container_config_fact uk-border-rounded">
                                                         <section style="width: 350px;">
@@ -499,6 +511,8 @@
 
 
                                                 </div>
+
+
                                             </div>
 
                                             <hr class="uk-divider-icon">
@@ -515,15 +529,16 @@
                                                     </form>
                                                 </div>
 
-                                                <div style="overflow: hidden; height: 280px;">
+                                                <div class="uk-overflow-auto scroll_entrys" style="height: 280px;">
                                                     <table class="uk-table uk-table-divider uk-table-small">
                                                         <thead>
                                                             <tr>
-                                                                <th class="uk-table-shrink" >Prod.</th>
-                                                                <th class="uk-text-truncate">Cant. C</th>
-                                                                <th class="uk-text-truncate">Precio. C</th>
-                                                                <th class="uk-text-truncate">Fecha Adq.</th>
+                                                                <th class="uk-table-shrink">Prod</th>
+                                                                <th class="uk-text-truncate">Tipo Mercancia</th>
+                                                                <th class="uk-text-truncate">Tam. Mercancia</th>
+                                                                <th class="uk-text-truncate">Cantidad</th>
                                                                 <th class="uk-text-truncate">Fecha Venc.</th>
+                                                                <th class="uk-text-truncate">Precio Mercancia</th>
                                                             </tr>
                                                         </thead>
 
@@ -545,11 +560,13 @@
                                                 <table class="uk-table uk-table-hover uk-table-divider uk-table-middle uk-light">
                                                     <thead>
                                                         <tr>
-                                                            <th class="uk-text-truncate">ID</th>
+                                                            <th class="uk-text-truncate">Prod</th>
+                                                            <th class="uk-text-truncate ">Tipo Mercancia</th>
+                                                            <th class="uk-text-truncate">Tam. Mercancia</th>
                                                             <th class="uk-text-truncate">Cantidad</th>
-                                                            <th class="uk-text-truncate">Nombre</th>
-                                                            <th class="uk-text-truncate">Precio unit.</th>
-                                                            <th class="uk-text-truncate">Precio total</th>
+                                                            <th class="uk-text-truncate">Fecha Venc.</th>
+                                                            <th class="uk-text-truncate">Precio</th>
+                                                            <th class="uk-text-truncate">Total a pagar</th>
                                                         </tr>
                                                     </thead>
 
@@ -561,15 +578,6 @@
 
                                             <div class="cont_detail-venta uk-flex uk-flex-right uk-margin-medium-top">
                                                 <div class="Container-fact-price" style="background-color: rgba(51, 51, 51, 0.288);">
-                                                    <div class="uk-flex uk-flex-between">
-                                                        <div class="uk-margin-large-right">SUBTOTAL </div>
-                                                        <div class="uk-flex uk-flex-middle">
-                                                            <p id="subtotalFact" class="Fact-price uk-text-success">0.00</p>
-                                                            <p id="subtotalFact_$" class="Fact-price uk-text-success uk-margin-remove-top uk-margin-small-left">0.00</p>
-                                                        </div>
-                                                    </div>
-
-                                                    <hr class="uk-margin-remove-top">
                                                     <div class="uk-flex uk-flex-between">
                                                         <div class="uk-margin-large-right uk-text-bolder">TOTAL </div>
                                                         <div class="uk-flex uk-flex-middle">

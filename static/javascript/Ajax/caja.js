@@ -46,7 +46,7 @@ $.ajax({
 
 function cargarCajas(page) {
     let data = {}
-    if (parseInt(session_user_rol_num) <= 2 ) {
+    if (parseInt(session_user_rol_num) <= 1 ) {
         data = {randomnautica: "caja", n: page_cajas, limite: 10}
     } else {
         data = {randomnautica: "caja", n: page_cajas, limite: 10, id_usuario: session_user_id}
@@ -57,6 +57,7 @@ function cargarCajas(page) {
         type: "GET",
         data: data,
         success: function (response) {
+            
             let json = JSON.parse(response);
             total_cajas = json['total']
             let template = ""

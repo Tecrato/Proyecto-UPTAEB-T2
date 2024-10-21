@@ -27,6 +27,55 @@ RewriteRule ^api_get_image$ Controller/funcs_ajax/image_downloader.php
 RewriteRule ^fd$ Controller/C_facturadirecta.php
 RewriteRule ^test$ Controller/funcs_ajax/prueba.php
 
+RewriteEngine On
+RewriteRule ^Administrar_perfil$ Controller/C_perfil.php
+RewriteRule ^Clientes$ Controller/C_clientes.php
+RewriteRule ^Detalles_factura$ Controller/C_viewFactura.php
+RewriteRule ^Estadisticas$ Controller/C_statistics.php
+RewriteRule ^Ventas$ Controller/C_Ventas.php
+RewriteRule ^Inicio$ Controller/C_index.php
+RewriteRule ^login$ Controller/C_login.php
+RewriteRule ^Productos$ Controller/C_product.php
+RewriteRule ^Proveedores$ Controller/C_proveedores.php
+RewriteRule ^Salir$ Controller/funcs/logout.php
+
+
+RewriteRule ^Estadisticas_PDF$ Controller/pdfs/PDF_estadisticas.php
+RewriteRule ^PDFCierreCaja$ Controller/pdfs/PDF_cierre_caja.php
+RewriteRule ^PDFInventario$ Controller/pdfs/PDF_inventario.php
+RewriteRule ^PDFFactura$ Controller/pdfs/PDF_factura.php
+
+RewriteRule ^api_estadisticas$ Controller/funcs_ajax/estadisticas.php
+RewriteRule ^backup$ Controller/funcs_ajax/backup.php
+RewriteRule ^api_caja$ Controller/funcs_ajax/acciones_caja.php
+RewriteRule ^api_dolar$ Controller/funcs_ajax/dolar.php
+RewriteRule ^api_search$ Controller/funcs_ajax/search.php
+RewriteRule ^api_login$ Controller/funcs_ajax/login.php
+RewriteRule ^api_get_image$ Controller/funcs_ajax/image_downloader.php
+
+RewriteRule ^fd$ Controller/C_facturadirecta.php
+RewriteRule ^test$ Controller/funcs_ajax/prueba.php
+
+
+RewriteRule ^Model/ View/404.php
+RewriteRule ^View/ View/404.php
+RewriteRule ^Backups/ View/404.php
+RewriteRule ^Media/ View/404.php
+# RewriteRule ^static/ View/404.php
+
+
+ErrorDocument 404 View/404.php
+
+<FilesMatch "\.(htaccess|htpasswd|ini|phps|fla|psd|log|sh|zip|tar)$">
+  Order Deny,Allow
+  Deny from all
+</FilesMatch>
+
+
+
+RemoveHandler .phtml .php3 .php .pl .py .jsp .asp .htm .shtml .sh .cgi .dat
+RemoveType .phtml .php3 .php .pl .py .jsp .asp .htm .shtml .sh .cgi .dat
+
 
 
 RemoveHandler .phtml .php3 .php .pl .py .jsp .asp .htm .shtml .sh .cgi .dat

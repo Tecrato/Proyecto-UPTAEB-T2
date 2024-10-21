@@ -327,6 +327,8 @@ document.getElementById("input-search-fact").addEventListener("keyup", (e) => {
 
 //cargar productos
 function func(dolar) {
+  document.getElementById('Tasa_dolar_fact').textContent = (dolar) + " $"
+
   $.ajax({
     url: "Controller/funcs_ajax/search.php",
     type: "GET",
@@ -346,25 +348,37 @@ function func(dolar) {
           //esta condicion es para que agg el tr, pero modificando el tamaño del input de cantidad, para que se vea bien en versiones mobiles
 
           (dolar);
-          
+
           if (screen >= 1100) {
             tr += `
           <tr value="${producto.id}" class="TR-Product uk-light">
+              <td style="display: none">
+                  <input type="hidden" value="${producto.id}">
+              </td>
               <td class="uk-text-nowrap uk-table-shrink">
-                  <input type="hidden" value="${producto.nombre}">
-                  ${producto.nombre}
+                  <input type="hidden" value="${producto.nombre + " " + producto.valor_unidad + " " + producto.unidad + " " + producto.marca}">
+                  ${producto.nombre + " " + producto.valor_unidad + " " + producto.unidad + " " + producto.marca}
               </td>
               <td>
-                  <input class="uk-input uk-form-width-small disponible" type="number" aria-label="disabled"">
+                  <select class="uk-select" name="" id="">
+                      <option value="Saco">Saco</option>
+                      <option value="Paquete">Paquete</option>
+                      <option value="Bulto">Bulto</option>
+                      <option value="Paca">Paca</option>
+                      <option value="Caja">Caja</option>
+                  </select>
               </td>
               <td>
-                  <input class="uk-input uk-form-width-small" type="number" aria-label="disabled"">
+                  <input class="uk-input uk-form-width-small" type="number" aria-label="disabled"" placeholder="magnitud mercancia">
+              </td>
+              <td>
+                  <input class="uk-input uk-form-width-small State-input-stock" type="text" placeholder="Cantidad" aria-label="Input">
               </td>
               <td>
                   <input class="uk-input uk-form-width-small State-input-stock" type="date" placeholder="Cantidad" aria-label="Input">
               </td>
               <td>
-                  <input class="uk-input uk-form-width-small State-input-stock" type="date" placeholder="Cantidad" aria-label="Input">
+                  <input class="uk-input uk-form-width-small State-input-stock" type="text" placeholder="Precio" aria-label="Input">
               </td>
               <td class="uk-flex uk-flex-center">
                   <button class="uk-icon-button ButtonPlus" uk-icon="plus"></button>
@@ -408,97 +422,42 @@ function func(dolar) {
       //aqui insertamos los tr
       ContainerTr.innerHTML += tr;
 
-      //seleccionamos el input donde el usuario ingresa la cantidad de productos que desea comprar
-      let inputState = document.querySelectorAll(".State-input-stock");
-      inputState.forEach((input) => {
-        //capturamos el evento de pulsar una tecla
-        input.addEventListener("keyup", (e) => {
-          //esta variable guarda la cantidad de stock del producto en esa fila
-          let cantidad = parseInt(input.parentElement.previousElementSibling.previousElementSibling.firstElementChild.value);
-
-
-
-          //esta variable guarda el valor de lo que el usuario teclea
-          let cantidadCliente = parseInt(e.target.value);
-          if (cantidadCliente <= cantidad && cantidadCliente > 0) {
-            input.classList.add("succesc");
-          } else {
-            input.classList.remove("succesc");
-          }
-          if (cantidadCliente > cantidad || cantidadCliente == 0 || /^([a-zA-Z]+)$/.test(e.target.value)) {
-            input.classList.add("danger");
-          } else {
-            input.classList.remove("danger");
-          }
-        });
-      });
 
       //creamos esta funcion que calculara los montos de la factura
       let ActualizarTotal = () => {
         //obtenemos los valores del iva, ya sean true o false
-        let IvaController = document.querySelectorAll(".controller-iva");
-        let PriceExentIva = 0;
-        let PriceNoExentIva = 0;
-        let priceDolar = 0;
+        let IvaController = document.querySelectorAll(".total_pagar_entrys");
+        let priceFinal = 0;
         for (const algo of IvaController) {
-          let IvaStatus = algo.getAttribute("iva");
-          let cantidadProduct = parseFloat(algo.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent)
-          let valor$ = parseFloat(algo.parentElement.nextElementSibling.getAttribute('value') * cantidadProduct)
-          priceDolar += valor$
-          if (IvaStatus == 0) {
-            let precioUndTotal = parseFloat(algo.parentElement.previousElementSibling.textContent);
-            PriceExentIva += precioUndTotal;
-
-          } else {
-            let precioUndTotal = parseFloat(algo.parentElement.previousElementSibling.textContent);
-            PriceNoExentIva += precioUndTotal;
-          }
+          let monto = parseFloat(algo.parentElement.previousElementSibling.textContent)
+          priceFinal += monto
         }
 
-
-
-        // esta varible tendra la suma del total parcial
-        let totalAPagarParcial = PriceExentIva + PriceNoExentIva;
-        //obtenemos el contenedor del subtotal
-        let subtotal = document.getElementById("subtotalFact");
-        let subtotal$ = document.getElementById("subtotalFact_$");
-        //luego su texto sera igual a la variable totalAPagarParcial, mas el tipo de moneda
-        subtotal.textContent = totalAPagarParcial.toFixed(2) + " BS";
-        subtotal$.textContent = priceDolar.toFixed(2) + " $";
-        // //creamos la variable que tendra el iva
-        let iva = PriceNoExentIva * 0.16;
-
-        let TextIva = (document.getElementById("iva").textContent = iva.toFixed(2) + " BS");
-
-
-        //con esta varible obtenemos el total a pagar
-        let totalAPagar = totalAPagarParcial + iva;
-
         //obtenemos el contenedor del total
-        (document.getElementById("totalFact").textContent = totalAPagar.toFixed(2) + " BS");
-        (document.getElementById("totalFact$").textContent = (priceDolar).toFixed(2) + " $");
-        document.querySelector(".amount_MP").textContent = totalAPagar.toFixed(2) + " BS"
+        (document.getElementById("totalFact").textContent = priceFinal.toFixed(2) + " BS");
+        (document.getElementById("totalFact$").textContent = (priceFinal / (dolar)).toFixed(2) + " $");
+        document.querySelector(".amount_MP").textContent = priceFinal.toFixed(2) + " BS"
 
 
-        document.getElementById("IGTF").textContent = "0.00 $"
-        let INP = document.querySelectorAll(".AMOUNT-MP")
-        INP.forEach((B) => {
-          // captamos el evento de keyup, osea si el usuario teclea sobre el input
-          if (B.previousElementSibling.value == "Divisa") {
-            let IGTF = 0;
-            IGTF = parseFloat(B.value) * 0.3
-            if (B.value == "") {
-              document.getElementById("IGTF").textContent = "0.00 $"
-              document.getElementById("totalFact$").textContent = "0.00 $"
-            } else {
-              document.getElementById("IGTF").textContent = IGTF.toFixed(2) + " $"
-              let monto$ = parseFloat(document.getElementById("totalFact$").textContent)
-              monto$ += IGTF
-              document.getElementById("totalFact$").textContent = monto$.toFixed(2) + " $"
-            }
+        // document.getElementById("IGTF").textContent = "0.00 $"
+        // let INP = document.querySelectorAll(".AMOUNT-MP")
+        // INP.forEach((B) => {
+        //   // captamos el evento de keyup, osea si el usuario teclea sobre el input
+        //   if (B.previousElementSibling.value == "Divisa") {
+        //     let IGTF = 0;
+        //     IGTF = parseFloat(B.value) * 0.3
+        //     if (B.value == "") {
+        //       document.getElementById("IGTF").textContent = "0.00 $"
+        //       document.getElementById("totalFact$").textContent = "0.00 $"
+        //     } else {
+        //       document.getElementById("IGTF").textContent = IGTF.toFixed(2) + " $"
+        //       let monto$ = parseFloat(document.getElementById("totalFact$").textContent)
+        //       monto$ += IGTF
+        //       document.getElementById("totalFact$").textContent = monto$.toFixed(2) + " $"
+        //     }
 
-          }
-        })
+        //   }
+        // })
       };
 
       //seleccionamos todos los botones de +, ya que necesitamos agg los valores del tr en la tabla de la derecha
@@ -514,7 +473,6 @@ function func(dolar) {
           let valor = boton.parentElement.parentElement.children;
           //esta variable contiene el nombre del producto, para luego hacer una comprobaciob
           let valor2 = boton.parentElement.parentElement.attributes.value.textContent;
-
           // este array guardara los datos del producto que puso el cliente
           let array = [];
 
@@ -523,114 +481,53 @@ function func(dolar) {
             //por cada vuelta, inserta en el array el valor de los inputs, dentro de cada TD
             array.push(child.firstElementChild.value);
           }
-          let ivaIdentifier = boton.previousElementSibling.value;
-
           let idProducto = valor2;
-          let cantidad = array[3] == "" ? 0 : parseInt(array[3]);
-          let precioUnitario = parseFloat(array[2]);
-          let totalParcial = cantidad * precioUnitario;
+          let cantidad = array[4] == "" ? 0 : parseInt(array[4]);
 
           // Seleccionamos el tbody de la tabla de la derecha
           let tbody = document.getElementById("Detail-product-fact");
           let filas = tbody.getElementsByTagName("tr");
           let existeProducto = false;
 
-          for (let fila of filas) {
-            if (fila.querySelector(".id_trDetail").textContent === idProducto) {
-              // Si el producto ya existe, actualizamos los valores
-              let cantidadExistente = parseInt(fila.children[1].textContent);
-              let nuevaCantidad = cantidadExistente + cantidad;
-              fila.children[1].textContent = nuevaCantidad;  // Actualizamos la cantidad
-              fila.children[4].textContent = (nuevaCantidad * precioUnitario) + " BS";  // Actualizamos el total parcial
-
-              // Restamos la cantidad del stock
-              let idTableDetail = parseInt(fila.children[0].textContent);
-              let StockDisponible = document.querySelectorAll(".stockHeight");
-              StockDisponible.forEach((da) => {
-                if (idTableDetail == parseInt(da.getAttribute("value"))) {
-                  let cantidadUsuario = parseInt(fila.children[1].textContent);
-                  let cantidadStock = parseInt(da.firstElementChild.nextElementSibling.firstElementChild.value);
-                  da.firstElementChild.nextElementSibling.firstElementChild.value = cantidadStock - cantidad;  // Restamos la cantidad del stock
-                  boton.parentElement.previousElementSibling.firstElementChild.classList.remove("succesc");
-                  boton.parentElement.previousElementSibling.firstElementChild.value = "";
-                }
-              });
-
-              existeProducto = true;
-              break;
-            }
-          }
-
           // Si el producto no existe, agregamos una nueva fila
-          if (!existeProducto) {
-            let trDetail = `
+          let trDetail = `
             <tr class="uk-light">
-              <td class="id_trDetail">${idProducto}</td>
+              <td style="display: none">${array[0]}</td>
+              <td class="id_trDetail">${array[1]}</td>
+              <td>${array[2]}</td>
+              <td>${array[3]}</td>
               <td>${cantidad}</td>
-              <td>${array[0]} ${ivaIdentifier == 0 ? "(E)" : ""}</td>
-              <td>${precioUnitario} BS</td>
-              <td class="uk-text-success totalParcial">${totalParcial} BS</td>
+              <td>${array[5]}</td>
+              <td>${array[6]}</td>
+              <td>${cantidad * parseFloat(array[6])} BS</td>
               <td class="uk-flex uk-flex-center">
-                <input class="controller-iva" type="hidden" iva="${array[4]}">
-                <button href="" class="uk-icon-button Btn-delete" uk-icon="trash"></button>
+                <input type="hidden" class="total_pagar_entrys">
+                <button class="uk-icon-button Btn-delete_entrys" uk-icon="trash"></button>
               </td>
-              <td value="${array[5]}" style="display: none;"></td>
             </tr>
           `;
 
-            if (cantidad <= parseInt(array[1]) && cantidad != 0 && array[3] != "") {
-              // A la vez que insertamos datos en la tabla de detalles, también restamos la cantidad que el usuario colocó
-              boton.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.firstElementChild.value -= cantidad;
-              // También quitamos el estilo del input
-              boton.parentElement.previousElementSibling.firstElementChild.classList.remove("succesc");
-              // Además reseteamos el input una vez pulsado el botón de plus
-              boton.parentElement.previousElementSibling.firstElementChild.value = "";
-              // Insertamos los tr con los detalles de los productos solo si se cumplen todas las condiciones
-              tbody.innerHTML += trDetail;
-            }
-          }
           //en esta condicion mostraremos un mensaje si el campo de cantidad esta vacio
-          if (array[3] == "") {
-            boton.parentElement.previousElementSibling.firstElementChild.setAttribute("uk-tooltip", "title: Debe ingresar una cantidad");
-            boton.parentElement.previousElementSibling.firstElementChild.classList.add("tooltip-efect");
+          if (array[3] == "" || array[4] == "" || array[5] == "" || array[6] == "") {
+            boton.setAttribute("uk-tooltip", "title:Los campos no pueden estar vacios");
+            boton.classList.add("tooltip-efect");
             UIkit.tooltip(".tooltip-efect").show();
 
             setTimeout(() => {
-              boton.parentElement.previousElementSibling.firstElementChild.removeAttribute("uk-tooltip");
-              boton.parentElement.previousElementSibling.firstElementChild.classList.remove("tooltip-efect");
+              boton.removeAttribute("uk-tooltip");
+              boton.classList.remove("tooltip-efect");
             }, 800);
-          } else if (parseInt(array[3]) > parseInt(array[1]) || parseInt(array[3]) == 0) {
-            //esta condicion es en caso que la cantidad que ingrese el usuario supere la cantidad en existencia
-            boton.parentElement.previousElementSibling.firstElementChild.setAttribute("uk-tooltip", "title: La cantidad ingresada no es valida");
-            boton.parentElement.previousElementSibling.firstElementChild.classList.add("tooltip-efect");
-            UIkit.tooltip(".tooltip-efect").show();
-
-            setTimeout(() => {
-              boton.parentElement.previousElementSibling.firstElementChild.removeAttribute("uk-tooltip");
-              boton.parentElement.previousElementSibling.firstElementChild.classList.remove("tooltip-efect");
-            }, 800);
-          } else if (/^([a-zA-Z]+)$/.test(array[3])) {
-            boton.parentElement.previousElementSibling.firstElementChild.setAttribute("uk-tooltip", "title: Debe Ingresar solo numeros");
-            boton.parentElement.previousElementSibling.firstElementChild.classList.add("tooltip-efect");
-            UIkit.tooltip(".tooltip-efect").show();
-
-            setTimeout(() => {
-              boton.parentElement.previousElementSibling.firstElementChild.removeAttribute("uk-tooltip");
-              boton.parentElement.previousElementSibling.firstElementChild.classList.remove("tooltip-efect");
-            }, 800);
+          } else if (array[3] != "" && array[4] != "" && array[5] != "" && array[6] != "") {
+            tbody.innerHTML += trDetail;
+            ActualizarTotal()
           }
-
-          let stockHeight =
-            boton.parentElement.parentElement.classList.add("stockHeight");
-          let StockDisponible = document.querySelectorAll(".stockHeight");
 
           //con esta variable guardamos los botones de eliminar de cada tr, de la tabla de la derecha
-          let BtnDelete = document.querySelectorAll(".Btn-delete");
-          let btnStock = parseInt(boton.parentElement.parentElement.getAttribute("value"));
-
+          let BtnDeleteEntrys = document.querySelectorAll(".Btn-delete_entrys");
           //recorremos los botones para obtener la etiqueta html
-          for (const btn of BtnDelete) {
+          for (const btn of BtnDeleteEntrys) {
             btn.addEventListener("click", () => {
+
               //aqui obtenemos el tr del boton que estamos pulsando
               let trash = btn.parentElement.parentElement;
               //seleccionamos el tbody de la tabla de la derecha y removemos al hijo
@@ -639,14 +536,6 @@ function func(dolar) {
               // y luego actualizamos el total a pagar
               ActualizarTotal();
               let idTableDetail = parseInt(btn.parentElement.parentElement.firstElementChild.textContent);
-
-              StockDisponible.forEach((da) => {
-                if (idTableDetail == parseInt(da.getAttribute("value"))) {
-                  let cantidadUsuario = parseInt(btn.parentElement.parentElement.firstElementChild.nextElementSibling.textContent);
-                  let cantidadStock = parseInt(da.firstElementChild.nextElementSibling.firstElementChild.value);
-                  da.firstElementChild.nextElementSibling.firstElementChild.value = cantidadUsuario + cantidadStock;
-                }
-              });
             });
           }
 
@@ -778,6 +667,7 @@ function func(dolar) {
             let btnDeleteMP = document.querySelectorAll(".btn-deleteMP")
             btnDeleteMP.forEach((btn) => {
               btn.addEventListener('click', () => {
+                console.log(btn);
                 //seleccionamos el contenedor de los tipos de pago en la izquierda, y removemos al hijo
                 cont.removeChild(btn.parentElement.parentElement)
 
@@ -792,7 +682,7 @@ function func(dolar) {
                   result += number
                 })
 
-                (btn.parentElement.parentElement.parentElement);
+                  (btn.parentElement.parentElement.parentElement);
 
               })
             })
@@ -802,33 +692,33 @@ function func(dolar) {
 
       //aqui hacemos la funcion para el credito
 
-      let checkCredito = document.querySelector(".credito_check")
-      $('.formCredito').hide()
+      // let checkCredito = document.querySelector(".credito_check")
+      // $('.formCredito').hide()
 
-      let credito = 1
-      checkCredito.addEventListener("change", () => {
+      // let credito = 1
+      // checkCredito.addEventListener("change", () => {
 
-        if (checkCredito.checked == true) {
-          credito = 0
-          $('.cont_metodos_pagos').hide()
-          $('.btn_agg_metodoPago').hide()
-          $('.amount_MP').hide()
-          document.querySelector(".name_MP").textContent = "FECHA DE CREDITO"
-          $('.formCredito').show()
-
-
+      //   if (checkCredito.checked == true) {
+      //     credito = 0
+      //     $('.cont_metodos_pagos').hide()
+      //     $('.btn_agg_metodoPago').hide()
+      //     $('.amount_MP').hide()
+      //     document.querySelector(".name_MP").textContent = "FECHA DE CREDITO"
+      //     $('.formCredito').show()
 
 
 
-        } else {
-          credito = 1
-          $('.cont_metodos_pagos').show()
-          $('.btn_agg_metodoPago').show()
-          $('.amount_MP').show()
-          document.querySelector(".name_MP").textContent = "TIPO DE PAGO"
-          $('.formCredito').hide()
-        }
-      })
+
+
+      //   } else {
+      //     credito = 1
+      //     $('.cont_metodos_pagos').show()
+      //     $('.btn_agg_metodoPago').show()
+      //     $('.amount_MP').show()
+      //     document.querySelector(".name_MP").textContent = "TIPO DE PAGO"
+      //     $('.formCredito').hide()
+      //   }
+      // })
 
 
 
@@ -847,52 +737,52 @@ function func(dolar) {
 
         //este json sera el que se envie al server para insertar los datos de la factura
         let json = {
-          id_usuario: session_user_id,
-          id_cliente: parseInt(idClient),
-          IVA: parseFloat(document.getElementById("iva").textContent).toFixed(2),
-          IGTF: parseFloat(document.getElementById("IGTF").textContent).toFixed(2),
-          monto_final: parseFloat(document.getElementById("totalFact").textContent).toFixed(2),
-          monto_dolar: parseFloat(document.getElementById("totalFact$").textContent),
-          credito: checkCredito.checked,
-          fecha_inicio_credito: document.querySelector('.fecha_inicio_credito').value,
-          fecha_cierre_credito: document.querySelector('.fecha_cierre_credito').value,
-          active: credito,
-          detalles: [],
-          pagos: []
+          proveedor: parseInt(idClient),
+          fecha_compra: document.querySelector(".date_compra_entrys").value,
+          codigo: (Math.random() * 50000).toFixed(0),
+          detalles: document.querySelector(".detalles-compra_entry").value,
+          metodos_pagos: [],
+          lista: [],
         };
 
-        if (tipoPago == 0 && !checkCredito.checked) {
-          btnCreateFact.setAttribute("uk-tooltip", "title:Debe ingresar forma de pago; pos: right;");
-          UIkit.tooltip(".btnCreateFact").show();
+        // if (tipoPago == 0 && !checkCredito.checked) {
+        //   btnCreateFact.setAttribute("uk-tooltip", "title:Debe ingresar forma de pago; pos: right;");
+        //   UIkit.tooltip(".btnCreateFact").show();
 
-          setTimeout(() => {
-            btnCreateFact.removeAttribute("uk-tooltip");
-          }, 1000);
-        } else if (TotalRestar != 0 && !checkCredito.checked) {
-          btnCreateFact.setAttribute("uk-tooltip", "title:Debe ingresar un monto en el pago; pos: right");
-          UIkit.tooltip(".btnCreateFact").show();
-          setTimeout(() => {
-            btnCreateFact.removeAttribute("uk-tooltip");
-          }, 1000);
-        } else if (tableDetailProduct == 0) {
-          btnCreateFact.setAttribute("uk-tooltip", "title:Debe ingresar producto; pos: right");
-          UIkit.tooltip(".btnCreateFact").show();
-          setTimeout(() => {
-            btnCreateFact.removeAttribute("uk-tooltip");
-          }, 1000);
-        } else {
+        //   setTimeout(() => {
+        //     btnCreateFact.removeAttribute("uk-tooltip");
+        //   }, 1000);
+        // } else if (TotalRestar != 0 && !checkCredito.checked) {
+        //   btnCreateFact.setAttribute("uk-tooltip", "title:Debe ingresar un monto en el pago; pos: right");
+        //   UIkit.tooltip(".btnCreateFact").show();
+        //   setTimeout(() => {
+        //     btnCreateFact.removeAttribute("uk-tooltip");
+        //   }, 1000);
+        // } else if (tableDetailProduct == 0) {
+        //   btnCreateFact.setAttribute("uk-tooltip", "title:Debe ingresar producto; pos: right");
+        //   UIkit.tooltip(".btnCreateFact").show();
+        //   setTimeout(() => {
+        //     btnCreateFact.removeAttribute("uk-tooltip");
+        //   }, 1000);
+        // } else {
           let blo = document.getElementById("Detail-product-fact").children;
 
           for (const iterator of blo) {
-            let algo = parseInt(iterator.firstElementChild.textContent);
-            let algo2 = parseInt(iterator.firstElementChild.nextElementSibling.textContent);
-            let algo5 = parseFloat(iterator.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent);
+            let id = iterator.firstElementChild.textContent
+            let precio_compra = iterator.lastElementChild.previousElementSibling.previousElementSibling.textContent
+            let fechaV = iterator.lastElementChild.previousElementSibling.previousElementSibling.previousElementSibling.textContent
+            let mercancia = iterator.firstElementChild.nextElementSibling.nextElementSibling.textContent
+            let t_mercancia = iterator.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent
+            let cantidad_m = iterator.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent
 
-            //insertamos los datos de los productos por cada tr que haya en detalles de factura
-            json.detalles.push({
-              id_product: algo,
-              cantidad: algo2,
-              precio: algo5,
+            // insertamos los datos de los productos por cada tr que haya en detalles de factura
+            json.lista.push({
+              id_product: id,
+              precio_compra: precio_compra,
+              fecha_vencimiento: fechaV,
+              mercancia: mercancia,
+              t_mercancia: t_mercancia,
+              cantidad_mercancia: cantidad_m,
             });
           }
 
@@ -903,7 +793,7 @@ function func(dolar) {
             let valor = e.value
             let monto = e.nextElementSibling.value
 
-            json.pagos.push({
+            json.metodos_pagos.push({
               metodo: valor,
               monto: monto
             });
@@ -912,6 +802,7 @@ function func(dolar) {
 
           //envio de datos con ajax
           //preparamos el json
+          console.log(json);
           let jsonString = JSON.stringify(json);
 
 
@@ -920,7 +811,6 @@ function func(dolar) {
             type: "POST",
             data: { jsonString },
             success: function (response) {
-              targetFact()
               let json = JSON.parse('{' + response.split('{')[1]);
               if (json.error == "Caja Error") {
                 UIkit.notification.closeAll();
@@ -967,7 +857,7 @@ function func(dolar) {
               }
             },
           });
-        }
+        
       });
 
       //con esto hacemos la busqueda de los productos
