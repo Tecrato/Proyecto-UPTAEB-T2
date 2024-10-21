@@ -216,7 +216,6 @@ const renderModelsChart2_1 = () => {
   }
 
   const semana = obtenerInicioYFinSemana();
-  console.log(semana);
 
   function inicializarGrafica(init, finish) {
     $.ajax({

@@ -67,7 +67,7 @@
             $query->execute();
             return $query->fetchAll();
 		}
-        function agregar($usuario, $datos, $pagos, $credito, $fecha_inicio, $fecha_vencimiento,$monto_dolar) {
+        function agregar($datos, $pagos, $credito, $fecha_inicio, $fecha_vencimiento,$monto_dolar) {
             try {
 
                 $this->conn->beginTransaction();
@@ -99,18 +99,17 @@
 
                 if ($credito == true) {
                     $clase5 = new Credito(null, $registro['id'], $fecha_vencimiento, $monto_dolar);
-                    $clase5->agregar($usuario);
+                    $clase5->agregar();
                 }
                 else {
                     for ($i = 0; $i < count($pagos); $i++) {
                         $lista = $pagos[$i];
                         $clase_f = new Pago(null, $registro['id'], $lista->metodo, $lista->monto);
-                        $clase_f->agregar($usuario);
+                        $clase_f->agregar();
                     }
                 }
 
-                $this->add_bitacora($usuario, "registrar_ventas", "agregar", "se agrego una venta");
-                return $this->conn->lastInsertId();
+                return 1;
             } catch (Exception $e) {
                 $this->conn->rollBack();
                 return 0;

@@ -14,28 +14,24 @@
 			return $this->conn->query($query)->fetchAll();
 		}
 
-		function agregar($usuario){
+		function agregar(){
             $query = $this->conn->prepare('INSERT INTO unidades (nombre) VALUES (:nombre)');
             $query->bindParam(':nombre',$this->nombre);
             $query->execute();
-			$this->add_bitacora($usuario,"Unidades","Registrar","Unidad Registrada");
-            return $this->conn->lastInsertId();
         }
 		
-		function borrar($usuario){
+		function borrar(){
             $query = $this->conn->prepare('DELETE FROM unidades WHERE id = :id');
             $query->bindParam(':id',$this->id);
             $query->execute();
-			$this->add_bitacora($usuario,"Unidades","Eliminar","Unidad".$this->id." Eliminada");
         }
 
-		function actualizar($usuario){
+		function actualizar(){
             $query = 'UPDATE unidades SET nombre=:nombre WHERE id=:id';
             $query = $this->conn->prepare($query);
             $query->bindParam(':nombre',$this->nombre);
             $query->bindParam(':id',$this->id);
             $query->execute(); 
-			$this->add_bitacora($usuario,"Unidades","Modificar","Unidad ".$this->id." Modificada");
         }
         function COUNT(){
             return $this->conn->query("SELECT COUNT(*) 'total' FROM usuarios")->fetch()['total'];

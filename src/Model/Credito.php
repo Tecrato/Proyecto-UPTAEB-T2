@@ -18,38 +18,34 @@
             DB::__construct();
         }
 
-        function agregar($usuario){
+        function agregar(){
             $query = $this->conn->prepare("INSERT INTO credito (fecha_limite, id_rv, monto_final, status) VALUES(:fecha_limite, :id_rv, :monto_final,1)");
             $query->bindParam(':id_rv',$this->id_rv, PDO::PARAM_STR);
             $query->bindParam(':fecha_limite',$this->fecha_limite, PDO::PARAM_STR);
             $query->bindParam(':monto_final',$this->monto_final, PDO::PARAM_STR);
             $query->execute();
-            $this->add_bitacora($usuario,"Credito","Registrar","Credito Registrado");
-            return $this->conn->lastInsertId();
         }
 
-        function desactivar($usuario){
+        function desactivar(){
             $query = $this->conn->prepare('UPDATE credito SET active=0 WHERE id=:id');
             $query->bindParam(':id',$this->id);
             $query->execute();
-            $this->add_bitacora($usuario,"Credito","Desactivado","Credito".$this->id." Eliminado");
         }
 
-        function actualizar($usuario){
+        function actualizar(){
             $query = $this->conn->prepare("UPDATE INTO credito (id, fecha_limite, id_rv, monto_final, telefono, active) VALUES(:id, :id_cliente, :fecha_limite, :id_rv, :monto_final,1)");
             $query->bindParam(':id',$this->id, PDO::PARAM_STR);
             $query->bindParam(':id_rv',$this->id_rv, PDO::PARAM_STR);
             $query->bindParam(':fecha_limite',$this->fecha_limite, PDO::PARAM_STR);
             $query->bindParam(':monto_final',$this->monto_final, PDO::PARAM_STR);
             $query->execute();
-            $this->add_bitacora($usuario,"Credito","Modificar","Credito Modificado");
         }
 
         function COUNT(){
             return $this->conn->query("SELECT COUNT(*) as 'total' FROM credito")->fetch()['total'];
         }
 
-        function pagar($usuario,$pagos){
+        function pagar($pagos){
             $query = $this->conn->prepare("UPDATE credito SET status=0 WHERE id_rv=:id");
             $query->bindParam(':id',$this->id_rv);
             $query->execute();
@@ -57,9 +53,8 @@
             for ($i = 0; $i < count($pagos); $i++) {
                 $lista = $pagos[$i];
                 $clase_f = new Pago(null, $this->id_rv, $lista["metodo"], $lista['monto']);
-                $clase_f->agregar($usuario);
+                $clase_f->agregar();
             }
-            $this->add_bitacora($usuario,"Credito","Pagar","Credito".$this->id." Pagado");
         }
 
         function search($n=0,$limite=9){

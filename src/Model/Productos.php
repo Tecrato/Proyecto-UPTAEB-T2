@@ -40,9 +40,114 @@
 
         }
 
-       public function setIdProducto($id){
+        function set_id($id){
             $this->id = $id;
         }
+
+        function set_id_categoria($id_categoria){
+            $this->id_categoria = $id_categoria;
+        }
+
+        function set_id_unidad($id_unidad){
+            $this->id_unidad = $id_unidad;
+        }
+
+        function set_id_marca($id_marca){
+            $this->id_marca = $id_marca;
+        }
+
+        function set_valor_unidad($valor_unidad){
+            $this->valor_unidad = $valor_unidad;
+        }
+
+        function set_nombre($nombre){
+            $this->nombre = $nombre;
+        }
+
+        function set_imagen($imagen){
+            $this->imagen = $imagen;
+        }
+
+        function set_stock_min($stock_min){
+            $this->stock_min = $stock_min;
+        }
+
+        function set_stock_max($stock_max){
+            $this->stock_max = $stock_max;
+        }
+
+        function set_precio_venta($precio_venta){
+            $this->precio_venta = $precio_venta;
+        }
+
+        function set_IVA($IVA){
+            $this->IVA = $IVA;
+        }
+
+        function set_active($active){
+            $this->active = $active;
+        }
+
+        function set_codigo($codigo){
+            $this->codigo = $codigo;
+        }
+
+        function set_algoritmo($algoritmo){
+            $this->algoritmo = $algoritmo;
+        }
+
+        function get_id(){
+            return $this->id;
+        }
+
+        function get_id_categoria(){
+            return $this->id_categoria;
+        }
+
+        function get_id_unidad(){
+            return $this->id_unidad;
+        }
+
+        function get_id_marca(){
+            return $this->id_marca;
+        }
+
+        function get_valor_unidad(){
+            return $this->valor_unidad;
+        }
+
+        function get_nombre(){
+            return $this->nombre;
+        }
+
+        function get_imagen(){
+            return $this->imagen;
+        }
+
+        function get_stock_min(){
+            return $this->stock_min;
+        }
+
+        function get_stock_max(){
+            return $this->stock_max;
+        }
+
+        function get_precio_venta(){
+            return $this->precio_venta;
+        }
+
+        function get_IVA(){
+            return $this->IVA;
+        }
+
+        function get_codigo(){
+            return $this->codigo;
+        }
+
+        function get_algoritmo(){
+            return $this->algoritmo;
+        }
+
         // esta funcion agrega a la tabla productos un objeto con los valores que se le estan pasando
         function agregar(){
             

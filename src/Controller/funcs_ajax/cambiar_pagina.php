@@ -24,8 +24,9 @@
         $vart = new Registro_ventas();
         $todos = $vart->COUNT();
     } elseif ($type == 'bitacora') {
-        $vart = new DB();
-        $todos = $vart->COUNT_bitacora();
+        require('../../Model/Bitacora.php');
+        $vart = new Bitacora();
+        $todos = $vart->COUNT();
     }
 
     if ($dir === 'next' && $page < ceil($todos / $pagination)-1){

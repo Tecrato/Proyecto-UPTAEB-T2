@@ -3,6 +3,7 @@
     require("./verificar_admin_funcs.php");
     require('../../Model/Conexion.php');
     require('../../Model/Permisos.php');
+    require('../../Model/Bitacora.php');
     $tipo = $_POST['tipo']; // Depende de que es lo que queramos borrar
 
 
@@ -33,21 +34,23 @@
         require('../../Model/Productos.php');
         
         $clase = new Proveedor($_POST['ID']); // Llama al modelo y le manda la instruccion
-        $clase->desactivar($_SESSION['user_id']);
+        $clase->desactivar();
+        $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Borrar","Borrado ".$tipo);
+        $clase2->agregar();
+        echo "1";
 
-        header('Location:../../Proveedores');
     }
     elseif ($tipo == 'cliente'){
         require('../../Model/Clientes.php');
         $clase = new Cliente($_POST['ID']);
-        $clase->desactivar($_SESSION['user_id']);
+        $clase->desactivar();
 
         header('Location:../../Clientes');
     }
     elseif ($tipo == 'usuarios'){
         require('../../Model/Usuarios.php');
         $clase = new Usuario($_POST['ID']);
-        $clase->borrar($_SESSION['user_id']);
+        $clase->borrar();
 
         header('Location:../../Administrar_perfil');
     }
@@ -67,26 +70,28 @@
     elseif ($tipo === 'unidad'){
         require('../../Model/Unidades.php');
         $clase = new Unidad($_POST["ID"]);
-        $clase->borrar($_SESSION['user_id']);
+        $clase->borrar();
     }
     elseif ($tipo === 'marca'){
         require('../../Model/Marcas.php');
         $clase = new Marca($_POST["ID"]);
-        $clase->borrar($_SESSION['user_id']);
+        $clase->borrar();
     }
     elseif ($tipo === 'categoria'){
         require('../../Model/Categorias.php');
         $clase = new Categoria($_POST["ID"]);
-        $clase->borrar($_SESSION['user_id']);
+        $clase->borrar();
     }
     elseif ($tipo === 'metodo_pago'){
         require('../../Model/Metodos_pagos.php');
         $clase = new Metodo_pago($_POST["ID"]);
-        $clase->desactivar($_SESSION['user_id']);
+        $clase->desactivar();
     }
     elseif ($tipo === 'permiso'){
         $clase = new Permiso(null,$_POST["id_usuario"],$_POST["tabla"],$_POST["accion"]);
-        $clase->borrar($_SESSION['user_id']);
+        $clase->borrar();
+        $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Borrar","Borrado ".$tipo);
+        $clase2->agregar();
     }
     elseif ($tipo == 'notificaciones'){
         require('../../Model/Notificaciones.php');

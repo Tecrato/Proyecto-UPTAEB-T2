@@ -39,9 +39,6 @@
         require('../../Model/Marcas.php');
         $clase = new Marca();
     }
-    elseif ($_GET['randomnautica'] == "bitacora") {
-        $clase = new DB();
-    }
     elseif ($_GET['randomnautica'] == "ventas") {
         require('../../Model/Registro de ventas.php');
         $clase = new Registro_ventas();
@@ -113,25 +110,28 @@
         require('../../Model/Proveedores.php');
         $clase = new Proveedor(
             id:(isset($_GET['ID']) ? $_GET['ID'] : null),
-            like:(isset($_GET['like']) ? $_GET['like'] : '')
+            like:(isset($_GET['like']) ? $_GET['like'] : ''),
+            active:(isset($_GET['active']) ? $_GET['active'] : 1)
         );
     }
     elseif ($_GET['randomnautica'] == "capital") {  
         require('../../Model/Capital.php');
         $clase = new Capital();
     }
+    elseif ($_GET['randomnautica'] == "bitacora") {
+        $clase = new Bitacora(
+            id:(isset($_GET['ID']) ? $_GET['ID'] : null),
+            id_usuario:(isset($_GET['id_usuario']) ? $_GET['id_usuario'] : null),
+            tabla:(isset($_GET['tabla']) ? $_GET['tabla'] : null),
+            accion:(isset($_GET['accion']) ? $_GET['accion'] : null),
+        );
+    }
 
     
     $count = $clase->COUNT();
 
     if (isset($_GET['subFunction'])) {
-        if ($_GET['subFunction'] == 'bitacora') {
-            if (isset($_GET['ID'])){
-                $count = $clase->COUNT_user($_GET['ID']);
-            }
-            $result = $clase->search_bitacora(id:(isset($_GET['ID']) ? $_GET['ID'] : null),n:$n,limite:$limite);
-        }
-        else if ($_GET['subFunction'] == 'count') {
+        if ($_GET['subFunction'] == 'count') {
             $result = $clase->COUNT();
         }
         else if ($_GET['subFunction'] == 'detallesCapital') {

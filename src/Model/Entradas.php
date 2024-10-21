@@ -21,10 +21,6 @@
             DB::__construct();
         }
 
-        public function setIdProducto($id_producto){
-            $this->id_producto = $id_producto;
-        }
-
 		function agregar(){
 			$query = $this->conn->prepare("INSERT INTO entradas VALUES(null, :id1, :id2, :cantidad, :fecha_compra, :fecha_vencimiento, :precio_compra, :cantidad, 1)");
 

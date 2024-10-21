@@ -6,6 +6,7 @@
 
     require('../../Model/Conexion.php');
     require('../../Model/Permisos.php');
+    require('../../Model/Bitacora.php');
 
     print_r($_POST);
 
@@ -17,7 +18,7 @@
         require('../../Model/Usuarios.php');
         $hash = password_hash($_POST["password"],PASSWORD_DEFAULT);
         $clase = new Usuario(null,$_POST["nombre"],$_POST["correo"],$hash,3,substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, 20)); 
-        $clase->agregar(isset($_SESSION['user_id']) ? $_SESSION['user_id'] : -1);
+        $clase->agregar();
     }
     elseif ($_SESSION['rol_num'] > 1 and count($result) <= 0) {
         echo json_encode(['status' => 'error','error'=>'Permiso Error (bueno ps)']);
@@ -55,7 +56,12 @@
 
     elseif ($tipo === 'lote'){
         require('../../Model/Entradas.php');
-        $clase = new Entrada(null,$_POST["ID"],$_POST["proveedor"],$_POST["cantidad"],$_POST["fecha_c"],$_POST["fecha_v"],$_POST["precio_compra"]); // Llama al modelo y le manda la instruccion
+        
+        for($i = 0; $i < count($_POST["entradas"]); $i++) {
+            $entrada = $_POST["entradas"][$i];
+            $clase = new Entrada(null,$entrada["ID"],$entrada["proveedor"],$entrada["cantidad"],$entrada["fecha_c"],$entrada["fecha_v"],$entrada["precio_compra"]); // Llama al modelo y le manda la instruccion
+            $clase->agregar();
+        }
     }
 
     elseif ($tipo === 'proveedor'){
@@ -96,13 +102,9 @@
     }
 
     if ($tipo != 'producto') {
-        $resultado = $clase->agregar($_SESSION['user_id']);
-        # Verificamos que el resultado sea un numero
-        if (!is_numeric($resultado)) {
-            echo json_encode(['status' => 'error', 'error' => 'Error interno']);
-            exit(0);
-            die();
-        }
+        $clase->agregar();
+        $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Agregar","Agregado ".$tipo);
+        $clase2->agregar();
     }
     echo json_encode(['status' => 'ok', 'message' => 'Entrada agregada correctamente', 'last_insert_id' => $resultado]);
 ?>

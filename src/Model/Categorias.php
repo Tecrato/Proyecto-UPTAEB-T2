@@ -10,12 +10,10 @@
 			$this->nombre = $nombre;
 		}
 
-        function agregar($usuario){
+        function agregar(){
             $query = $this->conn->prepare("INSERT INTO categoria VALUES(null, :nombre)");
             $query->bindParam(':nombre',$this->nombre);
             $query->execute();
-			$this->add_bitacora($usuario,"Categorias","Registrar","Categoria Registrada");
-            return $this->conn->lastInsertId();
         }
 
         function search($n=0,$limite=100){
@@ -40,20 +38,18 @@
             return $consulta->fetchAll();
         }
 
-        function borrar($usuario){
+        function borrar(){
             $query = $this->conn->prepare('DELETE FROM categoria WHERE id = :id');
             $query->bindParam(':id',$this->id);
             $query->execute();
-			$this->add_bitacora($usuario,"Categorias","Eliminar","Categoria".$this->id." Eliminada");
         }
 
-        function actualizar($usuario){
+        function actualizar(){
             $query = 'UPDATE categoria SET nombre=:nombre WHERE id=:id';
             $query = $this->conn->prepare($query);
             $query->bindParam(':nombre',$this->nombre);
             $query->bindParam(':id',$this->id);
             $query->execute(); 
-			$this->add_bitacora($usuario,"Categorias","Modificar","Categoria ".$this->id." Modificada");
         }
 
         function COUNT(){

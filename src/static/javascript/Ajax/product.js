@@ -403,7 +403,7 @@ const tarjetas = (response, cont) => {
     <div class="uk-card uk-card-default uk-background-secondary uk-light uk-border-rounded">
         <div class="uk-visible-toggle" tabindex="-1">
             <article class="uk-transition-toggle">
-                <img src="src/Media/imagenes/${item.imagen
+                <img src="Media/imagenes/${item.imagen
       }"" alt="" class="img_product" width="150px" style="object-fit: cover; height: 215px;">
                 <div class="uk-position-top-right uk-transition-fade uk-position-small">
                     <a href="#modal-details-product" uk-toggle class="btnDetails" data-id="${item.id

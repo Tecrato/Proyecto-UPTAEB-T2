@@ -19,7 +19,38 @@ class Caja extends DB{
         $query->bindParam(':id_usuario', $this->id_usuario, PDO::PARAM_INT);
         $query->bindParam(':monto_inicial', $this->monto_inicial, PDO::PARAM_INT);
         $query->execute();
-        $this->add_bitacora($this->id_usuario, "Caja", "Abriendo", "Caja abierta");
+    }
+
+    function set_id($id){
+        $this->id = $id;
+    }
+
+    function set_monto_inicial($monto){
+        $this->monto_inicial = $monto;
+    }
+
+    function set_monto_final($monto){
+        $this->monto_final = $monto;
+    }
+
+    function set_estado($estado){
+        $this->estado = $estado;
+    }
+
+    function get_id(){
+        return $this->id;
+    }
+
+    function get_monto_inicial(){
+        return $this->monto_inicial;
+    }
+
+    function get_monto_final(){
+        return $this->monto_final;
+    }
+
+    function get_estado(){
+        return $this->estado;
     }
 
     function search($n = 0, $limite = 100, $order = ' id DESC '){

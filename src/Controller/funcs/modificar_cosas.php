@@ -3,6 +3,7 @@
     require("./verificar_admin_funcs.php");
     require('../../Model/Conexion.php');
     require('../../Model/Permisos.php');
+    require('../../Model/Bitacora.php');
     require 'subir_imagen.php';
     $tipo = $_POST['tipo']; // Depende de que es lo que queramos actualizar
 
@@ -50,18 +51,18 @@
     elseif ($tipo === 'proveedor'){
         require('../../Model/Proveedores.php');
         $clase = new Proveedor($_POST["ID"],$_POST["nombre"],$_POST["razon_social"],$_POST["T-D"]."-".$_POST["rif"],$_POST["TLFNO"],$_POST["correo"],$_POST["direccion"]); // Llama al modelo y le manda la instruccion
-        $clase->actualizar($_SESSION['user_id']);
+        $clase->actualizar();
     }
     elseif ($tipo === 'cliente'){
         require('../../Model/Clientes.php');
         $clase = new Cliente($_POST["ID"],$_POST["nombre"],$_POST["cedula"],$_POST["apellido"],$_POST["documento"],$_POST["direccion"],$_POST["TLFNO"]);
-        $clase->actualizar($_SESSION['user_id']);
+        $clase->actualizar();
     }
     elseif ($tipo === 'usuario'){
         require('../../Model/Usuarios.php');
         $pass = isset($_POST["password"]) ? password_hash($_POST["password"],PASSWORD_DEFAULT) : null;
         $clase = new Usuario($_POST["ID"],$_POST["nombre"],$_POST["correo"],$pass,isset($_POST["rol"]) ? $_POST["rol"] : null, $_POST["semilla"]); 
-        $clase->actualizar($_SESSION['user_id']);
+        $clase->actualizar();
 
         if (isset($_POST['self'])) {
             session_start();
@@ -74,28 +75,31 @@
     elseif ($tipo === 'marca'){
         require('../../Model/Marcas.php');
         $clase = new Marca($_POST["ID"],$_POST["nombre"]);
-        $clase->actualizar($_SESSION['user_id']);
+        $clase->actualizar();
     }
     elseif ($tipo === 'unidad'){
         require('../../Model/Unidades.php');
         $clase = new Unidad($_POST["ID"],$_POST["nombre"]);
-        $clase->actualizar($_SESSION['user_id']);
+        $clase->actualizar();
     }
     elseif ($tipo === 'categoria'){
         require('../../Model/Categorias.php');
         $clase = new Categoria($_POST["ID"],$_POST["nombre"]);
-        $clase->actualizar($_SESSION['user_id']);
+        $clase->actualizar();
     }
     elseif ($tipo === 'metodo_pago'){
         require('../../Model/Metodos_pagos.php');
         $clase = new Metodo_pago($_POST["ID"],$_POST["nombre"]);
-        $clase->actualizar($_SESSION['user_id'], $_POST["ID"]);
+        $clase->actualizar();
     }
     elseif ($tipo === 'configuraciones'){
         require('../../Model/Configuraciones.php');
         $clase = new Configuracion($_POST["llave"],$_POST["valor"]);
-        $clase->actualizar($_SESSION['user_id']);
+        $clase->actualizar();
     }
+    
+    $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Modificar","Modificado ".$tipo);
+    $clase2->agregar();
     
     echo json_encode(['status' => 'active']);
 ?>

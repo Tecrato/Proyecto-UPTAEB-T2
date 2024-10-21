@@ -28,7 +28,7 @@
         }
 
         // esta funcion agrega a la tabla productos un objeto con los valores que se le estan pasando
-        function agregar($usuario) {
+        function agregar() {
             
             $query = $this->conn->prepare("INSERT INTO proveedores VALUES(null, :nombre, :razon, :rif, :tel, :correo, :dir,1)");
 
@@ -39,21 +39,19 @@
             $query->bindParam(':correo',$this->correo);
             $query->bindParam(':dir',$this->direccion);
             $query->execute();
-            $this->add_bitacora($usuario,"Proveedores","Registrar","Proveedor Registrado");
             return $this->conn->lastInsertId();
         }
 
         // con esta funcion se elimina un elemento dependiendo de su id
-        function desactivar($usuario) {
+        function desactivar() {
 			$query = $this->conn->prepare('UPDATE proveedores SET active=0 WHERE id=:id');
 
 			$query->bindParam(':id',$this->id);
 			$query->execute();
-            $this->add_bitacora($usuario,"Proveedor","Desactivado","Proveedor".$this->id." Eliminado");
         }
 
         // Con esta funcion podremos cambiar un producto segun su ID con los valores que le pasemos
-        function actualizar($usuario) {
+        function actualizar() {
             
             $query = $this->conn->prepare("UPDATE proveedores SET nombre=:nombre, razon_social=:razon_social, rif=:rif, telefono=:tel, correo=:correo, direccion=:dir WHERE ID=:id");
         
@@ -65,7 +63,6 @@
             $query->bindParam(':dir',$this->direccion);
             $query->bindParam(':id',$this->id);
             $query->execute();
-            $this->add_bitacora($usuario,"Proveedor","Modificar","Proveedor ".$this->id." Modificado");
         }
 
         // Con esta otra funcion se busca entre los productos en la base de datos

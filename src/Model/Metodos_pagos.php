@@ -11,25 +11,21 @@
 
         }
 
-        function agregar($usuario){
+        function agregar(){
             $query = $this->conn->prepare("INSERT INTO metodo_pago VALUES(null, :nombre,1)");
             $query->bindParam(':nombre',$this->nombre);
             $query->execute();
-			$this->add_bitacora($usuario,"Metodos de Pago","Registrar","Metodo de Pago Registrado");
-            return $this->conn->lastInsertId();
         }
-        function borrar($usuario) {
+        function borrar() {
             $query = $this->conn->prepare("DELETE FROM metodo_pago WHERE ID=:id");
             $query->bindParam(':id',$this->id, PDO::PARAM_INT);
             $query->execute();
-			$this->add_bitacora($usuario,"Marcas","Eliminar","Marca".$this->id." Eliminada");
         }
 
-        function desactivar($usuario){
+        function desactivar(){
 			$query = $this->conn->prepare('UPDATE metodo_pago SET active=0 WHERE id=:id');
 			$query->bindParam(':id',$this->id);
 			$query->execute();
-			$this->add_bitacora($usuario,"Metodo de Pago","Eliminar","Metodo de Pago".$this->id. " Eliminado");
         }
         function search($n=0,$limite=9){
             $query = "SELECT * FROM metodo_pago";
@@ -53,13 +49,12 @@
             $consulta->execute();
             return $consulta->fetchAll();
         }
-        function actualizar($usuario){
+        function actualizar(){
             $query = 'UPDATE metodo_pago SET nombre=:nombre WHERE id=:id';
             $query = $this->conn->prepare($query);
             $query->bindParam(':nombre',$this->nombre);
             $query->bindParam(':id',$this->id);
             $query->execute();
-			$this->add_bitacora($usuario,"Metodo de Pago","Modificar","Metodo de Pago ".$this->id." Modificado");
         }
 
         function COUNT(){

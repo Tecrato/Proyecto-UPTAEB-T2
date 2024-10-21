@@ -15,22 +15,19 @@
 
         }
 
-        function agregar($usuario){
+        function agregar(){
             $query = $this->conn->prepare("INSERT INTO permisos(id_usuario,tabla,permiso) VALUES(:id_usuario,:tabla,:permiso)");
             $query->bindParam(':id_usuario',$this->id_usuario);
             $query->bindParam(':tabla',$this->tabla);
             $query->bindParam(':permiso',$this->permiso);
             $query->execute();
-			$this->add_bitacora($usuario,"Permisos","Registrar","Permiso Registrado");
-            return $this->conn->lastInsertId();
         }
-        function borrar($usuario) {
+        function borrar() {
             $query = $this->conn->prepare("DELETE FROM permisos WHERE id_usuario=:id_usuario AND tabla=:tabla AND permiso=:permiso");
             $query->bindParam(':id_usuario',$this->id_usuario);
             $query->bindParam(':tabla',$this->tabla);
             $query->bindParam(':permiso',$this->permiso);
             $query->execute();
-			$this->add_bitacora($usuario,"Permisos","Eliminar","Permiso".$this->id. " Eliminado");
         }
         function search($n=0,$limite=9){
             $query = "SELECT a.id, a.id_usuario, b.nombre as nombre, a.tabla, a.permiso FROM permisos as a

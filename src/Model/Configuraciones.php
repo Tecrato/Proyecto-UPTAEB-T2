@@ -9,14 +9,13 @@
             $this->key = $key;
 		}
 
-        function actualizar($usuario) {
+        function actualizar() {
             
             $query = "UPDATE configuraciones SET valor=:valor WHERE llave=:llave";
             $query = $this->conn->prepare($query);
             $query->bindParam(':valor',$this->value, PDO::PARAM_STR);
             $query->bindParam(':llave',$this->key, PDO::PARAM_STR);
             $query->execute();
-			$this->add_bitacora($usuario,"Configuraciones","Modificar","Configuracion $this->key Modificada");
 
         }
         function search($n=0, $limite=9) {

@@ -22,7 +22,7 @@
 
         }
 
-        function agregar($usuario = 0){
+        function agregar(){
             $query = $this->conn->prepare("INSERT INTO usuarios (nombre, correo, hash, rol,semilla) VALUES(:nombre, :correo, :hash, :rol,:semilla)");
             
             $query->bindParam(':nombre',$this->nombre, PDO::PARAM_STR);
@@ -31,18 +31,14 @@
             $query->bindParam(':rol',$this->rol, PDO::PARAM_STR);
             $query->bindParam(':semilla',$this->semilla, PDO::PARAM_STR);
             $query->execute();
-            $this->add_bitacora($usuario,"Usuarios","Registrar","Usuario Registrado");
-            return $this->conn->lastInsertId();
         }
 
 
-
-        function borrar($usuario) {
+        function borrar() {
 
             $query = $this->conn->prepare("DELETE FROM usuarios WHERE ID=:id");
             
             $query->execute([':id'=>$this->id]);
-            $this->add_bitacora($usuario,"Usuarios","Eliminados","Usuario".$this->id." Eliminado");
         }
         function search($n=0,$limite=9){
             // Al igual que la clase anterior, puede buscar segun muchos valores o solo algunos
@@ -86,7 +82,7 @@
             $consulta->execute();
             return $consulta->fetchAll();
         }
-        function actualizar($usuario){
+        function actualizar(){
             $query = 'UPDATE usuarios SET nombre=:nombre, correo=:correo, hash=:pass';
             if ($this->rol) {
                 $query .= ', rol=:rol';
@@ -103,20 +99,17 @@
             }
 
             $query->execute(); 
-            $this->add_bitacora($usuario,"Usuario","Modificar","Usuario "."$id"." Modificado");
         }
-        public function login($usuario){
+        public function login(){
             $query = $this->conn->prepare('UPDATE usuarios SET active=1 , sesion_id=:sesion_id WHERE id=:id');
             $query->bindParam(':id',$this->id);
             $query->bindParam(':sesion_id', $this->sesion_id);
             $query->execute();
-            $this->add_bitacora($usuario,"Usuarios","Login","Usuario ".$this->nombre." logueado");
         }
-        function logout($usuario) {
+        function logout() {
             $query = $this->conn->prepare('UPDATE usuarios SET active=0 WHERE id=:id');
             $query->bindParam(':id',$this->id);
             $query->execute(); 
-            $this->add_bitacora($usuario,"Usuarios","Logout","Usuario ".$this->nombre." des-logueado");
         }
         function COUNT(){
             return $this->conn->query("SELECT COUNT(*) 'total' FROM usuarios")->fetch()['total'];
@@ -142,7 +135,6 @@
             $consulta->bindParam(':id',$this->id, PDO::PARAM_STR);
             $consulta->bindParam(':rol',$this->rol, PDO::PARAM_STR);
             $consulta->execute();
-            $this->add_bitacora($this->id,"Usuarios","Modifcar","Usuario ".$this->nombre." Cambio de rol");
         }
 }       
 

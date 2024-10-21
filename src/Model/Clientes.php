@@ -24,7 +24,7 @@
             DB::__construct();
         }
 
-        function agregar($usuario){
+        function agregar(){
             $query = $this->conn->prepare("INSERT INTO clientes (nombre, cedula, apellido, documento, direccion, telefono, active) VALUES(:nombre, :cedula, :apellido, :documento, :direccion, :telefono,1)");
             $query->bindParam(':nombre',$this->nombre, PDO::PARAM_STR);
             $query->bindParam(':cedula',$this->cedula, PDO::PARAM_STR);
@@ -33,18 +33,15 @@
             $query->bindParam(':direccion',$this->direccion, PDO::PARAM_STR);
             $query->bindParam(':telefono',$this->telefono, PDO::PARAM_STR);
             $query->execute();
-            $this->add_bitacora($usuario,"Cliente","Registrar","Cliente Registrado");
-            return $this->conn->lastInsertId();
         }
 
-        function desactivar($usuario){
+        function desactivar(){
 			$query = $this->conn->prepare('UPDATE clientes SET active=0 WHERE id=:id');
 			$query->bindParam(':id',$this->id);
 			$query->execute();
-			$this->add_bitacora($usuario,"Cliente","Eliminar","Cliente".$this->id." Eliminado");
         }
 
-        function actualizar($usuario){
+        function actualizar(){
             $query = $this->conn->prepare("UPDATE clientes SET nombre=:nombre, cedula=:cedula, documento=:documento, apellido=:apellido, Telefono=:telefono, direccion=:direccion WHERE id=:id");
             $query->bindParam(':nombre',$this->nombre);
             $query->bindParam(':cedula',$this->cedula);
@@ -53,7 +50,6 @@
             $query->bindParam(':telefono',$this->telefono);
             $query->bindParam(':direccion',$this->direccion);
             $query->bindParam(':id',$this->id);
-			$this->add_bitacora($usuario,"Cliente","Modificar","Cliente ".$this->id." Modificado");
             return $query->execute(); 
         }
 

@@ -5,8 +5,6 @@ function newNotification() {
         type: "GET",
         data: { randomnautica: "notificaciones", status: 1 , subFunction: 'count'},
         success: function (response) {
-            console.log(response);
-            
             let json = JSON.parse(response);
             let badge = document.querySelector(".uk-badge");
             badge.textContent = json.lista;
