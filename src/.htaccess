@@ -28,11 +28,15 @@ RewriteRule ^PDFCierreCaja$ Controller/pdfs/PDF_cierre_caja.php
 RewriteRule ^PDFInventario$ Controller/pdfs/PDF_inventario.php
 RewriteRule ^PDFFactura$ Controller/pdfs/PDF_factura.php
 
+RewriteRule ^api_search$ Controller/funcs_ajax/search.php
+RewriteRule ^api_agregar$ Controller/funcs_ajax/agregar_cosas.php
+RewriteRule ^api_editar$ Controller/funcs_ajax/modificar_cosas.php
+RewriteRule ^api_eliminar$ Controller/funcs_ajax/borrar_cosas.php
+
+
 RewriteRule ^api_estadisticas$ Controller/funcs_ajax/estadisticas.php
 RewriteRule ^backup$ Controller/funcs_ajax/backup.php
 RewriteRule ^api_caja$ Controller/funcs_ajax/acciones_caja.php
-RewriteRule ^api_dolar$ Controller/funcs_ajax/dolar.php
-RewriteRule ^api_search$ Controller/funcs_ajax/search.php
 RewriteRule ^api_login$ Controller/funcs_ajax/login.php
 RewriteRule ^api_get_image$ Controller/funcs_ajax/image_downloader.php
 
@@ -44,14 +48,6 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ /Proyecto-UPTAEB-T2/src/View/404.php
 
 RewriteRule ^Model/$ View/404.php [NC]
-# RewriteRule ^Modelos/$ /Proyecto-UPTAEB-T2/src/Model/
-# RewriteRule ^View/$ View/404.php
-# RewriteRule ^View/$ View/404.php
-# RewriteRule ^Backups/$ View/404.php
-# RewriteRule ^Media/$ View/404.php
-# RewriteRule ^static/$ View/404.php
-
-# RewriteRule ^(.*)$ View/404.php
 
 
 <FilesMatch "\.(htaccess|htpasswd|ini|phps|fla|psd|log|sh|zip|tar)$">

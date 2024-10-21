@@ -56,6 +56,8 @@
 
     elseif ($tipo === 'lote'){
         require('../../Model/Entradas.php');
+
+        $compra = $_POST["compra"];
         
         for($i = 0; $i < count($_POST["entradas"]); $i++) {
             $entrada = $_POST["entradas"][$i];

@@ -40,18 +40,51 @@
             b.id,
             u.id id_usuario,
             u.nombre,
-            u.apellido,
             b.tabla,
             b.accion,
-            b.detalles
+            b.detalles,
+            b.fecha
             FROM bitacora b
             INNER JOIN usuarios u ON b.id_usuario = u.id
             WHERE 1
             ";
 
+            $lista = [];
+
+            if ($this->id){
+                array_push($lista,'id');
+            }
+            if ($this->id_usuario){
+                array_push($lista, 'id_usuario');
+            }
+            if ($this->tabla){
+                array_push($lista, 'tabla');
+            }
+            if ($this->accion){
+                array_push($lista, 'accion');
+            }
+            if ($lista) {
+                foreach ($lista as $e){
+                    $query .= ' AND b.'.$e.'=:'.$e;
+                }
+            }
+
             $n = $n*$limite;
             $query = $query . " LIMIT :l OFFSET :n";
             $consulta = $this->conn->prepare($query);
+
+            if ($this->id){
+                $consulta->bindParam(':id',$this->id, PDO::PARAM_INT);
+            }
+            if ($this->id_usuario){
+                $consulta->bindParam(':id_usuario',$this->id_usuario, PDO::PARAM_INT);
+            }
+            if ($this->tabla){
+                $consulta->bindParam(':tabla',$this->tabla, PDO::PARAM_STR);
+            }
+            if ($this->accion){
+                $consulta->bindParam(':accion',$this->accion, PDO::PARAM_STR);
+            }
 
 
             $consulta->bindParam(':l',$limite, PDO::PARAM_INT);

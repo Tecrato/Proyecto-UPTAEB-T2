@@ -7,6 +7,7 @@
     require('../../Model/Usuarios.php');
     include("../funcs/verificar.php");
     require('../../Model/Permisos.php');
+    require('../../Model/Bitacora.php');
 
 
     $limite = isset($_GET['limite']) ? intval($_GET['limite']) : 50;
@@ -132,7 +133,7 @@
 
     if (isset($_GET['subFunction'])) {
         if ($_GET['subFunction'] == 'count') {
-            $result = $clase->COUNT();
+            $result = $count;
         }
         else if ($_GET['subFunction'] == 'detallesCapital') {
             $result = $clase->detallesCapital();
