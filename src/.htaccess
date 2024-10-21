@@ -5,6 +5,9 @@ ErrorDocument 404 /Proyecto-UPTAEB-T2/src/View/404.php
 
 RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/Model/
 RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/View/
+RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/Backups/
+RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/Plugins/
+# RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/Media/
 # RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/static/
 
 RewriteRule ^(Inicio)?$ Controller/C_index.php
