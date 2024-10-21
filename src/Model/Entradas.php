@@ -56,7 +56,7 @@
                     print_r($entrada);
                 }
                 print_r("Tecnicamente, todo ha ido bien");
-                return 1;
+                return $last_id;
             } catch (Exception $e) {
                 print_r($e);
                 $this->conn->rollBack();
