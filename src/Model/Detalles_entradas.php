@@ -23,7 +23,7 @@
             DB::__construct();
         }
 
-		function agregar($transaccion = false){
+		function agregar($transaccion = true){
             echo "iniciando agregar";
 			$query = $this->conn->prepare("INSERT INTO entradas_2 VALUES(null, :id1, :mercancia, :tm, :precio_compra, :id2, :fecha_vencimiento, :cantidad, :existencia)");
             

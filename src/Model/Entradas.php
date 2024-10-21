@@ -32,7 +32,7 @@
                 $query->execute();
                 $last_id = $this->conn->lastInsertId();
 
-                echo "123123";
+                $this->conn->commit();
                 
                 for ($i = 0; $i < count($lista); $i++) {
                     $entrada = $lista[$i];
@@ -55,7 +55,7 @@
                     echo "<br> <h1> entrada $i terminada</h1>";
                     print_r($entrada);
                 }
-                $this->conn->commit();
+                print_r("Tecnicamente, todo ha ido bien");
                 return 1;
             } catch (Exception $e) {
                 print_r($e);
