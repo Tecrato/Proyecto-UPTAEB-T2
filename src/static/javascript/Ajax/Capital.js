@@ -15,7 +15,7 @@ $(".pag-btn-movimiento-capital").click((ele) => {
 function fetchCapital(page){
     page_mov_capital = page
     $.ajax({
-        url: "Controller/funcs_ajax/search.php",
+        url: "api_search",
         type: "GET",
         data: { randomnautica: "capital", n: page_mov_capital, limite: 10},
         success: function (response) {
@@ -42,7 +42,7 @@ fetchCapital(0)
 
 function detailsCapital(){
     $.ajax({
-        url: "Controller/funcs_ajax/search.php",
+        url: "api_search",
         type: "GET",
         data: {randomnautica: "capital", subFunction: "detallesCapital"},
         success: function (response) {

@@ -1,6 +1,6 @@
 const MarcasTable = () => {
     $.ajax({
-        url: "Controller/funcs_ajax/search.php",
+        url: "api_search",
         type: "GET",
         data: { randomnautica: "marcas" },
         success: function (response) {

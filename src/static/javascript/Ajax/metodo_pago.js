@@ -9,7 +9,7 @@ document.querySelector(".btnAggMetodo").addEventListener("click", () => {
 
 const cargarMetodosPago = () => {
     $.ajax({
-        url: "Controller/funcs_ajax/search.php",
+        url: "api_search",
         type: "GET",
         data: { randomnautica: "metodo_pago"},
         success: function (response) {

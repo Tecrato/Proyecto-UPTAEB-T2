@@ -1,6 +1,6 @@
 const cargarPermisos = () => {
     $.ajax({
-        url: "Controller/funcs_ajax/search.php",
+        url: "api_search",
         type: "GET",
         data: { randomnautica: "permiso", limite: 10 },
         success: function (response) {
@@ -23,7 +23,7 @@ const cargarPermisos = () => {
 cargarPermisos()
 
 $.ajax({
-    url: "Controller/funcs_ajax/search.php",
+    url: "api_search",
     type: "GET",
     data: { randomnautica: "usuario" },
     success: function (response) {
@@ -92,7 +92,7 @@ select_ID.addEventListener("change", () => {
     });
 
     $.ajax({
-        url: "Controller/funcs_ajax/search.php",
+        url: "api_search",
         type: "GET",
         data: { randomnautica: "permiso", ID: id_user, limite: 500 },
         success: function (response) {

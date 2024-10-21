@@ -1,6 +1,6 @@
 //se hace una consulta ajax para traer los datos de la factura
 $.ajax({
-  url: "Controller/funcs_ajax/search.php",
+  url: "api_search",
   type: "GET",
   data: { randomnautica: "ventas" , limite:20},
   success: function (response) {

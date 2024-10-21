@@ -130,7 +130,7 @@ const ModalEdit = () => {
       let id = b.getAttribute("id")
       document.querySelector(".ValueInpUpdateClient").setAttribute("value", id);
       $.ajax({
-        url: "Controller/funcs_ajax/search.php",
+        url: "api_search",
         type: "GET",
         data: { randomnautica: "clientes", ID: id },
         success: function (response) {
@@ -175,7 +175,7 @@ const ModalEdit = () => {
 function cardClient(page) {
   page_clientes = page
   $.ajax({
-    url: "Controller/funcs_ajax/search.php",
+    url: "api_search",
     type: "GET",
     data: { randomnautica: "clientes", n: page_clientes, limite: 6 },
     success: function (response) {

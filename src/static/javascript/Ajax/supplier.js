@@ -133,7 +133,7 @@ const ModalEdit = () => {
       document.querySelector(".ValueInpUpdateProv").setAttribute("value", id);
 
       $.ajax({
-        url: "Controller/funcs_ajax/search.php",
+        url: "api_search",
         type: "GET",
         data: { randomnautica: "proveedores", active: 1, ID: id },
         success: function (response) {
@@ -179,7 +179,7 @@ const ModalEdit = () => {
 function cardProv(page) {
   page_proveedores = page
   $.ajax({
-    url: "Controller/funcs_ajax/search.php",
+    url: "api_search",
     type: "GET",
     data: { randomnautica: "proveedores", n: page_proveedores, limite: 6, active: 1 },
     success: function (response) {

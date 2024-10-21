@@ -31,7 +31,7 @@ const checkCaja = () => {
 }
 
 $.ajax({
-    url: "Controller/funcs_ajax/search.php",
+    url: "api_search",
     type: "GET",
     data: { randomnautica: "usuario" },
     success: function (response) {
@@ -53,7 +53,7 @@ function cargarCajas(page) {
     }
     page_cajas = page
     $.ajax({
-        url: "Controller/funcs_ajax/search.php",
+        url: "api_search",
         type: "GET",
         data: data,
         success: function (response) {

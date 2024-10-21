@@ -134,7 +134,7 @@ try {
 
 function DOLAR_RV(func) {
   $.ajax({
-    url: "Controller/funcs_ajax/search.php",
+    url: "api_search",
     type: "GET",
     data: { randomnautica: "configuraciones", llave: "dolar" },
     success: function (response) {
@@ -147,7 +147,7 @@ function DOLAR_RV(func) {
 
 function DOLAR_DB(id) {
   $.ajax({
-    url: "Controller/funcs_ajax/search.php",
+    url: "api_search",
     type: "GET",
     data: { randomnautica: "configuraciones", llave: "dolar" },
     success: function (response) {
@@ -174,7 +174,7 @@ function PermisosG(btnEdit, btnDelete, tabla, btnAgg, T) {
 
 
   $.ajax({
-    url: "Controller/funcs_ajax/search.php",
+    url: "api_search",
     type: "GET",
     data: { randomnautica: "permiso", ID: session_user_id },
     success: function (response) {

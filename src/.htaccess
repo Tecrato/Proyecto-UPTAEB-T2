@@ -1,10 +1,19 @@
 RewriteEngine On
+
+ErrorDocument 404 /Proyecto-UPTAEB-T2/src/View/404.php
+
+
+RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/Model/
+RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/View/
+# RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/static/
+
+RewriteRule ^(Inicio)?$ Controller/C_index.php
+
 RewriteRule ^Administrar_perfil$ Controller/C_perfil.php
 RewriteRule ^Clientes$ Controller/C_clientes.php
 RewriteRule ^Detalles_factura$ Controller/C_viewFactura.php
 RewriteRule ^Estadisticas$ Controller/C_statistics.php
 RewriteRule ^Ventas$ Controller/C_Ventas.php
-RewriteRule ^Inicio$ Controller/C_index.php
 RewriteRule ^login$ Controller/C_login.php
 RewriteRule ^Productos$ Controller/C_product.php
 RewriteRule ^Proveedores$ Controller/C_proveedores.php
@@ -27,15 +36,20 @@ RewriteRule ^api_get_image$ Controller/funcs_ajax/image_downloader.php
 RewriteRule ^fd$ Controller/C_facturadirecta.php
 RewriteRule ^test$ Controller/funcs_ajax/prueba.php
 
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /Proyecto-UPTAEB-T2/src/View/404.php
 
-RewriteRule ^Model/ View/404.php
-RewriteRule ^View/ View/404.php
-RewriteRule ^Backups/ View/404.php
-RewriteRule ^Media/ View/404.php
-RewriteRule ^static/ View/404.php
+RewriteRule ^Model/$ View/404.php [NC]
+# RewriteRule ^Modelos/$ /Proyecto-UPTAEB-T2/src/Model/
+# RewriteRule ^View/$ View/404.php
+# RewriteRule ^View/$ View/404.php
+# RewriteRule ^Backups/$ View/404.php
+# RewriteRule ^Media/$ View/404.php
+# RewriteRule ^static/$ View/404.php
 
+# RewriteRule ^(.*)$ View/404.php
 
-ErrorDocument 404 View/404.php
 
 <FilesMatch "\.(htaccess|htpasswd|ini|phps|fla|psd|log|sh|zip|tar)$">
   Order Deny,Allow

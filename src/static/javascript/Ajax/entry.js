@@ -1,7 +1,7 @@
 let hola = "";
 const cargarEntrys = () => {
   $.ajax({
-    url: "Controller/funcs_ajax/search.php",
+    url: "api_search",
     type: "GET",
     data: { randomnautica: "entradas" },
     success: function (response) {
@@ -56,7 +56,7 @@ const cargarEntrys = () => {
 cargarEntrys()
 
 $.ajax({
-  url: "Controller/funcs_ajax/search.php",
+  url: "api_search",
   type: "GET",
   data: { randomnautica: "proveedores" },
   success: function (response) {
@@ -74,7 +74,7 @@ $.ajax({
         let idSup = e.getAttribute("idSup");
         let template = "";
         $.ajax({
-          url: "Controller/funcs_ajax/search.php",
+          url: "api_search",
           type: "GET",
           data: { randomnautica: "entradas", id_proveedor: idSup },
           success: function (response) {

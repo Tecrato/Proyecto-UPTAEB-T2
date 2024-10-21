@@ -1,24 +1,20 @@
 <?php
-class DB
-{
+class DB{
 
     public $dbHost = 'localhost';
     public $dbUser = 'root';
-    public $dbPass = '12345';
-    public $dbName = 'proyecto_4';
+    public $dbPass = '';
+    public $dbName = 'proyecto';
 
     public $conn;
-    function __construct()
-    {
+    function __construct(){
         $this->conn = new PDO('mysql:host=' . $this->dbHost . ';dbname=' . $this->dbName, $this->dbUser, $this->dbPass);
         $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
-    function __destruct()
-    {
+    function __destruct(){
         $this->conn = null;
     }
-    function add_bitacora($usuario, $tabla, $accion, $detalles)
-    {
+    function add_bitacora($usuario, $tabla, $accion, $detalles){
         $query = 'INSERT INTO bitacora(id_usuario,tabla,accion,detalles) VALUES(:usu,:ta,:acc,:de)';
         $query = $this->conn->prepare($query);
         $query->bindParam(':usu', $usuario);
@@ -27,8 +23,7 @@ class DB
         $query->bindParam(':de', $detalles);
         $query->execute();
     }
-    function search_bitacora($id = null, $limite = 9, $n = 0, $order = " id DESC")
-    {
+    function search_bitacora($id = null, $limite = 9, $n = 0, $order = " id DESC"){
         $query = "SELECT
                     b.id,
                     (SELECT nombre FROM usuarios WHERE usuarios.id = b.id_usuario) as nombre,
@@ -57,22 +52,19 @@ class DB
         $consulta->execute();
         return $consulta->fetchAll();
     }
-    function COUNT()
-    {
+    function COUNT(){
         $query = $this->conn->prepare("SELECT COUNT(*) as 'total' FROM bitacora");
         $query->execute();
         return $query->fetch()['total'];
     }
-    function COUNT_user($user)
-    {
+    function COUNT_user($user){
         $query = $this->conn->prepare("SELECT COUNT(*) as 'total' FROM bitacora WHERE id_usuario=:id");
         $query->bindParam(":id", $user, PDO::PARAM_INT);
         $query->execute();
         return $query->fetch()['total'];
     }
 
-    function Backup($type)
-    {
+    function Backup($type){
         if ($type == "Insert") {
             date_default_timezone_set('America/Caracas');
             $backupFile = "../../Backups/" . $this->dbName . '_' . date('Y-m-d_H-i') . '.sql';

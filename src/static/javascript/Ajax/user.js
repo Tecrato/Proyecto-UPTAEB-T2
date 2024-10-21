@@ -36,7 +36,7 @@ function generar_bitacora_general(page) {
     page_general = page
     template = ""
     $.ajax({
-        url: "Controller/funcs_ajax/search.php",
+        url: "api_search",
         type: "GET",
         data: { randomnautica: "bitacora", subFunction: "bitacora", limite: 10, n: page },
         success: function (response) {
@@ -62,7 +62,7 @@ function generar_bitacora_personal(page) {
     page_personal = page
     template2 = ""
     $.ajax({
-        url: "Controller/funcs_ajax/search.php",
+        url: "api_search",
         type: "GET",
         data: { randomnautica: "bitacora", subFunction: "bitacora", limite: 10, n: page, ID: session_user_id },
         success: function (response) {
