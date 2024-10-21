@@ -73,8 +73,8 @@
                 $this->conn->beginTransaction();
                 for ($i = 0; $i < count($datos); $i++) {
                     $lista = $datos[$i];
-                    $clase_l = new Entrada(null, $lista->id_product, cantidad: $lista->cantidad);
-                    if ($clase_l->descontar() != 1){
+                    $clase_l = new Detalle_entrada(null, $lista->id_product);
+                    if ($clase_l->descontar($lista->cantidad) != 1){
                         throw new Exception("Algo paso, nose", 1);
                     }
                 }

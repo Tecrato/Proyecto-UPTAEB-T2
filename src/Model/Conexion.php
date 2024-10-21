@@ -4,7 +4,7 @@ class DB
 
     public $dbHost = 'localhost';
     public $dbUser = 'root';
-    public $dbName = 'proyecto';
+    public $dbName = 'proyecto_ciego';
 
     public $conn;
     function __construct()

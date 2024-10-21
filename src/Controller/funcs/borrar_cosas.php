@@ -21,11 +21,13 @@
         require('../../Model/Productos.php');
         $clase = new Producto($_POST['ID']); // Llama al modelo y le manda la instruccion
         // $imagen = $clase->search()[0]['imagen'];
-
+        
         // if ($imagen != "banner_productos.png"){
-        //     print_r(realpath("../../Media/imagenes/".$imagen));
-        //     unlink("../../Media/imagenes/".$imagen);
-        // }
+            //     print_r(realpath("../../Media/imagenes/".$imagen));
+            //     unlink("../../Media/imagenes/".$imagen);
+            // }
+            $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Borrar","Borrado ".$tipo);
+            $clase2->agregar();
         $clase->toggle_active();
     }
     elseif ($tipo == 'proveedor'){
@@ -38,12 +40,16 @@
         $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Borrar","Borrado ".$tipo);
         $clase2->agregar();
         echo "1";
+        $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Borrar","Borrado ".$tipo);
+        $clase2->agregar();
 
     }
     elseif ($tipo == 'cliente'){
         require('../../Model/Clientes.php');
         $clase = new Cliente($_POST['ID']);
         $clase->desactivar();
+        $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Borrar","Borrado ".$tipo);
+        $clase2->agregar();
 
         header('Location:../../Clientes');
     }
@@ -51,6 +57,8 @@
         require('../../Model/Usuarios.php');
         $clase = new Usuario($_POST['ID']);
         $clase->borrar();
+        $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Borrar","Borrado ".$tipo);
+        $clase2->agregar();
 
         header('Location:../../Administrar_perfil');
     }
@@ -58,6 +66,8 @@
         require('../../Model/Registro de ventas.php');
         $clase = new Registro_ventas($_POST['ID']);
         $clase->desactivar();
+        $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Borrar","Borrado ".$tipo);
+        $clase2->agregar();
 
         header('Location:../../Ventas');
     }
@@ -65,27 +75,37 @@
         require('../../Model/Entradas.php');
         $clase = new Entrada($_POST['ID']);
         $clase->borrar();
+        $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Borrar","Borrado ".$tipo);
+        $clase2->agregar();
 
     }
     elseif ($tipo === 'unidad'){
         require('../../Model/Unidades.php');
         $clase = new Unidad($_POST["ID"]);
         $clase->borrar();
+        $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Borrar","Borrado ".$tipo);
+        $clase2->agregar();
     }
     elseif ($tipo === 'marca'){
         require('../../Model/Marcas.php');
         $clase = new Marca($_POST["ID"]);
         $clase->borrar();
+        $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Borrar","Borrado ".$tipo);
+        $clase2->agregar();
     }
     elseif ($tipo === 'categoria'){
         require('../../Model/Categorias.php');
         $clase = new Categoria($_POST["ID"]);
         $clase->borrar();
+        $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Borrar","Borrado ".$tipo);
+        $clase2->agregar();
     }
     elseif ($tipo === 'metodo_pago'){
         require('../../Model/Metodos_pagos.php');
         $clase = new Metodo_pago($_POST["ID"]);
         $clase->desactivar();
+        $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Borrar","Borrado ".$tipo);
+        $clase2->agregar();
     }
     elseif ($tipo === 'permiso'){
         $clase = new Permiso(null,$_POST["id_usuario"],$_POST["tabla"],$_POST["accion"]);

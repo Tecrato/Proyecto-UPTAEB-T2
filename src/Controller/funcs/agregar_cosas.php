@@ -55,20 +55,17 @@
     }
 
     elseif ($tipo === 'lote'){
+        require("../../Model/Detalles_entradas.php");
         require('../../Model/Entradas.php');
 
-        $compra = $_POST["compra"];
+        $clase = new Entrada(null, $_POST["proveedor"],$_POST["fecha_compra"],$_POST["codigo"],$_POST["detalles"]);
+        $clase->agregar($_POST["lista"]);
         
-        for($i = 0; $i < count($_POST["entradas"]); $i++) {
-            $entrada = $_POST["entradas"][$i];
-            $clase = new Entrada(null,$entrada["ID"],$entrada["proveedor"],$entrada["cantidad"],$entrada["fecha_c"],$entrada["fecha_v"],$entrada["precio_compra"]); // Llama al modelo y le manda la instruccion
-            $clase->agregar();
-        }
     }
 
     elseif ($tipo === 'proveedor'){
         require('../../Model/Proveedores.php');
-        $clase = new Proveedor(null,$_POST["nombre"],$_POST["razon_social"],$_POST["T-D"]."-".$_POST["rif"],$_POST["TLFNO"],$_POST["correo"],$_POST["direccion"]); // Llama al modelo y le manda la instruccion
+        $clase = new Proveedor(null,$_POST["nombre"],$_POST["razon_social"],$_POST["T-D"]."-".$_POST["rif"],$_POST["telefono"],$_POST["correo"],$_POST["direccion"]); // Llama al modelo y le manda la instruccion
     }
     elseif ($tipo === 'cliente'){
         require('../../Model/Clientes.php');
@@ -104,7 +101,7 @@
     }
 
     if ($tipo != 'producto') {
-        $clase->agregar();
+        $resultado = $clase->agregar();
         $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Agregar","Agregado ".$tipo);
         $clase2->agregar();
     }

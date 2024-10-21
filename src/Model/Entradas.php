@@ -1,108 +1,115 @@
 <?php
 	class Entrada extends DB{
         private $id;
-        private $id_producto;
         private $id_proveedor;
-        private $cantidad;
         private $fecha_compra;
-        private $fecha_vencimiento;
-        private $precio_compra;
-        private $active;
+        private $codigo;
+        private $detalles;
 
-        function __construct($id=null, $id_producto=null,$id_proveedor=null,$cantidad=null,$fecha_compra=null,$fecha_vencimiento=null,$precio_compra=null,$active=1){
+        function __construct($id=null, $id_proveedor=null,$fecha_compra=null,$codigo=null,$detalles=null){
             $this->id = $id;
-            $this->id_producto = $id_producto;
             $this->id_proveedor = $id_proveedor;
-            $this->cantidad = $cantidad;
             $this->fecha_compra = $fecha_compra;
-            $this->fecha_vencimiento = $fecha_vencimiento;
-            $this->precio_compra = $precio_compra;
-            $this->active = $active;
+            $this->codigo = $codigo;
+            $this->detalles = $detalles;
             DB::__construct();
         }
 
-		function agregar(){
-			$query = $this->conn->prepare("INSERT INTO entradas VALUES(null, :id1, :id2, :cantidad, :fecha_compra, :fecha_vencimiento, :precio_compra, :cantidad, 1)");
-
-			$query->bindParam(':id1',$this->id_producto);
-			$query->bindParam(':id2',$this->id_proveedor);
-			$query->bindParam(':cantidad',$this->cantidad);
-			$query->bindParam(':fecha_compra',$this->fecha_compra);
-			$query->bindParam(':fecha_vencimiento',$this->fecha_vencimiento);
-			$query->bindParam(':precio_compra',$this->precio_compra);
-			$query->bindParam(':cantidad',$this->cantidad);
-
-			$query->execute();
-            return $this->conn->lastInsertId();
-		}
-
-		function descontar(){
-
-			$entradas = $this->search(0,10000,order:' fecha_vencimiento ASC');
+		function agregar($lista){
             try {
+                $this->conn->beginTransaction();
+                echo "123123";
+                $query = $this->conn->prepare("INSERT INTO entradas
+                (id, id_proveedor, fecha_compra, codigo, detalles)
+                VALUES(null, :id_proveedor, :fecha_compra, :codigo, :detalles)");
+    
+                $query->bindParam(':id_proveedor',$this->id_proveedor, PDO::PARAM_INT);
+                $query->bindParam(':fecha_compra',$this->fecha_compra, PDO::PARAM_STR);
+                $query->bindParam(':codigo',$this->codigo, PDO::PARAM_INT);
+                $query->bindParam(':detalles',$this->detalles, PDO::PARAM_STR);
+
+
+                $query->execute();
+                $last_id = $this->conn->lastInsertId();
+
+                echo "123123";
                 
-                for ($i = 0; $this->cantidad >= 1; $i++) {
-                    $entrada = $entradas[$i];
-                    if ($entrada['existencia'] > $this->cantidad) {
-                        $query = "UPDATE entradas SET existencia=" . $entrada['existencia'] - $this->cantidad . " WHERE id=" . $entrada['id'];
-                        $this->conn->query($query);
-                        $this->cantidad = 0;
-                    } else {
-                        $query = "UPDATE entradas SET existencia=0 WHERE id=" . $entrada['id'];
-                        $this->conn->query($query);
-                        $this->cantidad -= $entrada['existencia'];
-                    }
+                for ($i = 0; $i < count($lista); $i++) {
+                    $entrada = $lista[$i];
+
+                    echo "<br> <h1> entrada $i</h1>";
+                    print_r($entrada);
+                    echo "<br>";
+                    $clase = new Detalle_entrada(
+                        null,
+                        $last_id,
+                        $entrada->id_producto,
+                        $entrada->mercancia,
+                        $entrada->t_mercancia,
+                        $entrada->fecha_vencimiento,
+                        $entrada->precio_compra,
+                        $entrada->t_mercancia  * $entrada->cantidad_mercancia, 
+                        $entrada->cantidad_mercancia
+                    );
+                    $clase->agregar();
+                    echo "<br> <h1> entrada $i terminada</h1>";
+                    print_r($entrada);
                 }
+                $this->conn->commit();
                 return 1;
-            }
-            catch (Exception $e){
+            } catch (Exception $e) {
+                print_r($e);
+                $this->conn->rollBack();
                 return 0;
             }
 		}
 
-		function borrar() {
+        function borrar() {
 			$query = $this->conn->prepare('DELETE FROM entradas WHERE id=:id');
 
 			$query->bindParam(':id',$this->id);
 			$query->execute();
 		}
 
-		function search($n=0,$limite=9, $order = ' id ASC '){
+        function search($n=0,$limite=9, $order = ' id ASC '){
             $query = "SELECT 
                     a.id,
-                    a.id_producto,
-                    b.nombre producto,
                     a.id_proveedor,
-                    c.razon_social proveedor,
-                    a.cantidad,
+                    b.nombre proveedor,
                     a.fecha_compra,
-                    a.fecha_vencimiento,
-                    a.precio_compra,
-                    a.existencia
+                    a.codigo,
+                    a.detalles
                     FROM entradas a 
-                    INNER JOIN productos b ON b.id = a.id_producto
-                    INNER JOIN proveedores c ON c.id = a.id_proveedor
-                    WHERE a.active=:active AND b.active=1";
+                    INNER JOIN proveedores b ON b.id = a.id_proveedor
+                    WHERE a.existencia=:existencia";
 
 			$lista = [];
 
             if ($this->id){
             	array_push($lista,'id');
             }
-            if ($this->id_producto){
-                array_push($lista, 'id_producto');
-            }
             if ($this->id_proveedor){
                 array_push($lista, 'id_proveedor');
             }
+            if ($this->fecha_compra){
+                array_push($lista, 'fecha_compra');
+            }
+            if ($this->codigo){
+                array_push($lista, 'codigo');
+            }
+            if ($this->detalles){
+                array_push($lista, 'detalles');
+            }
+
             if ($lista) {
             	foreach ($lista as $e){
             		$query .= ' AND '.$e.'=:'.$e;
             	}
             }
 
-
-            $n = $n*$limite;
+			if ($this->id){
+                $query .= ' AND a.id=:id';
+			}
 			$query = $query . " ORDER BY $order ";
 			$query = $query . " LIMIT :l OFFSET :n ";
 
@@ -111,24 +118,56 @@
 
             $consulta->bindParam(':l',$limite, PDO::PARAM_INT);
             $consulta->bindParam(':n',$n, PDO::PARAM_INT);
-            $consulta->bindParam(':active',$this->active, PDO::PARAM_INT);
 
             if ($this->id){
                 $consulta->bindParam(':id',$this->id, PDO::PARAM_INT);
             }
-			if ($this->id_producto) {
-                $consulta->bindParam(':id_producto',$this->id_producto, PDO::PARAM_INT);
-			}
 			if ($this->id_proveedor) {
                 $consulta->bindParam(':id_proveedor',$this->id_proveedor, PDO::PARAM_INT);
+			}
+			if ($this->fecha_compra) {
+                $consulta->bindParam(':fecha_compra',$this->fecha_compra, PDO::PARAM_STR);
+			}
+			if ($this->codigo) {
+                $consulta->bindParam(':codigo',$this->codigo, PDO::PARAM_STR);
+			}
+			if ($this->detalles) {
+                $consulta->bindParam(':detalles',$this->detalles, PDO::PARAM_STR);
 			}
 
             $consulta->execute();
             return $consulta->fetchAll();
 		}
         function COUNT(){
-            $query = $this->conn->prepare("SELECT COUNT(*) as 'total' FROM entradas WHERE active=:active");
-			$query->bindParam(':active',$this->active, PDO::PARAM_INT);
+            $sql = "SELECT COUNT(*) as 'total' FROM entradas WHERE 1 ";
+            if ($this->id){
+                $sql .= " AND id=:id";
+            }
+            if ($this->id_proveedor){
+                $sql .= " AND id_proveedor=:id_proveedor";
+            }
+            if ($this->fecha_compra){
+                $sql .= " AND fecha_compra=:fecha_compra";
+            }
+            if ($this->codigo){
+                $sql .= " AND codigo=:codigo";
+            }
+
+            $query = $this->conn->prepare($sql);
+
+            if ($this->id) {
+                $query->bindParam(":id", $this->id, PDO::PARAM_INT);
+            }
+            if ($this->id_proveedor) {
+                $query->bindParam(":id_proveedor", $this->id_proveedor, PDO::PARAM_INT);
+            }
+            if ($this->fecha_compra) {
+                $query->bindParam(":fecha_compra", $this->fecha_compra, PDO::PARAM_STR);
+            }
+            if ($this->codigo) {
+                $query->bindParam(":codigo", $this->codigo, PDO::PARAM_STR);
+            }
+            
             $query->execute();
             return $query->fetch()['total'];
         }
