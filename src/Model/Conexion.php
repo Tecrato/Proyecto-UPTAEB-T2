@@ -4,12 +4,13 @@ class DB
 
     public $dbHost = 'localhost';
     public $dbUser = 'root';
-    public $dbName = 'proyecto_ciego';
+    public $dbName = 'proyecto_5';
+    public $dbPass = '12345';
 
     public $conn;
     function __construct()
     {
-        $this->conn = new PDO('mysql:host=' . $this->dbHost . ';dbname=' . $this->dbName, $this->dbUser);
+        $this->conn = new PDO('mysql:host=' . $this->dbHost . ';dbname=' . $this->dbName, $this->dbUser, $this->dbPass);
         $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
     function __destruct()

@@ -54,7 +54,7 @@
         // header('Location:../../Productos');
     }
 
-    elseif ($tipo === 'lote'){
+    elseif ($tipo === 'entrada'){
         require("../../Model/Detalles_entradas.php");
         require('../../Model/Entradas.php');
 
@@ -100,7 +100,7 @@
         $clase = new Permiso(null,$_POST["id_usuario"],$_POST["tabla"],$_POST["permiso"]);
     }
 
-    if ($tipo != 'producto') {
+    if ($tipo != 'producto' and $tipo != 'entrada') {
         $resultado = $clase->agregar();
         $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Agregar","Agregado ".$tipo);
         $clase2->agregar();

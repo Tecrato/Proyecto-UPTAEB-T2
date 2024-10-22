@@ -43,13 +43,13 @@
                     $clase = new Detalle_entrada(
                         null,
                         $last_id,
-                        $entrada->id_producto,
-                        $entrada->mercancia,
-                        $entrada->t_mercancia,
-                        $entrada->fecha_vencimiento,
-                        $entrada->precio_compra,
-                        $entrada->t_mercancia  * $entrada->cantidad_mercancia, 
-                        $entrada->cantidad_mercancia
+                        $entrada["id_producto"],
+                        $entrada["mercancia"],
+                        $entrada["t_mercancia"],
+                        $entrada["fecha_vencimiento"],
+                        $entrada["precio_compra"],
+                        $entrada["t_mercancia"]  * $entrada["cantidad_mercancia"], 
+                        $entrada['cantidad_mercancia']
                     );
                     $clase->agregar();
                     echo "<br> <h1> entrada $i terminada</h1>";

@@ -101,11 +101,10 @@
 
 
     elseif ($_GET['randomnautica'] == "entradas") {
-        require('../../Model/Entradas.php');
-        $clase = new Entrada(
-            id_producto: isset($_GET['id_producto']) ? $_GET['id_producto']: null,
-            id_proveedor: isset($_GET['id_proveedor']) ? $_GET['id_proveedor']: null,
-            active:(isset($_GET['active']) ? $_GET['active'] : 1));
+        require('../../Model/Detalles_entradas.php');
+        $clase = new Detalle_entrada(
+            id_producto: (isset($_GET['id_producto']) ? $_GET['id_producto']: null),
+        );
     }
     elseif ($_GET['randomnautica'] == "proveedores") {
         require('../../Model/Proveedores.php');

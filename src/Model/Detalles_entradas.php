@@ -78,37 +78,26 @@
 
 		function search($n=0,$limite=9, $order = ' id ASC '){
             $query = "SELECT 
-                    a.id,
-                    a.id_producto,
-                    b.nombre producto,
-                    a.mercancia,
-                    c.razon_social proveedor,
-                    a.tamaño_mercancia,
-                    a.fecha_compra,
-                    a.fecha_vencimiento,
-                    a.precio_compra,
-                    a.existencia
-                    FROM entradas_2 a 
-                    INNER JOIN productos b ON b.id = a.id_producto
-                    INNER JOIN proveedores c ON c.id = a.mercancia
-                    WHERE a.existencia=:existencia AND b.existencia=1";
+                    *
+                    FROM entradas_2 AS a
+                    WHERE 1";
 
 			$lista = [];
 
-            if ($this->id){
-            	array_push($lista,'id');
-            }
-            if ($this->id_producto){
-                array_push($lista, 'id_producto');
-            }
-            if ($this->mercancia){
-                array_push($lista, 'mercancia');
-            }
-            if ($lista) {
-            	foreach ($lista as $e){
-            		$query .= ' AND '.$e.'=:'.$e;
-            	}
-            }
+            // if ($this->id){
+            // 	array_push($lista,'id');
+            // }
+            // if ($this->id_producto){
+            //     array_push($lista, 'id_producto');
+            // }
+            // if ($this->mercancia){
+            //     array_push($lista, 'mercancia');
+            // }
+            // if ($lista) {
+            // 	foreach ($lista as $e){
+            // 		$query .= ' AND '.$e.'=:'.$e;
+            // 	}
+            // }
 
 
             $n = $n*$limite;
@@ -120,23 +109,22 @@
 
             $consulta->bindParam(':l',$limite, PDO::PARAM_INT);
             $consulta->bindParam(':n',$n, PDO::PARAM_INT);
-            $consulta->bindParam(':existencia',$this->existencia, PDO::PARAM_INT);
 
-            if ($this->id){
-                $consulta->bindParam(':id',$this->id, PDO::PARAM_INT);
-            }
-			if ($this->id_producto) {
-                $consulta->bindParam(':id_producto',$this->id_producto, PDO::PARAM_INT);
-			}
-			if ($this->mercancia) {
-                $consulta->bindParam(':mercancia',$this->mercancia, PDO::PARAM_INT);
-			}
+            // if ($this->id){
+            //     $consulta->bindParam(':id',$this->id, PDO::PARAM_INT);
+            // }
+			// if ($this->id_producto) {
+            //     $consulta->bindParam(':id_producto',$this->id_producto, PDO::PARAM_INT);
+			// }
+			// if ($this->mercancia) {
+            //     $consulta->bindParam(':mercancia',$this->mercancia, PDO::PARAM_INT);
+			// }
 
             $consulta->execute();
             return $consulta->fetchAll();
 		}
         function COUNT(){
-            $query = $this->conn->prepare("SELECT COUNT(*) as 'total' FROM entradas WHERE existencia=:existencia");
+            $query = $this->conn->prepare("SELECT COUNT(*) as 'total' FROM entradas_2 WHERE existencia=:existencia");
 			$query->bindParam(':existencia',$this->existencia, PDO::PARAM_INT);
             $query->execute();
             return $query->fetch()['total'];

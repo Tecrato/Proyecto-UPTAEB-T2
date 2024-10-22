@@ -3,10 +3,10 @@ RewriteEngine On
 ErrorDocument 404 /Proyecto-UPTAEB-T2/src/View/404.php
 
 
-RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/Model/
-RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/View/
-RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/Backups/
-RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/Plugins/
+# RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/Model/
+# RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/View/
+# RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/Backups/
+# RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/Plugins/
 # RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/Media/
 # RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/static/
 
@@ -29,9 +29,9 @@ RewriteRule ^PDFInventario$ Controller/pdfs/PDF_inventario.php
 RewriteRule ^PDFFactura$ Controller/pdfs/PDF_factura.php
 
 RewriteRule ^api_search$ Controller/funcs_ajax/search.php
-RewriteRule ^api_agregar$ Controller/funcs_ajax/agregar_cosas.php
-RewriteRule ^api_editar$ Controller/funcs_ajax/modificar_cosas.php
-RewriteRule ^api_eliminar$ Controller/funcs_ajax/borrar_cosas.php
+RewriteRule ^api_agregar$ Controller/funcs/agregar_cosas.php
+RewriteRule ^api_editar$ Controller/funcs/modificar_cosas.php
+RewriteRule ^api_eliminar$ Controller/funcs/borrar_cosas.php
 
 
 RewriteRule ^api_estadisticas$ Controller/funcs_ajax/estadisticas.php
@@ -43,11 +43,11 @@ RewriteRule ^api_get_image$ Controller/funcs_ajax/image_downloader.php
 RewriteRule ^fd$ Controller/C_facturadirecta.php
 RewriteRule ^test$ Controller/funcs_ajax/prueba.php
 
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ /Proyecto-UPTAEB-T2/src/View/404.php
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteRule ^(.*)$ /Proyecto-UPTAEB-T2/src/View/404.php
 
-RewriteRule ^Model/$ View/404.php [NC]
+# RewriteRule ^Model/$ View/404.php [NC]
 
 
 <FilesMatch "\.(htaccess|htpasswd|ini|phps|fla|psd|log|sh|zip|tar)$">
@@ -55,5 +55,5 @@ RewriteRule ^Model/$ View/404.php [NC]
   Deny from all
 </FilesMatch>
 
-RemoveHandler .phtml .php3 .php .pl .py .jsp .asp .htm .shtml .sh .cgi .dat
-RemoveType .phtml .php3 .php .pl .py .jsp .asp .htm .shtml .sh .cgi .dat
+# RemoveHandler .phtml .php3 .php .pl .py .jsp .asp .htm .shtml .sh .cgi .dat
+# RemoveType .phtml .php3 .php .pl .py .jsp .asp .htm .shtml .sh .cgi .dat
