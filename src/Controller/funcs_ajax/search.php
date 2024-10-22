@@ -19,39 +19,19 @@
     $result = $other_class->search();
 
 
-    if ($_GET['randomnautica'] == "productos") {
-        require('../../Model/Productos.php');
-        $clase = new Producto(
-            id:(isset($_GET['ID']) ? $_GET['ID'] : null),
-            nombre:(isset($_GET['nombre']) ? $_GET['nombre'] : null),
-            active:(isset($_GET['active']) ? $_GET['active'] : null),
-            like:(isset($_GET['like']) ? $_GET['like'] : '')
+    if ($_GET['randomnautica'] == "caja") {
+        require('../../Model/Cajas.php');
+        $clase = new Caja(
+            id_usuario:(isset($_GET['id_usuario']) ? $_GET['id_usuario'] : null),
+            
         );
     }
     elseif ($_GET['randomnautica'] == "categorias") {
         require('../../Model/Categorias.php');
-        $clase = new Categoria();
-    }
-    elseif ($_GET['randomnautica'] == "unidades") {
-        require('../../Model/Unidades.php');
-        $clase = new Unidad();
-    }
-    elseif ($_GET['randomnautica'] == "marcas") {
-        require('../../Model/Marcas.php');
-        $clase = new Marca();
-    }
-    elseif ($_GET['randomnautica'] == "ventas") {
-        require('../../Model/Registro de ventas.php');
-        $clase = new Registro_ventas();
-    }
-    elseif ($_GET['randomnautica'] == "metodo_pago") {
-        require('../../Model/Metodos_pagos.php');
-        $clase = new Metodo_pago();
-    }
-    elseif ($_GET['randomnautica'] == "usuario") {
-        $clase = new Usuario(
+        $clase = new Categoria(
             id:(isset($_GET['ID']) ? $_GET['ID'] : null),
-            rol:(isset($_GET['rol']) ? $_GET['rol'] : null),
+            nombre:(isset($_GET['nombre']) ? $_GET['nombre'] : null),
+            like:(isset($_GET['like']) ? $_GET['like'] : '')
         );
     }
     elseif ($_GET['randomnautica'] == "clientes") {
@@ -62,36 +42,68 @@
             like_cedula:(isset($_GET['like_cedula']) ? $_GET['like_cedula'] : ''),
         );
     }
+    elseif ($_GET['randomnautica'] == "credito") {
+        require('../../Model/Credito.php');
+        $clase = new Credito(
+            id:(isset($_GET['ID']) ? $_GET['ID'] : null),
+        );
+    }
     elseif ($_GET['randomnautica'] == "configuraciones") {
         require('../../Model/Configuraciones.php');
         $clase = new Configuracion(
             key:(isset($_GET['llave']) ? $_GET['llave'] : null)
         );
     }
-    
-    elseif ($_GET['randomnautica'] == "permiso") {  
-        $clase = new Permiso(id_usuario:(isset($_GET['ID']) ? $_GET['ID'] : null));
-    }
-
-    elseif ($_GET['randomnautica'] == "caja") {
-        require('../../Model/Cajas.php');
-        $clase = new Caja(
-            id_usuario:(isset($_GET['id_usuario']) ? $_GET['id_usuario'] : null),
-            
+    elseif ($_GET['randomnautica'] == "marcas") {
+        require('../../Model/Marcas.php');
+        $clase = new Marca(
+            id:(isset($_GET['id']) ? $_GET['id'] : null),
+            nombre:(isset($_GET['nombre']) ? $_GET['nombre'] : null),
+            like:(isset($_GET['like']) ? $_GET['like'] : '')
         );
     }
+    elseif ($_GET['randomnautica'] == "metodo_pago") {
+        require('../../Model/Metodos_pagos.php');
+        $clase = new Metodo_pago();
+    }
+    
+
     elseif ($_GET['randomnautica'] === 'notificaciones'){
         require('../../Model/Notificaciones.php');
         $clase = new Notificacion(
             id:(isset($_GET['ID']) ? $_GET['ID'] : null),
             status:(isset($_GET['status']) ? $_GET['status'] : null),
-    );
-    }
-    elseif ($_GET['randomnautica'] == "credito") {
-        require('../../Model/Credito.php');
-        $clase = new Credito(
-            id:(isset($_GET['ID']) ? $_GET['ID'] : null),
         );
+    }
+    elseif ($_GET['randomnautica'] == "permiso") {  
+        $clase = new Permiso(id_usuario:(isset($_GET['ID']) ? $_GET['ID'] : null));
+    }
+    elseif ($_GET['randomnautica'] == "productos") {
+        require('../../Model/Productos.php');
+        $clase = new Producto(
+            id:(isset($_GET['ID']) ? $_GET['ID'] : null),
+            nombre:(isset($_GET['nombre']) ? $_GET['nombre'] : null),
+            active:(isset($_GET['active']) ? $_GET['active'] : null),
+            like:(isset($_GET['like']) ? $_GET['like'] : '')
+        );
+    }
+    elseif ($_GET['randomnautica'] == "unidades") {
+        require('../../Model/Unidades.php');
+        $clase = new Unidad(
+            id:(isset($_GET['id']) ? $_GET['id'] : null),
+            nombre:(isset($_GET['nombre']) ? $_GET['nombre'] : null),
+            like:(isset($_GET['like']) ? $_GET['like'] : '')
+        );
+    }
+    elseif ($_GET['randomnautica'] == "usuario") {
+        $clase = new Usuario(
+            id:(isset($_GET['ID']) ? $_GET['ID'] : null),
+            rol:(isset($_GET['rol']) ? $_GET['rol'] : null),
+        );
+    }
+    elseif ($_GET['randomnautica'] == "ventas") {
+        require('../../Model/Registro de ventas.php');
+        $clase = new Registro_ventas();
     }
     elseif ($_SESSION['rol_num'] > 1 and count($result) <= 0) {
         echo json_encode(['status' => 'error','error'=>'Permiso '.$_GET['randomnautica'].' Error (bueno ps)']);

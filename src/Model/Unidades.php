@@ -3,15 +3,42 @@
 	class Unidad extends DB {
 		private $id;
 		private $nombre;
-		function __construct($id=null, $nombre=null){
+        private $like;
+		function __construct($id=null, $nombre=null, $like=""){
 			DB::__construct();
 			$this->id = $id;
 			$this->nombre = $nombre;
+            $this->like = $like;
 		}
 		
 		function search($n=0, $limite=9){
-			$query = "SELECT * FROM unidades";
-			return $this->conn->query($query)->fetchAll();
+			$query = "SELECT * FROM unidades WHERE nombre LIKE :como ";
+			$lista = [];
+
+            if ($this->id){
+            	array_push($lista,'id');
+            }
+            if ($lista) {
+            	foreach ($lista as $e){
+            		$query .= ' AND '.$e.'=:'.$e;
+            	}
+            }
+            $n = $n*$limite;
+            
+
+            $query = $query . " LIMIT :l OFFSET :n";
+            $consulta = $this->conn->prepare($query);
+
+
+            $consulta->bindParam(':l',$limite, PDO::PARAM_INT);
+            $consulta->bindParam(':n',$n, PDO::PARAM_INT);
+            $consulta->bindValue(':como','%'.$this->like.'%');
+            
+            if ($this->id != null){
+                $consulta->bindParam(':id',$this->id, PDO::PARAM_INT);
+            }
+            $consulta->execute();
+            return $consulta->fetchAll();
 		}
 
 		function agregar(){
