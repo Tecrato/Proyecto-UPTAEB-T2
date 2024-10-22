@@ -653,9 +653,6 @@ let cargarCategoriasFilter = () => {
   });
 }
 cargarCategoriasFilter()
-
-
-
 //esta consulta sirve para cargar los datos de las marcas en el filtro
 let cargarMarcasFilter = () => {
   $.ajax({
@@ -677,6 +674,19 @@ cargarMarcasFilter()
 
 
 let filter = document.querySelectorAll(".filter_product");
+let messaje = (e) => {
+  return `        <li>
+                      <div class="uk-padding-remove-vertical uk-flex uk-flex-middle">
+                          <span class="uk-margin-small-right" uk-icon="history"></span>
+                          <p class="uk-margin-small">no se encontro resultado</p>
+                      </div>
+                      <div class="uk-padding-remove-vertical uk-flex uk-flex-middle">
+                        <div class="uk-flex uk-flex-center uk-margin-small-top" style="width: 100%;">
+                            <a href="Productos" class="uk-button uk-button-default" style="color: #999; border-color: #999;">${e}</a>
+                        </div>
+                      </div>
+                  </li>`
+}
 filter.forEach((e) => {
   e.addEventListener("keyup", () => {
     let data = e.getAttribute("name");
@@ -693,19 +703,7 @@ filter.forEach((e) => {
               options += `<li  uk-filter-control="filter: [data-category='${date.nombre}']; group: category"><a class='filterS' href="#">${date.nombre}</a></li>`;
             });
             if(json.lista.length == 0){
-              document.querySelector(".filter_category").innerHTML = `
-                  <li>
-                      <div class="uk-padding-remove-vertical uk-flex uk-flex-middle">
-                          <span class="uk-margin-small-right" uk-icon="history"></span>
-                          <p class="uk-margin-small">no se encontro resultado</p>
-                      </div>
-                      <div class="uk-padding-remove-vertical uk-flex uk-flex-middle">
-                        <div class="uk-flex uk-flex-center uk-margin-small-top" style="width: 100%;">
-                            <a href="Productos" class="uk-button uk-button-default" style="color: #999; border-color: #999;">Registrar Categoria</a>
-                        </div>
-                      </div>
-                  </li>
-              `
+              document.querySelector(".filter_category").innerHTML = messaje("Registrar Categoria")
             } else {
               document.querySelector(".filter_category").innerHTML = options;
             }
@@ -729,19 +727,7 @@ filter.forEach((e) => {
               options += `<li  uk-filter-control="filter: [data-category='${date.nombre}']; group: category"><a class='filterS' href="#">${date.nombre}</a></li>`;
             });
             if(json.lista.length == 0){
-              document.querySelector(".filter_marca").innerHTML = `
-                  <li>
-                      <div class="uk-padding-remove-vertical uk-flex uk-flex-middle">
-                          <span class="uk-margin-small-right" uk-icon="history"></span>
-                          <p class="uk-margin-small">no se encontro resultado</p>
-                      </div>
-                      <div class="uk-padding-remove-vertical uk-flex uk-flex-middle">
-                        <div class="uk-flex uk-flex-center uk-margin-small-top" style="width: 100%;">
-                            <a href="Productos" class="uk-button uk-button-default" style="color: #999; border-color: #999;">Registrar Marca</a>
-                        </div>
-                      </div>
-                  </li>
-              `
+              document.querySelector(".filter_marca").innerHTML = messaje("Registrar Marca")
             } else {
               document.querySelector(".filter_marca").innerHTML = options;
             }
