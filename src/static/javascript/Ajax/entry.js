@@ -7,6 +7,7 @@ const cargarEntrys = () => {
     success: function (response) {
       let template;
       let json = JSON.parse(response);
+      console.log(json);
       json.lista.forEach((f) => {
         let fechaVencimiento = new Date(f.fecha_vencimiento);
         let fechaActual = new Date();
@@ -334,7 +335,6 @@ function func(dolar) {
     type: "GET",
     data: { randomnautica: "productos" },
     success: function (response) {
-      console.log(response);
       let productos = JSON.parse(response).lista;
 
       // aqui seleccionamos el contenedor de la tabla de la izquierda, es decir el tbody donde luego insertaremos los tr
@@ -545,20 +545,22 @@ function func(dolar) {
           // y tambien se llama cuando eliminamos un registro en la tabla de la derecha, ya que toma los tr, los vuelve
           // a recorrer y vuelve a sumar los montos
 
-          //esta condicion actualiza el total solo si se cumple todas las condiciones
-          if (parseInt(array[3]) <= parseInt(array[1]) && parseInt(array[3]) != 0 && array[3] != "") {
-            ActualizarTotal();
-          }
         });
       });
 
       //funcion para agg metodos de pago
       //este contador se usa para determinar el id de cada pago, para manipular los eventos en dos lados
       let bool = true
+      function removeEventListenerIfExists(element, event, handler) {
+        const clone = element.cloneNode(true);
+        element.replaceWith(clone);
+        return clone;
+      }
       let btnAggMetodoPago = document.querySelector(".btn_agg_metodoPago")
+      btnAggMetodoPago = removeEventListenerIfExists(btnAggMetodoPago, 'click');
       // Agregar metodo de pago
       btnAggMetodoPago.addEventListener('click', () => {
-        ("click");
+
         // Incrementar el contador para obtener el id único de cada pago
         // Obtener el contenedor de los métodos de pago
         let cont = document.querySelector(".cont_metodos_pagos")
@@ -611,6 +613,7 @@ function func(dolar) {
               bool = false
             }
 
+
             if (bool == true) {
               $(".cont_metodos_pagos").append(template)
               // Agregar la nueva plantilla al contenedor de los métodos de pago finales
@@ -621,106 +624,46 @@ function func(dolar) {
 
             //este sera el evento en donde colocaremos en pagos finales, el valor del input
             //seleccionamos todos los select
-            let amount = []
             let INP = document.querySelectorAll(".AMOUNT-MP")
-            let totalDebito = document.querySelector(".amount_MP")
+            let totalDebito = document.querySelector(".amount_MP");
+            let initialTotalDebito = parseFloat(totalDebito.textContent);
 
             INP.forEach((B) => {
 
               // captamos el evento de keyup, osea si el usuario teclea sobre el input
-              B.addEventListener("change", () => {
+              B.addEventListener("keyup", () => {
                 if (B.value == "") {
                   bool = false
                 } else {
                   bool = true
                 }
-
-                // let amount = []
-
-                // INP.forEach((B) => {
-                //   amount.push(B.value)
-                // })
-                // (totalDebito);
-                // (amount);
-                // let result = 0
-                // amount.forEach((a) => {
-                //   let number = a == "" ? 0 : parseFloat(a)
-                //   result += number
-                // })
-                // let valor = totalDebito - result
-                // totalDebito.textContent =  valor
-
                 let valor = B.value == "" ? 0 : parseFloat(B.value)
-                // ActualizarTotal()
-                let valor2 = parseFloat(B.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.textContent)
-                // if (B.previousElementSibling.value == "Divisa" && valor2 != 0) {
-                //   B.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.textContent = (valor2 -(valor * dolar)).toFixed(2)
-                // } else
-                if (valor2 != 0 && B.value != "") {
-                  B.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.textContent = (valor2 - valor).toFixed(2)
+                if (B.previousElementSibling.options[B.previousElementSibling.selectedIndex].textContent == "Divisa") {
+                  totalDebito.textContent = (initialTotalDebito - (valor * dolar)).toFixed(2) + " Bs"
+                } else {
+                  totalDebito.textContent = (initialTotalDebito - valor).toFixed(2) + " BS"
                 }
               })
             })
-
 
             //esta parte es para eliminar un registro en los tipos de pago
             //seleccionamos todos los btn de eliminar, los recorremos y le asignamos el evento click
             let btnDeleteMP = document.querySelectorAll(".btn-deleteMP")
             btnDeleteMP.forEach((btn) => {
               btn.addEventListener('click', () => {
-                console.log(btn);
                 //seleccionamos el contenedor de los tipos de pago en la izquierda, y removemos al hijo
                 cont.removeChild(btn.parentElement.parentElement)
-
-                for (const f of INP) {
-                  (f.value);
+                let value = parseFloat(btn.previousElementSibling.value)
+                if (btn.previousElementSibling.previousElementSibling.options[btn.previousElementSibling.previousElementSibling.selectedIndex].textContent == "Divisa") {
+                  totalDebito.textContent = (parseFloat(totalDebito.textContent) + (value * dolar)).toFixed(2) + " Bs"
+                } else {
+                  totalDebito.textContent = (parseFloat(totalDebito.textContent) + value).toFixed(2) + " BS"
                 }
-                // amount.pop()
-                let result = 0
-
-                amount.forEach((a) => {
-                  let number = a == "" ? 0 : parseFloat(a)
-                  result += number
-                })
-
-                  (btn.parentElement.parentElement.parentElement);
-
               })
             })
           }
         })
       })
-
-      //aqui hacemos la funcion para el credito
-
-      // let checkCredito = document.querySelector(".credito_check")
-      // $('.formCredito').hide()
-
-      // let credito = 1
-      // checkCredito.addEventListener("change", () => {
-
-      //   if (checkCredito.checked == true) {
-      //     credito = 0
-      //     $('.cont_metodos_pagos').hide()
-      //     $('.btn_agg_metodoPago').hide()
-      //     $('.amount_MP').hide()
-      //     document.querySelector(".name_MP").textContent = "FECHA DE CREDITO"
-      //     $('.formCredito').show()
-
-
-
-
-
-      //   } else {
-      //     credito = 1
-      //     $('.cont_metodos_pagos').show()
-      //     $('.btn_agg_metodoPago').show()
-      //     $('.amount_MP').show()
-      //     document.querySelector(".name_MP").textContent = "TIPO DE PAGO"
-      //     $('.formCredito').hide()
-      //   }
-      // })
-
 
 
 
@@ -747,28 +690,25 @@ function func(dolar) {
           lista: [],
         };
 
-        // if (tipoPago == 0 && !checkCredito.checked) {
-        //   btnCreateFact.setAttribute("uk-tooltip", "title:Debe ingresar forma de pago; pos: right;");
-        //   UIkit.tooltip(".btnCreateFact").show();
 
-        //   setTimeout(() => {
-        //     btnCreateFact.removeAttribute("uk-tooltip");
-        //   }, 1000);
-        // } else if (TotalRestar != 0 && !checkCredito.checked) {
-        //   btnCreateFact.setAttribute("uk-tooltip", "title:Debe ingresar un monto en el pago; pos: right");
-        //   UIkit.tooltip(".btnCreateFact").show();
-        //   setTimeout(() => {
-        //     btnCreateFact.removeAttribute("uk-tooltip");
-        //   }, 1000);
-        // } else if (tableDetailProduct == 0) {
-        //   btnCreateFact.setAttribute("uk-tooltip", "title:Debe ingresar producto; pos: right");
-        //   UIkit.tooltip(".btnCreateFact").show();
-        //   setTimeout(() => {
-        //     btnCreateFact.removeAttribute("uk-tooltip");
-        //   }, 1000);
-        // } else {
+        if (idClient == "default") {
+          btnCreateFact.setAttribute("uk-tooltip", "title:Debe seleccionar un proveedor; pos: right");
+          UIkit.tooltip(".btnCreateFact").show();
+          setTimeout(() => { btnCreateFact.removeAttribute("uk-tooltip"); }, 1000);
+        } else if (tableDetailProduct == 0) {
+          btnCreateFact.setAttribute("uk-tooltip", "title:Debe ingresar producto; pos: right");
+          UIkit.tooltip(".btnCreateFact").show();
+          setTimeout(() => { btnCreateFact.removeAttribute("uk-tooltip"); }, 1000);
+        } else if (tipoPago == 0 && !checkCredito.checked) {
+          btnCreateFact.setAttribute("uk-tooltip", "title:Debe ingresar forma de pago; pos: right;");
+          UIkit.tooltip(".btnCreateFact").show();
+          setTimeout(() => { btnCreateFact.removeAttribute("uk-tooltip"); }, 1000);
+        } else if (TotalRestar != 0 && !checkCredito.checked) {
+          btnCreateFact.setAttribute("uk-tooltip", "title:Debe ingresar un monto en el pago; pos: right");
+          UIkit.tooltip(".btnCreateFact").show();
+          setTimeout(() => { btnCreateFact.removeAttribute("uk-tooltip"); }, 1000);
+        } else {
           let blo = document.getElementById("Detail-product-fact").children;
-
           for (const iterator of blo) {
             let id = iterator.firstElementChild.textContent
             let precio_compra = iterator.lastElementChild.previousElementSibling.previousElementSibling.textContent
@@ -806,7 +746,7 @@ function func(dolar) {
           //preparamos el json
           console.log(json);
           let jsonString = JSON.stringify(json);
-          
+
 
 
           $.ajax({
@@ -815,10 +755,12 @@ function func(dolar) {
             data: json,
             success: function (response) {
               console.log(response);
-              
+
             },
           });
-        
+
+        }
+
       });
 
       //con esto hacemos la busqueda de los productos
