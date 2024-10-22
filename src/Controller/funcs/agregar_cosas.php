@@ -62,9 +62,13 @@
         $clase = new Entrada(null, $_POST["proveedor"],$_POST["fecha_compra"],$_POST["codigo"],$_POST["detalles"]);
         $resultado = $clase->agregar($_POST["lista"]);
 
-        for ($i = 0; $i < count($_POST["pagos"]); $i++) {
-            $pago = $_POST["pagos"][$i];
-            $clase2 = new Pago_entrada(null, $resultado, $pago["metodo_pago"], $pago["monto"]);
+        echo "<br> last_insert_id: ";
+        print_r($resultado);
+        echo "<br>";
+
+        for ($i = 0; $i < count($_POST["metodos_pagos"]); $i++) {
+            $pago = $_POST["metodos_pagos"][$i];
+            $clase2 = new Pago_entrada(null, $pago["metodo"], $resultado, $pago["monto"]);
             $clase2->agregar();
         }
         
