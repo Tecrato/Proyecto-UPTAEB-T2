@@ -59,7 +59,15 @@
         require('../../Model/Entradas.php');
 
         $clase = new Entrada(null, $_POST["proveedor"],$_POST["fecha_compra"],$_POST["codigo"],$_POST["detalles"]);
-        $clase->agregar($_POST["lista"]);
+        $resultado = $clase->agregar($_POST["lista"]);
+
+        for ($i = 0; $i < count($_POST["metodos_pagos"]); $i++) {
+            $metodo = $_POST["metodos_pagos"][$i];
+            $clase2 = new Pago(null, $resultado, $metodo["metodo_pago"], $metodo["monto"]);
+            $clase2->agregar();
+        }
+        
+        echo json_encode(['status' => 'ok', 'message' => 'Entrada agregada correctamente', 'last_insert_id' => $resultado]);
         
     }
 
