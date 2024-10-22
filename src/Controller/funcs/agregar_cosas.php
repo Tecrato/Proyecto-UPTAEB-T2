@@ -57,13 +57,14 @@
     elseif ($tipo === 'entrada'){
         require("../../Model/Detalles_entradas.php");
         require('../../Model/Entradas.php');
+        require('../../Model/Pagos_entradas.php');
 
         $clase = new Entrada(null, $_POST["proveedor"],$_POST["fecha_compra"],$_POST["codigo"],$_POST["detalles"]);
         $resultado = $clase->agregar($_POST["lista"]);
 
-        for ($i = 0; $i < count($_POST["metodos_pagos"]); $i++) {
-            $metodo = $_POST["metodos_pagos"][$i];
-            $clase2 = new Pago(null, $resultado, $metodo["metodo_pago"], $metodo["monto"]);
+        for ($i = 0; $i < count($_POST["pagos"]); $i++) {
+            $pago = $_POST["pagos"][$i];
+            $clase2 = new Pago_entrada(null, $resultado, $pago["metodo_pago"], $pago["monto"]);
             $clase2->agregar();
         }
         

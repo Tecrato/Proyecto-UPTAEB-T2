@@ -33,6 +33,8 @@ RewriteRule ^api_agregar$ Controller/funcs/agregar_cosas.php
 RewriteRule ^api_editar$ Controller/funcs/modificar_cosas.php
 RewriteRule ^api_eliminar$ Controller/funcs/borrar_cosas.php
 
+RewriteRule ^modelo/conexion$ Model/conexion.php
+
 
 RewriteRule ^api_estadisticas$ Controller/funcs_ajax/estadisticas.php
 RewriteRule ^backup$ Controller/funcs_ajax/backup.php
