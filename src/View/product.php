@@ -41,6 +41,10 @@
                                         <li>
                                             <a id="productFilterCategory" href="#">CATEGORIA <span uk-drop-parent-icon></span></a>
                                             <div class="uk-dropdown">
+                                                <form class="uk-search uk-search-default uk-margin-small-bottom">
+                                                    <span uk-search-icon style="color: #999"></span>
+                                                    <input class="uk-search-input input_placeholder filter_product" name="categoria" type="search" placeholder="Buscar" aria-label="" style="color: #999; border-color: #999;">
+                                                </form>
                                                 <ul class="uk-nav uk-dropdown-nav filter_category">
                                                     <!-- aqui se cargan las categorias con js -->
                                                 </ul>
@@ -49,6 +53,10 @@
                                         <li>
                                             <a id="productFilterMarca" href="#">MARCA <span uk-drop-parent-icon></span></a>
                                             <div class="uk-dropdown">
+                                                <form class="uk-search uk-search-default uk-margin-small-bottom">
+                                                    <span uk-search-icon style="color: #999"></span>
+                                                    <input class="uk-search-input input_placeholder filter_product" name="marca" type="search" placeholder="Buscar" aria-label="" style="color: #999; border-color: #999;">
+                                                </form>
                                                 <ul class="uk-nav uk-dropdown-nav filter_marca">
 
                                                 </ul>

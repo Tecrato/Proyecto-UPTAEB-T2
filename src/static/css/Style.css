@@ -3,6 +3,9 @@
     overflow-y: auto;
     width: 280px;
 }
+.input_placeholder::placeholder{
+    color: #999 !important; 
+}
 .btn_pdf{
     display: flex;
     align-items: center;

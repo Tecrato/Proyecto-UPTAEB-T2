@@ -633,6 +633,32 @@ formAggProduct.addEventListener("submit", (e) => {
   });
 });
 
+//funcion para los filtros de productos
+
+let filter = document.querySelectorAll(".filter_product");
+filter.forEach((e) => {
+  e.addEventListener("keyup", () => {
+    let data = e.getAttribute("name");
+    let url
+
+    if (data == "categoria") {
+      url = "categorias"
+    } else {
+      url = "marcas"
+    }
+
+    $.ajax({
+      url: "api_search",
+      type: "GET",
+      data: { randomnautica: url, like: e.value },
+      success: function (response) {
+        console.log(response);
+      },
+    })
+    
+  });
+})
+
 //esta consulta sirve para cargar los datos de las categorias en el filtro
 $.ajax({
   url: "api_search",
