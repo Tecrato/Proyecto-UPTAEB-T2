@@ -92,7 +92,7 @@
             return $this->conn->lastInsertId();
         }
         public function borrar(){
-            $query = $this->conn->prepare("DELETE FROM $this->tabla WHERE ID=:id");
+            $query = $this->conn->prepare("DELETE FROM $this->table WHERE ID=:id");
             $query->bindParam(':id',$this->variables['id'], PDO::PARAM_INT);
             $query->execute();
         }
@@ -100,7 +100,7 @@
             if (!isset($this->variables['id']) and $this->variables['id'] == null){
                 return false;
             }
-            $sql = "UPDATE $his->tablet SET ";
+            $sql = "UPDATE $this->table SET ";
             foreach ($this->variables as $key => $value){
                 if ($key == 'id'){
                     continue;

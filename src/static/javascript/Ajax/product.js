@@ -598,7 +598,7 @@ formAggProduct.addEventListener("submit", (e) => {
   if (val == false) {
     url = "api_agregar";
   } else {
-    url = "Controller/funcs/modificar_cosas.php";
+    url = "api_editar";
   }
   //aqui instanciamos el objeto formData y como parametro, le pasamos el formulario
   //el formData es un objeto que actua con encapsulamiento de datos de los form
@@ -766,6 +766,7 @@ inpNameProduct.addEventListener("keyup", (e) => {
       type: "POST",
       data: { randomnautica: "productos", like: val },
       success: function (response) {
+        console.log(response)
         let json = JSON.parse(response);
         json.lista.forEach((e) => {
           let nombre = e.nombre.toLowerCase();
@@ -879,7 +880,7 @@ function Edit_U_M_C(tr) {
         let formDataEdit = new FormData(formEdit);
 
         $.ajax({
-          url: "Controller/funcs/modificar_cosas.php",
+          url: api_editar,
           type: "POST",
           data: formDataEdit,
           processData: false,
