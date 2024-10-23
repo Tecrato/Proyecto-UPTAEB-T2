@@ -30,7 +30,7 @@ function insertANDupdateCLient_proveedor(FORM, NUMBER, TABLE, TYPE) {
     if (insertOrUpdate == false) {
       url = "api_agregar"
     } else {
-      url = "Controller/funcs/modificar_cosas.php"
+      url = "api_editar"
     }
 
     let countryData = iti.getSelectedCountryData();

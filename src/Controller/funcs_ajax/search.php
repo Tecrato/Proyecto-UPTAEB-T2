@@ -8,6 +8,7 @@
     include("Controller/funcs/verificar.php");
     require('Model/Permisos.php');
     require('Model/Bitacora.php');
+    require('Model/Db_base.php');
 
 
     $limite = isset($_POST['limite']) ? intval($_POST['limite']) : 50;

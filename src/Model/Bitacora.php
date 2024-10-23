@@ -26,11 +26,6 @@
             return $this->conn->lastInsertId();
         }
 
-        static function add_bitacora($usuario, $tabla, $accion, $detalles){
-            $clase = new Bitacora(null, $usuario, $tabla, $accion, $detalles);
-            $clase->agregar();
-        }
-
         function COUNT(){
             return $this->conn->query("SELECT COUNT(*) as 'total' FROM bitacora")->fetch()['total'];
         }

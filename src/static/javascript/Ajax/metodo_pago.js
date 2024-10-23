@@ -105,7 +105,7 @@ formMetodoPago.addEventListener("submit", (e) => {
     if (bool == false) {
         UrlSite = "api_agregar"
     } else {
-        UrlSite = "Controller/funcs/modificar_cosas.php"
+        UrlSite = api_editar
     }
     e.preventDefault();
     let data = new FormData(formMetodoPago);

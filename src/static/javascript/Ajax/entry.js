@@ -5,6 +5,8 @@ const cargarEntrys = () => {
     type: "POST",
     data: { randomnautica: "entradas" },
     success: function (response) {
+      console.log(response)
+      
       let template;
       let json = JSON.parse(response);
       console.log(json);
@@ -54,7 +56,7 @@ const cargarEntrys = () => {
     },
   });
 };
-cargarEntrys()
+// cargarEntrys()
 
 $.ajax({
   url: "api_search",
