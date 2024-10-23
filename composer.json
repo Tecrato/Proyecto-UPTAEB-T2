@@ -4,7 +4,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Shtechnologyx\\Pt3\\": "src/",
+            "Shtechnologyx\\Proyecto-UPTAEB-T2\\": "src/",
             "Pt3\\Model" : "src/Model"
         }
     },
