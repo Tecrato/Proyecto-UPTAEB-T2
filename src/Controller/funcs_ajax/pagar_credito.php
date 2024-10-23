@@ -20,7 +20,10 @@
     print_r($_POST);
     $clase = new Credito(null,id_rv:$_POST["id_rv"]);
 
-    $clase->pagar($_SESSION['user_id'],$_POST["pagos"]);
+    $clase->pagar($_POST["pagos"]);
+
+    $clase2 = new Bitacora(null,$_SESSION['user_id'],"Credito","Pagado","Credito pagado");
+    $clase2->agregar();
 
     echo json_encode(['status' => 'active']);
 ?>

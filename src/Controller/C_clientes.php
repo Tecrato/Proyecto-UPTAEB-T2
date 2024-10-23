@@ -4,6 +4,8 @@
     include("./funcs/verificar.php");
     require('../Model/Clientes.php');
 
+    use Shtechnologyx\Pt3\Model\Usuario;
+    use Shtechnologyx\Pt3\Model\Cliente;
 
     include('../View/client.php');
 ?>

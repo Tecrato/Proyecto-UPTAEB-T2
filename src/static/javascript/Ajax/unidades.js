@@ -1,7 +1,7 @@
 // esta funcion se encargara de cargar las filas de las tablas de unidades
 const UnidadesTable = () => {
   $.ajax({
-    url: "Controller/funcs_ajax/search.php",
+    url: "api_search",
     type: "GET",
     data: { randomnautica: "unidades" },
     success: function (response) {

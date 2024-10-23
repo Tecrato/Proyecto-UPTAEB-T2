@@ -62,9 +62,9 @@ $(".pag-btn-productos_2").click((ele) => {
 });
 
 
-selectMetodoGanancia.addEventListener("change", ()=>{
+selectMetodoGanancia.addEventListener("change", () => {
   if (selectMetodoGanancia.value != 0) {
-    document.querySelector(".PVUpdateProduct").setAttribute("disabled","")
+    document.querySelector(".PVUpdateProduct").setAttribute("disabled", "")
     // document.querySelector(".PVUpdateProduct").value = ""
   } else {
     document.querySelector(".PVUpdateProduct").removeAttribute("disabled")
@@ -88,13 +88,13 @@ const modalDetalles = (n) => {
       // }
       //hacemos la peticion ajax para crear el esqueleto del modag
       $.ajax({
-        url: "Controller/funcs_ajax/search.php",
+        url: "api_search",
         type: "GET",
         data: { randomnautica: "productos", ID: idProduct, active: n },
         success: function (response) {
           let json = JSON.parse(response);
           json.lista.forEach((item) => {
-    
+
             document.querySelector(".productDetailName").textContent =
               item.nombre + " " + item.valor_unidad + " " + item.unidad;
             document.querySelector(".productDetailmarca").textContent =
@@ -105,7 +105,7 @@ const modalDetalles = (n) => {
               item.stock ? item.stock : 0;
             document.querySelector(".productDetailPV").textContent =
               parseFloat(item.precio_venta).toFixed(2);
-            JsBarcode("#Bard",item.codigo,{
+            JsBarcode("#Bard", item.codigo, {
               width: 1.3
             })
 
@@ -147,7 +147,7 @@ const modalDetalles = (n) => {
                       sup.parentElement.getAttribute("idProveedor");
                     let contenedor = sup.nextElementSibling;
                     $.get(
-                      "Controller/funcs_ajax/search.php",
+                      "api_search",
                       {
                         randomnautica: "entradas",
                         id_producto: idProduct,
@@ -216,7 +216,7 @@ const modalEntradas = () => {
       document.getElementById("ValueIdEntry").setAttribute("value", idProduct);
       // ejecutamos esta peticion para traer los proveedores de los productos a los select
       $.ajax({
-        url: "Controller/funcs_ajax/search.php",
+        url: "api_search",
         type: "GET",
         data: { randomnautica: "proveedores" },
         success: function (response) {
@@ -290,7 +290,7 @@ const modalModificar = () => {
         .setAttribute("value", idProduct);
       // ejecutamos esta peticion para traer los proveedores de los productos a los select
       $.ajax({
-        url: "Controller/funcs_ajax/search.php",
+        url: "api_search",
         type: "GET",
         data: { randomnautica: "productos", ID: idProduct },
         success: function (response) {
@@ -349,40 +349,40 @@ const modalEliminar = () => {
       let formDelete = document.querySelector("#formDelete");
       if (!formDelete.dataset.listenerAdded) {
 
-      //captamos su evento submit
-      formDelete.addEventListener("submit", (e) => {
-        e.preventDefault();
-        //creamos y luego pasamos por parametro los datos del form
-        let detailDelete = new FormData(formDelete);
-        //hacemos la peticion ajax
-        $.ajax({
-          url: "Controller/funcs/borrar_cosas.php",
-          type: "POST",
-          data: detailDelete,
-          processData: false,
-          contentType: false,
-          success: function (response) {
-            console.log(response);
-            //ocultamos el modal
-            UIkit.modal("#eliminar_product").hide();
-            //mostramos el mensaje de eliminacion exitosa
-            UIkit.notification.closeAll();
+        //captamos su evento submit
+        formDelete.addEventListener("submit", (e) => {
+          e.preventDefault();
+          //creamos y luego pasamos por parametro los datos del form
+          let detailDelete = new FormData(formDelete);
+          //hacemos la peticion ajax
+          $.ajax({
+            url: "Controller/funcs/borrar_cosas.php",
+            type: "POST",
+            data: detailDelete,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+              console.log(response);
+              //ocultamos el modal
+              UIkit.modal("#eliminar_product").hide();
+              //mostramos el mensaje de eliminacion exitosa
+              UIkit.notification.closeAll();
 
-            UIkit.notification({
-              message:
-                "<span uk-icon='icon: check'></span> Producto Eliminado correctamente ",
-              status: "success",
-              pos: "bottom-right",
-              group: idDelete,
-            });
+              UIkit.notification({
+                message:
+                  "<span uk-icon='icon: check'></span> Producto Eliminado correctamente ",
+                status: "success",
+                pos: "bottom-right",
+                group: idDelete,
+              });
 
-            //para al final, llamar a la funcion de cargar las tarjetas
-            cargarTargetProduct();
-            document.querySelector(".searchProductActive").value = "";
-          },
+              //para al final, llamar a la funcion de cargar las tarjetas
+              cargarTargetProduct();
+              document.querySelector(".searchProductActive").value = "";
+            },
+          });
         });
-      });
-    }
+      }
     });
   });
 };
@@ -480,7 +480,7 @@ const cargarTargetProduct = (page) => {
   //hacemos la petion ajax
   page_productos = page
   $.ajax({
-    url: "Controller/funcs_ajax/search.php",
+    url: "api_search",
     type: "GET",
     data: {
       randomnautica: "productos",
@@ -492,7 +492,7 @@ const cargarTargetProduct = (page) => {
     success: function (response) {
       marcaAgua();
       tarjetas(response, ".container-target-product");
-      (page_productos,total_productos,'\n',response)
+      (page_productos, total_productos, '\n', response)
       modalDetalles(1);
       if (session_user_rol_num == "1") {
         $(".btn-modal-register").removeClass("invisible")
@@ -512,7 +512,7 @@ cargarTargetProduct(0)
 
 const cargarCategoriaRegProduct = () => {
   $.ajax({
-    url: "Controller/funcs_ajax/search.php",
+    url: "api_search",
     type: "GET",
     data: { randomnautica: "categorias" },
     success: function (response) {
@@ -534,7 +534,7 @@ const cargarCategoriaRegProduct = () => {
 const cargarUnidadesRegProduct = () => {
   //   //ejecutamos esta peticion para traer las unidades de los productos a los select
   $.ajax({
-    url: "Controller/funcs_ajax/search.php",
+    url: "api_search",
     type: "GET",
     data: { randomnautica: "unidades" },
     success: function (response) {
@@ -556,7 +556,7 @@ const cargarUnidadesRegProduct = () => {
 const cargarMarcasRegProduct = () => {
   //   //ejecutamos esta peticion para traer las unidades de los productos a los select
   $.ajax({
-    url: "Controller/funcs_ajax/search.php",
+    url: "api_search",
     type: "GET",
     data: { randomnautica: "marcas" },
     success: function (response) {
@@ -633,39 +633,123 @@ formAggProduct.addEventListener("submit", (e) => {
   });
 });
 
+//funcion para los filtros de productos
+
+
 //esta consulta sirve para cargar los datos de las categorias en el filtro
-$.ajax({
-  url: "Controller/funcs_ajax/search.php",
-  type: "GET",
-  data: { randomnautica: "categorias" },
-  success: function (response) {
-    let options = ``;
-    let json = JSON.parse(response);
-    json.lista.forEach((date) => {
-      options += `<li  uk-filter-control="filter: [data-category='${date.nombre}']; group: category"><a class='filterS' href="#">${date.nombre}</a></li>`;
-    });
-    document.querySelector(".filter_category").innerHTML += options;
-  },
-});
+let cargarCategoriasFilter = () => {
+  $.ajax({
+    url: "api_search",
+    type: "GET",
+    data: { randomnautica: "categorias" },
+    success: function (response) {
+      let options = ``;
+      let json = JSON.parse(response);
+      json.lista.forEach((date) => {
+        options += `<li  uk-filter-control="filter: [data-category='${date.nombre}']; group: category"><a class='filterS' href="#">${date.nombre}</a></li>`;
+      });
+      document.querySelector(".filter_category").innerHTML = options;
+    },
+  });
+}
+cargarCategoriasFilter()
 //esta consulta sirve para cargar los datos de las marcas en el filtro
-$.ajax({
-  url: "Controller/funcs_ajax/search.php",
-  type: "GET",
-  data: { randomnautica: "marcas" },
-  success: function (response) {
-    let options = ``;
-    let json = JSON.parse(response);
-    json.lista.forEach((E) => {
-      options += `<li  uk-filter-control="filter: [data-marca='${E.nombre}']; group: marca"><a class='filterS' href="#">${E.nombre}</a></li>`;
-    });
-    document.querySelector(".filter_marca").innerHTML += options;
-  },
-});
+let cargarMarcasFilter = () => {
+  $.ajax({
+    url: "api_search",
+    type: "GET",
+    data: { randomnautica: "marcas" },
+    success: function (response) {
+      let options = ``;
+      let json = JSON.parse(response);
+      json.lista.forEach((E) => {
+        options += `<li  uk-filter-control="filter: [data-marca='${E.nombre}']; group: marca"><a class='filterS' href="#">${E.nombre}</a></li>`;
+      });
+      document.querySelector(".filter_marca").innerHTML = options;
+    },
+  });
+}
+cargarMarcasFilter()
+
+
+
+let filter = document.querySelectorAll(".filter_product");
+const messaje = (e) => {
+  return `        <li>
+                      <div class="uk-padding-remove-vertical uk-flex uk-flex-middle">
+                          <span class="uk-margin-small-right" uk-icon="history"></span>
+                          <p class="uk-margin-small">no se encontro resultado</p>
+                      </div>
+                      <div class="uk-padding-remove-vertical uk-flex uk-flex-middle">
+                        <div class="uk-flex uk-flex-center uk-margin-small-top" style="width: 100%;">
+                            <a href="Productos" class="uk-button uk-button-default" style="color: #999; border-color: #999;">${e}</a>
+                        </div>
+                      </div>
+                  </li>`
+}
+filter.forEach((e) => {
+  e.addEventListener("keyup", () => {
+    let data = e.getAttribute("name");
+    if (data == "categoria") {
+      if (e.value != "") {
+        $.ajax({
+          url: "api_search",
+          type: "GET",
+          data: { randomnautica: "categorias", like: e.value },
+          success: function (response) {
+            let options = ``;
+            let json = JSON.parse(response);
+            json.lista.forEach((date) => {
+              options += `<li  uk-filter-control="filter: [data-category='${date.nombre}']; group: category"><a class='filterS' href="#">${date.nombre}</a></li>`;
+            });
+            if(json.lista.length == 0){
+              document.querySelector(".filter_category").innerHTML = messaje("Registrar Categoria")
+            } else {
+              document.querySelector(".filter_category").innerHTML = options;
+            }
+          },
+        });
+      } else {
+        cargarCategoriasFilter()
+      }
+
+
+    } else if (data == "marca") {
+      if (e.value != "") {
+        $.ajax({
+          url: "api_search",
+          type: "GET",
+          data: { randomnautica: "marcas", like: e.value },
+          success: function (response) {
+            let options = ``;
+            let json = JSON.parse(response);
+            json.lista.forEach((date) => {
+              options += `<li  uk-filter-control="filter: [data-category='${date.nombre}']; group: category"><a class='filterS' href="#">${date.nombre}</a></li>`;
+            });
+            if(json.lista.length == 0){
+              document.querySelector(".filter_marca").innerHTML = messaje("Registrar Marca")
+            } else {
+              document.querySelector(".filter_marca").innerHTML = options;
+            }
+          },
+        });
+      } else {
+        cargarMarcasFilter()
+      }
+    }
+  });
+})
+
+
+
+
+
+
 //esta funcion tiene el objetivo de mostrar los productos por nombre
 document.querySelector(".searchProductActive").addEventListener("keyup", (e) => {
-    like_product = e.target.value;
-    cargarTargetProduct(0);
-  });
+  like_product = e.target.value;
+  cargarTargetProduct(0);
+});
 
 
 let inpNameProduct = document.querySelector(".NameUpdateProduct");
@@ -673,7 +757,7 @@ inpNameProduct.addEventListener("keyup", (e) => {
   let val = e.target.value.toLowerCase();
   if (val != "") {
     $.ajax({
-      url: "Controller/funcs_ajax/search.php",
+      url: "api_search",
       type: "GET",
       data: { randomnautica: "productos", like: val },
       success: function (response) {
@@ -717,7 +801,7 @@ inpNameProduct.addEventListener("keyup", (e) => {
 });
 
 // estas funciones son para las marcas, unidades y categorias
-function Registrar_U_M_C(form, tr, item_reset, notification){
+function Registrar_U_M_C(form, tr, item_reset, notification) {
   // seleccionamos el formulario
   let Form_identificador = document.getElementById(form);
   // captamos su evento submit
@@ -746,7 +830,7 @@ function Registrar_U_M_C(form, tr, item_reset, notification){
     });
   });
 };
-function Edit_U_M_C(tr){
+function Edit_U_M_C(tr) {
   // seleccionamos todos los btn de editar de las tablas
   let btnAction = document.querySelectorAll(".Edit-U_M_C");
   // los recorremos
@@ -812,7 +896,7 @@ function Edit_U_M_C(tr){
     });
   });
 };
-function DELETE_U_M_C(TR, BTN){
+function DELETE_U_M_C(TR, BTN) {
   //seleccionamos todos los btn de eliminar de el modulo correspondiente
   document.querySelectorAll(BTN).forEach((b) => {
     b.addEventListener("click", () => {

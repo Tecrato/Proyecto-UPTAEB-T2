@@ -1,13 +1,16 @@
 <?php
 
-require('../../Model/Conexion.php');
+require_once("../../../vendor/autoload.php");
+// require('../../Model/Conexion.php');
 require('../../Model/Usuarios.php');
 include("../funcs/verificar.php");
-require('../../Plugins/fpdf.php');
+// require('../../Plugins/fpdf.php');
 
-require('../../Model/Estadisticas.php');
+use Shtechnologyx\Pt3\Model\Estadisticas;
+
+// require('../../Model/Estadisticas.php');
+
 $clase = new Estadisticas();
-// print_r($_POST);
 
 $max = isset($_POST['max']) ? $_POST['max'] : null;
 $min = isset($_POST['min']) ? $_POST['min'] : null;

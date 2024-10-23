@@ -1,10 +1,14 @@
 <?php
-class Estadisticas extends DB
+
+namespace Shtechnologyx\Pt3\Model;
+
+
+class Estadisticas extends Conexion
 {
 
     function __construct()
     {
-        DB::__construct();
+        Conexion::__construct();
     }
     function ratio_ventas()
     {

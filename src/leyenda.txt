@@ -22,7 +22,7 @@ parametros opcionales:
  - [nombre de columna segun la tabla]: str = [valor que tendra la columna]
  - [nombre de columna segun la tabla]: str = [valor que tendra la columna]
 
- - subFuncion: str = "bitacora" o "count" o "detallesCapital"
+ - subFuncion: str = "count" o "detallesCapital"
 
 retorno:
 {

@@ -1,0 +1,31 @@
+{
+    "proveedor": 0,
+    "fecha_compra": 0,
+    "metodos_pagos": [
+        {
+            "transferencia": 0,
+            "efectivo": 0,
+            "cheque": 0
+        }
+    ],
+    "codigo": "12345678",
+    "detalles": "nose que póner áca",
+    "lista": [
+        {
+            "idproducto": 0,
+            "precio_compra": 200,
+            "fecha_vencimiento": "2020-01-01",
+            "mercancia": "saco de huevos",
+            "t_mercancia": 24,
+            "cantidad_mercancia": 20
+        },
+        {
+            "id_producto": 20,
+            "precio_por": 200,
+            "fecha_vencimiento": "2020-01-01",
+            "mercancia": "saco de huevos",
+            "t_mercancia": 24,
+            "cantidad_mercancia": 20
+        }
+    ]
+}

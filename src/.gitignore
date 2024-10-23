@@ -1,0 +1,8 @@
+Media/imagenes/*.*
+!Media/imagenes/banner_productos.png
+
+rar.rar
+.env
+.vscode
+.vscode/
+

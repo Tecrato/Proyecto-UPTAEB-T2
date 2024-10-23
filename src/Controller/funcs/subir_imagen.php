@@ -1,4 +1,6 @@
 <?php
+namespace Shtechnologyx\Pt3\Controller\funcs;
+
 	function subir_imagen($imagen,$inicial="", $replace=false){
 		$extensiones = [0=>'image/jpg',1=>'image/jpeg',2=>'image/png'];
 		if ($imagen['error']){

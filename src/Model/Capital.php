@@ -1,24 +1,25 @@
 <?php
-	class Capital extends DB {
+
+namespace Shtechnologyx\Pt3\Model;
+use PDO;
+	class Capital extends Conexion {
 
 		private $id;
 		private $monto;
         private $descripcion;
 
 		function __construct($id=null, $descripcion=null, $monto=null){
-			DB::__construct();
+			Conexion::__construct();
 			$this->id = $id;
 			$this->monto = $monto;
             $this->descripcion = $descripcion;
 		}
 
-        function agregar($usuario) {
+        function agregar() {
             $query = $this->conn->prepare("INSERT INTO movimientos_capital (monto, descripcion) VALUES(:monto, :descripcion)");
             $query->bindParam(':monto', $this->monto);
             $query->bindParam(':descripcion', $this->descripcion);
             $query->execute();
-            $this->add_bitacora($usuario,"movimientos_capital","Registrar","Capital Cambiado");
-            return $this->conn->lastInsertId();
         }
         function search($n=0,$limite=100){
             // Al igual que la clase anterior, puede buscar segun muchos valores o solo algunos

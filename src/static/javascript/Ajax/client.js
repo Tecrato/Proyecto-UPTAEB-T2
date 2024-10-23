@@ -130,7 +130,7 @@ const ModalEdit = () => {
       let id = b.getAttribute("id")
       document.querySelector(".ValueInpUpdateClient").setAttribute("value", id);
       $.ajax({
-        url: "Controller/funcs_ajax/search.php",
+        url: "api_search",
         type: "GET",
         data: { randomnautica: "clientes", ID: id },
         success: function (response) {
@@ -175,7 +175,7 @@ const ModalEdit = () => {
 function cardClient(page) {
   page_clientes = page
   $.ajax({
-    url: "Controller/funcs_ajax/search.php",
+    url: "api_search",
     type: "GET",
     data: { randomnautica: "clientes", n: page_clientes, limite: 6 },
     success: function (response) {
@@ -259,4 +259,101 @@ function cardClient(page) {
   });
 }
 cardClient(0)
+
+let searchFilter = document.querySelector("#SearchCustomer")
+
+searchFilter.addEventListener("keyup", () => {
+  let value = searchFilter.value
+  let data = {}
+  if (parseInt(value)) {
+    data = {
+      randomnautica: "clientes", 
+      like_cedula: value
+    }
+  } else {
+    data = {
+      randomnautica: "clientes", 
+      like_nombre: value
+    }
+  }
+  $.ajax({
+    url: "api_search",
+    type: "GET",
+    data: data,
+    success: function (response) {
+      let json = JSON.parse(response);
+      let template = "";
+      if (json.lista.length == 0) {
+        marcaAgua()
+        
+      } else {
+        json.lista.forEach((element) => {
+          template += `   <div>
+          <div class="target_supplier uk-card uk-card-default uk-flex uk-padding-small uk-background-secondary uk-light uk-border-rounded"
+              style="width: 370px; background-color: #333;">
+              <div>
+                  <div class="img_proveedor_container uk-border-rounded">
+                      <img src="static/images/undraw_profile_2.svg" alt="" width="120px" />
+                      <h5
+                          class="uk-margin-remove-left uk-margin-remove-right uk-margin-small-top uk-margin-small-bottom uk-text-center">
+                          ${element.nombre}
+                      </h5>
+                  </div>
+              </div>
+      
+              <div>
+                  <div class="uk-flex uk-flex-middle uk-flex-between uk-margin-small-bottom">
+                      <h4 class="uk-margin-remove-bottom uk-margin-right uk-text-center">
+                          DATOS
+                      </h4>
+                      <div>
+                          <a href="#modificar_cliente" id="${element.id}" uk-tooltip="title:Editar; delay: 500"
+                              class="uk-icon-button uk-margin-small-right edit_client" type="button"
+                              style="border: none; cursor: pointer">
+                              <span uk-icon="icon: file-edit"></span>
+                          </a>
+                          <a href="#eliminar_cliente" uk-toggle id="${element.id}" uk-tooltip="title:Eliminar; delay: 500"
+                              class="uk-icon-button uk-margin-small-right delete_client" uk-tooltip="title:Eliminar; delay: 500"
+                              type="button" style="border: none; cursor: pointer" type="button">
+                              <span uk-icon="icon: trash"></span>
+                          </a>
+                      </div>
+                  </div>
+      
+                  <hr class="uk-margin-bottom uk-margin-remove-top hr_supplier" />
+      
+                  <div class="Container-details-suppliers" style="width: 200px;">
+                      <div class="uk-flex">
+                          <h6 class="uk-margin-small">Documento</h6>
+                          <p class="uk-margin-small uk-margin-small-left uk-margin-remove-top uk-text-meta">
+                          ${element.documento + "-" + element.cedula}
+                          </p>
+                      </div>
+                      <div class="uk-flex">
+                          <h6 class="uk-margin-small">Telefono</h6>
+                          <p class="uk-margin-small uk-margin-small-left uk-margin-remove-top uk-text-meta">
+                          ${element.telefono}
+                          </p>
+                      </div>
+                      <div class="">
+                          <h6 class="uk-margin-small-right uk-margin-remove-bottom" style="float: left;">Direccion
+                          </h6>
+                          <p class="uk-margin-small uk-margin-small-left uk-margin-remove-top uk-margin-remove-left uk-text-meta"
+                              style="width: 185px; line-height: 23px;">
+                              ${element.direccion}
+                          </p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>`
+          
+      });
+      }
+       
+      $(".cont_client_cards").html(template)
+      marcaAgua()
+    }
+  })
+})
 insertANDupdateCLient_proveedor('.form_client', "#tlfno_client", cardClient, "cliente")

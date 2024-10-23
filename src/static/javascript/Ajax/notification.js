@@ -1,7 +1,7 @@
 
 function newNotification() {
     $.ajax({
-        url: "Controller/funcs_ajax/search.php",
+        url: "api_search",
         type: "GET",
         data: { randomnautica: "notificaciones", status: 1 , subFunction: 'count'},
         success: function (response) {
@@ -18,7 +18,7 @@ newNotification()
 
 const cargarNotify = () =>{
     $.ajax({
-        url: "Controller/funcs_ajax/search.php",
+        url: "api_search",
         type: "GET",
         data: { randomnautica: "notificaciones" },
         success: function (response) {

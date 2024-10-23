@@ -34,6 +34,8 @@
         else if ($rol == 3){
             $_SESSION['rol'] = "Usuario"; // Y tambien guarda el nombre para despues   
         }
+        $clase2 = new Bitacora(null,$row['id'],"Usuarios","Login","Usuario ".$row['nombre']." logueado");
+        $clase2->agregar();
         echo 1;
     } else {
         echo 0;

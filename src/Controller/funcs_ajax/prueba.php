@@ -121,17 +121,50 @@
 	// $clase = new Caja(null,$_SESSION['user_id'],monto_inicial:10000);
 	// $clase->abrir();
 	
-	$otra_clase_mas = new Caja(id_usuario:$_SESSION['user_id'], estado:1);
-	$ultima_caja = $otra_clase_mas->buscar_ultima();
-	if ($ultima_caja == NULL) {
-		echo json_encode(['status' => 'error','estado'=>'no']);
-		exit(0);
-		die();
-	}
-	echo json_encode(['status' => 'active','estado'=>'si']);
-	
+	$cont = password_hash('(Tocuyo1##)',PASSWORD_DEFAULT);
+	print_r($cont);
+	echo '<br>';
 
-	print_r(phpinfo());
+	$datos = json_decode('
+{
+    "proveedor": 1,
+    "fecha_compra": "2020-01-01",
+    "metodos_pagos": [
+        {
+            "transferencia": 0,
+            "efectivo": 0,
+            "cheque": 0
+        }
+    ],
+    "codigo": "12345678",
+    "detalles": "nose que póner áca",
+    "lista": [
+        {
+            "id_producto": 4,
+            "precio_compra": 200,
+            "fecha_vencimiento": "2025-01-01",
+            "mercancia": "saco de huevos",
+            "t_mercancia": 24,
+            "cantidad_mercancia": 20
+        },
+        {
+            "id_producto": 4,
+            "precio_compra": 200,
+            "fecha_vencimiento": "2025-01-01",
+            "mercancia": "saco de huevos",
+            "t_mercancia": 24,
+            "cantidad_mercancia": 20
+        }
+    ]
+}
+	');
+	
+	print_r((array)$datos->lista[0]);
+
+	require('../../Model/Detalles_entradas.php');
+	require('../../Model/Entradas.php');
+	$clase = new Entrada(null,$datos->proveedor,$datos->fecha_compra,$datos->codigo,$datos->detalles);
+	print_r($clase->agregar($datos->lista));
 
 	?>
 	

@@ -3,6 +3,9 @@
     overflow-y: auto;
     width: 280px;
 }
+.input_placeholder::placeholder{
+    color: #999 !important; 
+}
 .btn_pdf{
     display: flex;
     align-items: center;
@@ -326,6 +329,13 @@
     border: 1px solid #ffffff84;
     /* padding: 10px; */
     height: 70px;
+    width: 175px;
+    /* border-radius: 10px; */
+}
+.Plus-supplier{
+    border: 1px solid #ffffff84;
+    /* padding: 10px; */
+    height: 95px;
     width: 175px;
     /* border-radius: 10px; */
 }

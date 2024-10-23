@@ -1,13 +1,18 @@
 <?php
-    require('../Model/Conexion.php');
-    require('../Model/Usuarios.php');
-    include("./funcs/verificar.php");
-    
+// require_once __DIR__ . '../../../vendor/autoload.php';
+require("../../vendor/autoload.php");
 
-    include('../Model/Productos.php');
-    include('../Model/Clientes.php');
-    include('../Model/Proveedores.php');
-    include('../Model/Registro de ventas.php');
+
+    // require('../Model/Conexion.php');
+    // require('../Model/Usuarios.php');
+    // include("./funcs/verificar.php");
+    
+    use Shtechnologyx\Pt3\Model\Usuario;
+    // use Shtechnologyx\Pt3\Controller\funcs\verificar;;
+    use Shtechnologyx\Pt3\Model\Producto;
+    use Shtechnologyx\Pt3\Model\Cliente;
+    use Shtechnologyx\Pt3\Model\Proveedor;
+    use Shtechnologyx\Pt3\Model\Registro_ventas;
 
     $result = new Producto(active:1);
     $result = $result->search(limite: 5,order: ' id DESC');

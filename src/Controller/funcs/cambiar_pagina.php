@@ -1,6 +1,17 @@
 <?php
+
+namespace Shtechnologyx\Pt3\Controller\funcs;
+require('../../../vendor/autoload.php');
+
     require('../../Model/Conexion.php');
     // Con este codigo se avanza o se retrocede la pagina en las pantallas
+
+    use Shtechnologyx\Pt3\Model\Producto;
+    use Shtechnologyx\Pt3\Model\Entrada;
+    use Shtechnologyx\Pt3\Model\Proveedor;
+    use Shtechnologyx\Pt3\Model\Cliente;
+    use Shtechnologyx\Pt3\Model\Registro_ventas;
+
 
     $dir = $_GET['dir'];
     $page = intval($_GET['p']);
@@ -9,27 +20,22 @@
     $active = isset($_GET['active']) ?intval($_GET['active']) : 1;
 
     if ($type == 'productos') {
-        require('../../Model/Productos.php');
         $vart = new Producto;
         $todos = $vart->COUNT();
     }
     if ($type == 'entradas') {
-        require('../../Model/Entradas.php');
         $vart = new Entrada;
         $todos = $vart->COUNT();
     } 
     elseif ($type == 'proveedores') {
-        require('../../Model/Proveedores.php');
         $vart = new Proveedor;
         $todos = $vart->COUNT();
     }
     elseif ($type == 'clientes') {
-        require('../../Model/Clientes.php');
         $vart = new Cliente;
         $todos = $vart->COUNT();
     }
     elseif ($type == 'ventas') {
-        require('../../Model/Registro de ventas.php');
         $vart = new Registro_ventas();
         $todos = $vart->COUNT();
     }

@@ -16,7 +16,7 @@ if (session_user_rol_num == "1") {
 
 function func(dolar) {
   $.ajax({
-    url: "Controller/funcs_ajax/search.php",
+    url: "api_search",
     type: "GET",
     data: { randomnautica: "productos" },
     success: function (response) {
@@ -366,7 +366,7 @@ function func(dolar) {
         })
         let availableOptions = []
         $.ajax({
-          url: "Controller/funcs_ajax/search.php",
+          url: "api_search",
           type: "GET",
           data: { randomnautica: "metodo_pago" },
           success: function (response) {
@@ -675,7 +675,7 @@ function func(dolar) {
 const targetFact = (num) => {
   pag_facturas = num
   $.ajax({
-    url: "Controller/funcs_ajax/search.php",
+    url: "api_search",
     type: "GET",
     data: { randomnautica: "ventas", n: pag_facturas, limite: 9 },
     success: function (response) {
@@ -758,7 +758,7 @@ document.getElementById("input-search-fact").addEventListener("keyup", (e) => {
   //si no esta vacio, entonces enviamos una solicitud ajax para buscar los clientes
   if (val != "") {
     $.ajax({
-      url: "Controller/funcs_ajax/search.php",
+      url: "api_search",
       type: "GET",
       data: { randomnautica: "clientes", like_cedula: val },
       success: function (response) {

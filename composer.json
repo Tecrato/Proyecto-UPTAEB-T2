@@ -1,0 +1,14 @@
+{
+    "name": "shtechnologyx/pt3",
+    "description": "Sistema de gestion administrativo",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Shtechnologyx\\Pt3\\": "src/",
+            "Pt3\\Model" : "src/Model"
+        }
+    },
+    "require": {
+        "setasign/fpdf": "^1.8"
+    }
+}
