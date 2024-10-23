@@ -1,6 +1,6 @@
-http://localhost/Proyecto-UPTAEB-T2/Inicio
+http://localhost/Pt3/Inicio
 
-http://github.com/Tecrato/Proyecto-UPTAEB-T2/
+http://github.com/Tecrato/Pt3/
 
 https://uiverse.io/Nawsome/short-dolphin-98
 

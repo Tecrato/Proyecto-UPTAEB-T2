@@ -189,13 +189,13 @@ echo "
         <nav class="uk-background-secondary uk-light" uk-navbar>
             <div class="uk-navbar-left ">
                 <ul class="uk-navbar-nav uk-margin-large-left">
-                    <li class="uk-margin-small-right Link" href="/Proyecto-UPTAEB-T2/Inicio">
+                    <li class="uk-margin-small-right Link" href="/Pt3/Inicio">
                         <a id="linkInicio" class="uk-button uk-button-text enlace_nav" href="Inicio">
                             <span uk-icon="thumbnails" class="uk-icon uk-margin-small-right uk-icon-button"></span>
                             <p>Inicio</p>
                         </a>
                     </li>
-                    <li class="uk-margin-small-right Link" href="/Proyecto-UPTAEB-T2/Productos">
+                    <li class="uk-margin-small-right Link" href="/Pt3/Productos">
                         <a id="linkProductos" class="uk-button uk-button-text enlace_nav" href="Productos">
                             <span uk-icon="product" class="uk-icon uk-margin-small-right uk-icon-button"></span>
                             <p>Productos</p>
@@ -203,7 +203,7 @@ echo "
                     </li>
                     <?php if ($_SESSION['rol_num'] <= 2) { ?>
 
-                        <li class="uk-margin-small-right Link" href="/Proyecto-UPTAEB-T2/Proveedores">
+                        <li class="uk-margin-small-right Link" href="/Pt3/Proveedores">
                             <a id="linkProveedores" class="uk-button uk-button-text enlace_nav" href="Proveedores">
                                 <span uk-icon="bookmark" class="uk-icon uk-margin-small-right uk-icon-button"></span>
                                 <p>Proveedores</p>
@@ -211,14 +211,14 @@ echo "
                         </li>
 
                     <?php }; ?>
-                    <li class="uk-margin-small-right Link" href="/Proyecto-UPTAEB-T2/Clientes">
+                    <li class="uk-margin-small-right Link" href="/Pt3/Clientes">
                         <a id="linkClientes" class="uk-button uk-button-text enlace_nav" href="Clientes">
                             <span uk-icon="users" class="uk-icon uk-margin-small-right uk-icon-button"></span>
                             <p>Clientes</p>
                         </a>
                     </li>
                     <?php if ($_SESSION['rol_num'] <= 2) { ?>
-                        <li class="uk-margin-small-right Link" href="/Proyecto-UPTAEB-T2/Estadisticas">
+                        <li class="uk-margin-small-right Link" href="/Pt3/Estadisticas">
                             <a id="linkEstadisticas" class="uk-button uk-button-text enlace_nav" href="Estadisticas">
                                 <span uk-icon="statitics" class="uk-icon uk-margin-small-right uk-icon-button"></span>
                                 <p>Estadisticas</p>
@@ -226,7 +226,7 @@ echo "
                         </li>
                     <?php }; ?>
 
-                    <li class="uk-margin-small-right Link" href="/Proyecto-UPTAEB-T2/Ventas">
+                    <li class="uk-margin-small-right Link" href="/Pt3/Ventas">
                         <a id="linkVentas" class="uk-button uk-button-text enlace_nav" href="Ventas">
                             <span uk-icon="factura" class="uk-icon uk-margin-small-right uk-icon-button"></span>
                             <p>Registro de ventas</p>

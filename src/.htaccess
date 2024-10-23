@@ -1,14 +1,14 @@
 RewriteEngine On
 
-ErrorDocument 404 /Proyecto-UPTAEB-T2/src/View/404.php
+ErrorDocument 404 /Pt3/src/View/404.php
 
 
-# RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/Model/
-# RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/View/
-# RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/Backups/
-# RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/Plugins/
-# RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/Media/
-# RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/static/
+# RedirectMatch 403 ^/Pt3/src/Model/
+# RedirectMatch 403 ^/Pt3/src/View/
+# RedirectMatch 403 ^/Pt3/src/Backups/
+# RedirectMatch 403 ^/Pt3/src/Plugins/
+# RedirectMatch 403 ^/Pt3/src/Media/
+# RedirectMatch 403 ^/Pt3/src/static/
 
 RewriteRule ^(Inicio)?$ Controller/C_index.php
 
@@ -47,7 +47,7 @@ RewriteRule ^test$ Controller/funcs_ajax/prueba.php
 
 # RewriteCond %{REQUEST_FILENAME} !-f
 # RewriteCond %{REQUEST_FILENAME} !-d
-# RewriteRule ^(.*)$ /Proyecto-UPTAEB-T2/src/View/404.php
+# RewriteRule ^(.*)$ /Pt3/src/View/404.php
 
 # RewriteRule ^Model/$ View/404.php [NC]
 

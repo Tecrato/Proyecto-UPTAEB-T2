@@ -1,10 +1,10 @@
 {
-    "name": "shtechnologyx/pt3",
+    "name": "shtechnologyx/Pt3",
     "description": "Sistema de gestion administrativo",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Shtechnologyx\\Proyecto-UPTAEB-T2\\": "src/"
+            "Shtechnologyx\\Pt3\\": "src/"
         }
     },
     "require": {

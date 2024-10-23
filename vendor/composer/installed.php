@@ -1,6 +1,6 @@
 <?php return array(
     'root' => array(
-        'name' => 'shtechnologyx/pt3',
+        'name' => 'shtechnologyx/Pt3',
         'pretty_version' => '1.0.0+no-version-set',
         'version' => '1.0.0.0',
         'reference' => null,
@@ -19,7 +19,7 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-        'shtechnologyx/pt3' => array(
+        'shtechnologyx/Pt3' => array(
             'pretty_version' => '1.0.0+no-version-set',
             'version' => '1.0.0.0',
             'reference' => null,

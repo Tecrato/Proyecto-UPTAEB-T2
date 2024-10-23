@@ -132,10 +132,10 @@ formRegisterUser.addEventListener("submit", (e) => {
                 success: (response) => {
                     (response);
                     if (response == "1") {
-                        window.location = "http://localhost/Proyecto-UPTAEB-T2/Administrar_perfil"
+                        window.location = "http://localhost/Pt3/Administrar_perfil"
                         localStorage.setItem("intro", "true")
                     } else {
-                        window.location = "http://localhost/Proyecto-UPTAEB-T2/login"
+                        window.location = "http://localhost/Pt3/login"
                     }
                 }
             })

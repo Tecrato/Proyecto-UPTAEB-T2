@@ -74,7 +74,7 @@
                 </section>
                 <hr class="uk-divide">
                 <div class="uk-flex uk-flex-center ">
-                    <a class="uk-button uk-button-default uk-margin-small-top" href="/Proyecto-UPTAEB-T2/Productos">Ver más</a>
+                    <a class="uk-button uk-button-default uk-margin-small-top" href="/Pt3/Productos">Ver más</a>
                 </div>
             </div>
         </div>

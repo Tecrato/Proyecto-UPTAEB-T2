@@ -7,6 +7,6 @@
 </head>
 <body>
     <h1>Error 404</h1>
-    <a href="/Proyecto-UPTAEB-T2/src">Volver</a>
+    <a href="/Pt3/src">Volver</a>
 </body>
 </html>
