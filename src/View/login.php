@@ -22,7 +22,7 @@
                         <img src="static/images/logo_m.png" alt="" width="130px">
                         <h3>Iniciar Sesión</h3>
                     </div>
-                    <form class="uk-grid-small" uk-grid action="Controller/funcs/login.php" method="POST">
+                    <form class="uk-grid-small" uk-grid action="login_normal" method="POST">
 
                         <div class="uk-width-1-1@s uk-flex uk-flex-center">
 

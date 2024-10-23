@@ -27,7 +27,7 @@ function insertANDupdateCLient_proveedor(FORM, NUMBER, TABLE, TYPE) {
     e.preventDefault();
 
     if (insertOrUpdate == false) {
-      url = "Controller/funcs/agregar_cosas.php"
+      url = "api_agregar"
     } else {
       url = "Controller/funcs/modificar_cosas.php"
     }
@@ -131,7 +131,7 @@ const ModalEdit = () => {
       document.querySelector(".ValueInpUpdateClient").setAttribute("value", id);
       $.ajax({
         url: "api_search",
-        type: "GET",
+        type: "POST",
         data: { randomnautica: "clientes", ID: id },
         success: function (response) {
           let json = JSON.parse(response);
@@ -176,7 +176,7 @@ function cardClient(page) {
   page_clientes = page
   $.ajax({
     url: "api_search",
-    type: "GET",
+    type: "POST",
     data: { randomnautica: "clientes", n: page_clientes, limite: 6 },
     success: function (response) {
       let template = "";
@@ -278,7 +278,7 @@ searchFilter.addEventListener("keyup", () => {
   }
   $.ajax({
     url: "api_search",
-    type: "GET",
+    type: "POST",
     data: data,
     success: function (response) {
       let json = JSON.parse(response);

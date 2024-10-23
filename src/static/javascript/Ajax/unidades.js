@@ -2,7 +2,7 @@
 const UnidadesTable = () => {
   $.ajax({
     url: "api_search",
-    type: "GET",
+    type: "POST",
     data: { randomnautica: "unidades" },
     success: function (response) {
       let template = "";

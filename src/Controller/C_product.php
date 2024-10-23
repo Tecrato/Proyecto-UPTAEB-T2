@@ -1,8 +1,8 @@
 <?php
-     require('../Model/Conexion.php');
-     require('../Model/Usuarios.php');
-     include("./funcs/verificar.php");
+     require('Model/Conexion.php');
+     require('Model/Usuarios.php');
+     include("Controller/funcs/verificar.php");
 
-    include('../View/product.php');
+    include('View/product.php');
 
 ?>

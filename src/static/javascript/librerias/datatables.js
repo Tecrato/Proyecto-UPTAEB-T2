@@ -12354,7 +12354,7 @@
 		 *
 		 *  @deprecated 1.10. Please use `ajax` for this functionality now.
 		 */
-		"sServerMethod": "GET",
+		"sServerMethod": "POST",
 	
 	
 		/**

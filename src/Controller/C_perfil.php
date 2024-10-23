@@ -1,7 +1,7 @@
 <?php
-    require('../Model/Conexion.php');
-    require('../Model/Usuarios.php');
-    include("./funcs/verificar.php");
+    require('Model/Conexion.php');
+    require('Model/Usuarios.php');
+    include("Controller/funcs/verificar.php");
 
 
     $result = new Usuario();
@@ -9,5 +9,5 @@
     $tu = new Usuario(id:$_SESSION['user_id']);
     $tu = $tu->search()[0];
 
-    include('../View/perfil.php');
+    include('View/perfil.php');
 ?>

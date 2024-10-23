@@ -89,7 +89,7 @@ const modalDetalles = (n) => {
       //hacemos la peticion ajax para crear el esqueleto del modag
       $.ajax({
         url: "api_search",
-        type: "GET",
+        type: "POST",
         data: { randomnautica: "productos", ID: idProduct, active: n },
         success: function (response) {
           let json = JSON.parse(response);
@@ -115,7 +115,7 @@ const modalDetalles = (n) => {
             let supplierName = "";
             $.ajax({
               url: "api_estadisticas",
-              type: "GET",
+              type: "POST",
               data: {
                 select: "proveedor_de_una_entrada",
                 id_producto: idProduct,
@@ -217,7 +217,7 @@ const modalEntradas = () => {
       // ejecutamos esta peticion para traer los proveedores de los productos a los select
       $.ajax({
         url: "api_search",
-        type: "GET",
+        type: "POST",
         data: { randomnautica: "proveedores" },
         success: function (response) {
           let options = ``;
@@ -246,7 +246,7 @@ const modalEntradas = () => {
           let formDataLote = new FormData(formAggLote);
           //hacemos la peticion ajax
           $.ajax({
-            url: "Controller/funcs/agregar_cosas.php",
+            url: "api_agregar",
             type: "POST",
             data: formDataLote,
             processData: false,
@@ -291,7 +291,7 @@ const modalModificar = () => {
       // ejecutamos esta peticion para traer los proveedores de los productos a los select
       $.ajax({
         url: "api_search",
-        type: "GET",
+        type: "POST",
         data: { randomnautica: "productos", ID: idProduct },
         success: function (response) {
           let json = JSON.parse(response);
@@ -481,7 +481,7 @@ const cargarTargetProduct = (page) => {
   page_productos = page
   $.ajax({
     url: "api_search",
-    type: "GET",
+    type: "POST",
     data: {
       randomnautica: "productos",
       n: page_productos, // Aca va el numero de la pagina actual
@@ -513,7 +513,7 @@ cargarTargetProduct(0)
 const cargarCategoriaRegProduct = () => {
   $.ajax({
     url: "api_search",
-    type: "GET",
+    type: "POST",
     data: { randomnautica: "categorias" },
     success: function (response) {
       let options = ``;
@@ -535,7 +535,7 @@ const cargarUnidadesRegProduct = () => {
   //   //ejecutamos esta peticion para traer las unidades de los productos a los select
   $.ajax({
     url: "api_search",
-    type: "GET",
+    type: "POST",
     data: { randomnautica: "unidades" },
     success: function (response) {
       let options = ``;
@@ -557,7 +557,7 @@ const cargarMarcasRegProduct = () => {
   //   //ejecutamos esta peticion para traer las unidades de los productos a los select
   $.ajax({
     url: "api_search",
-    type: "GET",
+    type: "POST",
     data: { randomnautica: "marcas" },
     success: function (response) {
       let options = ``;
@@ -591,7 +591,7 @@ formAggProduct.addEventListener("submit", (e) => {
   e.preventDefault();
   let url;
   if (val == false) {
-    url = "Controller/funcs/agregar_cosas.php";
+    url = "api_agregar";
   } else {
     url = "Controller/funcs/modificar_cosas.php";
   }
@@ -640,7 +640,7 @@ formAggProduct.addEventListener("submit", (e) => {
 let cargarCategoriasFilter = () => {
   $.ajax({
     url: "api_search",
-    type: "GET",
+    type: "POST",
     data: { randomnautica: "categorias" },
     success: function (response) {
       let options = ``;
@@ -657,7 +657,7 @@ cargarCategoriasFilter()
 let cargarMarcasFilter = () => {
   $.ajax({
     url: "api_search",
-    type: "GET",
+    type: "POST",
     data: { randomnautica: "marcas" },
     success: function (response) {
       let options = ``;
@@ -694,7 +694,7 @@ filter.forEach((e) => {
       if (e.value != "") {
         $.ajax({
           url: "api_search",
-          type: "GET",
+          type: "POST",
           data: { randomnautica: "categorias", like: e.value },
           success: function (response) {
             let options = ``;
@@ -718,7 +718,7 @@ filter.forEach((e) => {
       if (e.value != "") {
         $.ajax({
           url: "api_search",
-          type: "GET",
+          type: "POST",
           data: { randomnautica: "marcas", like: e.value },
           success: function (response) {
             let options = ``;
@@ -758,7 +758,7 @@ inpNameProduct.addEventListener("keyup", (e) => {
   if (val != "") {
     $.ajax({
       url: "api_search",
-      type: "GET",
+      type: "POST",
       data: { randomnautica: "productos", like: val },
       success: function (response) {
         let json = JSON.parse(response);
@@ -811,12 +811,13 @@ function Registrar_U_M_C(form, tr, item_reset, notification) {
     let Form_Send = new FormData(Form_identificador);
     // enviamos los datos la backend con una peticion ajax
     $.ajax({
-      url: "Controller/funcs/agregar_cosas.php",
+      url: "api_agregar",
       type: "POST",
       data: Form_Send,
       processData: false,
       contentType: false,
       success: function (response) {
+        console.log(response)
         tr();
         document.querySelector(item_reset).value = "";
         UIkit.notification.closeAll();

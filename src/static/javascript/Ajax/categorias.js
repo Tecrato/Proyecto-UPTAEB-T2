@@ -1,9 +1,11 @@
 const CategoriasTable = () => {
     $.ajax({
     url: "api_search",
-    type: "GET",
+    type: "POST",
     data: { randomnautica: "categorias" },
     success: function (response) {
+      console.log(response);
+      
       let template = "";
       let json = JSON.parse(response);
       json.lista.forEach((C) => {

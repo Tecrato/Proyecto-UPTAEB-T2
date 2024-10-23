@@ -1,4 +1,4 @@
-<?php require("../View/complementos/header.php"); ?>
+<?php require("View/complementos/header.php"); ?>
 
 <main class="Bg-Main-home2">
     <!-- <h2 class="uk-text-bolder uk-light uk-margin-remove-bottom uk-padding uk-padding-remove-bottom">BIENVENIDO USUARIO</h2> -->

@@ -2,7 +2,7 @@ let hola = "";
 const cargarEntrys = () => {
   $.ajax({
     url: "api_search",
-    type: "GET",
+    type: "POST",
     data: { randomnautica: "entradas" },
     success: function (response) {
       let template;
@@ -58,7 +58,7 @@ cargarEntrys()
 
 $.ajax({
   url: "api_search",
-  type: "GET",
+  type: "POST",
   data: { randomnautica: "proveedores" },
   success: function (response) {
     let json = JSON.parse(response);
@@ -76,7 +76,7 @@ $.ajax({
         let template = "";
         $.ajax({
           url: "api_search",
-          type: "GET",
+          type: "POST",
           data: { randomnautica: "entradas", id_proveedor: idSup },
           success: function (response) {
             let json = JSON.parse(response);
@@ -111,7 +111,7 @@ btnAggMetodoPago.addEventListener('click', () => {
   let availableOptions = []
   $.ajax({
     url: "api_search",
-    type: "GET",
+    type: "POST",
     data: { randomnautica: "metodo_pago" },
     success: function (response) {
       let json = JSON.parse(response);
@@ -259,7 +259,7 @@ document.getElementById("input-search-fact").addEventListener("keyup", (e) => {
   if (val != "") {
     $.ajax({
       url: "api_search",
-      type: "GET",
+      type: "POST",
       data: { randomnautica: "proveedores", like: val },
       success: function (response) {
         let json = JSON.parse(response);
@@ -332,7 +332,7 @@ function func(dolar) {
 
   $.ajax({
     url: "api_search",
-    type: "GET",
+    type: "POST",
     data: { randomnautica: "productos" },
     success: function (response) {
       let productos = JSON.parse(response).lista;
@@ -575,7 +575,7 @@ function func(dolar) {
         let availableOptions = []
         $.ajax({
           url: "api_search",
-          type: "GET",
+          type: "POST",
           data: { randomnautica: "metodo_pago" },
           success: function (response) {
             let json = JSON.parse(response);

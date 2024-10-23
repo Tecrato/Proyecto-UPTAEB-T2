@@ -9397,7 +9397,7 @@
     function ajax(url, options) {
       const env = {
         data: null,
-        method: "GET",
+        method: "POST",
         headers: {},
         xhr: new XMLHttpRequest(),
         beforeSend: noop,

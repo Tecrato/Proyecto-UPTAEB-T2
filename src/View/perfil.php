@@ -1,4 +1,4 @@
-<?php require("../View/complementos/header.php"); ?>
+<?php require("View/complementos/header.php"); ?>
 <main class="Bg-Main-home2 uk-padding uk-light">
 
     <div class="uk-child-width-1-1@s" uk-grid>

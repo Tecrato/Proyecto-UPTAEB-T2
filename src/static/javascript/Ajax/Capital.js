@@ -16,7 +16,7 @@ function fetchCapital(page){
     page_mov_capital = page
     $.ajax({
         url: "api_search",
-        type: "GET",
+        type: "POST",
         data: { randomnautica: "capital", n: page_mov_capital, limite: 10},
         success: function (response) {
             let template = '';
@@ -43,7 +43,7 @@ fetchCapital(0)
 function detailsCapital(){
     $.ajax({
         url: "api_search",
-        type: "GET",
+        type: "POST",
         data: {randomnautica: "capital", subFunction: "detallesCapital"},
         success: function (response) {
             let template = '';
@@ -98,7 +98,7 @@ FormCapital.addEventListener("submit", (e) => {
     e.preventDefault();
     let data = new FormData(FormCapital);
     $.ajax({
-        url: "Controller/funcs/agregar_cosas.php",
+        url: "api_agregar",
         type: "POST",
         data: data,
         contentType: false,

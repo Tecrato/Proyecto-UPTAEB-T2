@@ -6,59 +6,59 @@
 
     $clase = new Estadisticas();
 
-    if ($_GET['select'] == 'ratio_ventas') {
+    if ($_POST['select'] == 'ratio_ventas') {
         $result = $clase->ratio_ventas();
     }
-    else if ($_GET['select'] == 'total_productos_categoria') {
+    else if ($_POST['select'] == 'total_productos_categoria') {
         $result = $clase->total_productos_categoria();
     }
-    else if ($_GET['select'] == 'total_stock_categoria') {
+    else if ($_POST['select'] == 'total_stock_categoria') {
         $result = $clase->total_stock_categoria();
     }
-    else if ($_GET['select'] == 'max_ventas') {
+    else if ($_POST['select'] == 'max_ventas') {
         $result = $clase->max_ventas();
     }
-    else if ($_GET['select'] == 'min_ventas') {
+    else if ($_POST['select'] == 'min_ventas') {
         $result = $clase->min_ventas();
     }
-    else if ($_GET['select'] == 'clientes_frecuentes') {
+    else if ($_POST['select'] == 'clientes_frecuentes') {
         $result = $clase->clientes_frecuentes();
     }
-    else if ($_GET['select'] == 'proveedor_de_una_entrada') {
-        $result = $clase->search_proveedor_from_product($_GET['id_producto']);
+    else if ($_POST['select'] == 'proveedor_de_una_entrada') {
+        $result = $clase->search_proveedor_from_product($_POST['id_producto']);
     }
-    else if ($_GET['select'] == 'valor_total_inventario') {
+    else if ($_POST['select'] == 'valor_total_inventario') {
         $result = $clase->ValorTotalInventario();
     }
-    else if ($_GET['select'] == 'ganancia_mensuales') {
+    else if ($_POST['select'] == 'ganancia_mensuales') {
         $result = $clase->ganancias_mensuales();
     }
-    else if ($_GET['select'] == 'valor_inventario_mes') {
+    else if ($_POST['select'] == 'valor_inventario_mes') {
         $result = $clase->valor_inventario_mes();
     }
-    else if ($_GET['select'] == 'coste_productos_vendidos') {
+    else if ($_POST['select'] == 'coste_productos_vendidos') {
         $result = $clase->coste_productos_vendidos();
     }
-    else if ($_GET['select'] == 'rotacion_inventario') {
+    else if ($_POST['select'] == 'rotacion_inventario') {
         $result = $clase->rotacion_inventario();
     }
-    else if ($_GET['select'] == 'filter_year') {
-        $result = $clase->filter_year_ganancias($_GET['year']);
+    else if ($_POST['select'] == 'filter_year') {
+        $result = $clase->filter_year_ganancias($_POST['year']);
     }
-    else if ($_GET['select'] == 'filter_week') {
-        $result = $clase->filter_week_ganancias($_GET['init'], $_GET['finish']);
+    else if ($_POST['select'] == 'filter_week') {
+        $result = $clase->filter_week_ganancias($_POST['init'], $_POST['finish']);
     }
-    else if ($_GET['select'] == 'filter_max_anio') {
-        $result = $clase->filter_max_anio($_GET['year']);
+    else if ($_POST['select'] == 'filter_max_anio') {
+        $result = $clase->filter_max_anio($_POST['year']);
     }
-    else if ($_GET['select'] == 'filter_max_mes-anio') {
-        $result = $clase->filter_max_anio_mes($_GET['year'], $_GET['month']);
+    else if ($_POST['select'] == 'filter_max_mes-anio') {
+        $result = $clase->filter_max_anio_mes($_POST['year'], $_POST['month']);
     }
-    else if ($_GET['select'] == 'filter_min_anio') {
-        $result = $clase->filter_min_anio($_GET['year']);
+    else if ($_POST['select'] == 'filter_min_anio') {
+        $result = $clase->filter_min_anio($_POST['year']);
     }
-    else if ($_GET['select'] == 'filter_min_mes-anio') {
-        $result = $clase->filter_min_anio_mes($_GET['year'], $_GET['month']);
+    else if ($_POST['select'] == 'filter_min_mes-anio') {
+        $result = $clase->filter_min_anio_mes($_POST['year'], $_POST['month']);
     }
 
     $json = ['lista'=> $result];

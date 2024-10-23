@@ -32,7 +32,7 @@ const checkCaja = () => {
 
 $.ajax({
     url: "api_search",
-    type: "GET",
+    type: "POST",
     data: { randomnautica: "usuario" },
     success: function (response) {
         let json = JSON.parse(response);
@@ -54,7 +54,7 @@ function cargarCajas(page) {
     page_cajas = page
     $.ajax({
         url: "api_search",
-        type: "GET",
+        type: "POST",
         data: data,
         success: function (response) {
             let json = JSON.parse(response);

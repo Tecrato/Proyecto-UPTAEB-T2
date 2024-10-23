@@ -49,7 +49,7 @@ echo "
 <script>var session_user_rol_num = '" . $_SESSION['rol_num'] . "'</script>
 "
 ?>
-<?php require("../View/complementos/loader.php"); ?>
+<?php require("View/complementos/loader.php"); ?>
 <body class="Bg-Main-home controller-modal">
 
     <!-- **********************************  Menu de PC (1024 en adelante)  ********************************** -->

@@ -1,8 +1,8 @@
 <?php
     // Con este codigo se confirma si el usuario tiene una cuenta para entrar al sistema
     session_start();
-    require '../../Model/Conexion.php';
-    require '../../Model/Usuarios.php';
+    require 'Model/Conexion.php';
+    require 'Model/Usuarios.php';
     
     $sesion_id = substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, 10);//creamos el string del sesion id
     $correo = $_POST["correo"];

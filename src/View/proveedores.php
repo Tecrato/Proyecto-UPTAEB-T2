@@ -1,5 +1,5 @@
-<?php require("../View/complementos/loader.php"); ?>
-<?php require("../View/complementos/header.php"); ?>
+<?php require("View/complementos/loader.php"); ?>
+<?php require("View/complementos/header.php"); ?>
 <main class="Bg-Main-home2 uk-padding">
 
     <section class="uk-background-secondary uk-padding uk-border-rounded uk-light" uk-filter="target: .js-filter">
@@ -9,7 +9,7 @@
                     <div class="uk-margin-right">
                         <div class="uk-flex">
                             <div class="uk-margin formDelete">
-                                <form class="uk-search uk-search-default search-responsive-product" action="" method="GET">
+                                <form class="uk-search uk-search-default search-responsive-product" action="" method="POST">
                                     <button class="uk-search-icon-flip" type="submit" uk-search-icon></button>
                                     <input id="SearchSupplier" class="uk-search-input" type="text" placeholder="Buscar" name="like" aria-label="Search">
                                 </form>

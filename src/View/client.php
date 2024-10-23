@@ -1,4 +1,4 @@
-<?php require("../View/complementos/header.php"); ?>
+<?php require("View/complementos/header.php"); ?>
 
 <main class="Bg-Main-home2 uk-padding uk-padding-remove-bottom">
 
@@ -9,7 +9,7 @@
                     <div class="uk-margin-right">
                         <div class="uk-flex">
                             <div class="uk-margin formDelete">
-                                <form class="uk-search uk-search-default search-responsive-product" action="" method="GET">
+                                <form class="uk-search uk-search-default search-responsive-product" action="" method="POST">
                                     <button class="uk-search-icon-flip" type="submit" uk-search-icon></button>
                                     <input id="SearchCustomer" class="uk-search-input" type="text" placeholder="Buscar" name="like_nombre" aria-label="Search">
                                 </form>

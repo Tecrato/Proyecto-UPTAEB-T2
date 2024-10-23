@@ -1,7 +1,7 @@
 //se hace una consulta ajax para traer los datos de la factura
 $.ajax({
   url: "api_search",
-  type: "GET",
+  type: "POST",
   data: { randomnautica: "ventas" , limite:20},
   success: function (response) {
     let json = JSON.parse(response);
@@ -55,7 +55,7 @@ $.ajax({
         //hacemos la peticion,mandando el id al controlador como una variable por url
         $.ajax({
           url: `PDFFactura?id=${id}`,
-          type: "GET",
+          type: "POST",
           success: function (response) {
             let json = JSON.parse(response);
             (response);

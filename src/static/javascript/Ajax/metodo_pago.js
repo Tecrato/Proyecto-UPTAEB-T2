@@ -10,7 +10,7 @@ document.querySelector(".btnAggMetodo").addEventListener("click", () => {
 const cargarMetodosPago = () => {
     $.ajax({
         url: "api_search",
-        type: "GET",
+        type: "POST",
         data: { randomnautica: "metodo_pago"},
         success: function (response) {
             let json = JSON.parse(response);
@@ -103,7 +103,7 @@ let formMetodoPago = document.getElementById("FORM_METODO_PAGO");
 let UrlSite = ""
 formMetodoPago.addEventListener("submit", (e) => {
     if (bool == false) {
-        UrlSite = "Controller/funcs/agregar_cosas.php"
+        UrlSite = "api_agregar"
     } else {
         UrlSite = "Controller/funcs/modificar_cosas.php"
     }

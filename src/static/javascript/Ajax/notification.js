@@ -2,7 +2,7 @@
 function newNotification() {
     $.ajax({
         url: "api_search",
-        type: "GET",
+        type: "POST",
         data: { randomnautica: "notificaciones", status: 1 , subFunction: 'count'},
         success: function (response) {
             let json = JSON.parse(response);
@@ -19,7 +19,7 @@ newNotification()
 const cargarNotify = () =>{
     $.ajax({
         url: "api_search",
-        type: "GET",
+        type: "POST",
         data: { randomnautica: "notificaciones" },
         success: function (response) {
             let templete = ``

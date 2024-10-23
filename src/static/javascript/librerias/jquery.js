@@ -6955,7 +6955,7 @@ jQuery.extend( {
 		} else {
 
 			// If a hook was provided get the non-computed value from there
-			if ( hooks && "get" in hooks &&
+			if ( hooks && "POST" in hooks &&
 				( ret = hooks.get( elem, false, extra ) ) !== undefined ) {
 
 				return ret;
@@ -6982,7 +6982,7 @@ jQuery.extend( {
 		hooks = jQuery.cssHooks[ name ] || jQuery.cssHooks[ origName ];
 
 		// If a hook was provided get the computed value from there
-		if ( hooks && "get" in hooks ) {
+		if ( hooks && "POST" in hooks ) {
 			val = hooks.get( elem, true, extra );
 		}
 
@@ -8027,7 +8027,7 @@ jQuery.extend( {
 			return value;
 		}
 
-		if ( hooks && "get" in hooks && ( ret = hooks.get( elem, name ) ) !== null ) {
+		if ( hooks && "POST" in hooks && ( ret = hooks.get( elem, name ) ) !== null ) {
 			return ret;
 		}
 
@@ -8148,7 +8148,7 @@ jQuery.extend( {
 			return ( elem[ name ] = value );
 		}
 
-		if ( hooks && "get" in hooks && ( ret = hooks.get( elem, name ) ) !== null ) {
+		if ( hooks && "POST" in hooks && ( ret = hooks.get( elem, name ) ) !== null ) {
 			return ret;
 		}
 
@@ -8441,7 +8441,7 @@ jQuery.fn.extend( {
 					jQuery.valHooks[ elem.nodeName.toLowerCase() ];
 
 				if ( hooks &&
-					"get" in hooks &&
+					"POST" in hooks &&
 					( ret = hooks.get( elem, "value" ) ) !== undefined
 				) {
 					return ret;
@@ -9284,7 +9284,7 @@ jQuery.extend( {
 
 	ajaxSettings: {
 		url: location.href,
-		type: "GET",
+		type: "POST",
 		isLocal: rlocalProtocol.test( location.protocol ),
 		global: true,
 		processData: true,
@@ -9822,7 +9822,7 @@ jQuery.extend( {
 	}
 } );
 
-jQuery.each( [ "get", "post" ], function( _i, method ) {
+jQuery.each( [ "POST", "post" ], function( _i, method ) {
 	jQuery[ method ] = function( url, data, callback, type ) {
 
 		// Shift arguments if data argument was omitted
@@ -9858,7 +9858,7 @@ jQuery._evalUrl = function( url, options, doc ) {
 		url: url,
 
 		// Make this explicit, since user can override this through ajaxSetup (#11264)
-		type: "GET",
+		type: "POST",
 		dataType: "script",
 		cache: true,
 		async: false,
@@ -10148,7 +10148,7 @@ jQuery.ajaxPrefilter( "script", function( s ) {
 		s.cache = false;
 	}
 	if ( s.crossDomain ) {
-		s.type = "GET";
+		s.type = "POST";
 	}
 } );
 
@@ -10374,10 +10374,10 @@ jQuery.fn.load = function( url, params, callback ) {
 		jQuery.ajax( {
 			url: url,
 
-			// If "type" variable is undefined, then "GET" method will be used.
+			// If "type" variable is undefined, then "POST" method will be used.
 			// Make value of this field explicit since
 			// user can override it through ajaxSetup method
-			type: type || "GET",
+			type: type || "POST",
 			dataType: "html",
 			data: params
 		} ).done( function( responseText ) {
