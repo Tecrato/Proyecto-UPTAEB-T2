@@ -5,6 +5,8 @@ const cargarEntrys = () => {
     type: "POST",
     data: { randomnautica: "entradas" },
     success: function (response) {
+      console.log(response)
+      
       let template;
       let json = JSON.parse(response);
       console.log(json);
@@ -54,7 +56,7 @@ const cargarEntrys = () => {
     },
   });
 };
-cargarEntrys()
+// cargarEntrys()
 
 $.ajax({
   url: "api_search",
@@ -790,7 +792,7 @@ DOLAR_RV(func)
             var table = $('#miTabla').DataTable({
                 "ajax": {
                     "url": "api_search", // URL de la petición AJAX
-                    "type": "GET",
+                    "type": "POST",
                     "data": { randomnautica: "entradas" },  // Parámetros enviados al servidor
                     "dataSrc": "lista"  // Espera que la respuesta JSON contenga un array en 'data'
                 },
