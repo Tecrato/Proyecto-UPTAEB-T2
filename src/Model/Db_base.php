@@ -136,7 +136,7 @@
             }
             foreach ($this->variables_like as $key => $value){
                 $value2 = '%'.$value.'%';
-                $consulta->bindParam(':alike'.$key,$value2);
+                $consulta->bindParam(':alike'.$key,$value2, PDO::PARAM_STR);
             }
 
             $n = $n*$limite;

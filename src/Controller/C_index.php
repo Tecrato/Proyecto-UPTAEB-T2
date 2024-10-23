@@ -1,6 +1,7 @@
 <?php
     require('Model/Conexion.php');
     require('Model/Usuarios.php');
+    require('Model/Db_base.php');
     include("Controller/funcs/verificar.php");
     
 
