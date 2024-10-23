@@ -23,12 +23,16 @@ echo "
     </link>
     <link rel="stylesheet" href="static/css/loader.css">
     <link rel="stylesheet" href="static/css/uikit.css">
-    <link rel="stylesheet" href="static/css/dataTables.css">
-    <link rel="stylesheet" href="static/css/responsive.dataTables.css">
     <link rel="stylesheet" href="static/css/introjs.min.css">
     <link rel="stylesheet" href="static/css/introjs-modern.css">
     <link rel="stylesheet" href="static/css/Style.css">
+
+    <link rel="stylesheet" href="static/css/dataTable/dataTables.dataTables.css">
+    <link rel="stylesheet" href="static/css/dataTable/searchPanes.dataTables.css">
+    <link rel="stylesheet" href="static/css/dataTable/select.dataTables.css">
+    <link rel="stylesheet" href="static/css/dataTable/dataTables.dateTime.min.css">
     
+
     <script src="static/javascript/librerias/jquery.js"></script>
     <script src="static/javascript/librerias/intro.min.js"></script>
     <script src="static/javascript/librerias/uikit.js"></script>

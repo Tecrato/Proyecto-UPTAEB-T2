@@ -781,3 +781,63 @@ function func(dolar) {
   });
 }
 DOLAR_RV(func)
+
+
+
+
+        $(document).ready(function () {
+            // Inicialización de la tabla con AJAX
+            var table = $('#miTabla').DataTable({
+                "ajax": {
+                    "url": "api_search", // URL de la petición AJAX
+                    "type": "GET",
+                    "data": { randomnautica: "entradas" },  // Parámetros enviados al servidor
+                    "dataSrc": "lista"  // Espera que la respuesta JSON contenga un array en 'data'
+                },
+                "columns": [
+                    { "data": "id" },
+                    { "data": "id_producto" },
+                    { "data": "fecha_vencimiento" },
+                    { "data": "precio_compra" },
+                ],
+                "dom": 'Plfrtip',  // Integrar SearchPanes en el DOM
+                "searchPanes": {
+                    "panes": [
+                        { header: 'Producto', options: [{ label: 'Producto A', value: 'Producto A' }, { label: 'Producto B', value: 'Producto B' }] },
+                        { header: 'Proveedor', options: [{ label: 'Proveedor 1', value: 'Proveedor 1' }, { label: 'Proveedor 2', value: 'Proveedor 2' }] }
+                    ]
+                },
+                "select": false  // Habilitar la selección
+            });
+
+            // Inicializar el DateTime picker para el filtro de rango de fechas
+            var minDate, maxDate;
+            minDate = new DateTime($('#min'), {
+                format: 'YYYY-MM-DD'
+            });
+            maxDate = new DateTime($('#max'), {
+                format: 'YYYY-MM-DD'
+            });
+
+            // Filtro de rango de fechas
+            $('#min, #max').on('change', function () {
+                table.draw();
+            });
+
+            // Extender el método de búsqueda de DataTables para filtrar por rango de fechas
+            $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+                var min = minDate.val();
+                var max = maxDate.val();
+                var date = moment(data[2], 'YYYY-MM-DD');  // Columna de fecha (índice 3)
+
+                if (
+                    (min === null && max === null) ||
+                    (min === null && date.isSameOrBefore(max)) ||
+                    (min.isSameOrBefore(date) && max === null) ||
+                    (min.isSameOrBefore(date) && date.isSameOrBefore(max))
+                ) {
+                    return true;
+                }
+                return false;
+            });
+        });
