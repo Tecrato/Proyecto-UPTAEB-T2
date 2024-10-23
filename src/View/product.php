@@ -1,6 +1,14 @@
 <?php require("View/complementos/header.php"); ?>
 
-
+<style>
+        /* Modificar el estilo de los SearchPanes para alinearlos en filas de 2 */
+        .dtsp-searchPanes {
+            width: 30%;
+            flex-wrap: nowrap !important;
+    justify-content: space-around !important;
+    gap: 10% !important;
+        }
+    </style>
 <main class="Bg-Main-home2 uk-padding uk-padding-remove-bottom main-Product uk-light">
     <section class="">
         <ul uk-tab>
@@ -323,7 +331,18 @@
 
                     <main class="uk-background-secondary uk-padding uk-border-rounded" uk-filter="target: .js-filter; animation: fade">
                         <!-- container-filter sera el  que tenga todos los filtros de busqueda -->
-                        <section class="container-filter">
+                        <!-- <section class="container-filter">
+                            <div class="uk-flex">
+                                <div class="uk-margin">
+                                    <form class="form_search_entrys uk-search uk-search-default" style="width: 250px;">
+                                        <span class="uk-search-icon-flip" uk-search-icon></span>
+                                        <input id="entrada" class="uk-search-input" type="search" placeholder="Buscar Entrada" aria-label="Search">
+                                    </form>
+                                </div>
+                                <a href="#modal-full-entrys" uk-toggle class="uk-margin-left" uk-tooltip="title:Añadir Entrada; delay: 500">
+                                    <img src="./static/images/btn_lote2.png" alt="" width="35px">
+                                </a>
+                            </div>
                             <div>
                                 <nav uk-dropnav="mode: click">
                                     <ul class="uk-subnav uk-margin-remove" style="gap: 25px;">
@@ -332,7 +351,6 @@
                                             <a id="SupplierFilterOne" href="#">PROVEEDORES <span uk-drop-parent-icon></span></a>
                                             <div class="uk-dropdown">
                                                 <ul class="uk-nav uk-dropdown-nav filter_prov_entry">
-                                                    <!-- aqui se cargan los proveedores con js -->
                                                 </ul>
                                             </div>
                                         </li>
@@ -344,24 +362,18 @@
                                                 </ul>
                                             </div>
                                         </li>
+                                        <li>
+                                            <a id="s" href="#">FECHA <span uk-drop-parent-icon></span></a>
+                                            <div class="uk-dropdown">
+                                                <ul class="uk-nav uk-dropdown-nav">
+
+                                                </ul>
+                                            </div>
+                                        </li>
                                     </ul>
                                 </nav>
                             </div>
-
-                            <div class="uk-flex uk-flex-middle">
-                                <a href="#modal-full-entrys" uk-toggle class="uk-margin-right" uk-tooltip="title:Añadir Entrada; delay: 500">
-                                    <img src="./static/images/btn_lote2.png" alt="" width="35px">
-                                </a>
-
-                                <!-- input_search sera el contenedor del input tipo search -->
-                                <div class="uk-margin">
-                                    <form class="form_search_entrys uk-search uk-search-default" style="width: 500px;">
-                                        <span class="uk-search-icon-flip" uk-search-icon></span>
-                                        <input id="entrada" class="uk-search-input" type="search" placeholder="Buscar Entrada" aria-label="Search">
-                                    </form>
-                                </div>
-                            </div>
-                        </section>
+                        </section> -->
 
 
                         <!-- *********************************modal de entradas productos********************************* -->
@@ -414,7 +426,7 @@
                             </div>
                         </div>
 
-                        <!-- **************************Modal para crear facturas************************** -->
+                        <!-- **************************Modal para crear entradas nuevas************************** -->
 
                         <div id="modal-full-entrys" class="uk-modal-full" uk-modal>
                             <div class="uk-modal-dialog uk-background-secondary uk-light">
@@ -613,7 +625,7 @@
 
                         <!-- conatainer_table contendra la tabla -->
                         <section>
-                            <div class="uk-overflow-auto altura_table_entry ">
+                            <!-- <div class="uk-overflow-auto altura_table_entry ">
                                 <table class="uk-table uk-table-divider uk-table-hover uk-light">
                                     <thead class="activeGood">
                                         <tr>
@@ -627,7 +639,6 @@
                                     </thead>
                                     <tbody class="js-filter cont_entry">
 
-                                        <!-- tbody, donde se generaran los tr y td con programacion -->
                                     </tbody>
                                 </table>
                             </div>
@@ -638,7 +649,34 @@
                                     <li><a class="pag-btn-productos" data-direccion="next">Next</a></li>
                                     <li><a class="pag-btn-productos" data-direccion="end"><span class="uk-margin-small-left" uk-pagination-next></span><span class="uk-margin-small-left" uk-pagination-next></span></a></li>
                                 </ul>
+                            </div> -->
+                            <div>
+                                <label for="min">Fecha mínima:</label>
+                                <input type="text" id="min" name="min">
+                                <label for="max">Fecha máxima:</label>
+                                <input type="text" id="max" name="max">
                             </div>
+                            <table id="miTabla" class="display">
+                                
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Producto</th>
+                                        <th>Fecha de Vencimiento</th>
+                                        <th>Precio de Compra</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Producto</th>
+                                        <th>Fecha de Vencimiento</th>
+                                        <th>Precio de Compra</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            <!-- Inputs para el filtro de rango de fechas -->
+                            
                         </section>
                     </main>
 
@@ -862,6 +900,13 @@
 
 <script src="static/javascript/Ajax/categorias.js" defer></script>
 <script src="static/javascript/Ajax/marcas.js" defer></script>
+<script src="static/javascript/librerias/dataTable/dataTables.js" defer></script>
+<script src="static/javascript/librerias/dataTable/moment.min.js" defer></script>
+<script src="static/javascript/librerias/dataTable/dataTables.dateTime.min.js" defer></script>
+<script src="static/javascript/librerias/dataTable/dataTables.searchPanes.js" defer></script>
+<script src="static/javascript/librerias/dataTable/searchPanes.dataTables.js" defer></script>
+<script src="static/javascript/librerias/dataTable/dataTables.select.js" defer></script>
+<script src="static/javascript/librerias/dataTable/select.dataTables.js" defer></script>
 
 
 

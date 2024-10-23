@@ -440,7 +440,12 @@ const tarjetas = (response, cont) => {
           `;
     //seleccionamos el contenedor de las tarjetas, y las insertamos
     $(cont).html(tarjeta);
-
+    const imagenes = document.querySelectorAll('.img_product');
+    imagenes.forEach(imagen => {
+        imagen.onerror = function() {
+            this.src = 'Media/imagenes/banner_productos.png';
+        }; 
+    });
     //esto es para acomodar la posicion de los botones dependiendo de la resolucion
     if (screen < 938) {
       let options = document.querySelectorAll(".btns_option_product");
