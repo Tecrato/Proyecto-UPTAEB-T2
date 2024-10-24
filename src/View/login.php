@@ -14,7 +14,6 @@
 
 <body>
     <section class="uk-light  sectionP">
-
         <section class="uk-flex uk-flex-center uk-flex-middle" style="height: 100%;">
             <article class="Item uk-flex-center uk-flex-middle Login" data-aos="zoom-in-up">
                 <div class="Register">
@@ -22,7 +21,7 @@
                         <img src="static/images/logo_m.png" alt="" width="130px">
                         <h3>Iniciar Sesión</h3>
                     </div>
-                    <form class="uk-grid-small" uk-grid action="login_normal" method="POST">
+                    <form class="uk-grid-small" uk-grid action="Controller/funcs/login.php" method="POST">
 
                         <div class="uk-width-1-1@s uk-flex uk-flex-center">
 
@@ -40,12 +39,15 @@
                         <div class="uk-width-1-1@s uk-flex uk-flex-center">
                             <div class="uk-inline">
                                 <span class="uk-form-icon" uk-icon="icon: question"></span>
-                                <input class="uk-input uk-form-blank" placeholder="Codigo" type="text" aria-label="Not clickable icon" name="codigo" required autocomplete="off">
+                                <input class="uk-input uk-form-blank" placeholder="Ingrese Codigo CAPTCHA" type="text" aria-label="Not clickable icon" name="codigo" required autocomplete="off">
                             </div>
                         </div>
-                        <div class="uk-width-1-1@s uk-flex uk-flex-middle uk-flex-center">
-                            <img src="Controller/funcs/Captcha.php" alt="" width="150" id="img-codigo">
-                            <button class="uk-icon-button uk-margin-small-left" uk-icon="refresh" type="button" id="regenera"></button>
+                        <div class="uk-width-1-1@s uk-flex uk-flex-middle uk-flex-column">
+                            <label class="uk-form-label uk-margin-small-bottom" for="form-stacked-text">Codigo Captcha</label>
+                            <div class="uk-width-1-1@s uk-flex uk-flex-middle uk-flex-center">
+                                <img src="Controller/funcs/Captcha.php" alt="" width="150" id="img-codigo">
+                                <button class="uk-icon-button uk-margin-small-left" uk-icon="refresh" type="button" id="regenera"></button>
+                            </div>
                         </div>
 
 
