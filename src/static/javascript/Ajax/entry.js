@@ -6,7 +6,7 @@ const cargarEntrys = () => {
     data: { randomnautica: "entradas" },
     success: function (response) {
       console.log(response)
-      
+
       let template;
       let json = JSON.parse(response);
       console.log(json);
@@ -94,141 +94,6 @@ $.ajax({
   },
 });
 
-let bool = true
-let btnAggMetodoPago = document.querySelector(".btn_agg_metodoPago")
-// Agregar metodo de pago
-btnAggMetodoPago.addEventListener('click', () => {
-  ("click");
-  // Incrementar el contador para obtener el id único de cada pago
-  // Obtener el contenedor de los métodos de pago
-  let cont = document.querySelector(".cont_metodos_pagos")
-  // Obtener todos los select de métodos de pago existentes
-  let selectOptions = document.querySelectorAll(".selectMetodoPago")
-  // Obtener los valores de los select seleccionados
-  let options = []
-  selectOptions.forEach((select) => {
-    let option = select.options[select.selectedIndex]
-    options.push(option.value)
-  })
-  let availableOptions = []
-  $.ajax({
-    url: "api_search",
-    type: "POST",
-    data: { randomnautica: "metodo_pago" },
-    success: function (response) {
-      let json = JSON.parse(response);
-      json.lista.forEach((date) => {
-        // Solo agregar opciones que no hayan sido seleccionadas previamente
-        if (!options.includes(date.id.toString())) {
-          availableOptions.push({
-            nombre: date.nombre,
-            id: date.id
-          });
-        }
-      });
-
-      // Crear la plantilla HTML para el nuevo método de pago
-      let template = `<div class="inputPago">
-                          <div class="uk-flex uk-flex-around">
-                              <select class="uk-select selectMetodoPago uk-form-small" name="" id="" style="background-color: transparent; border: transparent; width: 150px;">
-                                  <option disabled>TIPO DE PAGO</option>
-                                  ${availableOptions.map(option => `<option value="${option.id}">${option.nombre}</option>`).join('')}
-                              </select>
-                              <input class="uk-input uk-form-small uk-form-width-small AMOUNT-MP" placeholder="Monto" type="text" style="background-color: transparent; border: transparent;">
-                               <button class="btn-deleteMP" uk-icon="trash"></button> 
-                          </div>
-                          <hr class="uk-margin-remove">
-                      </div>`
-
-
-      let contMetodos = document.querySelector(".cont_metodos_pagos")
-      if (contMetodos.childElementCount == 0) {
-        $(".cont_metodos_pagos").append(template)
-        // Agregar la nueva plantilla al contenedor de los métodos de pago finales
-        bool = false
-      }
-      if (contMetodos.lastElementChild.firstElementChild.firstElementChild.nextElementSibling.value == "") {
-        bool = false
-      }
-
-      if (bool == true) {
-        $(".cont_metodos_pagos").append(template)
-        // Agregar la nueva plantilla al contenedor de los métodos de pago finales
-      }
-      // Agregar la nueva plantilla al contenedor de los métodos de 
-      let select = document.querySelectorAll(".selectMetodoPago")
-
-
-      //este sera el evento en donde colocaremos en pagos finales, el valor del input
-      //seleccionamos todos los select
-      let amount = []
-      let INP = document.querySelectorAll(".AMOUNT-MP")
-      let totalDebito = document.querySelector(".amount_MP")
-
-      INP.forEach((B) => {
-
-        // captamos el evento de keyup, osea si el usuario teclea sobre el input
-        B.addEventListener("change", () => {
-          if (B.value == "") {
-            bool = false
-          } else {
-            bool = true
-          }
-
-          // let amount = []
-
-          // INP.forEach((B) => {
-          //   amount.push(B.value)
-          // })
-          // (totalDebito);
-          // (amount);
-          // let result = 0
-          // amount.forEach((a) => {
-          //   let number = a == "" ? 0 : parseFloat(a)
-          //   result += number
-          // })
-          // let valor = totalDebito - result
-          // totalDebito.textContent =  valor
-
-          let valor = B.value == "" ? 0 : parseFloat(B.value)
-          // ActualizarTotal()
-          let valor2 = parseFloat(B.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.textContent)
-          // if (B.previousElementSibling.value == "Divisa" && valor2 != 0) {
-          //   B.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.textContent = (valor2 -(valor * dolar)).toFixed(2)
-          // } else
-          if (valor2 != 0 && B.value != "") {
-            B.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.textContent = (valor2 - valor).toFixed(2)
-          }
-        })
-      })
-
-
-      //esta parte es para eliminar un registro en los tipos de pago
-      //seleccionamos todos los btn de eliminar, los recorremos y le asignamos el evento click
-      let btnDeleteMP = document.querySelectorAll(".btn-deleteMP")
-      btnDeleteMP.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          //seleccionamos el contenedor de los tipos de pago en la izquierda, y removemos al hijo
-          cont.removeChild(btn.parentElement.parentElement)
-
-          for (const f of INP) {
-            (f.value);
-          }
-          // amount.pop()
-          let result = 0
-
-          amount.forEach((a) => {
-            let number = a == "" ? 0 : parseFloat(a)
-            result += number
-          })
-
-            (btn.parentElement.parentElement.parentElement);
-
-        })
-      })
-    }
-  })
-})
 
 //aqui hacemos la funcion para el credito
 
@@ -441,26 +306,6 @@ function func(dolar) {
         (document.getElementById("totalFact$").textContent = (priceFinal / (dolar)).toFixed(2) + " $");
         document.querySelector(".amount_MP").textContent = priceFinal.toFixed(2) + " BS"
 
-
-        // document.getElementById("IGTF").textContent = "0.00 $"
-        // let INP = document.querySelectorAll(".AMOUNT-MP")
-        // INP.forEach((B) => {
-        //   // captamos el evento de keyup, osea si el usuario teclea sobre el input
-        //   if (B.previousElementSibling.value == "Divisa") {
-        //     let IGTF = 0;
-        //     IGTF = parseFloat(B.value) * 0.3
-        //     if (B.value == "") {
-        //       document.getElementById("IGTF").textContent = "0.00 $"
-        //       document.getElementById("totalFact$").textContent = "0.00 $"
-        //     } else {
-        //       document.getElementById("IGTF").textContent = IGTF.toFixed(2) + " $"
-        //       let monto$ = parseFloat(document.getElementById("totalFact$").textContent)
-        //       monto$ += IGTF
-        //       document.getElementById("totalFact$").textContent = monto$.toFixed(2) + " $"
-        //     }
-
-        //   }
-        // })
       };
 
       //seleccionamos todos los botones de +, ya que necesitamos agg los valores del tr en la tabla de la derecha
@@ -787,253 +632,274 @@ DOLAR_RV(func)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 $(document).ready(function () {
   // Inicialización de la tabla con AJAX
   var table = $('#miTabla').DataTable({
-      "language": {
-        "processing": "Procesando...",
-        "lengthMenu": "Mostrar _MENU_ registros",
-        "zeroRecords": "No se encontraron resultados",
-        "emptyTable": "Ningún dato disponible en esta tabla",
-        "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-        "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-        "search": "Buscar:",
-        "infoThousands": ",",
-        "loadingRecords": "Cargando...",
-        "paginate": {
-            "first": "Primero",
-            "last": "Último",
-            "next": "Siguiente",
-            "previous": "Anterior"
+    "language": {
+      "processing": "Procesando...",
+      "lengthMenu": "Mostrar _MENU_ registros",
+      "zeroRecords": "No se encontraron resultados",
+      "emptyTable": "Ningún dato disponible en esta tabla",
+      "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+      "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+      "search": "Buscar:",
+      "infoThousands": ",",
+      "loadingRecords": "Cargando...",
+      "paginate": {
+        "first": "Primero",
+        "last": "Último",
+        "next": "Siguiente",
+        "previous": "Anterior"
+      },
+      "aria": {
+        "sortAscending": ": Activar para ordenar la columna de manera ascendente",
+        "sortDescending": ": Activar para ordenar la columna de manera descendente"
+      },
+      "buttons": {
+        "copy": "Copiar",
+        "colvis": "Visibilidad",
+        "collection": "Colección",
+        "colvisRestore": "Restaurar visibilidad",
+        "copyKeys": "Presione ctrl o u2318 + C para copiar los datos de la tabla al portapapeles del sistema. <br /> <br /> Para cancelar, haga clic en este mensaje o presione escape.",
+        "copySuccess": {
+          "1": "Copiada 1 fila al portapapeles",
+          "_": "Copiadas %ds fila al portapapeles"
         },
-        "aria": {
-            "sortAscending": ": Activar para ordenar la columna de manera ascendente",
-            "sortDescending": ": Activar para ordenar la columna de manera descendente"
+        "copyTitle": "Copiar al portapapeles",
+        "csv": "CSV",
+        "excel": "Excel",
+        "pageLength": {
+          "-1": "Mostrar todas las filas",
+          "_": "Mostrar %d filas"
         },
-        "buttons": {
-            "copy": "Copiar",
-            "colvis": "Visibilidad",
-            "collection": "Colección",
-            "colvisRestore": "Restaurar visibilidad",
-            "copyKeys": "Presione ctrl o u2318 + C para copiar los datos de la tabla al portapapeles del sistema. <br /> <br /> Para cancelar, haga clic en este mensaje o presione escape.",
-            "copySuccess": {
-                "1": "Copiada 1 fila al portapapeles",
-                "_": "Copiadas %ds fila al portapapeles"
-            },
-            "copyTitle": "Copiar al portapapeles",
-            "csv": "CSV",
-            "excel": "Excel",
-            "pageLength": {
-                "-1": "Mostrar todas las filas",
-                "_": "Mostrar %d filas"
-            },
-            "pdf": "PDF",
-            "print": "Imprimir",
-            "renameState": "Cambiar nombre",
-            "updateState": "Actualizar",
-            "createState": "Crear Estado",
-            "removeAllStates": "Remover Estados",
-            "removeState": "Remover",
-            "savedStates": "Estados Guardados",
-            "stateRestore": "Estado %d"
+        "pdf": "PDF",
+        "print": "Imprimir",
+        "renameState": "Cambiar nombre",
+        "updateState": "Actualizar",
+        "createState": "Crear Estado",
+        "removeAllStates": "Remover Estados",
+        "removeState": "Remover",
+        "savedStates": "Estados Guardados",
+        "stateRestore": "Estado %d"
+      },
+      "autoFill": {
+        "cancel": "Cancelar",
+        "fill": "Rellene todas las celdas con <i>%d</i>",
+        "fillHorizontal": "Rellenar celdas horizontalmente",
+        "fillVertical": "Rellenar celdas verticalmentemente"
+      },
+      "decimal": ",",
+      "searchBuilder": {
+        "add": "Añadir condición",
+        "button": {
+          "0": "Constructor de búsqueda",
+          "_": "Constructor de búsqueda (%d)"
         },
-        "autoFill": {
-            "cancel": "Cancelar",
-            "fill": "Rellene todas las celdas con <i>%d</i>",
-            "fillHorizontal": "Rellenar celdas horizontalmente",
-            "fillVertical": "Rellenar celdas verticalmentemente"
+        "clearAll": "Borrar todo",
+        "condition": "Condición",
+        "conditions": {
+          "date": {
+            "after": "Despues",
+            "before": "Antes",
+            "between": "Entre",
+            "empty": "Vacío",
+            "equals": "Igual a",
+            "notBetween": "No entre",
+            "notEmpty": "No Vacio",
+            "not": "Diferente de"
+          },
+          "number": {
+            "between": "Entre",
+            "empty": "Vacio",
+            "equals": "Igual a",
+            "gt": "Mayor a",
+            "gte": "Mayor o igual a",
+            "lt": "Menor que",
+            "lte": "Menor o igual que",
+            "notBetween": "No entre",
+            "notEmpty": "No vacío",
+            "not": "Diferente de"
+          },
+          "string": {
+            "contains": "Contiene",
+            "empty": "Vacío",
+            "endsWith": "Termina en",
+            "equals": "Igual a",
+            "notEmpty": "No Vacio",
+            "startsWith": "Empieza con",
+            "not": "Diferente de",
+            "notContains": "No Contiene",
+            "notStartsWith": "No empieza con",
+            "notEndsWith": "No termina con"
+          },
+          "array": {
+            "not": "Diferente de",
+            "equals": "Igual",
+            "empty": "Vacío",
+            "contains": "Contiene",
+            "notEmpty": "No Vacío",
+            "without": "Sin"
+          }
         },
-        "decimal": ",",
-        "searchBuilder": {
-            "add": "Añadir condición",
-            "button": {
-                "0": "Constructor de búsqueda",
-                "_": "Constructor de búsqueda (%d)"
-            },
-            "clearAll": "Borrar todo",
-            "condition": "Condición",
-            "conditions": {
-                "date": {
-                    "after": "Despues",
-                    "before": "Antes",
-                    "between": "Entre",
-                    "empty": "Vacío",
-                    "equals": "Igual a",
-                    "notBetween": "No entre",
-                    "notEmpty": "No Vacio",
-                    "not": "Diferente de"
-                },
-                "number": {
-                    "between": "Entre",
-                    "empty": "Vacio",
-                    "equals": "Igual a",
-                    "gt": "Mayor a",
-                    "gte": "Mayor o igual a",
-                    "lt": "Menor que",
-                    "lte": "Menor o igual que",
-                    "notBetween": "No entre",
-                    "notEmpty": "No vacío",
-                    "not": "Diferente de"
-                },
-                "string": {
-                    "contains": "Contiene",
-                    "empty": "Vacío",
-                    "endsWith": "Termina en",
-                    "equals": "Igual a",
-                    "notEmpty": "No Vacio",
-                    "startsWith": "Empieza con",
-                    "not": "Diferente de",
-                    "notContains": "No Contiene",
-                    "notStartsWith": "No empieza con",
-                    "notEndsWith": "No termina con"
-                },
-                "array": {
-                    "not": "Diferente de",
-                    "equals": "Igual",
-                    "empty": "Vacío",
-                    "contains": "Contiene",
-                    "notEmpty": "No Vacío",
-                    "without": "Sin"
-                }
-            },
-            "data": "Data",
-            "deleteTitle": "Eliminar regla de filtrado",
-            "leftTitle": "Criterios anulados",
-            "logicAnd": "Y",
-            "logicOr": "O",
-            "rightTitle": "Criterios de sangría",
-            "title": {
-                "0": "Constructor de búsqueda",
-                "_": "Constructor de búsqueda (%d)"
-            },
-            "value": "Valor"
+        "data": "Data",
+        "deleteTitle": "Eliminar regla de filtrado",
+        "leftTitle": "Criterios anulados",
+        "logicAnd": "Y",
+        "logicOr": "O",
+        "rightTitle": "Criterios de sangría",
+        "title": {
+          "0": "Constructor de búsqueda",
+          "_": "Constructor de búsqueda (%d)"
         },
-        "searchPanes": {
-            "clearMessage": "Borrar todo",
-            "collapse": {
-                "0": "Paneles de búsqueda",
-                "_": "Paneles de búsqueda (%d)"
-            },
-            "count": "{total}",
-            "countFiltered": "{shown} ({total})",
-            "emptyPanes": "Sin paneles de búsqueda",
-            "loadMessage": "Cargando paneles de búsqueda",
-            "title": "Filtros Activos - %d",
-            "showMessage": "Mostrar Todo",
-            "collapseMessage": "Colapsar Todo"
+        "value": "Valor"
+      },
+      "searchPanes": {
+        "clearMessage": "Borrar todo",
+        "collapse": {
+          "0": "Paneles de búsqueda",
+          "_": "Paneles de búsqueda (%d)"
         },
-        "select": {
-            "cells": {
-                "1": "1 celda seleccionada",
-                "_": "%d celdas seleccionadas"
-            },
-            "columns": {
-                "1": "1 columna seleccionada",
-                "_": "%d columnas seleccionadas"
-            },
-            "rows": {
-                "1": "1 fila seleccionada",
-                "_": "%d filas seleccionadas"
-            }
+        "count": "{total}",
+        "countFiltered": "{shown} ({total})",
+        "emptyPanes": "Sin paneles de búsqueda",
+        "loadMessage": "Cargando paneles de búsqueda",
+        "title": "Filtros Activos - %d",
+        "showMessage": "Mostrar Todo",
+        "collapseMessage": "Colapsar Todo"
+      },
+      "select": {
+        "cells": {
+          "1": "1 celda seleccionada",
+          "_": "%d celdas seleccionadas"
         },
-        "thousands": ".",
-        "datetime": {
-            "previous": "Anterior",
-            "next": "Proximo",
-            "hours": "Horas",
-            "minutes": "Minutos",
-            "seconds": "Segundos",
-            "unknown": "-",
-            "amPm": [
-                "AM",
-                "PM"
-            ],
-            "months": {
-                "0": "Enero",
-                "1": "Febrero",
-                "2": "Marzo",
-                "3": "Abril",
-                "4": "Mayo",
-                "5": "Junio",
-                "6": "Julio",
-                "7": "Agosto",
-                "8": "Septiembre",
-                "9": "Octubre",
-                "10": "Noviembre",
-                "11": "Diciembre"
-            },
-            "weekdays": [
-                "Dom",
-                "Lun",
-                "Mar",
-                "Mie",
-                "Jue",
-                "Vie",
-                "Sab"
-            ]
+        "columns": {
+          "1": "1 columna seleccionada",
+          "_": "%d columnas seleccionadas"
         },
-        "editor": {
-            "close": "Cerrar",
-            "create": {
-                "button": "Nuevo",
-                "title": "Crear Nuevo Registro",
-                "submit": "Crear"
-            },
-            "edit": {
-                "button": "Editar",
-                "title": "Editar Registro",
-                "submit": "Actualizar"
-            },
-            "remove": {
-                "button": "Eliminar",
-                "title": "Eliminar Registro",
-                "submit": "Eliminar",
-                "confirm": {
-                    "1": "¿Está seguro que desea eliminar 1 fila?",
-                    "_": "¿Está seguro que desea eliminar %d filas?"
-                }
-            },
-            "error": {
-                "system": "Ha ocurrido un error en el sistema (<a target=\"\\\" rel=\"\\ nofollow\" href=\"\\\">Más información&lt;\\/a&gt;).</a>"
-            },
-            "multi": {
-                "title": "Múltiples Valores",
-                "info": "Los elementos seleccionados contienen diferentes valores para este registro. Para editar y establecer todos los elementos de este registro con el mismo valor, hacer click o tap aquí, de lo contrario conservarán sus valores individuales.",
-                "restore": "Deshacer Cambios",
-                "noMulti": "Este registro puede ser editado individualmente, pero no como parte de un grupo."
-            }
-        },
-        "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
-        "stateRestore": {
-            "creationModal": {
-                "button": "Crear",
-                "name": "Nombre:",
-                "order": "Clasificación",
-                "paging": "Paginación",
-                "search": "Busqueda",
-                "select": "Seleccionar",
-                "columns": {
-                    "search": "Búsqueda de Columna",
-                    "visible": "Visibilidad de Columna"
-                },
-                "title": "Crear Nuevo Estado",
-                "toggleLabel": "Incluir:"
-            },
-            "emptyError": "El nombre no puede estar vacio",
-            "removeConfirm": "¿Seguro que quiere eliminar este %s?",
-            "removeError": "Error al eliminar el registro",
-            "removeJoiner": "y",
-            "removeSubmit": "Eliminar",
-            "renameButton": "Cambiar Nombre",
-            "renameLabel": "Nuevo nombre para %s",
-            "duplicateError": "Ya existe un Estado con este nombre.",
-            "emptyStates": "No hay Estados guardados",
-            "removeTitle": "Remover Estado",
-            "renameTitle": "Cambiar Nombre Estado"
+        "rows": {
+          "1": "1 fila seleccionada",
+          "_": "%d filas seleccionadas"
         }
+      },
+      "thousands": ".",
+      "datetime": {
+        "previous": "Anterior",
+        "next": "Proximo",
+        "hours": "Horas",
+        "minutes": "Minutos",
+        "seconds": "Segundos",
+        "unknown": "-",
+        "amPm": [
+          "AM",
+          "PM"
+        ],
+        "months": {
+          "0": "Enero",
+          "1": "Febrero",
+          "2": "Marzo",
+          "3": "Abril",
+          "4": "Mayo",
+          "5": "Junio",
+          "6": "Julio",
+          "7": "Agosto",
+          "8": "Septiembre",
+          "9": "Octubre",
+          "10": "Noviembre",
+          "11": "Diciembre"
+        },
+        "weekdays": [
+          "Dom",
+          "Lun",
+          "Mar",
+          "Mie",
+          "Jue",
+          "Vie",
+          "Sab"
+        ]
+      },
+      "editor": {
+        "close": "Cerrar",
+        "create": {
+          "button": "Nuevo",
+          "title": "Crear Nuevo Registro",
+          "submit": "Crear"
+        },
+        "edit": {
+          "button": "Editar",
+          "title": "Editar Registro",
+          "submit": "Actualizar"
+        },
+        "remove": {
+          "button": "Eliminar",
+          "title": "Eliminar Registro",
+          "submit": "Eliminar",
+          "confirm": {
+            "1": "¿Está seguro que desea eliminar 1 fila?",
+            "_": "¿Está seguro que desea eliminar %d filas?"
+          }
+        },
+        "error": {
+          "system": "Ha ocurrido un error en el sistema (<a target=\"\\\" rel=\"\\ nofollow\" href=\"\\\">Más información&lt;\\/a&gt;).</a>"
+        },
+        "multi": {
+          "title": "Múltiples Valores",
+          "info": "Los elementos seleccionados contienen diferentes valores para este registro. Para editar y establecer todos los elementos de este registro con el mismo valor, hacer click o tap aquí, de lo contrario conservarán sus valores individuales.",
+          "restore": "Deshacer Cambios",
+          "noMulti": "Este registro puede ser editado individualmente, pero no como parte de un grupo."
+        }
+      },
+      "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+      "stateRestore": {
+        "creationModal": {
+          "button": "Crear",
+          "name": "Nombre:",
+          "order": "Clasificación",
+          "paging": "Paginación",
+          "search": "Busqueda",
+          "select": "Seleccionar",
+          "columns": {
+            "search": "Búsqueda de Columna",
+            "visible": "Visibilidad de Columna"
+          },
+          "title": "Crear Nuevo Estado",
+          "toggleLabel": "Incluir:"
+        },
+        "emptyError": "El nombre no puede estar vacio",
+        "removeConfirm": "¿Seguro que quiere eliminar este %s?",
+        "removeError": "Error al eliminar el registro",
+        "removeJoiner": "y",
+        "removeSubmit": "Eliminar",
+        "renameButton": "Cambiar Nombre",
+        "renameLabel": "Nuevo nombre para %s",
+        "duplicateError": "Ya existe un Estado con este nombre.",
+        "emptyStates": "No hay Estados guardados",
+        "removeTitle": "Remover Estado",
+        "renameTitle": "Cambiar Nombre Estado"
+      }
     },
-  
-  "ajax": {
+
+    "ajax": {
       "url": "api_search", // URL de la petición AJAX
       "type": "POST",
       "data": { randomnautica: "entradas" },  // Parámetros enviados al servidor

@@ -331,7 +331,7 @@
 
                     <main class="uk-background-secondary uk-padding uk-border-rounded" uk-filter="target: .js-filter; animation: fade">
                         <!-- container-filter sera el  que tenga todos los filtros de busqueda -->
-                        <!-- <section class="container-filter">
+                        <section class="container-filter">
                             <div class="uk-flex">
                                 <div class="uk-margin">
                                     <form class="form_search_entrys uk-search uk-search-default" style="width: 250px;">
@@ -373,7 +373,7 @@
                                     </ul>
                                 </nav>
                             </div>
-                        </section> -->
+                        </section>
 
 
                         <!-- *********************************modal de entradas productos********************************* -->
@@ -625,7 +625,7 @@
 
                         <!-- conatainer_table contendra la tabla -->
                         <section>
-                            <!-- <div class="uk-overflow-auto altura_table_entry ">
+                            <div class="uk-overflow-auto altura_table_entry ">
                                 <table class="uk-table uk-table-divider uk-table-hover uk-light">
                                     <thead class="activeGood">
                                         <tr>
@@ -649,8 +649,8 @@
                                     <li><a class="pag-btn-productos" data-direccion="next">Next</a></li>
                                     <li><a class="pag-btn-productos" data-direccion="end"><span class="uk-margin-small-left" uk-pagination-next></span><span class="uk-margin-small-left" uk-pagination-next></span></a></li>
                                 </ul>
-                            </div> -->
-                            <div>
+                            </div>
+                            <!-- <div>
                                 <label for="min">Fecha mínima:</label>
                                 <input type="text" id="min" name="min">
                                 <label for="max">Fecha máxima:</label>
@@ -674,7 +674,7 @@
                                         <th>Precio de Compra</th>
                                     </tr>
                                 </tfoot>
-                            </table>
+                            </table> -->
                             <!-- Inputs para el filtro de rango de fechas -->
                             
                         </section>
