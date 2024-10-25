@@ -5,10 +5,10 @@
     // require('../../Model/Metodos_pagos.php');
     // require('../../Model/Cajas.php');
     // require('./acciones_caja.php');
-    session_start();
+    // session_start();
     // require("../funcs/verificar_admin_funcs.php");
-    require('../../Model/Conexion.php');
-    require('../../Model/Cajas.php');
+    // require('Model/Conexion.php');
+    // require('Model/Cajas.php');
 
 
 
@@ -125,46 +125,48 @@
 	print_r($cont);
 	echo '<br>';
 
-	$datos = json_decode('
-{
-    "proveedor": 1,
-    "fecha_compra": "2020-01-01",
-    "metodos_pagos": [
-        {
-            "transferencia": 0,
-            "efectivo": 0,
-            "cheque": 0
-        }
-    ],
-    "codigo": "12345678",
-    "detalles": "nose que póner áca",
-    "lista": [
-        {
-            "id_producto": 4,
-            "precio_compra": 200,
-            "fecha_vencimiento": "2025-01-01",
-            "mercancia": "saco de huevos",
-            "t_mercancia": 24,
-            "cantidad_mercancia": 20
-        },
-        {
-            "id_producto": 4,
-            "precio_compra": 200,
-            "fecha_vencimiento": "2025-01-01",
-            "mercancia": "saco de huevos",
-            "t_mercancia": 24,
-            "cantidad_mercancia": 20
-        }
-    ]
-}
-	');
-	
-	print_r((array)$datos->lista[0]);
+	print_r(["id" => 1] + ["id" => 2]);
 
-	require('../../Model/Detalles_entradas.php');
-	require('../../Model/Entradas.php');
-	$clase = new Entrada(null,$datos->proveedor,$datos->fecha_compra,$datos->codigo,$datos->detalles);
-	print_r($clase->agregar($datos->lista));
+// 	$datos = json_decode('
+// {
+//     "proveedor": 1,
+//     "fecha_compra": "2020-01-01",
+//     "metodos_pagos": [
+//         {
+//             "transferencia": 0,
+//             "efectivo": 0,
+//             "cheque": 0
+//         }
+//     ],
+//     "codigo": "12345678",
+//     "detalles": "nose que póner áca",
+//     "lista": [
+//         {
+//             "id_producto": 4,
+//             "precio_compra": 200,
+//             "fecha_vencimiento": "2025-01-01",
+//             "mercancia": "saco de huevos",
+//             "t_mercancia": 24,
+//             "cantidad_mercancia": 20
+//         },
+//         {
+//             "id_producto": 4,
+//             "precio_compra": 200,
+//             "fecha_vencimiento": "2025-01-01",
+//             "mercancia": "saco de huevos",
+//             "t_mercancia": 24,
+//             "cantidad_mercancia": 20
+//         }
+//     ]
+// }
+// 	');
+	
+// 	print_r((array)$datos->lista[0]);
+
+// 	require('../../Model/Detalles_entradas.php');
+// 	require('../../Model/Entradas.php');
+// 	$clase = new Entrada(null,$datos->proveedor,$datos->fecha_compra,$datos->codigo,$datos->detalles);
+// 	print_r($clase->agregar($datos->lista));
 
 	?>
 	

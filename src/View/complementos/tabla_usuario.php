@@ -61,7 +61,7 @@ echo '
 
         <div class="uk-modal-body">
             <p>Deseas eliminar este registro para siempre? No podras recuperlo mas adelante</p>
-            <form action="Controller/funcs/borrar_cosas.php" method="POST">
+            <form action="api_eliminar" method="POST">
                 <input type=number value="'.$row['id'].'" name="ID" style="display:none">
                 <input type=text value="usuarios" name="tipo" style="display:none">
                 <input type="submit" id="eliminar'.$row['id'].'" style="display:none">

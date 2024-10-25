@@ -51,7 +51,14 @@ class Estadisticas extends DB
     }
     function search_proveedor_from_product($id_producto)
     {
-        $query = $this->conn->prepare('SELECT id_proveedor, (SELECT razon_social FROM proveedores p WHERE p.id = entradas.id_proveedor) AS proveedor FROM entradas WHERE id_producto=:id GROUP BY id_proveedor');
+        $query = $this->conn->prepare('SELECT 
+        id_proveedor, 
+        proveedores.razon_social
+        FROM entradas_2
+        INNER JOIN entradas ON entradas.id = entradas_2.id_entrada
+        INNER JOIN proveedores ON proveedores.id = entradas.id_proveedor 
+        WHERE id_producto=:id 
+        GROUP BY entradas.id_proveedor');
         $query->bindParam(':id', $id_producto);
         $query->execute();
         return $query->fetchAll();

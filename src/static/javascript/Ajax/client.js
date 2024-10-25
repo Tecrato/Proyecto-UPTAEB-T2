@@ -85,7 +85,7 @@ function DeleteClientProv(BTN, FORM, IDSETTER, TR, notification) {
         e.preventDefault();
         let data = new FormData(form);
         $.ajax({
-          url: "Controller/funcs/borrar_cosas.php",
+          url: "api_eliminar",
           type: "POST",
           processData: false,
           contentType: false,
@@ -177,7 +177,7 @@ function cardClient(page) {
   $.ajax({
     url: "api_search",
     type: "POST",
-    data: { randomnautica: "clientes", n: page_clientes, limite: 6 },
+    data: { randomnautica: "clientes", n: page_clientes, limite: 6, active: 1 },
     success: function (response) {
       let template = "";
       let json = JSON.parse(response);
@@ -268,12 +268,14 @@ searchFilter.addEventListener("keyup", () => {
   if (parseInt(value)) {
     data = {
       randomnautica: "clientes", 
-      like_cedula: value
+      like_cedula: value,
+      active: 1
     }
   } else {
     data = {
       randomnautica: "clientes", 
-      like_nombre: value
+      like_nombre: value,
+      active: 1
     }
   }
   $.ajax({

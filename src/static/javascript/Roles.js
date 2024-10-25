@@ -67,7 +67,7 @@ radio.forEach((r) => {
             });
         } else {
             $.ajax({
-                url: "Controller/funcs/borrar_cosas.php",
+                url: "api_eliminar",
                 type: "POST",
                 data: { tipo: "permiso", id_usuario: id_user, tabla, accion },
                 success: function (response) {

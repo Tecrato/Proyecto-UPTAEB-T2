@@ -53,7 +53,8 @@
             isset($_POST['IVA']) ? $_POST['IVA'] : null,
             isset($_POST['codigo']) ? $_POST['codigo'] : null,
             1,
-            isset($_POST['algoritmo']) ? $_POST['algoritmo'] : null
+            isset($_POST['algoritmo']) ? $_POST['algoritmo'] : null,
+            isset($_POST['ganancia']) ? $_POST['ganancia'] : null,
         );
 
         try {

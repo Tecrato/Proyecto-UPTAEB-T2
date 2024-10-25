@@ -7,8 +7,8 @@
     require('Model/Conexion.php');
     require('Model/Permisos.php');
     require('Model/Bitacora.php');
+    require('Model/Db_base.php');
 
-    print_r($_POST);
 
     $other_class = new Permiso(null,$_SESSION['user_id'],$_POST['tipo'],'agregar');
     $result = $other_class->search();
@@ -42,7 +42,23 @@
         }
         
         require('Model/Productos.php');
-        $clase = new Producto(null,$_POST["categoria"],$_POST["unidad"],$_POST["marca"],$_POST["valor_unidad"],$_POST["nombre"],$nick,$_POST["stock_min"],$_POST["stock_max"],$_POST["precio_venta"],$_POST["IVA"],$_POST["codigo"],$_POST["algoritmo"]);
+        $clase = new Producto(
+            null,
+            $_POST["categoria"],
+            $_POST["unidad"],
+            $_POST["marca"],
+            $_POST["valor_unidad"],
+            $_POST["nombre"],
+            $nick,
+            $_POST["stock_min"],
+            $_POST["stock_max"],
+            isset($_POST["precio_venta"]) ? $_POST["precio_venta"] : 0,
+            $_POST["IVA"],
+            $_POST["codigo"],
+            1,
+            $_POST["algoritmo"],
+            isset($_POST["ganancia"]) ? $_POST["ganancia"] : 0.30
+        );
         try {
             print_r($clase->agregar());
         } catch (Exception $e) {
@@ -114,9 +130,15 @@
     }
 
     if ($tipo != 'producto' and $tipo != 'entrada') {
-        $resultado = $clase->agregar();
-        $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Agregar","Agregado ".$tipo);
-        $clase2->agregar();
+        try {
+            $resultado = $clase->agregar();
+            $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Agregar","Agregado ".$tipo);
+            $clase2->agregar();
+            echo json_encode(['status' => 'ok', 'message' => '$tipo agregada correctamente', 'last_insert_id' => $resultado]);
+
+        } catch (Exception $e) {
+            echo json_encode(['status' => 'error','error'=>'No es posible agregar el registro']);
+            die();
+        }
     }
-    echo json_encode(['status' => 'ok', 'message' => 'Entrada agregada correctamente', 'last_insert_id' => $resultado]);
 ?>

@@ -41,6 +41,7 @@
             id:(isset($_POST['ID']) ? $_POST['ID'] : null),
             like_nombre:(isset($_POST['like_nombre']) ? $_POST['like_nombre'] : ''),
             like_cedula:(isset($_POST['like_cedula']) ? $_POST['like_cedula'] : ''),
+            active:(isset($_POST['active']) ? $_POST['active'] : null),
         );
     }
     elseif ($_POST['randomnautica'] == "credito") {
@@ -84,7 +85,7 @@
         $clase = new Producto(
             id:(isset($_POST['ID']) ? $_POST['ID'] : null),
             nombre:(isset($_POST['nombre']) ? $_POST['nombre'] : null),
-            active:(isset($_POST['active']) ? !$_POST['active'] : null),
+            active:(isset($_POST['active']) ? $_POST['active'] : null),
             like:(isset($_POST['like']) ? $_POST['like'] : '')
         );
     }

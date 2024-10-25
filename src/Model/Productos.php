@@ -19,7 +19,8 @@
         private $like;
 
         function __construct($id=null, $id_categoria=null,$id_unidad=null,$id_marca=null,$valor_unidad=null,$nombre=null,
-            $imagen=null,$stock_min=null,$stock_max=null,$precio_venta=null,$IVA=null,$codigo=null,$active=null,$algoritmo=null,$like='',$ganancia=null){
+            $imagen=null,$stock_min=null,$stock_max=null,$precio_venta=null,$IVA=null,$codigo=null,$active=null,$algoritmo=null,
+            $ganancia=null,$like=''){
 
             $this->id = $id;
             $this->id_categoria = $id_categoria;
@@ -50,15 +51,16 @@
                 "stock_max"=> $this->stock_max,
                 "precio_venta"=> $this->precio_venta,
                 "IVA"=> $this->IVA,
-                "active"=> $this->active,
                 "ganancia" => $this->ganancia,
                 "codigo"=> $this->codigo,
+                "active"=> $this->active,
                 "algoritmo"=> $this->algoritmo,
+                "ganancia" => $this->ganancia,
             ]);
             $this->add_variables_like([
                 "nombre" => $this->like
             ]);
-            $this->table = 'productos';
+            $this->tabla = 'productos';
             $this->select_query = "
                 a.id,
                 a.id_categoria,
