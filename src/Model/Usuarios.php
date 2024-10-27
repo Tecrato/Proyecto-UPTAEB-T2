@@ -1,5 +1,8 @@
 <?php
 
+require_once('Conexion.php');
+
+
     class Usuario extends DB{
         private $id;
         private $nombre;

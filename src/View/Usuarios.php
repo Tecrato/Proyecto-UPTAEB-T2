@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/css/LogReg.css">
-    <link rel="stylesheet" href="static/css/uikit.css">
-    <link rel="stylesheet" href="static/css/aos.css">
-    <link rel="shortcut icon" href="static/images/logo_m.png" type="image/x-icon">
+    <link rel="stylesheet" href="src/static/css/LogReg.css">
+    <link rel="stylesheet" href="src/static/css/uikit.css">
+    <link rel="stylesheet" href="src/static/css/aos.css">
+    <link rel="shortcut icon" href="src/static/images/logo_m.png" type="image/x-icon">
     <title>Iniciar Sesion</title>
 </head>
 
@@ -18,7 +18,7 @@
             <article class="Item uk-flex-center uk-flex-middle Login" data-aos="zoom-in-up">
                 <div class="Register">
                     <div class="uk-text-center">
-                        <img src="static/images/logo_m.png" alt="" width="130px">
+                        <img src="src/static/images/logo_m.png" alt="" width="130px">
                         <h3>Iniciar Sesión</h3>
                     </div>
                     <form class="uk-grid-small" uk-grid action="login_normal" method="POST">
@@ -63,7 +63,7 @@
             <article class="Item uk-flex-center uk-flex-middle SetPassword display-none">
                 <div class="Register">
                     <div class="uk-text-center">
-                        <img src="static/images/logo_m.png" alt="" width="130px">
+                        <img src="src/static/images/logo_m.png" alt="" width="130px">
                         <h3>Recuperar Contraseña</h3>
                     </div>
                     <div class="uk-flex uk-flex-column uk-flex-middle" method="POST">
@@ -101,7 +101,7 @@
             <article class="Item uk-flex-center uk-flex-middle SetRegister display-none">
                 <div class="Register">
                     <div class="uk-text-center">
-                        <img src="static/images/logo_m.png" alt="" width="130px">
+                        <img src="src/static/images/logo_m.png" alt="" width="130px">
                         <h3>Registrarse</h3>
                     </div>
                     <!-- <div class="uk-flex uk-flex-column uk-flex-middle" method="POST">
@@ -165,11 +165,11 @@
 
     </section>
 
-    <script src="static/javascript/librerias/uikit.js"></script>
-    <script src="static/javascript/librerias/uikit-icons.js"></script>
-    <script src="static/javascript/librerias/aos.js"></script>
-    <script src="static/javascript/librerias/jquery.js"></script>
-    <script src="static/javascript/Ajax/recuperaPass.js"></script>
+    <script src="src/static/javascript/librerias/uikit.js"></script>
+    <script src="src/static/javascript/librerias/uikit-icons.js"></script>
+    <script src="src/static/javascript/librerias/aos.js"></script>
+    <script src="src/static/javascript/librerias/jquery.js"></script>
+    <script src="src/static/javascript/Ajax/recuperaPass.js"></script>
 
     <script>
         AOS.init({
@@ -190,7 +190,7 @@
              * La imagen se asigna dinámicamente a la propiedad 'src' de la imagen en el documento.
              */
             function generaCodigo() {
-                let url = 'Controller/funcs/Captcha.php';
+                let url = 'src/Controller/funcs/Captcha.php';
 
                 fetch(url)
                     .then(response => response.blob())
