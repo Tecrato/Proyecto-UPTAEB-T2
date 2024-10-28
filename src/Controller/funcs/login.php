@@ -4,9 +4,9 @@
     session_start();
 
 
-    use Proyecto\T2\Model\Conexion;
-    use Proyecto\T2\Model\Usuario;
-    use Proyecto\T2\Model\Bitacora;
+    use Shtechnologyx\Pt3\Model\Conexion;
+    use Shtechnologyx\Pt3\Model\Usuario;
+    use Shtechnologyx\Pt3\Model\Bitacora;
 
     
     $sesion_id = substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, 10);//creamos el string del sesion id
@@ -17,7 +17,7 @@
     
 
     if (!($_SESSION['codigo_verificacion'] == sha1($codigo))) {
-        header('Location: ../../login?error=2');
+        header('Location: login?error=2');
         exit(0);
         die();
     }
@@ -27,7 +27,7 @@
     $result = $c->search();
     
     if (count($result) != 1) {
-        header('Location: ../../login?error=3');
+        header('Location: login?error=3');
     }
     else if ($_POST["correo"] and $_POST["contraseña"] and password_verify($password,$result[0]['hash'])) { // si hay un resultado entonces lo deja pasar
         $row = $result[0];
@@ -51,10 +51,10 @@
         }
         $clase2 = new Bitacora(null,$row['id'],"Usuarios","Login","Usuario ".$row['nombre']." logueado");
         $clase2->agregar();
-        // header('Location: ../../Inicio'); // y pa' la pagina que se va
+        header('Location: Inicio'); // y pa' la pagina que se va
         echo "funciono";
     } else {
-        // header('Location: ../../login?error=0'); // Sino, lo devuelve al login
+        header('Location: login?error=0'); // Sino, lo devuelve al login
         echo "no funciono";
     }
 
