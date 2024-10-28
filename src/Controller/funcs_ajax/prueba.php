@@ -5,10 +5,10 @@
     // require('../../Model/Metodos_pagos.php');
     // require('../../Model/Cajas.php');
     // require('./acciones_caja.php');
-    session_start();
+    // session_start();
     // require("../funcs/verificar_admin_funcs.php");
-    require('../../Model/Conexion.php');
-    require('../../Model/Cajas.php');
+    // require('../../Model/Conexion.php');
+    // require('../../Model/Cajas.php');
 
 
 
@@ -159,12 +159,15 @@
 }
 	');
 	
-	print_r((array)$datos->lista[0]);
+	// print_r((array)$datos->lista[0]);
 
-	require('../../Model/Detalles_entradas.php');
-	require('../../Model/Entradas.php');
-	$clase = new Entrada(null,$datos->proveedor,$datos->fecha_compra,$datos->codigo,$datos->detalles);
-	print_r($clase->agregar($datos->lista));
+	// require('../../Model/Detalles_entradas.php');
+	// require('../../Model/Entradas.php');
+	// $clase = new Entrada(null,$datos->proveedor,$datos->fecha_compra,$datos->codigo,$datos->detalles);
+	// print_r($clase->agregar($datos->lista));
+	use Shtechnologyx\Pt3\Model\Conexion;
+	$c = new Conexion();
+	print_r($c->getVars());
 
 	?>
 	

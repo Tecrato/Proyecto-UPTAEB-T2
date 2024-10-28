@@ -1,8 +1,5 @@
 <?php
 
-namespace Shtechnologyx\Pt3\Controller\funcs;
-require('../../../vendor/autoload.php');
-
 use Exception;
 
 session_start();

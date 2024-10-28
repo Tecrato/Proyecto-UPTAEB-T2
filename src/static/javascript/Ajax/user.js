@@ -37,7 +37,7 @@ function generar_bitacora_general(page) {
     template = ""
     $.ajax({
         url: "api_search",
-        type: "GET",
+        type: "POST",
         data: { randomnautica: "bitacora", limite: 10, n: page },
         success: function (response) {
             console.log(response)
@@ -64,7 +64,7 @@ function generar_bitacora_personal(page) {
     template2 = ""
     $.ajax({
         url: "api_search",
-        type: "GET",
+        type: "POST",
         data: { randomnautica: "bitacora", limite: 10, n: page, id_usuario: session_user_id },
         success: function (response) {
             console.log(response, page)
