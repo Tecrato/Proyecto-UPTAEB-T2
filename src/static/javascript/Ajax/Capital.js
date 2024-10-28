@@ -98,7 +98,7 @@ FormCapital.addEventListener("submit", (e) => {
     e.preventDefault();
     let data = new FormData(FormCapital);
     $.ajax({
-        url: "Controller/funcs/agregar_cosas.php",
+        url: "api_agregar",
         type: "POST",
         data: data,
         contentType: false,

@@ -246,7 +246,7 @@ const modalEntradas = () => {
           let formDataLote = new FormData(formAggLote);
           //hacemos la peticion ajax
           $.ajax({
-            url: "Controller/funcs/agregar_cosas.php",
+            url: "api_agregar",
             type: "POST",
             data: formDataLote,
             processData: false,
@@ -811,12 +811,13 @@ function Registrar_U_M_C(form, tr, item_reset, notification) {
     let Form_Send = new FormData(Form_identificador);
     // enviamos los datos la backend con una peticion ajax
     $.ajax({
-      url: "Controller/funcs/agregar_cosas.php",
+      url: "api_agregar",
       type: "POST",
       data: Form_Send,
       processData: false,
       contentType: false,
       success: function (response) {
+        console.log(response)
         tr();
         document.querySelector(item_reset).value = "";
         UIkit.notification.closeAll();

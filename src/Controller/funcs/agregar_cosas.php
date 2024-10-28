@@ -1,15 +1,13 @@
 <?php
 
-use Exception;
-
 session_start();
 // require("./verificar_admin_funcs.php");
 require 'subir_imagen.php';
 $tipo = $_POST['tipo']; // Depende de que es lo que queramos insertar
 
-require('../../Model/Conexion.php');
+use Shtechnologyx\Pt3\Model\Conexion;
 
-use Shtechnologyx\Pt3\Model\Permiso;
+use Shtechnologyx\Pt3\model\Permisos;
 use Shtechnologyx\Pt3\Model\Bitacora;
 use Shtechnologyx\Pt3\Model\Usuario;
 use Shtechnologyx\Pt3\Model\Producto;
@@ -24,7 +22,7 @@ use Shtechnologyx\Pt3\Model\Metodo_pago;
 use Shtechnologyx\Pt3\Model\Credito;
 use Shtechnologyx\Pt3\Model\Capital;
 
-$other_class = new Permiso(null, $_SESSION['user_id'], $_POST['tipo'], 'agregar');
+$other_class = new Permisos(null, $_SESSION['user_id'], $_POST['tipo'], 'agregar');
 $result = $other_class->search();
 
 if ($tipo === 'usuarios') {

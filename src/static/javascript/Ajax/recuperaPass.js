@@ -117,7 +117,7 @@ formRegisterUser.addEventListener("submit", (e) => {
     }
     //peticion para registrar el usuario
     $.ajax({
-        url: "Controller/funcs/agregar_cosas.php",
+        url: "api_agregar",
         type: "POST",
         data: data,
         contentType: false,

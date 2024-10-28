@@ -59,7 +59,7 @@ radio.forEach((r) => {
 
         if (condicion == 'Si') {
             $.ajax({
-                url: "Controller/funcs/agregar_cosas.php",
+                url: "api_agregar",
                 type: "POST",
                 data: { tipo: "permiso", id_usuario: id_user, tabla: tabla, permiso: accion },
                 success: function (response) {
