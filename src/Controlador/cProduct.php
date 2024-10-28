@@ -1,7 +1,7 @@
 <?php
-    // require_once(`Model/productos.php`);
+    // require_once('Model/productos.php');
     class CProduct{
         public function viewProduct():void{
-            require_once (`View/product.php`);
+            require_once 'View/product.php';
         }
     }
