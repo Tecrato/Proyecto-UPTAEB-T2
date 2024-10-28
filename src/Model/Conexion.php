@@ -1,29 +1,24 @@
 <?php
+    namespace Shtechnologyx\Pt3\Model;
+    use PDO;
 
-namespace Shtechnologyx\Pt3\Model;
-use PDO;
-
-class Conexion
-{
+class Conexion{
 
     public $dbHost = 'localhost';
     public $dbUser = 'root';
-    public $dbName = 'proyecto_5';
-    public $dbPass = '12345';
+    public $dbName = 'proyecto';
+    public $dbPass = '';
 
     public $conn;
-    function __construct()
-    {
+    function __construct(){
         $this->conn = new PDO('mysql:host=' . $this->dbHost . ';dbname=' . $this->dbName, $this->dbUser, $this->dbPass);
         $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
-    function __destruct()
-    {
+    function __destruct(){
         $this->conn = null;
     }
 
-    function Backup($type)
-    {
+    function Backup($type){
         if ($type == "Insert") {
             date_default_timezone_set('America/Caracas');
             $backupFile = "../../Backups/" . $this->dbName . '_' . date('Y-m-d_H-i') . '.sql';

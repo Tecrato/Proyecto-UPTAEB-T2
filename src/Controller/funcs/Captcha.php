@@ -1,7 +1,7 @@
 <?php
 // Iniciar la sesión para almacenar el código de verificación
 
-// namespace Shtechnologyx\Pt3\Controller\funcs;
+// namespace Proyecto\T2\Controller\funcs;
 
 session_start();
 

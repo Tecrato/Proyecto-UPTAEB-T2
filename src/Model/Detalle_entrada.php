@@ -1,8 +1,6 @@
 <?php
-
-namespace Shtechnologyx\Pt3\Model;
-use PDO;
-use Exception;
+    namespace Shtechnologyx\Pt3\Model;
+    use PDO;
 	class Detalle_entrada extends Conexion{
         private $id;
         private $id_entrada;

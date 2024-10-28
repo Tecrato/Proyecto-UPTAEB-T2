@@ -1,6 +1,6 @@
 <?php
-namespace Shtechnologyx\Pt3\Model;
-use PDO;
+    namespace Shtechnologyx\Pt3\Model;
+    use PDO;
 
 	class Notificacion extends Conexion {
 		private $id;

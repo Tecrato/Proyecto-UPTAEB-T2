@@ -5,7 +5,7 @@ Chart.defaults.borderColor = "#444";
 
 $.ajax({
     url: "api_estadisticas",
-    type: "GET",
+    type: "POST",
     data: { select: "ratio_ventas" },
     success: function (response) {
         let json = JSON.parse(response);
@@ -27,7 +27,7 @@ $.ajax({
 
 $.ajax({
     url: "api_estadisticas",
-    type: "GET",
+    type: "POST",
     data: { select: "clientes_frecuentes" },
     success: function (response) {
         let json = JSON.parse(response);
@@ -50,7 +50,7 @@ $.ajax({
 
 $.ajax({
     url: "api_estadisticas",
-    type: "GET",
+    type: "POST",
     data: { select: "total_productos_categoria" },
     success: function (response) {
         let json = JSON.parse(response);
@@ -108,7 +108,7 @@ const renderModelsChart6 = () => {
     ("object");
     $.ajax({
         url: "api_estadisticas",
-        type: "GET",
+        type: "POST",
         data: { select: "valor_total_inventario" },
         success: function (response) {
             (response);

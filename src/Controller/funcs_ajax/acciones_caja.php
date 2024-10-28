@@ -1,9 +1,9 @@
 <?php
 session_start();
-require("../funcs/verificar_admin_funcs.php");
-require('../../Model/Conexion.php');
-require('../../Model/Cajas.php');
-require('../../Model/Permisos.php');
+require("Controller/funcs/verificar_admin_funcs.php");
+use Shtechnologyx\Pt3\model\Conexion;
+use Shtechnologyx\Pt3\model\Caja;
+use Shtechnologyx\Pt3\model\Permiso;
 
 
 

@@ -1,6 +1,4 @@
 <?php
-namespace Shtechnologyx\Pt3\Controller\funcs;
-require('../../../vendor/autoload.php');
 
     // Con este codigo de destruye la session
     // No quedara nada
@@ -18,5 +16,5 @@ require('../../../vendor/autoload.php');
     $clase2->agregar();
 
     session_destroy();
-    header("Location:login"); // Y pal login
+    header("Location:Login"); // Y pal login
 ?>

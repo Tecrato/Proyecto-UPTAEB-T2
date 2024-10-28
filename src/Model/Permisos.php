@@ -1,9 +1,7 @@
 <?php
-
-namespace Shtechnologyx\Pt3\Model;
-use PDO;
-
-    class Permiso extends Conexion{
+    namespace Shtechnologyx\Pt3\Model;
+    use PDO;
+    class Permisos extends Conexion{
         private $id;
         private $id_usuario;
         private $tabla;

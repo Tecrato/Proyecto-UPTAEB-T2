@@ -176,7 +176,7 @@ function cardClient(page) {
   page_clientes = page
   $.ajax({
     url: "api_search",
-    type: "GET",
+    type: "POST",
     data: { randomnautica: "clientes", n: page_clientes, limite: 6 },
     success: function (response) {
       let template = "";

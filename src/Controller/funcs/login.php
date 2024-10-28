@@ -1,14 +1,12 @@
 <?php
-    namespace Shtechnologyx\Pt3\Controller\funcs;
-require('../../../vendor/autoload.php');
 
     // Con este codigo se confirma si el usuario tiene una cuenta para entrar al sistema
     session_start();
 
 
-    // require '../../Model/Conexion.php';
-    use Shtechnologyx\Pt3\Model\Usuario;
-    use Shtechnologyx\Pt3\Model\Bitacora;
+    use Proyecto\T2\Model\Conexion;
+    use Proyecto\T2\Model\Usuario;
+    use Proyecto\T2\Model\Bitacora;
 
     
     $sesion_id = substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, 10);//creamos el string del sesion id
@@ -53,9 +51,11 @@ require('../../../vendor/autoload.php');
         }
         $clase2 = new Bitacora(null,$row['id'],"Usuarios","Login","Usuario ".$row['nombre']." logueado");
         $clase2->agregar();
-        header('Location: ../../Inicio'); // y pa' la pagina que se va
+        // header('Location: ../../Inicio'); // y pa' la pagina que se va
+        echo "funciono";
     } else {
-        header('Location: ../../login?error=0'); // Sino, lo devuelve al login
+        // header('Location: ../../login?error=0'); // Sino, lo devuelve al login
+        echo "no funciono";
     }
 
 ?>

@@ -1,8 +1,8 @@
 <?php
-     require('../Model/Conexion.php');
-     require('../Model/Usuarios.php');
-     include("./funcs/verificar.php");
+    use Shtechnologyx\Pt3\Model\Conexion;
+    use Shtechnologyx\Pt3\Model\Usuarios;
+    include("Controller/funcs/verificar.php");
 
-    include('../View/product.php');
+    include('View/product.php');
 
 ?>

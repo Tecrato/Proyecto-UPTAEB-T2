@@ -1,7 +1,7 @@
 <?php
     // require('../Model/Conexion.php');
     // require('../Model/Usuarios.php');
-    include("./funcs/verificar.php");
+    include("Controller/funcs/verificar.php");
 
 
     use Shtechnologyx\Pt3\Model\Usuario;

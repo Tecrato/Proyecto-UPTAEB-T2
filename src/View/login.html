@@ -22,7 +22,7 @@
                         <img src="static/images/logo_m.png" alt="" width="130px">
                         <h3>Iniciar Sesión</h3>
                     </div>
-                    <form class="uk-grid-small" uk-grid action="Controller/funcs/login.php" method="POST">
+                    <form class="uk-grid-small" uk-grid action="login_normal" method="POST">
 
                         <div class="uk-width-1-1@s uk-flex uk-flex-center">
 
@@ -34,13 +34,13 @@
                         <div class="uk-width-1-1@s uk-flex uk-flex-center">
                             <div class="uk-inline">
                                 <span class="uk-form-icon" uk-icon="icon: lock"></span>
-                                <input class="uk-input" placeholder="Contraseña" type="password" aria-label="Not clickable icon" name="contraseña" pattern="^[\w\S]{8,}$" required>
+                                <input class="uk-input" placeholder="Contraseña" type="password" aria-label="Not clickable icon" name="contraseña" required>
                             </div>
                         </div>
                         <div class="uk-width-1-1@s uk-flex uk-flex-center">
                             <div class="uk-inline">
                                 <span class="uk-form-icon" uk-icon="icon: question"></span>
-                                <input class="uk-input uk-form-blank" placeholder="Codigo" type="text" aria-label="Not clickable icon" name="codigo" required autocomplete="off">
+                                <input class="uk-input uk-form-blank" placeholder="Codigo" type="text" aria-label="Not clickable icon" name="codigo" autocomplete="off" required>
                             </div>
                         </div>
                         <div class="uk-width-1-1@s uk-flex uk-flex-middle uk-flex-center">

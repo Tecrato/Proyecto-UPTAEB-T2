@@ -99,6 +99,7 @@ $.ajax({
   type: "POST",
   data: { accion: "check" },
   success: function (response) {
+    console.log(response)
     let json = JSON.parse(response);
     if (json.estado == "no") {
       document.getElementById("check_box").textContent = "CERRADA";
@@ -135,7 +136,7 @@ try {
 function DOLAR_RV(func) {
   $.ajax({
     url: "api_search",
-    type: "GET",
+    type: "POST",
     data: { randomnautica: "configuraciones", llave: "dolar" },
     success: function (response) {
       json = JSON.parse(response)
@@ -148,9 +149,10 @@ function DOLAR_RV(func) {
 function DOLAR_DB(id) {
   $.ajax({
     url: "api_search",
-    type: "GET",
+    type: "POST",
     data: { randomnautica: "configuraciones", llave: "dolar" },
     success: function (response) {
+      console.log(response)
       json = JSON.parse(response)
       document.getElementById(id).textContent = json.lista[0].valor + " Bs"
     }
@@ -175,7 +177,7 @@ function PermisosG(btnEdit, btnDelete, tabla, btnAgg, T) {
 
   $.ajax({
     url: "api_search",
-    type: "GET",
+    type: "POST",
     data: { randomnautica: "permiso", ID: session_user_id },
     success: function (response) {
       let json = JSON.parse(response);

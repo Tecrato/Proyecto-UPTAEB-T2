@@ -1,7 +1,7 @@
 <?php
+    namespace Shtechnologyx\Pt3\Model;
+    use PDO;
 
-namespace Shtechnologyx\Pt3\Model;
-use PDO;
 	class Configuracion extends Conexion {
         private $value;
         private $key;

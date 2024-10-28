@@ -1,11 +1,13 @@
 <?php
 // require_once __DIR__ . '../../../vendor/autoload.php';
-require("../../vendor/autoload.php");
+// require("../../vendor/autoload.php");
 
 
     // require('../Model/Conexion.php');
     // require('../Model/Usuarios.php');
     // include("./funcs/verificar.php");
+
+    session_start();
     
     use Shtechnologyx\Pt3\Model\Usuario;
     // use Shtechnologyx\Pt3\Controller\funcs\verificar;;
@@ -26,7 +28,7 @@ require("../../vendor/autoload.php");
     $factura = new Registro_ventas();
     $factura = $factura->COUNT();
 
-    include('../View/index.php');
+    include('View/index.php');
 
 
 

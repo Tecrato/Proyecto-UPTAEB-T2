@@ -1,7 +1,6 @@
 <?php
-
-namespace Shtechnologyx\Pt3\Model;
-use PDO;
+    namespace Shtechnologyx\Pt3\Model;
+    use PDO;
 
     class Metodo_pago extends Conexion{
         private $id;

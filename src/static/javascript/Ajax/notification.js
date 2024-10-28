@@ -2,9 +2,10 @@
 function newNotification() {
     $.ajax({
         url: "api_search",
-        type: "GET",
+        type: "POST",
         data: { randomnautica: "notificaciones", status: 1 , subFunction: 'count'},
         success: function (response) {
+            console.log(response);
             let json = JSON.parse(response);
             let badge = document.querySelector(".uk-badge");
             badge.textContent = json.lista;

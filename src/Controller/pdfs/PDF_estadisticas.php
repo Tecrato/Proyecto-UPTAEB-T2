@@ -6,7 +6,7 @@ require('../../Model/Usuarios.php');
 include("../funcs/verificar.php");
 // require('../../Plugins/fpdf.php');
 
-use Shtechnologyx\Pt3\Model\Estadisticas;
+use Proyecto\T2\Model\Estadisticas;
 
 // require('../../Model/Estadisticas.php');
 

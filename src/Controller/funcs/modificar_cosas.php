@@ -1,26 +1,26 @@
 <?php
 
-namespace Shtechnologyx\Pt3\Controller\funcs;
+namespace Proyecto\T2\Controller\funcs;
 require('../../../vendor/autoload.php');
 
 use Exception;
 
 session_start();
-use Shtechnologyx\Pt3\Controller\funcs\verificar_admin_funcs;
+use Proyecto\T2\Controller\funcs\verificar_admin_funcs;
 // require("./verificar_admin_funcs.php");
 require('../../Model/Conexion.php');
 
-use Shtechnologyx\Pt3\Model\Permiso;
-use Shtechnologyx\Pt3\Model\Bitacora;
-use Shtechnologyx\Pt3\Model\Usuario;
-use Shtechnologyx\Pt3\Model\Producto;
-use Shtechnologyx\Pt3\Model\Proveedor;
-use Shtechnologyx\Pt3\Model\Cliente;
-use Shtechnologyx\Pt3\Model\Unidad;
-use Shtechnologyx\Pt3\Model\Marca;
-use Shtechnologyx\Pt3\Model\Categoria;
-use Shtechnologyx\Pt3\Model\Metodo_pago;
-use Shtechnologyx\Pt3\Model\Configuracion;
+use Proyecto\T2\Model\Permiso;
+use Proyecto\T2\Model\Bitacora;
+use Proyecto\T2\Model\Usuario;
+use Proyecto\T2\Model\Producto;
+use Proyecto\T2\Model\Proveedor;
+use Proyecto\T2\Model\Cliente;
+use Proyecto\T2\Model\Unidad;
+use Proyecto\T2\Model\Marca;
+use Proyecto\T2\Model\Categoria;
+use Proyecto\T2\Model\Metodo_pago;
+use Proyecto\T2\Model\Configuracion;
 
 require 'subir_imagen.php';
 $tipo = $_POST['tipo']; // Depende de que es lo que queramos actualizar

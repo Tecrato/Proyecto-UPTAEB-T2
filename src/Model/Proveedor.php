@@ -1,7 +1,6 @@
 <?php
-
-namespace Shtechnologyx\Pt3\Model;
-use PDO;
+    namespace Shtechnologyx\Pt3\Model;
+    use PDO;
 
     // require('Conexion.php');
     class Proveedor extends Conexion{
