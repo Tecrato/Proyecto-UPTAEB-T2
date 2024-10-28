@@ -11,5 +11,5 @@
     $tu = new Usuario(id:$_SESSION['user_id']);
     $tu = $tu->search()[0];
 
-    include('../View/perfil.php');
+    include('View/perfil.php');
 ?>

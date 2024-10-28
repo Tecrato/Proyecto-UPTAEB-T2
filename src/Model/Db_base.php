@@ -1,6 +1,7 @@
 <?php
     namespace Shtechnologyx\Pt3\Model;
     use PDO;
+    use Shtechnologyx\Pt3\Model\Conexion;
     class Db_base extends Conexion{
         // Ejemplo
         // $this->add_variables([

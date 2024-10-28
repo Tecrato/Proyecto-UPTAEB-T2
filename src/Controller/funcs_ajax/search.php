@@ -1,7 +1,6 @@
 <?php
     // Con este archivo se buscan datos de ciertas maneras, dependiendo de lo que pase como "randomnautica"
     
-    use Shtechnologyx\Pt3\model\Conexion;
     use Shtechnologyx\Pt3\model\Db_base;
     use Shtechnologyx\Pt3\model\Usuarios;
     include("Controller/funcs/verificar.php");
