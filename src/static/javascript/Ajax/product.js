@@ -356,7 +356,7 @@ const modalEliminar = () => {
           let detailDelete = new FormData(formDelete);
           //hacemos la peticion ajax
           $.ajax({
-            url: "Controller/funcs/borrar_cosas.php",
+            url: "api_eliminar",
             type: "POST",
             data: detailDelete,
             processData: false,
@@ -927,7 +927,7 @@ function DELETE_U_M_C(TR, BTN) {
         let data = new FormData(FORM_DELETE)
 
         $.ajax({
-          url: "Controller/funcs/borrar_cosas.php",
+          url: "api_eliminar",
           type: "POST",
           data: data,
           processData: false,

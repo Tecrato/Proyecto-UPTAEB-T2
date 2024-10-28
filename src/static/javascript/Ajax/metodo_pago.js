@@ -75,7 +75,7 @@ const cargarMetodosPago = () => {
                         e.preventDefault();
                         let data = new FormData(form);
                         $.ajax({
-                            url: "Controller/funcs/borrar_cosas.php",
+                            url: "api_eliminar",
                             type: "POST",
                             processData: false,
                             contentType: false,

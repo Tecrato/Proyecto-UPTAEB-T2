@@ -50,15 +50,16 @@
                 "stock_max"=> $this->stock_max,
                 "precio_venta"=> $this->precio_venta,
                 "IVA"=> $this->IVA,
-                "active"=> $this->active,
                 "ganancia" => $this->ganancia,
                 "codigo"=> $this->codigo,
+                "active"=> $this->active,
                 "algoritmo"=> $this->algoritmo,
+                "ganancia" => $this->ganancia,
             ]);
             $this->add_variables_like([
                 "nombre" => $this->like
             ]);
-            $this->table = 'productos';
+            $this->tabla = 'productos';
             $this->select_query = "
                 a.id,
                 a.id_categoria,

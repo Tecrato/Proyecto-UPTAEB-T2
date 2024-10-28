@@ -107,7 +107,7 @@ formDolar.addEventListener("submit", (e) => {
     e.preventDefault();
     let data = new FormData(formDolar);
     $.ajax({
-        url: api_editar,
+        url: "api_editar",
         type: "POST",
         data: data,
         contentType: false,
