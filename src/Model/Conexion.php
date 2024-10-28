@@ -12,14 +12,5 @@
         function __destruct(){
             $this->conn = null;
         }
-        
-        function getVars() {
-            return [
-                'db_host' => $GLOBALS['db_host'],
-                'db_user' => $GLOBALS['db_user'],
-                'db_pass' => $GLOBALS['db_pass'],
-                'db_name' => $GLOBALS['db_name'],
-            ];
-        }
     }
 ?>

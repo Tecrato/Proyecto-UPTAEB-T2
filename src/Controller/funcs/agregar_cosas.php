@@ -42,7 +42,7 @@ elseif ($tipo === 'producto') {
         $img_err = subir_imagen($imagen, $nick);
         if ($img_err != false) {
             if ($img_err != 3) {
-                unlink('../../Media/imagenes/' . $nick);
+                unlink('Media/imagenes/' . $nick);
             }
             die();
         }
@@ -54,11 +54,11 @@ elseif ($tipo === 'producto') {
         print_r($clase->agregar());
     } catch (Exception $e) {
         print_r($e);
-        unlink('../../Media/imagenes/' . "producto_" . $_POST['nombre']);
+        unlink('Media/imagenes/' . "producto_" . $_POST['nombre']);
     }
 
 
-    // header('Location:../../Productos');
+    // header('Location:Productos');
 } elseif ($tipo === 'entrada') {
     $clase = new Entrada(null, $_POST["proveedor"], $_POST["fecha_compra"], $_POST["codigo"], $_POST["detalles"]);
     $resultado = $clase->agregar();
