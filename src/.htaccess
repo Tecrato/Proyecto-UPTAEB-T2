@@ -10,47 +10,47 @@ ErrorDocument 404 /Proyecto-UPTAEB-T2/src/View/404.php
 # RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/Media/
 # RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/static/
 
-RewriteRule ^(Inicio)?$ index.php?page=index
+# RewriteRule ^(Inicio)?$ index.php?page=index
 
-RewriteRule ^Administrar_perfil$ index.php?page=perfil
-RewriteRule ^Clientes$ index.php?page=clientes
-RewriteRule ^Detalles_factura$ index.php?page=viewFactura
-RewriteRule ^Estadisticas$ index.php?page=statistics
-RewriteRule ^Ventas$ index.php?page=Ventas
-RewriteRule ^login$ index.php?page=login
-RewriteRule ^Productos$ index.php?page=product
-RewriteRule ^Proveedores$ index.php?page=proveedores
-RewriteRule ^Salir$ index.php?page=logout&type=funcion
+# RewriteRule ^Administrar_perfil$ index.php?page=perfil
+# RewriteRule ^Clientes$ index.php?page=clientes
+# RewriteRule ^Detalles_factura$ index.php?page=viewFactura
+# RewriteRule ^Estadisticas$ index.php?page=statistics
+# RewriteRule ^Ventas$ index.php?page=Ventas
+# RewriteRule ^login$ index.php?page=login
+# RewriteRule ^Productos$ index.php?page=product
+# RewriteRule ^Proveedores$ index.php?page=proveedores
+# RewriteRule ^Salir$ index.php?page=logout&type=funcion
 
 
-RewriteRule ^Estadisticas_PDF$ Controller/pdfs/PDF_estadisticas.php
-RewriteRule ^PDFCierreCaja$ Controller/pdfs/PDF_cierre_caja.php
-RewriteRule ^PDFInventario$ Controller/pdfs/PDF_inventario.php
-RewriteRule ^PDFFactura$ Controller/pdfs/PDF_factura.php
+# RewriteRule ^Estadisticas_PDF$ Controller/pdfs/PDF_estadisticas.php
+# RewriteRule ^PDFCierreCaja$ Controller/pdfs/PDF_cierre_caja.php
+# RewriteRule ^PDFInventario$ Controller/pdfs/PDF_inventario.php
+# RewriteRule ^PDFFactura$ Controller/pdfs/PDF_factura.php
 
 # RewriteRule ^api_search$ Controller/funcs_ajax/search.php
 # RewriteRule ^api_agregar$ Controller/funcs/agregar_cosas.php
 # RewriteRule ^api_editar$ Controller/funcs/modificar_cosas.php
 # RewriteRule ^api_eliminar$ Controller/funcs/borrar_cosas.php
 # RewriteRule ^api_search$ Controller/funcs_ajax/search.php
-
+# 
 RewriteRule ^api_search$ index.php?page=search&type=funcion_ajax
-RewriteRule ^api_agregar$ index.php?page=agregar_cosas&type=funcion
-RewriteRule ^api_editar$ index.php?page=modificar_cosas&type=funcion
-RewriteRule ^api_eliminar$ index.php?page=borrar_cosas&type=funcion
+# RewriteRule ^api_agregar$ index.php?page=agregar_cosas&type=funcion
+# RewriteRule ^api_editar$ index.php?page=modificar_cosas&type=funcion
+# RewriteRule ^api_eliminar$ index.php?page=borrar_cosas&type=funcion
 
-RewriteRule ^Controller/vistalogin$ View/login.html
+# RewriteRule ^Controller/vistalogin$ View/login.html
 
 
-RewriteRule ^api_estadisticas$ Controller/funcs_ajax/estadisticas.php
-RewriteRule ^backup$ Controller/funcs_ajax/backup.php
-RewriteRule ^api_caja$ Controller/funcs_ajax/acciones_caja.php
-RewriteRule ^api_login$ Controller/funcs_ajax/login.php
-RewriteRule ^login_normal$ index.php?page=login&type=funcion
-RewriteRule ^api_get_image$ Controller/funcs_ajax/image_downloader.php
+# RewriteRule ^api_estadisticas$ Controller/funcs_ajax/estadisticas.php
+# RewriteRule ^backup$ Controller/funcs_ajax/backup.php
+# RewriteRule ^api_caja$ Controller/funcs_ajax/acciones_caja.php
+# RewriteRule ^api_login$ Controller/funcs_ajax/login.php
+# RewriteRule ^login_normal$ index.php?page=login&type=funcion
+# RewriteRule ^api_get_image$ Controller/funcs_ajax/image_downloader.php
 
-RewriteRule ^fd$ Controller/C_facturadirecta.php
-RewriteRule ^test$ Controller/funcs_ajax/prueba.php
+# RewriteRule ^fd$ Controller/C_facturadirecta.php
+# RewriteRule ^test$ Controller/funcs_ajax/prueba.php
 
 # RewriteCond %{REQUEST_FILENAME} !-f
 # RewriteCond %{REQUEST_FILENAME} !-d
