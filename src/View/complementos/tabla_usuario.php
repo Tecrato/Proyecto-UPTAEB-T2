@@ -26,7 +26,7 @@ echo '
             <h2 class="uk-modal-title">EDITAR USUARIO</h2>
         </div>
         <div class="uk-modal-body">
-            <form class="uk-grid-small uk-grid" uk-grid method="POST" action="Controller/funcs/modificar_cosas.php">
+            <form class="uk-grid-small uk-grid" uk-grid method="POST" action="api_editar">
                 <input type=number value="'.$row['id'].'" name="ID" style="display:none">
                 <input type=text value="usuario" name="tipo" style="display:none">
     

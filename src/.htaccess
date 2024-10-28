@@ -39,8 +39,7 @@ RewriteRule ^api_agregar$ index.php?page=agregar_cosas&type=funcion
 RewriteRule ^api_editar$ index.php?page=modificar_cosas&type=funcion
 RewriteRule ^api_eliminar$ index.php?page=borrar_cosas&type=funcion
 
-RewriteRule ^Controller/vistalogin$ View/login.html
-
+RewriteRule ^api_hacer_factura$ index.php?page=hacer_factura&type=funcion_ajax
 
 RewriteRule ^api_estadisticas$ index.php?page=estadisticas&type=funcion_ajax
 RewriteRule ^backup$ Controller/funcs_ajax/backup.php

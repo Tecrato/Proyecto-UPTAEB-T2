@@ -356,7 +356,7 @@ const modalEliminar = () => {
           let detailDelete = new FormData(formDelete);
           //hacemos la peticion ajax
           $.ajax({
-            url: "Controller/funcs/borrar_cosas.php",
+            url: "api_eliminar",
             type: "POST",
             data: detailDelete,
             processData: false,
@@ -591,9 +591,9 @@ formAggProduct.addEventListener("submit", (e) => {
   e.preventDefault();
   let url;
   if (val == false) {
-    url = "Controller/funcs/agregar_cosas.php";
+    url = "api_agregar";
   } else {
-    url = "Controller/funcs/modificar_cosas.php";
+    url = "api_editar";
   }
   //aqui instanciamos el objeto formData y como parametro, le pasamos el formulario
   //el formData es un objeto que actua con encapsulamiento de datos de los form
@@ -874,7 +874,7 @@ function Edit_U_M_C(tr) {
         let formDataEdit = new FormData(formEdit);
 
         $.ajax({
-          url: "Controller/funcs/modificar_cosas.php",
+          url: "api_editar",
           type: "POST",
           data: formDataEdit,
           processData: false,
@@ -921,7 +921,7 @@ function DELETE_U_M_C(TR, BTN) {
         let data = new FormData(FORM_DELETE)
 
         $.ajax({
-          url: "Controller/funcs/borrar_cosas.php",
+          url: "api_eliminar",
           type: "POST",
           data: data,
           processData: false,

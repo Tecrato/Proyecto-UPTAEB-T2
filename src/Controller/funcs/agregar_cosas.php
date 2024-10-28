@@ -2,7 +2,7 @@
 
 session_start();
 // require("./verificar_admin_funcs.php");
-require 'subir_imagen.php';
+require_once('Controller/funcs/subir_imagen.php');
 $tipo = $_POST['tipo']; // Depende de que es lo que queramos insertar
 
 use Shtechnologyx\Pt3\Model\Conexion;
@@ -21,6 +21,7 @@ use Shtechnologyx\Pt3\Model\Categoria;
 use Shtechnologyx\Pt3\Model\Metodo_pago;
 use Shtechnologyx\Pt3\Model\Credito;
 use Shtechnologyx\Pt3\Model\Capital;
+use Shtechnologyx\Pt3\Model\Detalle_entrada;
 
 $other_class = new Permisos(null, $_SESSION['user_id'], $_POST['tipo'], 'agregar');
 $result = $other_class->search();
@@ -49,7 +50,7 @@ elseif ($tipo === 'producto') {
     } else {
         $nick = "banner_productos.png";
     }
-    $clase = new Producto(null, $_POST["categoria"], $_POST["unidad"], $_POST["marca"], $_POST["valor_unidad"], $_POST["nombre"], $nick, $_POST["stock_min"], $_POST["stock_max"], $_POST["precio_venta"], $_POST["IVA"], $_POST["codigo"], $_POST["algoritmo"]);
+    $clase = new Producto(null, $_POST["categoria"], $_POST["unidad"], $_POST["marca"], $_POST["valor_unidad"], $_POST["nombre"], $nick, $_POST["stock_min"], $_POST["stock_max"], $_POST["precio_venta"], $_POST["IVA"], $_POST["codigo"], 1, $_POST["algoritmo"]);
     try {
         print_r($clase->agregar());
     } catch (Exception $e) {

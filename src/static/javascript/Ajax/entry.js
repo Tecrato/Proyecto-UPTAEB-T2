@@ -111,7 +111,7 @@ btnAggMetodoPago.addEventListener('click', () => {
   let availableOptions = []
   $.ajax({
     url: "api_search",
-    type: "GET",
+    type: "POST",
     data: { randomnautica: "metodo_pago" },
     success: function (response) {
       let json = JSON.parse(response);
@@ -259,7 +259,7 @@ document.getElementById("input-search-fact").addEventListener("keyup", (e) => {
   if (val != "") {
     $.ajax({
       url: "api_search",
-      type: "GET",
+      type: "POST",
       data: { randomnautica: "proveedores", like: val },
       success: function (response) {
         let json = JSON.parse(response);

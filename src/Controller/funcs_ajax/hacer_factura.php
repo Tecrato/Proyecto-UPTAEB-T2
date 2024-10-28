@@ -1,20 +1,21 @@
 <?php
     session_start();
-    require("../funcs/verificar_admin_funcs.php");
-	require('../../Model/Conexion.php');
-	require('../../Model/Entradas.php');
-	require('../../Model/Registro de ventas.php');
-	require('../../Model/Facturas.php');
-	require('../../Model/Pagos.php');
-	require('../../Model/Cajas.php');
-	require('../../Model/Credito.php');
+    require("Controller/funcs/verificar_admin_funcs.php");
+	use Shtechnologyx\Pt3\model\Conexion;
+	use Shtechnologyx\Pt3\model\Entrada;
+	use Shtechnologyx\Pt3\model\Registro_ventas;
+	use Shtechnologyx\Pt3\model\Factura;
+	use Shtechnologyx\Pt3\model\Pago;
+	use Shtechnologyx\Pt3\model\Caja;
+	use Shtechnologyx\Pt3\model\Credito;
+	use Shtechnologyx\Pt3\model\Bitacora;
 
 
 	$var = json_decode($_POST['jsonString']);
 
 	$otra_clase_mas = new Caja(id_usuario:$_SESSION['user_id'], estado:0);
 	$ultima_caja = $otra_clase_mas->buscar_ultima();
-	print_r($ultima_caja);
+	// print_r($ultima_caja);
 	if ($ultima_caja == NULL or count($ultima_caja) == 0) {
 		echo json_encode(['status' => 'error','error'=>'Caja Error']);
         exit(0);

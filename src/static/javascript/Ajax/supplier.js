@@ -28,9 +28,9 @@ function insertANDupdateCLient_proveedor(FORM, NUMBER, TABLE, TYPE) {
     e.preventDefault();
 
     if (insertOrUpdate == false) {
-      url = "Controller/funcs/agregar_cosas.php"
+      url = "api_agregar"
     } else {
-      url = "Controller/funcs/modificar_cosas.php"
+      url = "api_editar"
     }
 
     let countryData = iti.getSelectedCountryData();
@@ -86,7 +86,7 @@ function DeleteClientProv(BTN, FORM, IDSETTER, TR, notification) {
         e.preventDefault();
         let data = new FormData(form);
         $.ajax({
-          url: "Controller/funcs/borrar_cosas.php",
+          url: "api_eliminar",
           type: "POST",
           processData: false,
           contentType: false,

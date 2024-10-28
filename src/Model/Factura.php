@@ -66,12 +66,6 @@ class Factura extends Conexion {
         $query->execute();
         return $query->fetchAll();
     }
-    function search_mountFact(){
-        $query = $this->conn->prepare("SELECT monto_final - IVA AS subtotal,IVA,monto_final FROM registro_ventas WHERE id = :id");
-        $query->bindParam(':id', $this->id);
-        $query->execute();
-        return $query->fetchAll();
-    }
 
     function agregar(){
         $query = $this->conn->prepare("INSERT INTO factura VALUES(null, :id1, :id2, :cantidad, :coste)");
@@ -93,20 +87,6 @@ class Factura extends Conexion {
         } else {
             throw new Exception("Error, debe pasar el id del registro asociado", 1);
         }
-    }
-
-    function search_pagos(){
-        $query = $this->conn->prepare("SELECT 
-        m.nombre,
-        p.monto
-        FROM pagos p
-        INNER JOIN metodo_pago m ON m.id = p.id_metodo_pago
-        INNER JOIN registro_ventas r ON p.id_venta = r.id
-        WHERE r.id = :id");
-
-        $query->bindParam(':id', $this->id);
-        $query->execute();
-        return $query->fetchAll();
     }
 
     function search_ProductFact(){

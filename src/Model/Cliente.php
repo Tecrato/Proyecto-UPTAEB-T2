@@ -33,8 +33,6 @@
                 "apellido" => $this->apellido,
                 "telefono" => $this->telefono,
                 "direccion" => $this->direccion,
-                "like_nombre" => $this->like_nombre,
-                "like_cedula" => $this->like_cedula,
             ]);
             $this->add_variables_like([
                 "nombre" => $this->like_nombre,

@@ -66,7 +66,7 @@
                     <h3 class="uk-modal-title modal_title_proveedor">REGISTRAR PROVEEDOR</h3>
                 </div>
                 <div class="uk-modal-body">
-                    <form class="uk-grid-small uk-form-stacked form_prov" uk-grid method="POST" action="Controller/funcs/agregar_cosas.php">
+                    <form class="uk-grid-small uk-form-stacked form_prov" uk-grid method="POST" action="api_agregar">
                         <input type="text" name="tipo" value='proveedor' id="" style="display:none">
                         <input class="ValueInpUpdateProv" type="number" name="ID" style="display:none">
                         <div class="uk-width-1-2@s">

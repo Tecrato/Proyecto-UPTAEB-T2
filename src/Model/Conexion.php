@@ -5,7 +5,6 @@
     class Conexion{
         public $conn;
         function __construct(){
-            require_once("Controller/variables.php");
             $this->conn = new PDO('mysql:host=' . $GLOBALS['db_host'] . ';dbname=' . $GLOBALS['db_name'], $GLOBALS['db_user'], $GLOBALS['db_pass']);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }

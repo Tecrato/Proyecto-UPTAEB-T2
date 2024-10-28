@@ -27,9 +27,9 @@ function insertANDupdateCLient_proveedor(FORM, NUMBER, TABLE, TYPE) {
     e.preventDefault();
 
     if (insertOrUpdate == false) {
-      url = "Controller/funcs/agregar_cosas.php"
+      url = "api_agregar"
     } else {
-      url = "Controller/funcs/modificar_cosas.php"
+      url = "api_editar"
     }
 
     let countryData = iti.getSelectedCountryData();
@@ -43,7 +43,7 @@ function insertANDupdateCLient_proveedor(FORM, NUMBER, TABLE, TYPE) {
       contentType: false,
       data: data,
       success: (response) => {
-        (response);
+        console.log(response);
         let result = TABLE();
         if (insertOrUpdate == false) {
           UIkit.notification.closeAll();
@@ -85,12 +85,13 @@ function DeleteClientProv(BTN, FORM, IDSETTER, TR, notification) {
         e.preventDefault();
         let data = new FormData(form);
         $.ajax({
-          url: "Controller/funcs/borrar_cosas.php",
+          url: "api_eliminar",
           type: "POST",
           processData: false,
           contentType: false,
           data: data,
           success: (response) => {
+            console.log(response);
             let tr = TR()
             UIkit.notification.closeAll();
             UIkit.notification({
@@ -131,7 +132,7 @@ const ModalEdit = () => {
       document.querySelector(".ValueInpUpdateClient").setAttribute("value", id);
       $.ajax({
         url: "api_search",
-        type: "GET",
+        type: "POST",
         data: { randomnautica: "clientes", ID: id },
         success: function (response) {
           let json = JSON.parse(response);
@@ -278,7 +279,7 @@ searchFilter.addEventListener("keyup", () => {
   }
   $.ajax({
     url: "api_search",
-    type: "GET",
+    type: "POST",
     data: data,
     success: function (response) {
       let json = JSON.parse(response);

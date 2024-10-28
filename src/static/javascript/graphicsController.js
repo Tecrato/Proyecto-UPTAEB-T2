@@ -47,7 +47,7 @@ const renderModelsChart1 = () => {
 
   $.ajax({
     url: "api_estadisticas",
-    type: "GET",
+    type: "POST",
     data: { select: "ratio_ventas" },
     success: function (response) {
       let json = JSON.parse(response);
@@ -87,7 +87,7 @@ const renderModelsChart2 = () => {
 
   $.ajax({
     url: "api_estadisticas",
-    type: "GET",
+    type: "POST",
     data: { select: "filter_year", year: new Date().getFullYear() },
     success: function (response) {
       let json = JSON.parse(response);
@@ -154,7 +154,7 @@ const renderModelsChart2 = () => {
 
         $.ajax({
           url: "api_estadisticas",
-          type: "GET",
+          type: "POST",
           data: { select: "filter_year", year: inputValue },
           success: function (response) {
             let json = JSON.parse(response);
@@ -220,7 +220,7 @@ const renderModelsChart2_1 = () => {
   function inicializarGrafica(init, finish) {
     $.ajax({
       url: "api_estadisticas",
-      type: "GET",
+      type: "POST",
       data: { select: "filter_week", init: init, finish: finish },
       success: function (response) {
         console.log(response);
@@ -307,7 +307,7 @@ const renderModelsChart3 = () => {
 
   $.ajax({
     url: "api_estadisticas",
-    type: "GET",
+    type: "POST",
     data: { select: "valor_inventario_mes" },
     success: function (response) {
 
@@ -330,7 +330,7 @@ const renderModelsChart3 = () => {
 
       $.ajax({
         url: "api_estadisticas",
-        type: "GET",
+        type: "POST",
         data: { select: "coste_productos_vendidos" },
         success: function (response) {
 
@@ -342,7 +342,7 @@ const renderModelsChart3 = () => {
 
           $.ajax({
             url: "api_estadisticas",
-            type: "GET",
+            type: "POST",
             data: { select: "rotacion_inventario" },
             success: function (response) {
 
@@ -397,7 +397,7 @@ const renderModelsChart4 = () => {
 
   $.ajax({
     url: "api_estadisticas",
-    type: "GET",
+    type: "POST",
     data: { select: "filter_max_anio", year: new Date().getFullYear() },
     success: function (response) {
       let json = JSON.parse(response);
@@ -476,7 +476,7 @@ const renderModelsChart4 = () => {
 
         $.ajax({
           url: "api_estadisticas",
-          type: "GET",
+          type: "POST",
           data: url,
           success: function (response) {
             let productos = []
@@ -513,7 +513,7 @@ const renderModelsChart4 = () => {
 
 //   $.ajax({
 //     url: "api_estadisticas",
-//     type: "GET",
+//     type: "POST",
 //     data: { select: "min_ventas" },
 //     success: function (response) {
 //       let json = JSON.parse(response);
@@ -559,7 +559,7 @@ const renderModelsChart5 = () => {
 
   $.ajax({
     url: "api_estadisticas",
-    type: "GET",
+    type: "POST",
     data: { select: "filter_min_anio", year: new Date().getFullYear() },
     success: function (response) {
       let json = JSON.parse(response);
@@ -638,7 +638,7 @@ const renderModelsChart5 = () => {
 
         $.ajax({
           url: "api_estadisticas",
-          type: "GET",
+          type: "POST",
           data: url,
           success: function (response) {
             let productos = []

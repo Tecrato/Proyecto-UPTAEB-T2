@@ -1,9 +1,10 @@
 <?php
 
 
-require('../../Model/Conexion.php');
-require('../../Model/Usuarios.php');
-include("../funcs/verificar.php");
+use Shtechnologyx\Pt3\Model\Conexion;
+use Shtechnologyx\Pt3\Model\Usuario;
+use Shtechnologyx\Pt3\Model\Db_base;
+include("Controller/funcs/verificar.php");
 
 if (isset($_POST['type']) && $_POST['type'] == 'Insert') {
     $clase = new DB();

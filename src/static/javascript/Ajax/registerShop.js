@@ -600,10 +600,11 @@ function func(dolar) {
 
 
           $.ajax({
-            url: "Controller/funcs_ajax/hacer_factura.php",
+            url: "api_hacer_factura",
             type: "POST",
             data: { jsonString },
             success: function (response) {
+              console.log(response);
               targetFact()
               let json = JSON.parse('{' + response.split('{')[1]);
               if (json.error == "Caja Error") {
@@ -762,7 +763,7 @@ document.getElementById("input-search-fact").addEventListener("keyup", (e) => {
       type: "POST",
       data: { randomnautica: "clientes", like_cedula: val },
       success: function (response) {
-        (response);
+        console.log(response)
         let json = JSON.parse(response);
         let LI = "";
         //recorremos la respuesta del server y creamos el template de los li

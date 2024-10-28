@@ -136,7 +136,7 @@
                                                                     </div>
                                                                 </li>
                                                                 <li>
-                                                                    <form class="uk-form-horizontal uk-margin-large" method="POST" action="Controller/funcs/modificar_cosas.php">
+                                                                    <form class="uk-form-horizontal uk-margin-large" method="POST" action="api_editar">
                                                                         <input type=number value=<?php echo $tu['id'] ?> name="ID" style="display:none">
                                                                         <input type=text value="usuario" name="tipo" style="display:none">
                                                                         <input type=text value="zi" name="self" style="display:none">
@@ -872,7 +872,7 @@
                 <h2 class="uk-modal-title">REGISTRO USUARIO</h2>
             </div>
             <div class="uk-modal-body ">
-                <form class="uk-grid-small uk-form-stacked" uk-grid method="POST" action="./Controller/funcs/agregar_cosas.php">
+                <form class="uk-grid-small uk-form-stacked" uk-grid method="POST" action="./api_agregar">
                     <input type="text" name="tipo" value='usuarios' id="" style="display:none">
                     <div class="uk-width-1-2@s">
                         <label class="uk-form-label">Nombre</label>

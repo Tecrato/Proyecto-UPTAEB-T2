@@ -1,5 +1,6 @@
 <?php
     require "../vendor/autoload.php";
+    require_once("Controller/variables.php");
     $page = "login"; // default
     $type = "view"; // default
 

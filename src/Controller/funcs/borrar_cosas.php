@@ -1,31 +1,28 @@
 <?php
 
-namespace Proyecto\T2\Controller\funcs;
-require('../../../vendor/autoload.php');
 
     session_start();
-    // require("./verificar_admin_funcs.php");
-    use Proyecto\T2\Controller\funcs\verificar_admin_funcs;
-    require('../../Model/Conexion.php');
 
-    use Proyecto\T2\Model\Permiso;
-    use Proyecto\T2\Model\Bitacora;
-    use Proyecto\T2\Model\Usuario;
-    use Proyecto\T2\Model\Producto;
-    use Proyecto\T2\Model\Entrada;
-    use Proyecto\T2\Model\Proveedor;
-    use Proyecto\T2\Model\Cliente;
-    use Proyecto\T2\Model\Unidad;
-    use Proyecto\T2\Model\Marca;
-    use Proyecto\T2\Model\Categoria;
-    use Proyecto\T2\Model\Metodo_pago;
-    use Proyecto\T2\Model\Registro_ventas;
-    use Proyecto\T2\Model\Notificacion;
+    use Shtechnologyx\Pt3\Model\Conexion;
+    use Shtechnologyx\Pt3\Model\Db_base;
+    use Shtechnologyx\Pt3\Model\Permisos;
+    use Shtechnologyx\Pt3\Model\Bitacora;
+    use Shtechnologyx\Pt3\Model\Usuario;
+    use Shtechnologyx\Pt3\Model\Producto;
+    use Shtechnologyx\Pt3\Model\Entrada;
+    use Shtechnologyx\Pt3\Model\Proveedor;
+    use Shtechnologyx\Pt3\Model\Cliente;
+    use Shtechnologyx\Pt3\Model\Unidad;
+    use Shtechnologyx\Pt3\Model\Marca;
+    use Shtechnologyx\Pt3\Model\Categoria;
+    use Shtechnologyx\Pt3\Model\Metodo_pago;
+    use Shtechnologyx\Pt3\Model\Registro_ventas;
+    use Shtechnologyx\Pt3\Model\Notificacion;
 
     $tipo = $_POST['tipo']; // Depende de que es lo que queramos borrar
 
 
-    $other_class = new Permiso(null,$_SESSION['user_id'],$_POST['tipo'],'borrar');
+    $other_class = new Permisos(null,$_SESSION['user_id'],$_POST['tipo'],'borrar');
     $result = $other_class->search();
 
     if ($_SESSION['rol_num'] > 1 and count($result) <= 0) {
@@ -106,7 +103,7 @@ require('../../../vendor/autoload.php');
         $clase2->agregar();
     }
     elseif ($tipo === 'permiso'){
-        $clase = new Permiso(null,$_POST["id_usuario"],$_POST["tabla"],$_POST["accion"]);
+        $clase = new Permisos(null,$_POST["id_usuario"],$_POST["tabla"],$_POST["accion"]);
         $clase->borrar();
         $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Borrar","Borrado ".$tipo);
         $clase2->agregar();

@@ -3,7 +3,6 @@
 
 	class Backup {
         function insert(){
-            require_once "Controller/variables.php";
             date_default_timezone_set('America/Caracas');
             $backupFile = "Backups/" . $GLOBALS['db_name'] . '_' . date('Y-m-d_H-i') . '.sql';
             $command = "mysqldump -h " . $GLOBALS['db_host'] . " -u " . $GLOBALS['db_user'] . " " . $GLOBALS['db_name'] . " > $backupFile";

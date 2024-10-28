@@ -61,7 +61,7 @@ const cargarNotify = () =>{
                         btn.classList.toggle("notify-write");
                         let id = btn.getAttribute("id");
                         $.ajax({
-                            url: "Controller/funcs/borrar_cosas.php",
+                            url: "api_eliminar",
                             type: "POST",
                             data: { tipo: "notificaciones", ID: id },
                             success: (response) => {

@@ -3,13 +3,13 @@ session_start();
 require("Controller/funcs/verificar_admin_funcs.php");
 use Shtechnologyx\Pt3\model\Conexion;
 use Shtechnologyx\Pt3\model\Caja;
-use Shtechnologyx\Pt3\model\Permiso;
+use Shtechnologyx\Pt3\model\Permisos;
 
 
 
 if ($_POST['accion'] == 'abrir') {
 
-    $other_class = new Permiso(null,$_SESSION['user_id'],'caja','agregar');
+    $other_class = new Permisos(null,$_SESSION['user_id'],'caja','agregar');
     $result = $other_class->search();
     if ($_SESSION['rol_num'] > 1 and count($result) <= 0) {
         echo json_encode(['status' => 'error','error'=>'Permiso Error (bueno ps)']);
@@ -27,7 +27,7 @@ if ($_POST['accion'] == 'abrir') {
     $clase = new Caja(null, $_POST['user_id'], $_POST['monto_inicial']);
     $clase->abrir();
 } else if ($_POST['accion'] == 'cerrar') {
-    $other_class = new Permiso(null,$_SESSION['user_id'],'caja','modificar');
+    $other_class = new Permisos(null,$_SESSION['user_id'],'caja','modificar');
     $result = $other_class->search();
     if ($_SESSION['rol_num'] > 1 and count($result) <= 0) {
         echo json_encode(['status' => 'error','error'=>'Permiso Error (bueno ps)']);
