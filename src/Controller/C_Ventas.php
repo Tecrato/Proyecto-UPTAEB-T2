@@ -1,9 +1,9 @@
 <?php 
-	 require('Model/Conexion.php');
-     require('Model/Usuarios.php');
+     use Shtechnologyx\Pt3\Model\Conexion;
+     use Shtechnologyx\Pt3\Model\Usuario;
      include("Controller/funcs/verificar.php");
   
-	include('View/registerShop.php');
+     include('View/registerShop.php');
 
 
 ?>

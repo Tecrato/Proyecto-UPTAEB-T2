@@ -10,7 +10,7 @@
             $this->id = $id;
             $this->nombre = $nombre;
             Db_base::__construct();
-            $this->table = "metodo_pago";
+            $this->tabla = "metodo_pago";
             $this->add_variables([
                 "id" => $this->id,
                 "nombre" => $this->nombre

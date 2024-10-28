@@ -26,7 +26,7 @@ if (isset($_POST['type']) && $_POST['type'] == 'Insert') {
         $result = $clase->Backup($_POST['type']);
         foreach ($result as $value) {
             if ($value == $_POST['name']) {
-                unlink("../../Backups/$value");
+                unlink("Backups/$value");
                 echo ("Eliminacion exitosa");
             }
         }

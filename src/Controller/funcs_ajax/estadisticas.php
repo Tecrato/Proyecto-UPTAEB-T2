@@ -1,6 +1,6 @@
 <?php
     use Shtechnologyx\Pt3\Model\Conexion;
-    use Shtechnologyx\Pt3\Model\Usuarios;
+    use Shtechnologyx\Pt3\model\Usuario;
     include("Controller/funcs/verificar.php");
     use Shtechnologyx\Pt3\Model\Estadisticas;
 

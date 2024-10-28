@@ -1,18 +1,14 @@
 let cargarBackup = () => {
     $.ajax({
-        url: "backup",
+        url: "api_search",
         type: "POST",
-        data: { type: "Search" },
+        data: { randomnautica: "backup" },
         success: function (response) {
-            let json = JSON.parse(response);
-            let json2 = []
-            json.forEach((e) => {
-                if (e !== "." && e !== "..") {
-                    json2.push({ archivo: e })
-                }
-            })
+            console.log(response);
+            let json = JSON.parse(response)['lista'];
+            console.log(json)
             let template = "";
-            if (json2.length == 0) {
+            if (json.length == 0) {
                 template = `
                     <tr>
                         <td></td>
@@ -25,14 +21,14 @@ let cargarBackup = () => {
                     </tr>
                     `
             } else {
-                json2.forEach((p) => {
+                json.forEach((p) => {
                     template += `
                     <tr>
                         <td><img class="img_config_logo" src="./static/images/logo_letras-minimarket.png" alt="" width="50"></td>
-                        <td>${p.archivo}</td>
+                        <td>${p}</td>
                         <td>
                             <div>
-                                <a href="#eliminar_backup" uk-toggle class="uk-icon-button btnDeleteBackup" name="${p.archivo}" uk-icon="trash"></a>
+                                <a href="#eliminar_backup" uk-toggle class="uk-icon-button btnDeleteBackup" name="${p}" uk-icon="trash"></a>
                             </div>
                         </td>
                     </tr>

@@ -99,7 +99,7 @@
             $query = $this->conn->prepare($sql);
             $query->execute($this->variables);
         }
-        public function search($n=0,$limite=9, $order=' nombre ASC '){
+        public function search($n=0,$limite=9, $order=' id ASC '){
             $query = "SELECT $this->select_query FROM $this->tabla AS a $this->joins";
     
             $query .= " WHERE 1";
@@ -134,9 +134,8 @@
             return $consulta->fetchAll();
         }
         public function COUNT(){
-            $query = "SELECT COUNT(*) as 'total' FROM $this->tabla AS a $this->joins";
+            $query = "SELECT COUNT(*) as 'total' FROM $this->tabla AS a $this->joins WHERE 1";
             
-            $query .= " WHERE 1";
             foreach ($this->variables as $key => $value){
                 $query .= ' AND a.'.$key.'=:a'.$key;
             }

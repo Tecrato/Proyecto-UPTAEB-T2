@@ -10,7 +10,7 @@ document.querySelector(".btnAggMetodo").addEventListener("click", () => {
 const cargarMetodosPago = () => {
     $.ajax({
         url: "api_search",
-        type: "GET",
+        type: "POST",
         data: { randomnautica: "metodo_pago"},
         success: function (response) {
             let json = JSON.parse(response);

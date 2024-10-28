@@ -40,7 +40,6 @@ function generar_bitacora_general(page) {
         type: "POST",
         data: { randomnautica: "bitacora", limite: 10, n: page },
         success: function (response) {
-            console.log(response)
             let json = JSON.parse(response)
             total_general = json['total']
             json.lista.forEach(element => {
@@ -67,7 +66,6 @@ function generar_bitacora_personal(page) {
         type: "POST",
         data: { randomnautica: "bitacora", limite: 10, n: page, id_usuario: session_user_id },
         success: function (response) {
-            console.log(response, page)
             let json = JSON.parse(response)
             total_personal = json['total']
             json.lista.forEach(element => {

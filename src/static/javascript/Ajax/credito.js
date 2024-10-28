@@ -42,7 +42,7 @@ const metodoPago = () => {
         let availableOptions = []
         $.ajax({
             url: "api_search",
-            type: "GET",
+            type: "POST",
             data: { randomnautica: "metodo_pago" },
             success: function (response) {
                 let json = JSON.parse(response);
@@ -181,7 +181,7 @@ function generar_creditos(page){
     page_creditos = page
     $.ajax({
         url: "api_search",
-        type: "GET",
+        type: "POST",
         data: { randomnautica: "credito", n:page_creditos, limite: 10},
         success: function (response) {
             let json = JSON.parse(response);
@@ -211,7 +211,7 @@ function generar_creditos(page){
                     let id = btn.target.parentElement.parentElement.getAttribute("id")
                     $.ajax({
                         url: "api_search",
-                        type: "GET",
+                        type: "POST",
                         data: { randomnautica: "credito", ID: id },
                         success: function (response) {
                             let json = JSON.parse(response);

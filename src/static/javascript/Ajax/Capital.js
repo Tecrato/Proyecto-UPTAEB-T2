@@ -16,8 +16,8 @@ function fetchCapital(page){
     page_mov_capital = page
     $.ajax({
         url: "api_search",
-        type: "GET",
-        data: { randomnautica: "capital", n: page_mov_capital, limite: 10},
+        type: "POST",
+        data: { randomnautica: "capital", n: page_mov_capital, limite: 10, order: "id DESC"},
         success: function (response) {
             let template = '';
             let json = JSON.parse(response);
@@ -43,7 +43,7 @@ fetchCapital(0)
 function detailsCapital(){
     $.ajax({
         url: "api_search",
-        type: "GET",
+        type: "POST",
         data: {randomnautica: "capital", subFunction: "detallesCapital"},
         success: function (response) {
             let template = '';

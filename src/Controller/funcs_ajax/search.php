@@ -2,7 +2,7 @@
     // Con este archivo se buscan datos de ciertas maneras, dependiendo de lo que pase como "randomnautica"
     
     use Shtechnologyx\Pt3\model\Db_base;
-    use Shtechnologyx\Pt3\model\Usuarios;
+    use Shtechnologyx\Pt3\model\Usuario;
     include("Controller/funcs/verificar.php");
     use Shtechnologyx\Pt3\model\Permisos;
     use Shtechnologyx\Pt3\model\Bitacora;
@@ -10,11 +10,13 @@
     
     $limite = isset($_POST['limite']) ? intval($_POST['limite']) : 50;
     $n = (isset($_POST['n']) and $_POST['n'] != "") ? intval($_POST['n']) : 0;
+    $order = isset($_POST['order']) ? $_POST['order'] : " id ASC ";
     
     $other_class = new Permisos(null,$_SESSION['user_id'],$_POST['randomnautica'],'buscar');
     $result = $other_class->search();
     
     use Shtechnologyx\Pt3\model\Caja;
+    use Shtechnologyx\Pt3\model\Capital;
     use Shtechnologyx\Pt3\Model\Notificacion;
     use Shtechnologyx\Pt3\Model\Categoria;
     use Shtechnologyx\Pt3\Model\Marca;
@@ -26,6 +28,9 @@
     use Shtechnologyx\Pt3\Model\Detalle_entrada;
     use Shtechnologyx\Pt3\Model\Producto;
     use Shtechnologyx\Pt3\Model\Metodo_pago;
+    use Shtechnologyx\Pt3\Model\Registro_ventas;
+    use Shtechnologyx\Pt3\Model\Credito;
+    use Shtechnologyx\Pt3\Model\Backup;
 
 
     if ($_POST['randomnautica'] == "caja") {
@@ -49,7 +54,6 @@
         );
     }
     elseif ($_POST['randomnautica'] == "credito") {
-        require('Model/Credito.php');
         $clase = new Credito(
             id:(isset($_POST['ID']) ? $_POST['ID'] : null),
         );
@@ -79,7 +83,7 @@
         );
     }
     elseif ($_POST['randomnautica'] == "permiso") {  
-        $clase = new Permiso(id_usuario:(isset($_POST['ID']) ? $_POST['ID'] : null));
+        $clase = new Permisos(id_usuario:(isset($_POST['ID']) ? $_POST['ID'] : null));
     }
     elseif ($_POST['randomnautica'] == "productos") {
         $clase = new Producto(
@@ -103,7 +107,6 @@
         );
     }
     elseif ($_POST['randomnautica'] == "ventas") {
-        require('Model/Registro de ventas.php');
         $clase = new Registro_ventas();
     }
     elseif ($_SESSION['rol_num'] > 1 and count($result) <= 0) {
@@ -142,9 +145,12 @@
             active:(isset($_POST['active']) ? $_POST['active'] : 1)
         );
     }
-    elseif ($_POST['randomnautica'] == "capital") {  
-        require('Model/Capital.php');
+    elseif ($_POST['randomnautica'] == "capital") {
         $clase = new Capital();
+    }
+    elseif ($_POST['randomnautica'] == "backup") {  
+        require('Model/Backup.php');
+        $clase = new Backup();
     }
     elseif ($_POST['randomnautica'] == "bitacora") {
         $clase = new Bitacora(
@@ -167,7 +173,7 @@
         }
     }
     else {
-        $result = $clase->search(n:$n,limite:$limite);
+        $result = $clase->search($n,$limite, $order);
     }
 
     $json = [
