@@ -2,9 +2,9 @@
     // Con este codigo de destruye la session
     // No quedara nada
     session_start();
-    require '../../Model/Conexion.php';
-    require '../../Model/Usuarios.php';
-    require '../../Model/Bitacora.php';
+    require 'Model/Conexion.php';
+    require 'Model/Usuarios.php';
+    require 'Model/Bitacora.php';
 
     $usu = new Usuario($_SESSION['user_id']);
     $usu->logout();

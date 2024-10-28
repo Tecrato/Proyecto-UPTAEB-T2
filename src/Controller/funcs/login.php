@@ -1,8 +1,8 @@
 <?php
     // Con este codigo se confirma si el usuario tiene una cuenta para entrar al sistema
-    require 'Model/Conexion.php';
-    require 'Model/Usuarios.php';
-    require 'Model/Bitacora.php';
+    require '../../Model/Conexion.php';
+    require '../../Model/Usuarios.php';
+    require '../../Model/Bitacora.php';
     session_start(); // iniciamos la sesion
     
     $sesion_id = substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, 10);//creamos el string del sesion id
@@ -47,9 +47,9 @@
         }
         $clase2 = new Bitacora(null,$row['id'],"Usuarios","Login","Usuario ".$row['nombre']." logueado");
         $clase2->agregar();
-        header('Location: Inicio'); // y pa' la pagina que se va
+        header('Location: ../../Inicio'); // y pa' la pagina que se va
     } else {
-        header('Location: login?error=0'); // Sino, lo devuelve al login
+        header('Location: ../../login?error=0'); // Sino, lo devuelve al login
     }
 
 ?>

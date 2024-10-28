@@ -19,7 +19,7 @@
         private $like;
 
         function __construct($id=null, $id_categoria=null,$id_unidad=null,$id_marca=null,$valor_unidad=null,$nombre=null,
-            $imagen=null,$stock_min=null,$stock_max=null,$precio_venta=null,$IVA=null,$codigo=null,$active=null,$algoritmo=null,$like='',$ganancia=null){
+            $imagen=null,$stock_min=null,$stock_max=null,$precio_venta=null,$IVA=null,$codigo=null,$active=null,$algoritmo=null,$like='',$ganancia=NULL){
 
             $this->id = $id;
             $this->id_categoria = $id_categoria;

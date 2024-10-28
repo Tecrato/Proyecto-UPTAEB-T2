@@ -25,7 +25,7 @@
 
 		function agregar($transaccion = true){
             echo "iniciando agregar";
-			$query = $this->conn->prepare("INSERT INTO entradas_2 VALUES(null, :id1, :mercancia, :tm, :precio_compra, :id2, :fecha_vencimiento, :cantidad, :existencia)");
+			$query = $this->conn->prepare("INSERT INTO detalles_entrada VALUES(null, :id1, :mercancia, :tm, :precio_compra, :id2, :fecha_vencimiento, :cantidad, :existencia)");
             
             $query->bindParam(':id1',$this->id_producto, PDO::PARAM_INT);
             $query->bindParam(':mercancia',$this->mercancia, PDO::PARAM_INT);
@@ -53,11 +53,11 @@
                 for ($i = 0; $cantidad >= 1; $i++) {
                     $entrada = $entradas[$i];
                     if ($entrada['existencia'] > $cantidad) {
-                        $query = "UPDATE entradas_2 SET existencia=" . $entrada['existencia'] - $cantidad . " WHERE id=" . $entrada['id'];
+                        $query = "UPDATE detalles_entrada SET existencia=" . $entrada['existencia'] - $cantidad . " WHERE id=" . $entrada['id'];
                         $this->conn->query($query);
                         $cantidad = 0;
                     } else {
-                        $query = "UPDATE entradas_2 SET existencia=0 WHERE id=" . $entrada['id'];
+                        $query = "UPDATE detalles_entrada SET existencia=0 WHERE id=" . $entrada['id'];
                         $this->conn->query($query);
                         $cantidad -= $entrada['existencia'];
                     }
@@ -79,7 +79,7 @@
 		function search($n=0,$limite=9, $order = ' id ASC '){
             $query = "SELECT 
                     *
-                    FROM entradas_2 AS a
+                    FROM detalles_entrada AS a
                     WHERE 1";
 
 			$lista = [];
@@ -124,7 +124,7 @@
             return $consulta->fetchAll();
 		}
         function COUNT(){
-            $query = $this->conn->prepare("SELECT COUNT(*) as 'total' FROM entradas_2 WHERE existencia=:existencia");
+            $query = $this->conn->prepare("SELECT COUNT(*) as 'total' FROM detalles_entrada WHERE existencia=:existencia");
 			$query->bindParam(':existencia',$this->existencia, PDO::PARAM_INT);
             $query->execute();
             return $query->fetch()['total'];

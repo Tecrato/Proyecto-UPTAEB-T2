@@ -56,7 +56,7 @@ const cargarEntrys = () => {
     },
   });
 };
-// cargarEntrys()
+cargarEntrys()
 
 $.ajax({
   url: "api_search",

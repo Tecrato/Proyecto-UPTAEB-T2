@@ -10,10 +10,10 @@
 	    elseif ($imagen['size'] > (1024 * 1024 * 10)) {
 	        return 5;
 	    }
-	    elseif (file_exists('../../Media/imagenes/'.$inicial) and $replace) {
+	    elseif (file_exists('Media/imagenes/'.$inicial) and $replace) {
 	        return 3;
 	    } 
-	    elseif (!move_uploaded_file($imagen['tmp_name'],'../../Media/imagenes/'.$inicial)) {
+	    elseif (!move_uploaded_file($imagen['tmp_name'],'Media/imagenes/'.$inicial)) {
 	        return 4;
 	    }
 	    return false;
