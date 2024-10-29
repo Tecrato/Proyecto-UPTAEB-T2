@@ -3,11 +3,10 @@ const cargarEntrys = () => {
   $.ajax({
     url: "api_search",
     type: "POST",
-    data: { randomnautica: "entradas" },
+    data: { randomnautica: "detalles_entradas" },
     success: function (response) {
       let template;
       let json = JSON.parse(response);
-      console.log(json);
       json.lista.forEach((f) => {
         let fechaVencimiento = new Date(f.fecha_vencimiento);
         let fechaActual = new Date();

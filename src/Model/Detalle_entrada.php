@@ -1,6 +1,7 @@
 <?php
     namespace Shtechnologyx\Pt3\Model;
     use PDO;
+    use Exception;
 	class Detalle_entrada extends Conexion{
         private $id;
         private $id_entrada;
@@ -79,10 +80,30 @@
 		}
 
 		function search($n=0,$limite=9, $order = ' id ASC '){
-            $query = "SELECT 
-                    *
-                    FROM detalles_entradas AS a
-                    WHERE 1";
+            $query = "
+                SELECT 
+                b.id,
+                p.razon_social as proveedor,
+                b.fecha_compra,
+                b.codigo,
+                pr.nombre as producto,
+                m.nombre as marca,
+                pr.valor_unidad,
+                u.nombre as unidad,
+                c.nombre as categoria,
+                a.fecha_vencimiento,
+                a.precio_compra,
+                a.tamaño_mercancia,
+                a.cantidad,
+                a.existencia
+                FROM detalles_entradas AS a 
+                INNER JOIN entradas as b ON b.id = a.id_entrada
+                INNER JOIN proveedores AS p ON b.id_proveedor = p.id
+                INNER JOIN productos as pr ON a.id_producto = pr.id
+                INNER JOIN marcas as m ON m.id = pr.id_marca
+                INNER JOIN unidades as u ON u.id = pr.id_unidad
+                INNER JOIN categoria as c ON c.id = pr.id_categoria
+            ";
 
 			$lista = [];
 

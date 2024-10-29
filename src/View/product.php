@@ -414,7 +414,7 @@
                             </div>
                         </div>
 
-                        <!-- **************************Modal para crear facturas************************** -->
+                        <!-- **************************Modal para crear nuevas entradas************************** -->
 
                         <div id="modal-full-entrys" class="uk-modal-full" uk-modal>
                             <div class="uk-modal-dialog uk-background-secondary uk-light">
