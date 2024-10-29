@@ -102,28 +102,29 @@
         public function search($n=0,$limite=9, $order=' id ASC '){
             $query = "SELECT $this->select_query FROM $this->tabla AS a $this->joins";
     
-            $query .= " WHERE 1";
-            foreach ($this->variables_like as $key => $value){
-                $query .= ' AND a.'.$key.' LIKE :alike'.$key;
-            }
+            $query .= " WHERE 1 ";
             foreach ($this->variables as $key => $value){
-                $query .= ' AND a.'.$key.'=:a'.$key;
+                $query .= ' AND '.$key.'=:'.substr($key,2);
+            }
+            foreach ($this->variables_like as $key => $value){
+                $query .= ' AND '.$key.' LIKE :alike'.substr($key,2);
             }
 
 
             $query .= " ORDER BY $order ";
             $query .= " LIMIT :l OFFSET :n ";
             
+            // print_r($query);
             // Creamos la consulta
             $consulta = $this->conn->prepare($query);
             
             // Asignamos los parametros   
             foreach ($this->variables as $key => $value){
-                $consulta->bindParam(':a'.$key,$value);
+                $consulta->bindParam(':'.substr($key,2),$value);
             }
             foreach ($this->variables_like as $key => $value){
                 $value2 = '%'.$value.'%';
-                $consulta->bindParam(':alike'.$key,$value2, PDO::PARAM_STR);
+                $consulta->bindParam(':alike'.substr($key,2),$value2);
             }
 
             $n = $n*$limite;
@@ -137,10 +138,10 @@
             $query = "SELECT COUNT(*) as 'total' FROM $this->tabla AS a $this->joins WHERE 1";
             
             foreach ($this->variables as $key => $value){
-                $query .= ' AND a.'.$key.'=:a'.$key;
+                $query .= ' AND '.$key.'=:a'.substr($key,2);
             }
             foreach ($this->variables_like as $key => $value){
-                $query .= ' AND a.'.$key.' LIKE :alike'.$key;
+                $query .= ' AND '.$key.' LIKE :alike'.substr($key,2);
             }
 
             
@@ -149,11 +150,11 @@
             
             // Asignamos los parametros   
             foreach ($this->variables as $key => $value){
-                $consulta->bindParam(':a'.$key,$value);
+                $consulta->bindParam(':a'.substr($key,2),$value);
             }
             foreach ($this->variables_like as $key => $value){
                 $value2 = '%'.$value.'%';
-                $consulta->bindParam(':alike'.$key,$value2);
+                $consulta->bindParam(':alike'.substr($key,2),$value2);
             }
 
             $consulta->execute();

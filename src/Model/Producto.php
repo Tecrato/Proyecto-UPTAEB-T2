@@ -18,11 +18,11 @@
         private $codigo;
         private $ganancia;
         private $algoritmo;
-        private $like;
+        private $like_nombre;
 
         function __construct($id=null, $id_categoria=null,$id_unidad=null,$id_marca=null,$valor_unidad=null,$nombre=null,
             $imagen=null,$stock_min=null,$stock_max=null,$precio_venta=null,$IVA=null,$codigo=null,$active=null,$algoritmo=null,
-            $ganancia=null,$like=''){
+            $ganancia=null,$like_nombre=''){
 
             $this->id = $id;
             $this->id_categoria = $id_categoria;
@@ -39,28 +39,28 @@
             $this->ganancia = $ganancia;
             $this->codigo = $codigo;
             $this->algoritmo = $algoritmo;
-            $this->like = $like;
+            $this->like_nombre = $like_nombre;
             Db_base::__construct();
             $this->add_variables([
-                "id"=> $this->id,
-                "id_categoria"=> $this->id_categoria,
-                "id_unidad"=> $this->id_unidad,
-                "id_marca"=> $this->id_marca,
-                "valor_unidad"=> $this->valor_unidad,
-                "nombre"=> $this->nombre,
-                "imagen"=> $this->imagen,
-                "stock_min"=> $this->stock_min,
-                "stock_max"=> $this->stock_max,
-                "precio_venta"=> $this->precio_venta,
-                "IVA"=> $this->IVA,
-                "ganancia" => $this->ganancia,
-                "codigo"=> $this->codigo,
-                "active"=> $this->active,
-                "algoritmo"=> $this->algoritmo,
-                "ganancia" => $this->ganancia,
+                "a.id"=> $this->id,
+                "a.id_categoria"=> $this->id_categoria,
+                "a.id_unidad"=> $this->id_unidad,
+                "a.id_marca"=> $this->id_marca,
+                "a.valor_unidad"=> $this->valor_unidad,
+                "a.nombre"=> $this->nombre,
+                "a.imagen"=> $this->imagen,
+                "a.stock_min"=> $this->stock_min,
+                "a.stock_max"=> $this->stock_max,
+                "a.precio_venta"=> $this->precio_venta,
+                "a.IVA"=> $this->IVA,
+                "a.ganancia" => $this->ganancia,
+                "a.codigo"=> $this->codigo,
+                "a.active"=> $this->active,
+                "a.algoritmo"=> $this->algoritmo,
+                "a.ganancia" => $this->ganancia,
             ]);
             $this->add_variables_like([
-                "nombre" => $this->like
+                "a.nombre" => $this->like_nombre
             ]);
             $this->tabla = 'productos';
             $this->select_query = "

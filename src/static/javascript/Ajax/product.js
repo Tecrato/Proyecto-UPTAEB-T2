@@ -486,13 +486,12 @@ const cargarTargetProduct = (page) => {
       randomnautica: "productos",
       n: page_productos, // Aca va el numero de la pagina actual
       limite: 10, // Aca va el numero maximo de tarjetas que se pueden imprimir
-      like: like_product,
+      like_nombre: like_product,
       active: 1,
     },
     success: function (response) {
       marcaAgua();
       tarjetas(response, ".container-target-product");
-      (page_productos, total_productos, '\n', response)
       modalDetalles(1);
       if (session_user_rol_num == "1") {
         $(".btn-modal-register").removeClass("invisible")
@@ -761,6 +760,7 @@ inpNameProduct.addEventListener("keyup", (e) => {
       type: "POST",
       data: { randomnautica: "productos", like: val },
       success: function (response) {
+        console.log(response)
         let json = JSON.parse(response);
         json.lista.forEach((e) => {
           let nombre = e.nombre.toLowerCase();
@@ -960,6 +960,7 @@ function search_U_M_C(search, type, tr) {
         type: "POST",
         data: { randomnautica: type, like: value },
         success: function (response) {
+          console.log(response)
           let json = JSON.parse(response);
           tr()
         }

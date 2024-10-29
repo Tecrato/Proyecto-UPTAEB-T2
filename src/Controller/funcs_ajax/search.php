@@ -90,7 +90,7 @@
             id:(isset($_POST['ID']) ? $_POST['ID'] : null),
             nombre:(isset($_POST['nombre']) ? $_POST['nombre'] : null),
             active:(isset($_POST['active']) ? $_POST['active'] : null),
-            like:(isset($_POST['like']) ? $_POST['like'] : '')
+            like_nombre:(isset($_POST['like_nombre']) ? $_POST['like_nombre'] : '')
         );
     }
     elseif ($_POST['randomnautica'] == "unidades") {

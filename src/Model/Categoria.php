@@ -15,12 +15,11 @@
             Db_base::__construct();
             $this->tabla = "categoria";
             $this->add_variables([
-                "id" => $this->id,
-                "nombre" => $this->nombre,
-                "like" => $this->like,
+                "a.id" => $this->id,
+                "a.nombre" => $this->nombre,
             ]);
             $this->add_variables_like([
-                "nombre" => $this->like
+                "a.nombre" => $this->like
             ]);
 		}
 	}

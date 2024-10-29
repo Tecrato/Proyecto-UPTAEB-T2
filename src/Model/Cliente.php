@@ -26,17 +26,17 @@
             Db_base::__construct();
             $this->tabla = "clientes";
             $this->add_variables([
-                "id" => $this->id,
-                "nombre" => $this->nombre,
-                "cedula" => $this->cedula,
-                "documento" => $this->documento,
-                "apellido" => $this->apellido,
-                "telefono" => $this->telefono,
-                "direccion" => $this->direccion,
+                "a.id" => $this->id,
+                "a.nombre" => $this->nombre,
+                "a.cedula" => $this->cedula,
+                "a.documento" => $this->documento,
+                "a.apellido" => $this->apellido,
+                "a.telefono" => $this->telefono,
+                "a.direccion" => $this->direccion,
             ]);
             $this->add_variables_like([
-                "nombre" => $this->like_nombre,
-                "cedula" => $this->like_cedula
+                "a.nombre" => $this->like_nombre,
+                "a.cedula" => $this->like_cedula
             ]);
         }
 
