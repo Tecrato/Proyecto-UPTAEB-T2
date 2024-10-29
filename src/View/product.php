@@ -331,6 +331,10 @@
                                         <li>
                                             <a id="SupplierFilterOne" href="#">PROVEEDORES <span uk-drop-parent-icon></span></a>
                                             <div class="uk-dropdown">
+                                                <form class="uk-search uk-search-default uk-margin-small-bottom">
+                                                    <span uk-search-icon style="color: #999"></span>
+                                                    <input class="uk-search-input input_placeholder search_entrys" name="proveedores" type="search" placeholder="Buscar" aria-label="" style="color: #999; border-color: #999;">
+                                                </form>
                                                 <ul class="uk-nav uk-dropdown-nav filter_prov_entry">
                                                     <!-- aqui se cargan los proveedores con js -->
                                                 </ul>
@@ -339,7 +343,20 @@
                                         <li>
                                             <a id="SupplierFilterProducts" href="#">PRODUCTOS <span uk-drop-parent-icon></span></a>
                                             <div class="uk-dropdown">
+                                                <form class="uk-search uk-search-default uk-margin-small-bottom">
+                                                    <span uk-search-icon style="color: #999"></span>
+                                                    <input class="uk-search-input input_placeholder search_entrys" name="productos" type="search" placeholder="Buscar" aria-label="" style="color: #999; border-color: #999;">
+                                                </form>
                                                 <ul class="uk-nav uk-dropdown-nav filter_prov_entry_product">
+
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <a id="" href="#">FECHA <span uk-drop-parent-icon></span></a>
+                                            <div class="uk-dropdown">
+
+                                                <ul class="uk-nav uk-dropdown-nav">
 
                                                 </ul>
                                             </div>
@@ -614,15 +631,22 @@
                         <!-- conatainer_table contendra la tabla -->
                         <section>
                             <div class="uk-overflow-auto altura_table_entry ">
+
                                 <table class="uk-table uk-table-divider uk-table-hover uk-light">
                                     <thead class="activeGood">
                                         <tr>
                                             <th></th>
-                                            <th>#</th>
-                                            <th>NOMBRE</th>
-                                            <th>FECHA DE EXPIRACION</th>
-                                            <th>PRECIO DE COMPRA</th>
-                                            <th>ESTADO</th>
+                                            <th>Codigo</th>
+                                            <th>Producto</th>
+                                            <th>Proveedor</th>
+                                            <th>Presentacion</th>
+                                            <th>T.Presentacion</th>
+                                            <th>Comprado</th>
+                                            <th>existencia</th>
+                                            <th>Precio de Compra</th>
+                                            <th>Fecha de Compra</th>
+                                            <th>Fecha de Vencimiento</th>
+                                            <th>Estado</th>
                                         </tr>
                                     </thead>
                                     <tbody class="js-filter cont_entry">
@@ -655,8 +679,8 @@
                     <li><a id="liUnidades" href="#">Unidades</a></li>
                     <li><a id="liCategorias" href="#">Categorias</a></li>
                 </ul>
-                <div class="uk-flex uk-flex-around uk-flex-wrap uk-aling-center">
-                    <ul class="uk-switcher switcher-container uk-background-secondary uk-margin-medium-top uk-border-rounded" style="border: 1px solid #999;">
+                <div class="">
+                    <ul class="uk-switcher switcher-container uk-background-secondary uk-margin-medium-top uk-border-rounded">
                         <li class="invisible li_cont_m">
                             <form id="FORM_MARCA" method="post" class="uk-form-horizontal uk-margin-large uk-padding">
                                 <div class="uk-flex uk-flex-center uk-flex-middle uk-flex-middle uk-margin-medium-bottom" style="padding: 10px; background-color: #106733">
@@ -665,16 +689,15 @@
                                         REGISTRAR MARCA
                                     </h4>
                                 </div>
-                                <div class="uk-margin">
-                                    <label class="uk-form-label" for="form-horizontal-text">Nombre</label>
-                                    <div class="uk-form-controls">
+                                <div class="uk-margin uk-flex">
+                                    <label>Nombre</label>
+                                    <div class="uk-margin-left">
                                         <input name="nombre" class="uk-input marca_name" id="form-horizontal-text" type="text" placeholder="Nombre de marca" pattern="^([A-Zñ+áéó]|[a-zñáéó]){3,}( ([A-Zñ+áéó]|[a-zñáéó]){3,})?$" required>
                                         <input type="text" name="tipo" value='marca' style="display:none">
                                     </div>
-                                </div>
-                                <hr>
-                                <div class="uk-flex uk-flex-center uk-margin-medium-top">
-                                    <button type="submit" class="uk-button uk-button-default">Guardar</button>
+                                    <div class="uk-margin-medium-left">
+                                        <button type="submit" class="uk-button uk-button-default">Guardar</button>
+                                    </div>
                                 </div>
                             </form>
                         </li>
@@ -723,69 +746,89 @@
                     </ul>
 
 
-                    <ul class="uk-switcher switcher-container uk-margin-medium-top uk-background-secondary uk-padding uk-border-rounded" style="border: 1px solid #999;">
-                        <li style="height: 260px; overflow-y: auto; overflow-x: hidden;">
-                            <table class="uk-table uk-table-divider" style="height: 100px;">
-                                <thead>
-                                    <tr>
-                                        <th class="uk-table-expand"></th>
-                                        <th class="uk-table-expand">#</th>
-                                        <th class="uk-table-expand">Nombre</th>
-                                        <th class="uk-table-expand">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <div class="uk-flex uk-flex-center uk-flex-middle" style="padding: 10px; background-color: rgb(0, 150, 64);">
-                                    <h4 style="margin: 0px;">
-                                        <span uk-icon="icon: list; ratio: 2"></span>
-                                        MARCAS REGISTRADAS
-                                    </h4>
-                                </div>
-                                <tbody id="TemplateMarca">
+                    <ul class="uk-switcher switcher-container uk-margin-medium-top uk-background-secondary uk-padding uk-border-rounded">
+                        <li>
+                            <div class="uk-flex uk-flex-center uk-flex-middle" style="padding: 10px; background-color: rgb(0, 150, 64);">
+                                <h4 style="margin: 0px;">
+                                    <span uk-icon="icon: list; ratio: 2"></span>
+                                    MARCAS REGISTRADAS
+                                </h4>
+                            </div>
+                            <form class="uk-search uk-search-default uk-margin-top">
+                                <span uk-search-icon></span>
+                                <input class="uk-search-input search_marcas" type="search" placeholder="Buscar" aria-label="">
+                            </form>
+                            <div class="uk-overflow-auto">
+                                <table class="uk-table uk-table-divider" style="height: 100px;">
+                                    <thead>
+                                        <tr>
+                                            <th class="uk-table-expand"></th>
+                                            <th class="uk-table-expand">#</th>
+                                            <th class="uk-table-expand">Nombre</th>
+                                            <th class="uk-table-expand">Acciones</th>
+                                        </tr>
+                                    </thead>
 
-                                </tbody>
-                            </table>
+
+                                    <tbody id="TemplateMarca">
+
+                                    </tbody>
+                                </table>
+                            </div>
                         </li>
-                        <li style="height: 260px; overflow-y: auto; overflow-x: hidden;">
-                            <table class="uk-table uk-table-divider">
-                                <thead>
-                                    <tr>
-                                        <th class="uk-table-expand"></th>
-                                        <th class="uk-table-expand">#</th>
-                                        <th class="uk-table-expand">Nombre</th>
-                                        <th class="uk-table-expand">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <div class="uk-flex uk-flex-center uk-flex-middle" style="padding: 10px; background-color: rgb(0, 150, 64);">
-                                    <h4 style="margin: 0px;">
-                                        <span uk-icon="icon: list; ratio: 2"></span>
-                                        UNIDADES REGISTRADAS
-                                    </h4>
-                                </div>
-                                <tbody id="TemplateUnidad">
-
-                                </tbody>
-                            </table>
+                        <li>
+                            <div class="uk-flex uk-flex-center uk-flex-middle" style="padding: 10px; background-color: rgb(0, 150, 64);">
+                                <h4 style="margin: 0px;">
+                                    <span uk-icon="icon: list; ratio: 2"></span>
+                                    UNIDADES REGISTRADAS
+                                </h4>
+                            </div>
+                            <form class="uk-search uk-search-default uk-margin-top">
+                                <span uk-search-icon></span>
+                                <input class="uk-search-input" type="search" placeholder="Buscar" aria-label="">
+                            </form>
+                            <div class="uk-overflow-auto">
+                                <table class="uk-table uk-table-divider">
+                                    <thead>
+                                        <tr>
+                                            <th class="uk-table-expand"></th>
+                                            <th class="uk-table-expand">#</th>
+                                            <th class="uk-table-expand">Nombre</th>
+                                            <th class="uk-table-expand">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="TemplateUnidad">
+    
+                                    </tbody>
+                                </table>
+                            </div>
                         </li>
-                        <li style="height: 260px; overflow-y: auto; overflow-x: hidden;">
-                            <table class="uk-table uk-table-divider">
-                                <thead>
-                                    <tr>
-                                        <th class="uk-table-expand"></th>
-                                        <th class="uk-table-expand">#</th>
-                                        <th class="uk-table-expand">Nombre</th>
-                                        <th class="uk-table-expand">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <div class="uk-flex uk-flex-center uk-flex-middle" style="padding: 10px; background-color: rgb(0, 150, 64);">
-                                    <h4 style="margin: 0px;">
-                                        <span uk-icon="icon: list; ratio: 2"></span>
-                                        CATEGORIAS REGISTRADAS
-                                    </h4>
-                                </div>
-                                <tbody id="TemplateCategoria">
+                        <li>
+                            <div class="uk-flex uk-flex-center uk-flex-middle" style="padding: 10px; background-color: rgb(0, 150, 64);">
+                                <h4 style="margin: 0px;">
+                                    <span uk-icon="icon: list; ratio: 2"></span>
+                                    CATEGORIAS REGISTRADAS
+                                </h4>
+                            </div>
+                            <form class="uk-search uk-search-default uk-margin-top">
+                                <span uk-search-icon></span>
+                                <input class="uk-search-input" type="search" placeholder="Buscar" aria-label="">
+                            </form>
+                            <div class="uk-overflow-auto">
+                                <table class="uk-table uk-table-divider">
+                                    <thead>
+                                        <tr>
+                                            <th class="uk-table-expand"></th>
+                                            <th class="uk-table-expand">#</th>
+                                            <th class="uk-table-expand">Nombre</th>
+                                            <th class="uk-table-expand">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="TemplateCategoria">
 
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            </div>
                         </li>
                     </ul>
 

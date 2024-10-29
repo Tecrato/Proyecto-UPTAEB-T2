@@ -41,3 +41,4 @@ const MarcasTable = () => {
 };
 MarcasTable();
 Registrar_U_M_C("FORM_MARCA", MarcasTable, ".marca_name", "Marca Creada correctamente");
+search_U_M_C(".search_marcas", "marcas", MarcasTable);

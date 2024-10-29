@@ -7,6 +7,7 @@ const cargarEntrys = () => {
     success: function (response) {
       let template;
       let json = JSON.parse(response);
+      console.log(json);
       json.lista.forEach((f) => {
         let fechaVencimiento = new Date(f.fecha_vencimiento);
         let fechaActual = new Date();
@@ -33,11 +34,17 @@ const cargarEntrys = () => {
         }
 
         template += `<tr data-proveedor="${f.proveedor}" data-productEntry="${f.producto}">
-                              <td><img src="./static/images/btn_lote2.png" alt="" width="40"></td>
-                              <td>${f.id}</td>
-                              <td>${f.producto}</td>
-                              <td>${f.fecha_vencimiento}</td>
+                              <td><img src="./static/images/btn_lote2.png" alt="" width="80"></td>
+                              <td>${f.codigo}</td>
+                              <td>${f.producto + " " + f.valor_unidad + " " + f.unidad + " " + f.marca}</td>
+                              <td>${f.proveedor}</td>
+                              <td>${f.mercancia}</td>
+                              <td>${f.tamaño_mercancia}</td>
+                              <td>${f.cantidad}</td>
+                              <td>${f.existencia}</td>
                               <td>${f.precio_compra} Bs</td>
+                              <td>${f.fecha_compra}</td>
+                              <td>${f.fecha_vencimiento}</td>
                               <td>
                                   <div class="${color} uk-border-rounded uk-text-center uk-text-bold" style="padding: 5px; width: 115px;">${texto}</div>
                               </td>
@@ -55,177 +62,61 @@ const cargarEntrys = () => {
 };
 cargarEntrys()
 
-$.ajax({
-  url: "api_search",
-  type: "POST",
-  data: { randomnautica: "proveedores" },
-  success: function (response) {
-    let json = JSON.parse(response);
-    json.lista.forEach((p) => {
-      hola += `      
-        <li uk-filter-control="[data-proveedor='${p.razon_social}']"><a href="#" class="prov-entry-products" idSup="${p.id}">${p.razon_social}</a></li>    
-      `;
-    });
-    $(".filter_prov_entry").html(hola);
 
-    let listItem = document.querySelectorAll(".prov-entry-products");
-    listItem.forEach((e) => {
-      e.addEventListener("click", () => {
-        let idSup = e.getAttribute("idSup");
-        let template = "";
-        $.ajax({
-          url: "api_search",
-          type: "POST",
-          data: { randomnautica: "entradas", id_proveedor: idSup },
-          success: function (response) {
-            let json = JSON.parse(response);
-            json.lista.forEach((l) => {
-              template += `<li uk-filter-control="[data-productEntry='${l.producto}']"><a href="#">${l.producto}</a></li>`;
-            });
+let searchEntryFilter = document.querySelectorAll(".search_entrys")
+searchEntryFilter.forEach((e) => {
+  e.addEventListener("keyup", (item) => {
+    let name = item.target.value;
 
-            $(".filter_prov_entry_product").html(template);
-          },
-        });
-      });
-    });
-  },
-});
-
-let bool = true
-let btnAggMetodoPago = document.querySelector(".btn_agg_metodoPago")
-// Agregar metodo de pago
-btnAggMetodoPago.addEventListener('click', () => {
-  ("click");
-  // Incrementar el contador para obtener el id único de cada pago
-  // Obtener el contenedor de los métodos de pago
-  let cont = document.querySelector(".cont_metodos_pagos")
-  // Obtener todos los select de métodos de pago existentes
-  let selectOptions = document.querySelectorAll(".selectMetodoPago")
-  // Obtener los valores de los select seleccionados
-  let options = []
-  selectOptions.forEach((select) => {
-    let option = select.options[select.selectedIndex]
-    options.push(option.value)
-  })
-  let availableOptions = []
-  $.ajax({
-    url: "api_search",
-    type: "POST",
-    data: { randomnautica: "metodo_pago" },
-    success: function (response) {
-      let json = JSON.parse(response);
-      json.lista.forEach((date) => {
-        // Solo agregar opciones que no hayan sido seleccionadas previamente
-        if (!options.includes(date.id.toString())) {
-          availableOptions.push({
-            nombre: date.nombre,
-            id: date.id
+    if (name != "") {
+      $.ajax({
+        url: "api_search",
+        type: "POST",
+        data: { randomnautica: "proveedores", like: name, active: 1 },
+        success: function (response) {
+          let json = JSON.parse(response);
+          let hola = "";
+          json.lista.forEach((p) => {
+            hola += `      
+          <li><a href="#" class="prov-entry-products" idSup="${p.id}">${p.razon_social}</a></li>    
+        `;
           });
+          $(".filter_prov_entry").html(hola);
         }
-      });
-
-      // Crear la plantilla HTML para el nuevo método de pago
-      let template = `<div class="inputPago">
-                          <div class="uk-flex uk-flex-around">
-                              <select class="uk-select selectMetodoPago uk-form-small" name="" id="" style="background-color: transparent; border: transparent; width: 150px;">
-                                  <option disabled>TIPO DE PAGO</option>
-                                  ${availableOptions.map(option => `<option value="${option.id}">${option.nombre}</option>`).join('')}
-                              </select>
-                              <input class="uk-input uk-form-small uk-form-width-small AMOUNT-MP" placeholder="Monto" type="text" style="background-color: transparent; border: transparent;">
-                               <button class="btn-deleteMP" uk-icon="trash"></button> 
-                          </div>
-                          <hr class="uk-margin-remove">
-                      </div>`
-
-
-      let contMetodos = document.querySelector(".cont_metodos_pagos")
-      if (contMetodos.childElementCount == 0) {
-        $(".cont_metodos_pagos").append(template)
-        // Agregar la nueva plantilla al contenedor de los métodos de pago finales
-        bool = false
-      }
-      if (contMetodos.lastElementChild.firstElementChild.firstElementChild.nextElementSibling.value == "") {
-        bool = false
-      }
-
-      if (bool == true) {
-        $(".cont_metodos_pagos").append(template)
-        // Agregar la nueva plantilla al contenedor de los métodos de pago finales
-      }
-      // Agregar la nueva plantilla al contenedor de los métodos de 
-      let select = document.querySelectorAll(".selectMetodoPago")
-
-
-      //este sera el evento en donde colocaremos en pagos finales, el valor del input
-      //seleccionamos todos los select
-      let amount = []
-      let INP = document.querySelectorAll(".AMOUNT-MP")
-      let totalDebito = document.querySelector(".amount_MP")
-
-      INP.forEach((B) => {
-
-        // captamos el evento de keyup, osea si el usuario teclea sobre el input
-        B.addEventListener("change", () => {
-          if (B.value == "") {
-            bool = false
-          } else {
-            bool = true
-          }
-
-          // let amount = []
-
-          // INP.forEach((B) => {
-          //   amount.push(B.value)
-          // })
-          // (totalDebito);
-          // (amount);
-          // let result = 0
-          // amount.forEach((a) => {
-          //   let number = a == "" ? 0 : parseFloat(a)
-          //   result += number
-          // })
-          // let valor = totalDebito - result
-          // totalDebito.textContent =  valor
-
-          let valor = B.value == "" ? 0 : parseFloat(B.value)
-          // ActualizarTotal()
-          let valor2 = parseFloat(B.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.textContent)
-          // if (B.previousElementSibling.value == "Divisa" && valor2 != 0) {
-          //   B.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.textContent = (valor2 -(valor * dolar)).toFixed(2)
-          // } else
-          if (valor2 != 0 && B.value != "") {
-            B.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.textContent = (valor2 - valor).toFixed(2)
-          }
-        })
       })
-
-
-      //esta parte es para eliminar un registro en los tipos de pago
-      //seleccionamos todos los btn de eliminar, los recorremos y le asignamos el evento click
-      let btnDeleteMP = document.querySelectorAll(".btn-deleteMP")
-      btnDeleteMP.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          //seleccionamos el contenedor de los tipos de pago en la izquierda, y removemos al hijo
-          cont.removeChild(btn.parentElement.parentElement)
-
-          for (const f of INP) {
-            (f.value);
-          }
-          // amount.pop()
-          let result = 0
-
-          amount.forEach((a) => {
-            let number = a == "" ? 0 : parseFloat(a)
-            result += number
-          })
-
-            (btn.parentElement.parentElement.parentElement);
-
-        })
-      })
+    } else {
+      $(".filter_prov_entry").html("");
     }
   })
 })
+
+searchEntryFilter.forEach((e) => {
+  e.addEventListener("keyup", (item) => {
+    let name = item.target.value;
+
+    if (name != "") {
+      $.ajax({
+        url: "api_search",
+        type: "POST",
+        data: { randomnautica: "productos", like: name },
+        success: function (response) {
+          let json = JSON.parse(response);
+          console.log(json);
+          let hola = "";
+          json.lista.forEach((p) => {
+            hola += `      
+          <li><a href="#" class="prov-entry-products" idSup="${p.id}">${p.nombre + " " + p.valor_unidad + " " + p.unidad + " " + p.marca}</a></li>    
+        `;
+          });
+          $(".filter_prov_entry_product").html(hola);
+        }
+      })
+    } else {
+      $(".filter_prov_entry_product").html("");
+    }
+  })
+})
+
 
 //aqui hacemos la funcion para el credito
 
@@ -437,27 +328,6 @@ function func(dolar) {
         (document.getElementById("totalFact").textContent = priceFinal.toFixed(2) + " BS");
         (document.getElementById("totalFact$").textContent = (priceFinal / (dolar)).toFixed(2) + " $");
         document.querySelector(".amount_MP").textContent = priceFinal.toFixed(2) + " BS"
-
-
-        // document.getElementById("IGTF").textContent = "0.00 $"
-        // let INP = document.querySelectorAll(".AMOUNT-MP")
-        // INP.forEach((B) => {
-        //   // captamos el evento de keyup, osea si el usuario teclea sobre el input
-        //   if (B.previousElementSibling.value == "Divisa") {
-        //     let IGTF = 0;
-        //     IGTF = parseFloat(B.value) * 0.3
-        //     if (B.value == "") {
-        //       document.getElementById("IGTF").textContent = "0.00 $"
-        //       document.getElementById("totalFact$").textContent = "0.00 $"
-        //     } else {
-        //       document.getElementById("IGTF").textContent = IGTF.toFixed(2) + " $"
-        //       let monto$ = parseFloat(document.getElementById("totalFact$").textContent)
-        //       monto$ += IGTF
-        //       document.getElementById("totalFact$").textContent = monto$.toFixed(2) + " $"
-        //     }
-
-        //   }
-        // })
       };
 
       //seleccionamos todos los botones de +, ya que necesitamos agg los valores del tr en la tabla de la derecha

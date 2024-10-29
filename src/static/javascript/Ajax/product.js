@@ -950,3 +950,20 @@ function DELETE_U_M_C(TR, BTN) {
     });
   });
 };
+function search_U_M_C(search, type, tr) {
+  let search_input = document.querySelector(search)
+  search_input.addEventListener("keyup", (e) => {
+    let value = e.target.value
+    if (value != "") {
+      $.ajax({
+        url: "api_search",
+        type: "POST",
+        data: { randomnautica: type, like: value },
+        success: function (response) {
+          let json = JSON.parse(response);
+          tr()
+        }
+      })
+    }
+  })
+}
