@@ -18,7 +18,8 @@
 
         }
 		function search($n=0,$limite=9,$order='id DESC'){
-			$query = "SELECT 
+			$query = "
+            SELECT 
             a.id,
             a.monto_final,
             a.fecha,

@@ -331,7 +331,10 @@
 
                     <main class="uk-background-secondary uk-padding uk-border-rounded" uk-filter="target: .js-filter; animation: fade">
                         <!-- container-filter sera el  que tenga todos los filtros de busqueda -->
-                        <section class="container-filter">
+                        <a href="#modal-full-entrys" uk-toggle class="uk-margin-left" uk-tooltip="title:Añadir Entrada; delay: 500">
+                            <img src="./static/images/btn_lote2.png" alt="" width="35px">
+                        </a>
+                        <!-- <section class="container-filter">
                             <div class="uk-flex">
                                 <div class="uk-margin">
                                     <form class="form_search_entrys uk-search uk-search-default" style="width: 250px;">
@@ -339,9 +342,6 @@
                                         <input id="entrada" class="uk-search-input" type="search" placeholder="Buscar Entrada" aria-label="Search">
                                     </form>
                                 </div>
-                                <a href="#modal-full-entrys" uk-toggle class="uk-margin-left" uk-tooltip="title:Añadir Entrada; delay: 500">
-                                    <img src="./static/images/btn_lote2.png" alt="" width="35px">
-                                </a>
                             </div>
                             <div>
                                 <nav uk-dropnav="mode: click">
@@ -373,7 +373,7 @@
                                     </ul>
                                 </nav>
                             </div>
-                        </section>
+                        </section> -->
 
 
                         <!-- *********************************modal de entradas productos********************************* -->
@@ -625,7 +625,7 @@
 
                         <!-- conatainer_table contendra la tabla -->
                         <section>
-                            <div class="uk-overflow-auto altura_table_entry ">
+                            <!-- <div class="uk-overflow-auto altura_table_entry ">
                                 <table class="uk-table uk-table-divider uk-table-hover uk-light">
                                     <thead class="activeGood">
                                         <tr>
@@ -649,32 +649,38 @@
                                     <li><a class="pag-btn-productos" data-direccion="next">Next</a></li>
                                     <li><a class="pag-btn-productos" data-direccion="end"><span class="uk-margin-small-left" uk-pagination-next></span><span class="uk-margin-small-left" uk-pagination-next></span></a></li>
                                 </ul>
-                            </div>
-                            <!-- <div>
+                            </div> -->
+                            <div>
                                 <label for="min">Fecha mínima:</label>
-                                <input type="text" id="min" name="min">
+                                <input class="uk-input uk-form-width-small" type="text" id="min" name="min">
                                 <label for="max">Fecha máxima:</label>
-                                <input type="text" id="max" name="max">
+                                <input class="uk-input uk-form-width-small" type="text" id="max" name="max">
                             </div>
                             <table id="miTabla" class="display">
                                 
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th>Codigo</th>
                                         <th>Producto</th>
-                                        <th>Fecha de Vencimiento</th>
+                                        <th>Proveedor</th>
+                                        <th>Presentacion</th>
+                                        <th>T.Presentacion</th>
+                                        <th>Comprado</th>
+                                        <th>existencia</th>
                                         <th>Precio de Compra</th>
+                                        <th>Fecha de Compra</th>
+                                        <th>Fecha de Vencimiento</th>
                                     </tr>
                                 </thead>
-                                <tfoot>
+                                <!-- <tfoot>
                                     <tr>
                                         <th>ID</th>
                                         <th>Producto</th>
                                         <th>Fecha de Vencimiento</th>
                                         <th>Precio de Compra</th>
                                     </tr>
-                                </tfoot>
-                            </table> -->
+                                </tfoot> -->
+                            </table>
                             <!-- Inputs para el filtro de rango de fechas -->
                             
                         </section>
@@ -903,10 +909,10 @@
 <script src="static/javascript/librerias/dataTable/dataTables.js" defer></script>
 <script src="static/javascript/librerias/dataTable/moment.min.js" defer></script>
 <script src="static/javascript/librerias/dataTable/dataTables.dateTime.min.js" defer></script>
-<script src="static/javascript/librerias/dataTable/dataTables.searchPanes.js" defer></script>
-<script src="static/javascript/librerias/dataTable/searchPanes.dataTables.js" defer></script>
 <script src="static/javascript/librerias/dataTable/dataTables.select.js" defer></script>
 <script src="static/javascript/librerias/dataTable/select.dataTables.js" defer></script>
+<script src="static/javascript/librerias/dataTable/dataTables.searchPanes.js" defer></script>
+<script src="static/javascript/librerias/dataTable/searchPanes.dataTables.js" defer></script>
 
 
 

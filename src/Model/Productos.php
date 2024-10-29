@@ -71,7 +71,7 @@
                 m.nombre marca,
                 a.valor_unidad,
                 a.imagen,
-                (SELECT SUM(entradas_2.existencia) FROM entradas_2 Where id_producto = a.id AND entradas_2.fecha_vencimiento > NOW()) as stock,
+                (SELECT SUM(detalles_entrada.existencia) FROM detalles_entrada Where id_producto = a.id AND detalles_entrada.fecha_vencimiento > NOW()) as stock,
                 a.stock_min,
                 a.stock_max,
                 a.precio_venta,
@@ -83,7 +83,7 @@
                 INNER JOIN unidades c ON c.id = a.id_unidad
                 INNER JOIN marcas m ON m.id = a.id_marca
             ';
-            // $this->select_query = "a.id, a.id_categoria, a.id_unidad, a.id_marca, a.valor_unidad, a.nombre, a.imagen, a.stock_min, a.stock_max, a.precio_venta, a.IVA, a.active, c.nombre AS categoria, u.nombre AS unidad, m.nombre AS marca, (SELECT SUM(e.cantidad) FROM entradas_2 e WHERE e.id_producto = a.id) AS stock";
+            // $this->select_query = "a.id, a.id_categoria, a.id_unidad, a.id_marca, a.valor_unidad, a.nombre, a.imagen, a.stock_min, a.stock_max, a.precio_venta, a.IVA, a.active, c.nombre AS categoria, u.nombre AS unidad, m.nombre AS marca, (SELECT SUM(e.cantidad) FROM detalles_entrada e WHERE e.id_producto = a.id) AS stock";
         }
 
         function set_id($id){

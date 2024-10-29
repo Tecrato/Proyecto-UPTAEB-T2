@@ -1034,7 +1034,7 @@
 			}
 		},
 		search: {
-			container: 'dt-search',
+			container: 'dt-search uk-flex uk-flex-right@l',
 			input: 'dt-input'
 		},
 		table: 'dataTable',	
@@ -13043,12 +13043,12 @@
 		var tableId = settings.sTableId;
 		var language = settings.oLanguage;
 		var previousSearch = settings.oPreviousSearch;
-		var input = '<input type="search" class="'+classes.input+'"/>';
+		var input = '<input type="search" class="'+classes.input+' uk-input uk-form-width-medium uk-margin-bottom"/>';
 	
 		opts = $.extend({
-			placeholder: language.sSearchPlaceholder,
+			placeholder: "Buscar",
 			processing: false,
-			text: language.sSearch
+			text: ""
 		}, opts);
 	
 		// The _INPUT_ is optional - is appended if not present
@@ -13531,7 +13531,7 @@
 		var select = $('<select/>', {
 			'name':          tableId+'_length',
 			'aria-controls': tableId,
-			'class':         classes.select
+			'class':         classes.select + " " + "uk-select uk-form-width-xsmall"
 		} );
 	
 		for ( i=0 ; i<lengths.length ; i++ ) {

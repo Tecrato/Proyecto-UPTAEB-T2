@@ -21,7 +21,7 @@
         //     m.nombre marca,
         //     a.valor_unidad,
         //     a.imagen,
-        //     (SELECT SUM(entradas_2.existencia) FROM entradas_2 Where id_producto = a.id AND entradas_2.fecha_vencimiento > NOW()) as stock,
+        //     (SELECT SUM(detalles_entrada.existencia) FROM detalles_entrada Where id_producto = a.id AND detalles_entrada.fecha_vencimiento > NOW()) as stock,
         //     a.stock_min,
         //     a.stock_max,
         //     a.precio_venta,

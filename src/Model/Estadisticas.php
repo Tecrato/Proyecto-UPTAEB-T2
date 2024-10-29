@@ -54,8 +54,8 @@ class Estadisticas extends DB
         $query = $this->conn->prepare('SELECT 
         id_proveedor, 
         proveedores.razon_social
-        FROM entradas_2
-        INNER JOIN entradas ON entradas.id = entradas_2.id_entrada
+        FROM detalles_entrada
+        INNER JOIN entradas ON entradas.id = detalles_entrada.id_entrada
         INNER JOIN proveedores ON proveedores.id = entradas.id_proveedor 
         WHERE id_producto=:id 
         GROUP BY entradas.id_proveedor');
