@@ -95,16 +95,12 @@ function DeleteClientProv(BTN, FORM, IDSETTER, TR, notification) {
             let tr = TR()
             UIkit.notification.closeAll();
             UIkit.notification({
-              message: `<span uk-icon='icon: check'>${notification} Eliminado correctamente</span>`,
+              message: `<span uk-icon='icon: check'>${notification}</span>`,
               status: "success",
               pos: "bottom-right",
             });
             setTimeout(() => {
               UIkit.modal("#eliminar_supplier").hide();
-            }, 400)
-
-            setTimeout(() => {
-              UIkit.modal("#eliminar_cliente").hide();
             }, 400)
           }
         })

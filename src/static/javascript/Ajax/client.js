@@ -1,6 +1,7 @@
 var page_clientes = 0
 var total_clientes = 0
 
+
 $(".pag-btn-clientes").click((ele) => {
   cambiar_pagina_ajax(
     ele.target.dataset["direccion"],
@@ -92,20 +93,16 @@ function DeleteClientProv(BTN, FORM, IDSETTER, TR, notification) {
           data: data,
           success: (response) => {
             console.log(response);
-            let tr = TR()
             UIkit.notification.closeAll();
             UIkit.notification({
-              message: `<span uk-icon='icon: check'>${notification} Eliminado correctamente</span>`,
+              message: `<span uk-icon='icon: check'>${notification}correctamente</span>`,
               status: "success",
               pos: "bottom-right",
             });
             setTimeout(() => {
-              UIkit.modal("#eliminar_supplier").hide();
-            }, 400)
-
-            setTimeout(() => {
               UIkit.modal("#eliminar_cliente").hide();
             }, 400)
+            let tr = TR()
           }
         })
       })
@@ -178,7 +175,7 @@ function cardClient(page) {
   $.ajax({
     url: "api_search",
     type: "POST",
-    data: { randomnautica: "clientes", n: page_clientes, limite: 6 },
+    data: { randomnautica: "clientes", n: page_clientes, limite: 6, active: 0 },
     success: function (response) {
       let template = "";
       let json = JSON.parse(response);

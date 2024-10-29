@@ -20,6 +20,7 @@
     use Shtechnologyx\Pt3\Model\Notificacion;
 
     $tipo = $_POST['tipo']; // Depende de que es lo que queramos borrar
+    print_r($_POST);
 
 
     $other_class = new Permisos(null,$_SESSION['user_id'],$_POST['tipo'],'borrar');
