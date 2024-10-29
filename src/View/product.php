@@ -1,14 +1,14 @@
 <?php require("View/complementos/header.php"); ?>
 
 <style>
-        /* Modificar el estilo de los SearchPanes para alinearlos en filas de 2 */
-        .dtsp-searchPanes {
-            width: 30%;
-            flex-wrap: nowrap !important;
-    justify-content: space-around !important;
-    gap: 10% !important;
-        }
-    </style>
+    /* Modificar el estilo de los SearchPanes para alinearlos en filas de 2 */
+    .dtsp-searchPanes {
+        width: 30%;
+        flex-wrap: nowrap !important;
+        justify-content: space-around !important;
+        gap: 10% !important;
+    }
+</style>
 <main class="Bg-Main-home2 uk-padding uk-padding-remove-bottom main-Product uk-light">
     <section class="">
         <ul uk-tab>
@@ -656,33 +656,24 @@
                                 <label for="max">Fecha máxima:</label>
                                 <input class="uk-input uk-form-width-small" type="text" id="max" name="max">
                             </div>
-                            <table id="miTabla" class="display">
-                                
-                                <thead>
-                                    <tr>
-                                        <th>Codigo</th>
-                                        <th>Producto</th>
-                                        <th>Proveedor</th>
-                                        <th>Presentacion</th>
-                                        <th>T.Presentacion</th>
-                                        <th>Comprado</th>
-                                        <th>existencia</th>
-                                        <th>Precio de Compra</th>
-                                        <th>Fecha de Compra</th>
-                                        <th>Fecha de Vencimiento</th>
-                                    </tr>
-                                </thead>
-                                <!-- <tfoot>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Producto</th>
-                                        <th>Fecha de Vencimiento</th>
-                                        <th>Precio de Compra</th>
-                                    </tr>
-                                </tfoot> -->
-                            </table>
-                            <!-- Inputs para el filtro de rango de fechas -->
-                            
+                            <div class="uk-overflow-auto">
+                                <table id="miTabla" class="uk-table uk-table-divider">
+                                    <thead>
+                                        <tr>
+                                            <th>Codigo</th>
+                                            <th>Producto</th>
+                                            <th>Proveedor</th>
+                                            <th>Presentacion</th>
+                                            <th>T.Presentacion</th>
+                                            <th>Comprado</th>
+                                            <th>existencia</th>
+                                            <th>Precio de Compra</th>
+                                            <th>Fecha de Compra</th>
+                                            <th>Fecha de Vencimiento</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
                         </section>
                     </main>
 
@@ -913,6 +904,8 @@
 <script src="static/javascript/librerias/dataTable/select.dataTables.js" defer></script>
 <script src="static/javascript/librerias/dataTable/dataTables.searchPanes.js" defer></script>
 <script src="static/javascript/librerias/dataTable/searchPanes.dataTables.js" defer></script>
+<!-- <script src="static/javascript/librerias/dataTable/jquery.dataTables.min.js" defer></script> -->
+<script src="static/javascript/librerias/dataTable/dataTables.responsive.min.js" defer></script>
 
 
 

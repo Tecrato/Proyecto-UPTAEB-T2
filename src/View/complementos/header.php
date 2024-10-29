@@ -26,11 +26,14 @@ echo "
     <link rel="stylesheet" href="static/css/introjs.min.css">
     <link rel="stylesheet" href="static/css/introjs-modern.css">
     <link rel="stylesheet" href="static/css/Style.css">
-
+    
     <link rel="stylesheet" href="static/css/dataTable/dataTables.dataTables.css">
+    
     <link rel="stylesheet" href="static/css/dataTable/searchPanes.dataTables.css">
     <link rel="stylesheet" href="static/css/dataTable/select.dataTables.css">
     <link rel="stylesheet" href="static/css/dataTable/dataTables.dateTime.min.css">
+    
+    
     
 
     <script src="static/javascript/librerias/jquery.js"></script>

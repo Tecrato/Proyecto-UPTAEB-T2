@@ -651,6 +651,7 @@ $(document).ready(function() {
               });
 
               let table = $('#miTabla').DataTable({
+                "responsive": true,
                 "language": {
                   "processing": "Procesando...",
                   "lengthMenu": "Mostrar _MENU_ registros",

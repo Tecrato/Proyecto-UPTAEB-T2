@@ -1015,3 +1015,12 @@
         justify-content: center;
     }
 }
+
+#miTabla_info{
+    margin-top: 15px !important;
+}
+.dt-paging{
+    margin-top: 15px !important;
+    display: flex;
+    justify-content: flex-end;
+}
