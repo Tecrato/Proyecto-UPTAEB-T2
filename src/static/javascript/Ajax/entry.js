@@ -618,9 +618,6 @@ function func(dolar) {
               $(".cont_metodos_pagos").append(template)
               // Agregar la nueva plantilla al contenedor de los métodos de pago finales
             }
-            // Agregar la nueva plantilla al contenedor de los métodos de 
-            let select = document.querySelectorAll(".selectMetodoPago")
-
 
             //este sera el evento en donde colocaremos en pagos finales, el valor del input
             //seleccionamos todos los select
@@ -653,7 +650,7 @@ function func(dolar) {
               btn.addEventListener('click', () => {
                 //seleccionamos el contenedor de los tipos de pago en la izquierda, y removemos al hijo
                 cont.removeChild(btn.parentElement.parentElement)
-                let value = parseFloat(btn.previousElementSibling.value)
+                let value = btn.previousElementSibling.value == "" ? 0 : parseFloat(btn.previousElementSibling.value)
                 if (btn.previousElementSibling.previousElementSibling.options[btn.previousElementSibling.previousElementSibling.selectedIndex].textContent == "Divisa") {
                   totalDebito.textContent = (parseFloat(totalDebito.textContent) + (value * dolar)).toFixed(2) + " Bs"
                 } else {
