@@ -38,7 +38,7 @@ const cargarEntrys = () => {
                               <td>${f.codigo}</td>
                               <td>${f.producto + " " + f.valor_unidad + " " + f.unidad + " " + f.marca}</td>
                               <td>${f.proveedor}</td>
-                              <td>${f.mercancia}</td>
+                              <td>${f.id_empaquetado}</td>
                               <td>${f.tamaño_mercancia}</td>
                               <td>${f.cantidad}</td>
                               <td>${f.existencia}</td>

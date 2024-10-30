@@ -879,8 +879,10 @@ function Edit_U_M_C(tr) {
         msj = "Unidad Modificada correctamente";
       } else if (tipo == "categoria") {
         msj = "Categoria Modificada correctamente";
-      } else {
+      } else if (tipo == "marca") {
         msj = "Marca Modificada correctamente";
+      } else {
+        msj = "Empaque Modificado correctamente";
       }
       let formEdit = document.getElementById("form_edit-U-C-M");
 
@@ -903,6 +905,7 @@ function Edit_U_M_C(tr) {
               pos: "bottom-right",
               timeout: 2000
             });
+            UIkit.modal("#edit-U_M_C").hide();
           },
         });
 
@@ -957,6 +960,7 @@ function DELETE_U_M_C(TR, BTN) {
               pos: "bottom-right",
               timeout: 2000
             });
+            UIkit.modal("#eliminar-U_M_C").hide();
           },
         });
         idInput.removeAttribute('value')
@@ -965,21 +969,3 @@ function DELETE_U_M_C(TR, BTN) {
     });
   });
 };
-function search_U_M_C(search, type, tr) {
-  let search_input = document.querySelector(search)
-  search_input.addEventListener("keyup", (e) => {
-    let value = e.target.value
-    if (value != "") {
-      $.ajax({
-        url: "api_search",
-        type: "POST",
-        data: { randomnautica: type, like: value },
-        success: function (response) {
-          console.log(response)
-          let json = JSON.parse(response);
-          tr()
-        }
-      })
-    }
-  })
-}

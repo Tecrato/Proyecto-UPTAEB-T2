@@ -86,7 +86,7 @@
                 p.razon_social as proveedor,
                 b.fecha_compra,
                 b.codigo,
-                a.mercancia,
+                a.id_empaquetado,
                 pr.nombre as producto,
                 m.nombre as marca,
                 pr.valor_unidad,

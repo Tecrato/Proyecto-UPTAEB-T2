@@ -10,10 +10,11 @@
         function __construct($id=null,$nombre=null,$like=''){
             $this->id = $id;
             $this->nombre = $nombre;
+            $this->like = $like;
             Db_base::__construct();
             $this->add_variables([
                 "id"=> $this->id,
-                "nombre"=> $this->id_unidad,
+                "nombre"=> $this->nombre,
             ]);
             $this->add_variables_like([
                 "nombre" => $this->like

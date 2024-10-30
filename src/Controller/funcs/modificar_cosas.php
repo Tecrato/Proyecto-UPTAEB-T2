@@ -15,6 +15,7 @@ use Shtechnologyx\Pt3\Model\Marca;
 use Shtechnologyx\Pt3\Model\Categoria;
 use Shtechnologyx\Pt3\Model\Metodo_pago;
 use Shtechnologyx\Pt3\Model\Configuracion;
+use Shtechnologyx\Pt3\Model\Tipo_empaquetado;
 
 require 'subir_imagen.php';
 $tipo = $_POST['tipo']; // Depende de que es lo que queramos actualizar
@@ -89,6 +90,9 @@ if ($tipo === 'producto') {
     $clase->actualizar();
 } elseif ($tipo === 'configuraciones') {
     $clase = new Configuracion($_POST["llave"], $_POST["valor"]);
+    $clase->actualizar();
+}  elseif ($tipo === 'empaquetado') {
+    $clase = new Tipo_empaquetado($_POST["ID"], $_POST["nombre"]);
     $clase->actualizar();
 }
 

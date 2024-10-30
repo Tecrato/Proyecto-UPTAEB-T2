@@ -18,6 +18,7 @@
     use Shtechnologyx\Pt3\Model\Metodo_pago;
     use Shtechnologyx\Pt3\Model\Registro_ventas;
     use Shtechnologyx\Pt3\Model\Notificacion;
+use Shtechnologyx\Pt3\Model\Tipo_empaquetado;
 
     $tipo = $_POST['tipo']; // Depende de que es lo que queramos borrar
     print_r($_POST);
@@ -81,6 +82,12 @@
     }
     elseif ($tipo === 'unidad'){
         $clase = new Unidad($_POST["ID"]);
+        $clase->borrar();
+        $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Borrar","Borrado ".$tipo);
+        $clase2->agregar();
+    }
+    elseif ($tipo === 'empaquetado'){
+        $clase = new Tipo_empaquetado($_POST["ID"]);
         $clase->borrar();
         $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Borrar","Borrado ".$tipo);
         $clase2->agregar();
