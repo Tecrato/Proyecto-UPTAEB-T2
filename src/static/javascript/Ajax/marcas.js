@@ -1,8 +1,9 @@
+let like = ""
 const MarcasTable = () => {
     $.ajax({
         url: "api_search",
         type: "POST",
-        data: { randomnautica: "marcas" },
+        data: { randomnautica: "marcas", like: like },
         success: function (response) {
             let template = "";
             let json = JSON.parse(response);
@@ -39,6 +40,11 @@ const MarcasTable = () => {
         },
     });
 };
+
 MarcasTable();
+let search_input_marcas = document.querySelector(".search_marcas")
+search_input_marcas.addEventListener("keyup", (e) => {
+    like = e.target.value
+    MarcasTable()
+})
 Registrar_U_M_C("FORM_MARCA", MarcasTable, ".marca_name", "Marca Creada correctamente");
-search_U_M_C(".search_marcas", "marcas", MarcasTable);

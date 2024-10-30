@@ -678,12 +678,13 @@
                     <li><a id="liMarcas" href="#">Marcas</a></li>
                     <li><a id="liUnidades" href="#">Unidades</a></li>
                     <li><a id="liCategorias" href="#">Categorias</a></li>
+                    <li><a id="liEmpaquetado" href="#">Empaquetado</a></li>
                 </ul>
                 <div class="">
                     <ul class="uk-switcher switcher-container uk-background-secondary uk-margin-medium-top uk-border-rounded">
                         <li class="invisible li_cont_m">
                             <form id="FORM_MARCA" method="post" class="uk-form-horizontal uk-margin-large uk-padding">
-                                <div class="uk-flex uk-flex-center uk-flex-middle uk-flex-middle uk-margin-medium-bottom" style="padding: 10px; background-color: #106733">
+                                <div class="uk-flex uk-flex-center uk-flex-middle uk-flex-middle uk-margin-medium-bottom" style="padding: 10px;">
                                     <h4 style="margin: 0px;">
                                         <span uk-icon="icon: tag; ratio: 2"></span>
                                         REGISTRAR MARCA
@@ -703,7 +704,7 @@
                         </li>
                         <li class="invisible li_cont_u">
                             <form id="FORM_UNIDAD" method="post" class="uk-form-horizontal uk-margin-large uk-padding">
-                                <div class="uk-flex uk-flex-center uk-flex-middle uk-margin-medium-bottom" style="padding: 10px; background-color: #106733">
+                                <div class="uk-flex uk-flex-center uk-flex-middle uk-margin-medium-bottom" style="padding: 10px;">
                                     <h4 style="margin: 0px;">
                                         <span uk-icon="icon: tag; ratio: 2"></span>
                                         REGISTRAR UNIDAD
@@ -724,7 +725,7 @@
                         </li>
                         <li class="invisible li_cont_c">
                             <form id="FORM_CATEGORIA" method="post" class="uk-form-horizontal uk-margin-large uk-padding">
-                                <div class="uk-flex uk-flex-center uk-flex-middle uk-margin-medium-bottom" style="padding: 10px; background-color: #106733">
+                                <div class="uk-flex uk-flex-center uk-flex-middle uk-margin-medium-bottom" style="padding: 10px;">
                                     <h4 style="margin: 0px;">
                                         <span uk-icon="icon: tag; ratio: 2"></span>
                                         REGISTRAR CATEGORIA
@@ -743,12 +744,33 @@
                                 </div>
                             </form>
                         </li>
+                        <li class="invisible li_cont_e">
+                            <form id="FORM_EMPAQUETADO" method="post" class="uk-form-horizontal uk-margin-large uk-padding">
+                                <div class="uk-flex uk-flex-center uk-flex-middle uk-margin-medium-bottom" style="padding: 10px;">
+                                    <h4 style="margin: 0px;">
+                                        <span uk-icon="icon: tag; ratio: 2"></span>
+                                        REGISTRAR EMPAQUETADO
+                                    </h4>
+                                </div>
+                                <div class="uk-margin">
+                                    <label class="uk-form-label" for="form-horizontal-text">Nombre</label>
+                                    <div class="uk-form-controls">
+                                        <input name="nombre" class="uk-input empaquetado_name" id="form-horizontal-text" type="text" placeholder="Nombre de Empaquetado" pattern="^([A-Zñ+áéó]|[a-zñáéó]){3,}( ([A-Zñ+áéó]|[a-zñáéó]){3,})?$" required>
+                                        <input type="text" name="tipo" value='empaquetado' style="display:none">
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="uk-flex uk-flex-center uk-margin-medium-top">
+                                    <button class="uk-button uk-button-default">Guardar</button>
+                                </div>
+                            </form>
+                        </li>
                     </ul>
 
 
                     <ul class="uk-switcher switcher-container uk-margin-medium-top uk-background-secondary uk-padding uk-border-rounded">
                         <li>
-                            <div class="uk-flex uk-flex-center uk-flex-middle" style="padding: 10px; background-color: rgb(0, 150, 64);">
+                            <div class="uk-flex uk-flex-center uk-flex-middle" style="padding: 10px;">
                                 <h4 style="margin: 0px;">
                                     <span uk-icon="icon: list; ratio: 2"></span>
                                     MARCAS REGISTRADAS
@@ -777,7 +799,7 @@
                             </div>
                         </li>
                         <li>
-                            <div class="uk-flex uk-flex-center uk-flex-middle" style="padding: 10px; background-color: rgb(0, 150, 64);">
+                            <div class="uk-flex uk-flex-center uk-flex-middle" style="padding: 10px;">
                                 <h4 style="margin: 0px;">
                                     <span uk-icon="icon: list; ratio: 2"></span>
                                     UNIDADES REGISTRADAS
@@ -785,7 +807,7 @@
                             </div>
                             <form class="uk-search uk-search-default uk-margin-top">
                                 <span uk-search-icon></span>
-                                <input class="uk-search-input" type="search" placeholder="Buscar" aria-label="">
+                                <input class="uk-search-input search_unidades" type="search" placeholder="Buscar" aria-label="">
                             </form>
                             <div class="uk-overflow-auto">
                                 <table class="uk-table uk-table-divider">
@@ -804,7 +826,7 @@
                             </div>
                         </li>
                         <li>
-                            <div class="uk-flex uk-flex-center uk-flex-middle" style="padding: 10px; background-color: rgb(0, 150, 64);">
+                            <div class="uk-flex uk-flex-center uk-flex-middle" style="padding: 10px;">
                                 <h4 style="margin: 0px;">
                                     <span uk-icon="icon: list; ratio: 2"></span>
                                     CATEGORIAS REGISTRADAS
@@ -812,7 +834,7 @@
                             </div>
                             <form class="uk-search uk-search-default uk-margin-top">
                                 <span uk-search-icon></span>
-                                <input class="uk-search-input" type="search" placeholder="Buscar" aria-label="">
+                                <input class="uk-search-input search_categorias" type="search" placeholder="Buscar" aria-label="">
                             </form>
                             <div class="uk-overflow-auto">
                                 <table class="uk-table uk-table-divider">
@@ -825,6 +847,33 @@
                                         </tr>
                                     </thead>
                                     <tbody id="TemplateCategoria">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="uk-flex uk-flex-center uk-flex-middle" style="padding: 10px;">
+                                <h4 style="margin: 0px;">
+                                    <span uk-icon="icon: list; ratio: 2"></span>
+                                    EMPAQUETADOS REGISTRADOS
+                                </h4>
+                            </div>
+                            <form class="uk-search uk-search-default uk-margin-top">
+                                <span uk-search-icon></span>
+                                <input class="uk-search-input search_empaquetado" type="search" placeholder="Buscar" aria-label="">
+                            </form>
+                            <div class="uk-overflow-auto">
+                                <table class="uk-table uk-table-divider">
+                                    <thead>
+                                        <tr>
+                                            <th class="uk-table-expand"></th>
+                                            <th class="uk-table-expand">#</th>
+                                            <th class="uk-table-expand">Nombre</th>
+                                            <th class="uk-table-expand">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="TemplateEmpaquetado">
 
                                     </tbody>
                                 </table>
@@ -905,6 +954,7 @@
 
 <script src="static/javascript/Ajax/categorias.js" defer></script>
 <script src="static/javascript/Ajax/marcas.js" defer></script>
+<script src="static/javascript/Ajax/empaquetados.js" defer></script>
 
 
 

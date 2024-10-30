@@ -1,8 +1,10 @@
+let like_categoria = ""
+
 const CategoriasTable = () => {
     $.ajax({
     url: "api_search",
     type: "POST",
-    data: { randomnautica: "categorias" },
+    data: { randomnautica: "categorias", like: like_categoria },
     success: function (response) {
       let template = "";
       let json = JSON.parse(response);
@@ -39,6 +41,11 @@ const CategoriasTable = () => {
     },
   });
 }
-
 CategoriasTable()
+
+let search_input_categorias = document.querySelector(".search_categorias")
+search_input_categorias.addEventListener("keyup", (e) => {
+    like_categoria = e.target.value
+    CategoriasTable()
+})
 Registrar_U_M_C("FORM_CATEGORIA",CategoriasTable,".categoria_name","Categoria Creada correctamente");

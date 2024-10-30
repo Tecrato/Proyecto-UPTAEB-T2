@@ -1,9 +1,11 @@
 // esta funcion se encargara de cargar las filas de las tablas de unidades
+
+let like_unidades = ""
 const UnidadesTable = () => {
   $.ajax({
     url: "api_search",
     type: "POST",
-    data: { randomnautica: "unidades" },
+    data: { randomnautica: "unidades", like: like_unidades },
     success: function (response) {
       let template = "";
       let json = JSON.parse(response);
@@ -42,4 +44,9 @@ const UnidadesTable = () => {
 };
 UnidadesTable();
 
+let search_input_unidades = document.querySelector(".search_unidades")
+search_input_unidades.addEventListener("keyup", (e) => {
+    like_unidades = e.target.value
+    UnidadesTable()
+})
 Registrar_U_M_C("FORM_UNIDAD", UnidadesTable, ".nombre_unidad", "Unidad Creada correctamente");

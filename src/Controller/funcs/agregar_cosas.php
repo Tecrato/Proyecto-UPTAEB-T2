@@ -22,6 +22,7 @@ use Shtechnologyx\Pt3\Model\Metodo_pago;
 use Shtechnologyx\Pt3\Model\Credito;
 use Shtechnologyx\Pt3\Model\Capital;
 use Shtechnologyx\Pt3\Model\Detalle_entrada;
+use Shtechnologyx\Pt3\Model\Tipo_empaquetado;
 
 $other_class = new Permisos(null, $_SESSION['user_id'], $_POST['tipo'], 'agregar');
 $result = $other_class->search();
@@ -102,6 +103,9 @@ elseif ($tipo === 'unidad') {
 elseif ($tipo === 'marca') {
     $clase = new Marca(null, $_POST["nombre"]);
 } 
+elseif ($tipo === 'empaquetado') {
+    $clase = new Tipo_empaquetado(null, $_POST["nombre"]);
+} 
 elseif ($tipo === 'categoria') {
     $clase = new Categoria(null, $_POST["nombre"]);
 } 
@@ -115,7 +119,7 @@ elseif ($tipo === 'capital') {
     $clase = new Capital(null, $_POST["descripcion"], $_POST["monto"]);
 } 
 elseif ($tipo === 'permiso') {
-    $clase = new Permiso(null, $_POST["id_usuario"], $_POST["tabla"], $_POST["permiso"]);
+    $clase = new Permisos(null, $_POST["id_usuario"], $_POST["tabla"], $_POST["permiso"]);
 }
 
 if ($tipo != 'producto' and $tipo != 'entrada') {

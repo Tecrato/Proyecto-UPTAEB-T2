@@ -31,7 +31,7 @@
     use Shtechnologyx\Pt3\Model\Registro_ventas;
     use Shtechnologyx\Pt3\Model\Credito;
     use Shtechnologyx\Pt3\Model\Backup;
-
+use Shtechnologyx\Pt3\Model\Tipo_empaquetado;
 
     if ($_POST['randomnautica'] == "caja") {
         $clase = new Caja(
@@ -73,8 +73,11 @@
     elseif ($_POST['randomnautica'] == "metodo_pago") {
         $clase = new Metodo_pago();
     }
-    
-
+    elseif ($_POST['randomnautica'] == "empaquetado") {
+        $clase = new Tipo_empaquetado(
+            like:(isset($_POST['like']) ? $_POST['like'] : '')
+        );
+    }
     elseif ($_POST['randomnautica'] === 'notificaciones'){
         // require('Model/Notificaciones.php');
         $clase = new Notificacion(
