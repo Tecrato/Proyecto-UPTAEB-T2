@@ -1,6 +1,5 @@
 <?php
     namespace Shtechnologyx\Pt3\Model;
-    use PDO;
 
     class Producto extends Db_base{
         private $id;

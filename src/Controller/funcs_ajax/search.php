@@ -1,7 +1,6 @@
 <?php
     // Con este archivo se buscan datos de ciertas maneras, dependiendo de lo que pase como "randomnautica"
     
-    use Shtechnologyx\Pt3\model\Db_base;
     use Shtechnologyx\Pt3\model\Usuario;
     include("Controller/funcs/verificar.php");
     use Shtechnologyx\Pt3\model\Permisos;
@@ -55,6 +54,9 @@ use Shtechnologyx\Pt3\Model\Tipo_empaquetado;
     elseif ($_POST['randomnautica'] == "credito") {
         $clase = new Credito(
             id:(isset($_POST['ID']) ? $_POST['ID'] : null),
+            id_rv:(isset($_POST['id_rv']) ? $_POST['id_rv'] : null),
+            like_nombre_cliente:(isset($_POST['like_nombre_cliente']) ? $_POST['like_nombre_cliente'] : ''),
+            like_nombre_usuario:(isset($_POST['like_nombre_usuario']) ? $_POST['like_nombre_usuario'] : ''),
         );
     }
     elseif ($_POST['randomnautica'] == "configuraciones") {
@@ -74,11 +76,12 @@ use Shtechnologyx\Pt3\Model\Tipo_empaquetado;
     }
     elseif ($_POST['randomnautica'] == "empaquetado") {
         $clase = new Tipo_empaquetado(
+            id:(isset($_POST['id']) ? $_POST['id'] : null),
+            nombre:(isset($_POST['nombre']) ? $_POST['nombre'] : null),
             like:(isset($_POST['like']) ? $_POST['like'] : '')
         );
     }
     elseif ($_POST['randomnautica'] === 'notificaciones'){
-        // require('Model/Notificaciones.php');
         $clase = new Notificacion(
             id:(isset($_POST['ID']) ? $_POST['ID'] : null),
             status:(isset($_POST['status']) ? $_POST['status'] : null),
@@ -105,11 +108,21 @@ use Shtechnologyx\Pt3\Model\Tipo_empaquetado;
     elseif ($_POST['randomnautica'] == "usuario") {
         $clase = new Usuario(
             id:(isset($_POST['ID']) ? $_POST['ID'] : null),
+            nombre:(isset($_POST['nombre']) ? $_POST['nombre'] : null),
+            correo:(isset($_POST['correo']) ? $_POST['correo'] : null),
             rol:(isset($_POST['rol']) ? $_POST['rol'] : null),
+            nombre_like:(isset($_POST['nombre_like']) ? $_POST['nombre_like'] : null),
+            correo_like:(isset($_POST['correo_like']) ? $_POST['correo_like'] : null),
         );
     }
     elseif ($_POST['randomnautica'] == "ventas") {
-        $clase = new Registro_ventas();
+        $clase = new Registro_ventas(
+            id:(isset($_POST['ID']) ? $_POST['ID'] : null),
+            id_cliente:(isset($_POST['id_cliente']) ? $_POST['id_cliente'] : null),
+            id_usuario:(isset($_POST['id_usuario']) ? $_POST['id_usuario'] : null),
+            like_nombre_cliente:(isset($_POST['like_nombre_cliente']) ? $_POST['like_nombre_cliente'] : ''),
+            like_nombre_usuario:(isset($_POST['like_nombre_usuario']) ? $_POST['like_nombre_usuario'] : ''),
+        );
     }
     elseif ($_SESSION['rol_num'] > 1 and count($result) <= 0) {
         echo json_encode(['status' => 'error','error'=>'Permiso '.$_POST['randomnautica'].' Error (bueno ps)']);
