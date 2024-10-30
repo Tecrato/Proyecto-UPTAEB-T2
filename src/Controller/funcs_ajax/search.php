@@ -35,6 +35,7 @@ use Shtechnologyx\Pt3\Model\Tipo_empaquetado;
     if ($_POST['randomnautica'] == "caja") {
         $clase = new Caja(
             id_usuario:(isset($_POST['id_usuario']) ? $_POST['id_usuario'] : null),
+            between_fecha:(isset($_POST['between_fecha']) ? $_POST['between_fecha'] : null),
         );
     }
     elseif ($_POST['randomnautica'] == "categorias") {
@@ -57,6 +58,7 @@ use Shtechnologyx\Pt3\Model\Tipo_empaquetado;
             id_rv:(isset($_POST['id_rv']) ? $_POST['id_rv'] : null),
             like_nombre_cliente:(isset($_POST['like_nombre_cliente']) ? $_POST['like_nombre_cliente'] : ''),
             like_nombre_usuario:(isset($_POST['like_nombre_usuario']) ? $_POST['like_nombre_usuario'] : ''),
+            between_fecha:(isset($_POST['between_fecha']) ? $_POST['between_fecha'] : null),
         );
     }
     elseif ($_POST['randomnautica'] == "configuraciones") {
@@ -122,6 +124,7 @@ use Shtechnologyx\Pt3\Model\Tipo_empaquetado;
             id_usuario:(isset($_POST['id_usuario']) ? $_POST['id_usuario'] : null),
             like_nombre_cliente:(isset($_POST['like_nombre_cliente']) ? $_POST['like_nombre_cliente'] : ''),
             like_nombre_usuario:(isset($_POST['like_nombre_usuario']) ? $_POST['like_nombre_usuario'] : ''),
+            between_fecha:(isset($_POST['between_fecha']) ? $_POST['between_fecha'] : null),
         );
     }
     elseif ($_SESSION['rol_num'] > 1 and count($result) <= 0) {
@@ -138,6 +141,7 @@ use Shtechnologyx\Pt3\Model\Tipo_empaquetado;
             fecha_compra:(isset($_POST['fecha_compra']) ? $_POST['fecha_compra'] : null),
             codigo:(isset($_POST['codigo']) ? $_POST['codigo'] : null),
             detalles:(isset($_POST['detalles']) ? $_POST['detalles'] : null),
+            between_fecha:(isset($_POST['between_fecha']) ? $_POST['between_fecha'] : null),
         );
     }
     elseif ($_POST['randomnautica'] == "detalles_entradas") {

@@ -10,8 +10,9 @@
         private $active;
         private $like_nombre_cliente;
         private $like_nombre_usuario;
+        private $between_fecha;
 
-        function __construct($id=null, $monto_final=null,$id_cliente=null,$id_usuario=null,$id_caja=null,$IVA=null,$active=null,$like_nombre_cliente=null,$like_nombre_usuario=null){
+        function __construct($id=null, $monto_final=null,$id_cliente=null,$id_usuario=null,$id_caja=null,$IVA=null,$active=null,$like_nombre_cliente=null,$like_nombre_usuario=null, $between_fecha=null){
             $this->id = $id;
             $this->monto_final = $monto_final;
             $this->id_cliente = $id_cliente;
@@ -21,6 +22,7 @@
             $this->active = $active;
             $this->like_nombre_cliente = $like_nombre_cliente;
             $this->like_nombre_usuario = $like_nombre_usuario;
+            $this->between_fecha = $between_fecha;
             Db_base::__construct();
             $this->tabla = "registro_ventas";
             $this->add_variables([
@@ -35,6 +37,9 @@
             $this->add_variables_like([
                 "b.nombre" => $this->like_nombre_cliente,
                 "d.nombre" => $this->like_nombre_usuario
+            ]);
+            $this->add_variables_interval([
+                "a.fecha" => $this->between_fecha
             ]);
             $this->joins = "
                 INNER JOIN clientes b ON b.id = a.id_cliente

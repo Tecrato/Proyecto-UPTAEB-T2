@@ -10,8 +10,9 @@
        private $status;
        private $like_nombre_cliente;
        private $like_nombre_usuario;
+       private $between_fecha;
        
-       function __construct($id=null,$id_rv=null,$fecha_limite=null,$monto_final=null,$status=null,$like_nombre_cliente=null,$like_nombre_usuario=null){
+       function __construct($id=null,$id_rv=null,$fecha_limite=null,$monto_final=null,$status=null,$like_nombre_cliente=null,$like_nombre_usuario=null, $between_fecha=null){
             $this->id = $id;
             $this->id_rv = $id_rv;
             $this->fecha_limite = $fecha_limite;
@@ -19,6 +20,7 @@
             $this->status = $status;
             $this->like_nombre_cliente = $like_nombre_cliente;
             $this->like_nombre_usuario = $like_nombre_usuario;
+            $this->between_fecha = $between_fecha;
             Db_base::__construct();
             $this->tabla = "credito";
             $this->add_variables([
@@ -31,6 +33,9 @@
             $this->add_variables_like([
                 "c.nombre" => $this->like_nombre_cliente,
                 "u.nombre" => $this->like_nombre_usuario
+            ]);
+            $this->add_variables_interval([
+                "b.fecha" => $this->between_fecha
             ]);
             $this->select_query = "
             a.id,
@@ -48,7 +53,6 @@
             INNER JOIN caja j ON b.id_caja = j.id
             INNER JOIN usuarios u ON j.id_usuario = u.id
             INNER JOIN clientes c ON b.id_cliente = c.id
-            
             ";
         }
 

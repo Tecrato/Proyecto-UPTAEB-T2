@@ -678,7 +678,7 @@ const targetFact = (num) => {
   $.ajax({
     url: "api_search",
     type: "POST",
-    data: { randomnautica: "ventas", n: pag_facturas, limite: 9 },
+    data: { randomnautica: "ventas", n: pag_facturas, limite: 9},// , between_fecha: {inicio: fecha_inicio, fin: fecha_fin}},
     success: function (response) {
       console.log(response)
       let json = JSON.parse(response)

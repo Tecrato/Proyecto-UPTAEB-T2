@@ -12,6 +12,9 @@
         // $this->add_variables_like([
         //     "nombre" => $this->like
         // ]);
+        // $this->add_variables_interval([
+        //     "a.fecha" => $this->between_fecha
+        // ]);
         // $this->tabla = 'productos';
         // $this->select_query = "
         //     a.id,
@@ -42,6 +45,7 @@
         public $tabla;
         public $joins;
         public $select_query;
+        public $variables_interval;
         public function __construct($id=null, $tabla=""){
             $this->id = $id;
             $this->variables = array();
@@ -49,6 +53,7 @@
             $this->variables_like = array();
             $this->joins = "";
             $this->select_query = " a.* ";
+            $this->variables_interval = array();
             Conexion::__construct();
         }
         public function add_variables($variables) : void{
@@ -66,6 +71,15 @@
                 }
                 $this->variables_like[$key] = $value;
             }
+        }
+        public function add_variables_interval($variables) : void{
+            foreach ($variables as $key => $value){
+                if ($value == null){
+                    continue;
+                }
+                array_push($this->variables_interval, $value);
+            }
+            
         }
         public function agregar() : int{
             $sql = "INSERT INTO $this->tabla( ";
@@ -109,8 +123,9 @@
             foreach ($this->variables_like as $key => $value){
                 $query .= ' AND '.$key.' LIKE :alike'.substr($key,2);
             }
-
-
+            foreach ($this->variables_interval as $key => $value){
+                $query .= ' AND '.$key.' BETWEEN :'.substr($key,2).' AND :'.substr($key,2).'2';
+            }
             $query .= " ORDER BY $order ";
             $query .= " LIMIT :l OFFSET :n ";
             
@@ -126,7 +141,10 @@
                 $value2 = '%'.$value.'%';
                 $consulta->bindParam(':alike'.substr($key,2),$value2);
             }
-
+            foreach ($this->variables_interval as $key => $value){
+                $consulta->bindParam(':'.substr($key,2),$value["inicio"]);
+                $consulta->bindParam(':'.substr($key,2).'2',$value["fin"]);
+            }
             $n = $n*$limite;
             $consulta->bindParam(':l',$limite, PDO::PARAM_INT);
             $consulta->bindParam(':n',$n, PDO::PARAM_INT);
@@ -143,7 +161,9 @@
             foreach ($this->variables_like as $key => $value){
                 $query .= ' AND '.$key.' LIKE :alike'.substr($key,2);
             }
-
+            foreach ($this->variables_interval as $key => $value){
+                $query .= ' AND '.$key.' BETWEEN :'.substr($key,2).' AND :'.substr($key,2).'2';
+            }
             
             // Creamos la consulta
             $consulta = $this->conn->prepare($query);
@@ -156,7 +176,10 @@
                 $value2 = '%'.$value.'%';
                 $consulta->bindParam(':alike'.substr($key,2),$value2);
             }
-
+            foreach ($this->variables_interval as $key => $value){
+                $consulta->bindParam(':'.substr($key,2),$value["inicio"]);
+                $consulta->bindParam(':'.substr($key,2).'2',$value["fin"]);
+            }
             $consulta->execute();
             return $consulta->fetch()['total'];
         }

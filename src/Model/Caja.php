@@ -2,19 +2,47 @@
     namespace Shtechnologyx\Pt3\Model;
     use PDO;
 
-    class Caja extends Conexion{
+    class Caja extends Db_base{
 
         private $id;
         private $id_usuario;
         private $monto_inicial;
         private $estado;
+        private $between_fecha;
 
-        function __construct($id = null, $id_usuario = null, $monto_inicial = null, $estado = null){
-            Conexion::__construct();
+        function __construct($id = null, $id_usuario = null, $monto_inicial = null, $estado = null, $between_fecha = null){
             $this->id = $id;
             $this->id_usuario = $id_usuario;
             $this->monto_inicial = $monto_inicial;
             $this->estado = $estado;
+            $this->between_fecha = $between_fecha;
+            Db_base::__construct();
+            $this->tabla = "caja";
+            $this->add_variables([
+                "a.id" => $this->id,
+                "a.id_usuario" => $this->id_usuario,
+                "a.monto_inicial" => $this->monto_inicial,
+                "a.estado" => $this->estado,
+            ]);
+            $this->add_variables_interval([
+                "a.fecha" => $this->between_fecha
+            ]);
+            $this->select_query = "
+                a.id,
+                a.id_usuario,
+                b.nombre nombre_usuario,
+                a.monto_inicial,
+                a.monto_final,
+                a.estado,
+                a.fecha,
+                a.fecha_cierre,
+                a.total_ventas,
+                (SELECT SUM(rv.monto_final) FROM registro_ventas rv WHERE rv.id_caja=a.id) as total_cierre,
+                a.monto_credito
+            ";
+            $this->joins = "
+                INNER JOIN usuarios b ON b.id = a.id_usuario
+            ";
         }
 
         function abrir(){
@@ -54,61 +82,6 @@
 
         function get_estado(){
             return $this->estado;
-        }
-
-        function search($n = 0, $limite = 100, $order = ' id DESC '){
-            $query = "SELECT 
-                            a.id, 
-                            b.nombre, 
-                            a.monto_final, 
-                            a.monto_inicial, 
-                            a.estado, 
-                            a.fecha,
-                            a.fecha_cierre,
-                            a.total_ventas as total_ventas,
-                            (SELECT SUM(rv.monto_final) FROM registro_ventas rv WHERE rv.id_caja=a.id) as total_cierre,
-                            a.monto_credito as monto_credito
-                            FROM caja as a 
-                            INNER JOIN usuarios as b ON b.id = a.id_usuario
-                            WHERE 1";
-
-            $lista = [];
-
-            if ($this->id != null) {
-                array_push($lista, 'id');
-            }
-            if ($this->id_usuario != null) {
-                array_push($lista, 'id_usuario');
-            }
-            if ($this->estado != null) {
-                array_push($lista, 'estado');
-            }
-
-            if ($lista) {
-                foreach ($lista as $e) {
-                    $query .= ' AND a.' . $e . ' = :' . $e;
-                }
-            }
-
-            $n = $n * $limite;
-            $query .= " ORDER BY $order LIMIT :l OFFSET :n";
-
-            $consulta = $this->conn->prepare($query);
-            $consulta->bindParam(':l', $limite, PDO::PARAM_INT);
-            $consulta->bindParam(':n', $n, PDO::PARAM_INT);
-
-            if ($this->id != null) {
-                $consulta->bindParam(':id', $this->id, PDO::PARAM_INT);
-            }
-            if ($this->id_usuario != null) {
-                $consulta->bindParam(':id_usuario', $this->id_usuario, PDO::PARAM_INT);
-            }
-            if ($this->estado != null) {
-                $consulta->bindParam(':estado', $this->estado, PDO::PARAM_BOOL);
-            }
-
-            $consulta->execute();
-            return $consulta->fetchAll();
         }
 
         function cerrar(){
@@ -157,9 +130,4 @@
             $consulta->execute();
             return $consulta->fetchAll();
         }
-
-        function COUNT(){
-            return $this->conn->query("SELECT COUNT(*) 'total' FROM caja")->fetch()['total'];
-        }
-
 }

@@ -63,7 +63,7 @@ function cargarCajas(page) {
             json.lista.forEach(element => {
                 template += `<tr>
                                 <td>${element.id}</td>
-                                <td>${element.nombre}</td>
+                                <td>${element.nombre_usuario}</td>
                                 <td>${fecha(element.fecha)}</td>
                                 <td>${element.monto_inicial}</td>
                                 <td>${hora(element.fecha)}</td>
