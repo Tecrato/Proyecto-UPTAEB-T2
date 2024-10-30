@@ -2,7 +2,7 @@
     namespace Shtechnologyx\Pt3\Model;
     use PDO;
     use Shtechnologyx\Pt3\Model\Conexion;
-    class Db_base extends Conexion{
+    abstract class Db_base extends Conexion{
         // Ejemplo
         // $this->add_variables([
         //      "id" => $this->id,
@@ -51,7 +51,7 @@
             $this->select_query = " a.* ";
             Conexion::__construct();
         }
-        public function add_variables($variables){
+        public function add_variables($variables) : void{
             foreach ($variables as $key => $value){
                 if ($value == null){
                     continue;
@@ -59,7 +59,7 @@
                 $this->variables[$key] = $value;
             }
         }
-        public function add_variables_like($variables){
+        public function add_variables_like($variables) : void{
             foreach ($variables as $key => $value){
                 if ($value == null){
                     continue;
@@ -67,7 +67,7 @@
                 $this->variables_like[$key] = $value;
             }
         }
-        public function agregar(){
+        public function agregar() : int{
             $sql = "INSERT INTO $this->tabla( ";
             $sql .= implode(", ", array_keys($this->variables));
             $sql .= " ) VALUES(:";
@@ -78,14 +78,14 @@
             $query->execute($this->variables);
             return $this->conn->lastInsertId();
         }
-        public function borrar(){
+        public function borrar() : void {
             $query = $this->conn->prepare("DELETE FROM $this->tabla WHERE ID=:id");
             $query->bindParam(':id',$this->variables['id'], PDO::PARAM_INT);
             $query->execute();
         }
-        public function actualizar(){
+        public function actualizar() : void {
             if (!isset($this->variables['id']) or $this->variables['id'] == null){
-                return false;
+                return;
             }
             $sql = "UPDATE $this->tabla SET ";
             foreach ($this->variables as $key => $value){
@@ -99,7 +99,7 @@
             $query = $this->conn->prepare($sql);
             $query->execute($this->variables);
         }
-        public function search($n=0,$limite=9, $order=' id ASC '){
+        public function search($n=0,$limite=9, $order=' id ASC ') : Array{
             $query = "SELECT $this->select_query FROM $this->tabla AS a $this->joins";
     
             $query .= " WHERE 1 ";
@@ -134,7 +134,7 @@
             $consulta->execute();
             return $consulta->fetchAll();
         }
-        public function COUNT(){
+        public function COUNT() : int{
             $query = "SELECT COUNT(*) as 'total' FROM $this->tabla AS a $this->joins WHERE 1";
             
             foreach ($this->variables as $key => $value){

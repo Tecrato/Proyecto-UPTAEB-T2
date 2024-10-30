@@ -1,8 +1,7 @@
 <?php
     // archivo hecho para imprimir si la contraseña coincide con el hash de la base de datos, la contraseña es traida por metodo GET
     
-    require('../../Model/Conexion.php');
-    require('../../Model/Usuarios.php');
+    use \Model\Usuario;
 
     $c = new Usuario(null,null,$correo); // Llamamos al modelos y se busca el usuario
     $result = $c->search();

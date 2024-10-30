@@ -680,6 +680,7 @@ const targetFact = (num) => {
     type: "POST",
     data: { randomnautica: "ventas", n: pag_facturas, limite: 9 },
     success: function (response) {
+      console.log(response)
       let json = JSON.parse(response)
       total_facturas = json.total
       let template = ""

@@ -1,26 +1,47 @@
 <?php
     namespace Shtechnologyx\Pt3\Model;
-    use PDO;
-	class Registro_ventas extends Conexion {
+	class Registro_ventas extends Db_base{
         private $id;
         private $monto_final;
         private $id_cliente;
+        private $id_usuario;
         private $id_caja;
         private $IVA;
         private $active;
+        private $like_nombre_cliente;
+        private $like_nombre_usuario;
 
-        function __construct($id=null, $monto_final=null,$id_cliente=null,$id_caja=null,$IVA=null,$active=null){
+        function __construct($id=null, $monto_final=null,$id_cliente=null,$id_usuario=null,$id_caja=null,$IVA=null,$active=null,$like_nombre_cliente=null,$like_nombre_usuario=null){
             $this->id = $id;
             $this->monto_final = $monto_final;
             $this->id_cliente = $id_cliente;
+            $this->id_usuario = $id_usuario;
             $this->id_caja = $id_caja;
             $this->IVA = $IVA;
             $this->active = $active;
-            Conexion::__construct();
-
-        }
-		function search($n=0,$limite=9,$order='id DESC'){
-			$query = "SELECT 
+            $this->like_nombre_cliente = $like_nombre_cliente;
+            $this->like_nombre_usuario = $like_nombre_usuario;
+            Db_base::__construct();
+            $this->tabla = "registro_ventas";
+            $this->add_variables([
+                "a.id" => $this->id,
+                "a.monto_final" => $this->monto_final,
+                "a.id_cliente" => $this->id_cliente,
+                "a.id_caja" => $this->id_caja,
+                "a.IVA" => $this->IVA,
+                "a.active" => $this->active,
+                "c.id_usuario" => $this->id_usuario
+            ]);
+            $this->add_variables_like([
+                "b.nombre" => $this->like_nombre_cliente,
+                "d.nombre" => $this->like_nombre_usuario
+            ]);
+            $this->joins = "
+                INNER JOIN clientes b ON b.id = a.id_cliente
+                INNER JOIN caja c ON c.id = a.id_caja
+                INNER JOIN usuarios d ON d.id = c.id_usuario
+            ";
+            $this->select_query = "
             a.id,
             a.monto_final,
             a.fecha,
@@ -32,44 +53,9 @@
             a.IVA,
             c.id id_caja,
             a.active
-            FROM registro_ventas a 
-            INNER JOIN clientes b ON b.id = a.id_cliente
-            INNER JOIN caja c ON c.id = a.id_caja
-            INNER JOIN usuarios d ON d.id = c.id_usuario
-            WHERE 1";
-
-            $lista = [];
-            
-			if ($this->id != null){
-				array_push($lista,'id');
-			}
-			if ($this->active != null){
-				array_push($lista, 'active');
-			}
-			if ($lista) {
-				foreach ($lista as $e){
-					$query .= ' AND a.'.$e.'=:'.$e;
-				}
-			}
-
-			$query .= " ORDER BY a.$order  LIMIT :l OFFSET :n";
-            $query = $this->conn->prepare($query);
-
-            $n = $n*$limite;
-            $query->bindParam(':l',$limite, PDO::PARAM_INT);
-            $query->bindParam(':n',$n, PDO::PARAM_INT);
-
-            if ($this->id != null){
-                $query->bindParam(':id',$this->id, PDO::PARAM_INT);
-            }
-            if ($this->active != null){
-                $query->bindParam(':active',$this->active, PDO::PARAM_INT);
-            }
-
-            $query->execute();
-            return $query->fetchAll();
-		}
-        function agregar($datos, $pagos, $credito, $fecha_inicio, $fecha_vencimiento,$monto_dolar) {
+            ";
+        }
+        public function agregar_venta($datos, $pagos, $credito, $fecha_inicio, $fecha_vencimiento,$monto_dolar) : int {
             try {
 
                 $this->conn->beginTransaction();
@@ -123,13 +109,6 @@
 			$query->bindParam(':id',$this->id, PDO::PARAM_INT);
 
 			$query->execute();
-        }
-
-
-        function COUNT(){
-            $query = $this->conn->prepare("SELECT COUNT(*) as 'total' FROM registro_ventas");
-            $query->execute();
-            return $query->fetch()['total'];
         }
 	}
 ?>

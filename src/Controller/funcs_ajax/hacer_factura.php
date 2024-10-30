@@ -22,7 +22,7 @@
         die();
 	}
 	$clase2 = new Registro_ventas(null,$var->monto_final,$var->id_cliente, $ultima_caja['0'],$var->IVA,$var->active);
-	$result = $clase2->agregar($var->detalles, $var->pagos, $var->credito, $var->fecha_inicio_credito, $var->fecha_cierre_credito,$var->monto_dolar);
+	$result = $clase2->agregar_venta($var->detalles, $var->pagos, $var->credito, $var->fecha_inicio_credito, $var->fecha_cierre_credito,$var->monto_dolar);
 
 	$clase3 = new Bitacora(null,$_SESSION['user_id'],"Caja","Cerrar","Caja cerrada");
     $clase3->agregar();

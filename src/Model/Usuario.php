@@ -1,8 +1,7 @@
 <?php
     namespace Shtechnologyx\Pt3\Model;
-    use PDO;
 
-    class Usuario extends Conexion{
+    class Usuario extends Db_base{
         private $id;
         private $nombre;
         private $correo;
@@ -10,9 +9,11 @@
         private $rol;
         private $semilla;
         private $sesion_id;
+        private $nombre_like;
+        private $correo_like;
 
 
-        function __construct($id=null, $nombre=null,$correo=null,$hash=null,$rol=null,$semilla=null,$sesion_id=null){           
+        function __construct($id=null, $nombre=null,$correo=null,$hash=null,$rol=null,$semilla=null,$sesion_id=null,$nombre_like=null,$correo_like=null){
             $this->id = $id;
             $this->nombre = $nombre;
             $this->correo = $correo;
@@ -20,88 +21,23 @@
             $this->rol = $rol;
             $this->semilla = $semilla;
             $this->sesion_id = $sesion_id;
-            Conexion::__construct();
-
+            $this->nombre_like = $nombre_like;
+            $this->correo_like = $correo_like;
+            Db_base::__construct();
+            $this->tabla = "usuarios";
+            $this->add_variables([
+                "a.id" => $this->id,
+                "a.nombre" => $this->nombre,
+                "a.correo" => $this->correo,
+                "a.rol" => $this->rol,
+                "a.semilla" => $this->semilla,
+            ]);
+            $this->add_variables_like([
+                "a.nombre" => $this->nombre_like,
+                "a.correo" => $this->correo_like,
+            ]);
         }
 
-        function agregar(){
-            $query = $this->conn->prepare("INSERT INTO usuarios (nombre, correo, hash, rol,semilla) VALUES(:nombre, :correo, :hash, :rol,:semilla)");
-            
-            $query->bindParam(':nombre',$this->nombre, PDO::PARAM_STR);
-            $query->bindParam(':correo',$this->correo, PDO::PARAM_STR);
-            $query->bindParam(':hash',$this->hash, PDO::PARAM_STR);
-            $query->bindParam(':rol',$this->rol, PDO::PARAM_STR);
-            $query->bindParam(':semilla',$this->semilla, PDO::PARAM_STR);
-            $query->execute();
-        }
-
-
-        function borrar() {
-
-            $query = $this->conn->prepare("DELETE FROM usuarios WHERE ID=:id");
-            
-            $query->execute([':id'=>$this->id]);
-        }
-        function search($n=0,$limite=9){
-            // Al igual que la clase anterior, puede buscar segun muchos valores o solo algunos
-            $query = "SELECT * FROM usuarios WHERE 1";
-   
-			$lista = [];
-
-            if ($this->id){
-            	array_push($lista,'id');
-            }
-            if ($this->correo != null){
-                array_push($lista, 'correo');
-            }
-            if ($this->rol != null){
-                array_push($lista, 'rol');
-            }
-            if ($lista) {
-            	foreach ($lista as $e){
-            		$query .= ' AND '.$e.'=:'.$e;
-            	}
-            }
-            $n = $n*$limite;
-            
-
-            $query = $query . " LIMIT :l OFFSET :n";
-            $consulta = $this->conn->prepare($query);
-
-
-            $consulta->bindParam(':l',$limite, PDO::PARAM_INT);
-            $consulta->bindParam(':n',$n, PDO::PARAM_INT);
-            
-            if ($this->id != null){
-                $consulta->bindParam(':id',$this->id, PDO::PARAM_INT);
-            }
-            if ($this->correo != null){
-                $consulta->bindParam(':correo',$this->correo, PDO::PARAM_STR);
-            }
-            if ($this->rol != null){
-                $consulta->bindParam(':rol',$this->rol, PDO::PARAM_STR);
-            }
-            $consulta->execute();
-            return $consulta->fetchAll();
-        }
-        function actualizar(){
-            $query = 'UPDATE usuarios SET nombre=:nombre, correo=:correo, hash=:pass';
-            if ($this->rol) {
-                $query .= ', rol=:rol';
-            }
-            $query .= " WHERE id=:id";
-            $query = $this->conn->prepare($query);
-            
-            $query->bindParam(':nombre',$this->nombre);
-            $query->bindParam(':correo',$this->correo);
-            $query->bindParam('pass',$this->hash);
-            $query->bindParam(':id',$this->id);
-            if ($this->rol) {
-                $query->bindParam(':rol',$this->rol);
-            }
-
-            $query->execute(); 
-        }
         public function login(){
             $query = $this->conn->prepare('UPDATE usuarios SET active=1 , sesion_id=:sesion_id WHERE id=:id');
             $query->bindParam(':id',$this->id);
@@ -112,9 +48,6 @@
             $query = $this->conn->prepare('UPDATE usuarios SET active=0 WHERE id=:id');
             $query->bindParam(':id',$this->id);
             $query->execute(); 
-        }
-        function COUNT(){
-            return $this->conn->query("SELECT COUNT(*) 'total' FROM usuarios")->fetch()['total'];
         }
         function verificar($contraseña){
             $query = "SELECT * FROM usuarios WHERE correo=:correo";
