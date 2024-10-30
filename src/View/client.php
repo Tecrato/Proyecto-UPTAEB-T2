@@ -70,13 +70,13 @@
                         <div class="uk-width-1-2@s">
                             <label class="uk-form-label">Nombre</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input inputNameUpdateClient" type="text" placeholder="Nombre" name="nombre" aria-label="100" pattern="^([A-Zñ+áéó]|[a-zñáéó]){3,}( ([A-Zñ+áéó]|[a-zñáéó]){3,})?$" required>
+                                <input class="uk-input inputNameUpdateClient" type="text" placeholder="Nombre" name="nombre" aria-label="100" required>
                             </div>
                         </div>
                         <div class="uk-width-1-2@s">
                             <label class="uk-form-label">Apellido</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input inputLastNameUpdateClient" type="text" placeholder="Apellido" name="apellido" aria-label="50" pattern="([A-Zñ+áéó]|[a-zñáéó]){3,}( ([A-Zñ+áéó]|[a-zñáéó]){3,})?$" required>
+                                <input class="uk-input inputLastNameUpdateClient" type="text" placeholder="Apellido" name="apellido" aria-label="50" required>
                             </div>
                         </div>
                         <div class="uk-width-1-4@s">
@@ -92,13 +92,13 @@
                         <div class="uk-width-1-4@s">
                             <label class="uk-form-label">Nro Documento</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input inputNroDcUpdateClient" type="text" placeholder="cedula" name="cedula" aria-label="50" pattern="^([\d]{1,2})\.?([\d]{3})\.?([\d]{3})$" required>
+                                <input class="uk-input inputNroDcUpdateClient" type="text" placeholder="cedula" name="cedula" aria-label="50" required>
                             </div>
                         </div>
                         <div class="uk-width-1-2@s">
                             <label class="uk-form-label">Telefono</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input inputTLFNOUpdateClient" type="tel" id="tlfno_client" name="telefono" aria-label="50" pattern="^([\+\d]{2,4} ?)?([\d]{4}) ?\-?([\d]{3}) ?\-?([\d]{4})$" required>
+                                <input class="uk-input inputTLFNOUpdateClient" type="tel" id="tlfno_client" name="telefono" aria-label="50" required>
                             </div>
                         </div>
                         <div class="uk-width-1-1@s">
@@ -107,6 +107,7 @@
                                 <input class="uk-input inputDirUpdateClient" type="text" placeholder="Dirección" name="direccion" aria-label="50" minlength="5" maxlength="200" required>
                             </div>
                         </div>
+                        <div id="messageError" style="color: red;"></div>
                         <input type="submit" id="subirC" style="display:none" required>
                     </form>
                 </div>

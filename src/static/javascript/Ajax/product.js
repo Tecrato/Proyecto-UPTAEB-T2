@@ -580,7 +580,7 @@ document.querySelector(".btn-modal-register").addEventListener("click", () => {
   $("#formAggProduct").trigger("reset");
   document.querySelector(".title_modal_reg_upd").textContent =
     "REGISTRAR PRODUCTO";
-  cargarCategoriaRegProduct();
+  cargarCategoriaRegProduct();formAggProduct
   cargarUnidadesRegProduct();
   cargarMarcasRegProduct();
 });
@@ -589,47 +589,62 @@ let formAggProduct = document.getElementById("formAggProduct");
 formAggProduct.addEventListener("submit", (e) => {
   e.preventDefault();
   let url;
-  if (val == false) {
-    url = "api_agregar";
+  const datosFormulario = {
+    nombre: document.getElementsByClassName('NameUpdateProduct').value,
+    apellido: document.getElementsByClassName('apellido').value,
+    codigo: document.getElementsByClassName('CodeUpdateProduct').value,
+    valorUnidad: document.getElementsByClassName('ValorUnidadUpdateProduct').value
+  };
+  const { resultados, errores } = validarFormulario(datosFormulario);
+  const messageError = document.getElementsById('messageError');
+  messageError.innerHTML = ''; 
+  if (errores.length > 0) {
+      messageError.innerHTML = errores.join('<br>');
+      console.log(errores)
   } else {
-    url = "api_editar";
+    
+    if (val == false) {
+      url = "api_agregar";
+    } else {
+      url = "api_editar";
+    }
+    //aqui instanciamos el objeto formData y como parametro, le pasamos el formulario
+    //el formData es un objeto que actua con encapsulamiento de datos de los form
+    let formDataProduct = new FormData(formAggProduct)
+    // formDataProduct.set("precio_venta",document.querySelector(".PVUpdateProduct").value)
+    //hacemos la peticion ajax
+    $.ajax({
+      url: url,
+      type: "POST",
+      data: formDataProduct,
+      processData: false,
+      contentType: false,
+      success: function (response) {
+        console.log(response);
+        if (val == false) {
+          UIkit.notification.closeAll();
+          UIkit.notification({
+            message:
+              "<span uk-icon='icon: check'></span> Producto creado correctamente ",
+            status: "success",
+            pos: "bottom-right",
+          });
+        } else {
+          UIkit.notification.closeAll();
+          UIkit.notification({
+            message:
+              "<span uk-icon='icon: check'></span> Producto Modificado correctamente ",
+            status: "success",
+            pos: "bottom-right",
+            timeout: 2000
+          });
+        }
+        //en la respuesta le mostramos un mensaje de producto creado correctamente
+  
+        cargarTargetProduct(page_productos);
+      },
+    });
   }
-  //aqui instanciamos el objeto formData y como parametro, le pasamos el formulario
-  //el formData es un objeto que actua con encapsulamiento de datos de los form
-  let formDataProduct = new FormData(formAggProduct)
-  // formDataProduct.set("precio_venta",document.querySelector(".PVUpdateProduct").value)
-  //hacemos la peticion ajax
-  $.ajax({
-    url: url,
-    type: "POST",
-    data: formDataProduct,
-    processData: false,
-    contentType: false,
-    success: function (response) {
-      console.log(response);
-      if (val == false) {
-        UIkit.notification.closeAll();
-        UIkit.notification({
-          message:
-            "<span uk-icon='icon: check'></span> Producto creado correctamente ",
-          status: "success",
-          pos: "bottom-right",
-        });
-      } else {
-        UIkit.notification.closeAll();
-        UIkit.notification({
-          message:
-            "<span uk-icon='icon: check'></span> Producto Modificado correctamente ",
-          status: "success",
-          pos: "bottom-right",
-          timeout: 2000
-        });
-      }
-      //en la respuesta le mostramos un mensaje de producto creado correctamente
-
-      cargarTargetProduct(page_productos);
-    },
-  });
 });
 
 //funcion para los filtros de productos

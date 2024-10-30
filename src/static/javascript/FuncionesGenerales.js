@@ -2,7 +2,36 @@ window.addEventListener("load", () => {
   // document.querySelector(".preloader_container").classList.toggle("invisible")
   document.querySelector(".preloader_container").remove()
 })
+// VALIDACIONES DE INPUTS
+const validaciones = {
+  nombre: /^([A-Zñáéó]|[a-zñáéó]){3,}( ([A-Zñáéó]|[a-zñáéó]){3,})?$/,
+  apellido: /^([A-Zñáéó]|[a-zñáéó]){3,}( ([A-Zñáéó]|[a-zñáéó]){3,})?$/,
+  codigo: /^\d{13}$/,
+  valorUnidad: /^([\d]){1,4}$/,
+  cedula:/^([\d]{1,2})\.?([\d]{3})\.?([\d]{3})$/,
+  telefono:/^([\+\d]{2,4} ?)?([\d]{4}) ?\-?([\d]{3}) ?\-?([\d]{4})$/,
+  razonSocial:/([A-Zñ+áéó]|[a-zñáéó]){3,}( ([A-Zñ+áéó]|[a-zñáéó]){3,})?$/,
+  correo:/^([A-Za-z0-9\.\_]+)@([\w]{3,8})\.([\w]{2,3})(\.[\w]{2,4})?(\.[\w]{2,3})?$/,
+  
+};
+function validarFormulario(datos) {
+const resultados = {};
+const errores = [];
 
+for (const campo in datos) {
+if (validaciones.hasOwnProperty(campo)) {
+  const regex = validaciones[campo];
+  const esValido = regex.test(datos[campo]);
+  resultados[campo] = esValido;
+  
+  if (!esValido) {
+      errores.push(`El campo ${campo} no es válido.`);
+  }
+}
+}
+
+return { resultados, errores };
+}
 function cambiar_pagina_ajax(dir, func, limite = 9, page = 0, total = 0) {
   limite = limite
   if (dir == 'next' && page < Math.ceil(total / limite) - 1) {

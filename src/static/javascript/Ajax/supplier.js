@@ -26,52 +26,65 @@ function insertANDupdateCLient_proveedor(FORM, NUMBER, TABLE, TYPE) {
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-
-    if (insertOrUpdate == false) {
-      url = "api_agregar"
+    const datosFormulario = {
+      nombre: document.getElementsByClassName('nameProvUpdate').value,
+      razonSocial: document.getElementsByClassName('Razon_SocialProvUpdate').value,
+      cedula: document.getElementsByClassName('Nro_DocumentoProvUpdate').value,
+      correo: document.getElementsByClassName('emailProvUpdate').value
+    };
+    const { resultados, errores } = validarFormulario(datosFormulario);
+    const messageError = document.getElementsById('messageError');
+    messageError.innerHTML = ''; 
+    if (errores.length > 0) {
+        messageError.innerHTML = errores.join('<br>');
+        console.log(errores)
     } else {
-      url = "api_editar"
+      if (insertOrUpdate == false) {
+        url = "api_agregar"
+      } else {
+        url = "api_editar"
+      }
+
+      let countryData = iti.getSelectedCountryData();
+      let fullNumber = iti.getNumber();
+      let data = new FormData(form);
+      data.append("TLFNO", fullNumber);
+      $.ajax({
+        url: url,
+        type: "POST",
+        processData: false,
+        contentType: false,
+        data: data,
+        success: (response) => {
+          (response);
+          let result = TABLE();
+          if (insertOrUpdate == false) {
+            UIkit.notification.closeAll();
+            UIkit.notification({
+              message: `<span uk-icon='icon: check'>${TYPE} Registrado correctamente</span>`,
+              status: "success",
+              pos: "bottom-right",
+            });
+          } else {
+            UIkit.notification.closeAll();
+            UIkit.notification({
+              message: `<span uk-icon='icon: check'>${TYPE} Modificado correctamente</span>`,
+              status: "success",
+              pos: "bottom-right",
+            });
+          }
+
+          setTimeout(() => {
+            UIkit.modal("#register_supplier").hide();
+          }, 400);
+
+          setTimeout(() => {
+            UIkit.modal("#agregar_client").hide();
+          }, 400);
+
+        },
+      });
     }
-
-    let countryData = iti.getSelectedCountryData();
-    let fullNumber = iti.getNumber();
-    let data = new FormData(form);
-    data.append("TLFNO", fullNumber);
-    $.ajax({
-      url: url,
-      type: "POST",
-      processData: false,
-      contentType: false,
-      data: data,
-      success: (response) => {
-        (response);
-        let result = TABLE();
-        if (insertOrUpdate == false) {
-          UIkit.notification.closeAll();
-          UIkit.notification({
-            message: `<span uk-icon='icon: check'>${TYPE} Registrado correctamente</span>`,
-            status: "success",
-            pos: "bottom-right",
-          });
-        } else {
-          UIkit.notification.closeAll();
-          UIkit.notification({
-            message: `<span uk-icon='icon: check'>${TYPE} Modificado correctamente</span>`,
-            status: "success",
-            pos: "bottom-right",
-          });
-        }
-
-        setTimeout(() => {
-          UIkit.modal("#register_supplier").hide();
-        }, 400);
-
-        setTimeout(() => {
-          UIkit.modal("#agregar_client").hide();
-        }, 400);
-
-      },
-    });
   });
 }
 
