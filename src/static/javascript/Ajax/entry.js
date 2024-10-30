@@ -323,7 +323,7 @@ function func(dolar) {
 
       InsertarProductos();
 
-      
+
       //aqui insertamos los tr
       ContainerTr.innerHTML += tr;
 
@@ -374,6 +374,21 @@ function func(dolar) {
                       template += `<li id="${U.id}" class="btn-paquete"><a href="#">${U.nombre}</a></li>`
                     })
                     container.innerHTML = template
+
+                    let btnPaquete = document.querySelectorAll(".btn-paquete")
+                    btnPaquete.forEach((btn) => {
+                      btn.addEventListener("click", () => {
+                        let id = btn.getAttribute("id")
+                        let name = btn.textContent
+                        let input = btn.parentElement.parentElement.previousElementSibling
+                        let nav = btn.parentElement.parentElement.parentElement.parentElement.parentElement.previousElementSibling
+                        let setIdNav = btn.parentElement.parentElement.parentElement.parentElement.parentElement.previousElementSibling.parentElement.parentElement.lastElementChild.firstElementChild
+                        input.textContent = name
+                        input.innerHTML += "<span uk-drop-parent-icon></span>"
+                        nav.setAttribute("value", name)
+                        setIdNav.setAttribute("value", id)
+                      })
+                    })
                   }
                 })
               })

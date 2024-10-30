@@ -440,6 +440,13 @@ const tarjetas = (response, cont) => {
           `;
     //seleccionamos el contenedor de las tarjetas, y las insertamos
     $(cont).html(tarjeta);
+    // imagen alternativa en caso de error
+    const imagenes = document.querySelectorAll('.img_product');
+    imagenes.forEach(imagen => {
+      imagen.onerror = function () {
+        this.src = 'Media/imagenes/banner_productos.png';
+      };
+    });
 
     //esto es para acomodar la posicion de los botones dependiendo de la resolucion
     if (screen < 938) {
@@ -578,9 +585,8 @@ const cargarMarcasRegProduct = () => {
 document.querySelector(".btn-modal-register").addEventListener("click", () => {
   val = false;
   $("#formAggProduct").trigger("reset");
-  document.querySelector(".title_modal_reg_upd").textContent =
-    "REGISTRAR PRODUCTO";
-  cargarCategoriaRegProduct();formAggProduct
+  document.querySelector(".title_modal_reg_upd").textContent = "REGISTRAR PRODUCTO";
+  cargarCategoriaRegProduct();
   cargarUnidadesRegProduct();
   cargarMarcasRegProduct();
 });
@@ -591,18 +597,17 @@ formAggProduct.addEventListener("submit", (e) => {
   let url;
   const datosFormulario = {
     nombre: document.getElementsByClassName('NameUpdateProduct').item(0).value,
-    // apellido: document.getElementsByClassName('apellido').item(0).value,
     codigo: document.getElementsByClassName('CodeUpdateProduct').item(0).value,
     valorUnidad: document.getElementsByClassName('ValorUnidadUpdateProduct').item(0).value
   };
   const { resultados, errores } = validarFormulario(datosFormulario);
   const messageError = document.getElementById('messageError');
-  messageError.innerHTML = ''; 
+  messageError.innerHTML = '';
   if (errores.length > 0) {
-      messageError.innerHTML = errores.join('<br>');
-      console.log(errores)
+    messageError.innerHTML = errores.join('<br>');
+    console.log(errores)
   } else {
-    
+
     if (val == false) {
       url = "api_agregar";
     } else {
@@ -640,7 +645,7 @@ formAggProduct.addEventListener("submit", (e) => {
           });
         }
         //en la respuesta le mostramos un mensaje de producto creado correctamente
-  
+
         cargarTargetProduct(page_productos);
       },
     });
@@ -716,7 +721,7 @@ filter.forEach((e) => {
             json.lista.forEach((date) => {
               options += `<li  uk-filter-control="filter: [data-category='${date.nombre}']; group: category"><a class='filterS' href="#">${date.nombre}</a></li>`;
             });
-            if(json.lista.length == 0){
+            if (json.lista.length == 0) {
               document.querySelector(".filter_category").innerHTML = messaje("Registrar Categoria")
             } else {
               document.querySelector(".filter_category").innerHTML = options;
@@ -740,7 +745,7 @@ filter.forEach((e) => {
             json.lista.forEach((date) => {
               options += `<li  uk-filter-control="filter: [data-category='${date.nombre}']; group: category"><a class='filterS' href="#">${date.nombre}</a></li>`;
             });
-            if(json.lista.length == 0){
+            if (json.lista.length == 0) {
               document.querySelector(".filter_marca").innerHTML = messaje("Registrar Marca")
             } else {
               document.querySelector(".filter_marca").innerHTML = options;
