@@ -72,13 +72,13 @@
                         <div class="uk-width-1-2@s">
                             <label class="uk-form-label">Nombre</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input nameProvUpdate" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="([A-Zñ+áéó]|[a-zñáéó]){3,}( ([A-Zñ+áéó]|[a-zñáéó]){3,})?$" required>
+                                <input class="uk-input nameProvUpdate" type="text" placeholder="Nombre" aria-label="100" name="nombre" required>
                             </div>
                         </div>
                         <div class="uk-width-1-2@s">
                             <label class="uk-form-label">Razon Social</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input Razon_SocialProvUpdate" type="text" placeholder="Razon Social" aria-label="100" name="razon_social" pattern="([A-Zñ+áéó]|[a-zñáéó]){3,}( ([A-Zñ+áéó]|[a-zñáéó]){3,})?$" required>
+                                <input class="uk-input Razon_SocialProvUpdate" type="text" placeholder="Razon Social" aria-label="100" name="razon_social" required>
                             </div>
                         </div>
                         <div class="uk-width-1-4@s">
@@ -94,7 +94,7 @@
                         <div class="uk-width-1-4@s">
                             <label class="uk-form-label">Nro Documento</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input Nro_DocumentoProvUpdate" type="text" placeholder="Nro" aria-label="50" name="rif" pattern="^[\d]{6,}+$" minlength="6" maxlength="10" required>
+                                <input class="uk-input Nro_DocumentoProvUpdate" type="text" placeholder="Nro" aria-label="50" name="rif" minlength="6" maxlength="10" required>
                             </div>
                         </div>
 
@@ -102,13 +102,13 @@
                         <div class="uk-width-1-2@s">
                             <label class="uk-form-label">Nro Telefono.</label>
                             <div class="uk-form-controls">
-                                <input id="tlfn_pais" class="uk-input tlfnProvUpdate" type="tel" minlength="9" aria-label="50" name="telefono" pattern="^([\+\d]{2,4} ?)?([\d]{4}) ?\-?([\d]{3}) ?\-?([\d]{4})$" required>
+                                <input id="tlfn_pais" class="uk-input tlfnProvUpdate" type="tel" minlength="9" aria-label="50" name="telefono" required>
                             </div>
                         </div>
                         <div class="uk-width-1-2@s">
                             <label class="uk-form-label">Correo Electrónico</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input emailProvUpdate" type="email" placeholder="Correo electrónico" aria-label="25" name="correo" pattern="^([A-Za-z0-9\.\_]+)@([\w]{3,8})\.([\w]{2,3})(\.[\w]{2,4})?(\.[\w]{2,3})?$" required>
+                                <input class="uk-input emailProvUpdate" type="email" placeholder="Correo electrónico" aria-label="25" name="correo" required>
                             </div>
                         </div>
                         <div class="uk-width-1-2@s">
@@ -118,6 +118,7 @@
                             </div>
                         </div>
                         <input type="submit" id="subirxd" style="display:none" required>
+                        <div id="messageError" style="color: red;"></div>
                     </form>
                 </div>
                 <div class="uk-modal-footer uk-text-right">

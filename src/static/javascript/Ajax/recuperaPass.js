@@ -108,39 +108,52 @@ const formRegisterUser = document.getElementById("formRegisterUser")
 
 formRegisterUser.addEventListener("submit", (e) => {
     e.preventDefault();
-    let data = new FormData(formRegisterUser);
-    data.append("tipo", "usuarios")
-    let a = validarContrasena(val)
-    if (a != "La contraseña es válida.") {
-        document.querySelector("#msj").textContent = a;
-        return
-    }
-    //peticion para registrar el usuario
-    $.ajax({
-        url: "api_agregar",
-        type: "POST",
-        data: data,
-        contentType: false,
-        processData: false,
-        success: (response) => {
-            $.ajax({
-                url: "Controller/funcs_ajax/login.php",
-                type: "POST",
-                data: data,
-                contentType: false,
-                processData: false,
-                success: (response) => {
-                    (response);
-                    if (response == "1") {
-                        window.location = "http://localhost/Pt3/Administrar_perfil"
-                        localStorage.setItem("intro", "true")
-                    } else {
-                        window.location = "http://localhost/Pt3/login"
-                    }
-                }
-            })
+    const datosFormulario = {
+        nombre: document.getElementsByClassName('inpRegisterName').value,
+        apellido: document.getElementsByClassName('inpRegisterLastName').value,
+        correo: document.getElementsByClassName('inpRegisterMail').value
+    };
+    const { resultados, errores } = validarFormulario(datosFormulario);
+    const messageError = document.getElementsById('messageError');
+    messageError.innerHTML = ''; 
+    if (errores.length > 0) {
+        messageError.innerHTML = errores.join('<br>');
+        console.log(errores)
+    } else {
+        let data = new FormData(formRegisterUser);
+        data.append("tipo", "usuarios")
+        let a = validarContrasena(val)
+        if (a != "La contraseña es válida.") {
+            document.querySelector("#msj").textContent = a;
+            return
         }
-    })
+        //peticion para registrar el usuario
+        $.ajax({
+            url: "api_agregar",
+            type: "POST",
+            data: data,
+            contentType: false,
+            processData: false,
+            success: (response) => {
+                $.ajax({
+                    url: "Controller/funcs_ajax/login.php",
+                    type: "POST",
+                    data: data,
+                    contentType: false,
+                    processData: false,
+                    success: (response) => {
+                        (response);
+                        if (response == "1") {
+                            window.location = "http://localhost/Pt3/Administrar_perfil"
+                            localStorage.setItem("intro", "true")
+                        } else {
+                            window.location = "http://localhost/Pt3/login"
+                        }
+                    }
+                })
+            }
+        })
+    }
 })
 valid_pass.addEventListener("keyup", (e) => {
     val = e.target.value;

@@ -117,13 +117,13 @@
                                     <div class="uk-width-1-2@s">
                                         <label class="uk-form-label">Nombre</label>
                                         <div class="uk-form-controls">
-                                            <input class="NameUpdateProduct uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" pattern="([A-Zñ+áéó]|[a-zñáéó]){3,}( ([A-Zñ+áéó]|[a-zñáéó]){3,})?$" required>
+                                            <input class="NameUpdateProduct uk-input" type="text" placeholder="Nombre" aria-label="100" name="nombre" required>
                                         </div>
                                     </div>
                                     <div class="uk-width-1-2@s">
                                         <label class="uk-form-label">Código</label>
                                         <div class="uk-form-controls">
-                                            <input class="CodeUpdateProduct uk-input" type="text" placeholder="Código" aria-label="100" name="codigo" pattern="^\d{12}$" minlength="12" maxlength="12" autocomplete="off" required>
+                                            <input class="CodeUpdateProduct uk-input" type="text" placeholder="Código" aria-label="100" name="codigo" minlength="13" maxlength="13" autocomplete="off" required>
                                         </div>
                                     </div>
                                     <div class="uk-width-1-2@s">
@@ -146,7 +146,7 @@
                                     <div class="uk-width-1-2@s">
                                         <label class="uk-form-label">Valor Uni.</label>
                                         <div class="uk-form-controls">
-                                            <input class="uk-input ValorUnidadUpdateProduct" type="text" pattern="^([\d]){1,4}?$" name="valor_unidad" minlength="1" maxlength="4" required>
+                                            <input class="uk-input ValorUnidadUpdateProduct" type="text"  name="valor_unidad" minlength="1" maxlength="4" required>
                                         </div>
                                     </div>
                                     <div class="uk-width-1-2@s">
@@ -171,7 +171,7 @@
                                     <div class="uk-width-1-2@s">
                                         <label class="uk-form-label">Precio Venta</label>
                                         <div class="uk-form-controls">
-                                            <input class="PVUpdateProduct uk-input" type="number" pattern="^([\d]){1,4}(.[\d]{1,2})?$" min="0.1" step="0.1" placeholder="precio_venta" aria-label="25" name="precio_venta" required>
+                                            <input class="PVUpdateProduct uk-input" type="number" min="0.1" step="0.1" placeholder="precio_venta" aria-label="25" name="precio_venta" required>
                                         </div>
                                     </div>
                                     <div class="uk-width-1-2@s">
@@ -198,6 +198,8 @@
                                         </div>
                                     </div>
                                     <input type="submit" id="subirxd" style="display:none">
+                                    <div id="messageError" style="color: red;">
+                                    </div>
                                 </form>
                             </div>
                             <div class="uk-modal-footer uk-text-right">
