@@ -353,6 +353,7 @@ function func(dolar) {
                 let nav = btn.parentElement.parentElement.parentElement.parentElement.parentElement.previousElementSibling
                 let setIdNav = btn.parentElement.parentElement.parentElement.parentElement.parentElement.previousElementSibling.parentElement.parentElement.lastElementChild.firstElementChild
                 input.textContent = name
+                input.innerHTML += "<span uk-drop-parent-icon></span>"
                 nav.setAttribute("value", name)
                 setIdNav.setAttribute("value", id)
               })
