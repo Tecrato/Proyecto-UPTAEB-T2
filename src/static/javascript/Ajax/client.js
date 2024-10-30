@@ -243,7 +243,7 @@ function cardClient(page) {
                                                 <div class="">
                                                     <h6 class="uk-margin-small-right uk-margin-remove-bottom" style="float: left;">Direccion
                                                     </h6>
-                                                    <p class="uk-margin-small uk-margin-small-left uk-margin-remove-top uk-margin-remove-left uk-text-meta"
+                                                    <p class="uk-margin-small uk-margin-small-left uk-margin-remove-top uk-margin-remove-left uk-text-meta uk-text-truncate"
                                                         style="width: 185px; line-height: 23px;">
                                                         ${element.direccion}
                                                     </p>
