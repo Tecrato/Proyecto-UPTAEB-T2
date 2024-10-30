@@ -122,6 +122,11 @@
             $query = $this->conn->prepare($sql);
             $query->execute($this->variables);
         }
+        public function borrar() : void {
+            $query = $this->conn->prepare("DELETE FROM $this->tabla WHERE id=:id");
+            $query->bindParam(':id',$this->variables['id'], PDO::PARAM_INT);
+            $query->execute();
+        }
         public function search($n=0,$limite=9, $order=' id ASC ') : Array{
             $query = "SELECT $this->select_query FROM $this->tabla AS a $this->joins";
     
