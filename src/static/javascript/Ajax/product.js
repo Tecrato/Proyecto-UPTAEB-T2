@@ -902,6 +902,7 @@ function Edit_U_M_C(tr) {
           processData: false,
           contentType: false,
           success: function (response) {
+            console.log(response);
             let result = tr();
             UIkit.notification.closeAll();
             UIkit.notification({
