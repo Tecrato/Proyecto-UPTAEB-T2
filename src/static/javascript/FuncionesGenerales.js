@@ -6,8 +6,8 @@ window.addEventListener("load", () => {
 const validaciones = {
   nombre: /^([A-Zñáéó]|[a-zñáéó]){3,}( ([A-Zñáéó]|[a-zñáéó]){3,})?$/,
   apellido: /^([A-Zñáéó]|[a-zñáéó]){3,}( ([A-Zñáéó]|[a-zñáéó]){3,})?$/,
-  codigo: /^\d{13}$/,
-  valorUnidad: /^([\d]){1,4}$/,
+  codigo: /^\d{12}$/,
+  valorUnidad: /^(\d{1,4})$/,
   cedula:/^([\d]{1,2})\.?([\d]{3})\.?([\d]{3})$/,
   telefono:/^([\+\d]{2,4} ?)?([\d]{4}) ?\-?([\d]{3}) ?\-?([\d]{4})$/,
   razonSocial:/([A-Zñ+áéó]|[a-zñáéó]){3,}( ([A-Zñ+áéó]|[a-zñáéó]){3,})?$/,

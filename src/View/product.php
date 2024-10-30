@@ -123,7 +123,7 @@
                                     <div class="uk-width-1-2@s">
                                         <label class="uk-form-label">Código</label>
                                         <div class="uk-form-controls">
-                                            <input class="CodeUpdateProduct uk-input" type="text" placeholder="Código" aria-label="100" name="codigo" minlength="13" maxlength="13" autocomplete="off" required>
+                                            <input class="CodeUpdateProduct uk-input" type="text" placeholder="Código" aria-label="100" name="codigo" minlength="12" maxlength="12" autocomplete="off" required>
                                         </div>
                                     </div>
                                     <div class="uk-width-1-2@s">

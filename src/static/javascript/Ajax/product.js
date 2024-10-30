@@ -590,13 +590,13 @@ formAggProduct.addEventListener("submit", (e) => {
   e.preventDefault();
   let url;
   const datosFormulario = {
-    nombre: document.getElementsByClassName('NameUpdateProduct').value,
-    apellido: document.getElementsByClassName('apellido').value,
-    codigo: document.getElementsByClassName('CodeUpdateProduct').value,
-    valorUnidad: document.getElementsByClassName('ValorUnidadUpdateProduct').value
+    nombre: document.getElementsByClassName('NameUpdateProduct').item(0).value,
+    // apellido: document.getElementsByClassName('apellido').item(0).value,
+    codigo: document.getElementsByClassName('CodeUpdateProduct').item(0).value,
+    valorUnidad: document.getElementsByClassName('ValorUnidadUpdateProduct').item(0).value
   };
   const { resultados, errores } = validarFormulario(datosFormulario);
-  const messageError = document.getElementsById('messageError');
+  const messageError = document.getElementById('messageError');
   messageError.innerHTML = ''; 
   if (errores.length > 0) {
       messageError.innerHTML = errores.join('<br>');

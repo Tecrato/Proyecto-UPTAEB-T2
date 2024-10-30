@@ -12,19 +12,10 @@ START TRANSACTION;
 SET time_zone = "+00:00";
 
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Base de datos: `proyecto`
---
+Base de datos: `proyecto`
 
 DELIMITER $$
---
--- Procedimientos
---
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `AsignarTotalVentasDia` (IN `id_caja` INT(250))   BEGIN
     DECLARE asignar_total_ventas FLOAT;
     DECLARE credito_monto FLOAT;
@@ -46,7 +37,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `check_and_notify` ()   BEGIN
     DECLARE diff INT;
     DECLARE cur CURSOR FOR 
         SELECT e.id, e.fecha_vencimiento, p.nombre 
-        FROM entradas_2 e 
+        FROM detalles_entrada e 
         JOIN productos p ON e.id_producto = p.id 
         WHERE e.active = 1 AND e.existencia > 0;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
@@ -197,7 +188,6 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ObtenerGananciasMensuales` (IN `ani
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ObtenerGananciasSemanales` (IN `fecha_inicio` DATE, IN `fecha_fin` DATE)   BEGIN
-    -- CTE para obtener las semanas en el rango dado
     WITH semanas AS (
         SELECT DISTINCT WEEK(fecha, 1) AS Semana
         FROM movimientos_capital
@@ -228,11 +218,11 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ObtenerGananciasSemanales` (IN `fec
     SELECT 
         ts.Semana,
         COALESCE(ROUND(SUM(CASE 
-                    WHEN m.monto NOT LIKE '-%' THEN m.monto  -- Sumar montos positivos
+                    WHEN m.monto NOT LIKE '-%' THEN m.monto 
                     ELSE 0 
                 END), 2), 0) 
             + COALESCE(ROUND(SUM(CASE 
-                    WHEN m.monto LIKE '-%' THEN m.monto  -- Sumar montos negativos
+                    WHEN m.monto LIKE '-%' THEN m.monto
                     ELSE 0 
                 END), 2), 0) AS Ganancia
     FROM 
@@ -335,7 +325,6 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `reporteCliente` (IN `cliente_id` INT)   BEGIN
     SELECT 
-        -- Datos Básicos del Cliente
         c.nombre AS Nombre,
         c.apellido AS Apellido,
         c.id AS ID_Cliente,
@@ -360,7 +349,6 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `reporteCliente` (IN `cliente_id` IN
          FROM registro_ventas rv 
          WHERE rv.id_cliente = cliente_id) AS Ultima_Compra_Fecha,
          
-        -- Productos Más Comprados
         (SELECT GROUP_CONCAT(prod.nombre ORDER BY Frecuencia DESC SEPARATOR ', ') 
          FROM (
              SELECT p.nombre, COUNT(f.id) AS Frecuencia
@@ -373,7 +361,6 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `reporteCliente` (IN `cliente_id` IN
              LIMIT 5
          ) AS prod) AS Productos_Mas_Comprados,
 
-        -- Categorías Más Compradas
         (SELECT GROUP_CONCAT(cat.nombre ORDER BY Frecuencia DESC SEPARATOR ', ') 
          FROM (
              SELECT cat.nombre, COUNT(f.id) AS Frecuencia
@@ -387,7 +374,6 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `reporteCliente` (IN `cliente_id` IN
              LIMIT 3
          ) AS cat) AS Categorias_Preferidas,
 
-        -- Frecuencia de Compra
         (SELECT GROUP_CONCAT(CONCAT(DAYNAME(rv.fecha), ' - ', HOUR(rv.fecha), 'h') 
                 ORDER BY Frecuencia DESC SEPARATOR ', ') 
          FROM (
@@ -411,13 +397,11 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `reporteProveedor` (IN `prod_id` INT
         p.correo AS Contacto_Correo,
         p.direccion AS Contacto_Direccion,
         
-        -- Historial de Compras
         COUNT(e.id) AS Total_Pedidos,
         SUM(d.precio_compra * d.cantidad) AS Importe_Total_Gastado,
         AVG(d.precio_compra * d.cantidad) AS Promedio_Gasto_Pedido,
         MAX(e.fecha_compra) AS Ultimo_Pedido_Fecha,
         
-        -- Productos Suministrados
         GROUP_CONCAT(DISTINCT prod.nombre SEPARATOR ', ') AS Productos_Suministrados,
         GROUP_CONCAT(DISTINCT cat.nombre SEPARATOR ', ') AS Categorias_Productos
 
@@ -435,9 +419,6 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `reporteProveedor` (IN `prod_id` INT
     GROUP BY p.id;
 END$$
 
---
--- Funciones
---
 CREATE DEFINER=`root`@`localhost` FUNCTION `dias_diferencia` (`fecha1` DATE, `fecha2` DATE) RETURNS INT(11) READS SQL DATA BEGIN
 	RETURN DATEDIFF(fecha1, fecha2);
 RETURN 1;
@@ -445,11 +426,6 @@ END$$
 
 DELIMITER ;
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `bitacora`
---
 
 CREATE TABLE `bitacora` (
   `id` int(11) NOT NULL,
@@ -460,9 +436,6 @@ CREATE TABLE `bitacora` (
   `detalles` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `bitacora`
---
 
 INSERT INTO `bitacora` (`id`, `id_usuario`, `tabla`, `accion`, `fecha`, `detalles`) VALUES
 (1, 1, 'Usuarios', 'Login', '2024-10-21 14:26:03', 'Usuario Edouard logueado'),
@@ -477,11 +450,7 @@ INSERT INTO `bitacora` (`id`, `id_usuario`, `tabla`, `accion`, `fecha`, `detalle
 (10, 1, 'configuraciones', 'Modificar', '2024-10-21 19:21:50', 'Modificado configuraciones'),
 (11, 1, 'producto', 'Modificar', '2024-10-21 19:22:35', 'Modificado producto');
 
--- --------------------------------------------------------
 
---
--- Estructura de tabla para la tabla `caja`
---
 
 CREATE TABLE `caja` (
   `id` int(11) NOT NULL,
@@ -495,9 +464,6 @@ CREATE TABLE `caja` (
   `total_ventas` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Disparadores `caja`
---
 DELIMITER $$
 CREATE TRIGGER `caja_cierre` AFTER UPDATE ON `caja` FOR EACH ROW BEGIN
 declare diferencia float;
@@ -507,39 +473,21 @@ END
 $$
 DELIMITER ;
 
--- --------------------------------------------------------
 
---
--- Estructura Stand-in para la vista `capital`
--- (Véase abajo para la vista actual)
---
 CREATE TABLE `capital` (
 `capital` decimal(34,2)
 );
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `categoria`
---
 
 CREATE TABLE `categoria` (
   `id` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Volcado de datos para la tabla `categoria`
---
 
 INSERT INTO `categoria` (`id`, `nombre`) VALUES
 (1, 'Bebidas');
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `clientes`
---
 
 CREATE TABLE `clientes` (
   `id` int(11) NOT NULL,
@@ -549,27 +497,16 @@ CREATE TABLE `clientes` (
   `documento` varchar(1) NOT NULL,
   `direccion` varchar(255) NOT NULL,
   `telefono` varchar(15) NOT NULL,
-  `fechaRegistro` date NOT NULL DEFAULT current_timestamp(),
+  `fechaRegistro` datetime NOT NULL DEFAULT current_timestamp(),
   `active` tinyint(4) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
--- --------------------------------------------------------
-
---
--- Estructura Stand-in para la vista `clientesfrecuentes`
--- (Véase abajo para la vista actual)
---
 CREATE TABLE `clientesfrecuentes` (
 `idCliente` int(11)
 ,`Cliente` varchar(500)
 ,`Compras` bigint(21)
 );
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `configuraciones`
---
 
 CREATE TABLE `configuraciones` (
   `id` int(11) NOT NULL,
@@ -577,19 +514,10 @@ CREATE TABLE `configuraciones` (
   `valor` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Volcado de datos para la tabla `configuraciones`
---
 
 INSERT INTO `configuraciones` (`id`, `llave`, `valor`) VALUES
 (1, 'dolar', '39');
 
--- --------------------------------------------------------
-
---
--- Estructura Stand-in para la vista `coste_productos_vendidos`
--- (Véase abajo para la vista actual)
---
 CREATE TABLE `coste_productos_vendidos` (
 `Enero` double(19,2)
 ,`Febrero` double(19,2)
@@ -605,20 +533,6 @@ CREATE TABLE `coste_productos_vendidos` (
 ,`Diciembre` double(19,2)
 );
 
--- --------------------------------------------------------
-
---
--- Estructura Stand-in para la vista `costo_entradas_mensuales`
--- (Véase abajo para la vista actual)
---
-CREATE TABLE `costo_entradas_mensuales` (
-);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `credito`
---
 
 CREATE TABLE `credito` (
   `id` int(11) NOT NULL,
@@ -628,9 +542,6 @@ CREATE TABLE `credito` (
   `status` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Disparadores `credito`
---
 DELIMITER $$
 CREATE TRIGGER `after_credito_insert` AFTER INSERT ON `credito` FOR EACH ROW BEGIN
 DECLARE total_egreso FLOAT;
@@ -640,12 +551,6 @@ END
 $$
 DELIMITER ;
 
--- --------------------------------------------------------
-
---
--- Estructura Stand-in para la vista `detalles_capital`
--- (Véase abajo para la vista actual)
---
 CREATE TABLE `detalles_capital` (
 `Gastos` decimal(34,2)
 ,`Ingresos` decimal(34,2)
@@ -653,11 +558,6 @@ CREATE TABLE `detalles_capital` (
 ,`capital` float
 );
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `detalles_entrada`
---
 
 CREATE TABLE `detalles_entrada` (
   `id` int(11) NOT NULL,
@@ -671,17 +571,11 @@ CREATE TABLE `detalles_entrada` (
   `existencia` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `detalles_entrada`
---
 
 INSERT INTO `detalles_entrada` (`id`, `id_producto`, `mercancia`, `tamaño_mercancia`, `precio_compra`, `id_entrada`, `fecha_vencimiento`, `cantidad`, `existencia`) VALUES
 (21, 4, '0', 12, 12, 83, '2024-10-30', 2, 24),
 (22, 4, '0', 12, 12, 84, '2024-10-30', 2, 24);
 
---
--- Disparadores `detalles_entrada`
---
 DELIMITER $$
 CREATE TRIGGER `entradas_agg` AFTER INSERT ON `detalles_entrada` FOR EACH ROW BEGIN
     DECLARE total_egreso FLOAT;
@@ -699,30 +593,24 @@ CREATE TRIGGER `precio_productos` AFTER INSERT ON `detalles_entrada` FOR EACH RO
     DECLARE v_algoritmo INT;
     DECLARE v_precio_nuevo DECIMAL(10,2);
 
-    -- Obtén el valor de ganancia, precio anterior, stock anterior y algoritmo de la tabla productos
-    SELECT p.ganancia, p.precio_venta, (SELECT SUM(e.existencia) FROM entradas_2 as e WHERE e.id_producto=p.id) as stock, p.algoritmo INTO v_ganancia, v_precio_anterior, v_stock_anterior, v_algoritmo
+    SELECT p.ganancia, p.precio_venta, (SELECT SUM(e.existencia) FROM detalles_entrada as e WHERE e.id_producto=p.id) as stock, p.algoritmo INTO v_ganancia, v_precio_anterior, v_stock_anterior, v_algoritmo
     FROM productos p 
     WHERE p.id = NEW.id_producto;
 
     
-    -- PEPS (Primero en entrar, primero en salir)
     
     IF v_algoritmo = 1 THEN
         UPDATE productos 
         SET precio_venta = NEW.precio_compra * (1 + v_ganancia)
         WHERE id = NEW.id_producto;
 
-    -- Media ponderada
     ELSEIF v_algoritmo = 2 THEN
         SET v_precio_nuevo = ((v_precio_anterior * v_stock_anterior) + (NEW.precio_compra * NEW.cantidad)) / (v_stock_anterior + NEW.cantidad);
         UPDATE productos 
         SET precio_venta = v_precio_nuevo * (1 + v_ganancia)
         WHERE id = NEW.id_producto;
 
-    -- UEPS (Último en entrar, primero en salir)
     ELSEIF v_algoritmo = 3 THEN
-        -- Aquí puedes implementar la lógica específica de UEPS, que generalmente es similar a PEPS
-        -- pero usando la entrada más reciente. Sin embargo, suele necesitar un manejo más complejo.
         UPDATE productos 
         SET precio_venta = NEW.precio_compra * (1 + v_ganancia)
         WHERE id = NEW.id_producto;
@@ -731,23 +619,12 @@ END
 $$
 DELIMITER ;
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `dinero`
---
-
 CREATE TABLE `dinero` (
   `id` int(11) NOT NULL,
   `monto` float NOT NULL,
   `fecha` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `entradas`
---
 
 CREATE TABLE `entradas` (
   `id` int(11) NOT NULL,
@@ -758,19 +635,11 @@ CREATE TABLE `entradas` (
   `active` tinyint(4) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Volcado de datos para la tabla `entradas`
---
 
 INSERT INTO `entradas` (`id`, `id_proveedor`, `fecha_compra`, `codigo`, `detalles`, `active`) VALUES
 (83, 1, '2024-10-21', 12468, 'primera entrada', 1),
 (84, 1, '2024-10-21', 35780, 'primera entrada', 1);
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `factura`
---
 
 CREATE TABLE `factura` (
   `id` int(11) NOT NULL,
@@ -780,12 +649,6 @@ CREATE TABLE `factura` (
   `coste_producto_total` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
--- --------------------------------------------------------
-
---
--- Estructura Stand-in para la vista `ganacias_mensuales`
--- (Véase abajo para la vista actual)
---
 CREATE TABLE `ganacias_mensuales` (
 `Enero` decimal(35,2)
 ,`Febrero` decimal(35,2)
@@ -801,30 +664,15 @@ CREATE TABLE `ganacias_mensuales` (
 ,`Diciembre` decimal(35,2)
 );
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `marcas`
---
-
 CREATE TABLE `marcas` (
   `id` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `marcas`
---
 
 INSERT INTO `marcas` (`id`, `nombre`) VALUES
 (1, 'Glup');
 
--- --------------------------------------------------------
-
---
--- Estructura Stand-in para la vista `max_ventas`
--- (Véase abajo para la vista actual)
---
 CREATE TABLE `max_ventas` (
 `id` int(11)
 ,`nombre` varchar(50)
@@ -834,11 +682,6 @@ CREATE TABLE `max_ventas` (
 ,`cantidad` decimal(32,0)
 );
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `metodo_pago`
---
 
 CREATE TABLE `metodo_pago` (
   `id` int(11) NOT NULL,
@@ -846,20 +689,11 @@ CREATE TABLE `metodo_pago` (
   `active` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `metodo_pago`
---
 
 INSERT INTO `metodo_pago` (`id`, `nombre`, `active`) VALUES
 (1, 'transferencia', 1),
 (2, 'Divisa', 1);
 
--- --------------------------------------------------------
-
---
--- Estructura Stand-in para la vista `min_ventas`
--- (Véase abajo para la vista actual)
---
 CREATE TABLE `min_ventas` (
 `id` int(11)
 ,`nombre` varchar(50)
@@ -869,11 +703,6 @@ CREATE TABLE `min_ventas` (
 ,`cantidad` decimal(32,0)
 );
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `movimientos_capital`
---
 
 CREATE TABLE `movimientos_capital` (
   `id` int(11) NOT NULL,
@@ -882,9 +711,6 @@ CREATE TABLE `movimientos_capital` (
   `fecha` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `movimientos_capital`
---
 
 INSERT INTO `movimientos_capital` (`id`, `monto`, `descripcion`, `fecha`) VALUES
 (1, -132, 'Egreso por nuevas entradas', '2024-10-21 16:34:45'),
@@ -899,9 +725,6 @@ INSERT INTO `movimientos_capital` (`id`, `monto`, `descripcion`, `fecha`) VALUES
 (10, -24, 'Egreso por nuevas entradas', '2024-10-21 20:33:54'),
 (11, -24, 'Egreso por nuevas entradas', '2024-10-21 20:35:48');
 
---
--- Disparadores `movimientos_capital`
---
 DELIMITER $$
 CREATE TRIGGER `mov_capital_dinero` AFTER INSERT ON `movimientos_capital` FOR EACH ROW BEGIN
 UPDATE dinero SET monto = monto + NEW.monto WHERE id = 1;
@@ -909,11 +732,6 @@ END
 $$
 DELIMITER ;
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `notificaciones`
---
 
 CREATE TABLE `notificaciones` (
   `id` int(11) NOT NULL,
@@ -923,11 +741,6 @@ CREATE TABLE `notificaciones` (
   `fecha` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pagos`
---
 
 CREATE TABLE `pagos` (
   `id` int(11) NOT NULL,
@@ -937,9 +750,6 @@ CREATE TABLE `pagos` (
   `fecha` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Disparadores `pagos`
---
 DELIMITER $$
 CREATE TRIGGER `movimientos_pagos` AFTER INSERT ON `pagos` FOR EACH ROW BEGIN
     INSERT INTO movimientos_capital (monto, descripcion)
@@ -948,11 +758,6 @@ END
 $$
 DELIMITER ;
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pagos_entradas`
---
 
 CREATE TABLE `pagos_entradas` (
   `id` int(11) NOT NULL,
@@ -961,18 +766,10 @@ CREATE TABLE `pagos_entradas` (
   `monto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `pagos_entradas`
---
 
 INSERT INTO `pagos_entradas` (`id`, `id_metodo_pago`, `id_entrada`, `monto`) VALUES
 (1, 1, 84, 24);
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `permisos`
---
 
 CREATE TABLE `permisos` (
   `id` int(11) NOT NULL,
@@ -981,11 +778,6 @@ CREATE TABLE `permisos` (
   `permiso` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `productos`
---
 
 CREATE TABLE `productos` (
   `id` int(11) NOT NULL,
@@ -1005,18 +797,9 @@ CREATE TABLE `productos` (
   `algoritmo` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Volcado de datos para la tabla `productos`
---
-
 INSERT INTO `productos` (`id`, `id_categoria`, `id_unidad`, `id_marca`, `valor_unidad`, `nombre`, `imagen`, `stock_min`, `stock_max`, `precio_venta`, `IVA`, `active`, `ganancia`, `codigo`, `algoritmo`) VALUES
 (4, 1, 1, 1, 1, 'Refrescador', 'producto_Refrescador_0579cdf3-7e2f-4320-900a-975ce9fa7ecc.jpeg', 1, 1000, 12, 0, 1, 0, '123123268788', 1);
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `proveedores`
---
 
 CREATE TABLE `proveedores` (
   `id` int(11) NOT NULL,
@@ -1029,27 +812,10 @@ CREATE TABLE `proveedores` (
   `active` tinyint(4) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Volcado de datos para la tabla `proveedores`
---
 
 INSERT INTO `proveedores` (`id`, `nombre`, `razon_social`, `rif`, `telefono`, `correo`, `direccion`, `active`) VALUES
 (1, 'Erseñor', 'DeAbajo', 'V-123123123', '04121338031', 'jo.hw722@gmail.com', 'Calle 10 entre carreras 3 y 7', 1);
 
--- --------------------------------------------------------
-
---
--- Estructura Stand-in para la vista `ratio_ventas`
--- (Véase abajo para la vista actual)
---
-CREATE TABLE `ratio_ventas` (
-);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `registro_ventas`
---
 
 CREATE TABLE `registro_ventas` (
   `id` int(11) NOT NULL,
@@ -1061,58 +827,21 @@ CREATE TABLE `registro_ventas` (
   `active` tinyint(4) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
--- --------------------------------------------------------
-
---
--- Estructura Stand-in para la vista `rotacion_inventario`
--- (Véase abajo para la vista actual)
---
-CREATE TABLE `rotacion_inventario` (
-);
-
--- --------------------------------------------------------
-
---
--- Estructura Stand-in para la vista `total_productos_categoria`
--- (Véase abajo para la vista actual)
---
 CREATE TABLE `total_productos_categoria` (
 `categoria` varchar(50)
 ,`total_productos` bigint(21)
 );
 
--- --------------------------------------------------------
-
---
--- Estructura Stand-in para la vista `total_stock_categoria`
--- (Véase abajo para la vista actual)
---
-CREATE TABLE `total_stock_categoria` (
-);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `unidades`
---
 
 CREATE TABLE `unidades` (
   `id` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Volcado de datos para la tabla `unidades`
---
 
 INSERT INTO `unidades` (`id`, `nombre`) VALUES
 (1, 'L');
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `usuarios`
---
 
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
@@ -1125,279 +854,130 @@ CREATE TABLE `usuarios` (
   `sesion_id` varchar(145) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Volcado de datos para la tabla `usuarios`
---
 
 INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `hash`, `rol`, `active`, `semilla`, `sesion_id`) VALUES
 (1, 'Edouard', 'nose@gmail.com', '$2y$10$pVahKWT/D1fO2rT.Bo5/qO3M8QgCiEiXDkED0FiH1S1droi5UoKcq', 1, 1, '1234', 'kUsDR4Q2Ye');
 
--- --------------------------------------------------------
-
---
--- Estructura Stand-in para la vista `valortotalinventario`
--- (Véase abajo para la vista actual)
---
-CREATE TABLE `valortotalinventario` (
-);
-
--- --------------------------------------------------------
-
---
--- Estructura Stand-in para la vista `valor_promedio_inventario_mensual`
--- (Véase abajo para la vista actual)
---
-CREATE TABLE `valor_promedio_inventario_mensual` (
-);
-
--- --------------------------------------------------------
-
---
--- Estructura para la vista `capital`
---
 DROP TABLE IF EXISTS `capital`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `capital`  AS SELECT round(sum(`movimientos_capital`.`monto`),2) AS `capital` FROM `movimientos_capital` ;
 
--- --------------------------------------------------------
-
---
--- Estructura para la vista `clientesfrecuentes`
---
 DROP TABLE IF EXISTS `clientesfrecuentes`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `clientesfrecuentes`  AS SELECT (select `registro_ventas`.`id_cliente`) AS `idCliente`, (select `clientes`.`nombre` from `clientes` where `clientes`.`id` = `registro_ventas`.`id_cliente`) AS `Cliente`, (select count(0) from `registro_ventas` where `registro_ventas`.`id_cliente` = `idCliente`) AS `Compras` FROM `registro_ventas` GROUP BY `registro_ventas`.`id_cliente` ORDER BY (select count(0) from `registro_ventas` where `registro_ventas`.`id_cliente` = `idCliente`) DESC LIMIT 0, 5 ;
 
--- --------------------------------------------------------
-
---
--- Estructura para la vista `coste_productos_vendidos`
---
 DROP TABLE IF EXISTS `coste_productos_vendidos`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `coste_productos_vendidos`  AS SELECT coalesce(round(sum(case when month(`rv`.`fecha`) = 1 then `p`.`monto` else 0 end),2),0) AS `Enero`, coalesce(round(sum(case when month(`rv`.`fecha`) = 2 then `p`.`monto` else 0 end),2),0) AS `Febrero`, coalesce(round(sum(case when month(`rv`.`fecha`) = 3 then `p`.`monto` else 0 end),2),0) AS `Marzo`, coalesce(round(sum(case when month(`rv`.`fecha`) = 4 then `p`.`monto` else 0 end),2),0) AS `Abril`, coalesce(round(sum(case when month(`rv`.`fecha`) = 5 then `p`.`monto` else 0 end),2),0) AS `Mayo`, coalesce(round(sum(case when month(`rv`.`fecha`) = 6 then `p`.`monto` else 0 end),2),0) AS `Junio`, coalesce(round(sum(case when month(`rv`.`fecha`) = 7 then `p`.`monto` else 0 end),2),0) AS `Julio`, coalesce(round(sum(case when month(`rv`.`fecha`) = 8 then `p`.`monto` else 0 end),2),0) AS `Agosto`, coalesce(round(sum(case when month(`rv`.`fecha`) = 9 then `p`.`monto` else 0 end),2),0) AS `Septiembre`, coalesce(round(sum(case when month(`rv`.`fecha`) = 10 then `p`.`monto` else 0 end),2),0) AS `Octubre`, coalesce(round(sum(case when month(`rv`.`fecha`) = 11 then `p`.`monto` else 0 end),2),0) AS `Noviembre`, coalesce(round(sum(case when month(`rv`.`fecha`) = 12 then `p`.`monto` else 0 end),2),0) AS `Diciembre` FROM (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) WHERE year(`rv`.`fecha`) = year(current_timestamp()) ;
 
--- --------------------------------------------------------
-
---
--- Estructura para la vista `costo_entradas_mensuales`
---
 DROP TABLE IF EXISTS `costo_entradas_mensuales`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `costo_entradas_mensuales`  AS SELECT coalesce(round(sum(case when month(`e`.`fecha_compra`) = 1 then `e2`.`precio_compra` else 0 end),2),0) AS `Enero`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 2 then `e2`.`precio_compra` else 0 end),2),0) AS `Febrero`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 3 then `e2`.`precio_compra` else 0 end),2),0) AS `Marzo`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 4 then `e2`.`precio_compra` else 0 end),2),0) AS `Abril`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 5 then `e2`.`precio_compra` else 0 end),2),0) AS `Mayo`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 6 then `e2`.`precio_compra` else 0 end),2),0) AS `Junio`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 7 then `e2`.`precio_compra` else 0 end),2),0) AS `Julio`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 8 then `e2`.`precio_compra` else 0 end),2),0) AS `Agosto`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 9 then `e2`.`precio_compra` else 0 end),2),0) AS `Septiembre`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 10 then `e2`.`precio_compra` else 0 end),2),0) AS `Octubre`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 11 then `e2`.`precio_compra` else 0 end),2),0) AS `Noviembre`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 12 then `e2`.`precio_compra` else 0 end),2),0) AS `Diciembre` FROM (`entradas_2` `e2` join `entradas` `e` on(`e`.`id` = `e2`.`id_entrada`)) WHERE year(`e`.`fecha_compra`) = year(current_timestamp()) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `costo_entradas_mensuales`  AS SELECT coalesce(round(sum(case when month(`e`.`fecha_compra`) = 1 then `e2`.`precio_compra` else 0 end),2),0) AS `Enero`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 2 then `e2`.`precio_compra` else 0 end),2),0) AS `Febrero`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 3 then `e2`.`precio_compra` else 0 end),2),0) AS `Marzo`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 4 then `e2`.`precio_compra` else 0 end),2),0) AS `Abril`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 5 then `e2`.`precio_compra` else 0 end),2),0) AS `Mayo`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 6 then `e2`.`precio_compra` else 0 end),2),0) AS `Junio`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 7 then `e2`.`precio_compra` else 0 end),2),0) AS `Julio`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 8 then `e2`.`precio_compra` else 0 end),2),0) AS `Agosto`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 9 then `e2`.`precio_compra` else 0 end),2),0) AS `Septiembre`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 10 then `e2`.`precio_compra` else 0 end),2),0) AS `Octubre`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 11 then `e2`.`precio_compra` else 0 end),2),0) AS `Noviembre`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 12 then `e2`.`precio_compra` else 0 end),2),0) AS `Diciembre` FROM (`detalles_entrada` `e2` join `entradas` `e` on(`e`.`id` = `e2`.`id_entrada`)) WHERE year(`e`.`fecha_compra`) = year(current_timestamp()) ;
 
--- --------------------------------------------------------
-
---
--- Estructura para la vista `detalles_capital`
---
 DROP TABLE IF EXISTS `detalles_capital`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `detalles_capital`  AS SELECT (select round(sum(case when `m`.`monto` like '-%' then `m`.`monto` else 0 end),2) from `movimientos_capital` `m`) AS `Gastos`, (select round(sum(case when `m`.`monto` not like '-%' then `m`.`monto` else 0 end),2) AS `Ingresos` from `movimientos_capital` `m`) AS `Ingresos`, (select coalesce(round(sum(`p`.`monto`),2),0) from `pagos` `p`) AS `Ventas`, (select `dinero`.`monto` from `dinero`) AS `capital` ;
 
--- --------------------------------------------------------
-
---
--- Estructura para la vista `ganacias_mensuales`
---
 DROP TABLE IF EXISTS `ganacias_mensuales`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ganacias_mensuales`  AS SELECT (select coalesce(round(sum(`m`.`monto`) + (select sum(`m`.`monto`) from `movimientos_capital` `m` where `m`.`monto` like '-%' and month(`m`.`fecha`) = 1),2),0) from `movimientos_capital` `m` where `m`.`monto` not like '-%' and month(`m`.`fecha`) = 1) AS `Enero`, (select coalesce(round(sum(`m`.`monto`) + (select sum(`m`.`monto`) from `movimientos_capital` `m` where `m`.`monto` like '-%' and month(`m`.`fecha`) = 2),2),0) from `movimientos_capital` `m` where `m`.`monto` not like '-%' and month(`m`.`fecha`) = 2) AS `Febrero`, (select coalesce(round(sum(`m`.`monto`) + (select sum(`m`.`monto`) from `movimientos_capital` `m` where `m`.`monto` like '-%' and month(`m`.`fecha`) = 3),2),0) from `movimientos_capital` `m` where `m`.`monto` not like '-%' and month(`m`.`fecha`) = 3) AS `Marzo`, (select coalesce(round(sum(`m`.`monto`) + (select sum(`m`.`monto`) from `movimientos_capital` `m` where `m`.`monto` like '-%' and month(`m`.`fecha`) = 4),2),0) from `movimientos_capital` `m` where `m`.`monto` not like '-%' and month(`m`.`fecha`) = 4) AS `Abril`, (select coalesce(round(sum(`m`.`monto`) + (select sum(`m`.`monto`) from `movimientos_capital` `m` where `m`.`monto` like '-%' and month(`m`.`fecha`) = 5),2),0) from `movimientos_capital` `m` where `m`.`monto` not like '-%' and month(`m`.`fecha`) = 5) AS `Mayo`, (select coalesce(round(sum(`m`.`monto`) + (select sum(`m`.`monto`) from `movimientos_capital` `m` where `m`.`monto` like '-%' and month(`m`.`fecha`) = 6),2),0) from `movimientos_capital` `m` where `m`.`monto` not like '-%' and month(`m`.`fecha`) = 6) AS `Junio`, (select coalesce(round(sum(`m`.`monto`) + (select sum(`m`.`monto`) from `movimientos_capital` `m` where `m`.`monto` like '-%' and month(`m`.`fecha`) = 7),2),0) from `movimientos_capital` `m` where `m`.`monto` not like '-%' and month(`m`.`fecha`) = 7) AS `Julio`, (select coalesce(round(sum(`m`.`monto`) + (select sum(`m`.`monto`) from `movimientos_capital` `m` where `m`.`monto` like '-%' and month(`m`.`fecha`) = 8),2),0) from `movimientos_capital` `m` where `m`.`monto` not like '-%' and month(`m`.`fecha`) = 8) AS `Agosto`, (select coalesce(round(sum(`m`.`monto`) + (select sum(`m`.`monto`) from `movimientos_capital` `m` where `m`.`monto` like '-%' and month(`m`.`fecha`) = 9),2),0) from `movimientos_capital` `m` where `m`.`monto` not like '-%' and month(`m`.`fecha`) = 9) AS `Septiembre`, (select coalesce(round(sum(`m`.`monto`) + (select sum(`m`.`monto`) from `movimientos_capital` `m` where `m`.`monto` like '-%' and month(`m`.`fecha`) = 10),2),0) from `movimientos_capital` `m` where `m`.`monto` not like '-%' and month(`m`.`fecha`) = 10) AS `Octubre`, (select coalesce(round(sum(`m`.`monto`) + (select sum(`m`.`monto`) from `movimientos_capital` `m` where `m`.`monto` like '-%' and month(`m`.`fecha`) = 11),2),0) from `movimientos_capital` `m` where `m`.`monto` not like '-%' and month(`m`.`fecha`) = 11) AS `Noviembre`, (select coalesce(round(sum(`m`.`monto`) + (select sum(`m`.`monto`) from `movimientos_capital` `m` where `m`.`monto` like '-%' and month(`m`.`fecha`) = 12),2),0) from `movimientos_capital` `m` where `m`.`monto` not like '-%' and month(`m`.`fecha`) = 12) AS `Diciembre` FROM `movimientos_capital` AS `m` WHERE year(`m`.`fecha`) = year(current_timestamp()) LIMIT 0, 1 ;
 
--- --------------------------------------------------------
-
---
--- Estructura para la vista `max_ventas`
---
 DROP TABLE IF EXISTS `max_ventas`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `max_ventas`  AS SELECT `p`.`id` AS `id`, `p`.`nombre` AS `nombre`, `p`.`valor_unidad` AS `unidad_valor`, (select `unidades`.`nombre` from `unidades` where `unidades`.`id` = `p`.`id_unidad`) AS `unidad`, (select `marcas`.`nombre` from `marcas` where `marcas`.`id` = `p`.`id_marca`) AS `marca`, (select sum(`f`.`cantidad`) from `factura` `f` where `f`.`id_productos` = `p`.`id`) AS `cantidad` FROM `productos` AS `p` WHERE `p`.`active` = 1 ORDER BY (select sum(`f`.`cantidad`) from `factura` `f` where `f`.`id_productos` = `p`.`id`) DESC LIMIT 0, 5 ;
 
--- --------------------------------------------------------
-
---
--- Estructura para la vista `min_ventas`
---
 DROP TABLE IF EXISTS `min_ventas`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `min_ventas`  AS SELECT `p`.`id` AS `id`, `p`.`nombre` AS `nombre`, `p`.`valor_unidad` AS `unidad_valor`, (select `unidades`.`nombre` from `unidades` where `unidades`.`id` = `p`.`id_unidad`) AS `unidad`, (select `marcas`.`nombre` from `marcas` where `marcas`.`id` = `p`.`id_marca`) AS `marca`, (select sum(`f`.`cantidad`) from `factura` `f` where `f`.`id_productos` = `p`.`id`) AS `cantidad` FROM `productos` AS `p` WHERE `p`.`active` = 1 AND (select sum(`f`.`cantidad`) from `factura` `f` where `f`.`id_productos` = `p`.`id`) is not null ORDER BY (select sum(`f`.`cantidad`) from `factura` `f` where `f`.`id_productos` = `p`.`id`) ASC LIMIT 0, 5 ;
 
--- --------------------------------------------------------
-
---
--- Estructura para la vista `ratio_ventas`
---
 DROP TABLE IF EXISTS `ratio_ventas`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ratio_ventas`  AS SELECT `p`.`id` AS `id`, `p`.`nombre` AS `nombre`, `p`.`valor_unidad` AS `unidad_valor`, (select `unidades`.`nombre` from `unidades` where `unidades`.`id` = `p`.`id_unidad`) AS `unidad`, (select `marcas`.`nombre` from `marcas` where `marcas`.`id` = `p`.`id_marca`) AS `marca`, 1 - (select sum(`c`.`existencia`) from `entradas_2` `c` where `c`.`id_producto` = `p`.`id`) / (select sum(`a`.`cantidad`) from `entradas_2` `a` where `a`.`id_producto` = `p`.`id`) AS `ratio_ventas` FROM `productos` AS `p` WHERE `p`.`active` = 1 LIMIT 0, 5 ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ratio_ventas`  AS SELECT `p`.`id` AS `id`, `p`.`nombre` AS `nombre`, `p`.`valor_unidad` AS `unidad_valor`, (select `unidades`.`nombre` from `unidades` where `unidades`.`id` = `p`.`id_unidad`) AS `unidad`, (select `marcas`.`nombre` from `marcas` where `marcas`.`id` = `p`.`id_marca`) AS `marca`, 1 - (select sum(`c`.`existencia`) from `detalles_entrada` `c` where `c`.`id_producto` = `p`.`id`) / (select sum(`a`.`cantidad`) from `detalles_entrada` `a` where `a`.`id_producto` = `p`.`id`) AS `ratio_ventas` FROM `productos` AS `p` WHERE `p`.`active` = 1 LIMIT 0, 5 ;
 
--- --------------------------------------------------------
-
---
--- Estructura para la vista `rotacion_inventario`
---
 DROP TABLE IF EXISTS `rotacion_inventario`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `rotacion_inventario`  AS SELECT coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 1) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`entradas_2` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 1),2),0) AS `Enero`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 2) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`entradas_2` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 2),2),0) AS `Febrero`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 3) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`entradas_2` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 3),2),0) AS `Marzo`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 4) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`entradas_2` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 4),2),0) AS `Abril`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 5) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`entradas_2` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 5),2),0) AS `Mayo`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 6) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`entradas_2` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 6),2),0) AS `Junio`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 7) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`entradas_2` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 7),2),0) AS `Julio`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 8) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`entradas_2` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 8),2),0) AS `Agosto`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 9) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`entradas_2` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 9),2),0) AS `Septiembre`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 10) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`entradas_2` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 10),2),0) AS `Octubre`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 11) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`entradas_2` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 11),2),0) AS `Noviembre`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 12) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`entradas_2` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 12),2),0) AS `Diciembre` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `rotacion_inventario`  AS SELECT coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 1) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 1),2),0) AS `Enero`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 2) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 2),2),0) AS `Febrero`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 3) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 3),2),0) AS `Marzo`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 4) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 4),2),0) AS `Abril`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 5) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 5),2),0) AS `Mayo`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 6) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 6),2),0) AS `Junio`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 7) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 7),2),0) AS `Julio`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 8) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 8),2),0) AS `Agosto`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 9) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 9),2),0) AS `Septiembre`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 10) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 10),2),0) AS `Octubre`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 11) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 11),2),0) AS `Noviembre`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 12) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 12),2),0) AS `Diciembre` ;
 
--- --------------------------------------------------------
-
---
--- Estructura para la vista `total_productos_categoria`
---
 DROP TABLE IF EXISTS `total_productos_categoria`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `total_productos_categoria`  AS SELECT `c`.`nombre` AS `categoria`, count(`p`.`id`) AS `total_productos` FROM (`categoria` `c` left join `productos` `p` on(`c`.`id` = `p`.`id_categoria`)) WHERE `p`.`active` = 1 GROUP BY `c`.`id`, `c`.`nombre` ;
 
--- --------------------------------------------------------
-
---
--- Estructura para la vista `total_stock_categoria`
---
 DROP TABLE IF EXISTS `total_stock_categoria`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `total_stock_categoria`  AS SELECT `c`.`id` AS `id`, `c`.`nombre` AS `nombre`, (select sum((select sum(`e`.`existencia`) from `entradas_2` `e` where `e`.`id_producto` = `p`.`id`)) from `productos` `p` where `p`.`id_categoria` = `c`.`id`) AS `total` FROM `categoria` AS `c` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `total_stock_categoria`  AS SELECT `c`.`id` AS `id`, `c`.`nombre` AS `nombre`, (select sum((select sum(`e`.`existencia`) from `detalles_entrada` `e` where `e`.`id_producto` = `p`.`id`)) from `productos` `p` where `p`.`id_categoria` = `c`.`id`) AS `total` FROM `categoria` AS `c` ;
 
--- --------------------------------------------------------
-
---
--- Estructura para la vista `valortotalinventario`
---
 DROP TABLE IF EXISTS `valortotalinventario`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `valortotalinventario`  AS SELECT (select `categoria`.`nombre` from `categoria` where `categoria`.`id` = `p`.`id_categoria`) AS `nombre`, round(sum((select sum(`e`.`existencia`) from `entradas_2` `e` where `e`.`id_producto` = `p`.`id`) * `p`.`precio_venta`),2) AS `valor` FROM `productos` AS `p` GROUP BY `p`.`id_categoria` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `valortotalinventario`  AS SELECT (select `categoria`.`nombre` from `categoria` where `categoria`.`id` = `p`.`id_categoria`) AS `nombre`, round(sum((select sum(`e`.`existencia`) from `detalles_entrada` `e` where `e`.`id_producto` = `p`.`id`) * `p`.`precio_venta`),2) AS `valor` FROM `productos` AS `p` GROUP BY `p`.`id_categoria` ;
 
--- --------------------------------------------------------
-
---
--- Estructura para la vista `valor_promedio_inventario_mensual`
---
 DROP TABLE IF EXISTS `valor_promedio_inventario_mensual`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `valor_promedio_inventario_mensual`  AS SELECT coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`entradas_2` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 1),0),0) AS `Enero`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`entradas_2` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 2),0),0) AS `Febrero`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`entradas_2` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 3),0),0) AS `Marzo`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`entradas_2` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 4),0),0) AS `Abril`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`entradas_2` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 5),0),0) AS `Mayo`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`entradas_2` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 6),0),0) AS `Junio`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`entradas_2` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 7),0),0) AS `Julio`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`entradas_2` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 8),0),0) AS `Agosto`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`entradas_2` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 9),0),0) AS `Septiembre`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`entradas_2` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 10),0),0) AS `Octubre`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`entradas_2` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 11),0),0) AS `Noviembre`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`entradas_2` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 12),0),0) AS `Diciembre` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `valor_promedio_inventario_mensual`  AS SELECT coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 1),0),0) AS `Enero`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 2),0),0) AS `Febrero`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 3),0),0) AS `Marzo`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 4),0),0) AS `Abril`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 5),0),0) AS `Mayo`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 6),0),0) AS `Junio`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 7),0),0) AS `Julio`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 8),0),0) AS `Agosto`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 9),0),0) AS `Septiembre`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 10),0),0) AS `Octubre`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 11),0),0) AS `Noviembre`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 12),0),0) AS `Diciembre` ;
 
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `bitacora`
---
 ALTER TABLE `bitacora`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_usuario_idx` (`id_usuario`);
 
---
--- Indices de la tabla `caja`
---
 ALTER TABLE `caja`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_user_idx` (`id_usuario`);
 
---
--- Indices de la tabla `categoria`
---
 ALTER TABLE `categoria`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `nombre` (`nombre`);
 
---
--- Indices de la tabla `clientes`
---
 ALTER TABLE `clientes`
   ADD PRIMARY KEY (`id`);
 
---
--- Indices de la tabla `configuraciones`
---
 ALTER TABLE `configuraciones`
   ADD PRIMARY KEY (`id`);
 
---
--- Indices de la tabla `credito`
---
 ALTER TABLE `credito`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_registro_ventas_idx` (`id_rv`);
 
---
--- Indices de la tabla `detalles_entrada`
---
 ALTER TABLE `detalles_entrada`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_producto` (`id_producto`),
   ADD KEY `id_entradas1` (`id_entrada`);
 
---
--- Indices de la tabla `dinero`
---
 ALTER TABLE `dinero`
   ADD PRIMARY KEY (`id`);
 
---
--- Indices de la tabla `entradas`
---
 ALTER TABLE `entradas`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_proveedor` (`id_proveedor`);
 
---
--- Indices de la tabla `factura`
---
 ALTER TABLE `factura`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_productos_has_registro_ventas_registro_ventas1_idx` (`id_registro_ventas`),
   ADD KEY `fk_productos_has_registro_ventas_productos1_idx` (`id_productos`);
 
---
--- Indices de la tabla `marcas`
---
 ALTER TABLE `marcas`
   ADD PRIMARY KEY (`id`);
 
---
--- Indices de la tabla `metodo_pago`
---
 ALTER TABLE `metodo_pago`
   ADD PRIMARY KEY (`id`);
 
---
--- Indices de la tabla `movimientos_capital`
---
 ALTER TABLE `movimientos_capital`
   ADD PRIMARY KEY (`id`);
 
---
--- Indices de la tabla `notificaciones`
---
 ALTER TABLE `notificaciones`
   ADD PRIMARY KEY (`id`);
 
---
--- Indices de la tabla `pagos`
---
 ALTER TABLE `pagos`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_venta_idx` (`id_venta`),
   ADD KEY `id_metodo_pago_idx` (`id_metodo_pago`);
 
---
--- Indices de la tabla `pagos_entradas`
---
 ALTER TABLE `pagos_entradas`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_metodo_pago2` (`id_metodo_pago`);
 
---
--- Indices de la tabla `permisos`
---
 ALTER TABLE `permisos`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_usuarios_idx` (`id_usuario`);
 
---
--- Indices de la tabla `productos`
---
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `nombre` (`nombre`),
@@ -1405,253 +985,128 @@ ALTER TABLE `productos`
   ADD KEY `id_stock_max_min_idx` (`id_unidad`),
   ADD KEY `id_marca_idx` (`id_marca`);
 
---
--- Indices de la tabla `proveedores`
---
 ALTER TABLE `proveedores`
   ADD PRIMARY KEY (`id`);
 
---
--- Indices de la tabla `registro_ventas`
---
 ALTER TABLE `registro_ventas`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_cliente_idx` (`id_cliente`),
   ADD KEY `id_caja_idx` (`id_caja`);
 
---
--- Indices de la tabla `unidades`
---
 ALTER TABLE `unidades`
   ADD PRIMARY KEY (`id`);
 
---
--- Indices de la tabla `usuarios`
---
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`);
 
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `bitacora`
---
 ALTER TABLE `bitacora`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
---
--- AUTO_INCREMENT de la tabla `caja`
---
 ALTER TABLE `caja`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `categoria`
---
 ALTER TABLE `categoria`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
---
--- AUTO_INCREMENT de la tabla `clientes`
---
 ALTER TABLE `clientes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `configuraciones`
---
 ALTER TABLE `configuraciones`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
---
--- AUTO_INCREMENT de la tabla `credito`
---
 ALTER TABLE `credito`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `detalles_entrada`
---
 ALTER TABLE `detalles_entrada`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
---
--- AUTO_INCREMENT de la tabla `dinero`
---
 ALTER TABLE `dinero`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `entradas`
---
 ALTER TABLE `entradas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
---
--- AUTO_INCREMENT de la tabla `factura`
---
 ALTER TABLE `factura`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `marcas`
---
 ALTER TABLE `marcas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
---
--- AUTO_INCREMENT de la tabla `metodo_pago`
---
 ALTER TABLE `metodo_pago`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
---
--- AUTO_INCREMENT de la tabla `movimientos_capital`
---
 ALTER TABLE `movimientos_capital`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
---
--- AUTO_INCREMENT de la tabla `notificaciones`
---
 ALTER TABLE `notificaciones`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `pagos`
---
 ALTER TABLE `pagos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `pagos_entradas`
---
 ALTER TABLE `pagos_entradas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
---
--- AUTO_INCREMENT de la tabla `permisos`
---
 ALTER TABLE `permisos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `productos`
---
 ALTER TABLE `productos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
---
--- AUTO_INCREMENT de la tabla `proveedores`
---
 ALTER TABLE `proveedores`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
---
--- AUTO_INCREMENT de la tabla `registro_ventas`
---
 ALTER TABLE `registro_ventas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT de la tabla `unidades`
---
 ALTER TABLE `unidades`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
---
--- AUTO_INCREMENT de la tabla `usuarios`
---
 ALTER TABLE `usuarios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `bitacora`
---
 ALTER TABLE `bitacora`
   ADD CONSTRAINT `id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
--- Filtros para la tabla `caja`
---
 ALTER TABLE `caja`
   ADD CONSTRAINT `id_user` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
--- Filtros para la tabla `credito`
---
 ALTER TABLE `credito`
   ADD CONSTRAINT `id_rv` FOREIGN KEY (`id_rv`) REFERENCES `registro_ventas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
--- Filtros para la tabla `detalles_entrada`
---
 ALTER TABLE `detalles_entrada`
   ADD CONSTRAINT `id_entradas1` FOREIGN KEY (`id_entrada`) REFERENCES `entradas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `id_producto` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
--- Filtros para la tabla `entradas`
---
 ALTER TABLE `entradas`
   ADD CONSTRAINT `entradas_ibfk_2` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedores` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
--- Filtros para la tabla `factura`
---
 ALTER TABLE `factura`
   ADD CONSTRAINT `fk_productos_has_registro_ventas_productos1` FOREIGN KEY (`id_productos`) REFERENCES `productos` (`id`),
   ADD CONSTRAINT `fk_productos_has_registro_ventas_registro_ventas1` FOREIGN KEY (`id_registro_ventas`) REFERENCES `registro_ventas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
--- Filtros para la tabla `pagos`
---
 ALTER TABLE `pagos`
   ADD CONSTRAINT `id_metodo_pago` FOREIGN KEY (`id_metodo_pago`) REFERENCES `metodo_pago` (`id`),
   ADD CONSTRAINT `id_venta` FOREIGN KEY (`id_venta`) REFERENCES `registro_ventas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
--- Filtros para la tabla `pagos_entradas`
---
 ALTER TABLE `pagos_entradas`
   ADD CONSTRAINT `id_metodo_pago2` FOREIGN KEY (`id_metodo_pago`) REFERENCES `metodo_pago` (`id`) ON DELETE CASCADE;
 
---
--- Filtros para la tabla `permisos`
---
 ALTER TABLE `permisos`
   ADD CONSTRAINT `id_usuarios` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`);
 
---
--- Filtros para la tabla `productos`
---
 ALTER TABLE `productos`
   ADD CONSTRAINT `id_categoria` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id`),
   ADD CONSTRAINT `id_marca` FOREIGN KEY (`id_marca`) REFERENCES `marcas` (`id`),
   ADD CONSTRAINT `id_unidad` FOREIGN KEY (`id_unidad`) REFERENCES `unidades` (`id`);
 
---
--- Filtros para la tabla `registro_ventas`
---
 ALTER TABLE `registro_ventas`
   ADD CONSTRAINT `id_caja` FOREIGN KEY (`id_caja`) REFERENCES `caja` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `id_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 DELIMITER $$
 --
--- Eventos
---
 CREATE DEFINER=`root`@`localhost` EVENT `check_and_notify` ON SCHEDULE EVERY 1 DAY STARTS '2024-06-23 10:04:00' ON COMPLETION NOT PRESERVE ENABLE DO CALL check_and_notify()$$
 
 DELIMITER ;
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
