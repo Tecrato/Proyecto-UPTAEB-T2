@@ -11,9 +11,10 @@
         private $precio_compra;
         private $existencia;
         private $cantidad;
+        private $id_proveedor;
         private $between_fecha_compra;
 
-        function __construct($id=null ,$id_entrada=null, $id_producto=null,$mercancia=null,$tamaño_mercancia=null,$fecha_vencimiento=null,$precio_compra=null,$existencia=1, $cantidad=1, $between_fecha_compra=null){
+        function __construct($id=null ,$id_entrada=null, $id_producto=null,$mercancia=null,$tamaño_mercancia=null,$fecha_vencimiento=null,$precio_compra=null,$existencia=1, $cantidad=1, $between_fecha_compra=null, $id_proveedor=null){
             $this->id = $id;
             $this->id_entrada = $id_entrada;
             $this->id_producto = $id_producto;
@@ -23,6 +24,7 @@
             $this->precio_compra = $precio_compra;
             $this->existencia = $existencia;
             $this->cantidad = $cantidad;
+            $this->id_proveedor = $id_proveedor;
             $this->between_fecha_compra = $between_fecha_compra;
             Db_base::__construct();
             $this->tabla = "detalles_entradas";
@@ -35,7 +37,8 @@
                 "a.fecha_vencimiento" => $this->fecha_vencimiento,
                 "a.precio_compra" => $this->precio_compra,
                 "a.cantidad" => $this->cantidad,
-                "a.existencia" => $this->existencia
+                "a.existencia" => $this->existencia,
+                "b.id_proveedor" => $this->id_proveedor,
             ]);
             $this->add_variables_interval([
                 "b.fecha_compra" => $this->between_fecha_compra,

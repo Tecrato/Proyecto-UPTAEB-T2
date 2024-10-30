@@ -53,9 +53,15 @@ elseif ($tipo === 'producto') {
     }
     $clase = new Producto(null, $_POST["categoria"], $_POST["unidad"], $_POST["marca"], $_POST["valor_unidad"], $_POST["nombre"], $nick, $_POST["stock_min"], $_POST["stock_max"], $_POST["precio_venta"], $_POST["IVA"], $_POST["codigo"], 1, $_POST["algoritmo"]);
     try {
-        print_r($clase->agregar());
+        // print_r($clase->agregar());
+        $resultado = $clase->agregar();
+        $clase2 = new Bitacora(null, $_SESSION['user_id'], $tipo, "Agregar", "Agregado " . $tipo);
+        $clase2->agregar();
+        echo json_encode(['status' => 'ok', 'message' => '$tipo agregado/a correctamente', 'last_insert_id' => $resultado]);
+        exit(0);
+        die();
     } catch (Exception $e) {
-        print_r($e);
+        echo json_encode(['status' => 'error', 'error' => $e->getMessage()]);
         unlink('Media/imagenes/' . "producto_" . $_POST['nombre']);
     }
 
@@ -122,8 +128,12 @@ elseif ($tipo === 'permiso') {
 }
 
 if ($tipo != 'producto' and $tipo != 'entrada') {
-    $resultado = $clase->agregar();
-    $clase2 = new Bitacora(null, $_SESSION['user_id'], $tipo, "Agregar", "Agregado " . $tipo);
-    $clase2->agregar();
+    try {
+        $resultado = $clase->agregar();
+        $clase2 = new Bitacora(null, $_SESSION['user_id'], $tipo, "Agregar", "Agregado " . $tipo);
+        $clase2->agregar();
+        echo json_encode(['status' => 'ok', 'message' => '$tipo agregado/a correctamente', 'last_insert_id' => $resultado]);
+    } catch (Exception $e) {
+        echo json_encode(['status' => 'error', 'error' => $e->getMessage()]);
+    }
 }
-echo json_encode(['status' => 'ok', 'message' => '$tipo agregado/a correctamente', 'last_insert_id' => $resultado]);

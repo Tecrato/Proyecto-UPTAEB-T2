@@ -21,6 +21,10 @@ parametros opcionales:
  - [nombre de columna segun la tabla]: str = [valor que tendra la columna]
  - [nombre de columna segun la tabla]: str = [valor que tendra la columna]
  - [nombre de columna segun la tabla]: str = [valor que tendra la columna]
+ - between_fecha: dict = {
+    "inicio": str,
+    "fin": str
+} # para las tablas que tengan fechas
 
  - subFuncion: str = "count" o "detallesCapital"
 

@@ -155,6 +155,7 @@ use Shtechnologyx\Pt3\Model\Tipo_empaquetado;
             precio_compra:(isset($_POST['precio_compra']) ? $_POST['precio_compra'] : null),
             existencia:(isset($_POST['existencia']) ? $_POST['existencia'] : null),
             cantidad:(isset($_POST['cantidad']) ? $_POST['cantidad'] : null),
+            id_proveedor:(isset($_POST['id_proveedor']) ? $_POST['id_proveedor'] : null),
         );
     }
     elseif ($_POST['randomnautica'] == "proveedores") {
