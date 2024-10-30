@@ -69,6 +69,7 @@ elseif ($tipo === 'producto') {
     
     for ($i = 0; $i < count($lista); $i++) {
         $entrada = $lista[$i];
+        $entrada["id_entrada"] = $resultado;
         $clase = new Detalle_entrada(
             null,
             $resultado,
@@ -88,8 +89,6 @@ elseif ($tipo === 'producto') {
         $clase2 = new Pago_entrada(null, $pago["metodo"], $resultado, $pago["monto"]);
         $clase2->agregar();
     }
-
-    echo json_encode(['status' => 'ok', 'message' => 'Entrada agregada correctamente', 'last_insert_id' => $resultado]);
 } 
 elseif ($tipo === 'proveedor') {
     $clase = new Proveedor(null, $_POST["nombre"], $_POST["razon_social"], $_POST["T-D"] . "-" . $_POST["rif"], $_POST["telefono"], $_POST["correo"], $_POST["direccion"]); // Llama al modelo y le manda la instruccion
@@ -127,4 +126,4 @@ if ($tipo != 'producto' and $tipo != 'entrada') {
     $clase2 = new Bitacora(null, $_SESSION['user_id'], $tipo, "Agregar", "Agregado " . $tipo);
     $clase2->agregar();
 }
-echo json_encode(['status' => 'ok', 'message' => 'Entrada agregada correctamente', 'last_insert_id' => $resultado]);
+echo json_encode(['status' => 'ok', 'message' => '$tipo agregado/a correctamente', 'last_insert_id' => $resultado]);

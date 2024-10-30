@@ -34,8 +34,8 @@
                 "a.tamaño_mercancia" => $this->tamaño_mercancia,
                 "a.fecha_vencimiento" => $this->fecha_vencimiento,
                 "a.precio_compra" => $this->precio_compra,
-                "a.existencia" => $this->existencia,
                 "a.cantidad" => $this->cantidad,
+                "a.existencia" => $this->existencia
             ]);
             $this->add_variables_interval([
                 "b.fecha_compra" => $this->between_fecha_compra,
@@ -66,10 +66,26 @@
                 INNER JOIN categoria as c ON c.id = pr.id_categoria
             ";
         }
-
+        
+		public function agregar() : int{
+			$query = $this->conn->prepare("INSERT INTO detalles_entradas VALUES(null, :id1, :id_empaquetado, :tm, :precio_compra, :id2, :fecha_vencimiento, :cantidad, :existencia)");
+            
+            $query->bindParam(':id1',$this->id_producto, PDO::PARAM_INT);
+            $query->bindParam(':id_empaquetado',$this->mercancia, PDO::PARAM_INT);
+            $query->bindParam(':tm',$this->tamaño_mercancia, PDO::PARAM_INT);
+            $query->bindParam(':precio_compra',$this->precio_compra, PDO::PARAM_INT);
+            $query->bindParam(':id2',$this->id_entrada, PDO::PARAM_INT);
+            $query->bindParam(':fecha_vencimiento',$this->fecha_vencimiento, PDO::PARAM_STR);
+            $query->bindParam(':cantidad',$this->cantidad, PDO::PARAM_INT);
+            $query->bindParam(':existencia',$this->existencia, PDO::PARAM_INT);
+        
+            $query->execute();
+            return $this->conn->lastInsertId();
+		}
 		function descontar($cantidad){
 
-			$entradas = $this->search(0,10000,order:' fecha_vencimiento ASC');
+			// $entradas = $this->search(0,10000,order:' fecha_vencimiento ASC');
+            $entradas = $this->conn->query("SELECT * FROM detalles_entradas WHERE id_producto=$this->id_producto AND existencia > 0")->fetchAll();
             try {
                 
                 for ($i = 0; $cantidad >= 1; $i++) {
@@ -90,4 +106,5 @@
                 return 0;
             }
 		}
-}
+            
+    }

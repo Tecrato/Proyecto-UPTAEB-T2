@@ -15,9 +15,9 @@
             Db_base::__construct();
             $this->tabla = "movimientos_capital";
             $this->add_variables([
-                "id" => $this->id,
-                "monto" => $this->monto,
-                "descripcion" => $this->descripcion,
+                "a.id" => $this->id,
+                "a.monto" => $this->monto,
+                "a.descripcion" => $this->descripcion,
             ]);
 		}
 

@@ -55,6 +55,9 @@
             $this->select_query = " a.* ";
             $this->variables_interval = array();
             Conexion::__construct();
+            if (!$this->conn) {
+                throw new Exception("Database connection failed");
+            }
         }
         public function add_variables($variables) : void{
             foreach ($variables as $key => $value){
@@ -79,27 +82,29 @@
                 }
                 array_push($this->variables_interval, $value);
             }
-            
+        }
+        private function normalizeKey($key) {
+            return explode(".", $key)[1];
         }
         public function agregar() : int{
             $lista_vars = array();
             foreach ($this->variables as $key => $value){
-                $lista_vars[substr($key, 2)] = $value;
+                $lista_vars[$this->normalizeKey($key)] = $value;
             }
-            $sql = "INSERT INTO $this->tabla( ";
-            $sql .= implode(", ", array_keys($lista_vars));
-            $sql .= " ) VALUES(:";
-            $sql .= implode(", :", array_keys($lista_vars));
-            $sql .= " ) ";
-            print_r($sql);
+            $sql = "INSERT INTO ".$this->tabla."(";
+            $sql .= implode(",", array_keys($lista_vars));
+            $sql .= ") VALUES(:";
+            $sql .= implode(",:", array_keys($lista_vars));
+            $sql .= ") ";
+
+            echo "\n";
+            echo "Consulta SQL: " . $sql . "\n";
+            print_r($lista_vars);
+            // $sql = str_replace("a.", "", $sql);
+            // print_r($sql);
             $query = $this->conn->prepare($sql);
             $query->execute($lista_vars);
             return $this->conn->lastInsertId();
-        }
-        public function borrar() : void {
-            $query = $this->conn->prepare("DELETE FROM $this->tabla WHERE ID=:id");
-            $query->bindParam(':id',$this->variables['id'], PDO::PARAM_INT);
-            $query->execute();
         }
         public function actualizar() : void {
             if (!isset($this->variables['id']) or $this->variables['id'] == null){
@@ -122,13 +127,13 @@
     
             $query .= " WHERE 1 ";
             foreach ($this->variables as $key => $value){
-                $query .= ' AND '.$key.'=:'.substr($key,2);
+                $query .= ' AND '.$key.'=:'.$this->normalizeKey($key);
             }
             foreach ($this->variables_like as $key => $value){
-                $query .= ' AND '.$key.' LIKE :alike'.substr($key,2);
+                $query .= ' AND '.$key.' LIKE :alike'.$this->normalizeKey($key);
             }
             foreach ($this->variables_interval as $key => $value){
-                $query .= ' AND '.$key.' BETWEEN :'.substr($key,2).' AND :'.substr($key,2).'2';
+                $query .= ' AND '.$key.' BETWEEN :'.$this->normalizeKey($key).' AND :'.$this->normalizeKey($key).'2';
             }
             $query .= " ORDER BY $order ";
             $query .= " LIMIT :l OFFSET :n ";
@@ -139,15 +144,15 @@
             
             // Asignamos los parametros   
             foreach ($this->variables as $key => $value){
-                $consulta->bindParam(':'.substr($key,2),$value);
+                $consulta->bindParam(':'.$this->normalizeKey($key),$value);
             }
             foreach ($this->variables_like as $key => $value){
                 $value2 = '%'.$value.'%';
-                $consulta->bindParam(':alike'.substr($key,2),$value2);
+                $consulta->bindParam(':alike'.$this->normalizeKey($key),$value2);
             }
             foreach ($this->variables_interval as $key => $value){
-                $consulta->bindParam(':'.substr($key,2),$value["inicio"]);
-                $consulta->bindParam(':'.substr($key,2).'2',$value["fin"]);
+                $consulta->bindParam(':'.$this->normalizeKey($key),$value["inicio"]);
+                $consulta->bindParam(':'.$this->normalizeKey($key).'2',$value["fin"]);
             }
             $n = $n*$limite;
             $consulta->bindParam(':l',$limite, PDO::PARAM_INT);
@@ -160,13 +165,13 @@
             $query = "SELECT COUNT(*) as 'total' FROM $this->tabla AS a $this->joins WHERE 1";
             
             foreach ($this->variables as $key => $value){
-                $query .= ' AND '.$key.'=:a'.substr($key,2);
+                $query .= ' AND '.$key.'=:a'.$this->normalizeKey($key);
             }
             foreach ($this->variables_like as $key => $value){
-                $query .= ' AND '.$key.' LIKE :alike'.substr($key,2);
+                $query .= ' AND '.$key.' LIKE :alike'.$this->normalizeKey($key);
             }
             foreach ($this->variables_interval as $key => $value){
-                $query .= ' AND '.$key.' BETWEEN :'.substr($key,2).' AND :'.substr($key,2).'2';
+                $query .= ' AND '.$key.' BETWEEN :'.$this->normalizeKey($key).' AND :'.$this->normalizeKey($key).'2';
             }
             
             // Creamos la consulta
@@ -174,17 +179,20 @@
             
             // Asignamos los parametros   
             foreach ($this->variables as $key => $value){
-                $consulta->bindParam(':a'.substr($key,2),$value);
+                $consulta->bindParam(':a'.$this->normalizeKey($key),$value);
             }
             foreach ($this->variables_like as $key => $value){
                 $value2 = '%'.$value.'%';
-                $consulta->bindParam(':alike'.substr($key,2),$value2);
+                $consulta->bindParam(':alike'.$this->normalizeKey($key),$value2);
             }
             foreach ($this->variables_interval as $key => $value){
-                $consulta->bindParam(':'.substr($key,2),$value["inicio"]);
-                $consulta->bindParam(':'.substr($key,2).'2',$value["fin"]);
+                $consulta->bindParam(':'.$this->normalizeKey($key),$value["inicio"]);
+                $consulta->bindParam(':'.$this->normalizeKey($key).'2',$value["fin"]);
             }
             $consulta->execute();
             return $consulta->fetch()['total'];
+        }
+        public function get_variables(){
+            return $this->variables;
         }
     }

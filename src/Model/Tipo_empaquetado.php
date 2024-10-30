@@ -13,11 +13,11 @@
             $this->like = $like;
             Db_base::__construct();
             $this->add_variables([
-                "id"=> $this->id,
-                "nombre"=> $this->nombre,
+                "a.id"=> $this->id,
+                "a.nombre"=> $this->nombre,
             ]);
             $this->add_variables_like([
-                "nombre" => $this->like
+                "a.nombre" => $this->like
             ]);
             $this->tabla = 'tipo_empaquetado';
         }
