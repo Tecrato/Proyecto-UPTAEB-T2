@@ -1,8 +1,7 @@
 <?php
     namespace Shtechnologyx\Pt3\Model;
     use PDO;
-    use Exception;
-	class Detalle_entrada extends Conexion{
+	class Detalle_entrada extends Db_base {
         private $id;
         private $id_entrada;
         private $id_producto;
@@ -12,8 +11,9 @@
         private $precio_compra;
         private $existencia;
         private $cantidad;
+        private $between_fecha_compra;
 
-        function __construct($id=null ,$id_entrada=null, $id_producto=null,$mercancia=null,$tamaño_mercancia=null,$fecha_vencimiento=null,$precio_compra=null,$existencia=1, $cantidad=1){
+        function __construct($id=null ,$id_entrada=null, $id_producto=null,$mercancia=null,$tamaño_mercancia=null,$fecha_vencimiento=null,$precio_compra=null,$existencia=1, $cantidad=1, $between_fecha_compra=null){
             $this->id = $id;
             $this->id_entrada = $id_entrada;
             $this->id_producto = $id_producto;
@@ -23,30 +23,49 @@
             $this->precio_compra = $precio_compra;
             $this->existencia = $existencia;
             $this->cantidad = $cantidad;
-            Conexion::__construct();
+            $this->between_fecha_compra = $between_fecha_compra;
+            Db_base::__construct();
+            $this->tabla = "detalles_entradas";
+            $this->add_variables([
+                "a.id" => $this->id,
+                "a.id_entrada" => $this->id_entrada,
+                "a.id_producto" => $this->id_producto,
+                "a.id_empaquetado" => $this->mercancia,
+                "a.tamaño_mercancia" => $this->tamaño_mercancia,
+                "a.fecha_vencimiento" => $this->fecha_vencimiento,
+                "a.precio_compra" => $this->precio_compra,
+                "a.existencia" => $this->existencia,
+                "a.cantidad" => $this->cantidad,
+            ]);
+            $this->add_variables_interval([
+                "b.fecha_compra" => $this->between_fecha_compra,
+            ]);
+            $this->select_query = "
+                b.id,
+                p.razon_social as proveedor,
+                b.fecha_compra,
+                b.codigo,
+                a.id_empaquetado,
+                pr.nombre as producto,
+                m.nombre as marca,
+                pr.valor_unidad,
+                u.nombre as unidad,
+                c.nombre as categoria,
+                a.fecha_vencimiento,
+                a.precio_compra,
+                a.tamaño_mercancia,
+                a.cantidad,
+                a.existencia
+            ";
+            $this->joins = "
+                INNER JOIN entradas as b ON b.id = a.id_entrada
+                INNER JOIN proveedores AS p ON b.id_proveedor = p.id
+                INNER JOIN productos as pr ON a.id_producto = pr.id
+                INNER JOIN marcas as m ON m.id = pr.id_marca
+                INNER JOIN unidades as u ON u.id = pr.id_unidad
+                INNER JOIN categoria as c ON c.id = pr.id_categoria
+            ";
         }
-
-		function agregar($transaccion = true){
-            echo "iniciando agregar";
-			$query = $this->conn->prepare("INSERT INTO detalles_entradas VALUES(null, :id1, :mercancia, :tm, :precio_compra, :id2, :fecha_vencimiento, :cantidad, :existencia)");
-            
-            $query->bindParam(':id1',$this->id_producto, PDO::PARAM_INT);
-            $query->bindParam(':mercancia',$this->mercancia, PDO::PARAM_INT);
-            $query->bindParam(':tm',$this->tamaño_mercancia, PDO::PARAM_INT);
-            $query->bindParam(':precio_compra',$this->precio_compra, PDO::PARAM_INT);
-            $query->bindParam(':id2',$this->id_entrada, PDO::PARAM_INT);
-            $query->bindParam(':fecha_vencimiento',$this->fecha_vencimiento, PDO::PARAM_STR);
-            $query->bindParam(':cantidad',$this->cantidad, PDO::PARAM_INT);
-            $query->bindParam(':existencia',$this->existencia, PDO::PARAM_INT);
-            
-            echo "terminando agregar";
-            if ($transaccion) {
-                $query->execute();
-            }
-            echo "terminando execute agregar";
-
-            return $this->conn->lastInsertId();
-		}
 
 		function descontar($cantidad){
 
@@ -71,86 +90,4 @@
                 return 0;
             }
 		}
-
-		function borrar() {
-			$query = $this->conn->prepare('DELETE FROM entradas WHERE id=:id');
-
-			$query->bindParam(':id',$this->id);
-			$query->execute();
-		}
-
-		function search($n=0,$limite=9, $order = ' id ASC '){
-            $query = "
-                SELECT 
-                b.id,
-                p.razon_social as proveedor,
-                b.fecha_compra,
-                b.codigo,
-                a.id_empaquetado,
-                pr.nombre as producto,
-                m.nombre as marca,
-                pr.valor_unidad,
-                u.nombre as unidad,
-                c.nombre as categoria,
-                a.fecha_vencimiento,
-                a.precio_compra,
-                a.tamaño_mercancia,
-                a.cantidad,
-                a.existencia
-                FROM detalles_entradas AS a 
-                INNER JOIN entradas as b ON b.id = a.id_entrada
-                INNER JOIN proveedores AS p ON b.id_proveedor = p.id
-                INNER JOIN productos as pr ON a.id_producto = pr.id
-                INNER JOIN marcas as m ON m.id = pr.id_marca
-                INNER JOIN unidades as u ON u.id = pr.id_unidad
-                INNER JOIN categoria as c ON c.id = pr.id_categoria
-            ";
-
-			$lista = [];
-
-            // if ($this->id){
-            // 	array_push($lista,'id');
-            // }
-            // if ($this->id_producto){
-            //     array_push($lista, 'id_producto');
-            // }
-            // if ($this->mercancia){
-            //     array_push($lista, 'mercancia');
-            // }
-            // if ($lista) {
-            // 	foreach ($lista as $e){
-            // 		$query .= ' AND '.$e.'=:'.$e;
-            // 	}
-            // }
-
-
-            $n = $n*$limite;
-			$query = $query . " ORDER BY $order ";
-			$query = $query . " LIMIT :l OFFSET :n ";
-
-
-            $consulta = $this->conn->prepare($query);
-
-            $consulta->bindParam(':l',$limite, PDO::PARAM_INT);
-            $consulta->bindParam(':n',$n, PDO::PARAM_INT);
-
-            // if ($this->id){
-            //     $consulta->bindParam(':id',$this->id, PDO::PARAM_INT);
-            // }
-			// if ($this->id_producto) {
-            //     $consulta->bindParam(':id_producto',$this->id_producto, PDO::PARAM_INT);
-			// }
-			// if ($this->mercancia) {
-            //     $consulta->bindParam(':mercancia',$this->mercancia, PDO::PARAM_INT);
-			// }
-
-            $consulta->execute();
-            return $consulta->fetchAll();
-		}
-        function COUNT(){
-            $query = $this->conn->prepare("SELECT COUNT(*) as 'total' FROM detalles_entradas WHERE existencia=:existencia");
-			$query->bindParam(':existencia',$this->existencia, PDO::PARAM_INT);
-            $query->execute();
-            return $query->fetch()['total'];
-        }
 }

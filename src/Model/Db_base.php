@@ -82,14 +82,18 @@
             
         }
         public function agregar() : int{
+            $lista_vars = array();
+            foreach ($this->variables as $key => $value){
+                $lista_vars[substr($key, 2)] = $value;
+            }
             $sql = "INSERT INTO $this->tabla( ";
-            $sql .= implode(", ", array_keys($this->variables));
+            $sql .= implode(", ", array_keys($lista_vars));
             $sql .= " ) VALUES(:";
-            $sql .= implode(", :", array_keys($this->variables));
+            $sql .= implode(", :", array_keys($lista_vars));
             $sql .= " ) ";
             print_r($sql);
             $query = $this->conn->prepare($sql);
-            $query->execute($this->variables);
+            $query->execute($lista_vars);
             return $this->conn->lastInsertId();
         }
         public function borrar() : void {

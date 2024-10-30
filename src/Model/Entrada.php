@@ -30,11 +30,11 @@ use Exception;
                 INNER JOIN proveedores b ON b.id = a.id_proveedor
             ';
             $this->add_variables([
-                "id" => $this->id,
-                "id_proveedor" => $this->id_proveedor,
-                "fecha_compra" => $this->fecha_compra,
-                "codigo" => $this->codigo,
-                "detalles" => $this->detalles,
+                "a.id" => $this->id,
+                "a.id_proveedor" => $this->id_proveedor,
+                "a.fecha_compra" => $this->fecha_compra,
+                "a.codigo" => $this->codigo,
+                "a.detalles" => $this->detalles,
             ]);
             $this->add_variables_interval([
                 "a.fecha_compra" => $this->between_fecha
