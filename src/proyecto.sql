@@ -473,16 +473,6 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Estructura Stand-in para la vista `capital`
--- (Véase abajo para la vista actual)
---
-CREATE TABLE `capital` (
-`capital` decimal(34,2)
-);
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `categoria`
 --
 
@@ -529,18 +519,6 @@ INSERT INTO `clientes` (`id`, `nombre`, `cedula`, `apellido`, `documento`, `dire
 -- --------------------------------------------------------
 
 --
--- Estructura Stand-in para la vista `clientesfrecuentes`
--- (Véase abajo para la vista actual)
---
-CREATE TABLE `clientesfrecuentes` (
-`idCliente` int(11)
-,`Cliente` varchar(500)
-,`Compras` bigint(21)
-);
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `configuraciones`
 --
 
@@ -557,35 +535,6 @@ CREATE TABLE `configuraciones` (
 INSERT INTO `configuraciones` (`id`, `llave`, `valor`) VALUES
 (1, 'dolar', '41');
 
--- --------------------------------------------------------
-
---
--- Estructura Stand-in para la vista `coste_productos_vendidos`
--- (Véase abajo para la vista actual)
---
-CREATE TABLE `coste_productos_vendidos` (
-`Enero` double(19,2)
-,`Febrero` double(19,2)
-,`Marzo` double(19,2)
-,`Abril` double(19,2)
-,`Mayo` double(19,2)
-,`Junio` double(19,2)
-,`Julio` double(19,2)
-,`Agosto` double(19,2)
-,`Septiembre` double(19,2)
-,`Octubre` double(19,2)
-,`Noviembre` double(19,2)
-,`Diciembre` double(19,2)
-);
-
--- --------------------------------------------------------
-
---
--- Estructura Stand-in para la vista `costo_entradas_mensuales`
--- (Véase abajo para la vista actual)
---
-CREATE TABLE `costo_entradas_mensuales` (
-);
 
 -- --------------------------------------------------------
 
@@ -613,18 +562,6 @@ END
 $$
 DELIMITER ;
 
--- --------------------------------------------------------
-
---
--- Estructura Stand-in para la vista `detalles_capital`
--- (Véase abajo para la vista actual)
---
-CREATE TABLE `detalles_capital` (
-`Gastos` decimal(34,2)
-,`Ingresos` decimal(34,2)
-,`Ventas` double(19,2)
-,`capital` float
-);
 
 -- --------------------------------------------------------
 
@@ -773,27 +710,6 @@ INSERT INTO `factura` (`id`, `id_registro_ventas`, `id_productos`, `cantidad`, `
 -- --------------------------------------------------------
 
 --
--- Estructura Stand-in para la vista `ganacias_mensuales`
--- (Véase abajo para la vista actual)
---
-CREATE TABLE `ganacias_mensuales` (
-`Enero` decimal(35,2)
-,`Febrero` decimal(35,2)
-,`Marzo` decimal(35,2)
-,`Abril` decimal(35,2)
-,`Mayo` decimal(35,2)
-,`Junio` decimal(35,2)
-,`Julio` decimal(35,2)
-,`Agosto` decimal(35,2)
-,`Septiembre` decimal(35,2)
-,`Octubre` decimal(35,2)
-,`Noviembre` decimal(35,2)
-,`Diciembre` decimal(35,2)
-);
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `marcas`
 --
 
@@ -815,21 +731,6 @@ INSERT INTO `marcas` (`id`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura Stand-in para la vista `max_ventas`
--- (Véase abajo para la vista actual)
---
-CREATE TABLE `max_ventas` (
-`id` int(11)
-,`nombre` varchar(50)
-,`unidad_valor` float
-,`unidad` varchar(45)
-,`marca` varchar(100)
-,`cantidad` decimal(32,0)
-);
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `metodo_pago`
 --
 
@@ -846,21 +747,6 @@ CREATE TABLE `metodo_pago` (
 INSERT INTO `metodo_pago` (`id`, `nombre`, `active`) VALUES
 (1, 'transferencia', 1),
 (2, 'Divisa', 1);
-
--- --------------------------------------------------------
-
---
--- Estructura Stand-in para la vista `min_ventas`
--- (Véase abajo para la vista actual)
---
-CREATE TABLE `min_ventas` (
-`id` int(11)
-,`nombre` varchar(50)
-,`unidad_valor` float
-,`unidad` varchar(45)
-,`marca` varchar(100)
-,`cantidad` decimal(32,0)
-);
 
 -- --------------------------------------------------------
 
@@ -1064,15 +950,6 @@ INSERT INTO `proveedores` (`id`, `nombre`, `razon_social`, `rif`, `telefono`, `c
 -- --------------------------------------------------------
 
 --
--- Estructura Stand-in para la vista `ratio_ventas`
--- (Véase abajo para la vista actual)
---
-CREATE TABLE `ratio_ventas` (
-);
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `registro_ventas`
 --
 
@@ -1093,15 +970,6 @@ CREATE TABLE `registro_ventas` (
 INSERT INTO `registro_ventas` (`id`, `monto_final`, `fecha`, `id_cliente`, `id_caja`, `IVA`, `active`) VALUES
 (1, 615, '2024-10-28 19:22:00', 1, 1, 0, 1),
 (2, 615, '2024-10-28 19:22:19', 1, 1, 0, 1);
-
--- --------------------------------------------------------
-
---
--- Estructura Stand-in para la vista `rotacion_inventario`
--- (Véase abajo para la vista actual)
---
-CREATE TABLE `rotacion_inventario` (
-);
 
 -- --------------------------------------------------------
 
@@ -1133,25 +1001,6 @@ CREATE TABLE `tipo_empaquetado_por_categoria` (
   `id_tipo_empaquetado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
---
--- Estructura Stand-in para la vista `total_productos_categoria`
--- (Véase abajo para la vista actual)
---
-CREATE TABLE `total_productos_categoria` (
-`categoria` varchar(50)
-,`total_productos` bigint(21)
-);
-
--- --------------------------------------------------------
-
---
--- Estructura Stand-in para la vista `total_stock_categoria`
--- (Véase abajo para la vista actual)
---
-CREATE TABLE `total_stock_categoria` (
-);
 
 -- --------------------------------------------------------
 
@@ -1196,23 +1045,6 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `hash`, `rol`, `active`, `semilla`, `sesion_id`) VALUES
 (1, 'Edouard', 'nose@gmail.com', '$2y$10$pVahKWT/D1fO2rT.Bo5/qO3M8QgCiEiXDkED0FiH1S1droi5UoKcq', 1, 1, '1234', 'mCa2rk1bhp');
 
--- --------------------------------------------------------
-
---
--- Estructura Stand-in para la vista `valortotalinventario`
--- (Véase abajo para la vista actual)
---
-CREATE TABLE `valortotalinventario` (
-);
-
--- --------------------------------------------------------
-
---
--- Estructura Stand-in para la vista `valor_promedio_inventario_mensual`
--- (Véase abajo para la vista actual)
---
-CREATE TABLE `valor_promedio_inventario_mensual` (
-);
 
 -- --------------------------------------------------------
 
