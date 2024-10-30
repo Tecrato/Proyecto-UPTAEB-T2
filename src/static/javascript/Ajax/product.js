@@ -951,6 +951,7 @@ function DELETE_U_M_C(TR, BTN) {
           processData: false,
           contentType: false,
           success: function (response) {
+            console.log(response);
             if (tipo == "unidad") {
               msj = "Unidad Eliminada correctamente";
             } else if (tipo == "categoria") {

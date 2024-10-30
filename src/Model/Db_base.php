@@ -128,7 +128,7 @@
         }
         public function borrar() : void {
             $query = $this->conn->prepare("DELETE FROM $this->tabla WHERE id=:id");
-            $query->bindParam(':id',$this->variables['id'], PDO::PARAM_INT);
+            $query->bindParam(':id',$this->variables['a.id'], PDO::PARAM_INT);
             $query->execute();
         }
         public function search($n=0,$limite=9, $order=' id ASC ') : Array{

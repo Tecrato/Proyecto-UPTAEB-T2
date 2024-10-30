@@ -42,82 +42,58 @@ use Shtechnologyx\Pt3\Model\Tipo_empaquetado;
             //     print_r(realpath("../../Media/imagenes/".$imagen));
             //     unlink("../../Media/imagenes/".$imagen);
             // }
-            $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Borrar","Borrado ".$tipo);
-            $clase2->agregar();
         $clase->toggle_active();
     }
     elseif ($tipo == 'proveedor'){
         $clase = new Proveedor($_POST['ID']); // Llama al modelo y le manda la instruccion
         $clase->desactivar();
-        $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Borrar","Borrado ".$tipo);
-        $clase2->agregar();
         echo "1";
-        $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Borrar","Borrado ".$tipo);
-        $clase2->agregar();
 
     }
     elseif ($tipo == 'cliente'){
         $clase = new Cliente($_POST['ID']);
         $clase->desactivar();
-        $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Borrar","Borrado ".$tipo);
-        $clase2->agregar();
     }
     elseif ($tipo == 'usuarios'){
         $clase = new Usuario($_POST['ID']);
         $clase->borrar();
-        $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Borrar","Borrado ".$tipo);
-        $clase2->agregar();
     }
     elseif ($tipo == 'ventas'){
         $clase = new Registro_ventas($_POST['ID']);
         $clase->desactivar();
-        $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Borrar","Borrado ".$tipo);
-        $clase2->agregar();
     }
     elseif ($tipo == 'entradas'){
         $clase = new Entrada($_POST['ID']);
         $clase->borrar();
-        $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Borrar","Borrado ".$tipo);
-        $clase2->agregar();
     }
     elseif ($tipo === 'unidad'){
         $clase = new Unidad($_POST["ID"]);
         $clase->borrar();
-        $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Borrar","Borrado ".$tipo);
-        $clase2->agregar();
     }
     elseif ($tipo === 'empaquetado'){
         $clase = new Tipo_empaquetado($_POST["ID"]);
         $clase->borrar();
-        $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Borrar","Borrado ".$tipo);
-        $clase2->agregar();
     }
     elseif ($tipo === 'marca'){
         $clase = new Marca($_POST["ID"]);
         $clase->borrar();
-        $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Borrar","Borrado ".$tipo);
-        $clase2->agregar();
     }
     elseif ($tipo === 'categoria'){
         $clase = new Categoria($_POST["ID"]);
         $clase->borrar();
-        $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Borrar","Borrado ".$tipo);
-        $clase2->agregar();
     }
     elseif ($tipo === 'metodo_pago'){
         $clase = new Metodo_pago($_POST["ID"]);
         $clase->desactivar();
-        $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Borrar","Borrado ".$tipo);
-        $clase2->agregar();
     }
     elseif ($tipo === 'permiso'){
         $clase = new Permisos(null,$_POST["id_usuario"],$_POST["tabla"],$_POST["accion"]);
         $clase->borrar();
-        $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Borrar","Borrado ".$tipo);
-        $clase2->agregar();
     }
     elseif ($tipo == 'notificaciones'){
         $clase = new Notificacion($_POST['ID']);
         $clase->desactivar();
     }
+    $clase2 = new Bitacora(null,$_SESSION['user_id'],$tipo,"Borrar","Borrado ".$tipo);
+    $clase2->agregar();
 ?>
