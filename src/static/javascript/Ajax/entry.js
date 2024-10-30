@@ -251,13 +251,23 @@ function func(dolar) {
                   ${producto.nombre + " " + producto.valor_unidad + " " + producto.unidad + " " + producto.marca}
               </td>
               <td>
-                  <select class="uk-select" name="" id="">
-                      <option value="Saco">Saco</option>
-                      <option value="Paquete">Paquete</option>
-                      <option value="Bulto">Bulto</option>
-                      <option value="Paca">Paca</option>
-                      <option value="Caja">Caja</option>
-                  </select>
+                    <input type="hidden">
+                    <nav uk-dropnav="mode: click">
+                      <ul class="uk-subnav" style="width: 100px;">
+                          <li>
+                              <a href>PAQUETE <span uk-drop-parent-icon></span></a>
+                              <div class="uk-dropdown">
+                                  <form class="uk-search uk-search-default uk-margin-small-bottom">
+                                      <span uk-search-icon style="color: #999"></span>
+                                      <input class="uk-search-input input_placeholder search_paquete_entry" name="paquete" type="search" placeholder="Buscar" aria-label="" style="color: #999; border-color: #999;">
+                                  </form>
+                                  <ul class="uk-nav uk-dropdown-nav cont_presentation">
+                                      
+                                  </ul>
+                              </div>
+                          </li>
+                      </ul>
+                    </nav>
               </td>
               <td>
                   <input class="uk-input uk-form-width-small" type="number" aria-label="disabled"" placeholder="magnitud mercancia">
@@ -276,6 +286,9 @@ function func(dolar) {
               </td>
               <td style="display: none">
                   <input type="hidden" value="${(producto.precio_venta / parseFloat(dolar)).toFixed(2)}">
+              </td>
+              <td style="display: none">
+                  <input type="hidden">
               </td>
           </tr>
       `;
@@ -310,8 +323,66 @@ function func(dolar) {
 
       InsertarProductos();
 
+      
       //aqui insertamos los tr
       ContainerTr.innerHTML += tr;
+
+      //aqui cargamos los datos del paquete q el usuario escoja
+      let cont_presentation = document.querySelectorAll(".cont_presentation");
+      cont_presentation.forEach((e) => {
+        let container = e
+
+        $.ajax({
+          url: "api_search",
+          type: "POST",
+          data: { randomnautica: "empaquetado" },
+          success: function (response) {
+            let json = JSON.parse(response);
+            let template = "";
+            json.lista.forEach((U) => {
+              template += `<li id="${U.id}" class="btn-paquete"><a href="#">${U.nombre}</a></li>`
+            })
+            container.innerHTML = template
+
+            let btnPaquete = document.querySelectorAll(".btn-paquete")
+            btnPaquete.forEach((btn) => {
+              btn.addEventListener("click", () => {
+                let id = btn.getAttribute("id")
+                let name = btn.textContent
+                let input = btn.parentElement.parentElement.previousElementSibling
+                let nav = btn.parentElement.parentElement.parentElement.parentElement.parentElement.previousElementSibling
+                let setIdNav = btn.parentElement.parentElement.parentElement.parentElement.parentElement.previousElementSibling.parentElement.parentElement.lastElementChild.firstElementChild
+                input.textContent = name
+                nav.setAttribute("value", name)
+                setIdNav.setAttribute("value", id)
+              })
+            })
+
+            let searchPaquete = document.querySelectorAll(".search_paquete_entry")
+            searchPaquete.forEach(e => {
+              e.addEventListener("keyup", (item) => {
+                let value = item.target.value
+                $.ajax({
+                  url: "api_search",
+                  type: "POST",
+                  data: { randomnautica: "empaquetado", like: value },
+                  success: function (response) {
+                    let json = JSON.parse(response);
+                    let template = "";
+                    json.lista.forEach((U) => {
+                      template += `<li id="${U.id}" class="btn-paquete"><a href="#">${U.nombre}</a></li>`
+                    })
+                    container.innerHTML = template
+                  }
+                })
+              })
+            })
+
+
+
+          }
+        })
+      })
 
 
       //creamos esta funcion que calculara los montos de la factura
@@ -351,6 +422,7 @@ function func(dolar) {
             //por cada vuelta, inserta en el array el valor de los inputs, dentro de cada TD
             array.push(child.firstElementChild.value);
           }
+          console.log(array);
           let idProducto = valor2;
           let cantidad = array[4] == "" ? 0 : parseInt(array[4]);
 
@@ -364,7 +436,7 @@ function func(dolar) {
             <tr class="uk-light">
               <td style="display: none">${array[0]}</td>
               <td class="id_trDetail">${array[1]}</td>
-              <td>${array[2]}</td>
+              <td id="${array[9]}">${array[2]}</td>
               <td>${array[3]}</td>
               <td>${cantidad}</td>
               <td>${array[5]}</td>
@@ -579,7 +651,8 @@ function func(dolar) {
             let id = iterator.firstElementChild.textContent
             let precio_compra = iterator.lastElementChild.previousElementSibling.previousElementSibling.textContent
             let fechaV = iterator.lastElementChild.previousElementSibling.previousElementSibling.previousElementSibling.textContent
-            let mercancia = iterator.firstElementChild.nextElementSibling.nextElementSibling.textContent
+            let mercancia = iterator.firstElementChild.nextElementSibling.nextElementSibling.getAttribute('id')
+            console.log(mercancia);
             let t_mercancia = iterator.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent
             let cantidad_m = iterator.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent
 

@@ -36,7 +36,6 @@ use Shtechnologyx\Pt3\Model\Tipo_empaquetado;
     if ($_POST['randomnautica'] == "caja") {
         $clase = new Caja(
             id_usuario:(isset($_POST['id_usuario']) ? $_POST['id_usuario'] : null),
-            
         );
     }
     elseif ($_POST['randomnautica'] == "categorias") {

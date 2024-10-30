@@ -820,7 +820,7 @@
                                         </tr>
                                     </thead>
                                     <tbody id="TemplateUnidad">
-    
+
                                     </tbody>
                                 </table>
                             </div>
@@ -942,7 +942,6 @@
 
         </ul>
     </section>
-
 
 </main>
 <script src="static/javaScript/librerias/JsBardcode.js" defer></script>
