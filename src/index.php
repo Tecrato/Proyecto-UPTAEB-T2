@@ -23,3 +23,7 @@
         require_once('Controller/funcs_ajax/'.$page.'.php');
         exit(0);
     }
+    else if ($type == "pdfs"){
+        require_once('Controller/pdfs/PDF_'.$page.'.php');
+        exit(0);
+    }

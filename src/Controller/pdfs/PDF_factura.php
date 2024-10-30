@@ -1,11 +1,10 @@
 <?php
-require("../../Model/Conexion.php");
-require('../../Model/Usuarios.php');
-include("../funcs/verificar.php");
-require('../../Plugins/fpdf.php');
-require('../../Model/Facturas.php');
-require('../../Model/Registro de ventas.php');
-require('../../Model/Pagos.php');
+use Proyecto\T2\Model\Usuario;
+include("Controller/funcs/verificar.php");
+use Proyecto\T2\Model\Factura;
+use Proyecto\T2\Model\Registro_ventas;
+use Proyecto\T2\Model\Pago;
+use FPDF as FPDF;
 
 $clase2 = new Registro_ventas(isset($_GET['id']) ? $_GET['id'] : null);
 $result = $clase2->search()[0];

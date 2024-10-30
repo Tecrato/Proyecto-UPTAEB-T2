@@ -1,10 +1,8 @@
 <?php
-require("../../Model/Conexion.php");
-require('../../Model/Usuarios.php');
-include("../funcs/verificar.php");
-// require('../../Plugins/fpdf.php');
+use Proyecto\T2\Model\Usuario;
+include("Controller/funcs/verificar.php");
+use Proyecto\T2\Model\Caja;
 use FPDF as FPDF;
-require('../../Model/Cajas.php');
 
 
 

@@ -1,11 +1,10 @@
 <?php
-require("../../Model/Conexion.php");
-require('../../Model/Usuarios.php');
-include("../funcs/verificar.php");
-// require('../../Plugins/fpdf.php');
+use Proyecto\T2\Model\Usuario;
+include("Controller/funcs/verificar.php");
+
 
 use FPDF as FPDF;
-require("../../Model/Productos.php");
+use Proyecto\T2\Model\Producto;
 
 $clase = new Producto();
 $result = $clase->search_inventario();

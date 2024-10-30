@@ -23,10 +23,10 @@ RewriteRule ^Proveedores$ index.php?page=proveedores
 RewriteRule ^Salir$ index.php?page=logout&type=funcion
 
 
-RewriteRule ^Estadisticas_PDF$ Controller/pdfs/PDF_estadisticas.php
-RewriteRule ^PDFCierreCaja$ Controller/pdfs/PDF_cierre_caja.php
-RewriteRule ^PDFInventario$ Controller/pdfs/PDF_inventario.php
-RewriteRule ^PDFFactura$ Controller/pdfs/PDF_factura.php
+RewriteRule ^Estadisticas_PDF$ index.php?page=estadisticas&type=pdfs
+RewriteRule ^PDFCierreCaja$ index.php?page=cierre_caja&type=pdfs
+RewriteRule ^PDFInventario$ index.php?page=inventario&type=pdfs
+RewriteRule ^PDFFactura$ index.php?page=factura&type=pdfs
 
 # RewriteRule ^api_search$ Controller/funcs_ajax/search.php
 # RewriteRule ^api_agregar$ Controller/funcs/agregar_cosas.php
