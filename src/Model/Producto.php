@@ -78,7 +78,8 @@
                 a.stock_max,
                 a.precio_venta,
                 a.IVA,
-                a.codigo
+                a.codigo,
+                a.active
             ";
             $this->joins = '
                 INNER JOIN categoria b ON b.id = a.id_categoria 

@@ -12,8 +12,8 @@
             Db_base::__construct();
             $this->tabla = "metodo_pago";
             $this->add_variables([
-                "id" => $this->id,
-                "nombre" => $this->nombre
+                "a.id" => $this->id,
+                "a.nombre" => $this->nombre
             ]);
         }
         function desactivar(){

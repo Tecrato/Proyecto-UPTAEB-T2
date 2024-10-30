@@ -1,5 +1,6 @@
 <?php
     namespace Shtechnologyx\Pt3\Model;
+    use PDO;
 	class Registro_ventas extends Db_base{
         private $id;
         private $monto_final;
@@ -66,38 +67,37 @@
                 $this->conn->beginTransaction();
                 for ($i = 0; $i < count($datos); $i++) {
                     $lista = $datos[$i];
-                    $clase_l = new Detalle_entrada(null, $lista->id_product);
+                    $clase_l = new Detalle_entrada(null, null, $lista->id_product);
                     if ($clase_l->descontar($lista->cantidad) != 1){
                         throw new Exception("Algo paso, nose", 1);
                     }
                 }
                 $this->conn->commit();
 
-                $query = $this->conn->prepare("INSERT INTO registro_ventas (monto_final, id_cliente, id_caja, IVA, active) VALUES(:monto, :id1, :id2, :iva,:active)");
+                $query = $this->conn->prepare("INSERT INTO registro_ventas (monto_final, id_cliente, id_caja, IVA) VALUES(:monto, :id1, :id2, :iva)");
                 $query->bindParam(':monto', $this->monto_final);
                 $query->bindParam(':id1', $this->id_cliente, PDO::PARAM_INT);
                 $query->bindParam(':id2', $this->id_caja, PDO::PARAM_INT);
                 $query->bindParam(':iva', $this->IVA, PDO::PARAM_STR);
-                $query->bindParam(':active', $this->active, PDO::PARAM_STR);
                 $query->execute();
 
 
-                $registro = $this->search(order: 'id DESC')[0];
+                $registro = $this->conn->lastInsertId();
 
                 for ($i = 0; $i < count($datos); $i++) {
                     $lista = $datos[$i];
-                    $clase_f = new Factura(null, $registro['id'], $lista->id_product, $lista->cantidad, $lista->precio);
+                    $clase_f = new Factura(null, $registro, $lista->id_product, $lista->cantidad, $lista->precio);
                     $clase_f->agregar();
                 }
 
                 if ($credito == true) {
-                    $clase5 = new Credito(null, $registro['id'], $fecha_vencimiento, $monto_dolar);
+                    $clase5 = new Credito(null, $registro, $fecha_vencimiento, $monto_dolar);
                     $clase5->agregar();
                 }
                 else {
                     for ($i = 0; $i < count($pagos); $i++) {
                         $lista = $pagos[$i];
-                        $clase_f = new Pago(null, $registro['id'], $lista->metodo, $lista->monto);
+                        $clase_f = new Pago(null, $registro, $lista->metodo, $lista->monto);
                         $clase_f->agregar();
                     }
                 }

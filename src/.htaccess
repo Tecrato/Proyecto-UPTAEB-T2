@@ -3,10 +3,10 @@ RewriteEngine On
 ErrorDocument 404 /Proyecto-UPTAEB-T2/src/View/404.php
 
 
-# RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/Model/
-# RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/View/
-# RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/Backups/
-# RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/Plugins/
+RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/Model/
+RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/View/
+RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/Backups/
+RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/Plugins/
 # RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/Media/
 # RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/static/
 
@@ -51,9 +51,9 @@ RewriteRule ^api_get_image$ Controller/funcs_ajax/image_downloader.php
 RewriteRule ^fd$ Controller/C_facturadirecta.php
 RewriteRule ^test$ index.php?page=prueba&type=funcion_ajax
 
-# RewriteCond %{REQUEST_FILENAME} !-f
-# RewriteCond %{REQUEST_FILENAME} !-d
-# RewriteRule ^(.*)$ /Proyecto-UPTAEB-T2/src/View/404.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /Proyecto-UPTAEB-T2/src/View/404.php
 
 # RewriteRule ^Model/$ View/404.php [NC]
 
