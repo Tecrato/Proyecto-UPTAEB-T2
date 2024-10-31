@@ -9,7 +9,7 @@ use Shtechnologyx\Pt3\Model\Usuario;
 
 session_start();
 if (!isset($_SESSION['user_name'])) {
-    header('Location:login?err=4');
+    header('Location:Login?err=4');
     die();
 }
 
@@ -19,5 +19,5 @@ $busqueda = $b->search();
 
 
 if ($_SESSION['sesion_id'] != $busqueda[0]['sesion_id']) {
-    header('Location:login?err=5');
+    header('Location:Login?err=5');
 }

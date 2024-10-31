@@ -16,11 +16,11 @@
     
     use Shtechnologyx\Pt3\model\Caja;
     use Shtechnologyx\Pt3\model\Capital;
+    use Shtechnologyx\Pt3\Model\Cliente;
     use Shtechnologyx\Pt3\Model\Notificacion;
     use Shtechnologyx\Pt3\Model\Categoria;
     use Shtechnologyx\Pt3\Model\Marca;
     use Shtechnologyx\Pt3\Model\Unidad;
-    use Shtechnologyx\Pt3\Model\Cliente;
     use Shtechnologyx\Pt3\Model\Proveedor;
     use Shtechnologyx\Pt3\Model\Configuracion;
     use Shtechnologyx\Pt3\Model\Entrada;
@@ -30,7 +30,7 @@
     use Shtechnologyx\Pt3\Model\Registro_ventas;
     use Shtechnologyx\Pt3\Model\Credito;
     use Shtechnologyx\Pt3\Model\Backup;
-use Shtechnologyx\Pt3\Model\Tipo_empaquetado;
+    use Shtechnologyx\Pt3\Model\Tipo_empaquetado;
 
     if ($_POST['randomnautica'] == "caja") {
         $clase = new Caja(

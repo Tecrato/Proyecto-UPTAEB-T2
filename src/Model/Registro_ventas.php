@@ -91,8 +91,8 @@
                     $clase_f->agregar();
                 }
 
-                if ($credito == true) {
-                    $clase5 = new Credito(null, $registro, $fecha_vencimiento, $monto_dolar);
+                if ($credito == true or $credito == 1) {
+                    $clase5 = new Credito(null, $registro, $fecha_vencimiento, $monto_dolar, 1);
                     $clase5->agregar();
                 }
                 else {

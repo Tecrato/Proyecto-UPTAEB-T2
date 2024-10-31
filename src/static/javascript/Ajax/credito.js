@@ -193,7 +193,7 @@ function generar_creditos(page){
                 
                 <tr id_rv="${f.id_rv}" id="${f.id}">
                     <td>${f.id}</td>
-                    <td>${f.nombre + " " + f.apellido}</td>
+                    <td>${f.nombre_cliente + " " + f.apellido_cliente}</td>
                     <td>${fecha(f.fecha_inicio)}</td>
                     <td>${fecha(f.fecha_limite)}</td>
                     <td>
