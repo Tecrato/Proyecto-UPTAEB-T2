@@ -1,5 +1,10 @@
 <?php
-    require('../../Model/Conexion.php');
+  use Shtechnologyx\Pt3\Model\Conexion;
+  use Shtechnologyx\Pt3\Model\Producto;
+    use Shtechnologyx\Pt3\Model\Cliente;
+    use Shtechnologyx\Pt3\Model\Proveedor;
+    use Shtechnologyx\Pt3\Model\Registro_ventas;
+    use Shtechnologyx\Pt3\Model\Bitacora;
     // Con este codigo se avanza o se retrocede la pagina en las pantallas
 
     $dir = $_GET['dir'];

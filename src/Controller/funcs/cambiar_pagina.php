@@ -1,16 +1,14 @@
 <?php
 
-namespace Proyecto\T2\Controller\funcs;
+namespace Shtechnologyx\Pt3\Controller\funcs;
 require('../../../vendor/autoload.php');
-
-    require('../../Model/Conexion.php');
     // Con este codigo se avanza o se retrocede la pagina en las pantallas
-
-    use Proyecto\T2\Model\Producto;
-    use Proyecto\T2\Model\Entrada;
-    use Proyecto\T2\Model\Proveedor;
-    use Proyecto\T2\Model\Cliente;
-    use Proyecto\T2\Model\Registro_ventas;
+    use Shtechnologyx\Pt3\Model\Conexion;
+    use Shtechnologyx\Pt3\Model\Producto;
+    use Shtechnologyx\Pt3\Model\Entrada;
+    use Shtechnologyx\Pt3\Model\Proveedor;
+    use Shtechnologyx\Pt3\Model\Cliente;
+    use Shtechnologyx\Pt3\Model\Registro_ventas;
 
 
     $dir = $_GET['dir'];

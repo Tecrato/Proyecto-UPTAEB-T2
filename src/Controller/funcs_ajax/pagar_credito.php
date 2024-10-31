@@ -1,12 +1,14 @@
 <?php
-    require('../../Model/Conexion.php');
-    require('../../Model/Usuarios.php');
-    include("../funcs/verificar.php");
-    require_once("../../Model/Credito.php");
-    require_once("../../Model/Pagos.php");
-    require('../../Model/Permisos.php');
+    use Shtechnologyx\Pt3\model\Conexion;
+    include("Controller/funcs/verificar.php");
+    use Shtechnologyx\Pt3\model\Pago;
+    use Shtechnologyx\Pt3\model\Credito;
+    use Shtechnologyx\Pt3\model\Permisos;
+    use Shtechnologyx\Pt3\model\Usuario;
+    use Shtechnologyx\Pt3\model\Bitacora;
+    
 
-    $other_class = new Permiso(null,$_SESSION['user_id'],"credito",'modificar');
+    $other_class = new Permisos(null,$_SESSION['user_id'],"credito",'modificar');
     $result = $other_class->search();
 
 
