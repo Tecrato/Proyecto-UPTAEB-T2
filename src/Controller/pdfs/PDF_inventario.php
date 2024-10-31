@@ -4,7 +4,7 @@ include("Controller/funcs/verificar.php");
 
 
 use FPDF as FPDF;
-use Proyecto\T2\Model\Producto;
+use Shtechnologyx\Pt3\Model\Producto;
 
 $clase = new Producto();
 $result = $clase->search_inventario();

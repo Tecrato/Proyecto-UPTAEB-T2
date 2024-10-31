@@ -3,7 +3,8 @@
 use Proyecto\T2\Model\Usuario;
 include("Controller/funcs/verificar.php");
 
-use Proyecto\T2\Model\Estadisticas;
+use FPDF as FPDF;
+use Shtechnologyx\Pt3\Model\Estadisticas;
 
 $clase = new Estadisticas();
 
