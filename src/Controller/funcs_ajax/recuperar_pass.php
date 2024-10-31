@@ -1,7 +1,6 @@
 <?php
 
-    require('../../Model/Conexion.php');
-    require('../../Model/Usuarios.php');
+    use Shtechnologyx\Pt3\Models\Usuario;
 
 
     if ($_POST['metodo'] == 'correo') {

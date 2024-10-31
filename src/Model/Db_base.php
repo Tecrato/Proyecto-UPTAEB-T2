@@ -201,7 +201,10 @@
             $consulta->execute();
             return $consulta->fetch()['total'];
         }
-        public function get_variables(){
-            return $this->variables;
+        public function get($key){
+            return $this->variables[$key];
+        }
+        public function set($key,$value){
+            return $this->variables[$key] = $value;
         }
     }

@@ -1,9 +1,9 @@
 <?php
-use Proyecto\T2\Model\Usuario;
+use Shtechnologyx\Pt3\Model\Usuario;
 include("Controller/funcs/verificar.php");
-use Proyecto\T2\Model\Factura;
-use Proyecto\T2\Model\Registro_ventas;
-use Proyecto\T2\Model\Pago;
+use Shtechnologyx\Pt3\Model\Factura;
+use Shtechnologyx\Pt3\Model\Registro_ventas;
+use Shtechnologyx\Pt3\Model\Pago;
 use FPDF as FPDF;
 
 $clase2 = new Registro_ventas(isset($_GET['id']) ? $_GET['id'] : null);

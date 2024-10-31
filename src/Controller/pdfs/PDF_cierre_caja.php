@@ -1,7 +1,7 @@
 <?php
-use Proyecto\T2\Model\Usuario;
+use Shtechnologyx\Pt3\Model\Usuario;
 include("Controller/funcs/verificar.php");
-use Proyecto\T2\Model\Caja;
+use Shtechnologyx\Pt3\Model\Caja;
 use FPDF as FPDF;
 
 
