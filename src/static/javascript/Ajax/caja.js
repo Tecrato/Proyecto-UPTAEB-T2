@@ -146,8 +146,7 @@ FORM_BOX_DATE.addEventListener("submit", (e) => {
         type: "POST",
         data: { randomnautica: "credito", between_fecha: { inicio: fecha_inicio, fin: fecha_fin } },
         success: function (response) {
-            let json = JSON.parse(response)
-            console.log(json);
+            TrCaja(response)
         }
     })
 })

@@ -604,7 +604,6 @@ function func(dolar) {
             type: "POST",
             data: { jsonString },
             success: function (response) {
-              console.log(response);
               targetFact()
               let json = JSON.parse('{' + response.split('{')[1]);
               if (json.error == "Caja Error") {
@@ -672,16 +671,8 @@ function func(dolar) {
     },
   });
 }
-
-const targetFact = (num) => {
-  pag_facturas = num
-  $.ajax({
-    url: "api_search",
-    type: "POST",
-    data: { randomnautica: "ventas", n: pag_facturas, limite: 9},// , between_fecha: {inicio: fecha_inicio, fin: fecha_fin}},
-    success: function (response) {
-      console.log(response)
-      let json = JSON.parse(response)
+function cardFactura(response){
+  let json = JSON.parse(response)
       total_facturas = json.total
       let template = ""
       json.lista.forEach((t) => {
@@ -736,11 +727,54 @@ const targetFact = (num) => {
       $(".cont_ventas_target").html(template)
       marcaAgua()
       colorDefault()
+}
+const targetFact = (num) => {
+  pag_facturas = num
+  $.ajax({
+    url: "api_search",
+    type: "POST",
+    data: { randomnautica: "ventas", n: pag_facturas, limite: 9},// , between_fecha: {inicio: fecha_inicio, fin: fecha_fin}},
+    success: function (response) {
+      cardFactura(response)
     }
-
   })
 }
 targetFact(0)
+//Filtro de busqueda
+let search_facturas = document.querySelector(".search_facturas")
+search_facturas.addEventListener("keyup", (E) => {
+  let value = E.target.value
+  console.log(value);
+  $.ajax({
+    url: "api_search",
+    type: "POST",
+    data: { randomnautica: "ventas", like_nombre_cliente: value },
+    success: function (response) {
+      console.log(response);
+      // cardFactura(response)
+    }
+  })
+})
+
+//filtro por fecha
+let FORM_FACT_DATE = document.querySelector(".FORM_FACT_DATE")
+FORM_FACT_DATE.addEventListener("submit", (e) => {
+  e.preventDefault()
+  let fecha_inicio = FORM_FACT_DATE.firstElementChild.firstElementChild.lastElementChild.value
+  let fecha_fin = FORM_FACT_DATE.firstElementChild.lastElementChild.lastElementChild.value
+  console.log(fecha_fin);
+  console.log();
+  $.ajax({
+    url: "api_search",
+    type: "POST",
+    data: { randomnautica: "ventas", between_fecha: { inicio: fecha_inicio, fin: fecha_fin } },
+    success: function (response) {
+      cardFactura(response)
+    }
+  })
+})
+
+
 
 $(".pag-btn-facturas").click((ele) => {
   cambiar_pagina_ajax(
