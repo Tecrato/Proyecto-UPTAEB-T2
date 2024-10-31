@@ -35,6 +35,7 @@
     if ($_POST['randomnautica'] == "caja") {
         $clase = new Caja(
             id_usuario:(isset($_POST['id_usuario']) ? $_POST['id_usuario'] : null),
+            like_nombre_usuario:(isset($_POST['like_nombre_usuario']) ? $_POST['like_nombre_usuario'] : null),
             between_fecha:(isset($_POST['between_fecha']) ? $_POST['between_fecha'] : null),
         );
     }
