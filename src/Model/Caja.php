@@ -10,14 +10,16 @@
         private $monto_final;
         private $estado;
         private $between_fecha;
+        private $like_nombre_usuario;
 
-        function __construct($id = null, $id_usuario = null, $monto_inicial = null, $monto_final = null, $estado = null, $between_fecha = null){
+        function __construct($id = null, $id_usuario = null, $monto_inicial = null, $monto_final = null, $estado = null, $between_fecha = null, $like_nombre_usuario = null){
             $this->id = $id;
             $this->id_usuario = $id_usuario;
             $this->monto_inicial = $monto_inicial;
             $this->monto_final = $monto_final;
             $this->estado = $estado;
             $this->between_fecha = $between_fecha;
+            $this->like_nombre_usuario = $like_nombre_usuario;
             Db_base::__construct();
             $this->tabla = "caja";
             $this->add_variables([
@@ -26,6 +28,9 @@
                 "a.monto_inicial" => $this->monto_inicial,
                 "a.monto_final" => $this->monto_final,
                 "a.estado" => $this->estado
+            ]);
+            $this->add_variables_like([
+                "b.nombre" => $this->like_nombre_usuario
             ]);
             $this->add_variables_interval([
                 "a.fecha" => $this->between_fecha
