@@ -61,7 +61,7 @@
             </div>
 
             <div class="uk-background-secondary uk-padding-small uk-border-rounded">
-                <iframe class="iframe" src="FacturaPDF" frameborder="0"></iframe>
+                <iframe class="iframe" src="PDFFactura" frameborder="0"></iframe>
             </div>
         </div>
         

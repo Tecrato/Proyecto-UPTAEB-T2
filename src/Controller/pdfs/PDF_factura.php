@@ -4,8 +4,8 @@ include("Controller/funcs/verificar.php");
 use Shtechnologyx\Pt3\Model\Factura;
 use Shtechnologyx\Pt3\Model\Registro_ventas;
 use Shtechnologyx\Pt3\Model\Pago;
-use FPDF as FPDF;
-
+// use Shtechnologyx\Pt3\Plugins\FPDF;
+use FPDF AS FPDF;
 $clase2 = new Registro_ventas(isset($_GET['id']) ? $_GET['id'] : null);
 $result = $clase2->search()[0];
 
@@ -45,7 +45,7 @@ $pdf->SetFont('Arial', '', 10);
 
 // Cabecera de página_____________________________________________________________________________________________
 // Logo
-$pdf->Image('../../static/images/logo_m.png', 20, 15, 30);
+$pdf->Image('static/images/logo_m.png', 20, 15, 30);
 // Arial bold 15
 $pdf->SetFont('Arial', '', 12);
 // Movernos a la derecha

@@ -19,13 +19,14 @@ if ($_POST['accion'] == 'abrir') {
     $otra_clase_mas = new Caja(id_usuario: $_POST['user_id'], estado: 0);
     $ultima_caja = $otra_clase_mas->search()[0];
 
-    if (count($ultima_caja) > 0) {
+    if (is_array($ultima_caja) && count($ultima_caja) > 0) {
         echo json_encode(['status' => 'error', 'estado' => 'mas cajas no']);
         exit(0);
         die();
+    }else{
+        $clase = new Caja(null, $_POST['user_id'], $_POST['monto_inicial']);
+        $clase->abrir();
     }
-    $clase = new Caja(null, $_POST['user_id'], $_POST['monto_inicial']);
-    $clase->abrir();
 } else if ($_POST['accion'] == 'cerrar') {
     $other_class = new Permisos(null,$_SESSION['user_id'],'caja','modificar');
     $result = $other_class->search();
@@ -45,14 +46,15 @@ if ($_POST['accion'] == 'abrir') {
     $clase = new Caja(id: $_POST['id_caja']);
     $clase->cerrar();
     echo json_encode(['status' => 'active', 'estado' => 'si']);
+    
 } else if ($_POST['accion'] == 'check') {
     $otra_clase_mas = new Caja(id_usuario: $_SESSION['user_id'], estado: 0);
-    $ultima_caja = $otra_clase_mas->search()[0];
+    $ultima_caja = $otra_clase_mas->search();
     if ($ultima_caja == NULL) {
         echo json_encode(['status' => 'error', 'estado' => 'no']);
         exit(0);
         die();
-    } else if ($ultima_caja['estado'] == 1) {
+    } else if ($ultima_caja == [] || $ultima_caja [0]['estado'] == 1) {
         echo json_encode(['status' => 'error', 'estado' => 'no']);
         exit(0);
         die();

@@ -7,10 +7,9 @@
     // require('../Model/Usuarios.php');
     // include("./funcs/verificar.php");
 
-    session_start();
     
     use Shtechnologyx\Pt3\Model\Usuario;
-    // use Shtechnologyx\Pt3\Controller\funcs\verificar;;
+    include("Controller/funcs/verificar.php");
     use Shtechnologyx\Pt3\Model\Producto;
     use Shtechnologyx\Pt3\Model\Cliente;
     use Shtechnologyx\Pt3\Model\Proveedor;

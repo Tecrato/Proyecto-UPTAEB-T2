@@ -7,13 +7,15 @@
         private $id;
         private $id_usuario;
         private $monto_inicial;
+        private $monto_final;
         private $estado;
         private $between_fecha;
 
-        function __construct($id = null, $id_usuario = null, $monto_inicial = null, $estado = null, $between_fecha = null){
+        function __construct($id = null, $id_usuario = null, $monto_inicial = null, $monto_final = null, $estado = null, $between_fecha = null){
             $this->id = $id;
             $this->id_usuario = $id_usuario;
             $this->monto_inicial = $monto_inicial;
+            $this->monto_final = $monto_final;
             $this->estado = $estado;
             $this->between_fecha = $between_fecha;
             Db_base::__construct();
@@ -22,7 +24,8 @@
                 "a.id" => $this->id,
                 "a.id_usuario" => $this->id_usuario,
                 "a.monto_inicial" => $this->monto_inicial,
-                "a.estado" => $this->estado,
+                "a.monto_final" => $this->monto_final,
+                "a.estado" => $this->estado
             ]);
             $this->add_variables_interval([
                 "a.fecha" => $this->between_fecha

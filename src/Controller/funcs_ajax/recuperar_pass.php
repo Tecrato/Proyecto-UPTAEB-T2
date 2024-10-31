@@ -1,6 +1,6 @@
 <?php
 
-    use Shtechnologyx\Pt3\Models\Usuario;
+    use Shtechnologyx\Pt3\Model\Usuario;
 
 
     if ($_POST['metodo'] == 'correo') {

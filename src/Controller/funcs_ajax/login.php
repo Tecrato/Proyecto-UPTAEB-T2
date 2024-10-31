@@ -3,6 +3,7 @@
     session_start();
     use Shtechnologyx\Pt3\model\Conexion;
     use Shtechnologyx\Pt3\model\Usuario;
+    use Shtechnologyx\Pt3\model\Bitacora;
     
     $sesion_id = substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, 10);//creamos el string del sesion id
     $correo = $_POST["correo"];

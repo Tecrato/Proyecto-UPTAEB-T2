@@ -6,7 +6,8 @@
 * Date:    2021-04-18                                                          *
 * Author:  Olivier PLATHEY                                                     *
 *******************************************************************************/
-
+namespace Shtechnologyx\Pt3\Plugins;
+use Exception;
 define('FPDF_VERSION','1.83');
 
 class FPDF
