@@ -158,11 +158,9 @@ search_caja.addEventListener("keyup", (e) => {
     $.ajax({
         url: "api_search",
         type: "POST",
-        data: { randomnautica: "caja", like_nombre_cliente: search },
+        data: { randomnautica: "caja", like_nombre_usuario: search },
         success: function (response) {
-            console.log(response);
             TrCaja(response)
-
         }
     })
 })

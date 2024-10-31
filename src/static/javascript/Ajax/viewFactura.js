@@ -48,17 +48,17 @@ $.ajax({
 
         //cada vez que pulsemos sobre una ficha, el iframe se recarga con la misma ruta, solo que se le ira cambiando el id de la factura
         let iframe = document.querySelector(".iframe");
-        iframe.src = `PDFFactura?id=${tj.getAttribute("id")}`;
+        iframe.src = `PDFFactura/${tj.getAttribute("id")}`;
 
         let id = tj.getAttribute("id");
         document.querySelector(".n_factura").textContent = "N_FACTURA " + id;
         //hacemos la peticion,mandando el id al controlador como una variable por url
         $.ajax({
-          url: `PDFFactura?id=${id}`,
-          type: "GET",
+          url: `PDFFactura`,
+          type: "POST",
+          data: {id: id},
           success: function (response) {
-            let json = JSON.parse(response);
-            (response);
+            // iframe.src = `PDFFactura?id=${id}`;
           },
         });
       });

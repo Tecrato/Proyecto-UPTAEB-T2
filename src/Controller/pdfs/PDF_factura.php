@@ -15,8 +15,6 @@ $product = $clase->search_ProductFact();
 $clase3 = new Pago(id_venta:isset($_GET['id']) ? $_GET['id'] : null);
 $pagos = $clase3->search();
 
-
-
 $fecha = strtotime($result['fecha']);
 $hora = strtoupper(date('h:i a', $fecha));
 $dia =  date('d/m/Y', $fecha);

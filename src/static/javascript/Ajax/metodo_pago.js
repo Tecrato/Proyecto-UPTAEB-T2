@@ -6,17 +6,11 @@ document.querySelector(".btnAggMetodo").addEventListener("click", () => {
     $("#FORM_METODO_PAGO").trigger("reset");
     document.querySelector(".titleModalmetodos").textContent = "REGISTRAR METODO DE PAGO"
 })
-
-const cargarMetodosPago = () => {
-    $.ajax({
-        url: "api_search",
-        type: "POST",
-        data: { randomnautica: "metodo_pago"},
-        success: function (response) {
-            let json = JSON.parse(response);
-            let template = "";
-            if (json.lista.length == 0) {
-                template = `
+function trMetodosPago(response) {
+    let json = JSON.parse(response);
+    let template = "";
+    if (json.lista.length == 0) {
+        template = `
                 <tr>
                     <td></td>
                     <td></td>
@@ -27,9 +21,9 @@ const cargarMetodosPago = () => {
                     <td></td>
                 </tr>
                 `
-            } else {
-                json.lista.forEach((p) => {
-                    template += `
+    } else {
+        json.lista.forEach((p) => {
+            template += `
                 <tr>
                     <td><img class="img_config_logo" src="./static/images/logo_letras-minimarket.png" alt="" width="50"></td>
                     <td>${p.id}</td>
@@ -42,59 +36,67 @@ const cargarMetodosPago = () => {
                     </td>
                 </tr>
                 `;
-                });
-            }
+        });
+    }
 
-            $("#Metodo-Pago-Table").html(template);
-
-
-            let btnUpdateMetodo = document.querySelectorAll(".btnUpdateMetodo");
-            btnUpdateMetodo.forEach((btn) => {
-                btn.addEventListener("click", () => {
-                    bool = true
-                    let input = document.querySelector(".inputUpdateMetodo")
-                    input.value = btn.parentElement.parentElement.previousElementSibling.textContent
-                    let id = btn.getAttribute("id");
-                    let idSet = document.querySelector("#inputIdMetodo")
-                    idSet.setAttribute("value", id)
-                    document.querySelector(".titleModalmetodos").textContent = "MODIFICAR METODO DE PAGO"
-                    UIkit.modal("#modal-metodo_pago").show();
-                })
-            })
+    $("#Metodo-Pago-Table").html(template);
 
 
-            let btnDeleteMetodo = document.querySelectorAll(".btnDeleteMetodo");
-            btnDeleteMetodo.forEach((btn) => {
-                btn.addEventListener("click", () => {
-                    let id = btn.getAttribute("id");
-                    let idSet = document.querySelector("#IdDelete_Metodo")
-                    idSet.setAttribute("value", id)
+    let btnUpdateMetodo = document.querySelectorAll(".btnUpdateMetodo");
+    btnUpdateMetodo.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            bool = true
+            let input = document.querySelector(".inputUpdateMetodo")
+            input.value = btn.parentElement.parentElement.previousElementSibling.textContent
+            let id = btn.getAttribute("id");
+            let idSet = document.querySelector("#inputIdMetodo")
+            idSet.setAttribute("value", id)
+            document.querySelector(".titleModalmetodos").textContent = "MODIFICAR METODO DE PAGO"
+            UIkit.modal("#modal-metodo_pago").show();
+        })
+    })
 
-                    let form = document.querySelector("#formDeleteMetodo")
-                    form.addEventListener("submit", (e) => {
-                        e.preventDefault();
-                        let data = new FormData(form);
-                        $.ajax({
-                            url: "api_eliminar",
-                            type: "POST",
-                            processData: false,
-                            contentType: false,
-                            data: data,
-                            success: (response) => {
-                                (response);
-                                UIkit.notification.closeAll();
-                                UIkit.notification({
-                                    message: `<span uk-icon='icon: check'>Metodo Eliminado</span>`,
-                                    status: "success",
-                                    pos: "bottom-right",
-                                });
-                                cargarMetodosPago();
-                                UIkit.modal("#eliminar_metodo").hide();
-                            },
+
+    let btnDeleteMetodo = document.querySelectorAll(".btnDeleteMetodo");
+    btnDeleteMetodo.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            let id = btn.getAttribute("id");
+            let idSet = document.querySelector("#IdDelete_Metodo")
+            idSet.setAttribute("value", id)
+
+            let form = document.querySelector("#formDeleteMetodo")
+            form.addEventListener("submit", (e) => {
+                e.preventDefault();
+                let data = new FormData(form);
+                $.ajax({
+                    url: "api_eliminar",
+                    type: "POST",
+                    processData: false,
+                    contentType: false,
+                    data: data,
+                    success: (response) => {
+                        (response);
+                        UIkit.notification.closeAll();
+                        UIkit.notification({
+                            message: `<span uk-icon='icon: check'>Metodo Eliminado</span>`,
+                            status: "success",
+                            pos: "bottom-right",
                         });
-                    })
-                })
+                        cargarMetodosPago();
+                        UIkit.modal("#eliminar_metodo").hide();
+                    },
+                });
             })
+        })
+    })
+}
+const cargarMetodosPago = () => {
+    $.ajax({
+        url: "api_search",
+        type: "POST",
+        data: { randomnautica: "metodo_pago" },
+        success: function (response) {
+            trMetodosPago(response)
         },
     });
 }
@@ -139,10 +141,9 @@ search_metodoPago.addEventListener("keyup", (e) => {
     $.ajax({
         url: "api_search",
         type: "POST",
-        data: { randomnautica: "credito", like_nombre_cliente: search },
+        data: { randomnautica: "metodo_pago", like_nombre: search },
         success: function (response) {
-            console.log(response);
-            // TrCredito(response)
+            trMetodosPago(response)
         }
     })
 })
