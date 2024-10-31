@@ -1015,3 +1015,7 @@
         justify-content: center;
     }
 }
+.uk-dropdown input[type="date"] {
+    z-index: 50000; /* Ajusta según sea necesario */
+    position: relative;
+}

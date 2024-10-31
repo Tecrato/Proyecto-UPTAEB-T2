@@ -1,6 +1,7 @@
 <?php
     namespace Shtechnologyx\Pt3\Model;
     use PDO;
+    use Exception;
 	class Registro_ventas extends Db_base{
         private $id;
         private $monto_final;

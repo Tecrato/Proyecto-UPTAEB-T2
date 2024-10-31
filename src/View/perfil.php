@@ -540,7 +540,6 @@
 
                         </div>
 
-
                         <div>
                             <ul uk-tab>
                                 <li><a href="#">REGISTRO DE USUARIO</a></li>
@@ -607,7 +606,6 @@
                                 </div>
                             </div>
                         </div>
-
 
                         <?php if ($_SESSION['rol_num'] <= 1) { ?>
 
@@ -706,8 +704,6 @@
                             </div>
 
                         <?php }; ?>
-
-
                         <div>
                             <div class="uk-child-width-1-1@s" uk-grid>
                                 <div>
@@ -773,6 +769,10 @@
                                                         <div class="uk-flex uk-flex-between uk-flex-middle">
                                                             <div>
                                                                 <h2>Metodos de pago</h2>
+                                                                <form class="uk-search uk-search-default uk-light form_btns_search">
+                                                                    <span class="uk-search-icon-flip uk-light" uk-search-icon></span>
+                                                                    <input class="uk-search-input uk-light search_metodoPago" type="search" placeholder="Buscar" aria-label="Search">
+                                                                </form>
                                                                 <h4>Modos de transacción para los pagos</h4>
                                                             </div>
                                                             <a href="#modal-metodo_pago" uk-toggle class="uk-button uk-button-default btnAggMetodo">

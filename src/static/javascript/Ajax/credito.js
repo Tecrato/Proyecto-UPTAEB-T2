@@ -13,13 +13,6 @@ $(".pag-btn-creditos").click((ele) => {
         total_cajas
     );
 });
-// Array.find((boleano) => {
-//     if (!boleano){
-//         $('.borrar').invisible()
-//     }
-// },
-// ('productos','borrar'))
-
 
 
 let bool = true
@@ -176,20 +169,12 @@ const metodoPago = () => {
         })
     })
 }
-
-function generar_creditos(page){
-    page_creditos = page
-    $.ajax({
-        url: "api_search",
-        type: "POST",
-        data: { randomnautica: "credito", n:page_creditos, limite: 10},
-        success: function (response) {
-            let json = JSON.parse(response);
-            console.log(response)
-            total_creditos = json['total']
-            let template = ""
-            json.lista.forEach((f) => {
-                template += `
+function TrCredito(response) {
+    let json = JSON.parse(response);
+    total_creditos = json['total']
+    let template = ""
+    json.lista.forEach((f) => {
+        template += `
                 
                 <tr id_rv="${f.id_rv}" id="${f.id}">
                     <td>${f.id}</td>
@@ -204,54 +189,97 @@ function generar_creditos(page){
                     </td>
                 </tr>
                 `
-            })
-            $("#Tbody_credito").html(template)
-            
-            $(".pagar_credito").click((btn) => {
-                    let id = btn.target.parentElement.parentElement.getAttribute("id")
-                    $.ajax({
-                        url: "api_search",
-                        type: "POST",
-                        data: { randomnautica: "credito", ID: id },
-                        success: function (response) {
-                            let json = JSON.parse(response);
-                            totalCredito.textContent = "Total en $: " + json.lista[0].monto_final
-                            document.querySelector(".total_credito_bs").textContent = "Total en Bs: " + parseFloat(document.getElementById("BCV").textContent) * parseFloat(json.lista[0].monto_final)
-                            metodoPago()
-                            let id_rv = btn.target.parentElement.parentElement.getAttribute("id_rv")
-                            let btn_credito_pago = document.querySelector(".btn_pagar_credito")
-                            btn_credito_pago.addEventListener("click", () => {
-                                let jf = []
-                                let n = document.querySelectorAll(".AMOUNT-MP2")
-                                n.forEach((B) => {
-                                    let value_input = B.value == "" ? 0 : B.value
-                                    let value_Tpago = B.previousElementSibling.value
+    })
+    $("#Tbody_credito").html(template)
 
-                                    jf.push({
-                                        metodo: value_Tpago,
-                                        monto: value_input
-                                    })
-                                })
-                                $.ajax({
-                                    url: "Controller/funcs_ajax/pagar_credito.php",
-                                    type: "POST",
-                                    data: { id_rv, pagos: jf },
-                                    success: function (response) {
-                                        UIkit.notification.closeAll();
-                                        UIkit.notification({
-                                          message: `<span uk-icon='icon: check'>Pago de credito correctamente</span>`,
-                                          status: "success",
-                                          pos: "bottom-right",
-                                        });
-                                        setTimeout(() => {
-                                          UIkit.modal("#credito_page").hide();
-                                        }, 400)
-                                    }
-                                })
-                            })
+    $(".pagar_credito").click((btn) => {
+        let id = btn.target.parentElement.parentElement.getAttribute("id")
+        $.ajax({
+            url: "api_search",
+            type: "POST",
+            data: { randomnautica: "credito", ID: id },
+            success: function (response) {
+                let json = JSON.parse(response);
+                totalCredito.textContent = "Total en $: " + json.lista[0].monto_final
+                document.querySelector(".total_credito_bs").textContent = "Total en Bs: " + parseFloat(document.getElementById("BCV").textContent) * parseFloat(json.lista[0].monto_final)
+                metodoPago()
+                let id_rv = btn.target.parentElement.parentElement.getAttribute("id_rv")
+                let btn_credito_pago = document.querySelector(".btn_pagar_credito")
+                btn_credito_pago.addEventListener("click", () => {
+                    let jf = []
+                    let n = document.querySelectorAll(".AMOUNT-MP2")
+                    n.forEach((B) => {
+                        let value_input = B.value == "" ? 0 : B.value
+                        let value_Tpago = B.previousElementSibling.value
+
+                        jf.push({
+                            metodo: value_Tpago,
+                            monto: value_input
+                        })
+                    })
+                    $.ajax({
+                        url: "Controller/funcs_ajax/pagar_credito.php",
+                        type: "POST",
+                        data: { id_rv, pagos: jf },
+                        success: function (response) {
+                            UIkit.notification.closeAll();
+                            UIkit.notification({
+                                message: `<span uk-icon='icon: check'>Pago de credito correctamente</span>`,
+                                status: "success",
+                                pos: "bottom-right",
+                            });
+                            setTimeout(() => {
+                                UIkit.modal("#credito_page").hide();
+                            }, 400)
                         }
                     })
                 })
             }
-        })}
+        })
+    })
+}
+function generar_creditos(page) {
+    page_creditos = page
+    $.ajax({
+        url: "api_search",
+        type: "POST",
+        data: { randomnautica: "credito", n: page_creditos, limite: 10 },
+        success: function (response) {
+            TrCredito(response)
+        }
+    })
+}
 generar_creditos(0)
+
+//filtro de creditos
+
+//filtro por fecha
+let FORM_CREDIT_DATE = document.querySelector(".FORM_CREDIT_DATE")
+FORM_CREDIT_DATE.addEventListener("submit", (e) => {
+    e.preventDefault()
+    let fecha_inicio = FORM_CREDIT_DATE.firstElementChild.firstElementChild.lastElementChild.value
+    let fecha_fin = FORM_CREDIT_DATE.firstElementChild.lastElementChild.lastElementChild.value
+    $.ajax({
+        url: "api_search",
+        type: "POST",
+        data: { randomnautica: "credito", between_fecha: { inicio: fecha_inicio, fin: fecha_fin } },
+        success: function (response) {
+            let json = JSON.parse(response)
+            TrCredito(response)
+        }
+    })
+})
+
+let search_credito = document.querySelector(".search_credito")
+search_credito.addEventListener("keyup", (e) => {
+    let search = e.target.value
+    $.ajax({
+        url: "api_search",
+        type: "POST",
+        data: { randomnautica: "credito", like_nombre_cliente: search },
+        success: function (response) {
+            console.log(response);
+            // TrCredito(response)
+        }
+    })
+})

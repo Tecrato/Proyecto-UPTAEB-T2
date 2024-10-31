@@ -1,67 +1,75 @@
 let hola = "";
+
+function entryTr(response) {
+  let template;
+  let json = JSON.parse(response);
+  json.lista.forEach((f) => {
+    let fechaVencimiento = new Date(f.fecha_vencimiento);
+    let fechaActual = new Date();
+    fechaVencimiento.setMinutes(
+      fechaVencimiento.getMinutes() + fechaVencimiento.getTimezoneOffset()
+    );
+    let diferencia = fechaVencimiento.getTime() - fechaActual.getTime();
+    let diasRestantes = Math.ceil(diferencia / (1000 * 60 * 60 * 24));
+    let color;
+    let texto;
+    (diasRestantes);
+    if (f.existencia == 0) {
+      color = "activeEmpty";
+      texto = "NO DISPONIBLE";
+    } else if (diasRestantes <= 10 && diasRestantes >= 1) {
+      color = "activeCloseToExpire";
+      texto = "POR VENCER";
+    } else if (diasRestantes > 10) {
+      color = "activeGood";
+      texto = "ACTIVO";
+    } else if (diasRestantes <= 0) {
+      color = "activeExpire";
+      texto = "EXPIRO";
+    }
+
+    template += `<tr data-proveedor="${f.proveedor}" data-productEntry="${f.producto}">
+                          <td><img src="./static/images/btn_lote2.png" alt="" width="80"></td>
+                          <td>${f.codigo}</td>
+                          <td>${f.producto + " " + f.valor_unidad + " " + f.unidad + " " + f.marca}</td>
+                          <td>${f.proveedor}</td>
+                          <td>${f.id_empaquetado}</td>
+                          <td>${f.tamaño_mercancia}</td>
+                          <td>${f.cantidad}</td>
+                          <td>${f.existencia}</td>
+                          <td>${f.precio_compra} Bs</td>
+                          <td>${f.fecha_compra}</td>
+                          <td>${f.fecha_vencimiento}</td>
+                          <td>
+                              <div class="${color} uk-border-rounded uk-text-center uk-text-bold" style="padding: 5px; width: 115px;">${texto}</div>
+                          </td>
+                      </tr>`;
+  });
+  $(".cont_entry").append(template);
+  let table_entry = document.querySelector(".cont_entry").childElementCount;
+  if (table_entry <= 0 || table_entry < 4) {
+    document.querySelector(".altura_table_entry").style.height = "300px";
+  } else {
+    document.querySelector(".altura_table_entry").style.height = "100%";
+  }
+}
 const cargarEntrys = () => {
   $.ajax({
     url: "api_search",
     type: "POST",
     data: { randomnautica: "detalles_entradas" },
     success: function (response) {
-      let template;
-      let json = JSON.parse(response);
-      console.log(json);
-      json.lista.forEach((f) => {
-        let fechaVencimiento = new Date(f.fecha_vencimiento);
-        let fechaActual = new Date();
-        fechaVencimiento.setMinutes(
-          fechaVencimiento.getMinutes() + fechaVencimiento.getTimezoneOffset()
-        );
-        let diferencia = fechaVencimiento.getTime() - fechaActual.getTime();
-        let diasRestantes = Math.ceil(diferencia / (1000 * 60 * 60 * 24));
-        let color;
-        let texto;
-        (diasRestantes);
-        if (f.existencia == 0) {
-          color = "activeEmpty";
-          texto = "NO DISPONIBLE";
-        } else if (diasRestantes <= 10 && diasRestantes >= 1) {
-          color = "activeCloseToExpire";
-          texto = "POR VENCER";
-        } else if (diasRestantes > 10) {
-          color = "activeGood";
-          texto = "ACTIVO";
-        } else if (diasRestantes <= 0) {
-          color = "activeExpire";
-          texto = "EXPIRO";
-        }
-
-        template += `<tr data-proveedor="${f.proveedor}" data-productEntry="${f.producto}">
-                              <td><img src="./static/images/btn_lote2.png" alt="" width="80"></td>
-                              <td>${f.codigo}</td>
-                              <td>${f.producto + " " + f.valor_unidad + " " + f.unidad + " " + f.marca}</td>
-                              <td>${f.proveedor}</td>
-                              <td>${f.id_empaquetado}</td>
-                              <td>${f.tamaño_mercancia}</td>
-                              <td>${f.cantidad}</td>
-                              <td>${f.existencia}</td>
-                              <td>${f.precio_compra} Bs</td>
-                              <td>${f.fecha_compra}</td>
-                              <td>${f.fecha_vencimiento}</td>
-                              <td>
-                                  <div class="${color} uk-border-rounded uk-text-center uk-text-bold" style="padding: 5px; width: 115px;">${texto}</div>
-                              </td>
-                          </tr>`;
-      });
-      $(".cont_entry").append(template);
-      let table_entry = document.querySelector(".cont_entry").childElementCount;
-      if (table_entry <= 0 || table_entry < 4) {
-        document.querySelector(".altura_table_entry").style.height = "300px";
-      } else {
-        document.querySelector(".altura_table_entry").style.height = "100%";
-      }
+      entryTr(response);
     },
   });
 };
 cargarEntrys()
 
+let SupplierFilterAll = document.querySelector("#SupplierFilterAll");
+SupplierFilterAll.addEventListener("click", () => {
+  $(".cont_entry").html("");
+  cargarEntrys();
+})
 
 let searchEntryFilter = document.querySelectorAll(".search_entrys")
 searchEntryFilter.forEach((e) => {
@@ -78,10 +86,27 @@ searchEntryFilter.forEach((e) => {
           let hola = "";
           json.lista.forEach((p) => {
             hola += `      
-          <li><a href="#" class="prov-entry-products" idSup="${p.id}">${p.razon_social}</a></li>    
+          <li class="prov_entry"><a href="#" class="prov-entry-products" idSup="${p.id}">${p.razon_social}</a></li>    
         `;
           });
           $(".filter_prov_entry").html(hola);
+
+          let prov_entry = document.querySelectorAll(".prov_entry");
+          prov_entry.forEach((e) => {
+            e.addEventListener("click", () => {
+              let id = e.firstElementChild.getAttribute("idSup");
+              $.ajax({
+                url: "api_search",
+                type: "POST",
+                data: { randomnautica: "detalles_entradas", id_proveedor: id },
+                success: function (response) {
+                  $(".cont_entry").html("");
+                  entryTr(response);
+                },
+              });
+            });
+          });
+
         }
       })
     } else {
@@ -98,17 +123,33 @@ searchEntryFilter.forEach((e) => {
       $.ajax({
         url: "api_search",
         type: "POST",
-        data: { randomnautica: "productos", like: name },
+        data: { randomnautica: "productos", like_nombre: name },
         success: function (response) {
           let json = JSON.parse(response);
-          console.log(json);
           let hola = "";
           json.lista.forEach((p) => {
             hola += `      
-          <li><a href="#" class="prov-entry-products" idSup="${p.id}">${p.nombre + " " + p.valor_unidad + " " + p.unidad + " " + p.marca}</a></li>    
+          <li class="prod-entry"><a href="#" class="prov-entry-products" idPr="${p.id}">${p.nombre + " " + p.valor_unidad + " " + p.unidad + " " + p.marca}</a></li>    
         `;
           });
           $(".filter_prov_entry_product").html(hola);
+
+
+          let prov_entry = document.querySelectorAll(".prod-entry");
+          prov_entry.forEach((e) => {
+            e.addEventListener("click", () => {
+              let id = e.firstElementChild.getAttribute("idPr");
+              $.ajax({
+                url: "api_search",
+                type: "POST",
+                data: { randomnautica: "detalles_entradas", id_producto: id },
+                success: function (response) {
+                  $(".cont_entry").html("");
+                  entryTr(response);
+                },
+              });
+            });
+          });
         }
       })
     } else {
@@ -117,6 +158,26 @@ searchEntryFilter.forEach((e) => {
   })
 })
 
+//FILTRO POR FECHA
+
+let FORM_ENTRY_BETWEEN = document.querySelector(".FORM_ENTRY_BETWEEN");
+FORM_ENTRY_BETWEEN.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  let start = FORM_ENTRY_BETWEEN.firstElementChild.firstElementChild.lastElementChild.value
+  let end = FORM_ENTRY_BETWEEN.firstElementChild.lastElementChild.lastElementChild.value
+
+  $.ajax({
+    url: "api_search",
+    type: "POST",
+    data: { randomnautica: "detalles_entradas", between_fecha: {inicio: start, fin: end} },
+    success: function (response) {
+      let json = JSON.parse(response);
+      $(".cont_entry").html("");
+      entryTr(response);
+    },
+  });
+})
 
 //aqui hacemos la funcion para el credito
 
