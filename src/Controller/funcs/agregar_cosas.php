@@ -24,9 +24,10 @@ use Shtechnologyx\Pt3\Model\Capital;
 use Shtechnologyx\Pt3\Model\Detalle_entrada;
 use Shtechnologyx\Pt3\Model\Tipo_empaquetado;
 
-$other_class = new Permisos(null, $_SESSION['user_id'], $_POST['tipo'], 'agregar');
-$result = $other_class->search();
-
+if ($_POST['tipo'] != 'usuarios') {
+    $other_class = new Permisos(null, $_SESSION['user_id'], $_POST['tipo'], 'agregar');
+    $result = $other_class->search();
+}
 if ($tipo === 'usuarios') {
     $hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
     $clase = new Usuario(null, $_POST["nombre"], $_POST["correo"], $hash, 3, substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, 20));
