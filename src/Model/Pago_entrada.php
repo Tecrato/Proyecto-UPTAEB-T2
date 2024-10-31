@@ -45,16 +45,16 @@
             $query = $this->conn->prepare($query);
 
             $n = $n*$limite;
-            $query->bindParam(':l', $limite, PDO::PARAM_INT);
-            $query->bindParam(':n', $n, PDO::PARAM_INT);
+            $query->bindValue(':l', $limite, PDO::PARAM_INT);
+            $query->bindValue(':n', $n, PDO::PARAM_INT);
             if ($this->id != null) {
-                $query->bindParam(':id', $this->id, PDO::PARAM_INT);
+                $query->bindValue(':id', $this->id, PDO::PARAM_INT);
             }
             if ($this->id_metodo_pago != null){
-                $query->bindParam(':id_metodo_pago', $this->id_metodo_pago, PDO::PARAM_INT);
+                $query->bindValue(':id_metodo_pago', $this->id_metodo_pago, PDO::PARAM_INT);
             }
             if ($this->id_entrada != null){
-                $query->bindParam(':id_entrada', $this->id_entrada, PDO::PARAM_INT);
+                $query->bindValue(':id_entrada', $this->id_entrada, PDO::PARAM_INT);
             }
 
             $query->execute();
@@ -63,9 +63,9 @@
 
         function agregar(){
             $query = $this->conn->prepare('INSERT INTO pagos_entradas (id_metodo_pago,id_entrada,monto) VALUES (:id_metodo_pago,:id_entrada,:monto)');
-            $query->bindParam(':id_metodo_pago',$this->id_metodo_pago);
-            $query->bindParam(':id_entrada',$this->id_entrada);
-            $query->bindParam(':monto',$this->monto);
+            $query->bindValue(':id_metodo_pago',$this->id_metodo_pago);
+            $query->bindValue(':id_entrada',$this->id_entrada);
+            $query->bindValue(':monto',$this->monto);
             $query->execute();
             return $this->conn->lastInsertId();
         }

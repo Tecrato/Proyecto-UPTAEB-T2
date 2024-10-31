@@ -59,32 +59,20 @@
                 throw new Exception("Database connection failed");
             }
         }
-        public function add_variables($variables) : void{
-            foreach ($variables as $key => $value){
-                if ($value == null){
-                    continue;
-                }
-                $this->variables[$key] = $value;
-            }
+        public function add_variables(array $variables) : void {
+            $this->variables = array_filter($variables, fn($value) => !is_null($value));
         }
-        public function add_variables_like($variables) : void{
-            foreach ($variables as $key => $value){
-                if ($value == null){
-                    continue;
-                }
-                $this->variables_like[$key] = $value;
-            }
+        public function add_variables_like(array $variables) : void {
+            $this->variables_like = array_filter($variables, fn($value) => !is_null($value));
         }
-        public function add_variables_interval($variables) : void{
-            foreach ($variables as $key => $value){
-                if ($value == null){
-                    continue;
-                }
-                array_push($this->variables_interval, $value);
-            }
+        public function add_variables_interval(array $variables) : void {
+            $this->variables_interval = array_filter($variables, fn($value) => !is_null($value));
         }
         private function normalizeKey($key) {
-            return explode(".", $key)[1];
+            if (str_contains($key, '.')){
+                return explode(".", $key)[1];
+            }
+            return $key;
         }
         public function agregar() : int{
             $lista_vars = array();
@@ -128,18 +116,16 @@
         }
         public function borrar() : void {
             $query = $this->conn->prepare("DELETE FROM $this->tabla WHERE id=:id");
-            $query->bindParam(':id',$this->variables['a.id'], PDO::PARAM_INT);
+            $query->bindValue(':id',$this->variables['a.id'], PDO::PARAM_INT);
             $query->execute();
         }
         public function search($n=0,$limite=9, $order=' id ASC ') : Array{
-            $query = "SELECT $this->select_query FROM $this->tabla AS a $this->joins";
-    
-            $query .= " WHERE 1 ";
-            foreach ($this->variables as $key => $value){
-                $query .= ' AND '.$key.'=:'.$this->normalizeKey($key);
-            }
+            $query = "SELECT $this->select_query FROM $this->tabla AS a $this->joins WHERE 1";
             foreach ($this->variables_like as $key => $value){
-                $query .= ' AND '.$key.' LIKE :alike'.$this->normalizeKey($key);
+                $query .= ' AND '.$key.' LIKE :like'.$this->normalizeKey($key);
+            }
+            foreach ($this->variables as $key => $value){
+                $query .= ' AND '.$key.' = :'.$this->normalizeKey($key);
             }
             foreach ($this->variables_interval as $key => $value){
                 $query .= ' AND '.$key.' BETWEEN :'.$this->normalizeKey($key).' AND :'.$this->normalizeKey($key).'2';
@@ -147,25 +133,26 @@
             $query .= " ORDER BY $order ";
             $query .= " LIMIT :l OFFSET :n ";
             
+            // print_r("\n");
             // print_r($query);
             // Creamos la consulta
             $consulta = $this->conn->prepare($query);
             
             // Asignamos los parametros   
             foreach ($this->variables as $key => $value){
-                $consulta->bindParam(':'.$this->normalizeKey($key),$value);
+                $consulta->bindValue(':'.$this->normalizeKey($key),$value);
             }
             foreach ($this->variables_like as $key => $value){
-                $value2 = '%'.$value.'%';
-                $consulta->bindParam(':alike'.$this->normalizeKey($key),$value2);
+                $value2 = $value.'%';
+                $consulta->bindValue(':like'.$this->normalizeKey($key),$value2, PDO::PARAM_STR);
             }
             foreach ($this->variables_interval as $key => $value){
-                $consulta->bindParam(':'.$this->normalizeKey($key),$value["inicio"]);
-                $consulta->bindParam(':'.$this->normalizeKey($key).'2',$value["fin"]);
+                $consulta->bindValue(':'.$this->normalizeKey($key),$value["inicio"]);
+                $consulta->bindValue(':'.$this->normalizeKey($key).'2',$value["fin"]);
             }
             $n = $n*$limite;
-            $consulta->bindParam(':l',$limite, PDO::PARAM_INT);
-            $consulta->bindParam(':n',$n, PDO::PARAM_INT);
+            $consulta->bindValue(':l',$limite, PDO::PARAM_INT);
+            $consulta->bindValue(':n',$n, PDO::PARAM_INT);
 
             $consulta->execute();
             return $consulta->fetchAll();
@@ -188,15 +175,15 @@
             
             // Asignamos los parametros   
             foreach ($this->variables as $key => $value){
-                $consulta->bindParam(':a'.$this->normalizeKey($key),$value);
+                $consulta->bindValue(':a'.$this->normalizeKey($key),$value);
             }
             foreach ($this->variables_like as $key => $value){
                 $value2 = '%'.$value.'%';
-                $consulta->bindParam(':alike'.$this->normalizeKey($key),$value2);
+                $consulta->bindValue(':alike'.$this->normalizeKey($key),$value2);
             }
             foreach ($this->variables_interval as $key => $value){
-                $consulta->bindParam(':'.$this->normalizeKey($key),$value["inicio"]);
-                $consulta->bindParam(':'.$this->normalizeKey($key).'2',$value["fin"]);
+                $consulta->bindValue(':'.$this->normalizeKey($key),$value["inicio"]);
+                $consulta->bindValue(':'.$this->normalizeKey($key).'2',$value["fin"]);
             }
             $consulta->execute();
             return $consulta->fetch()['total'];

@@ -16,8 +16,8 @@
             
             $query = "UPDATE configuraciones SET valor=:valor WHERE llave=:llave";
             $query = $this->conn->prepare($query);
-            $query->bindParam(':valor',$this->value, PDO::PARAM_STR);
-            $query->bindParam(':llave',$this->key, PDO::PARAM_STR);
+            $query->bindValue(':valor',$this->value, PDO::PARAM_STR);
+            $query->bindValue(':llave',$this->key, PDO::PARAM_STR);
             $query->execute();
 
         }
@@ -33,10 +33,10 @@
 
             
             $n = $n*$limite;
-			$query->bindParam(':l', $limite, PDO::PARAM_INT);
-			$query->bindParam(':n', $n, PDO::PARAM_INT);
+			$query->bindValue(':l', $limite, PDO::PARAM_INT);
+			$query->bindValue(':n', $n, PDO::PARAM_INT);
             if ($this->key != null) {
-                $query->bindParam(':llave',$this->key, PDO::PARAM_INT);
+                $query->bindValue(':llave',$this->key, PDO::PARAM_INT);
             }
             $query->execute();
             $result = $query->fetchAll();

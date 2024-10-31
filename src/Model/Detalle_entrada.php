@@ -73,14 +73,14 @@
 		public function agregar() : int{
 			$query = $this->conn->prepare("INSERT INTO detalles_entradas VALUES(null, :id1, :id_empaquetado, :tm, :precio_compra, :id2, :fecha_vencimiento, :cantidad, :existencia)");
             
-            $query->bindParam(':id1',$this->id_producto, PDO::PARAM_INT);
-            $query->bindParam(':id_empaquetado',$this->mercancia, PDO::PARAM_INT);
-            $query->bindParam(':tm',$this->tamaño_mercancia, PDO::PARAM_INT);
-            $query->bindParam(':precio_compra',$this->precio_compra, PDO::PARAM_INT);
-            $query->bindParam(':id2',$this->id_entrada, PDO::PARAM_INT);
-            $query->bindParam(':fecha_vencimiento',$this->fecha_vencimiento, PDO::PARAM_STR);
-            $query->bindParam(':cantidad',$this->cantidad, PDO::PARAM_INT);
-            $query->bindParam(':existencia',$this->existencia, PDO::PARAM_INT);
+            $query->bindValue(':id1',$this->id_producto, PDO::PARAM_INT);
+            $query->bindValue(':id_empaquetado',$this->mercancia, PDO::PARAM_INT);
+            $query->bindValue(':tm',$this->tamaño_mercancia, PDO::PARAM_INT);
+            $query->bindValue(':precio_compra',$this->precio_compra, PDO::PARAM_INT);
+            $query->bindValue(':id2',$this->id_entrada, PDO::PARAM_INT);
+            $query->bindValue(':fecha_vencimiento',$this->fecha_vencimiento, PDO::PARAM_STR);
+            $query->bindValue(':cantidad',$this->cantidad, PDO::PARAM_INT);
+            $query->bindValue(':existencia',$this->existencia, PDO::PARAM_INT);
         
             $query->execute();
             return $this->conn->lastInsertId();

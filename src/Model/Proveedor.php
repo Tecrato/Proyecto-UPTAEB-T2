@@ -34,12 +34,12 @@
             
             $query = $this->conn->prepare("INSERT INTO proveedores VALUES(null, :nombre, :razon, :rif, :tel, :correo, :dir,1)");
 
-            $query->bindParam(':nombre',$this->nombre);
-            $query->bindParam(':razon',$this->razon_social);
-            $query->bindParam(':rif',$this->rif);
-            $query->bindParam(':tel',$this->telefono);
-            $query->bindParam(':correo',$this->correo);
-            $query->bindParam(':dir',$this->direccion);
+            $query->bindValue(':nombre',$this->nombre);
+            $query->bindValue(':razon',$this->razon_social);
+            $query->bindValue(':rif',$this->rif);
+            $query->bindValue(':tel',$this->telefono);
+            $query->bindValue(':correo',$this->correo);
+            $query->bindValue(':dir',$this->direccion);
             $query->execute();
             return $this->conn->lastInsertId();
         }
@@ -48,7 +48,7 @@
         function desactivar() {
 			$query = $this->conn->prepare('UPDATE proveedores SET active=0 WHERE id=:id');
 
-			$query->bindParam(':id',$this->id);
+			$query->bindValue(':id',$this->id);
 			$query->execute();
         }
 
@@ -57,13 +57,13 @@
             
             $query = $this->conn->prepare("UPDATE proveedores SET nombre=:nombre, razon_social=:razon_social, rif=:rif, telefono=:tel, correo=:correo, direccion=:dir WHERE ID=:id");
         
-            $query->bindParam(':nombre',$this->nombre);
-            $query->bindParam(':razon_social',$this->razon_social);
-            $query->bindParam(':rif',$this->rif);
-            $query->bindParam(':tel',$this->telefono);
-            $query->bindParam(':correo',$this->correo);
-            $query->bindParam(':dir',$this->direccion);
-            $query->bindParam(':id',$this->id);
+            $query->bindValue(':nombre',$this->nombre);
+            $query->bindValue(':razon_social',$this->razon_social);
+            $query->bindValue(':rif',$this->rif);
+            $query->bindValue(':tel',$this->telefono);
+            $query->bindValue(':correo',$this->correo);
+            $query->bindValue(':dir',$this->direccion);
+            $query->bindValue(':id',$this->id);
             $query->execute();
         }
 
@@ -83,16 +83,16 @@
 
             $consulta = $this->conn->prepare($query);
 
-            $consulta->bindParam(':l',$limite, PDO::PARAM_INT);
-            $consulta->bindParam(':n',$n, PDO::PARAM_INT);
+            $consulta->bindValue(':l',$limite, PDO::PARAM_INT);
+            $consulta->bindValue(':n',$n, PDO::PARAM_INT);
             $this->like = '%'.$this->like.'%';
-            $consulta->bindParam(':como',$this->like, PDO::PARAM_STR);
+            $consulta->bindValue(':como',$this->like, PDO::PARAM_STR);
 
             if ($this->id != null){
-                $consulta->bindParam(':id',$this->id, PDO::PARAM_INT);
+                $consulta->bindValue(':id',$this->id, PDO::PARAM_INT);
             }
             if ($this->active != null){
-                $consulta->bindParam(':active',$this->active, PDO::PARAM_STR);
+                $consulta->bindValue(':active',$this->active, PDO::PARAM_STR);
             }
 
         

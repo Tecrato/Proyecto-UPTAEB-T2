@@ -17,7 +17,7 @@
 		
 		function desactivar(){
 			$query = $this->conn->prepare("UPDATE notificaciones SET status=1 WHERE id=:id");
-            $query->bindParam(':id',$this->id);
+            $query->bindValue(':id',$this->id);
             $query->execute();
 
 		}
@@ -50,16 +50,16 @@
 
             $consulta = $this->conn->prepare($query);
 
-            $consulta->bindParam(':l',$limite, PDO::PARAM_INT);
-            $consulta->bindParam(':n',$n, PDO::PARAM_INT);
+            $consulta->bindValue(':l',$limite, PDO::PARAM_INT);
+            $consulta->bindValue(':n',$n, PDO::PARAM_INT);
             if ($this->id != null){
-                $consulta->bindParam(':id',$this->id, PDO::PARAM_INT);
+                $consulta->bindValue(':id',$this->id, PDO::PARAM_INT);
             }    
             if ($this->id_usuario != null){
-                $consulta->bindParam(':id_usuario',$this->id_usuario, PDO::PARAM_INT);
+                $consulta->bindValue(':id_usuario',$this->id_usuario, PDO::PARAM_INT);
             }    
             if ($this->status != null){
-                $consulta->bindParam(':status',$this->status, PDO::PARAM_INT);
+                $consulta->bindValue(':status',$this->status, PDO::PARAM_INT);
             }    
             $consulta->execute();
             return $consulta->fetchAll();

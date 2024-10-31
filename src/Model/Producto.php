@@ -54,7 +54,7 @@
                 "a.IVA"=> $this->IVA,
                 "a.ganancia" => $this->ganancia,
                 "a.codigo"=> $this->codigo,
-                "a.active"=> $this->active,
+                "active"=> $this->active,
                 "a.algoritmo"=> $this->algoritmo,
                 "a.ganancia" => $this->ganancia,
             ]);
@@ -79,7 +79,7 @@
                 a.precio_venta,
                 a.IVA,
                 a.codigo,
-                a.active
+                a.active as active
             ";
             $this->joins = '
                 INNER JOIN categoria b ON b.id = a.id_categoria 
@@ -247,7 +247,7 @@
         function toggle_active() {
 			$query = $this->conn->prepare('UPDATE productos SET active=(NOT active) WHERE id=:id');
 
-			$query->bindParam(':id',$this->id);
+			$query->bindValue(':id',$this->id);
 			$query->execute();
         }
     }

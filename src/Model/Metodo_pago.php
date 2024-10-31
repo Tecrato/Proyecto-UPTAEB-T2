@@ -18,7 +18,7 @@
         }
         function desactivar(){
 			$query = $this->conn->prepare('UPDATE metodo_pago SET active=0 WHERE id=:id');
-			$query->bindParam(':id',$this->id);
+			$query->bindValue(':id',$this->id);
 			$query->execute();
         }
 }

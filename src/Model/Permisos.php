@@ -18,16 +18,16 @@
 
         function agregar(){
             $query = $this->conn->prepare("INSERT INTO permisos(id_usuario,tabla,permiso) VALUES(:id_usuario,:tabla,:permiso)");
-            $query->bindParam(':id_usuario',$this->id_usuario);
-            $query->bindParam(':tabla',$this->tabla);
-            $query->bindParam(':permiso',$this->permiso);
+            $query->bindValue(':id_usuario',$this->id_usuario);
+            $query->bindValue(':tabla',$this->tabla);
+            $query->bindValue(':permiso',$this->permiso);
             $query->execute();
         }
         function borrar() {
             $query = $this->conn->prepare("DELETE FROM permisos WHERE id_usuario=:id_usuario AND tabla=:tabla AND permiso=:permiso");
-            $query->bindParam(':id_usuario',$this->id_usuario);
-            $query->bindParam(':tabla',$this->tabla);
-            $query->bindParam(':permiso',$this->permiso);
+            $query->bindValue(':id_usuario',$this->id_usuario);
+            $query->bindValue(':tabla',$this->tabla);
+            $query->bindValue(':permiso',$this->permiso);
             $query->execute();
         }
         function search($n=0,$limite=9){
@@ -61,20 +61,20 @@
             $consulta = $this->conn->prepare($query);
 
 
-            $consulta->bindParam(':l',$limite, PDO::PARAM_INT);
-            $consulta->bindParam(':n',$n, PDO::PARAM_INT);
+            $consulta->bindValue(':l',$limite, PDO::PARAM_INT);
+            $consulta->bindValue(':n',$n, PDO::PARAM_INT);
             
             if ($this->id != null){
-                $consulta->bindParam(':id',$this->id, PDO::PARAM_INT);
+                $consulta->bindValue(':id',$this->id, PDO::PARAM_INT);
             }
             if ($this->id_usuario != null){
-                $consulta->bindParam(':id_usuario',$this->id_usuario, PDO::PARAM_INT);
+                $consulta->bindValue(':id_usuario',$this->id_usuario, PDO::PARAM_INT);
             }
             if ($this->tabla != null){
-                $consulta->bindParam(':tabla',$this->tabla, PDO::PARAM_STR);
+                $consulta->bindValue(':tabla',$this->tabla, PDO::PARAM_STR);
             }
             if ($this->permiso != null){
-                $consulta->bindParam(':permiso',$this->permiso, PDO::PARAM_STR);
+                $consulta->bindValue(':permiso',$this->permiso, PDO::PARAM_STR);
             }
             $consulta->execute();
             return $consulta->fetchAll();

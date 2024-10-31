@@ -21,10 +21,10 @@
 
         function agregar(){
             $query = $this->conn->prepare("INSERT INTO bitacora (id_usuario, tabla, accion, detalles) VALUES(:id_usuario, :tabla, :accion, :detalles)");
-            $query->bindParam(':id_usuario',$this->id_usuario, PDO::PARAM_INT);
-            $query->bindParam(':tabla',$this->tabla, PDO::PARAM_STR);
-            $query->bindParam(':accion',$this->accion, PDO::PARAM_STR);
-            $query->bindParam(':detalles',$this->detalles, PDO::PARAM_STR);
+            $query->bindValue(':id_usuario',$this->id_usuario, PDO::PARAM_INT);
+            $query->bindValue(':tabla',$this->tabla, PDO::PARAM_STR);
+            $query->bindValue(':accion',$this->accion, PDO::PARAM_STR);
+            $query->bindValue(':detalles',$this->detalles, PDO::PARAM_STR);
             $query->execute();
             return $this->conn->lastInsertId();
         }
@@ -77,21 +77,21 @@
             $consulta = $this->conn->prepare($query);
 
             if ($this->id){
-                $consulta->bindParam(':id',$this->id, PDO::PARAM_INT);
+                $consulta->bindValue(':id',$this->id, PDO::PARAM_INT);
             }
             if ($this->id_usuario){
-                $consulta->bindParam(':id_usuario',$this->id_usuario, PDO::PARAM_INT);
+                $consulta->bindValue(':id_usuario',$this->id_usuario, PDO::PARAM_INT);
             }
             if ($this->tabla){
-                $consulta->bindParam(':tabla',$this->tabla, PDO::PARAM_STR);
+                $consulta->bindValue(':tabla',$this->tabla, PDO::PARAM_STR);
             }
             if ($this->accion){
-                $consulta->bindParam(':accion',$this->accion, PDO::PARAM_STR);
+                $consulta->bindValue(':accion',$this->accion, PDO::PARAM_STR);
             }
 
 
-            $consulta->bindParam(':l',$limite, PDO::PARAM_INT);
-            $consulta->bindParam(':n',$n, PDO::PARAM_INT);
+            $consulta->bindValue(':l',$limite, PDO::PARAM_INT);
+            $consulta->bindValue(':n',$n, PDO::PARAM_INT);
             $consulta->execute();
             return $consulta->fetchAll();
         }

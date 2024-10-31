@@ -17,7 +17,7 @@ if ($_POST['accion'] == 'abrir') {
         die();
     }
     $otra_clase_mas = new Caja(id_usuario: $_POST['user_id'], estado: 0);
-    $ultima_caja = $otra_clase_mas->buscar_ultima();
+    $ultima_caja = $otra_clase_mas->search()[0];
 
     if (count($ultima_caja) > 0) {
         echo json_encode(['status' => 'error', 'estado' => 'mas cajas no']);
@@ -47,7 +47,7 @@ if ($_POST['accion'] == 'abrir') {
     echo json_encode(['status' => 'active', 'estado' => 'si']);
 } else if ($_POST['accion'] == 'check') {
     $otra_clase_mas = new Caja(id_usuario: $_SESSION['user_id'], estado: 0);
-    $ultima_caja = $otra_clase_mas->buscar_ultima();
+    $ultima_caja = $otra_clase_mas->search()[0];
     if ($ultima_caja == NULL) {
         echo json_encode(['status' => 'error', 'estado' => 'no']);
         exit(0);

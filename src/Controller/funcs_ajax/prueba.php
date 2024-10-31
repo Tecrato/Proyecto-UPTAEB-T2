@@ -43,7 +43,7 @@
 	// ");
 
 	// $this->like = '%'.$this->like.'%';
-    // $consulta->bindParam(':como',$this->like, PDO::PARAM_STR);
+    // $consulta->bindValue(':como',$this->like, PDO::PARAM_STR);
 	
 	
 	// $c = new Usuario();
@@ -165,9 +165,10 @@
 	// require('../../Model/Entradas.php');
 	// $clase = new Entrada(null,$datos->proveedor,$datos->fecha_compra,$datos->codigo,$datos->detalles);
 	// print_r($clase->agregar($datos->lista));
-	use Shtechnologyx\Pt3\Model\Conexion;
-	$c = new Conexion();
-	print_r($c->getVars());
+	use Shtechnologyx\Pt3\Model\Producto;
+	$c = new Producto(active:"si");
+	print_r($c->search(0,10));
+
 
 	?>
 	

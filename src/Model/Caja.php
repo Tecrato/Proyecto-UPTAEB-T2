@@ -47,8 +47,8 @@
 
         function abrir(){
             $query = $this->conn->prepare("INSERT INTO caja(id_usuario,monto_inicial,monto_final,estado) VALUES(:id_usuario, :monto_inicial, 0, 0)");
-            $query->bindParam(':id_usuario', $this->id_usuario, PDO::PARAM_INT);
-            $query->bindParam(':monto_inicial', $this->monto_inicial, PDO::PARAM_INT);
+            $query->bindValue(':id_usuario', $this->id_usuario, PDO::PARAM_INT);
+            $query->bindValue(':monto_inicial', $this->monto_inicial, PDO::PARAM_INT);
             $query->execute();
         }
 
@@ -92,29 +92,14 @@
                 return [];
             }
             $stmt = $this->conn->prepare('CALL AsignarTotalVentasDia(:id)');
-            $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
+            $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
             $stmt->execute();
             // $query = $this->conn->prepare('UPDATE caja SET monto_final=:mf, estado=0 WHERE id = :id');
-            // $query->bindParam(':id',$caja->id);
-            // $query->bindParam(':mf',$this->monto_final);
+            // $query->bindValue(':id',$caja->id);
+            // $query->bindValue(':mf',$this->monto_final);
             // $query->execute();
             // $this->add_bitacora($this->id_usuario,"Caja","Cerrar","Caja cerrada");
         }
-
-        function buscar_ultima(){
-            $consulta = $this->conn->prepare('SELECT * FROM caja WHERE estado=0 AND id_usuario=:id_usuario');
-            $consulta->bindParam(':id_usuario', $this->id_usuario, PDO::PARAM_INT);
-            $consulta->execute();
-            $result = $consulta->fetchAll();
-
-            if (count($result) < 1) {
-                return [];
-            }
-            // $caja = new Caja(null, $this->id_usuario, null, 0);
-            // $result = $caja->search();
-            return $result[0];
-        }
-
 
         function totalMetodosPago(){
             $consulta = $this->conn->prepare('SELECT 
@@ -126,7 +111,7 @@
                                             JOIN registro_ventas rv ON p.id_venta = rv.id
                                             WHERE rv.id_caja = :id) sub ON mp.id = sub.id_metodo_pago
                                             GROUP BY mp.nombre');
-            $consulta->bindParam(':id', $this->id, PDO::PARAM_INT);
+            $consulta->bindValue(':id', $this->id, PDO::PARAM_INT);
             $consulta->execute();
             return $consulta->fetchAll();
         }

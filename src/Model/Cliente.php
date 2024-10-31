@@ -42,7 +42,7 @@
 
         function desactivar(){
 			$query = $this->conn->prepare('UPDATE clientes SET active=0 WHERE id=:id');
-			$query->bindParam(':id',$this->id);
+			$query->bindValue(':id',$this->id);
 			$query->execute();
         }
 

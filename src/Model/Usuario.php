@@ -40,19 +40,19 @@
 
         public function login(){
             $query = $this->conn->prepare('UPDATE usuarios SET active=1 , sesion_id=:sesion_id WHERE id=:id');
-            $query->bindParam(':id',$this->id);
-            $query->bindParam(':sesion_id', $this->sesion_id);
+            $query->bindValue(':id',$this->id);
+            $query->bindValue(':sesion_id', $this->sesion_id);
             $query->execute();
         }
         function logout() {
             $query = $this->conn->prepare('UPDATE usuarios SET active=0 WHERE id=:id');
-            $query->bindParam(':id',$this->id);
+            $query->bindValue(':id',$this->id);
             $query->execute(); 
         }
         function verificar($contraseña){
             $query = "SELECT * FROM usuarios WHERE correo=:correo";
             $consulta = $this->conn->prepare($query);
-            $consulta->bindParam(':correo',$this->correo, PDO::PARAM_STR);
+            $consulta->bindValue(':correo',$this->correo, PDO::PARAM_STR);
             $consulta->execute();
             $resultado = password_verify($contraseña,$consulta->fetchAll()[0]['hash']);
             return $resultado;
@@ -60,15 +60,15 @@
         function cambiar_password() {
             $query = "UPDATE usuarios SET hash=:hash WHERE correo=:correo";
             $consulta = $this->conn->prepare($query);
-            $consulta->bindParam(':correo',$this->correo, PDO::PARAM_STR);
-            $consulta->bindParam(':hash',$this->hash, PDO::PARAM_STR);
+            $consulta->bindValue(':correo',$this->correo, PDO::PARAM_STR);
+            $consulta->bindValue(':hash',$this->hash, PDO::PARAM_STR);
             $consulta->execute();
         }
         function cambiar_rol() {
             $query = "UPDATE usuarios SET rol=:rol WHERE id=:id";
             $consulta = $this->conn->prepare($query);
-            $consulta->bindParam(':id',$this->id, PDO::PARAM_STR);
-            $consulta->bindParam(':rol',$this->rol, PDO::PARAM_STR);
+            $consulta->bindValue(':id',$this->id, PDO::PARAM_STR);
+            $consulta->bindValue(':rol',$this->rol, PDO::PARAM_STR);
             $consulta->execute();
         }
 }       

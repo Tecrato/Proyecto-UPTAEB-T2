@@ -491,10 +491,10 @@ const cargarTargetProduct = (page) => {
     type: "POST",
     data: {
       randomnautica: "productos",
+      active: 1,
       n: page_productos, // Aca va el numero de la pagina actual
       limite: 10, // Aca va el numero maximo de tarjetas que se pueden imprimir
       like_nombre: like_product,
-      active: 1,
     },
     success: function (response) {
       marcaAgua();

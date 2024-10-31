@@ -58,14 +58,14 @@
 
         function desactivar(){
             $query = $this->conn->prepare('UPDATE credito SET active=0 WHERE id=:id');
-            $query->bindParam(':id',$this->id);
+            $query->bindValue(':id',$this->id);
             $query->execute();
         }
 
 
         function pagar($pagos){
             $query = $this->conn->prepare("UPDATE credito SET status=0 WHERE id_rv=:id");
-            $query->bindParam(':id',$this->id_rv);
+            $query->bindValue(':id',$this->id_rv);
             $query->execute();
             
             for ($i = 0; $i < count($pagos); $i++) {

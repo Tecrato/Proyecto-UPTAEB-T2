@@ -54,13 +54,13 @@ class Factura extends Conexion {
 
         $query = $this->conn->prepare($query);
 
-        $query->bindParam(':l', $limite, PDO::PARAM_INT);
-        $query->bindParam(':n', $n, PDO::PARAM_INT);
+        $query->bindValue(':l', $limite, PDO::PARAM_INT);
+        $query->bindValue(':n', $n, PDO::PARAM_INT);
         if ($this->id != null) {
-            $query->bindParam(':id', $this->id, PDO::PARAM_INT);
+            $query->bindValue(':id', $this->id, PDO::PARAM_INT);
         }
         if ($this->id_registro_ventas != null){
-            $query->bindParam(':id_registro_ventas', $this->id_registro_ventas, PDO::PARAM_INT);
+            $query->bindValue(':id_registro_ventas', $this->id_registro_ventas, PDO::PARAM_INT);
         }
 
         $query->execute();
@@ -70,10 +70,10 @@ class Factura extends Conexion {
     function agregar(){
         $query = $this->conn->prepare("INSERT INTO factura VALUES(null, :id1, :id2, :cantidad, :coste)");
 
-        $query->bindParam(':id1', $this->id_registro_ventas);
-        $query->bindParam(':id2', $this->id_productos);
-        $query->bindParam(':cantidad', $this->cantidad);
-        $query->bindParam(':coste', $this->coste_producto_total);
+        $query->bindValue(':id1', $this->id_registro_ventas);
+        $query->bindValue(':id2', $this->id_productos);
+        $query->bindValue(':cantidad', $this->cantidad);
+        $query->bindValue(':coste', $this->coste_producto_total);
 
         $query->execute();
         return $this->conn->lastInsertId();
@@ -82,7 +82,7 @@ class Factura extends Conexion {
     function borrar(){
         if ($this->id_registro_ventas) {
             $query = $this->conn->prepare("DELETE FROM entradas WHERE id_registro_ventas=:id_registro");
-            $query->bindParam(':id_registro', $this->id_registro_ventas);
+            $query->bindValue(':id_registro', $this->id_registro_ventas);
             $query->execute();
         } else {
             throw new Exception("Error, debe pasar el id del registro asociado", 1);
@@ -96,7 +96,7 @@ class Factura extends Conexion {
                     (coste_producto_total / cantidad) AS valor_unit, 
                     cantidad * (SELECT precio_venta FROM productos WHERE factura.id_productos = id) AS Total 
                     FROM factura WHERE id_registro_ventas = :id_registro_ventas");
-        $query->bindParam(':id_registro_ventas', $this->id_registro_ventas);
+        $query->bindValue(':id_registro_ventas', $this->id_registro_ventas);
         $query->execute();
         return $query->fetchAll();
     }
