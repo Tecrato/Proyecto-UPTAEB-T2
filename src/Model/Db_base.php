@@ -55,9 +55,6 @@
             $this->select_query = " a.* ";
             $this->variables_interval = array();
             Conexion::__construct();
-            if (!$this->conn) {
-                throw new Exception("Database connection failed");
-            }
         }
         public function add_variables(array $variables) : void {
             $this->variables = array_filter($variables, fn($value) => !is_null($value));
@@ -70,7 +67,8 @@
         }
         private function normalizeKey($key) {
             if (str_contains($key, '.')){
-                return explode(".", $key)[1];
+                // return explode(".", $key)[1];
+                return implode("",explode(".", $key));
             }
             return $key;
         }

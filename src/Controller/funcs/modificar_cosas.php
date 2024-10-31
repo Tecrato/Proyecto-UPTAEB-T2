@@ -32,7 +32,7 @@ if ($_SESSION['rol_num'] > 1 and count($result) <= 0) {
 if ($tipo === 'producto') {
     print_r(file_exists('Media/imagenes/' . $_POST['old_img']));
     if ($_FILES['imagen1']['name'] != "") {
-        if (file_exists('Media/imagenes/' . $_POST['old_img'])) {
+        if (file_exists('Media/imagenes/' . $_POST['old_img']) && ('Media/imagenes/' . $_POST['old_img'] != 'Media/imagenes/banner_productos.png')) {
             unlink('Media/imagenes/' . $_POST['old_img']);
         }
         print_r('Media/imagenes/' . $_POST['old_img']);

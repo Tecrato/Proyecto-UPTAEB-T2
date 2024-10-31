@@ -74,7 +74,11 @@
         );
     }
     elseif ($_POST['randomnautica'] == "metodo_pago") {
-        $clase = new Metodo_pago();
+        $clase = new Metodo_pago(
+            id:(isset($_POST['id']) ? $_POST['id'] : null),
+            nombre:(isset($_POST['nombre']) ? $_POST['nombre'] : null),
+            like:(isset($_POST['like_nombre']) ? $_POST['like_nombre'] : '')
+        );
     }
     elseif ($_POST['randomnautica'] == "empaquetado") {
         $clase = new Tipo_empaquetado(
