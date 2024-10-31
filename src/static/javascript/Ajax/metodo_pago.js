@@ -132,3 +132,17 @@ formMetodoPago.addEventListener("submit", (e) => {
 })
 
 cargarMetodosPago()
+
+let search_metodoPago = document.querySelector(".search_metodoPago")
+search_metodoPago.addEventListener("keyup", (e) => {
+    let search = e.target.value
+    $.ajax({
+        url: "api_search",
+        type: "POST",
+        data: { randomnautica: "credito", like_nombre_cliente: search },
+        success: function (response) {
+            console.log(response);
+            // TrCredito(response)
+        }
+    })
+})

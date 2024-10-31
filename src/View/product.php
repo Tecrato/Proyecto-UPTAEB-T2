@@ -13,7 +13,7 @@
         </ul>
         <div class="height_controller">
         </div>
-        <ul class="uk-switcher uk-margin" data-uk-switcher="{swiping:false}">
+        <ul class="uk-switcher uk-margin">
             <li>
                 <section class="uk-background-secondary uk-padding uk-border-rounded" uk-filter="target: .js-filter">
                     <div>
@@ -146,7 +146,7 @@
                                     <div class="uk-width-1-2@s">
                                         <label class="uk-form-label">Valor Uni.</label>
                                         <div class="uk-form-controls">
-                                            <input class="uk-input ValorUnidadUpdateProduct" type="text"  name="valor_unidad" minlength="1" maxlength="4" required>
+                                            <input class="uk-input ValorUnidadUpdateProduct" type="text" name="valor_unidad" minlength="1" maxlength="4" required>
                                         </div>
                                     </div>
                                     <div class="uk-width-1-2@s">
@@ -355,18 +355,33 @@
                                             </div>
                                         </li>
                                         <li>
-                                            <a id="" href="#">FECHA <span uk-drop-parent-icon></span></a>
-                                            <div class="uk-dropdown">
+                                            <a href="#">FECHA <span uk-drop-parent-icon></span></a>
+                                            <div class="uk-dropdown" uk-dropdown="mode: click; delay-hide: 500">
 
                                                 <ul class="uk-nav uk-dropdown-nav">
-
+                                                    <form class="FORM_ENTRY_BETWEEN">
+                                                        <div class="uk-margin-small-top">
+                                                            <div class="uk-flex uk-flex-middle uk-margin-small-top">
+                                                                <span class="uk-margin-small-right uk-text-bold">De</span>
+                                                                <input class="uk-input" type="date" placeholder="100" aria-label="100" style="color: #999; border-color: #999;">
+                                                            </div>
+                                                            <div class="uk-flex uk-flex-middle uk-margin-top">
+                                                                <span class="uk-margin-small-right uk-text-bold">Hasta</span>
+                                                                <input class="uk-input" type="date" placeholder="100" aria-label="100" style="color: #999; border-color: #999;">
+                                                            </div>
+                                                        </div>
+                                                        <div class="uk-margin-top">
+                                                            <div class="uk-flex uk-flex-center">
+                                                                <input class="uk-button uk-button-secondary" type="submit" value="APLICAR" style="color: #999; border-color: #999;">
+                                                            </div>
+                                                        </div>
+                                                    </form>
                                                 </ul>
                                             </div>
                                         </li>
                                     </ul>
                                 </nav>
                             </div>
-
                             <div class="uk-flex uk-flex-middle">
                                 <a href="#modal-full-entrys" uk-toggle class="uk-margin-right" uk-tooltip="title:Añadir Entrada; delay: 500">
                                     <img src="./static/images/btn_lote2.png" alt="" width="35px">

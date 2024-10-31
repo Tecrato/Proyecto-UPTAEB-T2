@@ -22,7 +22,7 @@
                                     <div class="uk-margin formDelete uk-light">
                                         <form class="uk-search uk-search-default uk-light form_btns_search">
                                             <span class="uk-search-icon-flip uk-light" uk-search-icon></span>
-                                            <input class="uk-search-input uk-light" type="search" placeholder="Buscar" aria-label="Search">
+                                            <input class="uk-search-input uk-light search_facturas" type="search" placeholder="Buscar" aria-label="Search">
                                         </form>
                                     </div>
                                     <div class="uk-margin-left uk-light cont_btns_fact">
@@ -42,15 +42,15 @@
                                                         <li class="uk-margin-small-bottom uk-text-center"><strong>FILTRAR</strong></li>
                                                         <li>
                                                             <div class="">
-                                                                <form>
+                                                                <form class="FORM_FACT_DATE">
                                                                     <div class="uk-margin-small-top">
                                                                         <div class="uk-flex uk-flex-middle uk-margin-small-top">
                                                                             <span class="uk-margin-small-right uk-text-bold">De</span>
-                                                                            <input class="uk-input" type="date" placeholder="100" aria-label="100">
+                                                                            <input class="uk-input" type="date" placeholder="100" aria-label="100" style="color: #999; border-color: #999;">
                                                                         </div>
                                                                         <div class="uk-flex uk-flex-middle uk-margin-top">
                                                                             <span class="uk-margin-small-right uk-text-bold">Hasta</span>
-                                                                            <input class="uk-input" type="date" placeholder="100" aria-label="100">
+                                                                            <input class="uk-input" type="date" placeholder="100" aria-label="100" style="color: #999; border-color: #999;">
                                                                         </div>
                                                                     </div>
                                                                     <div class="uk-margin-top">
@@ -318,6 +318,49 @@
         <?php if ($_SESSION['rol_num'] <= 2) { ?>
 
             <li>
+                <div class="uk-flex" style="height: 50px;">
+                    <div class="uk-margin formDelete uk-light">
+                        <form class="uk-search uk-search-default uk-light form_btns_search">
+                            <span class="uk-search-icon-flip uk-light" uk-search-icon></span>
+                            <input class="uk-search-input uk-light search_credito" type="search" placeholder="Buscar" aria-label="Search">
+                        </form>
+                    </div>
+                    <nav uk-dropnav="mode: click">
+                        <ul class="uk-subnav uk-margin-remove">
+                            <li>
+                                <div class="">
+                                    <a href="" class="uk-icon-link icon-filter" uk-icon="icon: filter; ratio: 1.7"></a>
+                                </div>
+                                <div class="uk-dropdown uk-border-rounded">
+                                    <ul class="uk-nav uk-dropdown-nav uk-border-rounded">
+                                        <li class="uk-margin-small-bottom uk-text-center"><strong>FILTRAR</strong></li>
+                                        <li>
+                                            <div class="">
+                                                <form class="FORM_CREDIT_DATE">
+                                                    <div class="uk-margin-small-top">
+                                                        <div class="uk-flex uk-flex-middle uk-margin-small-top">
+                                                            <span class="uk-margin-small-right uk-text-bold">De</span>
+                                                            <input class="uk-input" type="date" placeholder="100" aria-label="100" style="color: #999; border-color: #999;">
+                                                        </div>
+                                                        <div class="uk-flex uk-flex-middle uk-margin-top">
+                                                            <span class="uk-margin-small-right uk-text-bold">Hasta</span>
+                                                            <input class="uk-input" type="date" placeholder="100" aria-label="100" style="color: #999; border-color: #999;">
+                                                        </div>
+                                                    </div>
+                                                    <div class="uk-margin-top">
+                                                        <div class="uk-flex uk-flex-center">
+                                                            <input class="uk-button uk-button-secondary" type="submit" value="APLICAR">
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
                 <div class="uk-padding-small uk-overflow-auto">
                     <table class="uk-table uk-light">
                         <thead class="uk-background-secondary">
@@ -385,7 +428,49 @@
         <?php }; ?>
 
         <li>
-
+            <div class="uk-flex" style="height: 50px;">
+                <div class="uk-margin formDelete uk-light">
+                    <form class="uk-search uk-search-default uk-light form_btns_search">
+                        <span class="uk-search-icon-flip uk-light" uk-search-icon></span>
+                        <input class="uk-search-input uk-light search_caja" type="search" placeholder="Buscar" aria-label="Search">
+                    </form>
+                </div>
+                <nav uk-dropnav="mode: click">
+                    <ul class="uk-subnav uk-margin-remove">
+                        <li>
+                            <div class="">
+                                <a href="" class="uk-icon-link icon-filter" uk-icon="icon: filter; ratio: 1.7"></a>
+                            </div>
+                            <div class="uk-dropdown uk-border-rounded">
+                                <ul class="uk-nav uk-dropdown-nav uk-border-rounded">
+                                    <li class="uk-margin-small-bottom uk-text-center"><strong>FILTRAR</strong></li>
+                                    <li>
+                                        <div class="">
+                                            <form class="FORM_BOX_DATE">
+                                                <div class="uk-margin-small-top">
+                                                    <div class="uk-flex uk-flex-middle uk-margin-small-top">
+                                                        <span class="uk-margin-small-right uk-text-bold">De</span>
+                                                        <input class="uk-input" type="date" placeholder="100" aria-label="100" style="color: #999; border-color: #999;">
+                                                    </div>
+                                                    <div class="uk-flex uk-flex-middle uk-margin-top">
+                                                        <span class="uk-margin-small-right uk-text-bold">Hasta</span>
+                                                        <input class="uk-input" type="date" placeholder="100" aria-label="100" style="color: #999; border-color: #999;">
+                                                    </div>
+                                                </div>
+                                                <div class="uk-margin-top">
+                                                    <div class="uk-flex uk-flex-center">
+                                                        <input class="uk-button uk-button-secondary" type="submit" value="APLICAR">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
             <a class="uk-button uk-button-default uk-margin-bottom uk-margin-top invisible btn_agg_caja date_caja" uk-toggle href="#caja-modal">Apertura de Caja</a>
 
             <div class="uk-light uk-padding-small uk-overflow-auto">

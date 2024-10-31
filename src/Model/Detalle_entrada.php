@@ -1,6 +1,7 @@
 <?php
     namespace Shtechnologyx\Pt3\Model;
     use PDO;
+    use Exception;
 	class Detalle_entrada extends Db_base {
         private $id;
         private $id_entrada;
