@@ -146,24 +146,26 @@ FORM_BOX_DATE.addEventListener("submit", (e) => {
         type: "POST",
         data: { randomnautica: "credito", between_fecha: { inicio: fecha_inicio, fin: fecha_fin } },
         success: function (response) {
+            console.log(JSON.parse(response));
             TrCaja(response)
         }
     })
 })
 
-// let search_credito = document.querySelector(".search_credito")
-// search_credito.addEventListener("keyup", (e) => {
-//     let search = e.target.value
-//     $.ajax({
-//         url: "api_search",
-//         type: "POST",
-//         data: { randomnautica: "credito", like_nombre_cliente: search },
-//         success: function (response) {
-//             console.log(response);
-//             // TrCredito(response)
-//         }
-//     })
-// })
+let search_caja = document.querySelector(".search_caja")
+search_caja.addEventListener("keyup", (e) => {
+    let search = e.target.value
+    $.ajax({
+        url: "api_search",
+        type: "POST",
+        data: { randomnautica: "caja", like_nombre_cliente: search },
+        success: function (response) {
+            console.log(response);
+            TrCaja(response)
+
+        }
+    })
+})
 
 
 checkCaja()

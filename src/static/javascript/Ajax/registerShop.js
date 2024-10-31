@@ -750,8 +750,7 @@ search_facturas.addEventListener("keyup", (E) => {
     type: "POST",
     data: { randomnautica: "ventas", like_nombre_cliente: value },
     success: function (response) {
-      console.log(response);
-      // cardFactura(response)
+      cardFactura(response)
     }
   })
 })

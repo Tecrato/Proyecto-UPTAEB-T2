@@ -277,8 +277,7 @@ search_credito.addEventListener("keyup", (e) => {
         type: "POST",
         data: { randomnautica: "credito", like_nombre_cliente: search },
         success: function (response) {
-            console.log(response);
-            // TrCredito(response)
+            TrCredito(response)
         }
     })
 })

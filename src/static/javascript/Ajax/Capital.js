@@ -46,6 +46,7 @@ function detailsCapital(){
         type: "POST",
         data: {randomnautica: "capital", subFunction: "detallesCapital"},
         success: function (response) {
+            console.log(response);
             let template = '';
             let json = JSON.parse(response);
             json.lista.forEach(element => {
