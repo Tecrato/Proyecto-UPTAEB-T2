@@ -3,10 +3,14 @@ RewriteEngine On
 ErrorDocument 404 /Proyecto-UPTAEB-T2/src/View/404.php
 
 
-RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/Model/
-RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/View/
-RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/Backups/
-RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/Plugins/
+# RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/Model/ 
+# RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src
+# RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/View/
+# RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/View/
+# RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/Backups/
+# RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/Backups/
+# RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/Plugins/
+# RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/plugins/
 # RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/Media/
 # RedirectMatch 403 ^/Proyecto-UPTAEB-T2/src/static/
 
@@ -27,7 +31,7 @@ RewriteRule ^Estadisticas_PDF$ index.php?page=estadisticas&type=pdfs
 RewriteRule ^PDFCierreCaja$ index.php?page=cierre_caja&type=pdfs
 RewriteRule ^PDFInventario$ index.php?page=inventario&type=pdfs
 # RewriteRule ^PDFFactura$ index.php?page=factura&type=pdfs
-RewriteRule ^PDFFactura/([0-9]+)$ index.php?page=factura&type=pdfs&id=$1
+RewriteRule ^PDFFactura/([0-9]+)$ index.php?page=factura&type=pdfs&id=$1 [L]
 
 RewriteRule ^api_search$ index.php?page=search&type=funcion_ajax
 RewriteRule ^api_agregar$ index.php?page=agregar_cosas&type=funcion
@@ -40,7 +44,7 @@ RewriteRule ^api_estadisticas$ index.php?page=estadisticas&type=funcion_ajax
 RewriteRule ^api_caja$ index.php?page=acciones_caja&type=funcion_ajax
 RewriteRule ^api_login$ Controller/funcs_ajax/login.php
 RewriteRule ^login_normal$ index.php?page=login&type=funcion
-RewriteRule ^api_get_image$ Controller/funcs_ajax/image_downloader.php
+RewriteRule ^api_get_image$ index.php?page=get_image&type=funcion_ajax
 
 RewriteRule ^Captcha$ Controller/funcs/Captcha.php
 
@@ -50,7 +54,12 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ /Proyecto-UPTAEB-T2/src/View/404.php
 
-# RewriteRule ^Model/$ View/404.php [NC]
+# RewriteRule ^(([a-zA-Z\d])+/)||static/$ /Proyecto-UPTAEB-T2/src/View/404.php [NC,L]
+RewriteRule ^Model/ View/404.php [NC,L]
+RewriteRule ^Controller/ View/404.php [NC,L]
+RewriteRule ^View/ View/404.php [NC,L]
+RewriteRule ^Backups/ View/404.php [NC,L]
+RewriteRule ^Model/ View/404.php [NC,L]
 
 
 <FilesMatch "\.(htaccess|htpasswd|ini|phps|fla|psd|log|sh|zip|tar)$">

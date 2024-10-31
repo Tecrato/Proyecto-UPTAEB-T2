@@ -6,7 +6,7 @@ use FPDF as FPDF;
 
 
 
-$clase = new Caja($_GET['id_caja']);
+$clase = new Caja($_POST['id_caja']);
 
 $metodos = $clase->totalMetodosPago();
 $detalles = $clase->search();
@@ -20,7 +20,7 @@ class PDF extends FPDF{
         // $this->Image('./Image/LogoM.png', 15, 8, 33);
 
         // $this->SetX(50);
-        $this->Image('../../static/images/inventario2-1-1.png', 0, 0, 210);
+        $this->Image('static/images/inventario2-1-1.png', 0, 0, 210);
         // Arial bold 15
 
     }
