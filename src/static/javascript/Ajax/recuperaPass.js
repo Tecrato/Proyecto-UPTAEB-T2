@@ -136,7 +136,7 @@ formRegisterUser.addEventListener("submit", (e) => {
             processData: false,
             success: (response) => {
                 $.ajax({
-                    url: "Controller/funcs_ajax/login.php",
+                    url: "api_login",
                     type: "POST",
                     data: data,
                     contentType: false,

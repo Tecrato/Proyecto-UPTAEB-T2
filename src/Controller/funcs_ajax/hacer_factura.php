@@ -28,7 +28,7 @@
 		id_cliente:$var->id_cliente, 
 		id_caja:$ultima_caja['id'],
 		IVA:$var->IVA,
-		active:1,
+		active:$var->active
 	);
 	$result = $clase2->agregar_venta($var->detalles, $var->pagos, $var->credito, $var->fecha_inicio_credito, $var->fecha_cierre_credito,$var->monto_dolar);
 

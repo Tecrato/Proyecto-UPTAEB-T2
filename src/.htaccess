@@ -28,12 +28,6 @@ RewriteRule ^PDFCierreCaja$ index.php?page=cierre_caja&type=pdfs
 RewriteRule ^PDFInventario$ index.php?page=inventario&type=pdfs
 RewriteRule ^PDFFactura$ index.php?page=factura&type=pdfs
 
-# RewriteRule ^api_search$ Controller/funcs_ajax/search.php
-# RewriteRule ^api_agregar$ Controller/funcs/agregar_cosas.php
-# RewriteRule ^api_editar$ Controller/funcs/modificar_cosas.php
-# RewriteRule ^api_eliminar$ Controller/funcs/borrar_cosas.php
-# RewriteRule ^api_search$ Controller/funcs_ajax/search.php
-
 RewriteRule ^api_search$ index.php?page=search&type=funcion_ajax
 RewriteRule ^api_agregar$ index.php?page=agregar_cosas&type=funcion
 RewriteRule ^api_editar$ index.php?page=modificar_cosas&type=funcion
@@ -42,13 +36,13 @@ RewriteRule ^api_eliminar$ index.php?page=borrar_cosas&type=funcion
 RewriteRule ^api_hacer_factura$ index.php?page=hacer_factura&type=funcion_ajax
 
 RewriteRule ^api_estadisticas$ index.php?page=estadisticas&type=funcion_ajax
-RewriteRule ^backup$ Controller/funcs_ajax/backup.php
 RewriteRule ^api_caja$ index.php?page=acciones_caja&type=funcion_ajax
 RewriteRule ^api_login$ Controller/funcs_ajax/login.php
 RewriteRule ^login_normal$ index.php?page=login&type=funcion
 RewriteRule ^api_get_image$ Controller/funcs_ajax/image_downloader.php
 
-RewriteRule ^fd$ Controller/C_facturadirecta.php
+RewriteRule ^Captcha$ Controller/funcs/Captcha.php
+
 RewriteRule ^test$ index.php?page=prueba&type=funcion_ajax
 
 RewriteCond %{REQUEST_FILENAME} !-f
