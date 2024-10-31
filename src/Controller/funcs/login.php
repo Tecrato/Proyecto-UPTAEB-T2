@@ -17,7 +17,7 @@
     
 
     if (!($_SESSION['codigo_verificacion'] == sha1($codigo))) {
-        header('Location: login?error=2');
+        header('Location: Login?error=2');
         exit(0);
         die();
     }
@@ -27,7 +27,7 @@
     $result = $c->search();
     
     if (count($result) != 1) {
-        header('Location: login?error=3');
+        header('Location: Login?error=3');
     }
     else if ($_POST["correo"] and $_POST["contraseña"] and password_verify($password,$result[0]['hash'])) { // si hay un resultado entonces lo deja pasar
         $row = $result[0];
@@ -54,7 +54,7 @@
         header('Location: Inicio'); // y pa' la pagina que se va
         echo "funciono";
     } else {
-        header('Location: login?error=0'); // Sino, lo devuelve al login
+        header('Location: Login?error=0'); // Sino, lo devuelve al login
         echo "no funciono";
     }
 

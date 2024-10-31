@@ -74,11 +74,12 @@
                 }
                 $this->conn->commit();
 
-                $query = $this->conn->prepare("INSERT INTO registro_ventas (monto_final, id_cliente, id_caja, IVA) VALUES(:monto, :id1, :id2, :iva)");
+                $query = $this->conn->prepare("INSERT INTO registro_ventas (monto_final, id_cliente, id_caja, IVA, active) VALUES(:monto, :id1, :id2, :iva, :active)");
                 $query->bindParam(':monto', $this->monto_final);
                 $query->bindParam(':id1', $this->id_cliente, PDO::PARAM_INT);
                 $query->bindParam(':id2', $this->id_caja, PDO::PARAM_INT);
                 $query->bindParam(':iva', $this->IVA, PDO::PARAM_STR);
+                $query->bindParam(':active', $this->active, PDO::PARAM_INT);
                 $query->execute();
 
 
