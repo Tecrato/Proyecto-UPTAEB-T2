@@ -237,3 +237,21 @@ function PermisosG(btnEdit, btnDelete, tabla, btnAgg, T) {
     }
   })
 }
+
+const table = ["productos","proveedores","clientes","estadisticas","ventas"]
+
+$.ajax({
+  url: "api_search",
+  type: "POST",
+  data: { randomnautica: "permiso", ID: session_user_id },
+  success: function (response) {
+    let json = JSON.parse(response);
+    json.lista.forEach((r) => {
+      if (r.permiso == "consultar" && table.includes(r.tabla)) {
+        console.log(`.${r.tabla}`)
+        document.querySelector(`.${r.tabla}`).classList.remove("invisible")
+      }
+    })
+  }
+})
+

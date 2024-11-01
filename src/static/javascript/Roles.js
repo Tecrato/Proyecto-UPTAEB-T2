@@ -29,6 +29,7 @@ $.ajax({
     success: function (response) {
         let json = JSON.parse(response);
         let options = ``;
+        options += `<option selected disabled>Seleccione Usuario</option>`;
         json.lista.forEach((date) => {
             if (session_user_id != date.id) {
                 options += `<option value="${date.id}">${date.nombre}</option>`;
@@ -44,10 +45,11 @@ let id_user = 0;
 let tabla = document.querySelector(".table_permisos tbody").children;
 
 const identificador = {
-    'agregar': 1,
-    'modificar': 2,
-    'eliminar': 3,
-    'imprimir': 4
+    "consultar": 1,
+    'agregar': 2,
+    'modificar': 3,
+    'eliminar': 4,
+    'imprimir': 5,
 };
 
 // Evento para manejar el cambio en los radios

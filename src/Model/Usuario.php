@@ -31,6 +31,8 @@
                 "a.correo" => $this->correo,
                 "a.rol" => $this->rol,
                 "a.semilla" => $this->semilla,
+                "a.hash" => $this->hash,
+                "a.sesion_id" => $this->sesion_id
             ]);
             $this->add_variables_like([
                 "a.nombre" => $this->nombre_like,

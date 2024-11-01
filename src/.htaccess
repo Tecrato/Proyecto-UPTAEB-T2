@@ -16,12 +16,12 @@ ErrorDocument 404 /Proyecto-UPTAEB-T2/src/View/404.php
 
 RewriteRule ^(Inicio)?$ index.php?page=index
 
-RewriteRule ^Administrar_perfil$ index.php?page=perfil
+RewriteRule ^Administrar_perfil$ index.php?page=perfil [NC]
 RewriteRule ^Clientes$ index.php?page=clientes
 RewriteRule ^Detalles_factura$ index.php?page=viewFactura
 RewriteRule ^Estadisticas$ index.php?page=statistics
 RewriteRule ^Ventas$ index.php?page=Ventas
-RewriteRule ^Login$ index.php?page=login
+RewriteRule ^Login$ index.php?page=login [NC]
 RewriteRule ^Productos$ index.php?page=product
 RewriteRule ^Proveedores$ index.php?page=proveedores
 RewriteRule ^Salir$ index.php?page=logout&type=funcion
@@ -42,7 +42,7 @@ RewriteRule ^api_hacer_factura$ index.php?page=hacer_factura&type=funcion_ajax
 
 RewriteRule ^api_estadisticas$ index.php?page=estadisticas&type=funcion_ajax
 RewriteRule ^api_caja$ index.php?page=acciones_caja&type=funcion_ajax
-RewriteRule ^api_login$ Controller/funcs_ajax/login.php
+RewriteRule ^api_login$ index.php?page=login&type=funcion_ajax
 RewriteRule ^login_normal$ index.php?page=login&type=funcion
 RewriteRule ^api_get_image$ index.php?page=get_image&type=funcion_ajax
 
@@ -56,7 +56,7 @@ RewriteRule ^(.*)$ /Proyecto-UPTAEB-T2/src/View/404.php
 
 # RewriteRule ^(([a-zA-Z\d])+/)||static/$ /Proyecto-UPTAEB-T2/src/View/404.php [NC,L]
 RewriteRule ^Model/ View/404.php [NC,L]
-RewriteRule ^Controller/ View/404.php [NC,L]
+# RewriteRule ^Controller/ View/404.php [NC,L]
 RewriteRule ^View/ View/404.php [NC,L]
 RewriteRule ^Backups/ View/404.php [NC,L]
 RewriteRule ^Model/ View/404.php [NC,L]
