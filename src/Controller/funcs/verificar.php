@@ -1,8 +1,5 @@
 <?php
 
-// namespace Shtechnologyx\Pt3\Controller\funcs;
-// require('../../../vendor/autoload.php');
-
 // Este es el codigo fusible de la pagina
 // Si alguien que no esta logueado entra, pal login
 use Shtechnologyx\Pt3\Model\Usuario;

@@ -123,4 +123,111 @@
             $consulta->execute();
             return $consulta->fetchAll();
         }
+        function pagosPorDivisa(){
+            $consulta = $this->conn->prepare('SELECT 
+                                                c.nombre AS nombre,
+                                                c.apellido AS apellido,
+                                                p.fecha AS fechaPago,
+                                                rv.id AS idFactura,
+                                                p.monto AS Monto,
+                                                mp.nombre AS Metodo_Pago,
+                                                (SELECT 
+                                                    SUM(p.monto)
+                                                FROM pagos p
+                                                JOIN registro_ventas rv ON p.id_venta = rv.id
+                                                JOIN metodo_pago mp ON p.id_metodo_pago = mp.id
+                                                WHERE rv.id_caja = :id 
+                                                AND mp.nombre = "divisa") AS totalRecaudado
+                                            FROM pagos p
+                                            JOIN registro_ventas rv ON p.id_venta = rv.id
+                                            JOIN clientes c ON rv.id_cliente = c.id
+                                            JOIN metodo_pago mp ON p.id_metodo_pago = mp.id
+                                            WHERE rv.id_caja = :id 
+                                            AND mp.nombre = "divisa"');
+            $consulta->bindValue(':id', $this->id, PDO::PARAM_INT);
+            $consulta->execute();
+            return $consulta->fetchAll();
+        }
+        function pagosPorTransferencia(){
+            $consulta = $this->conn->prepare('SELECT 
+                                                c.nombre AS nombre,
+                                                c.apellido AS apellido,
+                                                p.fecha AS fechaPago,
+                                                rv.id AS idFactura,
+                                                p.monto AS Monto,
+                                                mp.nombre AS Metodo_Pago,
+                                                (SELECT 
+                                                    SUM(p.monto)
+                                                FROM pagos p
+                                                JOIN registro_ventas rv ON p.id_venta = rv.id
+                                                JOIN metodo_pago mp ON p.id_metodo_pago = mp.id
+                                                WHERE rv.id_caja = :id 
+                                                AND mp.nombre = "transferencia") AS totalRecaudado
+                                            FROM pagos p
+                                            JOIN registro_ventas rv ON p.id_venta = rv.id
+                                            JOIN clientes c ON rv.id_cliente = c.id
+                                            JOIN metodo_pago mp ON p.id_metodo_pago = mp.id
+                                            WHERE rv.id_caja = :id 
+                                            AND mp.nombre = "transferencia"');
+            $consulta->bindValue(':id', $this->id, PDO::PARAM_INT);
+            $consulta->execute();
+            return $consulta->fetchAll();
+        }
+        function pagosPorEfectivo(){
+            $consulta = $this->conn->prepare('SELECT 
+                                                c.nombre AS nombre,
+                                                c.apellido AS apellido,
+                                                p.fecha AS fechaPago,
+                                                rv.id AS idFactura,
+                                                p.monto AS Monto,
+                                                mp.nombre AS Metodo_Pago,
+                                                (SELECT 
+                                                    SUM(p.monto)
+                                                FROM pagos p
+                                                JOIN registro_ventas rv ON p.id_venta = rv.id
+                                                JOIN metodo_pago mp ON p.id_metodo_pago = mp.id
+                                                WHERE rv.id_caja = :id 
+                                                AND mp.nombre = "efectivo") AS totalRecaudado
+                                            FROM pagos p
+                                            JOIN registro_ventas rv ON p.id_venta = rv.id
+                                            JOIN clientes c ON rv.id_cliente = c.id
+                                            JOIN metodo_pago mp ON p.id_metodo_pago = mp.id
+                                            WHERE rv.id_caja = :id 
+                                            AND mp.nombre = "efectivo"');
+            $consulta->bindValue(':id', $this->id, PDO::PARAM_INT);
+            $consulta->execute();
+            return $consulta->fetchAll();
+        }
+        function totalRecaudado(){
+            $consulta = $this->conn->prepare('SELECT 
+                                                (SELECT 
+                                                    SUM(p.monto)
+                                                FROM pagos p
+                                                JOIN registro_ventas rv ON p.id_venta = rv.id
+                                                JOIN metodo_pago mp ON p.id_metodo_pago = mp.id
+                                                WHERE rv.id_caja = :id 
+                                                AND mp.nombre = "transferencia") AS totalRecaudadoTransferencia,
+                                                
+                                                (SELECT 
+                                                    SUM(p.monto)
+                                                FROM pagos p
+                                                JOIN registro_ventas rv ON p.id_venta = rv.id
+                                                JOIN metodo_pago mp ON p.id_metodo_pago = mp.id
+                                                WHERE rv.id_caja = :id 
+                                                AND mp.nombre = "divisa") AS totalRecaudadoDivisa,
+                                                
+                                                (SELECT 
+                                                    SUM(p.monto)
+                                                FROM pagos p
+                                                JOIN registro_ventas rv ON p.id_venta = rv.id
+                                                JOIN metodo_pago mp ON p.id_metodo_pago = mp.id
+                                                WHERE rv.id_caja = :id 
+                                                AND mp.nombre = "efectivo") AS totalRecaudadoEfectivo
+                                            FROM pagos p
+                                            LIMIT 1;');
+            $consulta->bindValue(':id', $this->id, PDO::PARAM_INT);
+            $consulta->execute();
+            return $consulta->fetchAll();
+        }
+        
 }

@@ -6,11 +6,14 @@ use FPDF as FPDF;
 
 
 
-$clase = new Caja($_POST['id_caja']);
+$clase = new Caja($_GET['id_caja']);
 
 $metodos = $clase->totalMetodosPago();
+$pagosDivisa = $clase->pagosPorDivisa();
+$pagosTransferencia = $clase->pagosPorTransferencia();
+$pagosEfectivo = $clase->pagosPorEfectivo();
+$recaudos = $clase->totalRecaudado();
 $detalles = $clase->search();
-
 //CABECERA DEL INVENTARIO__________________________________________________________________________________
 
 class PDF extends FPDF{
@@ -48,7 +51,7 @@ $pdf->SetTextColor(25, 150, 40);
 $pdf->Cell(30, 30, 'CIERRE DE CAJA Nro.' . $detalles[0]["id"], 0, 0, 'C');
 $pdf->SetFont('Arial', '', 10);
 $pdf->SetTextColor(0, 0, 0);
-$pdf->Cell(155, 10, 'USUARIO: ' . $detalles[0]["nombre"], 0, 0, 'C');
+$pdf->Cell(155, 10, 'USUARIO: ' . $detalles[0]["nombre_usuario"], 0, 0, 'C');
 $pdf->Ln(5);
 $pdf->Cell(300, 10, 'FECHA DE IMPRESION: ' . $fecha2['mday'] . '/' . $fecha2['mon'] . '/' . $fecha2['year'], 0, 0, 'C');
 $pdf->Ln(5);
@@ -64,7 +67,7 @@ $pdf->Cell(30, 10, utf8_decode('------------------------------------------------
 
 $pdf->Ln(7);
 $pdf->Cell(35, 12, 'USUARIO: ', 0, 0, 'C');
-$pdf->Cell(2, 12, $detalles[0]["nombre"], 0, 0, 'C');
+$pdf->Cell(2, 12, $detalles[0]["nombre_usuario"], 0, 0, 'C');
 $pdf->Cell(40);
 $pdf->Cell(25, 12, 'FECHA:  ', 0, 0, 'C');
 $pdf->Cell(30, 12, $detalles[0]["fecha"], 0, 0, 'C');
@@ -133,60 +136,92 @@ $pdf->Cell(10, 12, number_format($detalles[0]['monto_credito'], 2, '.', ''). " $
 $pdf->Ln(8);
 $pdf->Cell(55, 12, 'TOTAL CIERRE DE CAJA', 0, 0, 'C');
 $pdf->Cell(10, 12, number_format($detalles[0]['total_cierre'], 2, '.', '') + $detalles[0]["monto_inicial"] . " Bs", 0, 0, 'C');
-// $pdf->Ln(10);
-// $pdf->Cell(78);
-// $pdf->SetFont('Arial', 'B', 12);
-// $pdf->Cell(30, 12, 'DETALLES DEL CUADRE DE CAJA', 0, 0, 'C');
+ $pdf->Ln(10);
+ $pdf->Cell(78);
+ $pdf->SetFont('Arial', 'B', 12);
+ $pdf->Cell(30, 12, 'DETALLES DEL CUADRE DE CAJA', 0, 0, 'C');
 
-// $pdf->Ln(15);
-
-// $pdf->Cell(70, 12, 'INGRESOS EN EFECTIVO', 0, 0, 'C');
-// $pdf->Ln(15);
-
-// $pdf->SetFont('Arial', '', 10);
-// for ($i = 0; $i < 2; $i++) {
-//     $pdf->Cell(15);
-//     $pdf->MultiCell(90, 5, 'PAGO DE VENTA DE ALEJANDRO VARGAS EL 1/11/2022 POR FACTURAS Nro. 01', 0, 'L', false);
-//     $pdf->Cell(300, -15, '10.50', 0, 0, 'C');
-//     $pdf->Ln(5);
-// }
+ $pdf->Ln(15);
+ foreach ($recaudos as $recaudo) {
 
 
-// $pdf->Cell(25);
-// $pdf->SetFont('Arial', 'B', 12);
-// $pdf->Cell(30, 12, 'TOTAL', 0, 0, 'C');
-// $pdf->Cell(80);
-// $pdf->Cell(30, 12, '150.00', 0, 0, 'C');
+ $pdf->Cell(70, 12, 'INGRESOS EN EFECTIVO', 0, 0, 'C');
+ $pdf->Ln(15);
+ foreach ($pagosEfectivo as $variable) {
+   
+     $pdf->SetFont('Arial', '', 10);
+     for ($i = 0; $i < 2; $i++) {
+         $pdf->Cell(15);
+     $pdf->MultiCell(90, 5, 'PAGO DE VENTA DE '.$variable["nombre"].' '.$variable["apellido"].' EL '.$variable["fechaPago"]. 'POR FACTURAS Nro.'.$variable["idFactura"], 0, 'L', false);
+     $pdf->Cell(300, -15, $variable["Monto"]." Bs", 0, 0, 'C');
+     $pdf->Ln(5);
+    }
+    
+}
+    
+    $pdf->Cell(25);
+    $pdf->SetFont('Arial', 'B', 12);
+    $pdf->Cell(30, 12, 'TOTAL', 0, 0, 'C');
+    $pdf->Cell(80);
+    $pdf->Cell(30, 12, $recaudo["totalRecaudadoEfectivo"]." Bs", 0, 0, 'C');
+    
+    
+    $pdf->SetFont('Arial', '', 10);
+    $pdf->Ln(8);
+    $pdf->Cell(78);
+    $pdf->Cell(30, 10, utf8_decode('----------------------------------------------------------------------------------------------------------------------------------------------------'), 0, 0, 'C');
+    $pdf->Ln(2);
 
 
-// $pdf->SetFont('Arial', '', 10);
-// $pdf->Ln(8);
-// $pdf->Cell(78);
-// $pdf->Cell(30, 10, utf8_decode('----------------------------------------------------------------------------------------------------------------------------------------------------'), 0, 0, 'C');
-// $pdf->Ln(2);
+ $pdf->SetFont('Arial', 'B', 12);
+ $pdf->Ln(10);
+ $pdf->Cell(10);
+ $pdf->Cell(70, 12, 'INGRESOS EN TRANSFERENCIA', 0, 0, 'C');
+ $pdf->Ln(15);
+
+ $pdf->SetFont('Arial', '', 10);
+ foreach ($pagosTransferencia as $variable) {
+
+         $pdf->Cell(15);
+     $pdf->MultiCell(90, 5, 'PAGO DE VENTA DE '.$variable["nombre"].' '.$variable["apellido"].' EL '.$variable["fechaPago"]. 'POR FACTURAS Nro.'.$variable["idFactura"], 0, 'L', false);
+     $pdf->Cell(300, -15, $variable["Monto"]." Bs", 0, 0, 'C');
+     $pdf->Ln(5);
+    
+    }
+ $pdf->Cell(25);
+ $pdf->SetFont('Arial', 'B', 12);
+ $pdf->Cell(30, 12, 'TOTAL', 0, 0, 'C');
+ $pdf->Cell(80);
+ $pdf->Cell(30, 12, $recaudo["totalRecaudadoTransferencia"].' Bs', 0, 0, 'C');
+ $pdf->Ln(20);
+    
+ $pdf->Cell(78);
+ $pdf->Cell(30, 10, utf8_decode('----------------------------------------------------------------------------------------------------------------------------------------------------'), 0, 0, 'C');
+ $pdf->Ln(2);
+
+ $pdf->SetFont('Arial', 'B', 12);
+ $pdf->Ln(10);
+ $pdf->Cell(10);
+ $pdf->Cell(70, 12, 'INGRESOS EN DIVISA', 0, 0, 'C');
+ $pdf->Ln(15);
+
+ $pdf->SetFont('Arial', '', 10);
+ foreach ($pagosDivisa as $variable) {
+    
+         $pdf->Cell(15);
+         $pdf->MultiCell(90, 5, 'PAGO DE VENTA DE '.$variable["nombre"].' '.$variable["apellido"].' EL '.$variable["fechaPago"]. 'POR FACTURAS Nro.'.$variable["idFactura"], 0, 'L', false);
+         $pdf->Cell(300, -15, $variable["Monto"]." Bs", 0, 0, 'C');
+         $pdf->Ln(5);
+        }
+     $pdf->Cell(25);
+     $pdf->SetFont('Arial', 'B', 12);
+     $pdf->Cell(30, 12, 'TOTAL', 0, 0, 'C');
+     $pdf->Cell(80);
+     $pdf->Cell(30, 12, $recaudo["totalRecaudadoDivisa"].' Bs', 0, 0, 'C');
 
 
-// $pdf->SetFont('Arial', 'B', 12);
-// $pdf->Ln(10);
-// $pdf->Cell(10);
-// $pdf->Cell(70, 12, 'INGRESOS EN TRANSFERENCIA', 0, 0, 'C');
-// $pdf->Ln(15);
 
-// $pdf->SetFont('Arial', '', 10);
-
-// for ($i = 0; $i < 2; $i++) {
-//     $pdf->Cell(15);
-//     $pdf->MultiCell(90, 5, 'PAGO DE VENTA DE ALEJANDRO VARGAS EL 1/11/2022 POR FACTURAS Nro. 01', 0, 'L', false);
-//     $pdf->Cell(300, -15, '10.50', 0, 0, 'C');
-//     $pdf->Ln(5);
-// }
-
-// $pdf->Cell(25);
-// $pdf->SetFont('Arial', 'B', 12);
-// $pdf->Cell(30, 12, 'TOTAL', 0, 0, 'C');
-// $pdf->Cell(80);
-// $pdf->Cell(30, 12, '150.00', 0, 0, 'C');
-
+}
 
 
 $pdf->Output();

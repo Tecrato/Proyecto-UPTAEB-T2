@@ -28,7 +28,7 @@ RewriteRule ^Salir$ index.php?page=logout&type=funcion
 
 
 RewriteRule ^Estadisticas_PDF$ index.php?page=estadisticas&type=pdfs
-RewriteRule ^PDFCierreCaja$ index.php?page=cierre_caja&type=pdfs
+RewriteRule ^PDFCierreCaja/([0-9]+)$ index.php?page=cierre_caja&type=pdfs&id_caja=$1 [L]
 RewriteRule ^PDFInventario$ index.php?page=inventario&type=pdfs
 # RewriteRule ^PDFFactura$ index.php?page=factura&type=pdfs
 RewriteRule ^PDFFactura/([0-9]+)$ index.php?page=factura&type=pdfs&id=$1 [L]

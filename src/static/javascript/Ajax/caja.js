@@ -59,7 +59,7 @@ function TrCaja(response) {
                                 <td>${element.total_ventas}</td>
                                 <td>${parseFloat(element.monto_credito).toFixed(2)} $</td>
                                 <td>
-                                    <a uk-tooltip="Imprimir Cierre" href="PDFCierreCaja?id_caja=${element.id}" class="btn_print_closeBox">${element.monto_final == null ? element.monto_inicial : parseFloat(element.monto_final).toFixed(2)}</a>
+                                    <a uk-tooltip="Imprimir Cierre" href="PDFCierreCaja/${element.id}" class="btn_print_closeBox">${element.monto_final == null ? element.monto_inicial : parseFloat(element.monto_final).toFixed(2)}</a>
                                 </td>
                                 <td>
                                     <div class="${element.estado == 0 ? "activeGood" : "activeExpire"} uk-border-rounded" style="padding: 5px;">${element.estado == 0 ? "ABIERTA" : "CERRADA"}</div>
