@@ -195,33 +195,33 @@ echo "
                             <p>Inicio</p>
                         </a>
                     </li>
-                    <li class="uk-margin-small-right Link productos invisible" id="productos">
+                    <li class="uk-margin-small-right Link productos" id="productos">
                         <a id="linkProductos" class="uk-button uk-button-text enlace_nav" href="Productos">
                             <span uk-icon="product" class="uk-icon uk-margin-small-right uk-icon-button"></span>
                             <p>Productos</p>
                         </a>
                     </li>
 
-                        <li class="uk-margin-small-right Link proveedores invisible">
+                        <li class="uk-margin-small-right Link proveedores">
                             <a id="linkProveedores" class="uk-button uk-button-text enlace_nav" href="Proveedores">
                                 <span uk-icon="bookmark" class="uk-icon uk-margin-small-right uk-icon-button"></span>
                                 <p>Proveedores</p>
                             </a>
                         </li>
-                    <li class="uk-margin-small-right Link clientes invisible">
+                    <li class="uk-margin-small-right Link clientes">
                         <a id="linkClientes" class="uk-button uk-button-text enlace_nav" href="Clientes">
                             <span uk-icon="users" class="uk-icon uk-margin-small-right uk-icon-button"></span>
                             <p>Clientes</p>
                         </a>
                     </li>
-                        <li class="uk-margin-small-right Link estadisticas invisible">
+                        <li class="uk-margin-small-right Link estadisticas">
                             <a id="linkEstadisticas" class="uk-button uk-button-text enlace_nav" href="Estadisticas">
                                 <span uk-icon="statitics" class="uk-icon uk-margin-small-right uk-icon-button"></span>
                                 <p>Estadisticas</p>
                             </a>
                         </li>
 
-                    <li class="uk-margin-small-right Link ventas invisible" >
+                    <li class="uk-margin-small-right Link ventas" >
                         <a id="linkVentas" class="uk-button uk-button-text enlace_nav" href="Ventas">
                             <span uk-icon="factura" class="uk-icon uk-margin-small-right uk-icon-button"></span>
                             <p>Registro de ventas</p>

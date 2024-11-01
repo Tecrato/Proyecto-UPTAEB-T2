@@ -8,29 +8,29 @@ const validaciones = {
   apellido: /^([A-Zñáéó]|[a-zñáéó]){3,}( ([A-Zñáéó]|[a-zñáéó]){3,})?$/,
   codigo: /^\d{12}$/,
   valorUnidad: /^(\d{1,4})$/,
-  cedula:/^([\d]{1,2})\.?([\d]{3})\.?([\d]{3})$/,
-  telefono:/^([\+\d]{2,4} ?)?([\d]{4}) ?\-?([\d]{3}) ?\-?([\d]{4})$/,
-  razonSocial:/([A-Zñ+áéó]|[a-zñáéó]){3,}( ([A-Zñ+áéó]|[a-zñáéó]){3,})?$/,
-  correo:/^([A-Za-z0-9\.\_]+)@([\w]{3,8})\.([\w]{2,3})(\.[\w]{2,4})?(\.[\w]{2,3})?$/,
-  
+  cedula: /^([\d]{1,2})\.?([\d]{3})\.?([\d]{3})$/,
+  telefono: /^([\+\d]{2,4} ?)?([\d]{4}) ?\-?([\d]{3}) ?\-?([\d]{4})$/,
+  razonSocial: /([A-Zñ+áéó]|[a-zñáéó]){3,}( ([A-Zñ+áéó]|[a-zñáéó]){3,})?$/,
+  correo: /^([A-Za-z0-9\.\_]+)@([\w]{3,8})\.([\w]{2,3})(\.[\w]{2,4})?(\.[\w]{2,3})?$/,
+
 };
 function validarFormulario(datos) {
-const resultados = {};
-const errores = [];
+  const resultados = {};
+  const errores = [];
 
-for (const campo in datos) {
-if (validaciones.hasOwnProperty(campo)) {
-  const regex = validaciones[campo];
-  const esValido = regex.test(datos[campo]);
-  resultados[campo] = esValido;
-  
-  if (!esValido) {
-      errores.push(`El campo ${campo} no es válido.`);
+  for (const campo in datos) {
+    if (validaciones.hasOwnProperty(campo)) {
+      const regex = validaciones[campo];
+      const esValido = regex.test(datos[campo]);
+      resultados[campo] = esValido;
+
+      if (!esValido) {
+        errores.push(`El campo ${campo} no es válido.`);
+      }
+    }
   }
-}
-}
 
-return { resultados, errores };
+  return { resultados, errores };
 }
 function cambiar_pagina_ajax(dir, func, limite = 9, page = 0, total = 0) {
   limite = limite
@@ -238,8 +238,13 @@ function PermisosG(btnEdit, btnDelete, tabla, btnAgg, T) {
   })
 }
 
-const table = ["productos","proveedores","clientes","estadisticas","ventas"]
+const table = ["productos", "proveedores", "clientes", "estadisticas", "ventas"]
 
+if (session_user_rol_num != 1) {
+  table.forEach(element => {
+    document.querySelector(`.${element}`).classList.add("invisible")
+  });
+}
 $.ajax({
   url: "api_search",
   type: "POST",
@@ -248,8 +253,12 @@ $.ajax({
     let json = JSON.parse(response);
     json.lista.forEach((r) => {
       if (r.permiso == "consultar" && table.includes(r.tabla)) {
-        console.log(`.${r.tabla}`)
         document.querySelector(`.${r.tabla}`).classList.remove("invisible")
+      }
+
+      if (session_user_rol_num == 1) {
+        document.querySelector(`.${r.tabla}`).classList.remove("invisible")
+
       }
     })
   }
