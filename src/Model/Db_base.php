@@ -72,10 +72,17 @@
             }
             return $key;
         }
+        private function normalizeKey2($key) {
+            if (str_contains($key, '.')){
+                return explode(".", $key)[1];
+                // return implode("",explode(".", $key));
+            }
+            return $key;
+        }
         public function agregar() : int{
             $lista_vars = array();
             foreach ($this->variables as $key => $value){
-                $lista_vars[$this->normalizeKey($key)] = $value;
+                $lista_vars[$this->normalizeKey2($key)] = $value;
             }
             $sql = "INSERT INTO ".$this->tabla."(";
             $sql .= implode(",", array_keys($lista_vars));

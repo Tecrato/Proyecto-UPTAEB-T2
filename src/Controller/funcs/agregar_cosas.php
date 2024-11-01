@@ -24,13 +24,14 @@ use Shtechnologyx\Pt3\Model\Capital;
 use Shtechnologyx\Pt3\Model\Detalle_entrada;
 use Shtechnologyx\Pt3\Model\Tipo_empaquetado;
 
+
 if ($_POST['tipo'] != 'usuarios') {
     $other_class = new Permisos(null, $_SESSION['user_id'], $_POST['tipo'], 'agregar');
     $result = $other_class->search();
 }
 if ($tipo === 'usuarios') {
     $hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
-    $clase = new Usuario(null, $_POST["nombre"], $_POST["correo"], $hash, 3, substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, 20));
+    $clase = new Usuario(null, $_POST["nombre"], $_POST["correo"], $hash, 3, substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, 20),substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, 10));
     $clase->agregar();
 } 
 elseif ($_SESSION['rol_num'] > 1 and count($result) <= 0) {
@@ -54,7 +55,6 @@ elseif ($tipo === 'producto') {
     }
     $clase = new Producto(null, $_POST["categoria"], $_POST["unidad"], $_POST["marca"], $_POST["valor_unidad"], $_POST["nombre"], $nick, $_POST["stock_min"], $_POST["stock_max"], $_POST["precio_venta"], $_POST["IVA"], $_POST["codigo"], 1, $_POST["algoritmo"]);
     try {
-        // print_r($clase->agregar());
         $resultado = $clase->agregar();
         $clase2 = new Bitacora(null, $_SESSION['user_id'], $tipo, "Agregar", "Agregado " . $tipo);
         $clase2->agregar();
@@ -128,7 +128,7 @@ elseif ($tipo === 'permiso') {
     $clase = new Permisos(null, $_POST["id_usuario"], $_POST["tabla"], $_POST["permiso"]);
 }
 
-if ($tipo != 'producto' and $tipo != 'entrada') {
+if ($tipo != 'producto' and $tipo != 'entrada' and $tipo != 'usuarios') {
     try {
         $resultado = $clase->agregar();
         $clase2 = new Bitacora(null, $_SESSION['user_id'], $tipo, "Agregar", "Agregado " . $tipo);
