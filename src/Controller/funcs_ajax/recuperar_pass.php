@@ -1,5 +1,4 @@
 <?php
-
     use Shtechnologyx\Pt3\Model\Usuario;
 
 

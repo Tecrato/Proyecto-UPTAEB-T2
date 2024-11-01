@@ -192,9 +192,9 @@ function cardProv(page) {
     type: "POST",
     data: { randomnautica: "proveedores", n: page_proveedores, limite: 6, active: 1 },
     success: function (response) {
+      console.log(response);
       let template = "";
       let json = JSON.parse(response);
-      (json)
       total_proveedores = json['total']
       json.lista.forEach((element) => {
         template += `<div>

@@ -1,9 +1,4 @@
 <?php
-
-session_start();
-// use Proyecto\T2\Controller\funcs\verificar_admin_funcs;
-
-use Shtechnologyx\Pt3\Model\Conexion;
 use Shtechnologyx\Pt3\Model\Permisos;
 use Shtechnologyx\Pt3\Model\Bitacora;
 use Shtechnologyx\Pt3\Model\Usuario;
@@ -70,7 +65,7 @@ if ($tipo === 'producto') {
     $clase->actualizar();
 
     if (isset($_POST['self'])) {
-        session_start();
+        
         $_SESSION['user_name'] = $_POST["nombre"];
         $_SESSION['user_id'] = $_POST["ID"];
     }

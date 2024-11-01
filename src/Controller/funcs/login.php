@@ -1,10 +1,7 @@
 <?php
 
     // Con este codigo se confirma si el usuario tiene una cuenta para entrar al sistema
-    session_start();
-
-
-    use Shtechnologyx\Pt3\Model\Conexion;
+    
     use Shtechnologyx\Pt3\Model\Usuario;
     use Shtechnologyx\Pt3\Model\Bitacora;
 

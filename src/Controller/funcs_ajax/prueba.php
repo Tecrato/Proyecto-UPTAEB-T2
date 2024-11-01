@@ -5,7 +5,7 @@
     // require('../../Model/Metodos_pagos.php');
     // require('../../Model/Cajas.php');
     // require('./acciones_caja.php');
-    // session_start();
+    // 
     // require("../funcs/verificar_admin_funcs.php");
     // require('../../Model/Conexion.php');
     // require('../../Model/Cajas.php');

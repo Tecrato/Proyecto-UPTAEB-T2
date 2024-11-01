@@ -73,6 +73,7 @@ radio.forEach((r) => {
                 type: "POST",
                 data: { tipo: "permiso", id_usuario: id_user, tabla, accion },
                 success: function (response) {
+                    console.log(response);
                 }
             });
         }

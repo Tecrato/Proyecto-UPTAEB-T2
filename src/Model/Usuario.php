@@ -1,5 +1,6 @@
 <?php
     namespace Shtechnologyx\Pt3\Model;
+    use PDO;
 
     class Usuario extends Db_base{
         private $id;

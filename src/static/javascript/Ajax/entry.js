@@ -340,7 +340,7 @@ function func(dolar) {
                   <input class="uk-input uk-form-width-small State-input-stock" type="date" placeholder="Cantidad" aria-label="Input">
               </td>
               <td>
-                  <input class="uk-input uk-form-width-small State-input-stock" type="text" placeholder="Precio" aria-label="Input">
+                  <input class="uk-input uk-form-width-small State-input-stock" type="text" placeholder="Precio (Bs)" aria-label="Input">
               </td>
               <td class="uk-flex uk-flex-center">
                   <button class="uk-icon-button ButtonPlus" uk-icon="plus"></button>

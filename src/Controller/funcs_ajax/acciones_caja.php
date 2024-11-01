@@ -1,14 +1,10 @@
 <?php
-session_start();
-use Shtechnologyx\Pt3\model\Conexion;
 use Shtechnologyx\Pt3\model\Caja;
 use Shtechnologyx\Pt3\model\Permisos;
 
 
 
 if ($_POST['accion'] == 'abrir') {
-    
-    require("Controller/funcs/verificar_admin_funcs.php");
     $other_class = new Permisos(null,$_SESSION['user_id'],'caja','agregar');
     $result = $other_class->search();
     if ($_SESSION['rol_num'] > 1 and count($result) <= 0) {
@@ -28,7 +24,6 @@ if ($_POST['accion'] == 'abrir') {
         $clase->abrir();
     }
 } else if ($_POST['accion'] == 'cerrar') {
-    require("Controller/funcs/verificar_admin_funcs.php");
     $other_class = new Permisos(null,$_SESSION['user_id'],'caja','modificar');
     $result = $other_class->search();
     if ($_SESSION['rol_num'] > 1 and count($result) <= 0) {

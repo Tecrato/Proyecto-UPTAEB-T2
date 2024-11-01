@@ -1,10 +1,4 @@
 <?php
-
-
-    session_start();
-
-    use Shtechnologyx\Pt3\Model\Conexion;
-    use Shtechnologyx\Pt3\Model\Db_base;
     use Shtechnologyx\Pt3\Model\Permisos;
     use Shtechnologyx\Pt3\Model\Bitacora;
     use Shtechnologyx\Pt3\Model\Usuario;
@@ -34,7 +28,6 @@ use Shtechnologyx\Pt3\Model\Tipo_empaquetado;
     }
     
     if ($tipo == 'producto'){
-        echo'hola';
         $clase = new Producto($_POST['ID']); // Llama al modelo y le manda la instruccion
         // $imagen = $clase->search()[0]['imagen'];
         
@@ -88,6 +81,8 @@ use Shtechnologyx\Pt3\Model\Tipo_empaquetado;
     }
     elseif ($tipo === 'permiso'){
         $clase = new Permisos(null,$_POST["id_usuario"],$_POST["tabla"],$_POST["accion"]);
+        $clase->search()[0];
+        $clase = new Permisos($clase->search()[0]['id']);
         $clase->borrar();
     }
     elseif ($tipo == 'notificaciones'){

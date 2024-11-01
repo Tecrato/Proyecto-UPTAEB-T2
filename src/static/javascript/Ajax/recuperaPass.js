@@ -37,11 +37,10 @@ document.getElementById("cancelRegister").addEventListener("click", () => {
 
 document.getElementById("forget-pass").addEventListener("click", () => {
     $.ajax({
-        url: "Controller/funcs_ajax/recuperar_pass.php",
+        url: "recuperar_pass",
         type: "POST",
         data: { email: input_correo.value, semilla: input_pass.value, metodo: 'semilla', password: input_passNew.value },
         success: (response) => {
-            (response)
             let json = JSON.parse(response)
             if (json.status == "error") {
                 UIkit.notification.closeAll();

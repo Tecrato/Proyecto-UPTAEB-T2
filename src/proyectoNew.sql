@@ -37,7 +37,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `check_and_notify` ()   BEGIN
     DECLARE diff INT;
     DECLARE cur CURSOR FOR 
         SELECT e.id, e.fecha_vencimiento, p.nombre 
-        FROM detalles_entrada e 
+        FROM detalles_entradas e 
         JOIN productos p ON e.id_producto = p.id 
         WHERE e.active = 1 AND e.existencia > 0;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
@@ -406,7 +406,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `reporteProveedor` (IN `prod_id` INT
         GROUP_CONCAT(DISTINCT cat.nombre SEPARATOR ', ') AS Categorias_Productos
 
     FROM entradas e
-    LEFT JOIN detalles_entrada d ON e.id = d.id_entrada
+    LEFT JOIN detalles_entradas d ON e.id = d.id_entrada
     LEFT JOIN productos prod ON d.id_producto = prod.id
     LEFT JOIN categoria cat ON prod.id_categoria = cat.id
     LEFT JOIN proveedores p ON e.id_proveedor = p.id
@@ -559,7 +559,7 @@ CREATE TABLE `detalles_capital` (
 );
 
 
-CREATE TABLE `detalles_entrada` (
+CREATE TABLE `detalles_entradas` (
   `id` int(11) NOT NULL,
   `id_producto` int(11) DEFAULT NULL,
   `mercancia` varchar(45) DEFAULT NULL,
@@ -572,12 +572,12 @@ CREATE TABLE `detalles_entrada` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
-INSERT INTO `detalles_entrada` (`id`, `id_producto`, `mercancia`, `tamaño_mercancia`, `precio_compra`, `id_entrada`, `fecha_vencimiento`, `cantidad`, `existencia`) VALUES
+INSERT INTO `detalles_entradas` (`id`, `id_producto`, `mercancia`, `tamaño_mercancia`, `precio_compra`, `id_entrada`, `fecha_vencimiento`, `cantidad`, `existencia`) VALUES
 (21, 4, '0', 12, 12, 83, '2024-10-30', 2, 24),
 (22, 4, '0', 12, 12, 84, '2024-10-30', 2, 24);
 
 DELIMITER $$
-CREATE TRIGGER `entradas_agg` AFTER INSERT ON `detalles_entrada` FOR EACH ROW BEGIN
+CREATE TRIGGER `entradas_agg` AFTER INSERT ON `detalles_entradas` FOR EACH ROW BEGIN
     DECLARE total_egreso FLOAT;
     SET total_egreso = NEW.cantidad * NEW.precio_compra;
     INSERT INTO movimientos_capital (monto, descripcion)
@@ -586,14 +586,14 @@ END
 $$
 DELIMITER ;
 DELIMITER $$
-CREATE TRIGGER `precio_productos` AFTER INSERT ON `detalles_entrada` FOR EACH ROW BEGIN
+CREATE TRIGGER `precio_productos` AFTER INSERT ON `detalles_entradas` FOR EACH ROW BEGIN
     DECLARE v_ganancia DECIMAL(10,2);
     DECLARE v_precio_anterior DECIMAL(10,2);
     DECLARE v_stock_anterior INT;
     DECLARE v_algoritmo INT;
     DECLARE v_precio_nuevo DECIMAL(10,2);
 
-    SELECT p.ganancia, p.precio_venta, (SELECT SUM(e.existencia) FROM detalles_entrada as e WHERE e.id_producto=p.id) as stock, p.algoritmo INTO v_ganancia, v_precio_anterior, v_stock_anterior, v_algoritmo
+    SELECT p.ganancia, p.precio_venta, (SELECT SUM(e.existencia) FROM detalles_entradas as e WHERE e.id_producto=p.id) as stock, p.algoritmo INTO v_ganancia, v_precio_anterior, v_stock_anterior, v_algoritmo
     FROM productos p 
     WHERE p.id = NEW.id_producto;
 
@@ -872,7 +872,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 
 DROP TABLE IF EXISTS `costo_entradas_mensuales`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `costo_entradas_mensuales`  AS SELECT coalesce(round(sum(case when month(`e`.`fecha_compra`) = 1 then `e2`.`precio_compra` else 0 end),2),0) AS `Enero`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 2 then `e2`.`precio_compra` else 0 end),2),0) AS `Febrero`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 3 then `e2`.`precio_compra` else 0 end),2),0) AS `Marzo`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 4 then `e2`.`precio_compra` else 0 end),2),0) AS `Abril`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 5 then `e2`.`precio_compra` else 0 end),2),0) AS `Mayo`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 6 then `e2`.`precio_compra` else 0 end),2),0) AS `Junio`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 7 then `e2`.`precio_compra` else 0 end),2),0) AS `Julio`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 8 then `e2`.`precio_compra` else 0 end),2),0) AS `Agosto`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 9 then `e2`.`precio_compra` else 0 end),2),0) AS `Septiembre`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 10 then `e2`.`precio_compra` else 0 end),2),0) AS `Octubre`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 11 then `e2`.`precio_compra` else 0 end),2),0) AS `Noviembre`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 12 then `e2`.`precio_compra` else 0 end),2),0) AS `Diciembre` FROM (`detalles_entrada` `e2` join `entradas` `e` on(`e`.`id` = `e2`.`id_entrada`)) WHERE year(`e`.`fecha_compra`) = year(current_timestamp()) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `costo_entradas_mensuales`  AS SELECT coalesce(round(sum(case when month(`e`.`fecha_compra`) = 1 then `e2`.`precio_compra` else 0 end),2),0) AS `Enero`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 2 then `e2`.`precio_compra` else 0 end),2),0) AS `Febrero`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 3 then `e2`.`precio_compra` else 0 end),2),0) AS `Marzo`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 4 then `e2`.`precio_compra` else 0 end),2),0) AS `Abril`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 5 then `e2`.`precio_compra` else 0 end),2),0) AS `Mayo`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 6 then `e2`.`precio_compra` else 0 end),2),0) AS `Junio`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 7 then `e2`.`precio_compra` else 0 end),2),0) AS `Julio`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 8 then `e2`.`precio_compra` else 0 end),2),0) AS `Agosto`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 9 then `e2`.`precio_compra` else 0 end),2),0) AS `Septiembre`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 10 then `e2`.`precio_compra` else 0 end),2),0) AS `Octubre`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 11 then `e2`.`precio_compra` else 0 end),2),0) AS `Noviembre`, coalesce(round(sum(case when month(`e`.`fecha_compra`) = 12 then `e2`.`precio_compra` else 0 end),2),0) AS `Diciembre` FROM (`detalles_entradas` `e2` join `entradas` `e` on(`e`.`id` = `e2`.`id_entrada`)) WHERE year(`e`.`fecha_compra`) = year(current_timestamp()) ;
 
 DROP TABLE IF EXISTS `detalles_capital`;
 
@@ -892,11 +892,11 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 
 DROP TABLE IF EXISTS `ratio_ventas`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ratio_ventas`  AS SELECT `p`.`id` AS `id`, `p`.`nombre` AS `nombre`, `p`.`valor_unidad` AS `unidad_valor`, (select `unidades`.`nombre` from `unidades` where `unidades`.`id` = `p`.`id_unidad`) AS `unidad`, (select `marcas`.`nombre` from `marcas` where `marcas`.`id` = `p`.`id_marca`) AS `marca`, 1 - (select sum(`c`.`existencia`) from `detalles_entrada` `c` where `c`.`id_producto` = `p`.`id`) / (select sum(`a`.`cantidad`) from `detalles_entrada` `a` where `a`.`id_producto` = `p`.`id`) AS `ratio_ventas` FROM `productos` AS `p` WHERE `p`.`active` = 1 LIMIT 0, 5 ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ratio_ventas`  AS SELECT `p`.`id` AS `id`, `p`.`nombre` AS `nombre`, `p`.`valor_unidad` AS `unidad_valor`, (select `unidades`.`nombre` from `unidades` where `unidades`.`id` = `p`.`id_unidad`) AS `unidad`, (select `marcas`.`nombre` from `marcas` where `marcas`.`id` = `p`.`id_marca`) AS `marca`, 1 - (select sum(`c`.`existencia`) from `detalles_entradas` `c` where `c`.`id_producto` = `p`.`id`) / (select sum(`a`.`cantidad`) from `detalles_entradas` `a` where `a`.`id_producto` = `p`.`id`) AS `ratio_ventas` FROM `productos` AS `p` WHERE `p`.`active` = 1 LIMIT 0, 5 ;
 
 DROP TABLE IF EXISTS `rotacion_inventario`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `rotacion_inventario`  AS SELECT coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 1) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 1),2),0) AS `Enero`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 2) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 2),2),0) AS `Febrero`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 3) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 3),2),0) AS `Marzo`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 4) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 4),2),0) AS `Abril`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 5) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 5),2),0) AS `Mayo`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 6) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 6),2),0) AS `Junio`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 7) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 7),2),0) AS `Julio`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 8) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 8),2),0) AS `Agosto`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 9) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 9),2),0) AS `Septiembre`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 10) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 10),2),0) AS `Octubre`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 11) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 11),2),0) AS `Noviembre`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 12) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 12),2),0) AS `Diciembre` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `rotacion_inventario`  AS SELECT coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 1) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entradas` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 1),2),0) AS `Enero`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 2) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entradas` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 2),2),0) AS `Febrero`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 3) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entradas` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 3),2),0) AS `Marzo`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 4) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entradas` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 4),2),0) AS `Abril`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 5) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entradas` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 5),2),0) AS `Mayo`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 6) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entradas` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 6),2),0) AS `Junio`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 7) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entradas` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 7),2),0) AS `Julio`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 8) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entradas` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 8),2),0) AS `Agosto`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 9) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entradas` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 9),2),0) AS `Septiembre`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 10) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entradas` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 10),2),0) AS `Octubre`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 11) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entradas` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 11),2),0) AS `Noviembre`, coalesce(round((select sum(`p`.`monto`) from (`pagos` `p` join `registro_ventas` `rv` on(`p`.`id_venta` = `rv`.`id`)) where month(`rv`.`fecha`) = 12) / (select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entradas` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 12),2),0) AS `Diciembre` ;
 
 DROP TABLE IF EXISTS `total_productos_categoria`;
 
@@ -904,15 +904,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 
 DROP TABLE IF EXISTS `total_stock_categoria`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `total_stock_categoria`  AS SELECT `c`.`id` AS `id`, `c`.`nombre` AS `nombre`, (select sum((select sum(`e`.`existencia`) from `detalles_entrada` `e` where `e`.`id_producto` = `p`.`id`)) from `productos` `p` where `p`.`id_categoria` = `c`.`id`) AS `total` FROM `categoria` AS `c` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `total_stock_categoria`  AS SELECT `c`.`id` AS `id`, `c`.`nombre` AS `nombre`, (select sum((select sum(`e`.`existencia`) from `detalles_entradas` `e` where `e`.`id_producto` = `p`.`id`)) from `productos` `p` where `p`.`id_categoria` = `c`.`id`) AS `total` FROM `categoria` AS `c` ;
 
 DROP TABLE IF EXISTS `valortotalinventario`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `valortotalinventario`  AS SELECT (select `categoria`.`nombre` from `categoria` where `categoria`.`id` = `p`.`id_categoria`) AS `nombre`, round(sum((select sum(`e`.`existencia`) from `detalles_entrada` `e` where `e`.`id_producto` = `p`.`id`) * `p`.`precio_venta`),2) AS `valor` FROM `productos` AS `p` GROUP BY `p`.`id_categoria` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `valortotalinventario`  AS SELECT (select `categoria`.`nombre` from `categoria` where `categoria`.`id` = `p`.`id_categoria`) AS `nombre`, round(sum((select sum(`e`.`existencia`) from `detalles_entradas` `e` where `e`.`id_producto` = `p`.`id`) * `p`.`precio_venta`),2) AS `valor` FROM `productos` AS `p` GROUP BY `p`.`id_categoria` ;
 
 DROP TABLE IF EXISTS `valor_promedio_inventario_mensual`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `valor_promedio_inventario_mensual`  AS SELECT coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 1),0),0) AS `Enero`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 2),0),0) AS `Febrero`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 3),0),0) AS `Marzo`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 4),0),0) AS `Abril`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 5),0),0) AS `Mayo`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 6),0),0) AS `Junio`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 7),0),0) AS `Julio`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 8),0),0) AS `Agosto`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 9),0),0) AS `Septiembre`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 10),0),0) AS `Octubre`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 11),0),0) AS `Noviembre`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entrada` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 12),0),0) AS `Diciembre` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `valor_promedio_inventario_mensual`  AS SELECT coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entradas` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 1),0),0) AS `Enero`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entradas` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 2),0),0) AS `Febrero`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entradas` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 3),0),0) AS `Marzo`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entradas` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 4),0),0) AS `Abril`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entradas` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 5),0),0) AS `Mayo`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entradas` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 6),0),0) AS `Junio`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entradas` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 7),0),0) AS `Julio`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entradas` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 8),0),0) AS `Agosto`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entradas` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 9),0),0) AS `Septiembre`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entradas` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 10),0),0) AS `Octubre`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entradas` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 11),0),0) AS `Noviembre`, coalesce(round((select sum(`e`.`existencia` * `e`.`precio_compra`) from (`detalles_entradas` `e` join `entradas` `e2` on(`e2`.`id` = `e`.`id_entrada`)) where month(`e2`.`fecha_compra`) = 12),0),0) AS `Diciembre` ;
 
 ALTER TABLE `bitacora`
   ADD PRIMARY KEY (`id`),
@@ -936,7 +936,7 @@ ALTER TABLE `credito`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_registro_ventas_idx` (`id_rv`);
 
-ALTER TABLE `detalles_entrada`
+ALTER TABLE `detalles_entradas`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_producto` (`id_producto`),
   ADD KEY `id_entradas1` (`id_entrada`);
@@ -1017,7 +1017,7 @@ ALTER TABLE `configuraciones`
 ALTER TABLE `credito`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `detalles_entrada`
+ALTER TABLE `detalles_entradas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 ALTER TABLE `dinero`
@@ -1074,7 +1074,7 @@ ALTER TABLE `caja`
 ALTER TABLE `credito`
   ADD CONSTRAINT `id_rv` FOREIGN KEY (`id_rv`) REFERENCES `registro_ventas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE `detalles_entrada`
+ALTER TABLE `detalles_entradas`
   ADD CONSTRAINT `id_entradas1` FOREIGN KEY (`id_entrada`) REFERENCES `entradas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `id_producto` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 

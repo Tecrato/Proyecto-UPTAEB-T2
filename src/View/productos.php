@@ -169,9 +169,9 @@
                                         </div>
                                     </div>
                                     <div class="uk-width-1-2@s">
-                                        <label class="uk-form-label">Precio Venta</label>
+                                        <label class="uk-form-label">Precio Venta Bs</label>
                                         <div class="uk-form-controls">
-                                            <input class="PVUpdateProduct uk-input" type="number" min="0.1" step="0.1" placeholder="precio_venta" aria-label="25" name="precio_venta" required>
+                                            <input class="PVUpdateProduct uk-input" type="number" min="0.1" step="0.1" placeholder="precio venta (Bs)" aria-label="25" name="precio_venta" required>
                                         </div>
                                     </div>
                                     <div class="uk-width-1-2@s">

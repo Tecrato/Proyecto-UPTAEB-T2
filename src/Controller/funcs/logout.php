@@ -2,9 +2,7 @@
 
     // Con este codigo de destruye la session
     // No quedara nada
-    session_start();
     
-    // require '../../Model/Conexion.php';
     use Shtechnologyx\Pt3\Model\Usuario;
     use Shtechnologyx\Pt3\Model\Bitacora;
 

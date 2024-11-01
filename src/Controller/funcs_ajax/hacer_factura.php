@@ -1,13 +1,6 @@
 <?php
-    session_start();
-    require("Controller/funcs/verificar_admin_funcs.php");
-	use Shtechnologyx\Pt3\model\Conexion;
-	use Shtechnologyx\Pt3\model\Entrada;
 	use Shtechnologyx\Pt3\model\Registro_ventas;
-	use Shtechnologyx\Pt3\model\Factura;
-	use Shtechnologyx\Pt3\model\Pago;
 	use Shtechnologyx\Pt3\model\Caja;
-	use Shtechnologyx\Pt3\model\Credito;
 	use Shtechnologyx\Pt3\model\Bitacora;
 
 

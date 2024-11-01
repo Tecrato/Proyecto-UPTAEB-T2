@@ -1,9 +1,6 @@
 <?php
 
-namespace Shtechnologyx\Pt3\Controller\funcs;
-require('../../../vendor/autoload.php');
     // Con este codigo se avanza o se retrocede la pagina en las pantallas
-    use Shtechnologyx\Pt3\Model\Conexion;
     use Shtechnologyx\Pt3\Model\Producto;
     use Shtechnologyx\Pt3\Model\Entrada;
     use Shtechnologyx\Pt3\Model\Proveedor;

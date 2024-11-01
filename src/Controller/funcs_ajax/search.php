@@ -2,7 +2,6 @@
     // Con este archivo se buscan datos de ciertas maneras, dependiendo de lo que pase como "randomnautica"
     
     use Shtechnologyx\Pt3\model\Usuario;
-    include("Controller/funcs/verificar.php");
     use Shtechnologyx\Pt3\model\Permisos;
     use Shtechnologyx\Pt3\model\Bitacora;
     
@@ -11,7 +10,7 @@
     $n = (isset($_POST['n']) and $_POST['n'] != "") ? intval($_POST['n']) : 0;
     $order = isset($_POST['order']) ? $_POST['order'] : " id ASC ";
     
-    $other_class = new Permisos(null,$_SESSION['user_id'],$_POST['randomnautica'],'buscar');
+    $other_class = new Permisos(null,$_SESSION['user_id'],$_POST['randomnautica'],'consultar');
     $result = $other_class->search();
     
     use Shtechnologyx\Pt3\model\Caja;
@@ -32,11 +31,38 @@
     use Shtechnologyx\Pt3\Model\Backup;
     use Shtechnologyx\Pt3\Model\Tipo_empaquetado;
 
-    if ($_POST['randomnautica'] == "caja") {
+    if ($_POST['randomnautica'] == "permiso") {  
+        $clase = new Permisos(id_usuario:(isset($_POST['ID']) ? $_POST['ID'] : null));
+    }
+    elseif ($_POST['randomnautica'] == "configuraciones") {
+        $clase = new Configuracion(
+            key:(isset($_POST['llave']) ? $_POST['llave'] : null)
+        );
+    }
+    elseif ($_POST['randomnautica'] === 'notificaciones'){
+        $clase = new Notificacion(
+            id:(isset($_POST['ID']) ? $_POST['ID'] : null),
+            status:(isset($_POST['status']) ? $_POST['status'] : null),
+        );
+    }
+    elseif ($_SESSION['rol_num'] > 1 and count($result) <= 0) {
+        echo json_encode(['status' => 'error','error'=>'Permiso '.$_POST['randomnautica'].' Error (bueno ps)']);
+        exit(0);
+        die();
+    }
+    elseif ($_POST['randomnautica'] == "caja") {
         $clase = new Caja(
             id_usuario:(isset($_POST['id_usuario']) ? $_POST['id_usuario'] : null),
             like_nombre_usuario:(isset($_POST['like_nombre_usuario']) ? $_POST['like_nombre_usuario'] : null),
             between_fecha:(isset($_POST['between_fecha']) ? $_POST['between_fecha'] : null),
+        );
+    }
+    elseif ($_POST['randomnautica'] == "productos") {
+        $clase = new Producto(
+            id:(isset($_POST['ID']) ? $_POST['ID'] : null),
+            nombre:(isset($_POST['nombre']) ? $_POST['nombre'] : null),
+            active:(isset($_POST['active']) ? $_POST['active'] : null),
+            like_nombre:(isset($_POST['like_nombre']) ? $_POST['like_nombre'] : '')
         );
     }
     elseif ($_POST['randomnautica'] == "categorias") {
@@ -62,11 +88,6 @@
             between_fecha:(isset($_POST['between_fecha']) ? $_POST['between_fecha'] : null),
         );
     }
-    elseif ($_POST['randomnautica'] == "configuraciones") {
-        $clase = new Configuracion(
-            key:(isset($_POST['llave']) ? $_POST['llave'] : null)
-        );
-    }
     elseif ($_POST['randomnautica'] == "marcas") {
         $clase = new Marca(
             id:(isset($_POST['id']) ? $_POST['id'] : null),
@@ -86,23 +107,6 @@
             id:(isset($_POST['id']) ? $_POST['id'] : null),
             nombre:(isset($_POST['nombre']) ? $_POST['nombre'] : null),
             like:(isset($_POST['like']) ? $_POST['like'] : '')
-        );
-    }
-    elseif ($_POST['randomnautica'] === 'notificaciones'){
-        $clase = new Notificacion(
-            id:(isset($_POST['ID']) ? $_POST['ID'] : null),
-            status:(isset($_POST['status']) ? $_POST['status'] : null),
-        );
-    }
-    elseif ($_POST['randomnautica'] == "permiso") {  
-        $clase = new Permisos(id_usuario:(isset($_POST['ID']) ? $_POST['ID'] : null));
-    }
-    elseif ($_POST['randomnautica'] == "productos") {
-        $clase = new Producto(
-            id:(isset($_POST['ID']) ? $_POST['ID'] : null),
-            nombre:(isset($_POST['nombre']) ? $_POST['nombre'] : null),
-            active:(isset($_POST['active']) ? $_POST['active'] : null),
-            like_nombre:(isset($_POST['like_nombre']) ? $_POST['like_nombre'] : '')
         );
     }
     elseif ($_POST['randomnautica'] == "unidades") {
@@ -131,11 +135,6 @@
             like_nombre_usuario:(isset($_POST['like_nombre_usuario']) ? $_POST['like_nombre_usuario'] : ''),
             between_fecha:(isset($_POST['between_fecha']) ? $_POST['between_fecha'] : null),
         );
-    }
-    elseif ($_SESSION['rol_num'] > 1 and count($result) <= 0) {
-        echo json_encode(['status' => 'error','error'=>'Permiso '.$_POST['randomnautica'].' Error (bueno ps)']);
-        exit(0);
-        die();
     }
 
 
@@ -176,7 +175,6 @@
         $clase = new Capital();
     }
     elseif ($_POST['randomnautica'] == "backup") {  
-        require('Model/Backup.php');
         $clase = new Backup();
     }
     elseif ($_POST['randomnautica'] == "bitacora") {

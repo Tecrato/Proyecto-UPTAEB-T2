@@ -22,7 +22,7 @@ RewriteRule ^Detalles_factura$ index.php?page=viewFactura
 RewriteRule ^Estadisticas$ index.php?page=statistics
 RewriteRule ^Ventas$ index.php?page=Ventas
 RewriteRule ^Login$ index.php?page=login [NC]
-RewriteRule ^Productos$ index.php?page=product
+RewriteRule ^Productos$ index.php?page=productos
 RewriteRule ^Proveedores$ index.php?page=proveedores
 RewriteRule ^Salir$ index.php?page=logout&type=funcion
 
@@ -37,6 +37,7 @@ RewriteRule ^api_search$ index.php?page=search&type=funcion_ajax
 RewriteRule ^api_agregar$ index.php?page=agregar_cosas&type=funcion
 RewriteRule ^api_editar$ index.php?page=modificar_cosas&type=funcion
 RewriteRule ^api_eliminar$ index.php?page=borrar_cosas&type=funcion
+RewriteRule ^recuperar_pass$ index.php?page=recuperar_pass&type=funcion_ajax
 
 RewriteRule ^api_hacer_factura$ index.php?page=hacer_factura&type=funcion_ajax
 
@@ -46,7 +47,7 @@ RewriteRule ^api_login$ index.php?page=login&type=funcion_ajax
 RewriteRule ^login_normal$ index.php?page=login&type=funcion
 RewriteRule ^api_get_image$ index.php?page=get_image&type=funcion_ajax
 
-RewriteRule ^Captcha$ Controller/funcs/Captcha.php
+RewriteRule ^Captcha$ index.php?page=Captcha&type=funcion
 
 RewriteRule ^test$ index.php?page=prueba&type=funcion_ajax
 

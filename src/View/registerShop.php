@@ -525,9 +525,9 @@
                                 </div>
                             </div>
                             <div class="uk-width-1-1@s">
-                                <label class="uk-form-label">Monto Inicial</label>
+                                <label class="uk-form-label">Monto Inicial Bs</label>
                                 <div class="uk-form-controls">
-                                    <input class="uk-input" type="text" placeholder="Monto Inicial" name="monto_inicial" aria-label="100" required>
+                                    <input class="uk-input" type="text" placeholder="Monto Inicial (Bs)" name="monto_inicial" aria-label="100" required>
                                 </div>
                                 <input type="date" name="fecha" style="display: none;">
                             </div>

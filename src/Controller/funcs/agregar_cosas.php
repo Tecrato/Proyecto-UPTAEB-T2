@@ -1,7 +1,4 @@
 <?php
-
-session_start();
-// require("./verificar_admin_funcs.php");
 require_once('Controller/funcs/subir_imagen.php');
 $tipo = $_POST['tipo']; // Depende de que es lo que queramos insertar
 

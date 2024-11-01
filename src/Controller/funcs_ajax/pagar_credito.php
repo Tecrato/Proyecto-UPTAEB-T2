@@ -1,10 +1,6 @@
 <?php
-    use Shtechnologyx\Pt3\model\Conexion;
-    include("Controller/funcs/verificar.php");
-    use Shtechnologyx\Pt3\model\Pago;
     use Shtechnologyx\Pt3\model\Credito;
     use Shtechnologyx\Pt3\model\Permisos;
-    use Shtechnologyx\Pt3\model\Usuario;
     use Shtechnologyx\Pt3\model\Bitacora;
     
 
