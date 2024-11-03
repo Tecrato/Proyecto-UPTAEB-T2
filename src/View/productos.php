@@ -468,45 +468,47 @@
 
                                                     <ul class="uk-subnav uk-margin-remove uk-padding-remove">
                                                         <li class="uk-flex uk-flex-column uk-flex-middle">
+                                                            <form id="Form_referencia" enctype="multipart/form-data">
+                                                                <div class="uk-flex uk-flex-around uk-border-rounded uk-margin-bottom entrys_credit-cont" style="width: 172px; border: 1px solid #fff; padding: 3px;">
+                                                                    <label><input class="uk-checkbox check_entrys" type="checkbox"> CREDITO</label>
+                                                                </div>
 
-                                                            <div class="uk-flex uk-flex-around uk-border-rounded uk-margin-bottom entrys_credit-cont" style="width: 172px; border: 1px solid #fff; padding: 3px;">
-                                                                <label><input class="uk-checkbox check_entrys" type="checkbox"> CREDITO</label>
-                                                            </div>
-
-                                                            <div class="Plus-supplier uk-flex uk-flex-column uk-flex-center uk-flex-middle uk-border-rounded">
-                                                                <div id="Client-datails" class="uk-flex uk-flex-column uk-flex-center uk-flex-middle">
-                                                                    <div class="uk-flex uk-flex-column uk-flex-middle uk-flex-center pointer" value="default">
-                                                                        <h5 class="uk-text-bold uk-margin-remove">AÑADIR PROVEEDOR</h5>
-                                                                        <a class="uk-margin-small-top" href="#" uk-icon="icon: plus-circle; ratio: 1.5"></a>
+                                                                <div class="Plus-supplier uk-flex uk-flex-column uk-flex-center uk-flex-middle uk-border-rounded">
+                                                                    <div id="Client-datails" class="uk-flex uk-flex-column uk-flex-center uk-flex-middle">
+                                                                        <div class="uk-flex uk-flex-column uk-flex-middle uk-flex-center pointer" value="default">
+                                                                            <h5 class="uk-text-bold uk-margin-remove">AÑADIR PROVEEDOR</h5>
+                                                                            <a class="uk-margin-small-top" href="#" uk-icon="icon: plus-circle; ratio: 1.5"></a>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
 
-                                                            <div class="uk-dropdown uk-border-rounded uk-background-secondary holz">
-                                                                <ul class="uk-nav uk-dropdown-nav">
-                                                                    <li class="uk-active uk-margin-small-bottom">
-                                                                        <form class="uk-search uk-search-default">
-                                                                            <span class="uk-search-icon-flip" uk-search-icon></span>
-                                                                            <input id="input-search-fact" class="uk-search-input" type="search" placeholder="Buscar" aria-label="Buscar">
-                                                                        </form>
-                                                                    </li>
-                                                                    <div id="Client">
+                                                                <div class="uk-dropdown uk-border-rounded uk-background-secondary holz">
+                                                                    <ul class="uk-nav uk-dropdown-nav">
+                                                                        <li class="uk-active uk-margin-small-bottom">
+                                                                            <form class="uk-search uk-search-default">
+                                                                                <span class="uk-search-icon-flip" uk-search-icon></span>
+                                                                                <input id="input-search-fact" class="uk-search-input" type="search" placeholder="Buscar" aria-label="Buscar">
+                                                                            </form>
+                                                                        </li>
+                                                                        <div id="Client">
 
-                                                                    </div>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="uk-margin-top">
-                                                                <div uk-form-custom="target: true">
-                                                                    <input type="file" aria-label="Custom controls">
-                                                                    <input class="uk-input uk-form-width-medium referenciaEntry" type="text" name="referencia" placeholder="Adjuntar Comprobante" aria-label="Custom controls" disabled>
+                                                                        </div>
+                                                                    </ul>
                                                                 </div>
-                                                            </div>
+                                                                <div class="uk-margin-top">
+                                                                    <div uk-form-custom="target: true">
+                                                                        <input type="file" aria-label="Custom controls">
+                                                                        <input class="uk-input uk-form-width-medium referenciaEntry" type="text" name="referencia" placeholder="Adjuntar Comprobante" aria-label="Custom controls" disabled>
+                                                                    </div>
+                                                                </div>
 
-                                                            <div class="uk-margin-top">
-                                                                <button class="btnCreateFact uk-button uk-button-default demo uk-border-rounded" type="button">
-                                                                    GENERAR FACTURA
-                                                                </button>
-                                                            </div>
+                                                                <div class="uk-margin-top">
+                                                                    <label for="referencia_for" class="btnCreateFact uk-button uk-button-default demo uk-border-rounded" type="button">
+                                                                        GENERAR FACTURA
+                                                                    </label>
+                                                                    <input id="referencia_for" type="submit" style="display: none;">
+                                                                </div>
+                                                            </form>
                                                         </li>
                                                     </ul>
                                                 </nav>
