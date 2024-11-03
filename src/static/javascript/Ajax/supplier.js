@@ -13,13 +13,19 @@ $(".pag-btn-proveedores").click((ele) => {
 });
 //funciones para modicar, insertar y eliminar clientes, proveedores
 
-function insertANDupdateCLient_proveedor(FORM, NUMBER, TABLE, TYPE) {
+function insertANDupdateCLient_proveedor(FORM, NUMBER,Number_2, TABLE, TYPE) {
 
   let inp = document.querySelector(NUMBER);
   let iti = window.intlTelInput(inp, {
     utilsScript: "Plugins/build/js/utils.js",
   });
   iti.setCountry("VE");
+
+  let inp2 = document.querySelector(Number_2);
+  let num = window.intlTelInput(inp2, {
+    utilsScript: "Plugins/build/js/utils.js",
+  });
+  num.setCountry("VE");
 
   let form = document.querySelector(FORM);
   let url = ""
@@ -47,8 +53,12 @@ function insertANDupdateCLient_proveedor(FORM, NUMBER, TABLE, TYPE) {
 
       let countryData = iti.getSelectedCountryData();
       let fullNumber = iti.getNumber();
+      let countryData2 = num.getSelectedCountryData();
+      let fullNumber2 = num.getNumber();
+
       let data = new FormData(form);
-      data.append("TLFNO", fullNumber);
+      data.append("TLFNO_1", fullNumber);
+      data.append("TLFNO_2", fullNumber2);
       $.ajax({
         url: url,
         type: "POST",
@@ -171,7 +181,8 @@ const ModalEdit = () => {
             document.querySelector(".nameProvUpdate").value = element.nombre
             document.querySelector(".Razon_SocialProvUpdate").value = element.razon_social
             document.querySelector(".Nro_DocumentoProvUpdate").value = element.rif.slice(2, Infinity)
-            document.querySelector(".tlfnProvUpdate").value = "0" + element.telefono.slice(3, Infinity)
+            document.querySelector(".tlfnProvUpdate_1").value = "0" + element.telefono.slice(3, Infinity)
+            // document.querySelector(".tlfnProvUpdate_2").value = "0" + element.telefono.slice(3, Infinity)
             document.querySelector(".emailProvUpdate").value = element.correo
             document.querySelector(".directionProvUpdate").value = element.direccion
           });
@@ -362,4 +373,4 @@ searchFilter.addEventListener("keyup", () => {
     }
   })
 })
-insertANDupdateCLient_proveedor('.form_prov', "#tlfn_pais", cardProv, "proveedor")
+insertANDupdateCLient_proveedor('.form_prov', "#tlfn_pais_1","#tlfn_pais_2", cardProv, "proveedor")

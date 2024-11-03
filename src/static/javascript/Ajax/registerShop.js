@@ -162,27 +162,6 @@ function func(dolar) {
         (document.getElementById("totalFact").textContent = totalAPagar.toFixed(2) + " BS");
         (document.getElementById("totalFact$").textContent = (priceDolar).toFixed(2) + " $");
         document.querySelector(".amount_MP").textContent = totalAPagar.toFixed(2) + " BS"
-
-
-        document.getElementById("IGTF").textContent = "0.00 $"
-        let INP = document.querySelectorAll(".AMOUNT-MP")
-        INP.forEach((B) => {
-          // captamos el evento de keyup, osea si el usuario teclea sobre el input
-          if (B.previousElementSibling.value == "Divisa") {
-            let IGTF = 0;
-            IGTF = parseFloat(B.value) * 0.3
-            if (B.value == "") {
-              document.getElementById("IGTF").textContent = "0.00 $"
-              document.getElementById("totalFact$").textContent = "0.00 $"
-            } else {
-              document.getElementById("IGTF").textContent = IGTF.toFixed(2) + " $"
-              let monto$ = parseFloat(document.getElementById("totalFact$").textContent)
-              monto$ += IGTF
-              document.getElementById("totalFact$").textContent = monto$.toFixed(2) + " $"
-            }
-
-          }
-        })
       };
 
       //seleccionamos todos los botones de +, ya que necesitamos agg los valores del tr en la tabla de la derecha
@@ -409,49 +388,26 @@ function func(dolar) {
               $(".cont_metodos_pagos").append(template)
               // Agregar la nueva plantilla al contenedor de los métodos de pago finales
             }
-            // Agregar la nueva plantilla al contenedor de los métodos de 
-            let select = document.querySelectorAll(".selectMetodoPago")
 
-
-            //este sera el evento en donde colocaremos en pagos finales, el valor del input
-            //seleccionamos todos los select
-            let amount = []
             let INP = document.querySelectorAll(".AMOUNT-MP")
-            let totalDebito = document.querySelector(".amount_MP")
+            InputFormaterAll(".AMOUNT-MP")
+            let totalDebito = document.querySelector(".amount_MP");
+            let initialTotalDebito = parseFloat(totalDebito.textContent);
 
             INP.forEach((B) => {
 
               // captamos el evento de keyup, osea si el usuario teclea sobre el input
-              B.addEventListener("change", () => {
-                if (B.value == "") {
-                  bool = false
+              B.addEventListener("keyup", (e) => {
+                if (B.value == "") bool = false
+                else bool = true
+
+
+                let valor = e.target.value == "" ? 0 : parseFloat(e.target.value.replace(/\./g, '').replace(',', '.'))
+                let divisa = B.previousElementSibling.options[B.previousElementSibling.selectedIndex].textContent
+                if (divisa == "Divisa" || divisa == "divisa") {
+                  totalDebito.textContent = (initialTotalDebito - (valor * dolar)).toFixed(2) + " Bs"
                 } else {
-                  bool = true
-                }
-
-                // let amount = []
-
-                // INP.forEach((B) => {
-                //   amount.push(B.value)
-                // })
-                // (totalDebito);
-                // (amount);
-                // let result = 0
-                // amount.forEach((a) => {
-                //   let number = a == "" ? 0 : parseFloat(a)
-                //   result += number
-                // })
-                // let valor = totalDebito - result
-                // totalDebito.textContent =  valor
-
-                let valor = B.value == "" ? 0 : parseFloat(B.value)
-                // ActualizarTotal()
-                let valor2 = parseFloat(B.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.textContent)
-                // if (B.previousElementSibling.value == "Divisa" && valor2 != 0) {
-                //   B.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.textContent = (valor2 -(valor * dolar)).toFixed(2)
-                // } else
-                if (valor2 != 0 && B.value != "") {
-                  B.parentElement.parentElement.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.textContent = (valor2 - valor).toFixed(2)
+                  totalDebito.textContent = (initialTotalDebito - valor).toFixed(2) + " BS"
                 }
               })
             })
@@ -464,20 +420,14 @@ function func(dolar) {
               btn.addEventListener('click', () => {
                 //seleccionamos el contenedor de los tipos de pago en la izquierda, y removemos al hijo
                 cont.removeChild(btn.parentElement.parentElement)
-
-                for (const f of INP) {
-                  (f.value);
+                let val = btn.previousElementSibling.value == "" ? 0 : parseFloat(btn.previousElementSibling.value.replace(',', '.'))
+                console.log(val);
+                let divisa = btn.parentElement.firstElementChild.options[btn.parentElement.firstElementChild.selectedIndex].textContent
+                if (divisa == "Divisa" || divisa == "divisa") {
+                    totalDebito.textContent = (parseFloat(totalDebito.textContent) + parseFloat((val * dolar).toFixed(2))).toFixed(2) + " Bs"
+                } else {
+                    totalDebito.textContent = (parseFloat(totalDebito.textContent) + val).toFixed(2) + " BS"
                 }
-                // amount.pop()
-                let result = 0
-
-                amount.forEach((a) => {
-                  let number = a == "" ? 0 : parseFloat(a)
-                  result += number
-                })
-
-                (btn.parentElement.parentElement.parentElement);
-
               })
             })
           }
@@ -671,12 +621,12 @@ function func(dolar) {
     },
   });
 }
-function cardFactura(response){
+function cardFactura(response) {
   let json = JSON.parse(response)
-      total_facturas = json.total
-      let template = ""
-      json.lista.forEach((t) => {
-        template += `
+  total_facturas = json.total
+  let template = ""
+  json.lista.forEach((t) => {
+    template += `
         <div>
       <div class="target-detail-fact uk-card uk-card-default uk-padding-small uk-background-secondary uk-light uk-border-rounded" style="width: 280px;">
           <div class="cont1_tar_fact">
@@ -723,17 +673,17 @@ function cardFactura(response){
       </div>
   </div>
         `
-      })
-      $(".cont_ventas_target").html(template)
-      marcaAgua()
-      colorDefault()
+  })
+  $(".cont_ventas_target").html(template)
+  marcaAgua()
+  colorDefault()
 }
 const targetFact = (num) => {
   pag_facturas = num
   $.ajax({
     url: "api_search",
     type: "POST",
-    data: { randomnautica: "ventas", n: pag_facturas, limite: 9},// , between_fecha: {inicio: fecha_inicio, fin: fecha_fin}},
+    data: { randomnautica: "ventas", n: pag_facturas, limite: 9 },// , between_fecha: {inicio: fecha_inicio, fin: fecha_fin}},
     success: function (response) {
       cardFactura(response)
     }

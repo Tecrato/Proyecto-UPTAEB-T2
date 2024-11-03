@@ -495,6 +495,12 @@
                                                                     </div>
                                                                 </ul>
                                                             </div>
+                                                            <div class="uk-margin-top">
+                                                                <div uk-form-custom="target: true">
+                                                                    <input type="file" aria-label="Custom controls">
+                                                                    <input class="uk-input uk-form-width-medium referenciaEntry" type="text" name="referencia" placeholder="Adjuntar Comprobante" aria-label="Custom controls" disabled>
+                                                                </div>
+                                                            </div>
 
                                                             <div class="uk-margin-top">
                                                                 <button class="btnCreateFact uk-button uk-button-default demo uk-border-rounded" type="button">
@@ -506,7 +512,8 @@
                                                 </nav>
                                                 <!-- ******************************************************************************  -->
 
-                                                <div class="uk-flex uk-flex-column uk-flex-center uk-margin-medium-left" style="gap: 12px 0px;">
+                                                <div class="uk-flex uk-flex-column uk-flex-center uk-margin-medium-left" style="gap: 15px 0px;">
+
                                                     <div>
                                                         <label for="">Fecha de compra</label>
                                                         <input class="uk-input date_compra_entrys" type="date">

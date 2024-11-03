@@ -270,12 +270,6 @@
                                                             <p id="iva" class="Fact-price uk-text-success">0.00</p>
                                                         </div>
                                                     </div>
-                                                    <div class="uk-flex uk-flex-between">
-                                                        <div class="uk-margin-large-right">IGTF 3% </div>
-                                                        <div>
-                                                            <p id="IGTF" class="Fact-price uk-text-success">0.00</p>
-                                                        </div>
-                                                    </div>
                                                     <hr class="uk-margin-remove-top">
                                                     <div class="uk-flex uk-flex-between">
                                                         <div class="uk-margin-large-right uk-text-bolder">TOTAL </div>
@@ -527,7 +521,7 @@
                             <div class="uk-width-1-1@s">
                                 <label class="uk-form-label">Monto Inicial Bs</label>
                                 <div class="uk-form-controls">
-                                    <input class="uk-input" type="text" placeholder="Monto Inicial (Bs)" name="monto_inicial" aria-label="100" required>
+                                    <input class="uk-input inputFormatAmountCaja" type="text" placeholder="Monto Inicial (Bs)" name="monto_inicial" aria-label="100" required>
                                 </div>
                                 <input type="date" name="fecha" style="display: none;">
                             </div>

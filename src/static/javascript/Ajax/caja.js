@@ -170,11 +170,11 @@ checkCaja()
 
 
 let formCaja = document.getElementById("FormCaja");
-// (formCaja);
 formCaja.addEventListener("submit", (e) => {
     e.preventDefault();
     let data = new FormData(formCaja);
     data.append("accion", "abrir");
+    data.set('monto_inicial',getDatabaseFormattedValue('.inputFormatAmountCaja'))
 
     $.ajax({
         url: "api_caja",
@@ -198,4 +198,4 @@ formCaja.addEventListener("submit", (e) => {
         }
     })
 })
-
+InputFormater('.inputFormatAmountCaja')
