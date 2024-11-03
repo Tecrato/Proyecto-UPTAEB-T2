@@ -699,7 +699,7 @@ function func(dolar) {
 
 
       //funcion para verificar si ya se puede enviar los datos para hacer la factura
-      let btnCreateFact = document.querySelector(".btnCreateFact");
+      let btnCreateFact = document.querySelector("#Form_referencia");
 
       btnCreateFact.addEventListener("submit", (e) => {
         e.preventDefault();
