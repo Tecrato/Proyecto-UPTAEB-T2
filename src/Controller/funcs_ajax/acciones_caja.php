@@ -13,7 +13,7 @@ if ($_POST['accion'] == 'abrir') {
         die();
     }
     $otra_clase_mas = new Caja(id_usuario: $_POST['user_id'], estado: 0);
-    $ultima_caja = $otra_clase_mas->search()[0];
+    $ultima_caja = $otra_clase_mas->search();
 
     if (is_array($ultima_caja) && count($ultima_caja) > 0) {
         echo json_encode(['status' => 'error', 'estado' => 'mas cajas no']);
