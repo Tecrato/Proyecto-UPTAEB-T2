@@ -701,7 +701,7 @@ function func(dolar) {
       //funcion para verificar si ya se puede enviar los datos para hacer la factura
       let btnCreateFact = document.querySelector(".btnCreateFact");
 
-      btnCreateFact.addEventListener("submit", (e) => {
+      btnCreateFact.addEventListener("click", () => {
         e.preventDefault();
         let tipoPago = document.querySelector(".cont_metodos_pagos").childElementCount
         let TotalRestar = parseFloat(document.querySelector(".amount_MP").textContent)
