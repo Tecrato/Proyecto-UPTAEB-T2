@@ -86,7 +86,7 @@
                     <div class="uk-light">
                         <section class="uk-light uk-padding uk-padding-remove-left uk-padding-remove-right uk-grid-small dataTable" uk-grid>
                             <div class="container_marca_agua">
-                                <img class="marca_agua" src="static/images/logo_letras-minimarket.png" alt="">
+                                <img class="marca_agua" src="src/static/images/logo_letras-minimarket.png" alt="">
                             </div>
                             <div class="[email protected] cont_ventas_target uk-grid-medium uk-flex-center dataTable2 height_controller" uk-grid uk-height-match="target: > div > .uk-card">
                                 <!-- ****************** Ficha de la factura ****************** -->

@@ -397,7 +397,6 @@
                             </div>
                         </section>
 
-
                         <!-- *********************************modal de entradas productos********************************* -->
 
                         <div id="product-entry" uk-modal bg-close='false'>

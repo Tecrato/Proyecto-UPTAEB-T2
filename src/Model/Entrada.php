@@ -8,13 +8,15 @@ use Exception;
         private $codigo;
         private $detalles;
         private $between_fecha;
+        private $comprobante;
 
-        function __construct($id=null, $id_proveedor=null,$fecha_compra=null,$codigo=null,$detalles=null, $between_fecha=null){
+        function __construct($id=null, $id_proveedor=null,$fecha_compra=null,$codigo=null,$detalles=null, $comprobante=null, $between_fecha=null){
             $this->id = $id;
             $this->id_proveedor = $id_proveedor;
             $this->fecha_compra = $fecha_compra;
             $this->codigo = $codigo;
             $this->detalles = $detalles;
+            $this->comprobante = $comprobante;
             $this->between_fecha = $between_fecha;
             Db_base::__construct();
             $this->tabla = 'entradas';
@@ -24,7 +26,8 @@ use Exception;
                 b.nombre proveedor,
                 a.fecha_compra,
                 a.codigo,
-                a.detalles
+                a.detalles,
+                a.comprobante,
             ";
             $this->joins = '
                 INNER JOIN proveedores b ON b.id = a.id_proveedor
@@ -35,6 +38,7 @@ use Exception;
                 "a.fecha_compra" => $this->fecha_compra,
                 "a.codigo" => $this->codigo,
                 "a.detalles" => $this->detalles,
+                "a.comprobante" => $this->comprobante
             ]);
             $this->add_variables_interval([
                 "a.fecha_compra" => $this->between_fecha

@@ -17,13 +17,13 @@ function insertANDupdateCLient_proveedor(FORM, NUMBER,Number_2, TABLE, TYPE) {
 
   let inp = document.querySelector(NUMBER);
   let iti = window.intlTelInput(inp, {
-    utilsScript: "Plugins/build/js/utils.js",
+    utilsScript: "src/Plugins/build/js/utils.js",
   });
   iti.setCountry("VE");
 
   let inp2 = document.querySelector(Number_2);
   let num = window.intlTelInput(inp2, {
-    utilsScript: "Plugins/build/js/utils.js",
+    utilsScript: "src/Plugins/build/js/utils.js",
   });
   num.setCountry("VE");
 
@@ -212,7 +212,7 @@ function cardProv(page) {
                           <div class="target_supplier uk-card uk-card-default uk-flex uk-padding-small uk-light uk-border-rounded" style=" background-color: #333;">
                               <div>
                                   <div class="img_proveedor_container uk-border-rounded">
-                                      <img src="static/images/logo_proveedor.png" alt="" width="80px" />
+                                      <img src="src/static/images/logo_proveedor.png" alt="" width="80px" />
                                       <h5 class="uk-margin-remove-left uk-margin-remove-right uk-margin-small-top uk-text-center">${element.razon_social}</h5>
                                   </div>
                               </div>
@@ -311,7 +311,7 @@ searchFilter.addEventListener("keyup", () => {
                           <div class="target_supplier uk-card uk-card-default uk-flex uk-padding-small uk-light uk-border-rounded" style=" background-color: #333;">
                               <div>
                                   <div class="img_proveedor_container uk-border-rounded">
-                                      <img src="static/images/logo_proveedor.png" alt="" width="80px" />
+                                      <img src="src/static/images/logo_proveedor.png" alt="" width="80px" />
                                       <h5 class="uk-margin-remove-left uk-margin-remove-right uk-margin-small-top uk-text-center">${element.razon_social}</h5>
                                   </div>
                               </div>

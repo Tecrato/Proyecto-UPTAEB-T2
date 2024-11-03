@@ -16,7 +16,7 @@
                             </div>
                             <div class="uk-margin-left cont_btns_client-action">
                                 <a id="registerCustomer" href="#agregar_client" uk-toggle uk-tooltip="title:Añadir Cliente; delay: 500" class="uk-margin-small-left btn-agg_client invisible">
-                                    <img class="btn_agg" src="./static/images/btn_agg.png" alt="" width="35px">
+                                    <img class="btn_agg" src="src/static/images/btn_agg.png" alt="" width="35px">
                                 </a>
                             </div>
                         </div>

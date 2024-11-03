@@ -484,7 +484,7 @@ function func(dolar) {
           id_usuario: session_user_id,
           id_cliente: parseInt(idClient),
           IVA: parseFloat(document.getElementById("iva").textContent).toFixed(2),
-          IGTF: parseFloat(document.getElementById("IGTF").textContent).toFixed(2),
+          /* IGTF: parseFloat(document.getElementById("IGTF").textContent).toFixed(2), */
           monto_final: parseFloat(document.getElementById("totalFact").textContent).toFixed(2),
           monto_dolar: parseFloat(document.getElementById("totalFact$").textContent),
           credito: checkCredito.checked,
@@ -632,7 +632,7 @@ function cardFactura(response) {
           <div class="cont1_tar_fact">
               <div class="uk-flex uk-flex-middle uk-flex-between">
                   <div class="uk-flex uk-flex-middle">
-                      <img class="uk-margin-small-right" src="static/images/logo_m.png" alt="" width="50PX">
+                      <img class="uk-margin-small-right" src="src/static/images/logo_m.png" alt="" width="50PX">
                       <h3 class="uk-margin-remove uk-text-bolder">#${t.id}</h3>
                   </div>
               </div>
