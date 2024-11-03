@@ -14,9 +14,11 @@ def main(args):
 	em["subject"] = "Minimarket Variedades el Poly."
 	em.set_content(texto)
 
-	contexto = ssl.create_default_context()
+	# contexto = ssl.create_default_context()
 	try:
-		with smtplib.SMTP_SSL(context = contexto) as smtp:
+		with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
+			# smtp.ehlo()
+			smtp.starttls()
 			smtp.login(email_sender, os.environ['MAIL_KEY'])
 			smtp.sendmail(email_sender,email_reciver,em.as_string())
 		return 'listo'
@@ -39,4 +41,4 @@ if __name__ == '__main__':
 # 				""",'12345'])
 # else:
 
-print(result,end="")
+	print(result,end="")

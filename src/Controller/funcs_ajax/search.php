@@ -45,6 +45,14 @@
             status:(isset($_POST['status']) ? $_POST['status'] : null),
         );
     }
+    elseif ($_POST['randomnautica'] == "bitacora") {
+        $clase = new Bitacora(
+            id:(isset($_POST['ID']) ? $_POST['ID'] : null),
+            id_usuario:(isset($_POST['id_usuario']) ? $_POST['id_usuario'] : null),
+            tabla:(isset($_POST['tabla']) ? $_POST['tabla'] : null),
+            accion:(isset($_POST['accion']) ? $_POST['accion'] : null),
+        );
+    }
     elseif ($_SESSION['rol_num'] > 1 and count($result) <= 0) {
         echo json_encode(['status' => 'error','error'=>'Permiso '.$_POST['randomnautica'].' Error (bueno ps)']);
         exit(0);
@@ -176,14 +184,6 @@
     }
     elseif ($_POST['randomnautica'] == "backup") {  
         $clase = new Backup();
-    }
-    elseif ($_POST['randomnautica'] == "bitacora") {
-        $clase = new Bitacora(
-            id:(isset($_POST['ID']) ? $_POST['ID'] : null),
-            id_usuario:(isset($_POST['id_usuario']) ? $_POST['id_usuario'] : null),
-            tabla:(isset($_POST['tabla']) ? $_POST['tabla'] : null),
-            accion:(isset($_POST['accion']) ? $_POST['accion'] : null),
-        );
     }
 
     

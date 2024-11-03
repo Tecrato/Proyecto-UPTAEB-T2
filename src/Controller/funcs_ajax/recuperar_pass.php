@@ -1,5 +1,6 @@
 <?php
     use Shtechnologyx\Pt3\Model\Usuario;
+    use Shtechnologyx\Pt3\Model\Bitacora;
 
     // print_r($_POST);
 
@@ -7,18 +8,22 @@
         $correo = $_POST['correo'];
 
         $clase = new Usuario(correo:$correo);
-        $id = $clase->search()[0]['id'];
+        $id = $clase->search();
 
         $nueva_semilla = substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, 10);
         $nueva_semilla_encriptada = password_hash($nueva_semilla,PASSWORD_DEFAULT);
 
-        $clase = new Usuario(id:$id,semilla:$nueva_semilla_encriptada);
+        $clase = new Usuario(id:$id[0]['id'],semilla:$nueva_semilla_encriptada);
         $clase->actualizar();
 
         $var = exec('"./Controller/funcs_ajax/mandar_correo.py" "'.$correo.'" "Tu semilla para el sistema Minimarket es es: '.$nueva_semilla.'"');
         // var_dump($var);
         // var_dump('"./Controller/funcs_ajax/mandar_correo.py" "'.$correo.'" "Tu semilla para el sistema Minimarket es es: '.$nueva_semilla.'"');
-        echo json_encode(['status' => 'active']);
+        if ($var == "listo") {
+            $clase2 = new Bitacora(null,$row['id'],"Usuarios","Semilla enviada","Usuario ".$id[0]['nombre']." a solicitado una nueva semilla");
+            $clase2->agregar();
+        }
+        echo json_encode(['status' => 'active', 'correo' => $correo, 'resultado' => $var]);
     } elseif ($_POST['metodo'] == 'semilla') {
         $clase = new Usuario(correo:$_POST['email']);
         $resultado = $clase->search();

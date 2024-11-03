@@ -53,8 +53,8 @@
         $clase2->agregar();
         header('Location: Inicio'); // y pa' la pagina que se va
     } else {
-        var_dump($result);
-        // header('Location: Login?error=0'); // Sino, lo devuelve al login
+        // var_dump($result);
+        header('Location: Login?error=0'); // Sino, lo devuelve al login
     }
 
 ?>

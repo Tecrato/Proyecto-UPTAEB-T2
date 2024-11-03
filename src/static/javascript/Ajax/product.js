@@ -595,10 +595,11 @@ let formAggProduct = document.getElementById("formAggProduct");
 formAggProduct.addEventListener("submit", (e) => {
   e.preventDefault();
   let url;
+  console.log(document.querySelector('.NameUpdateProduct'))
   const datosFormulario = {
-    nombre: document.querySelector('NameUpdateProduct').value,
-    codigo: document.querySelector('CodeUpdateProduct').value,
-    valorUnidad: document.querySelector('ValorUnidadUpdateProduct').value
+    nombre: document.querySelector('.NameUpdateProduct').value,
+    codigo: document.querySelector('.CodeUpdateProduct').value,
+    valorUnidad: document.querySelector('.ValorUnidadUpdateProduct').value
   };
   const { resultados, errores } = validarFormulario(datosFormulario);
   const messageError = document.querySelector('#messageError');
@@ -772,6 +773,7 @@ document.querySelector(".searchProductActive").addEventListener("keyup", (e) => 
 
 
 let inpNameProduct = document.querySelector(".NameUpdateProduct");
+console.log(inpNameProduct)
 inpNameProduct.addEventListener("keyup", (e) => {
   let val = e.target.value.toLowerCase();
   if (val != "") {
