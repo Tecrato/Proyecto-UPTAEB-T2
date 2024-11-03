@@ -69,7 +69,7 @@
                 INNER JOIN marcas as m ON m.id = pr.id_marca
                 INNER JOIN unidades as u ON u.id = pr.id_unidad
                 INNER JOIN categoria as c ON c.id = pr.id_categoria
-                INNER JOIN empaquetados as e ON e.id = a.id_empaquetado
+                INNER JOIN tipo_empaquetado as e ON e.id = a.id_empaquetado
             ";
         }
         

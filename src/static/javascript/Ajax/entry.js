@@ -699,7 +699,7 @@ function func(dolar) {
 
 
       //funcion para verificar si ya se puede enviar los datos para hacer la factura
-      let btnCreateFact = document.querySelector("#Form_referencia");
+      let btnCreateFact = document.querySelector(".btnCreateFact");
 
       btnCreateFact.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -779,14 +779,16 @@ function func(dolar) {
           //preparamos el json
           console.log(json);
           let jsonString = JSON.stringify(json);
+          let file = $('.referenciaEntry')[0].files[0]
 
-          let data = new FormData(btnCreateFact);
-          data.append("json", jsonString);
+          let data = new FormData();
+          data.append('referencia', file);
+          data.append('json', jsonString);
 
           $.ajax({
             url: "api_agregar",
             type: "POST",
-            data: data,
+            data: data
             success: function (response) {
               console.log(response);
 
