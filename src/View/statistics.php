@@ -1,4 +1,4 @@
-<?php require("View/complementos/header.php"); ?>
+<?php require("src/View/complementos/header.php"); ?>
 
 <main class="Bg-Main-home2 uk-padding uk-light">
 
@@ -245,8 +245,8 @@
     </section>
 
 </main>
-<script src="static/javaScript/librerias/chart.umd.js"></script>
-<script src="static/javaScript/graphicsController.js"></script>
+<script src="src/static/javascript/librerias/chart.umd.js"></script>
+<script src="src/static/javascript/graphicsController.js"></script>
 
 
 </body>

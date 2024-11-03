@@ -1,6 +1,5 @@
 <?php
-use Shtechnologyx\Pt3\Model\Usuario;
-include("Controller/funcs/verificar.php");
+
 
 
 use FPDF as FPDF;
@@ -16,7 +15,7 @@ $result2 = $clase->search()[0];
 class PDF extends FPDF {
     function Header() {
         // $this->Image('../static/images/inventario2.png',0,0,210);
-        $this->Image('../../static/images/inventario2-1-1.png',0,0,210);
+        $this->Image('src/static/images/inventario2-1-1.png',0,0,210);
     }
 }
 

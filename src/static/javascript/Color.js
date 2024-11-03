@@ -14,14 +14,14 @@ const colorLight = () => {
     })
 
     if (document.querySelector(".img1ProductSwitcher") || document.querySelector(".img2ProductSwitcher") || document.querySelector(".img3ProductSwitcher")) {
-        document.querySelector(".img1ProductSwitcher").src = "./static/images/cajas (2) newColor.png";
-        document.querySelector(".img2ProductSwitcher").src = "./static/images/suministrosNewColor.png";
-        document.querySelector(".img4ProductSwitcher").src = "./static/images/menuNewColor.png";
+        document.querySelector(".img1ProductSwitcher").src = "src/static/images/cajas (2) newColor.png";
+        document.querySelector(".img2ProductSwitcher").src = "src/static/images/suministrosNewColor.png";
+        document.querySelector(".img4ProductSwitcher").src = "src/static/images/menuNewColor.png";
     }
 
     if (document.querySelectorAll(".img_config_logo")) {
         document.querySelectorAll(".img_config_logo").forEach((k) => {
-            k.src = "./static/images/logo_letras-minimarketNewColor.png";
+            k.src = "src/static/images/logo_letras-minimarketNewColor.png";
         })
     }
 
@@ -30,7 +30,7 @@ const colorLight = () => {
         el.style.backgroundColor = "#fff";
     });
     document.querySelectorAll(".img3ProductSwitcher").forEach((img) => {
-        img.src = "./static/images/cajas (2) newColor.png";
+        img.src = "src/static/images/cajas (2) newColor.png";
     });
     if (document.querySelector(".item_profile-target") || document.querySelector(".item_profile-target-2")) {
         document.querySelector(".item_profile-target").style.backgroundColor = "#fff";
@@ -84,9 +84,9 @@ const colorDark = () => {
     document.querySelector(".Bg-Main-home").style.backgroundColor = "#111";
 
     if (document.querySelector(".img1ProductSwitcher") || document.querySelector(".img2ProductSwitcher") || document.querySelector(".img3ProductSwitcher")) {
-        document.querySelector(".img1ProductSwitcher").src = "./static/images/cajas (2).png";
-        document.querySelector(".img2ProductSwitcher").src = "./static/images/suministros.png";
-        document.querySelector(".img4ProductSwitcher").src = "./static/images/menu.png";
+        document.querySelector(".img1ProductSwitcher").src = "src/static/images/cajas (2).png";
+        document.querySelector(".img2ProductSwitcher").src = "src/static/images/suministros.png";
+        document.querySelector(".img4ProductSwitcher").src = "src/static/images/menu.png";
     }
 
 
@@ -143,7 +143,7 @@ const colorDark = () => {
     
     if (document.querySelectorAll(".img_config_logo")) {
         document.querySelectorAll(".img_config_logo").forEach((k) => {
-            k.src = "./static/images/logo_letras-minimarket.png";
+            k.src = "src/static/images/logo_letras-minimarket.png";
         })
     }
 

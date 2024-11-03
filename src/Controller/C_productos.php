@@ -1,3 +1,3 @@
 <?php
-    include('View/productos.php');
+    include('src/View/productos.php');
 ?>

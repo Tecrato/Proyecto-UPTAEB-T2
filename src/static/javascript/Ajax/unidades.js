@@ -12,7 +12,7 @@ const UnidadesTable = () => {
       json.lista.forEach((U) => {
         template += `
               <tr>
-                  <td><img src="./static/images/logo_m.png" alt="" width="50"></td>
+                  <td><img src="src/static/images/logo_m.png" alt="" width="50"></td>
                   <td>${U.id}</td>
                   <td>${U.nombre}</td>
                   <td>

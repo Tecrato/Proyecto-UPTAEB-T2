@@ -1,4 +1,4 @@
-<link rel="shortcut icon" href="static/images/logo_m.png" type="image/x-icon">
+<link rel="shortcut icon" href="src/static/images/logo_m.png" type="image/x-icon">
 <section class="preloader_container">
     <article class="bg-preloader">
         <div class="preloader">

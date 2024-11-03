@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/css/LogReg.css">
-    <link rel="stylesheet" href="static/css/uikit.css">
-    <link rel="stylesheet" href="static/css/aos.css">
-    <link rel="shortcut icon" href="static/images/logo_m.png" type="image/x-icon">
+    <link rel="stylesheet" href="src/static/css/LogReg.css">
+    <link rel="stylesheet" href="src/static/css/uikit.css">
+    <link rel="stylesheet" href="src/static/css/aos.css">
+    <link rel="shortcut icon" href="src/static/images/logo_m.png" type="image/x-icon">
     <title>Iniciar Sesion</title>
 </head>
 
@@ -146,12 +146,12 @@
 
     </section>
 
-    <script src="static/javascript/librerias/uikit.js"></script>
-    <script src="static/javascript/librerias/uikit-icons.js"></script>
-    <script src="static/javascript/librerias/aos.js"></script>
-    <script src="static/javascript/librerias/jquery.js"></script>
-    <script src="static/javascript/Ajax/login.js" defer></script>
-    <script src="static/javascript/Ajax/recuperaPass.js" defer></script>
+    <script src="src/static/javascript/librerias/uikit.js"></script>
+    <script src="src/static/javascript/librerias/uikit-icons.js"></script>
+    <script src="src/static/javascript/librerias/aos.js"></script>
+    <script src="src/static/javascript/librerias/jquery.js"></script>
+    <script src="src/static/javascript/Ajax/login.js" defer></script>
+    <script src="src/static/javascript/Ajax/recuperaPass.js" defer></script>
 
 
     <script>

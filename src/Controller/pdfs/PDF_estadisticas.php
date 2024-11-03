@@ -1,7 +1,6 @@
 <?php
 
-use Shtechnologyx\Pt3\Model\Usuario;
-include("Controller/funcs/verificar.php");
+
 
 use FPDF as FPDF;
 use Shtechnologyx\Pt3\Model\Estadisticas;
@@ -89,7 +88,7 @@ else if ($select == "rotacion_inventario") {
 $pdf->SetFont('Arial', 'B', 12);
 $pdf->Cell(260, 10, 'FECHA DEL REPORTE: ' . $fecha2['mday'] . '/' . $fecha2['mon'] . '/' . $fecha2['year'], 0, 0, 'C');
 $pdf->SetFont('Arial', '', 10);
-$pdf->Image('static/images/logo_m.png', 10, 10, 35);
+$pdf->Image('src/static/images/logo_m.png', 10, 10, 35);
 $pdf->Ln(40);
 $pdf->SetTextColor(255, 255, 255);
 $pdf->SetFont('Arial', 'B', 18);

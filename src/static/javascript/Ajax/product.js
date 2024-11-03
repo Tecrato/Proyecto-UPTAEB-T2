@@ -19,16 +19,16 @@ document.querySelector('#iconReportInv').addEventListener('click', () => {
 if (screen < 1023) {
   document.querySelector(
     ".itemSwitcher1"
-  ).innerHTML = `<img class="uk-preserve-width uk-margin-small-right img1ProductSwitcher" src="./static/images/cajas (2).png" width="30" height="30" alt="">`;
+  ).innerHTML = `<img class="uk-preserve-width uk-margin-small-right img1ProductSwitcher" src="src/static/images/cajas (2).png" width="30" height="30" alt="">`;
   document.querySelector(
     ".itemSwitcher2"
-  ).innerHTML = `<img class="uk-preserve-width uk-margin-small-right img2ProductSwitcher" src="./static/images/suministros.png" width="32" height="32" alt="">`;
+  ).innerHTML = `<img class="uk-preserve-width uk-margin-small-right img2ProductSwitcher" src="src/static/images/suministros.png" width="32" height="32" alt="">`;
   document.querySelector(
     ".itemSwitcher3"
-  ).innerHTML = `<img class="uk-preserve-width uk-margin-small-right img4ProductSwitcher" src="./static/images/menu.png" width="32" height="32" alt="">`;
+  ).innerHTML = `<img class="uk-preserve-width uk-margin-small-right img4ProductSwitcher" src="src/static/images/menu.png" width="32" height="32" alt="">`;
   document.querySelector(
     ".itemSwitcher4"
-  ).innerHTML = `<img class="uk-preserve-width uk-margin-small-right img5ProductSwitcher" src="./static/images/papelera-de-reciclaje.png" width="32" height="32" alt="">`;
+  ).innerHTML = `<img class="uk-preserve-width uk-margin-small-right img5ProductSwitcher" src="src/static/images/papelera-de-reciclaje.png" width="32" height="32" alt="">`;
 }
 
 if (screen < 1357) {
@@ -403,7 +403,7 @@ const tarjetas = (response, cont) => {
     <div class="uk-card uk-card-default uk-background-secondary uk-light uk-border-rounded">
         <div class="uk-visible-toggle" tabindex="-1">
             <article class="uk-transition-toggle">
-                <img src="Media/imagenes/${item.imagen
+                <img src="src/Media/imagenes/${item.imagen
       }"" alt="" class="img_product" width="150px" style="object-fit: cover; height: 215px;">
                 <div class="uk-position-top-right uk-transition-fade uk-position-small">
                     <a href="#modal-details-product" uk-toggle class="btnDetails" data-id="${item.id
@@ -421,7 +421,7 @@ const tarjetas = (response, cont) => {
                         <li>
                             <a href="#product-entry" uk-toggle class="Lote" uk-tooltip="title:Añadir Entrada; delay: 500" data-id="${item.id
       }">
-                                <img src="./static/images/btn_lote2.png" alt="" width="35px">
+                                <img src="src/static/images/btn_lote2.png" alt="" width="35px">
                             </a>
                         </li>
                     </ul>
@@ -444,7 +444,7 @@ const tarjetas = (response, cont) => {
     const imagenes = document.querySelectorAll('.img_product');
     imagenes.forEach(imagen => {
       imagen.onerror = function () {
-        this.src = 'Media/imagenes/banner_productos.png';
+        this.src = 'src/Media/imagenes/banner_productos.png';
       };
     });
 
@@ -597,7 +597,7 @@ formAggProduct.addEventListener("submit", (e) => {
   let url;
   console.log(document.querySelector('.NameUpdateProduct'))
   const datosFormulario = {
-    nombre: document.querySelector('.NameUpdateProduct').value,
+    nombreProducto: document.querySelector('.NameUpdateProduct').value,
     codigo: document.querySelector('.CodeUpdateProduct').value,
     valorUnidad: document.querySelector('.ValorUnidadUpdateProduct').value
   };

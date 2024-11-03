@@ -1,4 +1,4 @@
-<?php require("View/complementos/header.php"); ?>
+<?php require("src/View/complementos/header.php"); ?>
 <main class="Bg-Main-home2 uk-padding uk-light">
 
     <div class="uk-child-width-1-1@s" uk-grid>
@@ -22,7 +22,7 @@
                                     <span class="uk-margin-small-right" uk-icon="credit-card"></span>CAPITAL
                                 </a>
                             </li>
-                            <script src="static/javaScript/Ajax/capital.js" defer></script>
+                            <script src="src/static/javascript/Ajax/capital.js" defer></script>
                         <?php }; ?>
                         <li>
                             <a id="aSets" href="#">
@@ -83,7 +83,7 @@
 
                                                         <div class="item_profile-target">
                                                             <div class="uk-margin">
-                                                                <img width="160px" src="static/images/undraw_profile.svg" alt="">
+                                                                <img width="160px" src="src/static/images/undraw_profile.svg" alt="">
                                                             </div>
                                                             <div>
                                                                 <h3 class="uk-text-center "><?php echo $_SESSION['user_name']; ?></h3>
@@ -581,7 +581,7 @@
 
                                                             </tbody>
                                                         </table>
-                                                        <script src="static/javaScript/Ajax/respaldo.js" defer></script>
+                                                        <script src="src/static/javascript/Ajax/respaldo.js" defer></script>
 
                                                     </li>
 
@@ -769,7 +769,7 @@
                                                 <?php if ($_SESSION['rol_num'] <= 1) { ?>
                                                     <li><a href="#">METODOS DE PAGO</a></li>
 
-                                                    <script src="static/javaScript/Ajax/metodo_pago.js" defer></script>
+                                                    <script src="src/static/javascript/Ajax/metodo_pago.js" defer></script>
                                                 <?php }; ?>
                                             </ul>
                                         </div>
@@ -805,14 +805,14 @@
                                                             <div>
                                                                 <h4 class="uk-text-center">TASA ACTUAL</h4>
                                                                 <h4 id="DOLAR_DB" class="uk-text-center">38.00 BS</h4>
-                                                                <img src="./static/images/logo_letras-minimarket.png" alt="" style="width: 100%; min-width: 50%;">
+                                                                <img src="src/static/images/logo_letras-minimarket.png" alt="" style="width: 100%; min-width: 50%;">
                                                             </div>
                                                         </article>
                                                         <article class="uk-padding uk-margin-small uk-border-rounded" style="background-color: #333; width: 20%;">
                                                             <div>
                                                                 <h4 class="uk-text-center">TASA BCV</h4>
                                                                 <h4 id="BCV_actual" class="uk-text-center">37.00 BS</h4>
-                                                                <img src="./static/images/bcv2.png" alt="" style="width: 100%; min-width: 50%;">
+                                                                <img src="src/static/images/bcv2.png" alt="" style="width: 100%; min-width: 50%;">
                                                             </div>
                                                         </article>
                                                     </section>
@@ -979,9 +979,9 @@
 
 
 
-<script src="static/javaScript/Roles.js" defer></script>
-<script src="static/javaScript/Ajax/RegisterUser.js" defer></script>
-<script src="static/javaScript/Ajax/user.js" defer></script>
+<script src="src/static/javascript/Roles.js" defer></script>
+<script src="src/static/javascript/Ajax/RegisterUser.js" defer></script>
+<script src="src/static/javascript/Ajax/user.js" defer></script>
 
 
 

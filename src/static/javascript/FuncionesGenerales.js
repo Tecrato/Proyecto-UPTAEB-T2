@@ -5,6 +5,7 @@ window.addEventListener("load", () => {
 // VALIDACIONES DE INPUTS
 const validaciones = {
   nombre: /^([A-Zñáéó]|[a-zñáéó]){3,}( ([A-Zñáéó]|[a-zñáéó]){3,})?$/,
+  nombreProducto: /^([A-Za-zñáéó\d]){3,}(( |\-)?([A-Za-zñáéó\d ]){1,})?$/,
   apellido: /^([A-Zñáéó]|[a-zñáéó]){3,}( ([A-Zñáéó]|[a-zñáéó]){3,})?$/,
   codigo: /^\d{12}$/,
   valorUnidad: /^(\d{1,4})$/,
@@ -49,7 +50,7 @@ function cambiar_pagina_ajax(dir, func, limite = 9, page = 0, total = 0) {
 
 function cambiar_pagina_php(dir, type, limit = 9) {
   limit = limit
-  window.location.href = 'Controller/funcs/cambiar_pagina.php?dir=' + dir + '&p=' + page + '&type=' + type + '&n_p=' + limit
+  window.location.href = 'src/Controller/funcs/cambiar_pagina.php?dir=' + dir + '&p=' + page + '&type=' + type + '&n_p=' + limit
 }
 // funcion para colocar la marca de agua en el fondo de los modulos
 function marcaAgua() {

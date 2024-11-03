@@ -45,5 +45,5 @@
         $page = ceil($todos/$pagination)-1;
     }
     
-    header('Location:../../'.ucfirst($type).'?p='.$page);
+    header('Location:'.ucfirst($type).'?p='.$page);
 ?>

@@ -17,7 +17,7 @@
     $factura = new Registro_ventas();
     $factura = $factura->COUNT();
 
-    include('View/index.php');
+    include('src/View/index.php');
 
 
 

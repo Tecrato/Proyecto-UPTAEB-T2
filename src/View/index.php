@@ -1,4 +1,4 @@
-<?php require("View/complementos/header.php"); ?>
+<?php require("src/View/complementos/header.php"); ?>
 
 <main class="Bg-Main-home2">
     <!-- <h2 class="uk-text-bolder uk-light uk-margin-remove-bottom uk-padding uk-padding-remove-bottom">BIENVENIDO USUARIO</h2> -->
@@ -155,8 +155,8 @@
     </div>
 </main>
 
-<script src="static/javaScript/librerias/chart.umd.js"></script>
-<script src="static/javascript/Ajax/index.js"></script>
+<script src="src/static/javascript/librerias/chart.umd.js"></script>
+<script src="src/static/javascript/Ajax/index.js"></script>
 
 
 </body>

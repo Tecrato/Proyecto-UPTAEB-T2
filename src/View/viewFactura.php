@@ -67,7 +67,7 @@
         
    </div>
 
-    <script src="static/javascript/Ajax/viewFactura.js"></script>
+    <script src="src/static/javascript/Ajax/viewFactura.js"></script>
 
 
 </body>

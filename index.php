@@ -1,6 +1,6 @@
 <?php
-    require "src/vendor/autoload.php";
-    require_once("src/variables.php");
+    require "vendor/autoload.php";
+    require_once("variables.php");
     use Shtechnologyx\Pt3\Model\Usuario;
     use Shtechnologyx\Pt3\Model\Permisos;
 
@@ -39,19 +39,19 @@
     }
     
     if ($type == "view"){
-        require_once('Controller/C_'.$page.'.php');
-        // include('View/'.$page.'.php');
+        require_once('src/Controller/C_'.$page.'.php');
+        // include('src/View/'.$page.'.php');
         exit(0);
     }
     else if ($type == "funcion"){
-        require_once('Controller/funcs/'.$page.'.php');
+        require_once('src/Controller/funcs/'.$page.'.php');
         exit(0);
     }
     else if ($type == "funcion_ajax"){
-        require_once('Controller/funcs_ajax/'.$page.'.php');
+        require_once('src/Controller/funcs_ajax/'.$page.'.php');
         exit(0);
     }
     else if ($type == "pdfs"){
-        require_once('Controller/pdfs/PDF_'.$page.'.php');
+        require_once('src/Controller/pdfs/PDF_'.$page.'.php');
         exit(0);
     }

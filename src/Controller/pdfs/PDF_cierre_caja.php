@@ -1,6 +1,4 @@
 <?php
-use Shtechnologyx\Pt3\Model\Usuario;
-include("Controller/funcs/verificar.php");
 use Shtechnologyx\Pt3\Model\Caja;
 use FPDF as FPDF;
 
@@ -23,7 +21,7 @@ class PDF extends FPDF{
         // $this->Image('./Image/LogoM.png', 15, 8, 33);
 
         // $this->SetX(50);
-        $this->Image('static/images/inventario2-1-1.png', 0, 0, 210);
+        $this->Image('src/static/images/inventario2-1-1.png', 0, 0, 210);
         // Arial bold 15
 
     }

@@ -1,15 +1,15 @@
-<?php require("View/complementos/header.php"); ?>
+<?php require("src/View/complementos/header.php"); ?>
 
 
 <main class="Bg-Main-home2 uk-padding uk-padding-remove-bottom main-Product uk-light">
     <section class="">
         <ul uk-tab>
-            <li><a id="aProductos" class="itemSwitcher1" href="#"><img class="uk-preserve-width uk-margin-small-right img1ProductSwitcher" src="./static/images/cajas (2).png" width="30" height="30" alt="">PRODUCTOS</a></li>
+            <li><a id="aProductos" class="itemSwitcher1" href="#"><img class="uk-preserve-width uk-margin-small-right img1ProductSwitcher" src="src/static/images/cajas (2).png" width="30" height="30" alt="">PRODUCTOS</a></li>
 
             <?php if ($_SESSION['rol_num'] <= 1) { ?>
-                <li><a id="aEntradas" class="itemSwitcher2" href="#"><img class="uk-preserve-width uk-margin-small-right img2ProductSwitcher" src="./static/images/suministros.png" width="32" height="32" alt="">ENTRADAS</a></li>
+                <li><a id="aEntradas" class="itemSwitcher2" href="#"><img class="uk-preserve-width uk-margin-small-right img2ProductSwitcher" src="src/static/images/suministros.png" width="32" height="32" alt="">ENTRADAS</a></li>
             <?php }; ?>
-            <li><a id="aOtros" class="itemSwitcher3" href="#"><img class="uk-preserve-width uk-margin-small-right img4ProductSwitcher" src="./static/images/menu.png" width="32" height="32" alt="">OTROS</a></li>
+            <li><a id="aOtros" class="itemSwitcher3" href="#"><img class="uk-preserve-width uk-margin-small-right img4ProductSwitcher" src="src/static/images/menu.png" width="32" height="32" alt="">OTROS</a></li>
         </ul>
         <div class="height_controller">
         </div>
@@ -30,7 +30,7 @@
                                         <div class="uk-margin-left conts_btns_nav_product">
                                             <a id="iconReportInv" href="PDFInventario" class="uk-icon-link" uk-tooltip="title:Reporte Inventario; delay: 500" uk-icon="icon: file-pdf; ratio: 1.5"></a>
                                             <a id="registerProduct" href="#modal-register-product" uk-toggle uk-tooltip="title:Añadir; delay: 500" class="uk-margin-small-left btn-modal-register invisible">
-                                                <img class="btn_agg" src="./static/images/btn_agg.png" alt="" width="35px">
+                                                <img class="btn_agg" src="src/static/images/btn_agg.png" alt="" width="35px">
                                             </a>
                                         </div>
                                     </div>
@@ -82,7 +82,7 @@
                         <div>
                             <section class="uk-light uk-padding uk-padding-remove-left uk-padding-remove-right uk-grid-small dataTable viewP" uk-grid>
                                 <div class="container_marca_agua">
-                                    <img class="marca_agua" src="static/images/logo_letras-minimarket.png" alt="">
+                                    <img class="marca_agua" src="src/static/images/logo_letras-minimarket.png" alt="">
                                 </div>
                                 <div class="[email protected] uk-grid-large uk-flex-center dataTable2 container-target-product js-filter" uk-grid uk-height-match="target: > div > .uk-card">
                                     <!-- aqui se cargan las tarjetas de productos con js -->
@@ -384,7 +384,7 @@
                             </div>
                             <div class="uk-flex uk-flex-middle">
                                 <a href="#modal-full-entrys" uk-toggle class="uk-margin-right" uk-tooltip="title:Añadir Entrada; delay: 500">
-                                    <img src="./static/images/btn_lote2.png" alt="" width="35px">
+                                    <img src="src/static/images/btn_lote2.png" alt="" width="35px">
                                 </a>
 
                                 <!-- input_search sera el contenedor del input tipo search -->
@@ -454,7 +454,7 @@
                             <div class="uk-modal-dialog uk-background-secondary uk-light">
                                 <button class="uk-modal-close-full uk-close-large uk-background-secondary" type="button" uk-close></button>
                                 <div class="uk-grid-collapse uk-child-width-1-1@s" uk-grid>
-                                    <div class="uk-background-cover container_generate_fact" style="background-image: url('static/images/fondo2.jpg');" uk-height-viewport>
+                                    <div class="uk-background-cover container_generate_fact" style="background-image: url('src/static/images/fondo2.jpg');" uk-height-viewport>
 
                                         <h4 class="uk-text-bolder"></h4>
 
@@ -685,7 +685,7 @@
 
 
 
-                    <script src="static/javascript/Ajax/entry.js" defer></script>
+                    <script src="src/static/javascript/Ajax/entry.js" defer></script>
                 </li>
             <?php }; ?>
 
@@ -961,16 +961,16 @@
     </section>
 
 </main>
-<script src="static/javaScript/librerias/JsBardcode.js" defer></script>
+<script src="src/static/javascript/librerias/JsBardcode.js" defer></script>
 
-<!-- <script src="static/javascript/funcionDataTable.js" defer></script> -->
+<!-- <script src="src/static/javascript/funcionDataTable.js" defer></script> -->
 
-<script src="static/javascript/Ajax/product.js" defer></script>
-<script src="static/javascript/Ajax/unidades.js" defer></script>
+<script src="src/static/javascript/Ajax/product.js" defer></script>
+<script src="src/static/javascript/Ajax/unidades.js" defer></script>
 
-<script src="static/javascript/Ajax/categorias.js" defer></script>
-<script src="static/javascript/Ajax/marcas.js" defer></script>
-<script src="static/javascript/Ajax/empaquetados.js" defer></script>
+<script src="src/static/javascript/Ajax/categorias.js" defer></script>
+<script src="src/static/javascript/Ajax/marcas.js" defer></script>
+<script src="src/static/javascript/Ajax/empaquetados.js" defer></script>
 
 
 

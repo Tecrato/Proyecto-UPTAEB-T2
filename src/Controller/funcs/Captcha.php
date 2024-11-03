@@ -16,7 +16,7 @@ define('NUM_PUNTOS', 500);
 
 // Genera un código aleatorio de 5 caracteres
 $codigo = substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, CODIGO_LENGTH);
-$fuente = realpath('Plugins/font_captcha/Consolas.ttf');
+$fuente = realpath('src/Plugins/font_captcha/Consolas.ttf');
 
 // Guardar el código en la sesión después de aplicar hash (sha1)
 $_SESSION['codigo_verificacion'] = sha1($codigo);

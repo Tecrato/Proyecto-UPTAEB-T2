@@ -11,7 +11,7 @@ const CategoriasTable = () => {
       json.lista.forEach((C) => {
         template += `
               <tr>
-                  <td><img src="./static/images/logo_m.png" alt="" width="50"></td>
+                  <td><img src="src/static/images/logo_m.png" alt="" width="50"></td>
                   <td>${C.id}</td>
                   <td>${C.nombre}</td>
                   <td>

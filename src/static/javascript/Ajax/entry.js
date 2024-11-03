@@ -29,7 +29,7 @@ function entryTr(response) {
     }
 
     template += `<tr data-proveedor="${f.proveedor}" data-productEntry="${f.producto}">
-                          <td><img src="./static/images/btn_lote2.png" alt="" width="80"></td>
+                          <td><img src="src/static/images/btn_lote2.png" alt="" width="80"></td>
                           <td>${f.codigo}</td>
                           <td>${f.producto + " " + f.valor_unidad + " " + f.unidad + " " + f.marca}</td>
                           <td>${f.proveedor}</td>

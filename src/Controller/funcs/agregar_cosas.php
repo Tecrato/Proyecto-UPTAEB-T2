@@ -1,8 +1,8 @@
 <?php
-require_once('Controller/funcs/subir_imagen.php');
+require_once('src/Controller/funcs/subir_imagen.php');
 $tipo = $_POST['tipo']; // Depende de que es lo que queramos insertar
 
-use Shtechnologyx\Pt3\Model\Conexion;
+
 
 use Shtechnologyx\Pt3\model\Permisos;
 use Shtechnologyx\Pt3\Model\Bitacora;
@@ -43,7 +43,7 @@ elseif ($tipo === 'producto') {
         $img_err = subir_imagen($imagen, $nick);
         if ($img_err != false) {
             if ($img_err != 3) {
-                unlink('Media/imagenes/' . $nick);
+                unlink('src/Media/imagenes/' . $nick);
             }
             die();
         }
@@ -60,7 +60,7 @@ elseif ($tipo === 'producto') {
         die();
     } catch (Exception $e) {
         echo json_encode(['status' => 'error', 'error' => $e->getMessage()]);
-        unlink('Media/imagenes/' . "producto_" . $_POST['nombre']);
+        unlink('src/Media/imagenes/' . "producto_" . $_POST['nombre']);
     }
 
 

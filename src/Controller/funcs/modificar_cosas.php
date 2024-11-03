@@ -12,7 +12,7 @@ use Shtechnologyx\Pt3\Model\Metodo_pago;
 use Shtechnologyx\Pt3\Model\Configuracion;
 use Shtechnologyx\Pt3\Model\Tipo_empaquetado;
 
-require 'subir_imagen.php';
+require 'src/controller/funcs/subir_imagen.php';
 $tipo = $_POST['tipo']; // Depende de que es lo que queramos actualizar
 
 $other_class = new Permisos(null, $_SESSION['user_id'], $tipo, 'modificar');
@@ -25,18 +25,18 @@ if ($_SESSION['rol_num'] > 1 and count($result) <= 0) {
 }
 
 if ($tipo === 'producto') {
-    print_r(file_exists('Media/imagenes/' . $_POST['old_img']));
+    print_r(file_exists('src/Media/imagenes/' . $_POST['old_img']));
     if ($_FILES['imagen1']['name'] != "") {
-        if (file_exists('Media/imagenes/' . $_POST['old_img']) && ('Media/imagenes/' . $_POST['old_img'] != 'Media/imagenes/banner_productos.png')) {
-            unlink('Media/imagenes/' . $_POST['old_img']);
+        if (file_exists('src/Media/imagenes/' . $_POST['old_img']) && ('src/Media/imagenes/' . $_POST['old_img'] != 'src/Media/imagenes/banner_productos.png')) {
+            unlink('src/Media/imagenes/' . $_POST['old_img']);
         }
-        print_r('Media/imagenes/' . $_POST['old_img']);
+        print_r('src/Media/imagenes/' . $_POST['old_img']);
         $imagen = $_FILES['imagen1'];
         $nick = "producto_" . $_POST['nombre'] . "_" . $imagen['name'];
         $img_err = subir_imagen($imagen, $nick);
         if ($img_err != false) {
             if ($img_err != 3) {
-                unlink('Media/imagenes/' . $nick);
+                unlink('src/Media/imagenes/' . $nick);
             }
             die();
         }

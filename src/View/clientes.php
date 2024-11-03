@@ -1,4 +1,4 @@
-<?php require("View/complementos/header.php"); ?>
+<?php require("src/View/complementos/header.php"); ?>
 
 <main class="Bg-Main-home2 uk-padding uk-padding-remove-bottom">
 
@@ -154,7 +154,7 @@
 
 
 <script src="Plugins/build/js/intlTelInput.js"></script>
-<script src="static/javascript/Ajax/client.js"></script>
+<script src="src/static/javascript/Ajax/client.js"></script>
 
 
 </body>

@@ -40,7 +40,7 @@
     
     if ($type == "view"){
         require_once('Controller/C_'.$page.'.php');
-        // include('View/'.$page.'.php');
+        // include('src/View/'.$page.'.php');
         exit(0);
     }
     else if ($type == "funcion"){

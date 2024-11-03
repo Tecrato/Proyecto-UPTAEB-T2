@@ -17,28 +17,28 @@ echo "
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/css/MainInformation.css">
+    <link rel="stylesheet" href="src/static/css/MainInformation.css">
     </link>
-    <link rel="stylesheet" href="Plugins/build/css/intlTelInput.css">
+    <link rel="stylesheet" href="src/Plugins/build/css/intlTelInput.css">
     </link>
-    <link rel="stylesheet" href="static/css/loader.css">
-    <link rel="stylesheet" href="static/css/uikit.css">
-    <link rel="stylesheet" href="static/css/dataTables.css">
-    <link rel="stylesheet" href="static/css/responsive.dataTables.css">
-    <link rel="stylesheet" href="static/css/introjs.min.css">
-    <link rel="stylesheet" href="static/css/introjs-modern.css">
-    <link rel="stylesheet" href="static/css/Style.css">
+    <link rel="stylesheet" href="src/static/css/loader.css">
+    <link rel="stylesheet" href="src/static/css/uikit.css">
+    <link rel="stylesheet" href="src/static/css/dataTables.css">
+    <link rel="stylesheet" href="src/static/css/responsive.dataTables.css">
+    <link rel="stylesheet" href="src/static/css/introjs.min.css">
+    <link rel="stylesheet" href="src/static/css/introjs-modern.css">
+    <link rel="stylesheet" href="src/static/css/Style.css">
     
-    <script src="static/javascript/librerias/jquery.js"></script>
-    <script src="static/javascript/librerias/intro.min.js"></script>
-    <script src="static/javascript/librerias/uikit.js"></script>
-    <script src="static/javascript/librerias/uikit-icons.js"></script>
-    <script src="static/javascript/FuncionesGenerales.js" defer></script>
-    <script src="static/javascript/Tooltip-help.js" defer></script>
-    <script src="static/javascript/Ajax/notification.js"defer></script>
-    <script src="static/javascript/Color.js" defer></script>
+    <script src="src/static/javascript/librerias/jquery.js"></script>
+    <script src="src/static/javascript/librerias/intro.min.js"></script>
+    <script src="src/static/javascript/librerias/uikit.js"></script>
+    <script src="src/static/javascript/librerias/uikit-icons.js"></script>
+    <script src="src/static/javascript/FuncionesGenerales.js" defer></script>
+    <script src="src/static/javascript/Tooltip-help.js" defer></script>
+    <script src="src/static/javascript/Ajax/notification.js"defer></script>
+    <script src="src/static/javascript/Color.js" defer></script>
 
-    <link rel="shortcut icon" href="static/images/logo_m.png" type="image/x-icon">
+    <link rel="shortcut icon" href="src/static/images/logo_m.png" type="image/x-icon">
     <title id="title">Inventario-Inicio</title>
 </head>
 <?php
@@ -49,7 +49,7 @@ echo "
 <script>var session_user_rol_num = '" . $_SESSION['rol_num'] . "'</script>
 "
 ?>
-<?php require("View/complementos/loader.php"); ?>
+<?php require("src/View/complementos/loader.php"); ?>
 <body class="Bg-Main-home controller-modal">
 
     <!-- **********************************  Menu de PC (1024 en adelante)  ********************************** -->
@@ -66,7 +66,7 @@ echo "
                     <div class="uk-navbar-left">
                         <ul class="uk-navbar-nav ">
                             <li class="uk-flex uk-flex-middle">
-                                <a href="Inicio"><img src="static/images/Logo Minimarket 2.png" alt="" class="Nav-img uk-margin-medium-right"></a>
+                                <a href="Inicio"><img src="src/static/images/Logo Minimarket 2.png" alt="" class="Nav-img uk-margin-medium-right"></a>
 
                                 <!-- <form action="" class="uk-flex uk-flex-middle formSearchHeader">
                                     <input class="uk-input uk-margin-small-right uk-border-pill" type="text" placeholder="Buscar">
@@ -117,7 +117,7 @@ echo "
                                 <li id="iconSets">
                                     <a href="#">
                                         <!-- <span class="uk-icon uk-margin-small-right Bg-user" uk-icon="icon: user; ratio: 1.5"></span> -->
-                                        <img class="uk-preserve-width uk-border-circle uk-margin-small-right" src="static/images/undraw_profile.svg" width="40" height="40" alt="">
+                                        <img class="uk-preserve-width uk-border-circle uk-margin-small-right" src="src/static/images/undraw_profile.svg" width="40" height="40" alt="">
                                         <p class="Link-nav"><?php echo $_SESSION['user_name']; ?></p>
                                     </a>
                                     <div class="uk-dropdown uk-border-rounded">
@@ -177,7 +177,7 @@ echo "
                         <h5 class="uk-text-bolder uk-margin-remove" style="color: #fff;">CAJA: <span id="check_box">mmgvo</span></h5>
                     </div>
                     <div class="uk-margin-medium-right uk-flex uk-flex-middle">
-                        <img class="uk-margin-small-right" src="static/images/bcv.png" alt="" width="28px" height="25px">
+                        <img class="uk-margin-small-right" src="src/static/images/bcv.png" alt="" width="28px" height="25px">
                         <h5 class="uk-text-bolder uk-margin-remove" style="color: #fff;">BCV: <span id="BCV">0.00</span></h5>
                     </div>
                 </div>

@@ -1,3 +1,3 @@
 <?php
-    include('View/clientes.php');
+    include('src/View/clientes.php');
 ?>

@@ -1,3 +1,3 @@
 <?php 
-	include 'View/statistics.php';
+	include 'src/View/statistics.php';
 ?>

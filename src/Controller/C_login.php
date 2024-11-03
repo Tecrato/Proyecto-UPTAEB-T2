@@ -1,5 +1,5 @@
 <?php
-    include('View/login.php');
+    include('src/View/login.php');
     if (isset($_GET['err'])) {
         if ($_GET['err'] == '1'){
             echo '<script>

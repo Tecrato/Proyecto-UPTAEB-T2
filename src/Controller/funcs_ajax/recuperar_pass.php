@@ -16,9 +16,9 @@
         $clase = new Usuario(id:$id[0]['id'],semilla:$nueva_semilla_encriptada);
         $clase->actualizar();
 
-        $var = exec('"./Controller/funcs_ajax/mandar_correo.py" "'.$correo.'" "Tu semilla para el sistema Minimarket es es: '.$nueva_semilla.'"');
+        $var = exec('"src/Controller/funcs_ajax/mandar_correo.py" "'.$correo.'" "Tu semilla para el sistema Minimarket es es: '.$nueva_semilla.'"');
         // var_dump($var);
-        // var_dump('"./Controller/funcs_ajax/mandar_correo.py" "'.$correo.'" "Tu semilla para el sistema Minimarket es es: '.$nueva_semilla.'"');
+        // var_dump('"src/Controller/funcs_ajax/mandar_correo.py" "'.$correo.'" "Tu semilla para el sistema Minimarket es es: '.$nueva_semilla.'"');
         if ($var == "listo") {
             $clase2 = new Bitacora(null,$row['id'],"Usuarios","Semilla enviada","Usuario ".$id[0]['nombre']." a solicitado una nueva semilla");
             $clase2->agregar();

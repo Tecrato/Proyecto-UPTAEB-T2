@@ -1,3 +1,3 @@
 <?php 
-	include 'View/viewFactura.php';
+	include 'src/View/viewFactura.php';
 ?>

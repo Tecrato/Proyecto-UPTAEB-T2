@@ -15,7 +15,7 @@ function trMetodosPago(response) {
                     <td></td>
                     <td></td>
                     <td class="uk-text-center">
-                        <img class="uk-margin-top" style="opacity: 0.3;" src="./static/images/logo_letras-minimarketNewColor.png" alt="">
+                        <img class="uk-margin-top" style="opacity: 0.3;" src="src/static/images/logo_letras-minimarketNewColor.png" alt="">
                     </td>
                     <td></td>
                     <td></td>
@@ -25,7 +25,7 @@ function trMetodosPago(response) {
         json.lista.forEach((p) => {
             template += `
                 <tr>
-                    <td><img class="img_config_logo" src="./static/images/logo_letras-minimarket.png" alt="" width="50"></td>
+                    <td><img class="img_config_logo" src="src/static/images/logo_letras-minimarket.png" alt="" width="50"></td>
                     <td>${p.id}</td>
                     <td>${p.nombre}</td>
                     <td>

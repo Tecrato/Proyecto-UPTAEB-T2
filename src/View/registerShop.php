@@ -1,4 +1,4 @@
-<?php require("View/complementos/header.php"); ?>
+<?php require("src/View/complementos/header.php"); ?>
 
 <main class="Bg-Main-home2 uk-padding uk-padding-remove-bottom uk-light">
 
@@ -422,7 +422,7 @@
 
 
 
-                <script src="static/javascript/Ajax/credito.js" defer></script>
+                <script src="src/static/javascript/Ajax/credito.js" defer></script>
             </li>
 
         <?php }; ?>
@@ -571,9 +571,9 @@
 
 </main>
 
-<script src="static/javaScript/librerias/hammer.min.js"></script>
-<script src="static/javascript/Ajax/registerShop.js" defer></script>
-<script src="static/javascript/Ajax/caja.js" defer></script>
+<script src="src/static/javascript/librerias/hammer.min.js"></script>
+<script src="src/static/javascript/Ajax/registerShop.js" defer></script>
+<script src="src/static/javascript/Ajax/caja.js" defer></script>
 
 
 </body>

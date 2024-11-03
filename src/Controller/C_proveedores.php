@@ -1,3 +1,3 @@
 <?php
-    include('View/proveedores.php');
+    include('src/View/proveedores.php');
 ?>

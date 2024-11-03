@@ -1,5 +1,5 @@
 <?php require("View/complementos/loader.php"); ?>
-<?php require("View/complementos/header.php"); ?>
+<?php require("src/View/complementos/header.php"); ?>
 <main class="Bg-Main-home2 uk-padding">
 
     <section class="uk-background-secondary uk-padding uk-border-rounded uk-light" uk-filter="target: .js-filter">
@@ -159,7 +159,7 @@
 
 
 <script src="Plugins/build/js/intlTelInput.js" defer></script>
-<script src="static/javascript/Ajax/supplier.js" defer></script>
+<script src="src/static/javascript/Ajax/supplier.js" defer></script>
 
 </body>
 

@@ -1,6 +1,5 @@
 <?php
-use Shtechnologyx\Pt3\Model\Usuario;
-include("Controller/funcs/verificar.php");
+
 use Shtechnologyx\Pt3\Model\Factura;
 use Shtechnologyx\Pt3\Model\Registro_ventas;
 use Shtechnologyx\Pt3\Model\Pago;
@@ -43,7 +42,7 @@ $pdf->SetFont('Arial', '', 10);
 
 // Cabecera de página_____________________________________________________________________________________________
 // Logo
-$pdf->Image('static/images/logo_m.png', 20, 15, 30);
+$pdf->Image('src/static/images/logo_m.png', 20, 15, 30);
 // Arial bold 15
 $pdf->SetFont('Arial', '', 12);
 // Movernos a la derecha
