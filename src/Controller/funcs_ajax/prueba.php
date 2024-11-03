@@ -165,10 +165,15 @@
 	// require('../../Model/Entradas.php');
 	// $clase = new Entrada(null,$datos->proveedor,$datos->fecha_compra,$datos->codigo,$datos->detalles);
 	// print_r($clase->agregar($datos->lista));
-	use Shtechnologyx\Pt3\Model\Producto;
-	$c = new Producto(active:"si");
-	print_r($c->search(0,10));
-
+	// use Shtechnologyx\Pt3\Model\Producto;
+	// $c = new Producto(active:"si");
+	// print_r($c->search(0,10));
+	
+	use Shtechnologyx\Pt3\Model\Usuario;
+	$clase = new Usuario(null,null,'nose@gmail.com');
+	$result = $clase->search();
+	$semilla = password
+	print_r($clase->search());
 
 	?>
 	
