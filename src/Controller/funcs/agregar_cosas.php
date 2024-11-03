@@ -66,7 +66,20 @@ elseif ($tipo === 'producto') {
 
     // header('Location:Productos');
 } elseif ($tipo === 'entrada') {
-    $clase = new Entrada(null, $_POST["proveedor"], $_POST["fecha_compra"], $_POST["codigo"], $_POST["detalles"]);
+    var_dump($_POST);
+    if ($_FILES['referencia']['name'] != "") {
+        $file = $_FILES['referencia'];
+        $nick = "comprobante_" . $_POST["codigo"] . "_" . $file['name'];
+        if (file_exists('src/Media/comprobantes/'.$inicial)) {
+            unlink('src/Media/comprobantes/'.$inicial);
+        }
+        elseif (!move_uploaded_file($imagen['tmp_name'],'src/Media/comprobantes/'.$inicial)) {
+            throw new Exception("Error Processing Request", 1);
+        }
+    } else {
+        $nick = null;
+    }
+    $clase = new Entrada(null, $_POST["proveedor"], $_POST["fecha_compra"], $_POST["codigo"], $_POST["detalles"], $nick);
     $resultado = $clase->agregar();
 
     $lista = $_POST["lista"];

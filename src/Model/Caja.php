@@ -56,7 +56,7 @@
         function abrir(){
             $query = $this->conn->prepare("INSERT INTO caja(id_usuario,monto_inicial,monto_final,estado) VALUES(:id_usuario, :monto_inicial, 0, 0)");
             $query->bindValue(':id_usuario', $this->id_usuario, PDO::PARAM_INT);
-            $query->bindValue(':monto_inicial', $this->monto_inicial, PDO::PARAM_INT);
+            $query->bindValue(':monto_inicial', $this->monto_inicial);
             $query->execute();
         }
 

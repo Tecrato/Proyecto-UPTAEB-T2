@@ -1,4 +1,4 @@
-<?php require("View/complementos/loader.php"); ?>
+<?php require("src/View/complementos/loader.php"); ?>
 <?php require("src/View/complementos/header.php"); ?>
 <main class="Bg-Main-home2 uk-padding">
 
@@ -16,7 +16,7 @@
                             </div>
                             <div class="uk-margin-left cont_btns_client-action">
                                 <a id="registerSupplier" href="#register_supplier" uk-toggle uk-tooltip="title:Añadir Proveedor; delay: 500" class="uk-margin-small-left btn-aggSupplier invisible">
-                                    <img class="btn_agg" src="./static/images/btn_agg.png" alt="" width="35px">
+                                    <img class="btn_agg" src="src/static/images/btn_agg.png" alt="" width="35px">
                                 </a>
                             </div>
                         </div>

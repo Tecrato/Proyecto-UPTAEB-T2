@@ -631,7 +631,7 @@ function cardFactura(response) {
           <div class="cont1_tar_fact">
               <div class="uk-flex uk-flex-middle uk-flex-between">
                   <div class="uk-flex uk-flex-middle">
-                      <img class="uk-margin-small-right" src="static/images/logo_m.png" alt="" width="50PX">
+                      <img class="uk-margin-small-right" src="src/static/images/logo_m.png" alt="" width="50PX">
                       <h3 class="uk-margin-remove uk-text-bolder">#${t.id}</h3>
                   </div>
               </div>

@@ -56,11 +56,12 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ /Proyecto-UPTAEB-T2/src/View/404.php
 
 # RewriteRule ^(([a-zA-Z\d])+/)||static/$ /Proyecto-UPTAEB-T2/src/View/404.php [NC,L]
-RewriteRule ^Model/ View/404.php [NC,L]
-# RewriteRule ^Controller/ View/404.php [NC,L]
-RewriteRule ^View/ View/404.php [NC,L]
-RewriteRule ^Backups/ View/404.php [NC,L]
-RewriteRule ^Model/ View/404.php [NC,L]
+# RewriteRule ^src/Model/ View/404.php [NC,L]
+# RewriteRule ^src/Controller/ View/404.php [NC,L]
+# RewriteRule ^src/View/ View/404.php [NC,L]
+# RewriteRule ^src/Backups/ View/404.php [NC,L]
+# RewriteRule ^static/(.*)/(.*) static/$1/$2 [L]
+
 
 
 <FilesMatch "\.(htaccess|htpasswd|ini|phps|fla|psd|log|sh|zip|tar)$">
