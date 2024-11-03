@@ -5,13 +5,16 @@
     use Shtechnologyx\Pt3\Model\Usuario;
     use Shtechnologyx\Pt3\Model\Bitacora;
 
+    if (!isset($_POST['correo']) or !isset($_POST['contraseña'])) {
+        header('Location: Login?error=1');
+        exit(0);
+    }
     
     $sesion_id = substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, 10);//creamos el string del sesion id
     $correo = $_POST["correo"];
     $password = $_POST["contraseña"];
     $codigo = $_POST['codigo'];
 
-    
 
     if (!($_SESSION['codigo_verificacion'] == sha1($codigo))) {
         header('Location: Login?error=2');
@@ -26,7 +29,7 @@
     if (count($result) != 1) {
         header('Location: Login?error=3');
     }
-    else if ($_POST["correo"] and $_POST["contraseña"] and password_verify($password,$result[0]['hash'])) { // si hay un resultado entonces lo deja pasar
+    else if (password_verify($password,$result[0]['hash'])) { // si hay un resultado entonces lo deja pasar
         $row = $result[0];
 
         $c2 = new Usuario($row['id'],sesion_id:$sesion_id);
@@ -49,10 +52,9 @@
         $clase2 = new Bitacora(null,$row['id'],"Usuarios","Login","Usuario ".$row['nombre']." logueado");
         $clase2->agregar();
         header('Location: Inicio'); // y pa' la pagina que se va
-        echo "funciono";
     } else {
-        header('Location: Login?error=0'); // Sino, lo devuelve al login
-        echo "no funciono";
+        var_dump($result);
+        // header('Location: Login?error=0'); // Sino, lo devuelve al login
     }
 
 ?>

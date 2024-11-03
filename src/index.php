@@ -15,11 +15,13 @@
         $type = $_GET['type'];
     }
 
-    if ($page != "login" and $page != "index" and $page != "perfil" and $type == "view") {
-        if (!isset($_SESSION['user_name'])) {
+    if ($page != "login" and $type == "view") {
+        if (!isset($_SESSION['user_name']) or $_SESSION['user_name'] == "") {
             header('Location:Login?err=4');
             die();
         }
+    }
+    if ($page != "login" and $page != "index" and $page != "perfil" and $type == "view") {
         $b = new Usuario(id: $_SESSION['user_id']);
         $busqueda = $b->search();
         if ($_SESSION['sesion_id'] != $busqueda[0]['sesion_id']) {

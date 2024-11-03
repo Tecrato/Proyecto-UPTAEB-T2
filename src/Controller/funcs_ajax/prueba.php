@@ -170,10 +170,10 @@
 	// print_r($c->search(0,10));
 	
 	use Shtechnologyx\Pt3\Model\Usuario;
-	$clase = new Usuario(null,null,'nose@gmail.com');
+	$clase = new Usuario(null,null,'yolokratos903@gmail.com');
 	$result = $clase->search();
-	$semilla = password
-	print_r($clase->search());
+	$semilla = password_verify('apVw1',$result[0]['semilla']);
+	var_dump($semilla);
 
 	?>
 	
