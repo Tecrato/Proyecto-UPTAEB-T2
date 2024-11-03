@@ -299,10 +299,3 @@ function getDatabaseFormattedValue(input_formater_db) {
   let formattedValue = c.replace(/\./g, '').replace(',', '.');
   return formattedValue;
 }
-function getDatabaseFormattedValueAll(input_formater_db) {
-  let c = document.querySelectorAll(input_formater_db)
-  c.forEach((element) => {
-    let formattedValue = element.value.replace(/\./g, '').replace(',', '.');
-    return formattedValue;
-  })
-}

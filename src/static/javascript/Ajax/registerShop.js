@@ -232,7 +232,7 @@ function func(dolar) {
               <td>${cantidad}</td>
               <td>${array[0]} ${ivaIdentifier == 0 ? "(E)" : ""}</td>
               <td>${precioUnitario} BS</td>
-              <td class="uk-text-success totalParcial">${totalParcial} BS</td>
+              <td class="uk-text-success totalParcial">${totalParcial.toFixed(2)} BS</td>
               <td class="uk-flex uk-flex-center">
                 <input class="controller-iva" type="hidden" iva="${array[4]}">
                 <button href="" class="uk-icon-button Btn-delete" uk-icon="trash"></button>

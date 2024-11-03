@@ -28,7 +28,7 @@
                                     <div class="uk-margin-left uk-light cont_btns_fact">
                                         <a href="Detalles_factura" uk-icon="icon: file-pdf; ratio: 1.5" uk-tooltip="title:PDF Factura; delay: 500"></a>
                                         <a href="#modal-full" uk-toggle uk-tooltip="title:Añadir Factura; delay: 500" class="uk-margin-small-left btn_agg_factura invisible">
-                                            <img class="btn_agg" src="./static/images/btn_agg_factura2.png" alt="" width="35px">
+                                            <img class="btn_agg" src="src/static/images/btn_agg_factura2.png" alt="" width="35px">
                                         </a>
                                     </div>
                                     <nav uk-dropnav="mode: click">
@@ -102,7 +102,7 @@
                             <div class="uk-modal-dialog uk-background-secondary uk-light">
                                 <button class="uk-modal-close-full uk-close-large uk-background-secondary" type="button" uk-close></button>
                                 <div class="uk-grid-collapse uk-child-width-1-2@s" uk-grid>
-                                    <div class="uk-background-cover container_generate_fact" style="background-image: url('static/images/fondo2.jpg');" uk-height-viewport>
+                                    <div class="uk-background-cover container_generate_fact" style="background-image: url('src/static/images/fondo2.jpg');" uk-height-viewport>
 
                                         <h4 class="uk-text-bolder"></h4>
 

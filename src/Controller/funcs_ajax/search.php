@@ -169,7 +169,6 @@
             cantidad:(isset($_POST['cantidad']) ? $_POST['cantidad'] : null),
             id_proveedor:(isset($_POST['id_proveedor']) ? $_POST['id_proveedor'] : null),
             between_fecha_compra:(isset($_POST['between_fecha']) ? $_POST['between_fecha'] : null),
-
         );
     }
     elseif ($_POST['randomnautica'] == "proveedores") {

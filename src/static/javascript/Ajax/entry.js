@@ -65,128 +65,134 @@ const cargarEntrys = () => {
 };
 cargarEntrys()
 const filters = {
-  proveedor: '',
-  producto: '',
-  fechaInicio: '',
-  fechaFin: ''
+  proveedor: null,
+  producto: null,
+  fechaInicio: null,
+  fechaFin: null,
+  between_fecha: null,
 };
+
 function FilterEntry() {
+  const dataToSend = {
+    randomnautica: "detalles_entradas",
+    ...(filters.proveedor && { id_proveedor: filters.proveedor }),
+    ...(filters.producto && { id_producto: filters.producto }),
+    ...(filters.fechaInicio && filters.fechaFin && { between_fecha: { inicio: filters.fechaInicio, fin: filters.fechaFin } })
+  };
   $.ajax({
     url: "api_search",
     type: "POST",
-    data: {
-      randomnautica: "detalles_entradas",
-      id_proveedor: filters.proveedor,
-      id_producto: filters.producto,
-      between_fecha: { inicio: filters.fechaInicio, fin: filters.fechaFin }
-    },
+    data: dataToSend,
     success: function (response) {
-      console.log(response);
+      $(".cont_entry").html("");
+      entryTr(response);
     }
   });
 }
-FilterEntry();
 // let SupplierFilterAll = document.querySelector("#SupplierFilterAll");
-// SupplierFilterAll.addEventListener("click", () => {
-//   $(".cont_entry").html("");
-//   cargarEntrys();
-//   filters.proveedor = '';
-//   filters.producto = '';
-//   filters.fechaInicio = '';
-//   filters.fechaFin = '';
-//   FilterEntry();
-// })
+SupplierFilterAll.addEventListener("click", () => {
+  $(".cont_entry").html("");
+  cargarEntrys();
+  filters.proveedor = null;
+  filters.producto = null;
+  filters.fechaInicio = null;
+  filters.fechaFin = null;
+  FilterEntry();
+})
 
-// let searchEntryFilter = document.querySelectorAll(".search_entrys")
-// searchEntryFilter.forEach((e) => {
-//   e.addEventListener("keyup", (item) => {
-//     let name = item.target.value;
+let searchEntryFilter = document.querySelectorAll(".search_entrys")
+searchEntryFilter.forEach((e) => {
+  e.addEventListener("keyup", (item) => {
+    let name = item.target.value;
 
-//     if (name != "") {
-//       $.ajax({
-//         url: "api_search",
-//         type: "POST",
-//         data: { randomnautica: "proveedores", like: name, active: 1 },
-//         success: function (response) {
-//           let json = JSON.parse(response);
-//           let hola = "";
-//           json.lista.forEach((p) => {
-//             hola += `      
-//           <li class="prov_entry"><a href="#" class="prov-entry-products" idSup="${p.id}">${p.razon_social}</a></li>    
-//         `;
-//           });
-//           $(".filter_prov_entry").html(hola);
+    if (name != "") {
+      $.ajax({
+        url: "api_search",
+        type: "POST",
+        data: { randomnautica: "proveedores", like: name, active: 1 },
+        success: function (response) {
+          let json = JSON.parse(response);
+          let hola = "";
+          json.lista.forEach((p) => {
+            hola += `      
+          <li class="prov_entry"><a href="#" class="prov-entry-products" idSup="${p.id}">${p.razon_social}</a></li>    
+        `;
+          });
+          $(".filter_prov_entry").html(hola);
 
-//           let prov_entry = document.querySelectorAll(".prov_entry");
-//           prov_entry.forEach((e) => {
-//             e.addEventListener("click", () => {
-//               let id = e.firstElementChild.getAttribute("idSup");
-//               filters.proveedor = id;
-//               FilterEntry();
-//             });
-//           });
+          let prov_entry = document.querySelectorAll(".prov_entry");
+          prov_entry.forEach((e) => {
+            e.addEventListener("click", () => {
+              let id = e.firstElementChild.getAttribute("idSup");
+              filters.proveedor = id;
+              $(".cont_entry").html("");
+              FilterEntry();
+              console.log(dataToSend);
+            });
+          });
 
-//         }
-//       })
-//     } else {
-//       filters.proveedor = '';
-//       $(".filter_prov_entry").html("");
-//       FilterEntry();
-//     }
-//   })
-// })
+        }
+      })
+    } else {
+      filters.proveedor = '';
+      $(".filter_prov_entry").html("");
+      FilterEntry();
+    }
+  })
+})
 
-// searchEntryFilter.forEach((e) => {
-//   e.addEventListener("keyup", (item) => {
-//     let name = item.target.value;
+searchEntryFilter.forEach((e) => {
+  e.addEventListener("keyup", (item) => {
+    let name = item.target.value;
 
-//     if (name != "") {
-//       $.ajax({
-//         url: "api_search",
-//         type: "POST",
-//         data: { randomnautica: "productos", like_nombre: name },
-//         success: function (response) {
-//           let json = JSON.parse(response);
-//           let hola = "";
-//           json.lista.forEach((p) => {
-//             hola += `      
-//           <li class="prod-entry"><a href="#" class="prov-entry-products" idPr="${p.id}">${p.nombre + " " + p.valor_unidad + " " + p.unidad + " " + p.marca}</a></li>    
-//         `;
-//           });
-//           $(".filter_prov_entry_product").html(hola);
+    if (name != "") {
+      $.ajax({
+        url: "api_search",
+        type: "POST",
+        data: { randomnautica: "productos", like_nombre: name },
+        success: function (response) {
+          let json = JSON.parse(response);
+          let hola = "";
+          json.lista.forEach((p) => {
+            hola += `      
+          <li class="prod-entry"><a href="#" class="prov-entry-products" idPr="${p.id}">${p.nombre + " " + p.valor_unidad + " " + p.unidad + " " + p.marca}</a></li>    
+        `;
+          });
+          $(".filter_prov_entry_product").html(hola);
 
 
-//           let prov_entry = document.querySelectorAll(".prod-entry");
-//           prov_entry.forEach((e) => {
-//             e.addEventListener("click", () => {
-//               let id = e.firstElementChild.getAttribute("idPr");
-//               filters.producto = id;
-//               FilterEntry();
-//             });
-//           });
-//         }
-//       })
-//     } else {
-//       filters.producto = '';
-//       $(".filter_prov_entry_product").html("");
-//       fetchFilteredData();
-//     }
-//   })
-// })
+          let prov_entry = document.querySelectorAll(".prod-entry");
+          prov_entry.forEach((e) => {
+            e.addEventListener("click", () => {
+              let id = e.firstElementChild.getAttribute("idPr");
+              filters.producto = id;
+              $(".cont_entry").html("");
+              FilterEntry();
+            });
+          });
+        }
+      })
+    } else {
+      filters.producto = '';
+      $(".filter_prov_entry_product").html("");
+      FilterEntry();
+    }
+  })
+})
 
-// // //FILTRO POR FECHA
+// //FILTRO POR FECHA
 
-// let FORM_ENTRY_BETWEEN = document.querySelector(".FORM_ENTRY_BETWEEN");
-// FORM_ENTRY_BETWEEN.addEventListener("submit", (e) => {
-//   e.preventDefault();
+let FORM_ENTRY_BETWEEN = document.querySelector(".FORM_ENTRY_BETWEEN");
+FORM_ENTRY_BETWEEN.addEventListener("submit", (e) => {
+  e.preventDefault();
 
-//   let start = FORM_ENTRY_BETWEEN.firstElementChild.firstElementChild.lastElementChild.value
-//   let end = FORM_ENTRY_BETWEEN.firstElementChild.lastElementChild.lastElementChild.value
+  let start = FORM_ENTRY_BETWEEN.firstElementChild.firstElementChild.lastElementChild.value
+  let end = FORM_ENTRY_BETWEEN.firstElementChild.lastElementChild.lastElementChild.value
 
-//   filters.fechaInicio = start;
-//   filters.fechaFin = end;
-//   fetchFilteredData();
-// })
+  filters.fechaInicio = start;
+  filters.fechaFin = end;
+  FilterEntry();
+})
 
 //aqui hacemos la funcion para el credito
 
