@@ -7,6 +7,6 @@
 </head>
 <body>
     <h1>Error 404</h1>
-    <a href="/Pt3/src">Volver</a>
+    <a href="Inicio">Volver a Inicio</a>
 </body>
 </html>

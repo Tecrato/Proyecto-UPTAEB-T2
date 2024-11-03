@@ -39,6 +39,7 @@ $.ajax({
                             <td>${element.idCliente}</td>
                             <td>${element.Cliente}</td>
                             <td>${element.Compras}</td>
+                            <td>${element.pmc}</td>
                         </tr>
             `
         });

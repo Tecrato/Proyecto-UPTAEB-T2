@@ -60,13 +60,6 @@
             $resultado = password_verify($contraseña,$consulta->fetchAll()[0]['hash']);
             return $resultado;
         }
-        function cambiar_password() {
-            $query = "UPDATE usuarios SET hash=:hash WHERE correo=:correo";
-            $consulta = $this->conn->prepare($query);
-            $consulta->bindValue(':correo',$this->correo, PDO::PARAM_STR);
-            $consulta->bindValue(':hash',$this->hash, PDO::PARAM_STR);
-            $consulta->execute();
-        }
         function cambiar_rol() {
             $query = "UPDATE usuarios SET rol=:rol WHERE id=:id";
             $consulta = $this->conn->prepare($query);

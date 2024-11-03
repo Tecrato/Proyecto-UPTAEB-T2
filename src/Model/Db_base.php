@@ -105,7 +105,7 @@
             }
             $lista_vars = array();
             foreach ($this->variables as $key => $value){
-                $lista_vars[$this->normalizeKey($key)] = $value;
+                $lista_vars[$this->normalizeKey2($key)] = $value;
             }
             $sql = "UPDATE $this->tabla SET ";
             foreach ($lista_vars as $key => $value){

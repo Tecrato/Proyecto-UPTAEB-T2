@@ -41,6 +41,7 @@ document.getElementById("forget-pass").addEventListener("click", () => {
         type: "POST",
         data: { email: input_correo.value, semilla: input_pass.value, metodo: 'semilla', password: input_passNew.value },
         success: (response) => {
+            console.log(response)
             let json = JSON.parse(response)
             if (json.status == "error") {
                 UIkit.notification.closeAll();

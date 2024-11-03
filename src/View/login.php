@@ -150,8 +150,8 @@
     <script src="static/javascript/librerias/uikit-icons.js"></script>
     <script src="static/javascript/librerias/aos.js"></script>
     <script src="static/javascript/librerias/jquery.js"></script>
-    <script src="static/javascript/Ajax/recuperaPass.js"></script>
-    <script src="static/javascript/Ajax/login.js"></script>
+    <script src="static/javascript/Ajax/login.js" defer></script>
+    <script src="static/javascript/Ajax/recuperaPass.js" defer></script>
 
 
     <script>

@@ -1,6 +1,6 @@
 <?php
-    require "../vendor/autoload.php";
-    require_once("../variables.php");
+    require "src/vendor/autoload.php";
+    require_once("src/variables.php");
     use Shtechnologyx\Pt3\Model\Usuario;
     use Shtechnologyx\Pt3\Model\Permisos;
 

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-11-2024 a las 01:56:51
+-- Tiempo de generación: 03-11-2024 a las 06:10:40
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.0.30
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -653,6 +653,7 @@ CREATE TABLE `clientesfrecuentes` (
 `idCliente` int(11)
 ,`Cliente` varchar(500)
 ,`Compras` bigint(21)
+,`pmc` mediumtext
 );
 
 -- --------------------------------------------------------
@@ -1412,7 +1413,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `clientesfrecuentes`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `clientesfrecuentes`  AS SELECT (select `registro_ventas`.`id_cliente`) AS `idCliente`, (select `clientes`.`nombre` from `clientes` where `clientes`.`id` = `registro_ventas`.`id_cliente`) AS `Cliente`, (select count(0) from `registro_ventas` where `registro_ventas`.`id_cliente` = `idCliente`) AS `Compras` FROM `registro_ventas` GROUP BY `registro_ventas`.`id_cliente` ORDER BY (select count(0) from `registro_ventas` where `registro_ventas`.`id_cliente` = `idCliente`) DESC LIMIT 0, 5 ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `clientesfrecuentes`  AS SELECT `rv`.`id_cliente` AS `idCliente`, `c`.`nombre` AS `Cliente`, count(`rv`.`id`) AS `Compras`, `pmc`.`Productos_Mas_Comprados` AS `pmc` FROM ((`registro_ventas` `rv` left join `clientes` `c` on(`rv`.`id_cliente` = `c`.`id`)) left join (select `rv2`.`id_cliente` AS `id_cliente`,group_concat(`p`.`nombre` order by `prod`.`Frecuencia` DESC separator ', ') AS `Productos_Mas_Comprados` from (((`factura` `f` left join `productos` `p` on(`f`.`id_productos` = `p`.`id`)) left join `registro_ventas` `rv2` on(`f`.`id_registro_ventas` = `rv2`.`id`)) left join (select `f`.`id_registro_ventas` AS `id_registro_ventas`,`f`.`id_productos` AS `id_productos`,count(`f`.`id`) AS `Frecuencia` from `factura` `f` group by `f`.`id_registro_ventas`,`f`.`id_productos`) `prod` on(`f`.`id_registro_ventas` = `prod`.`id_registro_ventas` and `f`.`id_productos` = `prod`.`id_productos`)) group by `rv2`.`id_cliente`) `pmc` on(`rv`.`id_cliente` = `pmc`.`id_cliente`)) GROUP BY `rv`.`id_cliente` ORDER BY count(`rv`.`id`) DESC LIMIT 0, 5 ;
 
 -- --------------------------------------------------------
 

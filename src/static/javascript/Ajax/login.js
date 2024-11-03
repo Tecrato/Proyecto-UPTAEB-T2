@@ -9,25 +9,25 @@ const validaciones = {
     razonSocial:/([A-Zñ+áéó]|[a-zñáéó]){3,}( ([A-Zñ+áéó]|[a-zñáéó]){3,})?$/,
     correo:/^([A-Za-z0-9\.\_]+)@([\w]{3,8})\.([\w]{2,3})(\.[\w]{2,4})?(\.[\w]{2,3})?$/,
     
-  };
-  function validarFormulario(datos) {
-  const resultados = {};
-  const errores = [];
-  
-  for (const campo in datos) {
-  if (validaciones.hasOwnProperty(campo)) {
-    const regex = validaciones[campo];
-    const esValido = regex.test(datos[campo]);
-    resultados[campo] = esValido;
-    
-    if (!esValido) {
-        errores.push(`El campo ${campo} no es válido.`);
+};
+function validarFormulario(datos) {
+const resultados = {};
+const errores = [];
+
+for (const campo in datos) {
+    if (validaciones.hasOwnProperty(campo)) {
+        const regex = validaciones[campo];
+        const esValido = regex.test(datos[campo]);
+        resultados[campo] = esValido;
+
+        if (!esValido) {
+            errores.push(`El campo ${campo} no es válido.`);
+        }
     }
-  }
-  }
-  
-  return { resultados, errores };
-  }
+}
+
+return { resultados, errores };
+}
 
 
 
