@@ -62,30 +62,28 @@ elseif ($tipo === 'producto') {
         echo json_encode(['status' => 'error', 'error' => $e->getMessage()]);
         unlink('src/Media/imagenes/' . "producto_" . $_POST['nombre']);
     }
-
-
-    // header('Location:Productos');
 } elseif ($tipo === 'entrada') {
-    var_dump($_POST);
+    $cosa = json_decode($_POST['json']);
     if ($_FILES['referencia']['name'] != "") {
         $file = $_FILES['referencia'];
-        $nick = "comprobante_" . $_POST["codigo"] . "_" . $file['name'];
-        if (file_exists('src/Media/comprobantes/'.$inicial)) {
-            unlink('src/Media/comprobantes/'.$inicial);
+        $nick = "comprobante_" . $cosa->codigo . "_" . $file['name'];
+        if (file_exists('src/Media/comprobantes/'.$nick)) {
+            unlink('src/Media/comprobantes/'.$nick);
         }
-        elseif (!move_uploaded_file($imagen['tmp_name'],'src/Media/comprobantes/'.$inicial)) {
+        elseif (!move_uploaded_file($file['tmp_name'],'src/Media/comprobantes/'.$nick)) {
             throw new Exception("Error Processing Request", 1);
         }
     } else {
         $nick = null;
     }
-    $clase = new Entrada(null, $_POST["proveedor"], $_POST["fecha_compra"], $_POST["codigo"], $_POST["detalles"], $nick);
+    $clase = new Entrada(null, $cosa->proveedor, $cosa->fecha_compra, $cosa->codigo, $cosa->detalles, $nick);
     $resultado = $clase->agregar();
 
-    $lista = $_POST["lista"];
+    $lista = $cosa->lista;
     
     for ($i = 0; $i < count($lista); $i++) {
         $entrada = $lista[$i];
+        $entrada = new ArrayObject($entrada);
         $entrada["id_entrada"] = $resultado;
         $clase = new Detalle_entrada(
             null,
@@ -101,8 +99,9 @@ elseif ($tipo === 'producto') {
         $clase->agregar();
     }
 
-    for ($i = 0; $i < count($_POST["metodos_pagos"]); $i++) {
-        $pago = $_POST["metodos_pagos"][$i];
+    for ($i = 0; $i < count($cosa->metodos_pagos); $i++) {
+        $pago = $cosa->metodos_pagos[$i];
+        $pago = new ArrayObject($pago);
         $clase2 = new Pago_entrada(null, $pago["metodo"], $resultado, $pago["monto"]);
         $clase2->agregar();
     }

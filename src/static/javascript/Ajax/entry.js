@@ -764,7 +764,6 @@ function func(dolar) {
           let select = document.querySelectorAll(".selectMetodoPago")
           select.forEach((e) => {
 
-            (e.value);
             let valor = e.value
             let monto = e.nextElementSibling.value
 
@@ -780,6 +779,7 @@ function func(dolar) {
           console.log(json);
           let jsonString = JSON.stringify(json);
           let file = document.querySelector('.referenciaEntry').files[0]
+          console.log(file)
 
           let data = new FormData();
           data.append('referencia', file);
@@ -789,9 +789,9 @@ function func(dolar) {
           $.ajax({
             url: "api_agregar",
             type: "POST",
-            data: data,
-            contentType: false,
             processData: false,
+            contentType: false,
+            data: data,
             success: function (response) {
               console.log(response);
 
