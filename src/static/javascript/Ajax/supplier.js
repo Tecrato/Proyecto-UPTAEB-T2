@@ -27,13 +27,13 @@ function insertANDupdateCLient_proveedor(FORM, NUMBER, TABLE, TYPE) {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const datosFormulario = {
-      nombre: document.getElementsByClassName('nameProvUpdate').value,
-      razonSocial: document.getElementsByClassName('Razon_SocialProvUpdate').value,
-      cedula: document.getElementsByClassName('Nro_DocumentoProvUpdate').value,
-      correo: document.getElementsByClassName('emailProvUpdate').value
+      nombre: document.querySelector('.nameProvUpdate').value,
+      razonSocial: document.querySelector('.Razon_SocialProvUpdate').value,
+      cedula: document.querySelector('.Nro_DocumentoProvUpdate').value,
+      correo: document.querySelector('.emailProvUpdate').value
     };
     const { resultados, errores } = validarFormulario(datosFormulario);
-    const messageError = document.getElementsById('messageError');
+    const messageError = document.querySelector('#messageError');
     messageError.innerHTML = ''; 
     if (errores.length > 0) {
         messageError.innerHTML = errores.join('<br>');

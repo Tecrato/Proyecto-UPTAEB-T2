@@ -142,6 +142,7 @@
                             <th>#</th>
                             <th>CLIENTE</th>
                             <th>COMPRAS</th>
+                            <th>PRODUCTOS MÁS COMPRADOS</th>
                         </tr>
                     </thead>
                     <tbody id="tbody_clientes_frecuentes">

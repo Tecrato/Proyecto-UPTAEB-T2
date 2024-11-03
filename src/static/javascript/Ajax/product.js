@@ -596,12 +596,12 @@ formAggProduct.addEventListener("submit", (e) => {
   e.preventDefault();
   let url;
   const datosFormulario = {
-    nombre: document.getElementsByClassName('NameUpdateProduct').item(0).value,
-    codigo: document.getElementsByClassName('CodeUpdateProduct').item(0).value,
-    valorUnidad: document.getElementsByClassName('ValorUnidadUpdateProduct').item(0).value
+    nombre: document.querySelector('NameUpdateProduct').value,
+    codigo: document.querySelector('CodeUpdateProduct').value,
+    valorUnidad: document.querySelector('ValorUnidadUpdateProduct').value
   };
   const { resultados, errores } = validarFormulario(datosFormulario);
-  const messageError = document.getElementById('messageError');
+  const messageError = document.querySelector('#messageError');
   messageError.innerHTML = '';
   if (errores.length > 0) {
     messageError.innerHTML = errores.join('<br>');
