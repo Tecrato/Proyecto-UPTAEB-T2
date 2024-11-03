@@ -648,6 +648,7 @@ formAggProduct.addEventListener("submit", (e) => {
         //en la respuesta le mostramos un mensaje de producto creado correctamente
 
         cargarTargetProduct(page_productos);
+        UIkit.modal("#modal-register-product").hide();
       },
     });
   }

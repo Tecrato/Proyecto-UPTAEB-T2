@@ -18,7 +18,7 @@ $(".pag-btn-creditos").click((ele) => {
 let bool = true
 let btnAggMetodoPago = document.querySelector(".btn_agg_metodoPago2")
 // Agregar metodo de pago
-const metodoPago = () => {
+const metodoPago = (dolar) => {
     btnAggMetodoPago.addEventListener('click', () => {
         ("click");
         // Incrementar el contador para obtener el id único de cada pago
@@ -58,7 +58,6 @@ const metodoPago = () => {
                                         </select>
                                         <input class="uk-input uk-form-small uk-form-width-small AMOUNT-MP2" placeholder="Monto" type="text" style="background-color: transparent; border: transparent;">
                                         <button class="btn-deleteMP2" uk-icon="trash"></button> 
-                                        <button uk-icon="check" type="button"></button> 
                                     </div>
                                     <hr class="uk-margin">
                                 </div>`
@@ -78,56 +77,31 @@ const metodoPago = () => {
                     $(".inputPago").append(template)
                     // Agregar la nueva plantilla al contenedor de los métodos de pago finales
                 }
-
+                let totalDebito = document.querySelector(".total_pago_credito")
+                let totalDebitoInit = parseFloat(totalDebito.textContent)
                 //este sera el evento en donde colocaremos en pagos finales, el valor del input
                 //seleccionamos todos los select
                 let INP = document.querySelectorAll(".AMOUNT-MP2")
-                const calcularTotal = () => {
-                    INP.forEach((B) => {
-
-                        // captamos el evento de keyup, osea si el usuario teclea sobre el input
-                        B.addEventListener("change", () => {
-                            if (B.value == "") {
-                                bool = false
-                            } else {
-                                bool = true
-                            }
-                            let amount = []
-
-                            INP.forEach((B) => {
-                                if (B.previousElementSibling.children.namedItem("Divisa")) {
-                                    let Divisa = B.previousElementSibling.children.namedItem("Divisa").value
-                                    if (B.previousElementSibling.value == Divisa) {
-                                        let dola = parseFloat(parseFloat(B.value) * parseFloat(document.getElementById("BCV").textContent))
-                                        amount.push(dola)
-                                    } else {
-                                        amount.push(B.value)
-                                    }
-                                } else {
-                                    amount.push(B.value)
-                                }
-
-
-                            })
-                            let result = 0
-                            amount.forEach((a) => {
-                                let number = a == "" ? 0 : parseFloat(a)
-                                result += number
-                            })
-                            document.querySelector(".total_pago_credito").textContent = result + ' Bs'
-                            if (parseFloat(document.querySelector(".total_credito_bs").textContent.slice(13, Infinity)) != result) {
-                                document.querySelector(".total_pago_credito").classList.remove("succesc")
-                                document.querySelector(".total_pago_credito").classList.add("danger")
-                            } else if (parseFloat(document.querySelector(".total_credito_bs").textContent.slice(13, Infinity)) == result) {
-                                document.querySelector(".total_pago_credito").classList.remove("danger")
-                                document.querySelector(".total_pago_credito").classList.add("succesc")
-                            }
-
-
-                        })
+                InputFormaterAll(".AMOUNT-MP2")
+                INP.forEach((B) => {
+                    // captamos el evento de keyup, osea si el usuario teclea sobre el input
+                    B.addEventListener("keyup", (e) => {
+                        if (B.value == "") bool = false
+                        else bool = true
+                        let val = e.target.value == "" ? 0 : parseFloat(e.target.value.replace(/\./g, '').replace(',', '.'))
+                        let divisa = B.parentElement.firstElementChild.options[B.parentElement.firstElementChild.selectedIndex].textContent
+                        if (divisa == "Divisa" || divisa == "divisa") {
+                            totalDebito.textContent = (totalDebitoInit + (val * dolar)).toFixed(2)
+                        } else {
+                            totalDebito.textContent = (totalDebitoInit + val).toFixed(2)
+                        }
+                        if (parseFloat(document.querySelector(".total_credito_bs").textContent.slice(13, Infinity)) == val) {
+                            document.querySelector(".total_pago_credito").classList.add("succesc")
+                        } else if ((parseFloat(document.querySelector(".total_credito_bs").textContent.slice(13, Infinity)) != val)) {
+                            document.querySelector(".total_pago_credito").classList.remove("succesc")
+                        }
                     })
-                }
-                calcularTotal()
+                })
 
 
                 //esta parte es para eliminar un registro en los tipos de pago
@@ -137,31 +111,13 @@ const metodoPago = () => {
                     btn.addEventListener('click', () => {
                         //seleccionamos el contenedor de los tipos de pago en la izquierda, y removemos al hijo
                         cont.removeChild(btn.parentElement.parentElement)
-                        if (btn.previousElementSibling.previousElementSibling.children.namedItem("Divisa")) {
-                            let divisa = btn.previousElementSibling.previousElementSibling.children.namedItem("Divisa").value
-                            if (btn.previousElementSibling.previousElementSibling.value == divisa) {
-                                let desc = parseFloat(document.querySelector(".total_pago_credito").textContent)
-                                let dola = btn.previousElementSibling.value == "" ? 0 : parseFloat(btn.previousElementSibling.value) * parseFloat(document.getElementById("BCV").textContent)
-                                document.querySelector(".total_pago_credito").textContent = (desc - dola).toFixed(2) + ' Bs'
-                                calcularTotal()
-                            } else {
-                                let result = btn.previousElementSibling.value == "" ? 0 : parseFloat(btn.previousElementSibling.value)
-                                let desc = parseFloat(document.querySelector(".total_pago_credito").textContent)
-                                document.querySelector(".total_pago_credito").textContent = (desc - result).toFixed(2) + ' Bs'
-                                if (parseFloat(document.querySelector(".total_pago_credito").textContent) == 0) {
-                                    document.querySelector(".total_pago_credito").classList.remove("succesc")
-                                    document.querySelector(".total_pago_credito").classList.remove("danger")
-                                }
-                            }
+                        let val = btn.previousElementSibling.value == "" ? 0 : parseFloat(btn.previousElementSibling.value.replace(',', '.'))
+                        console.log(val);
+                        let divisa = btn.parentElement.firstElementChild.options[btn.parentElement.firstElementChild.selectedIndex].textContent
+                        if (divisa == "Divisa" || divisa == "divisa") {
+                            totalDebito.textContent = (parseFloat(totalDebito.textContent) - parseFloat((val * dolar).toFixed(2))).toFixed(2)
                         } else {
-                            let result = btn.previousElementSibling.value == "" ? 0 : parseFloat(btn.previousElementSibling.value)
-                            let desc = parseFloat(document.querySelector(".total_pago_credito").textContent)
-                            document.querySelector(".total_pago_credito").textContent = (desc - result).toFixed(2) + ' Bs'
-                            calcularTotal()
-                        }
-                        if (parseFloat(document.querySelector(".total_pago_credito").textContent) == 0) {
-                            document.querySelector(".total_pago_credito").classList.remove("succesc")
-                            document.querySelector(".total_pago_credito").classList.remove("danger")
+                            totalDebito.textContent = (parseFloat(totalDebito.textContent) - val).toFixed(2)
                         }
                     })
                 })
@@ -201,8 +157,8 @@ function TrCredito(response) {
             success: function (response) {
                 let json = JSON.parse(response);
                 totalCredito.textContent = "Total en $: " + json.lista[0].monto_final
-                document.querySelector(".total_credito_bs").textContent = "Total en Bs: " + parseFloat(document.getElementById("BCV").textContent) * parseFloat(json.lista[0].monto_final)
-                metodoPago()
+                document.querySelector(".total_credito_bs").textContent = "Total en Bs: " + (parseFloat(document.getElementById("BCV").textContent) * parseFloat(json.lista[0].monto_final)).toFixed(2)
+                DOLAR_RV(metodoPago)
                 let id_rv = btn.target.parentElement.parentElement.getAttribute("id_rv")
                 let btn_credito_pago = document.querySelector(".btn_pagar_credito")
                 btn_credito_pago.addEventListener("click", () => {

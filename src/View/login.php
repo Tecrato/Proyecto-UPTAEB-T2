@@ -82,13 +82,13 @@
                             </div>
                         </div>
                     </div>
-                    <div id="messageError" style="color: red;"></div>
                     <div class="uk-flex uk-flex-center">
                         <div>
                             <button class="uk-button uk-button-default uk-margin-small-top" id="forget-pass" type="submit">ENVIAR</button>
                             <button class="uk-button uk-button-default uk-margin-small-top" id="cancel" type="submit">CANCELAR</button>
                         </div>
                     </div>
+                    <div id="messageError" style="color: red;"></div>
                 </div>
                 </div>
             </article>

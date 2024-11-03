@@ -81,7 +81,7 @@
                                 <input class="uk-input Razon_SocialProvUpdate" type="text" placeholder="Razon Social" aria-label="100" name="razon_social" required>
                             </div>
                         </div>
-                        <div class="uk-width-1-4@s">
+                        <div class="uk-width-1-2@s">
                             <label class="uk-form-label">Documento</label>
                             <div class="uk-form-controls">
                                 <select name="T-D" class="uk-select T-DProvUpdate" id="form-stacked-select">
@@ -91,7 +91,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="uk-width-1-4@s">
+                        <div class="uk-width-1-2@s">
                             <label class="uk-form-label">Nro Documento</label>
                             <div class="uk-form-controls">
                                 <input class="uk-input Nro_DocumentoProvUpdate" type="text" placeholder="Nro" aria-label="50" name="rif" minlength="6" maxlength="10" required>
@@ -100,9 +100,15 @@
 
 
                         <div class="uk-width-1-2@s">
-                            <label class="uk-form-label">Nro Telefono.</label>
+                            <label class="uk-form-label">Nro Telefono 1.</label>
                             <div class="uk-form-controls">
-                                <input id="tlfn_pais" class="uk-input tlfnProvUpdate" type="tel" minlength="9" aria-label="50" name="telefono" required>
+                                <input id="tlfn_pais_1" class="uk-input tlfnProvUpdate_1" type="tel" minlength="9" aria-label="50" name="telefono_1" required>
+                            </div>
+                        </div>
+                        <div class="uk-width-1-2@s">
+                            <label class="uk-form-label">Nro Telefono 2.</label>
+                            <div class="uk-form-controls">
+                                <input id="tlfn_pais_2" class="uk-input tlfnProvUpdate_2" type="tel" minlength="9" aria-label="50" name="telefono_2" required>
                             </div>
                         </div>
                         <div class="uk-width-1-2@s">

@@ -265,3 +265,44 @@ $.ajax({
   }
 })
 
+//FILTRO TIPO BDV 
+
+function InputFormater(input) {
+  let inputDom = document.querySelector(input)
+  inputDom.addEventListener('input', (e) => {
+    let valueUser = e.target.value.replace(/,/g, '').replace(/\./g, '').replace(/[^0-9]/g, '')
+    let valueLength = valueUser.length
+    if (valueLength <= 2) { inputDom.value = '0' + "," + valueUser }
+    else if (valueLength >= 3) {
+      let it = (valueUser.slice(0, valueLength - 2) + "," + valueUser.slice(valueLength - 2))
+      inputDom.value = it.replace(/^0(?=\d)\,?/, "").replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+    }
+  });
+}
+function InputFormaterAll(input) {
+  let inputDom = document.querySelectorAll(input)
+  inputDom.forEach((element) => {
+    element.addEventListener('input', (e) => {
+      let valueUser = e.target.value.replace(/,/g, '').replace(/\./g, '').replace(/[^0-9]/g, '')
+      let valueLength = valueUser.length
+      if (valueLength <= 2) { element.value = '0' + "," + valueUser }
+      else if (valueLength >= 3) {
+        let it = (valueUser.slice(0, valueLength - 2) + "," + valueUser.slice(valueLength - 2))
+        element.value = it.replace(/^0(?=\d)\,?/, "").replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+      }
+    });
+
+  })
+}
+function getDatabaseFormattedValue(input_formater_db) {
+  let c = document.querySelector(input_formater_db).value;
+  let formattedValue = c.replace(/\./g, '').replace(',', '.');
+  return formattedValue;
+}
+function getDatabaseFormattedValueAll(input_formater_db) {
+  let c = document.querySelectorAll(input_formater_db)
+  c.forEach((element) => {
+    let formattedValue = element.value.replace(/\./g, '').replace(',', '.');
+    return formattedValue;
+  })
+}

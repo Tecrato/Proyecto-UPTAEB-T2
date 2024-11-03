@@ -64,120 +64,129 @@ const cargarEntrys = () => {
   });
 };
 cargarEntrys()
-
-let SupplierFilterAll = document.querySelector("#SupplierFilterAll");
-SupplierFilterAll.addEventListener("click", () => {
-  $(".cont_entry").html("");
-  cargarEntrys();
-})
-
-let searchEntryFilter = document.querySelectorAll(".search_entrys")
-searchEntryFilter.forEach((e) => {
-  e.addEventListener("keyup", (item) => {
-    let name = item.target.value;
-
-    if (name != "") {
-      $.ajax({
-        url: "api_search",
-        type: "POST",
-        data: { randomnautica: "proveedores", like: name, active: 1 },
-        success: function (response) {
-          let json = JSON.parse(response);
-          let hola = "";
-          json.lista.forEach((p) => {
-            hola += `      
-          <li class="prov_entry"><a href="#" class="prov-entry-products" idSup="${p.id}">${p.razon_social}</a></li>    
-        `;
-          });
-          $(".filter_prov_entry").html(hola);
-
-          let prov_entry = document.querySelectorAll(".prov_entry");
-          prov_entry.forEach((e) => {
-            e.addEventListener("click", () => {
-              let id = e.firstElementChild.getAttribute("idSup");
-              $.ajax({
-                url: "api_search",
-                type: "POST",
-                data: { randomnautica: "detalles_entradas", id_proveedor: id },
-                success: function (response) {
-                  $(".cont_entry").html("");
-                  entryTr(response);
-                },
-              });
-            });
-          });
-
-        }
-      })
-    } else {
-      $(".filter_prov_entry").html("");
-    }
-  })
-})
-
-searchEntryFilter.forEach((e) => {
-  e.addEventListener("keyup", (item) => {
-    let name = item.target.value;
-
-    if (name != "") {
-      $.ajax({
-        url: "api_search",
-        type: "POST",
-        data: { randomnautica: "productos", like_nombre: name },
-        success: function (response) {
-          let json = JSON.parse(response);
-          let hola = "";
-          json.lista.forEach((p) => {
-            hola += `      
-          <li class="prod-entry"><a href="#" class="prov-entry-products" idPr="${p.id}">${p.nombre + " " + p.valor_unidad + " " + p.unidad + " " + p.marca}</a></li>    
-        `;
-          });
-          $(".filter_prov_entry_product").html(hola);
-
-
-          let prov_entry = document.querySelectorAll(".prod-entry");
-          prov_entry.forEach((e) => {
-            e.addEventListener("click", () => {
-              let id = e.firstElementChild.getAttribute("idPr");
-              $.ajax({
-                url: "api_search",
-                type: "POST",
-                data: { randomnautica: "detalles_entradas", id_producto: id },
-                success: function (response) {
-                  $(".cont_entry").html("");
-                  entryTr(response);
-                },
-              });
-            });
-          });
-        }
-      })
-    } else {
-      $(".filter_prov_entry_product").html("");
-    }
-  })
-})
-
-//FILTRO POR FECHA
-
-let FORM_ENTRY_BETWEEN = document.querySelector(".FORM_ENTRY_BETWEEN");
-FORM_ENTRY_BETWEEN.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  let start = FORM_ENTRY_BETWEEN.firstElementChild.firstElementChild.lastElementChild.value
-  let end = FORM_ENTRY_BETWEEN.firstElementChild.lastElementChild.lastElementChild.value
-
+const filters = {
+  proveedor: '',
+  producto: '',
+  fechaInicio: '',
+  fechaFin: ''
+};
+function FilterEntry() {
   $.ajax({
     url: "api_search",
     type: "POST",
-    data: { randomnautica: "detalles_entradas", between_fecha: {inicio: start, fin: end} },
-    success: function (response) {
-      let json = JSON.parse(response);
-      $(".cont_entry").html("");
-      entryTr(response);
+    data: {
+      randomnautica: "detalles_entradas",
+      id_proveedor: filters.proveedor,
+      id_producto: filters.producto,
+      between_fecha: { inicio: filters.fechaInicio, fin: filters.fechaFin }
     },
+    success: function (response) {
+      console.log(response);
+    }
   });
-})
+}
+FilterEntry();
+// let SupplierFilterAll = document.querySelector("#SupplierFilterAll");
+// SupplierFilterAll.addEventListener("click", () => {
+//   $(".cont_entry").html("");
+//   cargarEntrys();
+//   filters.proveedor = '';
+//   filters.producto = '';
+//   filters.fechaInicio = '';
+//   filters.fechaFin = '';
+//   FilterEntry();
+// })
+
+// let searchEntryFilter = document.querySelectorAll(".search_entrys")
+// searchEntryFilter.forEach((e) => {
+//   e.addEventListener("keyup", (item) => {
+//     let name = item.target.value;
+
+//     if (name != "") {
+//       $.ajax({
+//         url: "api_search",
+//         type: "POST",
+//         data: { randomnautica: "proveedores", like: name, active: 1 },
+//         success: function (response) {
+//           let json = JSON.parse(response);
+//           let hola = "";
+//           json.lista.forEach((p) => {
+//             hola += `      
+//           <li class="prov_entry"><a href="#" class="prov-entry-products" idSup="${p.id}">${p.razon_social}</a></li>    
+//         `;
+//           });
+//           $(".filter_prov_entry").html(hola);
+
+//           let prov_entry = document.querySelectorAll(".prov_entry");
+//           prov_entry.forEach((e) => {
+//             e.addEventListener("click", () => {
+//               let id = e.firstElementChild.getAttribute("idSup");
+//               filters.proveedor = id;
+//               FilterEntry();
+//             });
+//           });
+
+//         }
+//       })
+//     } else {
+//       filters.proveedor = '';
+//       $(".filter_prov_entry").html("");
+//       FilterEntry();
+//     }
+//   })
+// })
+
+// searchEntryFilter.forEach((e) => {
+//   e.addEventListener("keyup", (item) => {
+//     let name = item.target.value;
+
+//     if (name != "") {
+//       $.ajax({
+//         url: "api_search",
+//         type: "POST",
+//         data: { randomnautica: "productos", like_nombre: name },
+//         success: function (response) {
+//           let json = JSON.parse(response);
+//           let hola = "";
+//           json.lista.forEach((p) => {
+//             hola += `      
+//           <li class="prod-entry"><a href="#" class="prov-entry-products" idPr="${p.id}">${p.nombre + " " + p.valor_unidad + " " + p.unidad + " " + p.marca}</a></li>    
+//         `;
+//           });
+//           $(".filter_prov_entry_product").html(hola);
+
+
+//           let prov_entry = document.querySelectorAll(".prod-entry");
+//           prov_entry.forEach((e) => {
+//             e.addEventListener("click", () => {
+//               let id = e.firstElementChild.getAttribute("idPr");
+//               filters.producto = id;
+//               FilterEntry();
+//             });
+//           });
+//         }
+//       })
+//     } else {
+//       filters.producto = '';
+//       $(".filter_prov_entry_product").html("");
+//       fetchFilteredData();
+//     }
+//   })
+// })
+
+// // //FILTRO POR FECHA
+
+// let FORM_ENTRY_BETWEEN = document.querySelector(".FORM_ENTRY_BETWEEN");
+// FORM_ENTRY_BETWEEN.addEventListener("submit", (e) => {
+//   e.preventDefault();
+
+//   let start = FORM_ENTRY_BETWEEN.firstElementChild.firstElementChild.lastElementChild.value
+//   let end = FORM_ENTRY_BETWEEN.firstElementChild.lastElementChild.lastElementChild.value
+
+//   filters.fechaInicio = start;
+//   filters.fechaFin = end;
+//   fetchFilteredData();
+// })
 
 //aqui hacemos la funcion para el credito
 
@@ -340,7 +349,7 @@ function func(dolar) {
                   <input class="uk-input uk-form-width-small State-input-stock" type="date" placeholder="Cantidad" aria-label="Input">
               </td>
               <td>
-                  <input class="uk-input uk-form-width-small State-input-stock" type="text" placeholder="Precio (Bs)" aria-label="Input">
+                  <input class="uk-input uk-form-width-small State-input-stock input_entry_format" type="text" placeholder="Precio (Bs)" aria-label="Input">
               </td>
               <td class="uk-flex uk-flex-center">
                   <button class="uk-icon-button ButtonPlus" uk-icon="plus"></button>
@@ -387,6 +396,7 @@ function func(dolar) {
 
       //aqui insertamos los tr
       ContainerTr.innerHTML += tr;
+      InputFormaterAll(".input_entry_format")
 
       //aqui cargamos los datos del paquete q el usuario escoja
       let cont_presentation = document.querySelectorAll(".cont_presentation");
@@ -701,6 +711,7 @@ function func(dolar) {
           fecha_compra: document.querySelector(".date_compra_entrys").value,
           codigo: (Math.random() * 50000).toFixed(0),
           detalles: document.querySelector(".detalles-compra_entry").value,
+          referencia: document.querySelector(".referenciaEntry").value,
           metodos_pagos: [],
           lista: [],
         };
@@ -729,14 +740,13 @@ function func(dolar) {
             let precio_compra = iterator.lastElementChild.previousElementSibling.previousElementSibling.textContent
             let fechaV = iterator.lastElementChild.previousElementSibling.previousElementSibling.previousElementSibling.textContent
             let mercancia = iterator.firstElementChild.nextElementSibling.nextElementSibling.getAttribute('id')
-            console.log(mercancia);
             let t_mercancia = iterator.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent
             let cantidad_m = iterator.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent
 
             // insertamos los datos de los productos por cada tr que haya en detalles de factura
             json.lista.push({
               id_producto: id,
-              precio_compra: precio_compra,
+              precio_compra: precio_compra.replace(/\./g, '').replace(',', '.'),
               fecha_vencimiento: fechaV,
               mercancia: mercancia,
               t_mercancia: t_mercancia,
