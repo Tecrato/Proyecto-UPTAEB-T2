@@ -497,8 +497,8 @@
                                                             </div>
                                                             <div class="uk-margin-top">
                                                                 <div uk-form-custom="target: true">
-                                                                    <input type="file" aria-label="Custom controls">
-                                                                    <input class="uk-input uk-form-width-medium referenciaEntry" type="text" name="referencia" placeholder="Adjuntar Comprobante" aria-label="Custom controls" disabled>
+                                                                    <input class="referenciaEntry" type="file" aria-label="Custom controls">
+                                                                    <input class="uk-input uk-form-width-medium " type="text" name="referencia" placeholder="Adjuntar Comprobante" aria-label="Custom controls" disabled>
                                                                 </div>
                                                             </div>
 

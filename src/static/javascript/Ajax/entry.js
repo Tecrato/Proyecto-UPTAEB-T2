@@ -779,16 +779,19 @@ function func(dolar) {
           //preparamos el json
           console.log(json);
           let jsonString = JSON.stringify(json);
-          let file = $('.referenciaEntry')[0].files[0]
+          let file = document.querySelector('.referenciaEntry').files[0]
 
           let data = new FormData();
           data.append('referencia', file);
           data.append('json', jsonString);
+          data.append('tipo', "entrada");
 
           $.ajax({
             url: "api_agregar",
             type: "POST",
-            data: data
+            data: data,
+            contentType: false,
+            processData: false,
             success: function (response) {
               console.log(response);
 
