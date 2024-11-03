@@ -55,10 +55,6 @@ use Shtechnologyx\Pt3\Model\Tipo_empaquetado;
         $clase = new Registro_ventas($_POST['ID']);
         $clase->desactivar();
     }
-    elseif ($tipo == 'entradas'){
-        $clase = new Entrada($_POST['ID']);
-        $clase->borrar();
-    }
     elseif ($tipo === 'unidad'){
         $clase = new Unidad($_POST["ID"]);
         $clase->borrar();

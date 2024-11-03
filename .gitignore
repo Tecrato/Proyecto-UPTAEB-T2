@@ -1,5 +1,6 @@
 Media/imagenes/*.*
 !Media/imagenes/banner_productos.png
+src/Media/comprobantes/*.*
 
 rar.rar
 .env

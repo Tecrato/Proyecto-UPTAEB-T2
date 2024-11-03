@@ -27,7 +27,7 @@ use Exception;
                 a.fecha_compra,
                 a.codigo,
                 a.detalles,
-                a.comprobante,
+                a.referencia,
             ";
             $this->joins = '
                 INNER JOIN proveedores b ON b.id = a.id_proveedor
@@ -38,7 +38,7 @@ use Exception;
                 "a.fecha_compra" => $this->fecha_compra,
                 "a.codigo" => $this->codigo,
                 "a.detalles" => $this->detalles,
-                "a.comprobante" => $this->comprobante
+                "a.referencia" => $this->comprobante
             ]);
             $this->add_variables_interval([
                 "a.fecha_compra" => $this->between_fecha

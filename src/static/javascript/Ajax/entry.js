@@ -701,7 +701,7 @@ function func(dolar) {
       //funcion para verificar si ya se puede enviar los datos para hacer la factura
       let btnCreateFact = document.querySelector(".btnCreateFact");
 
-      btnCreateFact.addEventListener("submit", (e) => {
+      btnCreateFact.addEventListener("click", (e) => {
         e.preventDefault();
         let tipoPago = document.querySelector(".cont_metodos_pagos").childElementCount
         let TotalRestar = parseFloat(document.querySelector(".amount_MP").textContent)
@@ -764,7 +764,6 @@ function func(dolar) {
           let select = document.querySelectorAll(".selectMetodoPago")
           select.forEach((e) => {
 
-            (e.value);
             let valor = e.value
             let monto = e.nextElementSibling.value
 
@@ -780,6 +779,7 @@ function func(dolar) {
           console.log(json);
           let jsonString = JSON.stringify(json);
           let file = document.querySelector('.referenciaEntry').files[0]
+          console.log(file)
 
           let data = new FormData();
           data.append('referencia', file);
@@ -789,9 +789,9 @@ function func(dolar) {
           $.ajax({
             url: "api_agregar",
             type: "POST",
-            data: data,
-            contentType: false,
             processData: false,
+            contentType: false,
+            data: data,
             success: function (response) {
               console.log(response);
 
