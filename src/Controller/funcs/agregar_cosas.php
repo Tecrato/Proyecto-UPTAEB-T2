@@ -107,7 +107,7 @@ elseif ($tipo === 'producto') {
     }
 } 
 elseif ($tipo === 'proveedor') {
-    $clase = new Proveedor(null, $_POST["nombre"], $_POST["razon_social"], $_POST["T-D"] . "-" . $_POST["rif"], $_POST["telefono"], $_POST["correo"], $_POST["direccion"]); // Llama al modelo y le manda la instruccion
+    $clase = new Proveedor(null, $_POST["nombre"], $_POST["razon_social"], $_POST["T-D"] . "-" . $_POST["rif"], $_POST["telefono_1"], $_POST["correo"], $_POST["direccion"],$_POST['telefono_2']); // Llama al modelo y le manda la instruccion
 } 
 elseif ($tipo === 'cliente') {
     $clase = new Cliente(null, $_POST["nombre"], $_POST["cedula"], $_POST["apellido"], $_POST["documento"], $_POST["direccion"], $_POST["TLFNO"]);

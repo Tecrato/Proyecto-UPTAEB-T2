@@ -702,7 +702,6 @@ function func(dolar) {
       let btnCreateFact = document.querySelector(".btnCreateFact");
 
       btnCreateFact.addEventListener("click", () => {
-        e.preventDefault();
         let tipoPago = document.querySelector(".cont_metodos_pagos").childElementCount
         let TotalRestar = parseFloat(document.querySelector(".amount_MP").textContent)
 

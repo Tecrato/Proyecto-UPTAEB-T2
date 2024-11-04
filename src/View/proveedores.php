@@ -164,7 +164,7 @@
 
 
 
-<script src="Plugins/build/js/intlTelInput.js" defer></script>
+<script src="src/Plugins/build/js/intlTelInput.js" defer></script>
 <script src="src/static/javascript/Ajax/supplier.js" defer></script>
 
 </body>
