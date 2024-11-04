@@ -88,12 +88,10 @@
                                                 </div>
                                             </form>
 
-                                            <form class="uk-margin-medium-top uk-flex uk-flex-center" id="formPDF2-1" action="Estadisticas_PDF" method="POST" enctype="multipart/form-data">
+                                            <form class="uk-margin-medium-top uk-flex uk-flex-center" id="formPDF2-1" action="formPDF/2(Semanales)" method="POST" enctype="multipart/form-data">
                                                 <input type="hidden" name="img" id="imgGananciaWeek_png">
                                                 <input type="hidden" name="weekStart" id="weekStart">
                                                 <input type="hidden" name="weekEnd" id="weekEnd">
-                                                <input type="hidden" name="select" value="filter_week_ganancias">
-                                                <input type="submit" value="Imprimir" style="display: none;">
                                                 <button class="btn_pdf" uk-icon="icon: file-pdf" type="submit">Generar reporte</button>
                                             </form>
                                         </li>
@@ -155,7 +153,7 @@
                                     <ul class="uk-nav uk-dropdown-nav">
                                         <li>
 
-                                            <form id="formPDF4" action="Estadisticas_PDF" method="POST" enctype="multipart/form-data">
+                                            <form id="formPDF4" action="formPDF/3(M-M-A)" method="POST" enctype="multipart/form-data">
                                                 <h5 style="color: #000 !important;">Filtrar: </h5>
                                                 <div class="uk-margin-bottom">
                                                     <label for="filter"> Año</label>
