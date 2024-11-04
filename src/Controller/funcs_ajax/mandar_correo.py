@@ -32,7 +32,7 @@ if __name__ == '__main__':
 		Para hacer pruebas antes de llamarlo con PHP
 	'''
 	result = main(list(sys.argv))
-# 	result = main(["jeje",decouple.config('MAIL_TEST'),f"""
+# 	result = main(["jaja",decouple.config('MAIL_TEST'),f"""
 # 				<!DOCTYPE html>
 # 				<html lang="es">
 # 				<body>

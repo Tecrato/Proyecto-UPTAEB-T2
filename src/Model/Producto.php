@@ -241,7 +241,7 @@
         }
         
         function search_inventario(){
-            $query = "SELECT id,nombre,(SELECT SUM(cantidad) FROM entradas WHERE productos.id = id_producto) AS entradas,(SELECT SUM(cantidad) - (SELECT SUM(existencia) FROM entradas WHERE productos.id = id_producto) FROM entradas WHERE productos.id = id_producto) AS salidas, (SELECT SUM(existencia) FROM entradas WHERE productos.id = id_producto) AS existencia, precio_venta,(SELECT SUM(existencia) FROM entradas WHERE productos.id = id_producto) * precio_venta AS Total FROM productos WHERE active = 1";
+            $query = "SELECT id,nombre,(SELECT SUM(cantidad) FROM detalles_entradas WHERE productos.id = id_producto) AS detalles_entradas,(SELECT SUM(cantidad) - (SELECT SUM(existencia) FROM detalles_entradas WHERE productos.id = id_producto) FROM detalles_entradas WHERE productos.id = id_producto) AS salidas, (SELECT SUM(existencia) FROM detalles_entradas WHERE productos.id = id_producto) AS existencia, precio_venta,(SELECT SUM(existencia) FROM detalles_entradas WHERE productos.id = id_producto) * precio_venta AS Total FROM productos WHERE active = 1";
             return $this->conn->query($query)->fetchAll();
         }
         function toggle_active() {
