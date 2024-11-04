@@ -50,11 +50,10 @@
                                                 </div>
                                             </form>
 
-                                            <form class="uk-margin-medium-top uk-flex uk-flex-center" id="formPDF2" action="Estadisticas_PDF" method="POST" enctype="multipart/form-data">
+                                            <form class="uk-margin-medium-top uk-flex uk-flex-center" id="formPDF2" action="formPDF/1(Anuales)" method="POST" enctype="multipart/form-data">
                                                 <input type="hidden" name="img" id="imgGanancia_png">
-                                                <input type="hidden" name="select" value="filter_year">
                                                 <input id="year" type="hidden" name="year">
-                                                <input type="submit" value="Imprimir" style="display: none;">
+                                                <!-- <input type="submit" value="Imprimir" style="display: none;"> -->
                                                 <button class="btn_pdf" uk-icon="icon: file-pdf" type="submit">Generar reporte</button>
                                             </form>
                                         </li>
