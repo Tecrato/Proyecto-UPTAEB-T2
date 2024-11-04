@@ -1,4 +1,4 @@
-import sys, ssl, smtplib, dotenv, os
+import sys, smtplib, dotenv, os
 from email.message import EmailMessage
 
 def main(args):
@@ -17,7 +17,7 @@ def main(args):
 	# contexto = ssl.create_default_context()
 	try:
 		with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
-			# smtp.ehlo()
+			smtp.ehlo()
 			smtp.starttls()
 			smtp.login(email_sender, os.environ['MAIL_KEY'])
 			smtp.sendmail(email_sender,email_reciver,em.as_string())
@@ -32,7 +32,7 @@ if __name__ == '__main__':
 		Para hacer pruebas antes de llamarlo con PHP
 	'''
 	result = main(list(sys.argv))
-# 	result = main(["jaja",decouple.config('MAIL_TEST'),f"""
+# 	result = main(["jeje",decouple.config('MAIL_TEST'),f"""
 # 				<!DOCTYPE html>
 # 				<html lang="es">
 # 				<body>
