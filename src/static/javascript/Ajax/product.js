@@ -774,7 +774,6 @@ document.querySelector(".searchProductActive").addEventListener("keyup", (e) => 
 
 
 let inpNameProduct = document.querySelector(".NameUpdateProduct");
-console.log(inpNameProduct)
 inpNameProduct.addEventListener("keyup", (e) => {
   let val = e.target.value.toLowerCase();
   if (val != "") {

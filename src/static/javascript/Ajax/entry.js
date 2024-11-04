@@ -1,6 +1,6 @@
 let hola = "";
 
-function entryTr(response) {
+function entryTrDetail(response) {
   let template;
   let json = JSON.parse(response);
   json.lista.forEach((f) => {
@@ -30,43 +30,67 @@ function entryTr(response) {
 
     template += `<tr data-proveedor="${f.proveedor}" data-productEntry="${f.producto}">
                           <td><img src="src/static/images/btn_lote2.png" alt="" width="80"></td>
-                          <td>${f.codigo}</td>
                           <td>${f.producto + " " + f.valor_unidad + " " + f.unidad + " " + f.marca}</td>
-                          <td>${f.proveedor}</td>
                           <td>${f.id_empaquetado}</td>
                           <td>${f.tamaño_mercancia}</td>
                           <td>${f.cantidad}</td>
                           <td>${f.existencia}</td>
                           <td>${f.precio_compra} Bs</td>
-                          <td>${f.fecha_compra}</td>
                           <td>${f.fecha_vencimiento}</td>
                           <td>
                               <div class="${color} uk-border-rounded uk-text-center uk-text-bold" style="padding: 5px; width: 115px;">${texto}</div>
                           </td>
                       </tr>`;
   });
-  $(".cont_entry").append(template);
-  let table_entry = document.querySelector(".cont_entry").childElementCount;
-  if (table_entry <= 0 || table_entry < 4) {
-    document.querySelector(".altura_table_entry").style.height = "300px";
-  } else {
-    document.querySelector(".altura_table_entry").style.height = "100%";
-  }
+  $(".cont_entry").html(template);
+}
+function entryTr(response) {
+  let template;
+  let json = JSON.parse(response);
+  json.lista.forEach((f) => {
+    template += `<tr data-proveedor="${f.proveedor}" data-productEntry="${f.producto}">
+                          <td><img src="src/static/images/btn_lote2.png" alt="" width="80"></td>
+                          <td>${f.codigo}</td>
+                          <td>${f.proveedor}</td>
+                          <td>${f.fecha_compra}</td>
+                          <td>
+                              <a href="#entrys_detail" uk-toggle class="uk-icon-button btn-details-entry" id=${f.id} uk-icon="info"></a>
+                              <a href="PDFEntrada/${f.id}" class="uk-icon-button" uk-icon="file-pdf"></a>
+                          </td>
+                      </tr>`;
+  });
+  $(".entrys_fact").append(template);
+  let btn_entry = document.querySelectorAll(".btn-details-entry")
+  btn_entry.forEach((e) => {
+    e.addEventListener("click", () => {
+      let id = e.getAttribute("id");
+      $.ajax({
+        url: "api_search",
+        type: "POST",
+        data: { randomnautica: "detalles_entradas", id_entrada: id },
+        success: function (response) {
+          console.log(response);
+          entryTrDetail(response)
+        },
+      });
+    })
+  })
+
 }
 const cargarEntrys = () => {
   $.ajax({
     url: "api_search",
     type: "POST",
-    data: { randomnautica: "detalles_entradas" },
+    data: { randomnautica: "entradas" },
     success: function (response) {
-      entryTr(response);
+      entryTr(response)
     },
   });
 };
 cargarEntrys()
+
 const filters = {
   proveedor: null,
-  producto: null,
   fechaInicio: null,
   fechaFin: null,
   between_fecha: null,
@@ -76,7 +100,6 @@ function FilterEntry() {
   const dataToSend = {
     randomnautica: "detalles_entradas",
     ...(filters.proveedor && { id_proveedor: filters.proveedor }),
-    ...(filters.producto && { id_producto: filters.producto }),
     ...(filters.fechaInicio && filters.fechaFin && { between_fecha: { inicio: filters.fechaInicio, fin: filters.fechaFin } })
   };
   $.ajax({
@@ -84,19 +107,18 @@ function FilterEntry() {
     type: "POST",
     data: dataToSend,
     success: function (response) {
-      $(".cont_entry").html("");
+      $(".entrys_fact").html("");
       entryTr(response);
     }
   });
 }
-// let SupplierFilterAll = document.querySelector("#SupplierFilterAll");
+let SupplierFilterAll = document.querySelector("#SupplierFilterAll");
 SupplierFilterAll.addEventListener("click", () => {
-  $(".cont_entry").html("");
-  cargarEntrys();
+  $(".entrys_fact").html("");
   filters.proveedor = null;
-  filters.producto = null;
   filters.fechaInicio = null;
   filters.fechaFin = null;
+  cargarEntrys();
   FilterEntry();
 })
 
@@ -125,9 +147,8 @@ searchEntryFilter.forEach((e) => {
             e.addEventListener("click", () => {
               let id = e.firstElementChild.getAttribute("idSup");
               filters.proveedor = id;
-              $(".cont_entry").html("");
+              $(".entrys_fact").html("");
               FilterEntry();
-              console.log(dataToSend);
             });
           });
 
@@ -136,45 +157,6 @@ searchEntryFilter.forEach((e) => {
     } else {
       filters.proveedor = '';
       $(".filter_prov_entry").html("");
-      FilterEntry();
-    }
-  })
-})
-
-searchEntryFilter.forEach((e) => {
-  e.addEventListener("keyup", (item) => {
-    let name = item.target.value;
-
-    if (name != "") {
-      $.ajax({
-        url: "api_search",
-        type: "POST",
-        data: { randomnautica: "productos", like_nombre: name },
-        success: function (response) {
-          let json = JSON.parse(response);
-          let hola = "";
-          json.lista.forEach((p) => {
-            hola += `      
-          <li class="prod-entry"><a href="#" class="prov-entry-products" idPr="${p.id}">${p.nombre + " " + p.valor_unidad + " " + p.unidad + " " + p.marca}</a></li>    
-        `;
-          });
-          $(".filter_prov_entry_product").html(hola);
-
-
-          let prov_entry = document.querySelectorAll(".prod-entry");
-          prov_entry.forEach((e) => {
-            e.addEventListener("click", () => {
-              let id = e.firstElementChild.getAttribute("idPr");
-              filters.producto = id;
-              $(".cont_entry").html("");
-              FilterEntry();
-            });
-          });
-        }
-      })
-    } else {
-      filters.producto = '';
-      $(".filter_prov_entry_product").html("");
       FilterEntry();
     }
   })
@@ -313,8 +295,6 @@ function func(dolar) {
       const InsertarProductos = () => {
         productos.forEach((producto) => {
           //esta condicion es para que agg el tr, pero modificando el tamaño del input de cantidad, para que se vea bien en versiones mobiles
-
-          (dolar);
 
           if (screen >= 1100) {
             tr += `
@@ -515,7 +495,7 @@ function func(dolar) {
             //por cada vuelta, inserta en el array el valor de los inputs, dentro de cada TD
             array.push(child.firstElementChild.value);
           }
-          console.log(array);
+          console.log(array[6].replace(/\./g, ''));
           let idProducto = valor2;
           let cantidad = array[4] == "" ? 0 : parseInt(array[4]);
 
@@ -534,7 +514,7 @@ function func(dolar) {
               <td>${cantidad}</td>
               <td>${array[5]}</td>
               <td>${array[6]}</td>
-              <td>${cantidad * parseFloat(array[6])} BS</td>
+              <td>${cantidad * parseFloat(array[6].replace(/\./g, ''))} BS</td>
               <td class="uk-flex uk-flex-center">
                 <input type="hidden" class="total_pagar_entrys">
                 <button class="uk-icon-button Btn-delete_entrys" uk-icon="trash"></button>
@@ -656,19 +636,20 @@ function func(dolar) {
             //este sera el evento en donde colocaremos en pagos finales, el valor del input
             //seleccionamos todos los select
             let INP = document.querySelectorAll(".AMOUNT-MP")
+            InputFormaterAll(".AMOUNT-MP")
             let totalDebito = document.querySelector(".amount_MP");
             let initialTotalDebito = parseFloat(totalDebito.textContent);
 
             INP.forEach((B) => {
 
               // captamos el evento de keyup, osea si el usuario teclea sobre el input
-              B.addEventListener("keyup", () => {
+              B.addEventListener("keyup", (e) => {
                 if (B.value == "") {
                   bool = false
                 } else {
                   bool = true
                 }
-                let valor = B.value == "" ? 0 : parseFloat(B.value)
+                let valor = e.target.value == "" ? 0 : parseFloat(e.target.value.replace(/\./g, ''))
                 if (B.previousElementSibling.options[B.previousElementSibling.selectedIndex].textContent == "Divisa") {
                   totalDebito.textContent = (initialTotalDebito - (valor * dolar)).toFixed(2) + " Bs"
                 } else {
@@ -752,7 +733,7 @@ function func(dolar) {
             // insertamos los datos de los productos por cada tr que haya en detalles de factura
             json.lista.push({
               id_producto: id,
-              precio_compra: precio_compra.replace(/\./g, '').replace(',', '.'),
+              precio_compra: precio_compra.replace(',', '.'),
               fecha_vencimiento: fechaV,
               mercancia: mercancia,
               t_mercancia: t_mercancia,

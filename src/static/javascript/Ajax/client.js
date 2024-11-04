@@ -198,7 +198,7 @@ function cardClient(page) {
                                         style="width: 370px; background-color: #333;">
                                         <div>
                                             <div class="img_proveedor_container uk-border-rounded">
-                                                <img src="static/images/undraw_profile_2.svg" alt="" width="120px" />
+                                                <img src="src/static/images/undraw_profile_2.svg" alt="" width="120px" />
                                                 <h5
                                                     class="uk-margin-remove-left uk-margin-remove-right uk-margin-small-top uk-margin-small-bottom uk-text-center">
                                                     ${element.nombre}

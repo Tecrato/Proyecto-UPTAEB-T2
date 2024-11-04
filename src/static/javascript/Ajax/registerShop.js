@@ -710,8 +710,6 @@ FORM_FACT_DATE.addEventListener("submit", (e) => {
   e.preventDefault()
   let fecha_inicio = FORM_FACT_DATE.firstElementChild.firstElementChild.lastElementChild.value
   let fecha_fin = FORM_FACT_DATE.firstElementChild.lastElementChild.lastElementChild.value
-  console.log(fecha_fin);
-  console.log();
   $.ajax({
     url: "api_search",
     type: "POST",

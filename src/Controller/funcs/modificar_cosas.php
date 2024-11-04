@@ -54,7 +54,16 @@ if ($tipo === 'producto') {
         die();
     }
 } elseif ($tipo === 'proveedor') {
-    $clase = new Proveedor($_POST["ID"], $_POST["nombre"], $_POST["razon_social"], $_POST["T-D"] . "-" . $_POST["rif"], $_POST["TLFNO"], $_POST["correo"], $_POST["direccion"]); // Llama al modelo y le manda la instruccion
+    $clase = new Proveedor(
+        id:$_POST["ID"], 
+        nombre:$_POST["nombre"], 
+        razon_social:$_POST["razon_social"], 
+        rif:$_POST["T-D"] . "-" . $_POST["rif"], 
+        telefono:$_POST["TLFNO"],
+        correo:$_POST["correo"], 
+        direccion:$_POST["direccion"],
+        telefono_2:$_POST["TLFNO_2"]
+    ); // Llama al modelo y le manda la instruccion
     $clase->actualizar();
 } elseif ($tipo === 'cliente') {
     $clase = new Cliente($_POST["ID"], $_POST["nombre"], $_POST["cedula"], $_POST["apellido"], $_POST["documento"], $_POST["direccion"], $_POST["TLFNO"]);

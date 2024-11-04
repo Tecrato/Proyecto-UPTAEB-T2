@@ -32,6 +32,7 @@ RewriteRule ^PDFCierreCaja/([0-9]+)$ index.php?page=cierre_caja&type=pdfs&id_caj
 RewriteRule ^PDFInventario$ index.php?page=inventario&type=pdfs
 # RewriteRule ^PDFFactura$ index.php?page=factura&type=pdfs
 RewriteRule ^PDFFactura/([0-9]+)$ index.php?page=factura&type=pdfs&id=$1 [L]
+RewriteRule ^PDFEntrada/(.*)$ index.php?page=entradas&type=pdfs&id=$1 [L]
 
 RewriteRule ^api_search$ index.php?page=search&type=funcion_ajax
 RewriteRule ^api_agregar$ index.php?page=agregar_cosas&type=funcion

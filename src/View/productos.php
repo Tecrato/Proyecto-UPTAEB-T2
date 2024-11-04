@@ -325,7 +325,19 @@
 
                     <main class="uk-background-secondary uk-padding uk-border-rounded" uk-filter="target: .js-filter; animation: fade">
                         <!-- container-filter sera el  que tenga todos los filtros de busqueda -->
+
                         <section class="container-filter">
+                            <div class="uk-flex">
+                                <div class="uk-margin">
+                                    <form class="form_search_entrys uk-search uk-search-default" style="width: 300px;">
+                                        <span class="uk-search-icon-flip" uk-search-icon></span>
+                                        <input id="entrada" class="uk-search-input" type="search" placeholder="Buscar Entrada" aria-label="Search">
+                                    </form>
+                                </div>
+                                <a href="#modal-full-entrys" uk-toggle class="uk-margin-left" uk-tooltip="title:Añadir Entrada; delay: 500">
+                                    <img src="src/static/images/btn_lote2.png" alt="" width="35px">
+                                </a>
+                            </div>
                             <div>
                                 <nav uk-dropnav="mode: click">
                                     <ul class="uk-subnav uk-margin-remove" style="gap: 25px;">
@@ -338,19 +350,6 @@
                                                     <input class="uk-search-input input_placeholder search_entrys" name="proveedores" type="search" placeholder="Buscar" aria-label="" style="color: #999; border-color: #999;">
                                                 </form>
                                                 <ul class="uk-nav uk-dropdown-nav filter_prov_entry">
-                                                    <!-- aqui se cargan los proveedores con js -->
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <a id="SupplierFilterProducts" href="#">PRODUCTOS <span uk-drop-parent-icon></span></a>
-                                            <div class="uk-dropdown">
-                                                <form class="uk-search uk-search-default uk-margin-small-bottom">
-                                                    <span uk-search-icon style="color: #999"></span>
-                                                    <input class="uk-search-input input_placeholder search_entrys" name="productos" type="search" placeholder="Buscar" aria-label="" style="color: #999; border-color: #999;">
-                                                </form>
-                                                <ul class="uk-nav uk-dropdown-nav filter_prov_entry_product">
-
                                                 </ul>
                                             </div>
                                         </li>
@@ -382,71 +381,8 @@
                                     </ul>
                                 </nav>
                             </div>
-                            <div class="uk-flex uk-flex-middle">
-                                <a href="#modal-full-entrys" uk-toggle class="uk-margin-right" uk-tooltip="title:Añadir Entrada; delay: 500">
-                                    <img src="src/static/images/btn_lote2.png" alt="" width="35px">
-                                </a>
 
-                                <!-- input_search sera el contenedor del input tipo search -->
-                                <div class="uk-margin">
-                                    <form class="form_search_entrys uk-search uk-search-default" style="width: 500px;">
-                                        <span class="uk-search-icon-flip" uk-search-icon></span>
-                                        <input id="entrada" class="uk-search-input" type="search" placeholder="Buscar Entrada" aria-label="Search">
-                                    </form>
-                                </div>
-                            </div>
                         </section>
-
-
-                        <!-- *********************************modal de entradas productos********************************* -->
-
-                        <div id="product-entry" uk-modal bg-close='false'>
-                            <div class="uk-modal-dialog">
-                                <button class="uk-modal-close-default close" type="button" uk-close></button>
-                                <div class="uk-modal-header">
-                                    <h2 class="uk-modal-title">DETALLES DE ENTRADA</h2>
-                                </div>
-                                <div class="uk-modal-body">
-                                    <form id="formLotes" class="uk-grid-small uk-form-stacked" uk-grid method="POST" action="">
-                                        <input type="text" name="tipo" value="lote" style="display:none">
-                                        <input type="text" name="ID" id="ValueIdEntry" style="display:none">
-                                        <div class="uk-width-1-3@s">
-                                            <label class="uk-form-label">Proveedor</label>
-                                            <div class="uk-form-controls">
-                                                <select class="uk-select selectSupplier" id="form-stacked-select" name="proveedor" required>
-                                                    <!-- aqui cargar las opciones en js -->
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="uk-width-1-3@s">
-                                            <label class="uk-form-label">Cantidad a comprar</label>
-                                            <div class="uk-form-controls">
-                                                <input class="uk-input" type="number" placeholder="Cantidad" aria-label="100" name="cantidad" required>
-                                            </div>
-                                        </div>
-                                        <div class="uk-width-1-3@s">
-                                            <label class="uk-form-label">Precio de compra</label>
-                                            <div class="uk-form-controls">
-                                                <input class="uk-input" type="number" min="0.1" step="0.1" placeholder="precio_compra" aria-label="25" name="precio_compra" required>
-                                            </div>
-                                        </div>
-                                        <div class="uk-width-1-1@s uk-flex uk-flex-middle">
-                                            <label for="" style="width: 265px;">Fecha adquisicion</label>
-                                            <input class="uk-input" type="date" step="0.01" aria-label="25" name="fecha_c" value="<?php echo date('Y-m-d'); ?>" required>
-                                        </div>
-                                        <div class="uk-width-1-1@s uk-flex uk-flex-middle">
-                                            <label for="" style="width: 265px;">Fecha de vencimiento</label>
-                                            <input class="uk-input" type="date" step="0.01" aria-label="25" name="fecha_v" required>
-                                        </div>
-                                        <input type="submit" id="subir" style="display:none">
-                                    </form>
-                                </div>
-                                <div class="uk-modal-footer uk-text-right">
-                                    <button class="uk-button uk-button-default uk-modal-close cancelar" type="button">Cancelar</button>
-                                    <label class="uk-button uk-button-secondary subir" type="submit" for="subir">Guardar</label>
-                                </div>
-                            </div>
-                        </div>
 
                         <!-- **************************Modal para crear nuevas entradas************************** -->
 
@@ -651,31 +587,62 @@
                         <!-- ******************************************************************************************************* -->
 
 
+                        <!-- **************************Modal para detalles de entradas************************** -->
+                        <div id="entrys_detail" class="uk-flex-top uk-modal-container" uk-modal>
+                            <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                                <button class="uk-modal-close-default" type="button" uk-close></button>
 
-                        <!-- conatainer_table contendra la tabla -->
+                                <section>
+                                    <div class="uk-margin">
+                                        <form class="uk-search uk-search-default">
+                                            <span uk-search-icon></span>
+                                            <input class="uk-search-input" type="search" placeholder="Buscar" aria-label="Search">
+                                        </form>
+                                    </div>
+                                </section>
+                                <hr>
+                                <section>
+                                    <div class="uk-overflow-auto">
+                                        <table class="uk-table uk-table-divider uk-table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Producto</th>
+                                                    <th>Presentacion</th>
+                                                    <th>T.Presentacion</th>
+                                                    <th>Comprado</th>
+                                                    <th>existencia</th>
+                                                    <th>Precio de Compra</th>
+                                                    <th>Fecha de Vencimiento</th>
+                                                    <th>Estado</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="js-filter cont_entry">
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </section>
+
+                            </div>
+                        </div>
+                        <!-- ******************************************************************************************************* -->
+
                         <section>
                             <div class="uk-overflow-auto altura_table_entry ">
-
                                 <table class="uk-table uk-table-divider uk-table-hover uk-light">
                                     <thead class="activeGood">
                                         <tr>
                                             <th></th>
                                             <th>Codigo</th>
-                                            <th>Producto</th>
                                             <th>Proveedor</th>
-                                            <th>Presentacion</th>
-                                            <th>T.Presentacion</th>
-                                            <th>Comprado</th>
-                                            <th>existencia</th>
-                                            <th>Precio de Compra</th>
                                             <th>Fecha de Compra</th>
-                                            <th>Fecha de Vencimiento</th>
-                                            <th>Estado</th>
+                                            <th>Referecia</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
-                                    <tbody class="js-filter cont_entry">
-
-                                        <!-- tbody, donde se generaran los tr y td con programacion -->
+                                    <tbody class="entrys_fact">
+                                        
                                     </tbody>
                                 </table>
                             </div>

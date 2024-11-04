@@ -57,7 +57,7 @@ function insertANDupdateCLient_proveedor(FORM, NUMBER,Number_2, TABLE, TYPE) {
       let fullNumber2 = num.getNumber();
 
       let data = new FormData(form);
-      data.append("TLFNO_1", fullNumber);
+      data.append("TLFNO", fullNumber);
       data.append("TLFNO_2", fullNumber2);
       $.ajax({
         url: url,

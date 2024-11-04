@@ -144,7 +144,7 @@
 
 @media (min-width: 1200px){
     .container-filter{
-        justify-content: space-around;
+        justify-content: space-between;
         padding: 0px 20px;
     }
     .container-filter p{

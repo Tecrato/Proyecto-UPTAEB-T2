@@ -200,7 +200,7 @@
                                     <ul class="uk-nav uk-dropdown-nav">
                                         <li>
 
-                                            <form id="formPDF5" action="Estadisticas_PDF" method="POST" enctype="multipart/form-data">
+                                            <form id="formPDF5" action="formPDF/4(M-M-MA)" method="POST" enctype="multipart/form-data">
                                                 <h5 style="color: #000 !important;">Filtrar: </h5>
                                                 <div class="uk-margin-bottom">
                                                     <label for="filter"> Año</label>

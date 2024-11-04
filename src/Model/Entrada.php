@@ -23,11 +23,11 @@ use Exception;
             $this->select_query = "
                 a.id,
                 a.id_proveedor,
-                b.nombre proveedor,
                 a.fecha_compra,
                 a.codigo,
                 a.detalles,
                 a.referencia,
+                b.razon_social as proveedor
             ";
             $this->joins = '
                 INNER JOIN proveedores b ON b.id = a.id_proveedor
