@@ -106,7 +106,8 @@
 
                 return 1;
             } catch (Exception $e) {
-                $this->conn->rollBack();
+                // $this->conn->rollBack();
+                print_r($e);
                 return 0;
             }
         }

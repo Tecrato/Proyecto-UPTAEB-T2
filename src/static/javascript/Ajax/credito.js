@@ -170,11 +170,11 @@ function TrCredito(response) {
 
                         jf.push({
                             metodo: value_Tpago,
-                            monto: value_input
+                            monto: value_input.replace(',','.')
                         })
                     })
                     $.ajax({
-                        url: "Controller/funcs_ajax/pagar_credito.php",
+                        url: "api_credito",
                         type: "POST",
                         data: { id_rv, pagos: jf },
                         success: function (response) {
@@ -187,6 +187,7 @@ function TrCredito(response) {
                             setTimeout(() => {
                                 UIkit.modal("#credito_page").hide();
                             }, 400)
+                            TrCredito()
                         }
                     })
                 })

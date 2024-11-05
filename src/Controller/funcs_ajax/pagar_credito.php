@@ -15,7 +15,6 @@
     }
 
 
-    print_r($_POST);
     $clase = new Credito(null,id_rv:$_POST["id_rv"]);
 
     $clase->pagar($_POST["pagos"]);

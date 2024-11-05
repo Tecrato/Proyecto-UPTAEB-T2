@@ -10,7 +10,7 @@
         $clase = new Usuario(correo:$correo);
         $id = $clase->search();
 
-        $nueva_semilla = substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, 10);
+        $nueva_semilla = substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, 15);
         $nueva_semilla_encriptada = password_hash($nueva_semilla,PASSWORD_DEFAULT);
 
         $clase = new Usuario(id:$id[0]['id'],semilla:$nueva_semilla_encriptada);

@@ -104,7 +104,7 @@
                                 $row = $result[$i];
                                 echo '
                                 <tr>
-                                    <td><img class="uk-preserve-width uk-border-circle" src="./Media/imagenes/' . $row['imagen'] . '" style="width: 48px; height: 48px; object-fit: cover;" alt=""></td>
+                                    <td><img class="uk-preserve-width uk-border-circle" src="src/Media/imagenes/' . $row['imagen'] . '" style="width: 48px; height: 48px; object-fit: cover;" alt=""></td>
                                     <td>' . $row['nombre'] . '</td>
                                     <td>' . $row['precio_venta'] . ' BS'. '</td>
 

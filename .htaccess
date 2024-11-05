@@ -44,6 +44,7 @@ RewriteRule ^api_hacer_factura$ index.php?page=hacer_factura&type=funcion_ajax
 
 RewriteRule ^formPDF/(.*)$ index.php?page=$1&type=pdfs
 
+RewriteRule ^api_credito$ index.php?page=Pagar_credito&type=funcion_ajax
 RewriteRule ^api_estadisticas$ index.php?page=estadisticas&type=funcion_ajax
 RewriteRule ^api_caja$ index.php?page=acciones_caja&type=funcion_ajax
 RewriteRule ^api_login$ index.php?page=login&type=funcion_ajax

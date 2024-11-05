@@ -484,7 +484,7 @@ function func(dolar) {
           id_usuario: session_user_id,
           id_cliente: parseInt(idClient),
           IVA: parseFloat(document.getElementById("iva").textContent).toFixed(2),
-          monto_final: parseFloat(document.getElementById("totalFact").textContent).toFixed(2),
+          monto_final: parseFloat(document.getElementById("totalFact").textContent).toFixed(2).replace(",","."),
           monto_dolar: parseFloat(document.getElementById("totalFact$").textContent),
           credito: checkCredito.checked,
           fecha_inicio_credito: document.querySelector('.fecha_inicio_credito').value,
@@ -538,7 +538,7 @@ function func(dolar) {
 
             json.pagos.push({
               metodo: valor,
-              monto: monto
+              monto: monto.replace(",",".")
             });
 
           })
@@ -553,6 +553,7 @@ function func(dolar) {
             type: "POST",
             data: { jsonString },
             success: function (response) {
+              console.log(response);
               targetFact()
               let json = JSON.parse('{' + response.split('{')[1]);
               if (json.error == "Caja Error") {
