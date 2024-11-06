@@ -48,7 +48,7 @@ class Estadisticas extends Conexion
 
     function clientes_frecuentes()
     {
-        $query = $this->conn->prepare('SELECT * FROM clientesfrecuentes;');
+        $query = $this->conn->prepare('SELECT * FROM `clientesfrecuentes`;');
         $query->execute();
         return $query->fetchAll();
     }

@@ -27,7 +27,11 @@ $pdf->SetTextColor(25, 150, 40);
 $pdf->SetFont('Arial', '', 12);
 $pdf->Cell(250, 20, utf8_decode('FECHA: ' . $fecha2['mday'] . '/' . $fecha2['mon'] . '/' . $fecha2['year']), 0, 1, 'C');
 $pdf->SetFont('Arial', 'B', 20);
-$pdf->Cell(270, 5, utf8_decode('ENTRADA NRO: ' . $result1['id']), 0, 0, 'C');
+$pdf->Cell(270, 5, utf8_decode('ORDEN DE COMPRA: ' . $result1['id']), 0, 0, 'C');
+
+$pdf->Ln(25);
+$pdf->SetFont('Arial', 'B', 20);
+$pdf->Cell(200, 5, utf8_decode('FACTURA DE ENTRADA'), 0, 0, 'C');
 
 
 $pdf->Ln(25);

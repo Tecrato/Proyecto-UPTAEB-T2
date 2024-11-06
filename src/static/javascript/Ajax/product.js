@@ -414,16 +414,10 @@ const tarjetas = (response, cont) => {
                 </div>
                 <div class="uk-position-bottom-center btns_option_product">
                     <ul class=" uk-iconnav uk-background-secondary uk-transition-slide-bottom-small" style="width: 105%; padding: 5px;">
-                        <li><a href="#eliminar_product" uk-toggle uk-tooltip="title:Eliminar; delay: 500" class="uk-icon-button deleteID" uk-icon="icon: trash" data-id="${item.id
-      }"></a></li>
                         <li><a href="#Producto-modificar" uk-tooltip="title:Modificar; delay: 500" class="uk-icon-button UpdateProduct" uk-icon="icon: file-edit" data-id="${item.id
       }"></a></li>
-                        <li>
-                            <a href="#product-entry" uk-toggle class="Lote" uk-tooltip="title:Añadir Entrada; delay: 500" data-id="${item.id
-      }">
-                                <img src="src/static/images/btn_lote2.png" alt="" width="35px">
-                            </a>
-                        </li>
+                        <li><a href="#eliminar_product" uk-toggle uk-tooltip="title:Eliminar; delay: 500" class="uk-icon-button deleteID" uk-icon="icon: trash" data-id="${item.id
+      }"></a></li>
                     </ul>
                 </div>
                 <div>
